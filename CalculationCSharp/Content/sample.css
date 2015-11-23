@@ -1,0 +1,23 @@
+﻿body {
+}
+
+h1,h2,h3,h4,.h2, .h4{
+    color:darkblue;
+}
+
+.btn{
+    border-radius:0;
+}
+
+tr.group-header{
+    background-color:lightgoldenrodyellow;
+    cursor:pointer;
+    text-align:center;
+}
+
+tr hr{
+    background-color: lightblue;
+    border-color:#eee;
+    color:lightblue;
+    margin:4px 20px;
+}
