@@ -1,5 +1,7 @@
 ﻿@model CalculationCSharp.Models.Calculation.Calculation
     
+<!doctype html>
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,6 +10,17 @@
     <br> <h1>Calculation Input</h1> <br />
 </div>
 
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="">
+  $(function() {
+    $( "#model.DOL" ).datepicker();
+  });
+</script>
 
 @using (Html.BeginForm())
 {
