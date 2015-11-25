@@ -1,6 +1,4 @@
 ﻿@model CalculationCSharp.Models.Calculation.Calculation
-    
-<!doctype html>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,16 +9,6 @@
 </div>
 
 <link href="~/Content/Site.css" rel="stylesheet" />
-
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="">
-  $(function() {
-    $( "#model.DOL" ).datepicker();
-  });
-</script>
 
 @using (Html.BeginForm())
 {
@@ -176,7 +164,23 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-   
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+
+     $(document).ready(function () {
+         $('input[type=datetime]').datepicker({
+             dateFormat: "dd/mm/yy",
+             changeMonth: true,
+             changeYear: true,
+             yearRange: "-60:+0"
+         });
+
+     });
+    </script>
+
 }
+

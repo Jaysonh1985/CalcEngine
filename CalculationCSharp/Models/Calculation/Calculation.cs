@@ -11,16 +11,12 @@ namespace CalculationCSharp.Models.Calculation
     public class Calculation
     {
         public string CalcReference { get; set; }
-        [DataType(DataType.Date)]
         public DateTime DOL { get; set; }
         public double APP { get; set; }
         public double CPD { get; set; }
-        [DataType(DataType.Date)]
         public DateTime PIDateOverride { get; set; }
-        [DataType(DataType.Date)]
         public DateTime DOB { get; set; }
         public string MarStat { get; set; }
-        [DataType(DataType.Date)]
         public DateTime DJS { get; set; }
         public double AddedYrsService { get; set; }
         public double TransInService { get; set; }
