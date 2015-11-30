@@ -22,19 +22,19 @@ namespace Engine.Controllers
         public ActionResult Input()
         {
 
-            InputForm.CalcReference = "1";
-            InputForm.DOL = Convert.ToDateTime("17/07/2015");
-            InputForm.APP = 23000;
-            InputForm.CPD = 1200;
-            InputForm.PIDateOverride = Convert.ToDateTime("30/04/2013");
-            InputForm.DOB = Convert.ToDateTime("30/09/1973");
-            InputForm.MarStat = "Married";
-            InputForm.DJS = Convert.ToDateTime("03/04/1991");
+            //InputForm.CalcReference = "1";
+            //InputForm.DOL = Convert.ToDateTime("17/07/2015");
+            //InputForm.APP = 23000;
+            //InputForm.CPD = 1200;
+            //InputForm.PIDateOverride = Convert.ToDateTime("30/04/2013");
+            //InputForm.DOB = Convert.ToDateTime("30/09/1973");
+            //InputForm.MarStat = "Married";
+            //InputForm.DJS = Convert.ToDateTime("03/04/1991");
             //AddedYrsService()
             //TransInService()
             //PartTimeService()
             //Breaks()
-            InputForm.Grade = "Firefighter";
+            //InputForm.Grade = "Firefighter";
             //CVofPensionDebit()
             //LSI()
             //SCPDPension()
