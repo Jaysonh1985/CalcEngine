@@ -9,7 +9,16 @@
 <div class="jumbotron">
     <br> <h1>Calculation Output</h1> <br />
 </div>
+
+<p>
+    <button id="expandAll" class="btn btn-primary" onclick="$('#companyGrid tr:not(.group-header, .group-footer)').fadeIn();">Expand All Data</button>
+    <button id="collapseAll" class="btn btn-primary" onclick="$('#companyGrid tr:not(:first, .group-header, .group-footer)').fadeOut();">Collapse All Data</button>
+    @Html.ActionLink("Export to Csv", "ExportClientsListToCSV", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Export to Excel", "ExportClientsListToExcel", null, new { @class = "btn btn-primary" })
+</p>
+
 <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">
+
 <table id="companyGrid" class="table table-bordered table">
     <tr>
         <th>
@@ -46,20 +55,8 @@
             }
         }
 </table>
-<p>
-    <button id="expandHeader" class="btn btn-primary" onclick="$('.group-header').fadeIn();">Expand Headers</button>
-    <button id="collapseHeader" class="btn btn-primary" onclick="$('.group-header').fadeOut();">Collapse Headers</button>
-    <button id="expandAll" class="btn btn-primary" onclick="$('#companyGrid tr:not(.group-header, .group-footer)').fadeIn();">Expand All Data</button>
-    <button id="collapseAll" class="btn btn-primary" onclick="$('#companyGrid tr:not(:first, .group-header, .group-footer)').fadeOut();">Collapse All Data</button>
-    <button id="expandAll" class="btn btn-primary" onclick="$('#companyGrid tr').fadeIn();">Expand All</button>
-    <button id="collapseAll" class="btn btn-primary" onclick="$('#companyGrid tr').fadeOut();">Collapse All</button>
-    <button id="expandFooter" class="btn btn-primary" onclick="$('.group-footer').fadeIn();">Expand Footers</button>
-    <button id="collapseFooter" class="btn btn-primary" onclick="$('.group-footer').fadeOut();">Collapse Footers</button>
-</p>
 
 <script src="~/Scripts/jquery-2.1.4.js"></script>
-
-
 
 <script type="text/javascript">
     $(function () {

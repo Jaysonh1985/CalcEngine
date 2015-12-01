@@ -33,7 +33,9 @@ namespace CalculationCSharp
             //css  
             bundles.Add(new StyleBundle("~/Content/cssjqryUi").Include(
                    "~/Content/jquery-ui.css"));
-
+            
+            //Turns off bootstrap.min
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
