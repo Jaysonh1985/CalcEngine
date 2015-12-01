@@ -11,10 +11,10 @@
 </div>
 
 <p>
-    <button id="expandAll" class="btn btn-primary" onclick="$('#companyGrid tr:not(.group-header, .group-footer)').fadeIn();">Expand All Data</button>
-    <button id="collapseAll" class="btn btn-primary" onclick="$('#companyGrid tr:not(:first, .group-header, .group-footer)').fadeOut();">Collapse All Data</button>
-    @Html.ActionLink("Export to Csv", "ExportClientsListToCSV", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Export to Excel", "ExportClientsListToExcel", null, new { @class = "btn btn-primary" })
+    <button id="expandAll" class="btn btn-default" onclick="$('#companyGrid tr:not(.group-header, .group-footer)').fadeIn();">Expand All Data</button>
+    <button id="collapseAll" class="btn btn-default" onclick="$('#companyGrid tr:not(:first, .group-header, .group-footer)').fadeOut();">Collapse All Data</button>
+    @Html.ActionLink("Export to Csv", "ExportClientsListToCSV", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Export to Excel", "ExportClientsListToExcel", null, new { @class = "btn btn-default" })
 </p>
 
 <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">
