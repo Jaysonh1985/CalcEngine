@@ -264,6 +264,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Calculation\Input.cshtml" />
     <Content Include="Views\Calculation\Output.cshtml" />
+    <Content Include="Views\Shared\_CalcTypes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
