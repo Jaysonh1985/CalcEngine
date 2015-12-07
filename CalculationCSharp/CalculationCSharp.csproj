@@ -176,8 +176,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Calculation\Calculation.cs" />
     <Compile Include="Models\Calculation\Index.cs" />
+    <Compile Include="Models\Calculation\OutputList.cs" />
+    <Compile Include="Models\Calculation\Scheme\Fire2006\Calculation_Type\Deferred\Calculation.cs" />
     <Compile Include="Models\DateFunctions\DateFunctions.cs" />
     <Compile Include="Models\Excel Import\ExcelImport.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -264,13 +265,15 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Calculation\Input.cshtml" />
     <Content Include="Views\Calculation\Output.cshtml" />
     <Content Include="Views\Shared\_CalcTypes.cshtml" />
     <Content Include="Views\Calculation\Index.cshtml" />
+    <Content Include="Views\Calculation\Scheme\Fire2006\Calculation_Type\Deferred\Input.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Calculation\Scheme\Fire2006\Calculation_Type\Retirement\" />
+    <Folder Include="Views\Calculation\Scheme\Fire2006\Calculation_Type\Retirement\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
