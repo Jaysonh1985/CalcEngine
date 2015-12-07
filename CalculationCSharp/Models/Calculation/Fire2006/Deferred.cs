@@ -6,14 +6,14 @@ using System.Collections.Generic;
 using CalculationCSharp.Models.Calculation;
 using System.ComponentModel.DataAnnotations;
 
-namespace CalculationCSharp.Models.Calculation.Scheme.Fire2006.Calculation_Type.Deferred
+namespace CalculationCSharp.Models.Calculation.Fire2006.Deferred
 {
-    public class Calculation
+    public class Deferred
     {
         //Mandatory Declarations DO NOT REMOVE!!!//
         public List<OutputList> List = new List<OutputList>();
         public OutputList OutputList = new OutputList();
-        public Calculation InputForm;
+        public Deferred InputForm;
         public LookupFunctions LookupFunctions = new LookupFunctions();
         public DateFunctions DateFunctions = new DateFunctions();
 
@@ -39,7 +39,7 @@ namespace CalculationCSharp.Models.Calculation.Scheme.Fire2006.Calculation_Type.
         public System.DateTime setHypotheticalPensionDate;
         private double setPotentialServicetoHRA;
 
-        public void Setup(Calculation Input)
+        public void Setup(Deferred Input)
         {
             InputForm = Input;
             

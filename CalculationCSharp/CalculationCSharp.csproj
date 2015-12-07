@@ -172,13 +172,14 @@
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Fire2006Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calculation\Index.cs" />
     <Compile Include="Models\Calculation\OutputList.cs" />
-    <Compile Include="Models\Calculation\Scheme\Fire2006\Calculation_Type\Deferred\Calculation.cs" />
+    <Compile Include="Models\Calculation\Fire2006\Deferred.cs" />
     <Compile Include="Models\DateFunctions\DateFunctions.cs" />
     <Compile Include="Models\Excel Import\ExcelImport.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -268,12 +269,10 @@
     <Content Include="Views\Calculation\Output.cshtml" />
     <Content Include="Views\Shared\_CalcTypes.cshtml" />
     <Content Include="Views\Calculation\Index.cshtml" />
-    <Content Include="Views\Calculation\Scheme\Fire2006\Calculation_Type\Deferred\Input.cshtml" />
+    <Content Include="Views\Fire2006\Deferred.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\Calculation\Scheme\Fire2006\Calculation_Type\Retirement\" />
-    <Folder Include="Views\Calculation\Scheme\Fire2006\Calculation_Type\Retirement\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
