@@ -17,16 +17,12 @@ namespace CalculationCSharp.Controllers
 {
     public class CalculationController : Controller
     {
-        public static CalculationCSharp.Models.Calculation.Calculation InputForm = new CalculationCSharp.Models.Calculation.Calculation();
-
-        public CalculationCSharp.Models.Calculation.Calculation List = new CalculationCSharp.Models.Calculation.Calculation();
-
-        public CalculationCSharp.Models.Calculation.Index IndexCalculation = new CalculationCSharp.Models.Calculation.Index();
-
-        // GET: Calculation
+         // GET: Calculation
         [HttpGet()]
         public ActionResult Input(CalculationCSharp.Models.Calculation.Index IndexCalculation)
         {
+            
+            Calculation InputForm = new Calculation();
 
             InputForm.CalcReference = "1";
             InputForm.DOL = Convert.ToDateTime("17/07/2015");
@@ -52,6 +48,7 @@ namespace CalculationCSharp.Controllers
 
         public ActionResult Output(CalculationCSharp.Models.Calculation.Calculation InputForm)
         {
+            CalculationCSharp.Models.Calculation.Calculation List = new CalculationCSharp.Models.Calculation.Calculation();
 
             List.Setup(InputForm);
 
@@ -64,6 +61,8 @@ namespace CalculationCSharp.Controllers
         [HttpGet]       
         public ActionResult Index(string SchemeType, string CalculationType)
         {
+            CalculationCSharp.Models.Calculation.Index IndexCalculation = new CalculationCSharp.Models.Calculation.Index();
+
             IndexCalculation.CalculationType = CalculationType;
             IndexCalculation.SchemeType = SchemeType;
                           
