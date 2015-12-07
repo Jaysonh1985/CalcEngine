@@ -19,7 +19,7 @@
 
 		for (int r = 1; r <= myArray.GetUpperBound(0); r++) {
 			for (int c = 1; c <= myArray.GetUpperBound(1); c++) {
-				object myValue = myArray(r, c);
+                object myValue = myArray.GetValue(c, r);
 			}
 		}
 		return myArray;

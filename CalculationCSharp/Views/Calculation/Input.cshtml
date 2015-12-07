@@ -164,23 +164,5 @@
     @Html.ActionLink("Back to Home", "Index","Home")
 </div>
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryui")
-    @Styles.Render("~/Content/cssjqryUi")
 
-    <script type="text/javascript">
-
-     $(document).ready(function () {
-         $('input[type=datetime]').datepicker({
-             dateFormat: "dd/mm/yy",
-             changeMonth: true,
-             changeYear: true,
-             yearRange: "-60:+0"
-         });
-
-     });
-    </script>
-
-}
 

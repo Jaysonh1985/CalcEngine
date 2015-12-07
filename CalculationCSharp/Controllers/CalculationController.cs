@@ -21,9 +21,11 @@ namespace CalculationCSharp.Controllers
 
         public CalculationCSharp.Models.Calculation.Calculation List = new CalculationCSharp.Models.Calculation.Calculation();
 
+        public CalculationCSharp.Models.Calculation.Index IndexCalculation = new CalculationCSharp.Models.Calculation.Index();
+
         // GET: Calculation
         [HttpGet()]
-        public ActionResult Input()
+        public ActionResult Input(CalculationCSharp.Models.Calculation.Index IndexCalculation)
         {
 
             InputForm.CalcReference = "1";
@@ -35,14 +37,6 @@ namespace CalculationCSharp.Controllers
             InputForm.MarStat = "Married";
             InputForm.DJS = Convert.ToDateTime("03/04/1991");
             InputForm.Grade = "Firefighter";
-            //AddedYrsService()
-            //TransInService()
-            //PartTimeService()
-            //Breaks()
-            //CVofPensionDebit()
-            //LSI()
-            //SCPDPension()
-            //SumAVCCont()
 
             return View("Input", InputForm);
         }
@@ -63,15 +57,19 @@ namespace CalculationCSharp.Controllers
 
             object Data = List.List;
 
-            //object dataarray = Data.ToArray;
-
-            //CSVOutput(Data);
-
             return View(Data);
 
         }
+        
+        [HttpGet]       
+        public ActionResult Index(string SchemeType, string CalculationType)
+        {
+            IndexCalculation.CalculationType = CalculationType;
+            IndexCalculation.SchemeType = SchemeType;
+                          
 
-       
+            return RedirectToAction("Input",IndexCalculation);
+        }
 
         public void ExportClientsListToCSV()
         {

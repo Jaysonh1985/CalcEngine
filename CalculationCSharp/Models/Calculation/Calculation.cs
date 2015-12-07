@@ -57,6 +57,7 @@ namespace CalculationCSharp.Models.Calculation
             ListBuild("EGI1.2", "Average Pensionable Pay", InputForm.APP, "Deferred Calculation");
             ListBuild("EGI1.3", "CPD Pension", InputForm.CPD, "Deferred Calculation");
             ListBuild("EGI1.4", "Pension Increase Date Overide", InputForm.PIDateOverride.ToShortDateString(), "Deferred Calculation");
+
             ListBuild("EGI2.1", "Date of Birth", InputForm.DOB.Date, "Member Details");
             ListBuild("EGI2.2", "Marital Status", InputForm.MarStat, "Member Details");
             ListBuild("EGI2.3", "Date Joined Scheme", InputForm.DJS.Date, "Member Details");
