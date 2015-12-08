@@ -34,33 +34,33 @@ namespace CalculationCSharp.Controllers
             return View(List);
 
         }
-        
-        
-        //public void ExportClientsListToCSV()
-        //{
-        //    List.Setup(InputForm);
-
-        //    StringWriter sw = new StringWriter();
-
-        //    sw.WriteLine("\"ID\",\"Field\",\"Value\"");
-
-        //    Response.ClearContent();
-        //    Response.AddHeader("content-disposition", "attachment;filename=Excel.csv");
-        //    Response.ContentType = "text/csv";
 
 
-        //    foreach (var line in List.List)
-        //    {
-        //        sw.WriteLine(string.Format("\"{0}\",\"{1}\",\"{2}\"",
-        //                                   line.ID,
-        //                                   line.Field,
-        //                                   line.Value));
-        //    }
-        //    Response.Write(sw.ToString());
+        public void ExportClientsListToCSV()
+        {
+            
 
-        //    Response.End();
+            StringWriter sw = new StringWriter();
 
-        //}
+            sw.WriteLine("\"ID\",\"Field\",\"Value\"");
+
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment;filename=Excel.csv");
+            Response.ContentType = "text/csv";
+
+
+            //foreach (var line in List.List)
+            //{
+            //    sw.WriteLine(string.Format("\"{0}\",\"{1}\",\"{2}\"",
+            //                               line.ID,
+            //                               line.Field,
+            //                               line.Value));
+            //}
+            Response.Write(sw.ToString());
+
+            Response.End();
+
+        }
 
 
         //public void ExportClientsListToExcel()
