@@ -112,3 +112,20 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 element.style {
 }
+
+.panel-default {
+    border-color: #fff;
+}
+
+.panel-title {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 36px;
+    color: inherit;
+}
+
+.panel-default > .panel-heading {
+    color: #fff;
+    background-color: rgba(173, 0, 0, 1);
+    border-color: #ddd;
+}

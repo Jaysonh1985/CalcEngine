@@ -5,13 +5,14 @@ using System.Web.Mvc;
 using System.Collections.Generic;
 using CalculationCSharp.Models.Calculation;
 using System.ComponentModel.DataAnnotations;
+using System.Collections;
 
 namespace CalculationCSharp.Models.Calculation.Fire2006.Deferred
 {
     public class Deferred
     {
         //Mandatory Declarations DO NOT REMOVE!!!//
-        public List<OutputList> List = new List<OutputList>();
+        
         public OutputList OutputList = new OutputList();
         public Deferred InputForm;
         public LookupFunctions LookupFunctions = new LookupFunctions();
@@ -34,12 +35,12 @@ namespace CalculationCSharp.Models.Calculation.Fire2006.Deferred
         public decimal LSI { get; set; }
         public decimal SCPDPension { get; set; }
         public decimal SumAVCCont { get; set; }
+        public IEnumerable List1 { get; set; }
 
+        public List<OutputList> List = new List<OutputList>();
         public double setPensionIncreaseFactor;
         public System.DateTime setHypotheticalPensionDate;
         private double setPotentialServicetoHRA;
-
-
 
         public void Setup(Deferred Input)
         {
@@ -113,6 +114,7 @@ namespace CalculationCSharp.Models.Calculation.Fire2006.Deferred
             OutputList.ListBuild(List, "EGR2.4", "Survivor CPD Pension", getSurvivorCPDPension(), "Survivor Benefits");
             OutputList.ListBuild(List, "EGR2.5", "Total Contingent Survivor Pension", getTotalContingentSurvivorPension(), "Survivor Benefits");
             OutputList.ListBuild(List, "EGR2.6", "Survivor's Requisite Benefit Pension", getSurvivorRequisiteBenefitPension(), "Survivor Benefits");
+
         }
 
         public void getFactors()

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<CalculationCSharp.Models.Calculation.OutputList>
+
+@{
+    ViewBag.Title = "Output";
+    Scripts.Render("~/Scripts/jquery-2.1.4.js");
+}
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse1">Calculation Ouput</a>
+            </h4>
+        </div>
+
+        <div id="collapse1" class="panel-collapse collapse in">
+            <br />
+            <p>
+                <button id="expandAll" class="btn btn-default" onclick="$('#companyGrid tr:not(.group-header, .group-footer)').fadeIn();">Expand All Data</button>
+                <button id="collapseAll" class="btn btn-default" onclick="$('#companyGrid tr:not(:first, .group-header, .group-footer)').fadeOut();">Collapse All Data</button>
+                @Html.ActionLink("Export to Csv", "ExportClientsListToCSV", null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Export to Excel", "ExportClientsListToExcel", null, new { @class = "btn btn-default" })
+            </p>
+
+            <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">
+
+            <table id="companyGrid" class="table table-bordered table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Field)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Value)
+                    </th>
+                </tr>
+                @{foreach (var group in Model.GroupBy(x => x.Group))
+            {
+                        <tr class="group-header">
+                            <td colspan="7">
+                                <span class="h4">@group.Key</span>
+                            </td>
+                        </tr>
+                        foreach (var item in group)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Field)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Value)
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+            </table>
+            </div>  
+        </div>
+</div>
+
+<script src="~/Scripts/jquery-2.1.4.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.group-header').click(function () {
+            $(this).nextUntil('.group-header').toggle();
+        });
+    });
+
+    var $rows = $('#companyGrid tr');
+    $('#search').keyup(function () {
+
+        var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+            reg = RegExp(val, 'i'),
+            text;
+
+        $rows.show().filter(function () {
+            text = $(this).text().replace(/\s+/g, ' ');
+            return !reg.test(text);
+        }).hide();
+    });
+</script>

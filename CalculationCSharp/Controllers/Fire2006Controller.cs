@@ -42,9 +42,7 @@ namespace CalculationCSharp.Controllers
 
             object Data = List.List;
 
-            TempData["Data"] = List.List;
-
-            return RedirectToAction("Output","Calculation");
+           return PartialView("_Output", Data);
 
         }
 
