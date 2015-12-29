@@ -64,7 +64,7 @@ namespace CalculationCSharp.Controllers
                 //Some kind of a result that will indicate that the view has 
                 //not been created yet. I would use a Javascript message to do so. 
 
-                return new DownloadFileActionResult(Output, "Cars.xls"); ;
+                return new DownloadFileActionResult(Output, "Output.xls"); ;
             }
         }
 

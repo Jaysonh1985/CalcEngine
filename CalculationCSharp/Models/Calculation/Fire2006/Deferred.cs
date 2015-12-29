@@ -17,6 +17,7 @@ namespace CalculationCSharp.Models.Calculation.Fire2006.Deferred
         public Deferred InputForm;
         public LookupFunctions LookupFunctions = new LookupFunctions();
         public DateFunctions DateFunctions = new DateFunctions();
+        public List<OutputList> List = new List<OutputList>();
 
         public string CalcReference { get; set; }
         public DateTime DOL { get; set; }
@@ -35,9 +36,8 @@ namespace CalculationCSharp.Models.Calculation.Fire2006.Deferred
         public decimal LSI { get; set; }
         public decimal SCPDPension { get; set; }
         public decimal SumAVCCont { get; set; }
-        public IEnumerable List1 { get; set; }
 
-        public List<OutputList> List = new List<OutputList>();
+        
         public double setPensionIncreaseFactor;
         public System.DateTime setHypotheticalPensionDate;
         private double setPotentialServicetoHRA;
