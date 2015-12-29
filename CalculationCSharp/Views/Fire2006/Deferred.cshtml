@@ -4,6 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="jumbotron1">
+        <h1>Fire 2006 Deferred</h1>
+</div>
+
 @Html.Partial("_BulkCalc")
 
 <link href="~/Content/Site.css" rel="stylesheet" />
@@ -15,11 +19,8 @@
                 <a data-toggle="collapse" href="#collapseinput1">Calculation Input</a>
             </h4>
         </div>
-        <div id="collapseinput1" class="panel-collapse collapse in">
-
-            <div class="page-header">
-                <h1>Fire 2006 Deferred</h1>
-            </div>
+        <div id="collapseinput1" class="panel-collapse collapse">
+            <br />
 
             @using (Html.BeginForm("Deferred", "Fire2006", FormMethod.Post, new { id = "my-form" }))
             {
