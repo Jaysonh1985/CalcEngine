@@ -8,6 +8,8 @@ using CalculationCSharp.Models.Calculation.Fire2006.Deferred;
 using System.Web.Routing;
 using CalculationCSharp.Models.Calculation;
 using System.Web.UI.WebControls;
+using OfficeOpenXml;
+using System.Text;
 
 namespace CalculationCSharp.Controllers
 
@@ -66,6 +68,131 @@ namespace CalculationCSharp.Controllers
 
                 return new DownloadFileActionResult(Output, "Output.xls"); ;
             }
+        }
+
+        public ActionResult Upload(FormCollection formCollection)
+
+        {
+
+            if (Request != null)
+
+            {
+
+                HttpPostedFileBase file = Request.Files["UploadedFile"];
+
+                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
+
+                {
+
+                    string fileName = file.FileName;
+
+                    string fileContentType = file.ContentType;
+
+                    byte[] fileBytes = new byte[file.ContentLength];
+
+                    var data = file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
+
+                    var usersList = new List<Deferred>();
+
+                    using (var package = new ExcelPackage(file.InputStream))
+
+                    {
+
+                        var currentSheet = package.Workbook.Worksheets;
+
+                        var workSheet = currentSheet.First();
+
+                        var noOfCol = workSheet.Dimension.End.Column;
+
+                        var noOfRow = workSheet.Dimension.End.Row;
+
+
+
+                        for (int colIterator = 2; colIterator <= noOfCol; colIterator++)
+
+                        {
+
+                            var model = new Models.Calculation.Fire2006.Deferred.Deferred();
+
+                            model.CalcReference = workSheet.Cells[1, colIterator].Value.ToString();
+                            model.DOL = Convert.ToDateTime(workSheet.Cells[2, colIterator].Value.ToString());
+                            model.APP = Convert.ToDouble(workSheet.Cells[3, colIterator].Value.ToString());
+                            model.CPD = Convert.ToDouble(workSheet.Cells[4, colIterator].Value.ToString());
+                            model.PIDateOverride = Convert.ToDateTime(workSheet.Cells[5, colIterator].Value.ToString());
+                            model.DOB = Convert.ToDateTime(workSheet.Cells[6, colIterator].Value.ToString());
+                            model.MarStat = workSheet.Cells[7, colIterator].Value.ToString();
+                            model.DJS = Convert.ToDateTime(workSheet.Cells[8, colIterator].Value.ToString());
+                            model.AddedYrsService = double.Parse(workSheet.Cells[9, colIterator].Value.ToString());
+                            model.TransInService = Convert.ToDouble(workSheet.Cells[10, colIterator].Value.ToString());
+                            model.PartTimeService = Convert.ToDouble(workSheet.Cells[11, colIterator].Value.ToString());
+                            model.Breaks = Convert.ToDouble(workSheet.Cells[12, colIterator].Value.ToString());
+                            model.Grade = workSheet.Cells[13, colIterator].Value.ToString();
+                            model.CVofPensionDebit = Convert.ToDouble(workSheet.Cells[14, colIterator].Value.ToString());
+                            model.LSI = Convert.ToDecimal(workSheet.Cells[15, colIterator].Value.ToString());
+                            model.SCPDPension = Convert.ToDecimal(workSheet.Cells[16, colIterator].Value.ToString());
+                            model.SumAVCCont = Convert.ToDecimal(workSheet.Cells[17, colIterator].Value.ToString());
+
+                            usersList.Add(model);
+
+
+                        }
+
+
+                        var stringBuilder = new StringBuilder();
+
+                        Response.ClearContent();
+
+                        Response.AddHeader("content-disposition", "attachment;filename=Output.csv");
+
+                        Response.ContentType = "text/csv";
+
+                        int HeaderRow = 0;
+
+                        foreach (var Member in usersList)
+                        {
+                            Deferred List = new Deferred();
+
+                            List.Setup(Member);
+
+                            if (HeaderRow < 1)
+                            {
+                                foreach (var output in List.List)
+                                {
+                                    stringBuilder.Append(output.ID);
+                                    stringBuilder.Append(",");
+                                }
+                                stringBuilder.AppendLine();
+
+                                foreach (var output in List.List)
+                                {
+                                    stringBuilder.Append(output.Field);
+                                    stringBuilder.Append(",");
+                                }
+                                stringBuilder.AppendLine();
+
+                                HeaderRow = 1;
+                            }
+
+
+                            foreach (var output in List.List)
+                            {
+                                stringBuilder.Append(output.Value);
+                                stringBuilder.Append(",");
+                            }
+                            stringBuilder.AppendLine();
+
+
+                        }
+
+                        Response.Write(stringBuilder.ToString());
+                        Response.End();
+                    }
+
+                }
+
+            }
+
+            return View("Index");
         }
 
     }

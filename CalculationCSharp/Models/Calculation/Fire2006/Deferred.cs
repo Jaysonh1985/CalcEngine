@@ -64,6 +64,7 @@ namespace CalculationCSharp.Models.Calculation.Fire2006.Deferred
             SumAVCCont = Input.SumAVCCont;
 
             getFactors();
+            OutputList.ListBuild(List, "EGC1.0", "Calculation Reference", Input.CalcReference, "Deferred Calculation");
             OutputList.ListBuild(List,"EGC1.1", "Hypothetical Pension", getHypotheticalPension(), "Deferred Calculation");
             OutputList.ListBuild(List, "EGC1.2", "Base Pension", getBasePension(), "Deferred Calculation");
             OutputList.ListBuild(List, "EGC1.3", "LSI Pension", LSI, "Deferred Calculation");
