@@ -188,11 +188,12 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Fire2006\Fire2006AreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\Fire2006Controller.cs" />
+    <Compile Include="Areas\Fire2006\Controllers\DeferredController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,7 +201,7 @@
     <Compile Include="Models\Calculation\DownloadFileActionResult.cs" />
     <Compile Include="Models\Calculation\Index.cs" />
     <Compile Include="Models\Calculation\OutputList.cs" />
-    <Compile Include="Models\Calculation\Fire2006\Deferred.cs" />
+    <Compile Include="Areas\Fire2006\Models\Deferred.cs" />
     <Compile Include="Models\DateFunctions\DateFunctions.cs" />
     <Compile Include="Models\Excel Import\ExcelImport.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -228,9 +229,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Fire2006\Views\web.config" />
+    <Content Include="Areas\Fire2006\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Fire2006\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Fire2006\Views\Deferred\Input.cshtml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim.pubxml" />
     <None Include="Properties\PublishProfiles\StandardImport.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -244,6 +253,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -290,7 +300,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_CalcTypes.cshtml" />
     <Content Include="Views\Calculation\Index.cshtml" />
-    <Content Include="Views\Fire2006\Deferred.cshtml" />
     <Content Include="Views\Shared\_Output.cshtml" />
     <Content Include="Views\Shared\_BulkCalc.cshtml" />
   </ItemGroup>

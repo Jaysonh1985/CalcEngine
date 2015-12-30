@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CalculationCSharp.Models.Calculation.Fire2006;
-using CalculationCSharp.Models.Calculation.Fire2006.Deferred;
+using CalculationCSharp.Areas.Fire2006.Models;
 using System.Web.Routing;
 using CalculationCSharp.Models.Calculation;
 using System.Web.UI.WebControls;
 using OfficeOpenXml;
 using System.Text;
 
-namespace CalculationCSharp.Controllers
+namespace CalculationCSharp.Areas.Fire2006.Controllers
 
 {
-    public class Fire2006Controller : Controller
+    public class DeferredController : Controller
     {
 
-        // GET: Calculation
+        // GET: Fire2006/Deferred
         [HttpGet()]
-        public ActionResult Deferred()
+        public ActionResult Input()
         {
              Deferred InputForm = new Deferred();
 
@@ -33,12 +32,12 @@ namespace CalculationCSharp.Controllers
             InputForm.DJS = Convert.ToDateTime("03/04/1991");
             InputForm.Grade = "Firefighter";
 
-            return View("Deferred", InputForm);
+            return View("Input", InputForm);
         }
 
         //POST: Calculation
         [HttpPost()]
-        public ActionResult Deferred(Deferred InputForm)
+        public ActionResult Input(Deferred InputForm)
         {
             Deferred List = new Deferred();
 
@@ -112,7 +111,7 @@ namespace CalculationCSharp.Controllers
 
                         {
 
-                            var model = new Models.Calculation.Fire2006.Deferred.Deferred();
+                            var model = new Deferred();
 
                             model.CalcReference = workSheet.Cells[1, colIterator].Value.ToString();
                             model.DOL = Convert.ToDateTime(workSheet.Cells[2, colIterator].Value.ToString());

@@ -1,11 +1,11 @@
-﻿@model CalculationCSharp.Models.Calculation.Fire2006.Deferred.Deferred
+﻿@model CalculationCSharp.Areas.Fire2006.Models.Deferred
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="jumbotron1">
-        <h1>Fire 2006 Deferred</h1>
+    <h1>Fire 2006 Deferred</h1>
 </div>
 
 @Html.Partial("_BulkCalc")
@@ -22,7 +22,7 @@
         <div id="collapseinput1" class="panel-collapse collapse">
             <br />
 
-            @using (Html.BeginForm("Deferred", "Fire2006", FormMethod.Post, new { id = "my-form" }))
+            @using (Html.BeginForm("Input", "Deferred", FormMethod.Post, new { id = "my-form" }))
             {
                 @Html.AntiForgeryToken()
 
@@ -166,7 +166,7 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Submit" class="btn btn-default"/>
+                            <input type="submit" value="Submit" class="btn btn-default" />
                         </div>
                     </div>
                 </div>

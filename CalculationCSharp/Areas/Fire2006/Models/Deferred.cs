@@ -7,7 +7,7 @@ using CalculationCSharp.Models.Calculation;
 using System.ComponentModel.DataAnnotations;
 using System.Collections;
 
-namespace CalculationCSharp.Models.Calculation.Fire2006.Deferred
+namespace CalculationCSharp.Areas.Fire2006.Models
 {
     public class Deferred
     {

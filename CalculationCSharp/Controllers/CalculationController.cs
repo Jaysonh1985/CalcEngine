@@ -23,7 +23,7 @@ namespace CalculationCSharp.Controllers
             IndexCalculation.SchemeType = SchemeType;
 
 
-            return RedirectToAction(CalculationType, SchemeType);
+            return RedirectToAction("Input", CalculationType, new { Area = SchemeType });
         }
 
     }
