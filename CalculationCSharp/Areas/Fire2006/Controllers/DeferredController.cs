@@ -112,27 +112,36 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
                         {
 
                             var model = new Deferred();
+                            var properties = new Dictionary<string, object>();
+                            var i = 1;
 
-                            model.CalcReference = workSheet.Cells[1, colIterator].Value.ToString();
-                            model.DOL = Convert.ToDateTime(workSheet.Cells[2, colIterator].Value.ToString());
-                            model.APP = Convert.ToDouble(workSheet.Cells[3, colIterator].Value.ToString());
-                            model.CPD = Convert.ToDouble(workSheet.Cells[4, colIterator].Value.ToString());
-                            model.PIDateOverride = Convert.ToDateTime(workSheet.Cells[5, colIterator].Value.ToString());
-                            model.DOB = Convert.ToDateTime(workSheet.Cells[6, colIterator].Value.ToString());
-                            model.MarStat = workSheet.Cells[7, colIterator].Value.ToString();
-                            model.DJS = Convert.ToDateTime(workSheet.Cells[8, colIterator].Value.ToString());
-                            model.AddedYrsService = double.Parse(workSheet.Cells[9, colIterator].Value.ToString());
-                            model.TransInService = Convert.ToDouble(workSheet.Cells[10, colIterator].Value.ToString());
-                            model.PartTimeService = Convert.ToDouble(workSheet.Cells[11, colIterator].Value.ToString());
-                            model.Breaks = Convert.ToDouble(workSheet.Cells[12, colIterator].Value.ToString());
-                            model.Grade = workSheet.Cells[13, colIterator].Value.ToString();
-                            model.CVofPensionDebit = Convert.ToDouble(workSheet.Cells[14, colIterator].Value.ToString());
-                            model.LSI = Convert.ToDecimal(workSheet.Cells[15, colIterator].Value.ToString());
-                            model.SCPDPension = Convert.ToDecimal(workSheet.Cells[16, colIterator].Value.ToString());
-                            model.SumAVCCont = Convert.ToDecimal(workSheet.Cells[17, colIterator].Value.ToString());
+                            foreach (var prop in model.GetType().GetProperties())
+                            {
+                                var Value = workSheet.Cells[i, colIterator].Value.ToString();
+
+                                DateTime dateTime;
+                                double number;
+
+                                if (DateTime.TryParse(Value,out dateTime))
+                                {
+                                    prop.SetValue(model, dateTime, null);
+
+                                }
+                                else if (Double.TryParse(Value, out number))
+                                {
+                                    prop.SetValue(model, number, null);
+                                }
+                                else
+                                {
+                                    prop.SetValue(model, Value, null);
+                                }
+                               
+
+                                i = i + 1;
+
+                            }
 
                             usersList.Add(model);
-
 
                         }
 

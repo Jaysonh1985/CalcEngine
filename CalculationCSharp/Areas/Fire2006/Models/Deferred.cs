@@ -33,9 +33,9 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         public double Breaks { get; set; }
         public string Grade { get; set; }
         public double CVofPensionDebit { get; set; }
-        public decimal LSI { get; set; }
-        public decimal SCPDPension { get; set; }
-        public decimal SumAVCCont { get; set; }
+        public double LSI { get; set; }
+        public double SCPDPension { get; set; }
+        public double SumAVCCont { get; set; }
 
         
         public double setPensionIncreaseFactor;
@@ -258,7 +258,7 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         {
             return Math.Round((getSurvivorContingentPension() * setPensionIncreaseFactor) - getSurvivorContingentPension(), 2);
         }
-        public decimal getSurvivorLSIPension()
+        public double getSurvivorLSIPension()
         {
             if (MarStat == "Married" | MarStat == "Civil Partnership")
             {
