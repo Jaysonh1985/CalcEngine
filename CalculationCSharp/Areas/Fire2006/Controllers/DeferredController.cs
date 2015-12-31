@@ -114,10 +114,11 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
                             var model = new Deferred();
                             var properties = new Dictionary<string, object>();
                             var i = 1;
-
+                            
                             foreach (var prop in model.GetType().GetProperties())
                             {
-                                var Value = workSheet.Cells[i, colIterator].Value.ToString();
+
+                                var Value = workSheet.Cells[i, colIterator].Value == null ? string.Empty : workSheet.Cells[i, colIterator].Value.ToString();
 
                                 DateTime dateTime;
                                 double number;
@@ -130,6 +131,10 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
                                 else if (Double.TryParse(Value, out number))
                                 {
                                     prop.SetValue(model, number, null);
+                                }
+                                else if (Value == "")
+                                {
+                                    prop.SetValue(model, null, null);
                                 }
                                 else
                                 {
