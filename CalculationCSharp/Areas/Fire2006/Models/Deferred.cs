@@ -46,6 +46,8 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         {
             InputForm = Input;
 
+            
+            CalcReference = Input.CalcReference;              
             DOL = Input.DOL;
             APP = Input.APP;
             CPD = Input.CPD;

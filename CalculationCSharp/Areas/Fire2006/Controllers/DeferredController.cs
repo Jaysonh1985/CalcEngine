@@ -9,12 +9,16 @@ using CalculationCSharp.Models.Calculation;
 using System.Web.UI.WebControls;
 using OfficeOpenXml;
 using System.Text;
+using CalculationCSharp.Models;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace CalculationCSharp.Areas.Fire2006.Controllers
 
 {
     public class DeferredController : Controller
     {
+        private CalculationDBContext db = new CalculationDBContext();
 
         // GET: Fire2006/Deferred
         [HttpGet()]
@@ -47,8 +51,42 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
 
             Session["Output"] = List.List;
 
+            CalculationResult CalcResult = new CalculationResult();
+
+            CalcResult.Scheme = "Fire2006";
+            CalcResult.User = "Jayson Herbert";
+            CalcResult.Type = "Deferred";
+            CalcResult.RunDate = DateTime.Now;
+            CalcResult.Reference = List.CalcReference;
+            CalcResult.Input = "TestInput";
+            CalcResult.Output = "TestOutput";
+
+            Create(CalcResult);        
+
            return PartialView("_Output", Data);
 
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: CalculationResults/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,User,Scheme,Type,RunDate,Reference,Input,Output")] CalculationResult calculationResult)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Calculation.Add(calculationResult);
+                db.SaveChanges();
+                return RedirectToAction("Input");
+            }
+
+            return View(calculationResult);
         }
 
         public ActionResult Download()
