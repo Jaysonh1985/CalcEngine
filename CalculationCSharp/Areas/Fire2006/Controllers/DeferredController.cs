@@ -4,14 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CalculationCSharp.Areas.Fire2006.Models;
-using System.Web.Routing;
 using CalculationCSharp.Models.Calculation;
-using System.Web.UI.WebControls;
 using OfficeOpenXml;
 using System.Text;
 using CalculationCSharp.Models;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
+using CalculationCSharp.Models.XMLFunctions;
 
 namespace CalculationCSharp.Areas.Fire2006.Controllers
 
@@ -53,13 +50,18 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
 
             CalculationResult CalcResult = new CalculationResult();
 
+            XMLFunctions xmlfunction = new XMLFunctions();
+
+            string InputXML = xmlfunction.XMLStringBuilder(List);
+            string OutputXML = xmlfunction.XMLStringBuilder(Data);
+
             CalcResult.Scheme = "Fire2006";
             CalcResult.User = "Jayson Herbert";
             CalcResult.Type = "Deferred";
             CalcResult.RunDate = DateTime.Now;
             CalcResult.Reference = List.CalcReference;
-            CalcResult.Input = "TestInput";
-            CalcResult.Output = "TestOutput";
+            CalcResult.Input = InputXML;
+            CalcResult.Output = OutputXML;
 
             Create(CalcResult);        
 

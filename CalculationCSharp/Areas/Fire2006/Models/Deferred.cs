@@ -9,6 +9,7 @@ using System.Collections;
 
 namespace CalculationCSharp.Areas.Fire2006.Models
 {
+    [Serializable]
     public class Deferred
     {
         //Mandatory Declarations DO NOT REMOVE!!!//
