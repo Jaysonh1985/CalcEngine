@@ -26,7 +26,6 @@ namespace CalculationCSharp.Models
         public string Type { get; set; }
         public DateTime RunDate { get; set; }
         public string Reference { get; set; }
-
         [Column(TypeName = "xml")]
         public String Input { get; set; }
         [Column(TypeName = "xml")]

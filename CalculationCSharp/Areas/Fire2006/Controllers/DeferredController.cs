@@ -40,11 +40,9 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
         [HttpPost()]
         public ActionResult Input(Deferred InputForm)
         {
-            Deferred List = new Deferred();
+            DeferredFunctions List = new DeferredFunctions();
 
             List.Setup(InputForm);
-
-            object Data = List.List;
 
             Session["Output"] = List.List;
 
@@ -52,20 +50,20 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
 
             XMLFunctions xmlfunction = new XMLFunctions();
 
-            string InputXML = xmlfunction.XMLStringBuilder(List);
-            string OutputXML = xmlfunction.XMLStringBuilder(Data);
+            string InputXML = xmlfunction.XMLStringBuilder(InputForm);
+            string OutputXML = xmlfunction.XMLStringBuilder(List.List);
 
             CalcResult.Scheme = "Fire2006";
             CalcResult.User = "Jayson Herbert";
             CalcResult.Type = "Deferred";
             CalcResult.RunDate = DateTime.Now;
-            CalcResult.Reference = List.CalcReference;
+            CalcResult.Reference = InputForm.CalcReference;
             CalcResult.Input = InputXML;
             CalcResult.Output = OutputXML;
 
             Create(CalcResult);        
 
-           return PartialView("_Output", Data);
+           return PartialView("_Output", List.List);
 
         }
 
@@ -75,8 +73,6 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
         }
 
         // POST: CalculationResults/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,User,Scheme,Type,RunDate,Reference,Input,Output")] CalculationResult calculationResult)
@@ -203,7 +199,7 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
 
                         foreach (var Member in usersList)
                         {
-                            Deferred List = new Deferred();
+                            DeferredFunctions List = new DeferredFunctions();
 
                             List.Setup(Member);
 

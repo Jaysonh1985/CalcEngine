@@ -12,14 +12,6 @@ namespace CalculationCSharp.Areas.Fire2006.Models
     [Serializable]
     public class Deferred
     {
-        //Mandatory Declarations DO NOT REMOVE!!!//
-        
-        public OutputList OutputList = new OutputList();
-        public Deferred InputForm;
-        public LookupFunctions LookupFunctions = new LookupFunctions();
-        public DateFunctions DateFunctions = new DateFunctions();
-        public List<OutputList> List = new List<OutputList>();
-
         public string CalcReference { get; set; }
         public DateTime DOL { get; set; }
         public double APP { get; set; }
@@ -37,8 +29,16 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         public double LSI { get; set; }
         public double SCPDPension { get; set; }
         public double SumAVCCont { get; set; }
+    }
 
-        
+    public class DeferredFunctions
+    {
+        //public OutputList OutputList = new OutputList();
+        public Deferred InputForm;
+        public LookupFunctions LookupFunctions = new LookupFunctions();
+        public DateFunctions DateFunctions = new DateFunctions();
+        public List<OutputList> List = new List<OutputList>();
+
         public double setPensionIncreaseFactor;
         public System.DateTime setHypotheticalPensionDate;
         private double setPotentialServicetoHRA;
@@ -46,85 +46,60 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         public void Setup(Deferred Input)
         {
             InputForm = Input;
-
-            
-            CalcReference = Input.CalcReference;              
-            DOL = Input.DOL;
-            APP = Input.APP;
-            CPD = Input.CPD;
-            PIDateOverride = Input.PIDateOverride;
-            DOB = Input.DOB;
-            MarStat = Input.MarStat;
-            DJS = Input.DJS;
-            AddedYrsService = Input.AddedYrsService;
-            TransInService = Input.TransInService;
-            PartTimeService = Input.PartTimeService;
-            Breaks = Input.Breaks;
-            Grade = Input.Grade;
-            CVofPensionDebit = Input.CVofPensionDebit;
-            LSI = Input.LSI;
-            SCPDPension = Input.SCPDPension;
-            SumAVCCont = Input.SumAVCCont;
-
             getFactors();
-            OutputList.ListBuild(List, "EGC1.0", "Calculation Reference", Input.CalcReference, "Deferred Calculation");
-            OutputList.ListBuild(List,"EGC1.1", "Hypothetical Pension", getHypotheticalPension(), "Deferred Calculation");
-            OutputList.ListBuild(List, "EGC1.2", "Base Pension", getBasePension(), "Deferred Calculation");
-            OutputList.ListBuild(List, "EGC1.3", "LSI Pension", LSI, "Deferred Calculation");
-            OutputList.ListBuild(List, "EGC1.4", "Total CPD Pension", getTotalCPDPension(), "Deferred Calculation");
-            OutputList.ListBuild(List, "EGC1.5", "Added Years Pension", getAddedYearsPension(), "Deferred Calculation");
-            OutputList.ListBuild(List, "EGC1.6", "Total Gross Pension", getTotalGrossPension(), "Deferred Calculation");
-            OutputList.ListBuild(List, "EGC1.7", "PI on Pension", getPIonPension(), "Deferred Calculation");
-            OutputList.ListBuild(List, "EGC1.8", "Current Value of Pension Debit", CVofPensionDebit, "Deferred Calculation");
-            OutputList.ListBuild(List, "EGC1.9", "Total Gross Pension at Exit", getTotalGrossPensionatExit(), "Deferred Calculation");
-            OutputList.ListBuild(List, "EGC1.10", "Total Pension at Exit", getTotalPensionatExit(), "Deferred Calculation");
-            OutputList.ListBuild(List, "EGI1.1", "Date of Leaving", DOL.ToShortDateString(), "Deferred Calculation");
-            OutputList.ListBuild(List, "EGI1.2", "Average Pensionable Pay", InputForm.APP, "Deferred Calculation");
-            OutputList.ListBuild(List, "EGI1.3", "CPD Pension", CPD, "Deferred Calculation");
-            OutputList.ListBuild(List, "EGI1.4", "Pension Increase Date Overide", PIDateOverride.ToShortDateString(), "Deferred Calculation");
 
-            OutputList.ListBuild(List, "EGI2.1", "Date of Birth", DOB.Date, "Member Details");
-            OutputList.ListBuild(List, "EGI2.2", "Marital Status", MarStat, "Member Details");
-            OutputList.ListBuild(List, "EGI2.3", "Date Joined Scheme", DJS.Date, "Member Details");
-            OutputList.ListBuild(List, "EGI2.4", "Added Years Service", AddedYrsService, "Member Details");
-            OutputList.ListBuild(List, "EGI2.5", "Transferred in Service", TransInService, "Member Details");
-            OutputList.ListBuild(List, "EGI2.6", "Part Time Service", PartTimeService, "Member Details");
-            OutputList.ListBuild(List, "EGI2.7", "Breaks", Breaks, "Member Details");
-            OutputList.ListBuild(List, "EGI2.8", "Grade", Grade, "Member Details");
-            OutputList.ListBuild(List, "EGI2.9", "Hypothetical Pension Date", getHypotheticalPensionDate(), "Member Details");
-            OutputList.ListBuild(List, "EGI2.10", "LSI Pension", LSI, "Member Details");
-            OutputList.ListBuild(List, "EGI2.11", "CPD Pension", SCPDPension, "Member Details");
-
-            OutputList.ListBuild(List, "EGI3.1", "Age at Date of leaving", getAgeatDOL(), "Dates Ages & Factors");
-            OutputList.ListBuild(List, "EGI3.2", "Calculation Date", System.DateTime.Now.ToShortDateString(), "Dates Ages & Factors");
-            OutputList.ListBuild(List, "EGI3.3", "Eligible Payment Date", getEligiblePaymentDate().ToShortDateString(), "Dates Ages & Factors");
-            OutputList.ListBuild(List, "EGI3.4", "Pension Increase Factor", setPensionIncreaseFactor, "Dates Ages & Factors");
-            OutputList.ListBuild(List, "EGI3.5", "CPD Pension Increase Factor", getCPDPensionIncreaseFactor(), "Dates Ages & Factors");
-
-            OutputList.ListBuild(List, "EGI4.1", "Total Pension Service", getTotalPensionService(), "Service");
-            OutputList.ListBuild(List, "EGI4.2", "Potential Pensionable Service to HRA", getPotentialPensionableServicetoHRA(), "Service");
-            OutputList.ListBuild(List, "EGI4.3", "Total Entitlement Service", getTotalEntitlementService(), "Service");
-            OutputList.ListBuild(List, "EGI4.4", "Part Time Adjustment", getPartTimeAdjustment(), "Service");
-            OutputList.ListBuild(List, "EGI4.5", "Total Post 88 Pension Service", getTotalPost88PensionService(), "Service");
-            OutputList.ListBuild(List, "EGI4.6", "Total Service for Survivor Requisite Benefit Pension", getTotalServiceSurvivorRequisiteBenefitPension(), "Service");
-
-            OutputList.ListBuild(List, "EGR1.1", "Date Effective", getAADateEffective(), "Annual Allowance");
-            OutputList.ListBuild(List, "EGR1.2", "AVC Contributions", InputForm.SumAVCCont, "Annual Allowance");
-            OutputList.ListBuild(List, "EGR1.3", "Annual Allowance Pension", getAnnualAllowancePension(), "Annual Allowance");
-
-            OutputList.ListBuild(List, "EGR2.1", "Survivor Contingent Pension", getSurvivorContingentPension(), "Survivor Benefits");
-            OutputList.ListBuild(List, "EGR2.2", "PI on Contingent Survivor Pension", getPIonSurvivorContingentPension(), "Survivor Benefits");
-            OutputList.ListBuild(List, "EGR2.3", "Survivor LSI Pension", getSurvivorLSIPension(), "Survivor Benefits");
-            OutputList.ListBuild(List, "EGR2.4", "Survivor CPD Pension", getSurvivorCPDPension(), "Survivor Benefits");
-            OutputList.ListBuild(List, "EGR2.5", "Total Contingent Survivor Pension", getTotalContingentSurvivorPension(), "Survivor Benefits");
-            OutputList.ListBuild(List, "EGR2.6", "Survivor's Requisite Benefit Pension", getSurvivorRequisiteBenefitPension(), "Survivor Benefits");
-
+            List.Add(new OutputList { ID = "EGC1.0", Field = "Calculation Reference", Value = Convert.ToString(Input.CalcReference), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.1", Field = "Hypothetical Pension", Value = Convert.ToString(getHypotheticalPension()), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.2", Field = "Base Pension", Value = Convert.ToString(getBasePension()), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.3", Field = "LSI Pension", Value = Convert.ToString(Input.LSI), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.4", Field = "Total CPD Pension", Value = Convert.ToString(getTotalCPDPension()), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.5", Field = "Added Years Pension", Value = Convert.ToString(getAddedYearsPension()), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.6", Field = "Total Gross Pension", Value = Convert.ToString(getTotalGrossPension()), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.7", Field = "PI on Pension", Value = Convert.ToString(getPIonPension()), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.8", Field = "Current Value of Pension Debit", Value = Convert.ToString(InputForm.CVofPensionDebit), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.9", Field = "Total Gross Pension at Exit", Value = Convert.ToString(getTotalGrossPensionatExit()), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.10", Field = "Total Pension at Exit", Value = Convert.ToString(getTotalPensionatExit()), Group = "Deferred Calculation" });
+            List.Add(new OutputList { ID = "EGI1.1", Field = "Date of Leaving", Value = Convert.ToString(InputForm.DOL.ToShortDateString()), Group = "Deferred Calculation" });
+            List.Add(new OutputList { ID = "EGI1.2", Field = "Average Pensionable Pay", Value = Convert.ToString(InputForm.APP), Group = "Deferred Calculation" });
+            List.Add(new OutputList { ID = "EGI1.3", Field = "CPD Pension", Value = Convert.ToString(InputForm.CPD), Group = "Deferred Calculation" });
+            List.Add(new OutputList { ID = "EGI1.4", Field = "Pension Increase Date Overide", Value = Convert.ToString(InputForm.PIDateOverride.ToShortDateString()), Group = "Deferred Calculation" });
+            List.Add(new OutputList { ID = "EGI2.1", Field = "Date of Birth", Value = Convert.ToString(InputForm.DOB.Date), Group = "Member Details" });
+            List.Add(new OutputList { ID = "EGI2.2", Field = "Marital Status", Value = Convert.ToString(InputForm.MarStat), Group = "Member Details" });
+            List.Add(new OutputList { ID = "EGI2.3", Field = "Date Joined Scheme", Value = Convert.ToString(InputForm.DJS.Date), Group = "Member Details" });
+            List.Add(new OutputList { ID = "EGI2.4", Field = "Added Years Service", Value = Convert.ToString(InputForm.AddedYrsService), Group = "Member Details" });
+            List.Add(new OutputList { ID = "EGI2.5", Field = "Transferred in Service", Value = Convert.ToString(InputForm.TransInService), Group = "Member Details" });
+            List.Add(new OutputList { ID = "EGI2.6", Field = "Part Time Service", Value = Convert.ToString(InputForm.PartTimeService), Group = "Member Details" });
+            List.Add(new OutputList { ID = "EGI2.7", Field = "Breaks", Value = Convert.ToString(InputForm.Breaks), Group = "Member Details" });
+            List.Add(new OutputList { ID = "EGI2.8", Field = "Grade", Value = Convert.ToString(InputForm.Grade), Group = "Member Details" });
+            List.Add(new OutputList { ID = "EGI2.9", Field = "Hypothetical Pension Date", Value = Convert.ToString(getHypotheticalPensionDate()), Group = "Member Details" });
+            List.Add(new OutputList { ID = "EGI2.10", Field = "LSI Pension", Value = Convert.ToString(InputForm.LSI), Group = "Member Details" });
+            List.Add(new OutputList { ID = "EGI2.11", Field = "CPD Pension", Value = Convert.ToString(InputForm.SCPDPension), Group = "Member Details" });
+            List.Add(new OutputList { ID = "EGI3.1", Field = "Age at Date of leaving", Value = Convert.ToString(getAgeatDOL()), Group = "Dates Ages & Factors" });
+            List.Add(new OutputList { ID = "EGI3.2", Field = "Calculation Date", Value = Convert.ToString(System.DateTime.Now.ToShortDateString()), Group = "Dates Ages & Factors" });
+            List.Add(new OutputList { ID = "EGI3.3", Field = "Eligible Payment Date", Value = Convert.ToString(getEligiblePaymentDate().ToShortDateString()), Group = "Dates Ages & Factors" });
+            List.Add(new OutputList { ID = "EGI3.4", Field = "Pension Increase Factor", Value = Convert.ToString(setPensionIncreaseFactor), Group = "Dates Ages & Factors" });
+            List.Add(new OutputList { ID = "EGI3.5", Field = "CPD Pension Increase Factor", Value = Convert.ToString(getCPDPensionIncreaseFactor()), Group = "Dates Ages & Factors" });
+            List.Add(new OutputList { ID = "EGI4.1", Field = "Total Pension Service", Value = Convert.ToString(getTotalPensionService()), Group = "Service" });
+            List.Add(new OutputList { ID = "EGI4.2", Field = "Potential Pensionable Service to HRA", Value = Convert.ToString(getPotentialPensionableServicetoHRA()), Group = "Service" });
+            List.Add(new OutputList { ID = "EGI4.3", Field = "Total Entitlement Service", Value = Convert.ToString(getTotalEntitlementService()), Group = "Service" });
+            List.Add(new OutputList { ID = "EGI4.4", Field = "Part Time Adjustment", Value = Convert.ToString(getPartTimeAdjustment()), Group = "Service" });
+            List.Add(new OutputList { ID = "EGI4.5", Field = "Total Post 88 Pension Service", Value = Convert.ToString(getTotalPost88PensionService()), Group = "Service" });
+            List.Add(new OutputList { ID = "EGI4.6", Field = "Total Service for Survivor Requisite Benefit Pension", Value = Convert.ToString(getTotalServiceSurvivorRequisiteBenefitPension()), Group = "Service" });
+            List.Add(new OutputList { ID = "EGR1.1", Field = "Date Effective", Value = Convert.ToString(getAADateEffective()), Group = "Annual Allowance" });
+            List.Add(new OutputList { ID = "EGR1.2", Field = "AVC Contributions", Value = Convert.ToString(InputForm.SumAVCCont), Group = "Annual Allowance" });
+            List.Add(new OutputList { ID = "EGR1.3", Field = "Annual Allowance Pension", Value = Convert.ToString(getAnnualAllowancePension()), Group = "Annual Allowance" });
+            List.Add(new OutputList { ID = "EGR2.1", Field = "Survivor Contingent Pension", Value = Convert.ToString(getSurvivorContingentPension()), Group = "Survivor Benefits" });
+            List.Add(new OutputList { ID = "EGR2.2", Field = "PI on Contingent Survivor Pension", Value = Convert.ToString(getPIonSurvivorContingentPension()), Group = "Survivor Benefits" });
+            List.Add(new OutputList { ID = "EGR2.3", Field = "Survivor LSI Pension", Value = Convert.ToString(getSurvivorLSIPension()), Group = "Survivor Benefits" });
+            List.Add(new OutputList { ID = "EGR2.4", Field = "Survivor CPD Pension", Value = Convert.ToString(getSurvivorCPDPension()), Group = "Survivor Benefits" });
+            List.Add(new OutputList { ID = "EGR2.5", Field = "Total Contingent Survivor Pension", Value = Convert.ToString(getTotalContingentSurvivorPension()), Group = "Survivor Benefits" });
+            List.Add(new OutputList { ID = "EGR2.6", Field = "Survivor's Requisite Benefit Pension", Value = Convert.ToString(getSurvivorRequisiteBenefitPension()), Group = "Survivor Benefits" });
         }
 
         public void getFactors()
         {
-            setPensionIncreaseFactor = LookupFunctions.CSVLookup("PIFactor", Convert.ToString(PIDateOverride.Date), 1, 2);
-            setHypotheticalPensionDate = Convert.ToDateTime(DOL.Date).AddDays(LookupFunctions.CSVLookup("Grade", Grade, 2, 3));
+            setPensionIncreaseFactor = LookupFunctions.CSVLookup("PIFactor", Convert.ToString(InputForm.PIDateOverride.Date), 1, 2);
+            setHypotheticalPensionDate = Convert.ToDateTime(InputForm.DOL.Date).AddDays(LookupFunctions.CSVLookup("Grade", InputForm.Grade, 2, 3));
             setPotentialServicetoHRA = getPotentialPensionableServicetoHRA();
         }
 
@@ -132,13 +107,13 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         {
             if (setPotentialServicetoHRA > 20)
             {
-                double HypotheticalPension = (setPotentialServicetoHRA * APP * 0.0166666666666667) + (((setPotentialServicetoHRA - 20) * 2) * APP * 0.0166666666666667);
+                double HypotheticalPension = (setPotentialServicetoHRA * InputForm.APP * 0.0166666666666667) + (((setPotentialServicetoHRA - 20) * 2) * InputForm.APP * 0.0166666666666667);
 
                 return Math.Round(HypotheticalPension, 2);
             }
             else
             {
-                return Math.Round(setPotentialServicetoHRA * APP * (1 / 6), 2);
+                return Math.Round(setPotentialServicetoHRA * InputForm.APP * (1 / 6), 2);
             }
         }
         public double getBasePension()
@@ -154,15 +129,15 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         }
         public double getTotalLSIPension()
         {
-            return Convert.ToDouble(LSI) * getCPDPensionIncreaseFactor();
+            return Convert.ToDouble(InputForm.LSI) * getCPDPensionIncreaseFactor();
         }
         public double getTotalCPDPension()
         {
-            return CPD * getCPDPensionIncreaseFactor();
+            return InputForm.CPD * getCPDPensionIncreaseFactor();
         }
         public double getAddedYearsPension()
         {
-            return getBasePension() * AddedYrsService * (1 / 60);
+            return getBasePension() * InputForm.AddedYrsService * (1 / 60);
         }
         public double getTotalGrossPension()
         {
@@ -178,7 +153,7 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         }
         public double getTotalPensionatExit()
         {
-            return getTotalGrossPensionatExit() - CVofPensionDebit;
+            return getTotalGrossPensionatExit() - InputForm.CVofPensionDebit;
         }
         public System.DateTime getHypotheticalPensionDate()
         {
@@ -186,11 +161,11 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         }
         public double getAgeatDOL()
         {
-            return DateFunctions.YearsDaysBetween(Convert.ToDateTime(DOB), Convert.ToDateTime(DOL), false, 365);
+            return DateFunctions.YearsDaysBetween(Convert.ToDateTime(InputForm.DOB), Convert.ToDateTime(InputForm.DOL), false, 365);
         }
         public System.DateTime getEligiblePaymentDate()
         {
-            return Convert.ToDateTime(DOB.Date).AddYears(60);
+            return Convert.ToDateTime(InputForm.DOB.Date).AddYears(60);
         }
 
         public double getCPDPensionIncreaseFactor()
@@ -199,29 +174,29 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         }
         public double getTotalPensionService()
         {
-            return DateFunctions.YearsDaysBetween(DJS.Date, DOL.Date, false, 365) + AddedYrsService + TransInService - PartTimeService - Breaks;
+            return DateFunctions.YearsDaysBetween(InputForm.DJS.Date, InputForm.DOL.Date, false, 365) + InputForm.AddedYrsService + InputForm.TransInService - InputForm.PartTimeService - InputForm.Breaks;
         }
         public double getPotentialPensionableServicetoHRA()
         {
             int YrsDJS;
             double Daysbetween;
             int YrsDOL;
-            YrsDJS = Convert.ToInt32(DateFunctions.YearsDaysBetween(DJS, DOL, false, 365));
-            YrsDOL = Convert.ToInt32(DateFunctions.YearsDaysBetween(DOL, getHypotheticalPensionDate(), true, 365));
+            YrsDJS = Convert.ToInt32(DateFunctions.YearsDaysBetween(InputForm.DJS, InputForm.DOL, false, 365));
+            YrsDOL = Convert.ToInt32(DateFunctions.YearsDaysBetween(InputForm.DOL, getHypotheticalPensionDate(), true, 365));
 
-            double daycalc = (DOL - DJS).TotalDays;
-            double daycalc2 = (getHypotheticalPensionDate() - DOL).TotalDays;
+            double daycalc = (InputForm.DOL - InputForm.DJS).TotalDays;
+            double daycalc2 = (getHypotheticalPensionDate() - InputForm.DOL).TotalDays;
 
             Daysbetween = ((daycalc / 365)) - YrsDJS + ((daycalc2 / 365) - YrsDOL);
             return YrsDJS + Daysbetween;
         }
         public double getTotalEntitlementService()
         {
-            return getTotalPensionService() + TransInService;
+            return getTotalPensionService() + InputForm.TransInService;
         }
         public double getPartTimeAdjustment()
         {
-            return PartTimeService / getTotalEntitlementService();
+            return InputForm.PartTimeService / getTotalEntitlementService();
         }
         public double getTotalPost88PensionService()
         {
@@ -263,9 +238,9 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         }
         public double getSurvivorLSIPension()
         {
-            if (MarStat == "Married" | MarStat == "Civil Partnership")
+            if (InputForm.MarStat == "Married" | InputForm.MarStat == "Civil Partnership")
             {
-                return LSI / 2;
+                return InputForm.LSI / 2;
             }
             else
             {
@@ -274,9 +249,9 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         }
         public double getSurvivorCPDPension()
         {
-            if (MarStat == "Married" | MarStat == "Civil Partnership")
+            if (InputForm.MarStat == "Married" | InputForm.MarStat == "Civil Partnership")
             {
-                return CPD / 2;
+                return InputForm.CPD / 2;
             }
             else
             {
@@ -289,9 +264,11 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         }
         public double getSurvivorRequisiteBenefitPension()
         {
-            return getTotalServiceSurvivorRequisiteBenefitPension() * APP;
+            return getTotalServiceSurvivorRequisiteBenefitPension() * InputForm.APP;
         }
 
 
     }
 }
+       
+

@@ -15,19 +15,6 @@ namespace CalculationCSharp.Models.Calculation
         public string Value { get; set; }
         public string Group { get; set; }
 
-        public void ListBuild(List<OutputList> List, string ID, string Field, object Value1, string Group)
-        {
-            var Value = Convert.ToString(Value1);
-
-            List.Add(new OutputList
-            {
-                ID = ID,
-                Field = Field,
-                Value = Value,
-                Group = Group
-            });
-
-        }
     }
 
 }
