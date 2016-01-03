@@ -53,7 +53,7 @@ namespace CalculationCSharp.Models
         public String OutputNew { get; set; }
         [Column(TypeName = "xml")]
         public String Difference { get; set; }
-        public Boolean Pass { get; set; }
+        public String Pass { get; set; }
 
     }
 
