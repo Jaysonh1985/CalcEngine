@@ -33,10 +33,34 @@ namespace CalculationCSharp.Models
 
     }
 
+    public class CalculationRegression
+    {
+        public int Id { get; set; }
+        [Required()]
+        [StringLength(100, MinimumLength = 2)]
+        public string Scheme { get; set; }
+        [Required()]
+        [StringLength(100, MinimumLength = 2)]
+        public string Type { get; set; }
+        public DateTime OriginalRunDate { get; set; }
+        public DateTime LatestRunDate { get; set; }
+        public string Reference { get; set; }
+        [Column(TypeName = "xml")]
+        public String Input { get; set; }
+        [Column(TypeName = "xml")]
+        public String OutputOld { get; set; }
+        [Column(TypeName = "xml")]
+        public String OutputNew { get; set; }
+        [Column(TypeName = "xml")]
+        public String Difference { get; set; }
+        public Boolean Pass { get; set; }
+
+    }
 
 
     public class CalculationDBContext : DbContext
     {
-        public DbSet<CalculationResult> Calculation { get; set; }
+        public DbSet<CalculationResult> CalculationResult { get; set; }
+        public DbSet<CalculationRegression> CalculationRegression { get; set; }
     }
 }

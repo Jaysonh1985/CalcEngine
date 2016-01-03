@@ -1,0 +1,87 @@
+﻿@model IEnumerable<CalculationCSharp.Models.CalculationRegression>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Scheme)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OriginalRunDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LatestRunDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Input)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OutputOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OutputNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Difference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pass)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Scheme)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OriginalRunDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LatestRunDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Input)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OutputOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OutputNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Difference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pass)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

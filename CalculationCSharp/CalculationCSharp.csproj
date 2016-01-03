@@ -134,6 +134,14 @@
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\XMLDiffPatch.1.0.8.28\lib\net\XmlDiffPatch.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="XmlDiffPatch.View, Version=1.0.1493.40755, Culture=neutral">
+      <HintPath>..\packages\XMLDiffPatch.1.0.8.28\lib\net\XmlDiffPatch.View.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -191,6 +199,7 @@
     <Compile Include="Areas\Fire2006\Fire2006AreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
+    <Compile Include="Controllers\CalculationRegressionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Areas\Fire2006\Controllers\DeferredController.cs" />
@@ -199,7 +208,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CalculationResult.cs" />
+    <Compile Include="Models\CalculationViewModels.cs" />
     <Compile Include="Models\Calculation\DownloadFileActionResult.cs" />
     <Compile Include="Models\Calculation\Index.cs" />
     <Compile Include="Models\Calculation\OutputList.cs" />
@@ -211,6 +220,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Repositories\CalculationRepository.cs" />
     <Compile Include="Models\Repositories\Repository.cs" />
+    <Compile Include="Models\StringFunctions\StringFunctions.cs" />
     <Compile Include="Models\XMLFunctions\XMLFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -306,6 +316,11 @@
     <Content Include="Views\Calculation\Index.cshtml" />
     <Content Include="Views\Shared\_Output.cshtml" />
     <Content Include="Views\Shared\_BulkCalc.cshtml" />
+    <Content Include="Views\CalculationRegressions\Create.cshtml" />
+    <Content Include="Views\CalculationRegressions\Delete.cshtml" />
+    <Content Include="Views\CalculationRegressions\Details.cshtml" />
+    <Content Include="Views\CalculationRegressions\Edit.cshtml" />
+    <Content Include="Views\CalculationRegressions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

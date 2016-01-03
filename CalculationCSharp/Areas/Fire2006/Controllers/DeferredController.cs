@@ -9,6 +9,8 @@ using OfficeOpenXml;
 using System.Text;
 using CalculationCSharp.Models;
 using CalculationCSharp.Models.XMLFunctions;
+using CalculationCSharp.Models.StringFunctions;
+using System.Xml;
 
 namespace CalculationCSharp.Areas.Fire2006.Controllers
 
@@ -53,6 +55,14 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
             string InputXML = xmlfunction.XMLStringBuilder(InputForm);
             string OutputXML = xmlfunction.XMLStringBuilder(List.List);
 
+            CalculationRegression calculationRegression = db.CalculationRegression.Find(1);
+
+            string InputRegXML = calculationRegression.Input.ToString();
+            string OutputOldRegXML = calculationRegression.OutputOld.ToString();
+            string OutputNewRegXML = calculationRegression.OutputNew.ToString();
+
+            xmlfunction.MatchXML(OutputOldRegXML, OutputNewRegXML);
+
             CalcResult.Scheme = "Fire2006";
             CalcResult.User = "Jayson Herbert";
             CalcResult.Type = "Deferred";
@@ -79,7 +89,7 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Calculation.Add(calculationResult);
+                db.CalculationResult.Add(calculationResult);
                 db.SaveChanges();
                 return RedirectToAction("Input");
             }
@@ -112,6 +122,9 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
             if (Request != null)
 
             {
+
+                String OutputString = "";
+                StringFunctions StringFunctions = new StringFunctions();
 
                 HttpPostedFileBase file = Request.Files["UploadedFile"];
 
@@ -161,6 +174,7 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
 
                                 if (DateTime.TryParse(Value,out dateTime))
                                 {
+                                    
                                     prop.SetValue(model, dateTime, null);
 
                                 }
@@ -186,9 +200,8 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
 
                         }
 
-
                         var stringBuilder = new StringBuilder();
-
+                        
                         Response.ClearContent();
 
                         Response.AddHeader("content-disposition", "attachment;filename=Output.csv");
@@ -203,37 +216,12 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
 
                             List.Setup(Member);
 
-                            if (HeaderRow < 1)
-                            {
-                                foreach (var output in List.List)
-                                {
-                                    stringBuilder.Append(output.ID);
-                                    stringBuilder.Append(",");
-                                }
-                                stringBuilder.AppendLine();
-
-                                foreach (var output in List.List)
-                                {
-                                    stringBuilder.Append(output.Field);
-                                    stringBuilder.Append(",");
-                                }
-                                stringBuilder.AppendLine();
-
-                                HeaderRow = 1;
-                            }
-
-
-                            foreach (var output in List.List)
-                            {
-                                stringBuilder.Append(output.Value);
-                                stringBuilder.Append(",");
-                            }
-                            stringBuilder.AppendLine();
-
-
+                            OutputString = StringFunctions.BulkCalc(List.List,HeaderRow,stringBuilder);
+                            HeaderRow = 1;
+                           
                         }
 
-                        Response.Write(stringBuilder.ToString());
+                        Response.Write(OutputString);
                         Response.End();
                     }
 
