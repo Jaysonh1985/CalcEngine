@@ -2,13 +2,11 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Calculation Regression</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -61,27 +59,36 @@
         <td>
             @Html.DisplayFor(modelItem => item.Reference)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Input)
+        <td>    
+            @Html.ActionLink("Input", "ViewXML", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check Input" })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OutputOld)
+            @Html.ActionLink("OutputOld", "ViewXML", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check OutputOld" })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OutputNew)
+            @Html.ActionLink("OutputNew", "ViewXML", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check OutputNew" })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Difference)
+            @Html.ActionLink("Difference", "ViewXML", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check Difference" })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Pass)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }
 
 </table>
+
+<div id="modal-container" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,6 +20,19 @@ namespace CalculationCSharp.Controllers
             return View(db.CalculationRegression.ToList());
         }
 
+        public ActionResult ViewXML(int? id)
+        {
+            CalculationRegression calculationRegression = db.CalculationRegression.Find(id);
+
+            return PartialView("_RegModal",calculationRegression);
+        }
+
+        //[HttpPost]
+        //public ActionResult AddNote(CalculationRegression model)
+        //{
+        //    return RedirectToAction("Index");
+        //}
+
         // GET: CalculationRegressions/Details/5
         public ActionResult Details(int? id)
         {

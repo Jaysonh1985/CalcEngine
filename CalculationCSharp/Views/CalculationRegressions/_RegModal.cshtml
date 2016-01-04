@@ -1,0 +1,21 @@
+﻿@model CalculationCSharp.Models.CalculationRegression
+
+    <br />
+    @using (Html.BeginForm("AddNote", "Dashboard", FormMethod.Post))
+    {
+        <div class="modal-header">
+            <h2 class="modal-header">Input</h2>
+        </div>
+
+        <div class="modal-body">
+         @Html.TextAreaFor(m => m.Input, new { style = "Width:500px; height:700px;" })
+        </div>
+        
+        <div class="modal-footer">
+            @*<button type="submit" id="btnSave" class="btn btn-default">Save</button>*@
+            <button type="button" class="btn btn-default" data-dissmiss="modal">Cancel</button>
+        </div>
+
+
+
+    }
