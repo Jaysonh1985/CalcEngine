@@ -7,6 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CalculationCSharp.Models;
+using CalculationCSharp.Models.Calculation;
+using System.Xml.Serialization;
+using System.IO;
+using CalculationCSharp.Areas.Fire2006.Models;
 
 namespace CalculationCSharp.Controllers
 {
@@ -27,12 +31,6 @@ namespace CalculationCSharp.Controllers
             return PartialView("_RegModal",calculationRegression);
         }
 
-        //[HttpPost]
-        //public ActionResult AddNote(CalculationRegression model)
-        //{
-        //    return RedirectToAction("Index");
-        //}
-
         // GET: CalculationRegressions/Details/5
         public ActionResult Details(int? id)
         {
@@ -49,26 +47,69 @@ namespace CalculationCSharp.Controllers
         }
 
         // GET: CalculationRegressions/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
-        }
-
-        // POST: CalculationRegressions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Scheme,Type,OriginalRunDate,LatestRunDate,Reference,Input,OutputOld,OutputNew,Difference,Pass")] CalculationRegression calculationRegression)
-        {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.CalculationRegression.Add(calculationRegression);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CalculationRegression calculationRegression = db.CalculationRegression.Find(id);
+            if (calculationRegression == null)
+            {
+                return HttpNotFound();
             }
 
-            return View(calculationRegression);
+            var serializer = new XmlSerializer(typeof(Areas.Fire2006.Models.Deferred));
+            object result;
+
+            
+
+            using (TextReader reader = new StringReader(calculationRegression.Input))
+            {
+                result = serializer.Deserialize(reader);
+            }
+
+            DeferredFunctions List = new DeferredFunctions();
+            CalculationBase RunCalculation = new CalculationBase();
+
+            var model = result as Deferred;
+
+            List.Setup(model);
+
+            RunCalculation.CalculationRun(model,List);
+            
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult CreateAll()
+        {
+            CalculationRegression calculationRegression = new CalculationRegression();
+
+            var test = db.CalculationRegression.ToList();
+
+            foreach (var Tes in test)
+            {
+                var serializer = new XmlSerializer(typeof(Areas.Fire2006.Models.Deferred));
+                object result;
+
+                using (TextReader reader = new StringReader(Tes.Input))
+                {
+                    result = serializer.Deserialize(reader);
+                }
+
+                DeferredFunctions List = new DeferredFunctions();
+                CalculationBase RunCalculation = new CalculationBase();
+
+                var model = result as Deferred;
+
+                List.Setup(model);
+
+                RunCalculation.CalculationRun(model, List);
+
+            } 
+
+
+            return RedirectToAction("Index");
         }
 
         // GET: CalculationRegressions/Edit/5

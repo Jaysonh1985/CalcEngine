@@ -7,6 +7,8 @@
 
 <h2>Calculation Regression</h2>
 
+@Html.ActionLink("Run All", "CreateAll",null,null, new { @class = "btn btn-default", title = "Run All Calcs" })
+
 <table class="table">
     <tr>
         <th>
@@ -69,12 +71,17 @@
             @Html.ActionLink("OutputNew", "ViewXML", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check OutputNew" })
         </td>
         <td>
-            @Html.ActionLink("Difference", "ViewXML", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check Difference" })
+            @if(item.Difference != null)
+            {
+                @Html.ActionLink("Difference", "ViewXML", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check Difference" })
+            }
+            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Pass)
         </td>
         <td>
+            @Html.ActionLink("Run", "Create", new { id = item.Id }) |
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
