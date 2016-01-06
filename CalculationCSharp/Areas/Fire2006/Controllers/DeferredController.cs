@@ -48,6 +48,8 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
             List.Setup(InputForm);
 
             Session["Output"] = List.List;
+            Session["Input"] = InputForm;
+            Session["List"] = List;
 
             CalculationBase RunCalculation = new CalculationBase();
 
@@ -58,50 +60,19 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
 
         }
 
-        //// POST: CalculationResults/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult CreateCalcResult([Bind(Include = "Id,User,Scheme,Type,RunDate,Reference,Input,Output")] CalculationResult calculationResult)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.CalculationResult.Add(calculationResult);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Input");
-        //    }
+        public ActionResult Regression()
+        {
+            Deferred InputForm = new Deferred();
+            InputForm = (Deferred) Session["Input"];
 
-        //    return View(calculationResult);
-        //}
+            DeferredFunctions List = new DeferredFunctions();
+            List = (DeferredFunctions)Session["List"];
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult CreateCalcRegression([Bind(Include = "Id,Scheme,Type,OriginalRunDate,LatestRunDate,Reference,Input,OutputOld,OutputNew,Difference,Pass")] CalculationRegression calculationRegression)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.CalculationRegression.Add(calculationRegression);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
+            CalculationBase RunCalculation = new CalculationBase();
+            RunCalculation.CalculationRegressionAdd(InputForm, List,false);
 
-        //    return View(calculationRegression);
-        //}
-
-        //// POST: CalculationRegressions/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult EditCalcRegression([Bind(Include = "Id,Scheme,Type,OriginalRunDate,LatestRunDate,Reference,Input,OutputOld,OutputNew,Difference,Pass")] CalculationRegression calculationRegression)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(calculationRegression).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(calculationRegression);
-        //}
+            return RedirectToAction("Input");
+        }
 
         public ActionResult Download()
         {

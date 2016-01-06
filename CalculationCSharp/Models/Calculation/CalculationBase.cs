@@ -32,50 +32,6 @@ namespace CalculationCSharp.Models.Calculation
             //CalculationRegression calculationRegression = db.CalculationRegression.Find();
             CalculationRegression CalcRegression = new CalculationRegression();
 
-            int resultid = 0;
-            using (var context = new CalculationDBContext())
-            {
-                var Regression = context.CalculationRegression
-                .Where(b => b.Reference == InputForm.CalcReference && b.Scheme == "Fire2006" && b.Type == "Deferred")
-                .FirstOrDefault();
-
-                #pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
-                if (Regression == null)
-                {
-                    resultid = 0;
-                }
-                else
-                {
-                    resultid = Regression.Id;
-                }
-
-            }
-
-            //string InputRegXML = calculationRegression.Input.ToString();
-            //string OutputOldRegXML = calculationRegression.OutputOld.ToString();
-            //string OutputNewRegXML = calculationRegression.OutputNew.ToString();
-
-            string sqlinput = xmlfunction.MatchXML(OutputXML, OutputXML);
-
-            CalcRegression.LatestRunDate = DateTime.Now;
-            CalcRegression.Input = InputXML;
-            CalcRegression.OutputOld = OutputXML;
-            CalcRegression.OutputNew = OutputXML;
-            CalcRegression.Scheme = "Fire2006";
-            CalcRegression.Type = "Deferred";
-            CalcRegression.Reference = InputForm.CalcReference;
-            CalcRegression.OriginalRunDate = DateTime.Parse("2015-01-20");
-            CalcRegression.Difference = sqlinput;
-
-            if (sqlinput == null)
-            {
-                CalcRegression.Pass = "TRUE";
-            }
-            else
-            {
-                CalcRegression.Pass = "FALSE";
-            }
-
             CalcResult.Scheme = "Fire2006";
             CalcResult.User = "Jayson Herbert";
             CalcResult.Type = "Deferred";
@@ -83,18 +39,73 @@ namespace CalculationCSharp.Models.Calculation
             CalcResult.Reference = InputForm.CalcReference;
             CalcResult.Input = InputXML;
             CalcResult.Output = OutputXML;
+            CreateCalcResult(CalcResult);
+        }
+
+        public void CalculationRegressionAdd(Deferred InputForm, DeferredFunctions List, Boolean Run)
+        {
+            CalculationCSharp.Models.XMLFunctions.XMLFunctions xmlfunction = new CalculationCSharp.Models.XMLFunctions.XMLFunctions();
+
+            string InputXML = xmlfunction.XMLStringBuilder(InputForm);
+            string OutputXML = xmlfunction.XMLStringBuilder(List.List);
+            CalculationRegression CalcRegression = new CalculationRegression();
+
+            int resultid = 0;
+            using (var context = new CalculationDBContext())
+            {
+                var Regression = context.CalculationRegression
+                .Where(b => b.Reference == InputForm.CalcReference && b.Scheme == "Fire2006" && b.Type == "Deferred")
+                .FirstOrDefault();
+                
+
+
+                if (Regression == null)
+                {
+                    resultid = 0;
+                }
+                else
+                {
+
+                    resultid = Regression.Id;
+                }
+
+            }
+
+            if (Run == true)
+            {
+                string Difference = xmlfunction.MatchXML(OutputXML, OutputXML);
+                CalcRegression.OutputNew = OutputXML;
+                CalcRegression.LatestRunDate = DateTime.Now;
+                CalcRegression.Difference = Difference;
+
+                if (Difference == null)
+                {
+                    CalcRegression.Pass = "TRUE";
+                }
+                else
+                {
+                    CalcRegression.Pass = "FALSE";
+                }
+            }
+            else
+            {
+                CalcRegression.Scheme = "Fire2006";
+                CalcRegression.Type = "Deferred";
+                CalcRegression.Input = InputXML;
+                CalcRegression.OutputOld = OutputXML;
+                CalcRegression.Reference = InputForm.CalcReference;
+                CalcRegression.OriginalRunDate = DateTime.Now;
+            }
 
             if (resultid > 0)
             {
                 CalcRegression.Id = resultid;
-                EditCalcRegression(CalcRegression);
+                EditCalcRegression(CalcRegression,Run);
             }
             else
             {
                 CreateCalcRegression(CalcRegression);
             }
-
-            CreateCalcResult(CalcResult);
         }
 
         public ActionResult CreateCalcResult([Bind(Include = "Id,User,Scheme,Type,RunDate,Reference,Input,Output")] CalculationResult calculationResult)
@@ -128,11 +139,28 @@ namespace CalculationCSharp.Models.Calculation
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditCalcRegression([Bind(Include = "Id,Scheme,Type,OriginalRunDate,LatestRunDate,Reference,Input,OutputOld,OutputNew,Difference,Pass")] CalculationRegression calculationRegression)
+        public ActionResult EditCalcRegression([Bind(Include = "Id,Scheme,Type,OriginalRunDate,LatestRunDate,Reference,Input,OutputOld,OutputNew,Difference,Pass")] CalculationRegression calculationRegression, Boolean Run)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(calculationRegression).State = EntityState.Modified;
+
+                if (Run == true)
+                {
+                    db.Entry(calculationRegression).Property(x => x.Scheme).IsModified = false;
+                    db.Entry(calculationRegression).Property(x => x.Type).IsModified = false;
+                    db.Entry(calculationRegression).Property(x => x.Input).IsModified = false;
+                    db.Entry(calculationRegression).Property(x => x.OutputOld).IsModified = false;
+                    db.Entry(calculationRegression).Property(x => x.Reference).IsModified = false;
+                    db.Entry(calculationRegression).Property(x => x.OriginalRunDate).IsModified = false;
+                }
+                else
+                {
+                    db.Entry(calculationRegression).Property(x => x.OutputNew).IsModified = false;
+                    db.Entry(calculationRegression).Property(x => x.LatestRunDate).IsModified = false;
+                    db.Entry(calculationRegression).Property(x => x.Difference).IsModified = false;
+                    db.Entry(calculationRegression).Property(x => x.Pass).IsModified = false;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

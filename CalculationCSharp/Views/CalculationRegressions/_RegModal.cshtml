@@ -1,14 +1,15 @@
-﻿@model CalculationCSharp.Models.CalculationRegression
+﻿@model CalculationCSharp.Models.Calculation.RegressionViewModel
 
     <br />
     @using (Html.BeginForm("AddNote", "Dashboard", FormMethod.Post))
     {
         <div class="modal-header">
-            <h2 class="modal-header">Input</h2>
+
         </div>
 
         <div class="modal-body">
-         @Html.TextAreaFor(m => m.Input, new { style = "Width:500px; height:700px;" })
+
+         @Html.TextAreaFor(model => Model.YourString, new {@class = "form-control", style = "width: 100%; max-width: 100%; height: 500px; " })
         </div>
         
         <div class="modal-footer">

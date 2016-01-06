@@ -62,13 +62,13 @@
             @Html.DisplayFor(modelItem => item.Reference)
         </td>
         <td>    
-            @Html.ActionLink("Input", "ViewXML", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check Input" })
+            @Html.ActionLink("Input", "ViewXMLInput", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check Input" })
         </td>
         <td>
-            @Html.ActionLink("OutputOld", "ViewXML", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check OutputOld" })
+            @Html.ActionLink("OutputOld", "ViewXMLOutput", null, new { id = item.Id, type = "OutputOld" }, new { @class = "btn btn-default modal-link", title = "Check OutputOld" })
         </td>
         <td>
-            @Html.ActionLink("OutputNew", "ViewXML", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check OutputNew" })
+            @Html.ActionLink("OutputNew", "ViewXMLOutput", null, new { id = item.Id, type = "OutputNew" }, new { @class = "btn btn-default modal-link", title = "Check OutputNew" })
         </td>
         <td>
             @if(item.Difference != null)
@@ -91,7 +91,7 @@
 </table>
 
 <div id="modal-container" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body">
 

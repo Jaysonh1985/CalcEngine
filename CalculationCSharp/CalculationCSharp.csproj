@@ -214,6 +214,7 @@
     <Compile Include="Models\Calculation\Index.cs" />
     <Compile Include="Models\Calculation\OutputList.cs" />
     <Compile Include="Areas\Fire2006\Models\Deferred.cs" />
+    <Compile Include="Models\Calculation\RegressionViewModel.cs" />
     <Compile Include="Models\DateFunctions\DateFunctions.cs" />
     <Compile Include="Models\Excel Import\ExcelImport.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -370,9 +371,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49366</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49367/</IISUrl>
+          <IISUrl>http://localhost:49368/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost:49367/</IISAppRootUrl>
+          <IISAppRootUrl>http://localhost:49368/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
