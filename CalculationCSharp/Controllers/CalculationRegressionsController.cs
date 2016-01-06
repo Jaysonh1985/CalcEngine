@@ -171,7 +171,7 @@ namespace CalculationCSharp.Controllers
 
                 List.Setup(model);
 
-                RunCalculation.CalculationRun(model, List);
+                RunCalculation.CalculationRegressionAdd(model, List, true);
 
             } 
 

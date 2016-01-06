@@ -50,14 +50,13 @@ namespace CalculationCSharp.Models.Calculation
             string OutputXML = xmlfunction.XMLStringBuilder(List.List);
             CalculationRegression CalcRegression = new CalculationRegression();
 
+            string OldOutput = "";
             int resultid = 0;
             using (var context = new CalculationDBContext())
             {
                 var Regression = context.CalculationRegression
                 .Where(b => b.Reference == InputForm.CalcReference && b.Scheme == "Fire2006" && b.Type == "Deferred")
                 .FirstOrDefault();
-                
-
 
                 if (Regression == null)
                 {
@@ -65,7 +64,7 @@ namespace CalculationCSharp.Models.Calculation
                 }
                 else
                 {
-
+                    OldOutput = Regression.OutputOld;
                     resultid = Regression.Id;
                 }
 
@@ -73,7 +72,7 @@ namespace CalculationCSharp.Models.Calculation
 
             if (Run == true)
             {
-                string Difference = xmlfunction.MatchXML(OutputXML, OutputXML);
+                string Difference = xmlfunction.MatchXML(OldOutput, OutputXML);
                 CalcRegression.OutputNew = OutputXML;
                 CalcRegression.LatestRunDate = DateTime.Now;
                 CalcRegression.Difference = Difference;

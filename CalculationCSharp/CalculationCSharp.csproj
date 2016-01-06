@@ -318,10 +318,7 @@
     <Content Include="Views\Calculation\Index.cshtml" />
     <Content Include="Views\Shared\_Output.cshtml" />
     <Content Include="Views\Shared\_BulkCalc.cshtml" />
-    <Content Include="Views\CalculationRegressions\Create.cshtml" />
     <Content Include="Views\CalculationRegressions\Delete.cshtml" />
-    <Content Include="Views\CalculationRegressions\Details.cshtml" />
-    <Content Include="Views\CalculationRegressions\Edit.cshtml" />
     <Content Include="Views\CalculationRegressions\Index.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Views\CalculationRegressions\_RegModal.cshtml" />
