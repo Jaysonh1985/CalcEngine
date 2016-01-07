@@ -15,8 +15,8 @@ namespace CalculationCSharp.Areas.Regression.Controllers
 {
     public class CalculationRegressionsController : Controller
     {
-        private CalculationDBContext db = new CalculationDBContext();
-
+        public CalculationDBContext db = new CalculationDBContext();
+        public CalculationCSharp.Controllers.CalculationBaseController RunCalculation = new CalculationCSharp.Controllers.CalculationBaseController();
         // GET: Regression/CalculationRegressions
         public ActionResult Index()
         {
@@ -110,13 +110,17 @@ namespace CalculationCSharp.Areas.Regression.Controllers
             }
 
             DeferredFunctions List = new DeferredFunctions();
-            CalculationBase RunCalculation = new CalculationBase();
 
             var model = result as Deferred;
 
             List.Setup(model);
 
-            RunCalculation.CalculationRegressionAdd(model, List, true);
+            CalculationCSharp.Models.XMLFunctions.XMLFunctions xmlfunction = new CalculationCSharp.Models.XMLFunctions.XMLFunctions();
+
+            string InputXML = xmlfunction.XMLStringBuilder(model);
+            string OutputXML = xmlfunction.XMLStringBuilder(List.List);
+
+            RunCalculation.CalculationRegressionAdd(InputXML, OutputXML, model.CalcReference, true);
 
             return RedirectToAction("Index");
         }
@@ -138,13 +142,17 @@ namespace CalculationCSharp.Areas.Regression.Controllers
                 }
 
                 DeferredFunctions List = new DeferredFunctions();
-                CalculationBase RunCalculation = new CalculationBase();
 
                 var model = result as Deferred;
 
                 List.Setup(model);
 
-                RunCalculation.CalculationRegressionAdd(model, List, true);
+                CalculationCSharp.Models.XMLFunctions.XMLFunctions xmlfunction = new CalculationCSharp.Models.XMLFunctions.XMLFunctions();
+
+                string InputXML = xmlfunction.XMLStringBuilder(model);
+                string OutputXML = xmlfunction.XMLStringBuilder(List.List);
+
+                RunCalculation.CalculationRegressionAdd(InputXML, OutputXML, model.CalcReference, true);
 
             }
 

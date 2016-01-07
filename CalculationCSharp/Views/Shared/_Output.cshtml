@@ -19,8 +19,6 @@
             <p>
                 <button id="expandAll" class="btn btn-default" onclick="$('#companyGrid tr:not(.group-header, .group-footer)').fadeIn();">Expand All Data</button>
                 <button id="collapseAll" class="btn btn-default" onclick="$('#companyGrid tr:not(:first, .group-header, .group-footer)').fadeOut();">Collapse All Data</button>
-                @Html.ActionLink("Download", "Download",null, new { @class = "btn btn-default" })
-                @Html.ActionLink("Regression", "Regression", null, new { @class = "btn btn-default" })
             </p>
 
             <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">

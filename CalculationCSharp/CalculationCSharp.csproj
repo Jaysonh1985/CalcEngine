@@ -200,6 +200,7 @@
     <Compile Include="Areas\Regression\Controllers\CalculationRegressionsController.cs" />
     <Compile Include="Areas\Regression\RegressionAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CalculationBaseController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -332,6 +333,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Regression\Views\Test\" />
+    <Folder Include="Views\CalcBase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

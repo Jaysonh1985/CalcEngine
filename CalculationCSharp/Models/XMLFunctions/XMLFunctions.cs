@@ -27,7 +27,7 @@ namespace CalculationCSharp.Models.XMLFunctions
             return res;
         }
 
-        public string MatchXML(String sourcePath, string actualPath)
+        public string MatchXML(string sourcePath, string actualPath)
 
         {
             List<OutputCompare> List = new List<OutputCompare>();

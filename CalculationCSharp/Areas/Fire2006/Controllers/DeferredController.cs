@@ -1,30 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CalculationCSharp.Areas.Fire2006.Models;
+using CalculationCSharp.Controllers;
 using CalculationCSharp.Models.Calculation;
-using OfficeOpenXml;
-using System.Text;
-using CalculationCSharp.Models;
-using CalculationCSharp.Models.XMLFunctions;
-using CalculationCSharp.Models.StringFunctions;
-using System.Xml;
-using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace CalculationCSharp.Areas.Fire2006.Controllers
 
 {
-    public class DeferredController : Controller
+    public class DeferredController : CalculationBaseController
     {
-        private CalculationDBContext db = new CalculationDBContext();
+        public Deferred InputForm = new Deferred();
+        public DeferredFunctions List = new DeferredFunctions();
+        public CalculationCSharp.Models.XMLFunctions.XMLFunctions xmlfunction = new CalculationCSharp.Models.XMLFunctions.XMLFunctions();
 
         // GET: Fire2006/Deferred
         [HttpGet()]
         public ActionResult Input()
-        {
-             Deferred InputForm = new Deferred();
+        {  
 
             InputForm.CalcReference = "1";
             InputForm.DOL = Convert.ToDateTime("17/07/2015");
@@ -43,171 +36,50 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
         [HttpPost()]
         public ActionResult Input(Deferred InputForm)
         {
-            DeferredFunctions List = new DeferredFunctions();
 
             List.Setup(InputForm);
 
-            Session["Output"] = List.List;
-            Session["Input"] = InputForm;
-            Session["List"] = List;
+            //Session["Output"] = List.List;
+            //Session["Input"] = InputForm;
+            //Session["List"] = List;
 
-            CalculationBase RunCalculation = new CalculationBase();
+            string InputXML = xmlfunction.XMLStringBuilder(InputForm);
+            string OutputXML = xmlfunction.XMLStringBuilder(List.List);
 
-            RunCalculation.CalculationRun(InputForm, List);
-      
+            CalculationRun(InputXML, OutputXML, InputForm.CalcReference);
 
-           return PartialView("_Output", List.List);
+
+            return PartialView("_Output", List.List);
 
         }
 
-        public ActionResult Regression()
+        public ActionResult Calculate(Deferred InputForm, string ActionLink)
         {
-            Deferred InputForm = new Deferred();
-            InputForm = (Deferred) Session["Input"];
+            List.Setup(InputForm);
 
-            DeferredFunctions List = new DeferredFunctions();
-            List = (DeferredFunctions)Session["List"];
+            string InputXML = xmlfunction.XMLStringBuilder(InputForm);
+            string OutputXML = xmlfunction.XMLStringBuilder(List.List);
 
-            CalculationBase RunCalculation = new CalculationBase();
-            RunCalculation.CalculationRegressionAdd(InputForm, List,false);
-
-            return RedirectToAction("Input");
-        }
-
-        public ActionResult Download()
-        {
-            List<OutputList> Output = new List<OutputList>();
-            Output = (List<OutputList>)Session["Output"];
-
-            if (Session["Output"] != null)
+            if (ActionLink == "Download")
             {
+                List<OutputList> Output = new List<OutputList>();
+                Output = List.List;
+                DownloadFileActionResult Download = new DownloadFileActionResult(Output, "Output.xls");
+
                 return new DownloadFileActionResult(Output, "Output.xls");
             }
+            else if(ActionLink == "Regression")
+            {
+                Regression(InputXML, OutputXML, InputForm.CalcReference);
+                return View("Input");
+            }
+
             else
             {
-                //Some kind of a result that will indicate that the view has 
-                //not been created yet. I would use a Javascript message to do so. 
-
-                return new DownloadFileActionResult(Output, "Output.xls"); ;
-            }
-        }
-
-        public ActionResult Upload(FormCollection formCollection)
-
-        {
-
-            if (Request != null)
-
-            {
-
-                String OutputString = "";
-                StringFunctions StringFunctions = new StringFunctions();
-
-                HttpPostedFileBase file = Request.Files["UploadedFile"];
-
-                if ((file != null) && (file.ContentLength > 0) && !string.IsNullOrEmpty(file.FileName))
-
-                {
-
-                    string fileName = file.FileName;
-
-                    string fileContentType = file.ContentType;
-
-                    byte[] fileBytes = new byte[file.ContentLength];
-
-                    var data = file.InputStream.Read(fileBytes, 0, Convert.ToInt32(file.ContentLength));
-
-                    var usersList = new List<Deferred>();
-
-                    using (var package = new ExcelPackage(file.InputStream))
-
-                    {
-
-                        var currentSheet = package.Workbook.Worksheets;
-
-                        var workSheet = currentSheet.First();
-
-                        var noOfCol = workSheet.Dimension.End.Column;
-
-                        var noOfRow = workSheet.Dimension.End.Row;
-
-
-
-                        for (int colIterator = 2; colIterator <= noOfCol; colIterator++)
-
-                        {
-
-                            var model = new Deferred();
-                            var properties = new Dictionary<string, object>();
-                            var i = 1;
-                            
-                            foreach (var prop in model.GetType().GetProperties())
-                            {
-
-                                var Value = workSheet.Cells[i, colIterator].Value == null ? string.Empty : workSheet.Cells[i, colIterator].Value.ToString();
-
-                                DateTime dateTime;
-                                double number;
-
-                                if (DateTime.TryParse(Value,out dateTime))
-                                {
-                                    
-                                    prop.SetValue(model, dateTime, null);
-
-                                }
-                                else if (Double.TryParse(Value, out number))
-                                {
-                                    prop.SetValue(model, number, null);
-                                }
-                                else if (Value == "")
-                                {
-                                    prop.SetValue(model, null, null);
-                                }
-                                else
-                                {
-                                    prop.SetValue(model, Value, null);
-                                }
-                               
-
-                                i = i + 1;
-
-                            }
-
-                            usersList.Add(model);
-
-                        }
-
-                        var stringBuilder = new StringBuilder();
-                        
-                        Response.ClearContent();
-
-                        Response.AddHeader("content-disposition", "attachment;filename=Output.csv");
-
-                        Response.ContentType = "text/csv";
-
-                        int HeaderRow = 0;
-
-                        foreach (var Member in usersList)
-                        {
-                            DeferredFunctions List = new DeferredFunctions();
-
-                            List.Setup(Member);
-
-                            OutputString = StringFunctions.BulkCalc(List.List,HeaderRow,stringBuilder);
-                            HeaderRow = 1;
-                           
-                        }
-
-                        Response.Write(OutputString);
-                        Response.End();
-                    }
-
-                }
-
+                return View("Input");
             }
 
-            return View("Index");
+            
         }
-
     }
 }
