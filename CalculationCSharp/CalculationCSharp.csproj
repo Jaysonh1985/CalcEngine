@@ -197,9 +197,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Fire2006\Fire2006AreaRegistration.cs" />
+    <Compile Include="Areas\Regression\Controllers\CalculationRegressionsController.cs" />
+    <Compile Include="Areas\Regression\RegressionAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
-    <Compile Include="Controllers\CalculationRegressionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Areas\Fire2006\Controllers\DeferredController.cs" />
@@ -214,14 +215,12 @@
     <Compile Include="Models\Calculation\Index.cs" />
     <Compile Include="Models\Calculation\OutputList.cs" />
     <Compile Include="Areas\Fire2006\Models\Deferred.cs" />
-    <Compile Include="Models\Calculation\RegressionViewModel.cs" />
+    <Compile Include="Areas\Regression\Models\RegressionViewModel.cs" />
     <Compile Include="Models\DateFunctions\DateFunctions.cs" />
     <Compile Include="Models\Excel Import\ExcelImport.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LookupFunctions\LookupFunctions.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Repositories\CalculationRepository.cs" />
-    <Compile Include="Models\Repositories\Repository.cs" />
     <Compile Include="Models\StringFunctions\StringFunctions.cs" />
     <Compile Include="Models\XMLFunctions\XMLFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -250,9 +249,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Regression\Views\web.config" />
+    <Content Include="Areas\Regression\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Regression\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Regression\Views\CalculationRegressions\Delete.cshtml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim.pubxml" />
     <None Include="Properties\PublishProfiles\StandardImport.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -318,13 +325,13 @@
     <Content Include="Views\Calculation\Index.cshtml" />
     <Content Include="Views\Shared\_Output.cshtml" />
     <Content Include="Views\Shared\_BulkCalc.cshtml" />
-    <Content Include="Views\CalculationRegressions\Delete.cshtml" />
-    <Content Include="Views\CalculationRegressions\Index.cshtml" />
+    <Content Include="Areas\Regression\Views\CalculationRegressions\Index.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
-    <Content Include="Views\CalculationRegressions\_RegModal.cshtml" />
+    <Content Include="Areas\Regression\Views\CalculationRegressions\_RegModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Regression\Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using CalculationCSharp.Models;
-using CalculationCSharp.Models.Calculation;
+using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 using CalculationCSharp.Areas.Fire2006.Models;
+using CalculationCSharp.Models.Calculation;
 using System.Xml.Linq;
-using System.Text;
 
-namespace CalculationCSharp.Controllers
+namespace CalculationCSharp.Areas.Regression.Controllers
 {
     public class CalculationRegressionsController : Controller
     {
         private CalculationDBContext db = new CalculationDBContext();
 
-        // GET: CalculationRegressions
+        // GET: Regression/CalculationRegressions
         public ActionResult Index()
         {
             return View(db.CalculationRegression.ToList());
@@ -61,7 +58,7 @@ namespace CalculationCSharp.Controllers
             }
 
 
-            if(type=="Input")
+            if (type == "Input")
             {
                 xmlTree = XElement.Parse(calculationRegression.Input);
 
@@ -119,7 +116,7 @@ namespace CalculationCSharp.Controllers
 
             List.Setup(model);
 
-            RunCalculation.CalculationRegressionAdd(model, List,true);
+            RunCalculation.CalculationRegressionAdd(model, List, true);
 
             return RedirectToAction("Index");
         }
@@ -149,43 +146,12 @@ namespace CalculationCSharp.Controllers
 
                 RunCalculation.CalculationRegressionAdd(model, List, true);
 
-            } 
+            }
 
             return RedirectToAction("Index");
         }
 
-        // GET: CalculationRegressions/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CalculationRegression calculationRegression = db.CalculationRegression.Find(id);
-            if (calculationRegression == null)
-            {
-                return HttpNotFound();
-            }
-            return View(calculationRegression);
-        }
-
-        // POST: CalculationRegressions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Scheme,Type,OriginalRunDate,LatestRunDate,Reference,Input,OutputOld,OutputNew,Difference,Pass")] CalculationRegression calculationRegression)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(calculationRegression).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(calculationRegression);
-        }
-
-        // GET: CalculationRegressions/Delete/5
+        // GET: Regression/CalculationRegressions/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -200,7 +166,7 @@ namespace CalculationCSharp.Controllers
             return View(calculationRegression);
         }
 
-        // POST: CalculationRegressions/Delete/5
+        // POST: Regression/CalculationRegressions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
