@@ -26,36 +26,7 @@ namespace CalculationCSharp.Controllers
             return View(db.CalculationRegression.ToList());
         }
 
-        public ActionResult ViewXMLInput(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CalculationRegression calculationRegression = db.CalculationRegression.Find(id);
-            if (calculationRegression == null)
-            {
-                return HttpNotFound();
-            }
-
-            StringBuilder builder = new StringBuilder();
-
-            XElement xmlTree = XElement.Parse(calculationRegression.Input);
-
-            IEnumerable<XElement> childElements =
-            from el in xmlTree.Elements()
-            select el;
-            foreach (XElement el in childElements)
-                builder.Append(el.Name).Append(": ").Append(el.Value).AppendLine();
-
-            RegressionViewModel myViewmodel = new RegressionViewModel();
-
-            myViewmodel.YourString = builder.ToString();
-
-            return PartialView("_RegModal", myViewmodel);
-        }
-
-        public ActionResult ViewXMLOutput(int? id, string type)
+        public ActionResult ViewXML(int? id, string type)
         {
             if (id == null)
             {
@@ -75,20 +46,42 @@ namespace CalculationCSharp.Controllers
             {
                 xmlTree = XElement.Parse(calculationRegression.OutputOld);
             }
-            else
+            else if (type == "OutputNew")
             {
                 xmlTree = XElement.Parse(calculationRegression.OutputNew);
             }
-            
-
-            foreach (XElement element in xmlTree.Descendants("OutputList"))
+            else if (type == "Input")
             {
-                foreach (XElement childEllement in element.Descendants())
-                {
-                    builder.Append(childEllement.Value).Append(" | ");
-                }
+                xmlTree = XElement.Parse(calculationRegression.Input);
+            }
 
-                builder.AppendLine();
+            else if (type == "Difference")
+            {
+                xmlTree = XElement.Parse(calculationRegression.Difference);
+            }
+
+
+            if(type=="Input")
+            {
+                xmlTree = XElement.Parse(calculationRegression.Input);
+
+                IEnumerable<XElement> childElements =
+                from el in xmlTree.Elements()
+                select el;
+                foreach (XElement el in childElements)
+                    builder.Append(el.Name).Append(": ").Append(el.Value).AppendLine();
+            }
+            else
+            {
+                foreach (XElement element in xmlTree.Descendants("OutputList"))
+                {
+                    foreach (XElement childEllement in element.Descendants())
+                    {
+                        builder.Append(childEllement.Value).Append(" | ");
+                    }
+
+                    builder.AppendLine();
+                }
             }
 
             RegressionViewModel myViewmodel = new RegressionViewModel();
@@ -98,23 +91,8 @@ namespace CalculationCSharp.Controllers
             return PartialView("_RegModal", myViewmodel);
         }
 
-        // GET: CalculationRegressions/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CalculationRegression calculationRegression = db.CalculationRegression.Find(id);
-            if (calculationRegression == null)
-            {
-                return HttpNotFound();
-            }
-            return View(calculationRegression);
-        }
-
         // GET: CalculationRegressions/Create
-        public ActionResult Create(int? id)
+        public ActionResult Run(int? id)
         {
             if (id == null)
             {
@@ -128,8 +106,6 @@ namespace CalculationCSharp.Controllers
 
             var serializer = new XmlSerializer(typeof(Areas.Fire2006.Models.Deferred));
             object result;
-
-            
 
             using (TextReader reader = new StringReader(calculationRegression.Input))
             {
@@ -148,7 +124,7 @@ namespace CalculationCSharp.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult CreateAll()
+        public ActionResult RunAll()
         {
             CalculationRegression calculationRegression = new CalculationRegression();
 
@@ -174,7 +150,6 @@ namespace CalculationCSharp.Controllers
                 RunCalculation.CalculationRegressionAdd(model, List, true);
 
             } 
-
 
             return RedirectToAction("Index");
         }

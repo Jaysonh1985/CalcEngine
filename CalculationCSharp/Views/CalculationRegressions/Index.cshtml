@@ -7,9 +7,9 @@
 
 <h2>Calculation Regression</h2>
 
-@Html.ActionLink("Run All", "CreateAll",null,null, new { @class = "btn btn-default", title = "Run All Calcs" })
-
-<table class="table">
+@Html.ActionLink("Run All", "RunAll",null,null, new { @class = "btn btn-default", title = "Run All Calcs" })
+ <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">
+<table id="table" class="table table-bordered table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Scheme)
@@ -62,18 +62,18 @@
             @Html.DisplayFor(modelItem => item.Reference)
         </td>
         <td>    
-            @Html.ActionLink("Input", "ViewXMLInput", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check Input" })
+            @Html.ActionLink("Input", "ViewXML", null, new { id = item.Id, type = "Input" }, new { @class = "btn btn-default modal-link", title = "Check Input" })
         </td>
         <td>
-            @Html.ActionLink("OutputOld", "ViewXMLOutput", null, new { id = item.Id, type = "OutputOld" }, new { @class = "btn btn-default modal-link", title = "Check OutputOld" })
+            @Html.ActionLink("OutputOld", "ViewXML", null, new { id = item.Id, type = "OutputOld" }, new { @class = "btn btn-default modal-link", title = "Check OutputOld" })
         </td>
         <td>
-            @Html.ActionLink("OutputNew", "ViewXMLOutput", null, new { id = item.Id, type = "OutputNew" }, new { @class = "btn btn-default modal-link", title = "Check OutputNew" })
+            @Html.ActionLink("OutputNew", "ViewXML", null, new { id = item.Id, type = "OutputNew" }, new { @class = "btn btn-default modal-link", title = "Check OutputNew" })
         </td>
         <td>
             @if(item.Difference != null)
             {
-                @Html.ActionLink("Difference", "ViewXML", null, new { id = item.Id }, new { @class = "btn btn-default modal-link", title = "Check Difference" })
+                @Html.ActionLink("Difference", "ViewXML", null, new { id = item.Id, type = "Difference" }, new { @class = "btn btn-default modal-link", title = "Check Difference" })
             }
             
         </td>
@@ -81,7 +81,7 @@
             @Html.DisplayFor(modelItem => item.Pass)
         </td>
         <td>
-            @Html.ActionLink("Run", "Create", new { id = item.Id }) |
+            @Html.ActionLink("Run", "Run", new { id = item.Id }) |
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>

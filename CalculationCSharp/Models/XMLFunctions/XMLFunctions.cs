@@ -34,7 +34,7 @@ namespace CalculationCSharp.Models.XMLFunctions
             StringBuilder strbuilder = new StringBuilder();
             XmlWriter writer = XmlWriter.Create(strbuilder);
 
-            string sourceId, sourceValue;
+            string sourceId, sourceField, sourceValue;
 
             using (XmlReader xr = XmlReader.Create(new StringReader(sourcePath)))
 
@@ -45,6 +45,10 @@ namespace CalculationCSharp.Models.XMLFunctions
                     xr.ReadToFollowing("ID");
 
                     sourceId = xr.ReadString();
+
+                    xr.ReadToFollowing("Field");
+
+                    sourceField = xr.ReadString();
 
                     xr.ReadToFollowing("Value");
 
@@ -63,7 +67,12 @@ namespace CalculationCSharp.Models.XMLFunctions
                             string ID;
                             ID = xr1.ReadString();
 
-                            if (ID == sourceId)
+
+                            xr1.ReadToFollowing("Field");
+                            string Field;
+                            Field = xr1.ReadString();
+
+                            if (ID == sourceId & Field == sourceField)
 
                             {                              
                                 string value;
@@ -73,7 +82,7 @@ namespace CalculationCSharp.Models.XMLFunctions
                                 value = xr1.ReadString();
 
                                 if (sourceValue != value)
-                                    List.Add(new OutputCompare { ID = sourceId, NewID = ID, Value = sourceValue, NewValue = value });
+                                    List.Add(new OutputCompare { ID = sourceId, Field = sourceField, Value = sourceValue, NewID = ID, NewField = Field, NewValue = value });
 
                             }
 
@@ -91,11 +100,13 @@ namespace CalculationCSharp.Models.XMLFunctions
 
                     foreach (OutputCompare OutputCompare in List)
                     {
-                        writer.WriteStartElement("Output");
+                        writer.WriteStartElement("OutputList");
 
                         writer.WriteElementString("ID", OutputCompare.ID.ToString());
-                        writer.WriteElementString("NewID", OutputCompare.NewID.ToString());
+                        writer.WriteElementString("Field", OutputCompare.Field.ToString());
                         writer.WriteElementString("Value", OutputCompare.Value.ToString());
+                        writer.WriteElementString("NewID", OutputCompare.NewID.ToString());
+                        writer.WriteElementString("NewField", OutputCompare.NewField.ToString());
                         writer.WriteElementString("NewValue", OutputCompare.NewValue.ToString());
 
                         writer.WriteEndElement();
@@ -116,8 +127,10 @@ namespace CalculationCSharp.Models.XMLFunctions
     public class OutputCompare
     {
         public string ID { get; set; }
-        public string NewID { get; set; }
+        public string Field { get; set; }
         public string Value { get; set; }
+        public string NewID { get; set; }
+        public string NewField { get; set; }
         public string NewValue { get; set; }
     }
 

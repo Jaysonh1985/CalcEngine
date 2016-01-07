@@ -59,6 +59,7 @@
             });
         })(jQuery);
 
+        //DatePicker
         $(document).ready(function () {
             $('input[type=datetime]').datepicker({
                 dateFormat: "dd/mm/yy",
@@ -69,6 +70,7 @@
 
         });
 
+        //Create Modal
         $(function () {
             $('body').on('click', '.modal-link', function (e) {
                 e.preventDefault();
@@ -85,14 +87,37 @@
             });
         });
 
-        $(function () {
-            $('btnSave').click(function () {
-                $('modal-container').modal('hide');
+
+        //Hide buttons on Modal
+        $(document).ready(function () {
+            // Show the Modal on load
+            $("#myModal").modal("show");
+
+            // Hide the Modal
+            $("#myBtn").click(function () {
+                $("#modal-container").modal("hide");
             });
         });
 
+        //Clear Modal on hide
         $('body').on('hidden.bs.modal', '.modal', function () {
             $(this).removeData('bs.modal');
+        });
+
+
+        //Search bar facility
+
+        var $rows = $('#table tr');
+        $('#search').keyup(function () {
+
+            var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+                reg = RegExp(val, 'i'),
+                text;
+
+            $rows.show().filter(function () {
+                text = $(this).text().replace(/\s+/g, ' ');
+                return !reg.test(text);
+            }).hide();
         });
 
     </script>
