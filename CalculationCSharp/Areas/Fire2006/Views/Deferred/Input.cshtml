@@ -166,11 +166,9 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Submit" class="btn btn-default" />
+                            <input type="submit" id="Submit" value="Submit" class="btn btn-default" />
                             <button id="Download"class = "btn btn-default">Download</button>
-                            <button id="Regression" class="btn btn-default">Regression</button>
-                            @*@Html.ActionLink("Download", "Calculate", null, new {InputForm = Model, Action = "Download"}, new { @class = "btn btn-default" })
-                            @Html.ActionLink("Regression", "Calculate", null, new { @class = "btn btn-default" })*@
+                            <button id="Regression" class="btn btn-default">Add to Regression</button>
                         </div>
                     </div>
 
@@ -187,38 +185,49 @@
 
     <script type="text/javascript">
 
-        $(function () {
+        $('#Download').hide();
+        $('#Regression').hide();
 
+         $(function () {
             $("#my-form").on("submit", function (e) {
                 e.preventDefault();
 
-                $.ajax({
+                 $.ajax({
                     url: this.action,
                     type: this.method,
                     data: $(this).serialize(),
                     success: function (data) {
                         $("#result").html(data);
+                        $("#Submit").click(function () {
+                            $('#result').show();
+                        });
+                        $("#Download").click(function () {
+                            var form = $("#my-form");
+                            form.attr("action", "@Url.Action("Input",null,new { ButtonType = "Download" })");
+                            form.submit();
+                            $('#result').hide();
+                            $('#Submit').hide();
+                        });                 
+                        $("#Regression").click(function () {
+                            var form = $("#my-form");
+                            form.attr("action", "@Url.Action("Input",null,new { ButtonType = "Regression" })");
+                            form.submit();
+                            $('#result').hide();
+                        });
+                        $('#Download').show();
+                        $('#Regression').show();
                     }
-                })
+                 })
+
             })
         })
 
-        $("#Download").click(function () {
-            var form = $("form#my-form");
-            form.attr("action", "@Url.Action("Calculate","Deferred",new { ActionLink = "Download" })");
-            form.submit();
-        });
 
-        $("#Regression").click(function () {
-            var form = $("form#my-form");
-            form.attr("action", "@Url.Action("Calculate","Deferred",new { ActionLink = "Regression" })");
-            form.submit();
-        });
+
 
     </script>
 
 }
-
 
 <div>
     @Html.ActionLink("Back to Home", "Index", "Home")

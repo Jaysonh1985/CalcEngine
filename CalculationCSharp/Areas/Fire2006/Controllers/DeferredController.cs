@@ -4,6 +4,9 @@ using CalculationCSharp.Areas.Fire2006.Models;
 using CalculationCSharp.Controllers;
 using CalculationCSharp.Models.Calculation;
 using System.Collections.Generic;
+using System.Web.UI.WebControls;
+using System.IO;
+using System.Web.UI;
 
 namespace CalculationCSharp.Areas.Fire2006.Controllers
 
@@ -34,51 +37,30 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
 
         //POST: Calculation
         [HttpPost()]
-        public ActionResult Input(Deferred InputForm)
+        public ActionResult Input(Deferred InputForm, string ButtonType)
         {
-
             List.Setup(InputForm);
-
-            //Session["Output"] = List.List;
-            //Session["Input"] = InputForm;
-            //Session["List"] = List;
-
             string InputXML = xmlfunction.XMLStringBuilder(InputForm);
             string OutputXML = xmlfunction.XMLStringBuilder(List.List);
 
-            CalculationRun(InputXML, OutputXML, InputForm.CalcReference);
-
-
-            return PartialView("_Output", List.List);
-
-        }
-
-        public ActionResult Calculate(Deferred InputForm, string ActionLink)
-        {
-            List.Setup(InputForm);
-
-            string InputXML = xmlfunction.XMLStringBuilder(InputForm);
-            string OutputXML = xmlfunction.XMLStringBuilder(List.List);
-
-            if (ActionLink == "Download")
+            if (ButtonType == "Download")
             {
                 List<OutputList> Output = new List<OutputList>();
                 Output = List.List;
-                DownloadFileActionResult Download = new DownloadFileActionResult(Output, "Output.xls");
 
-                return new DownloadFileActionResult(Output, "Output.xls");
+                string csv = "Charlie, Chaplin, Chuckles";
+                return File(new System.Text.UTF8Encoding().GetBytes(csv), "text/csv", "Report123.csv");
             }
-            else if(ActionLink == "Regression")
+            else if (ButtonType == "Regression")
             {
                 Regression(InputXML, OutputXML, InputForm.CalcReference);
-                return View("Input");
+                return RedirectToAction("Input");
             }
-
             else
             {
-                return View("Input");
+                CalculationRun(InputXML, OutputXML, InputForm.CalcReference);
+                return PartialView("_Output", List.List);
             }
-
             
         }
     }
