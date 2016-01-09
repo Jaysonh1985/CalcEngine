@@ -3,10 +3,8 @@ using System.Web.Mvc;
 using CalculationCSharp.Areas.Fire2006.Models;
 using CalculationCSharp.Controllers;
 using CalculationCSharp.Models.Calculation;
+using CalculationCSharp.Models;
 using System.Collections.Generic;
-using System.Web.UI.WebControls;
-using System.IO;
-using System.Web.UI;
 
 namespace CalculationCSharp.Areas.Fire2006.Controllers
 
@@ -14,8 +12,7 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
     public class DeferredController : CalculationBaseController
     {
         public Deferred InputForm = new Deferred();
-        public DeferredFunctions List = new DeferredFunctions();
-        public CalculationCSharp.Models.XMLFunctions.XMLFunctions xmlfunction = new CalculationCSharp.Models.XMLFunctions.XMLFunctions();
+        public new CalculationCSharp.Models.XMLFunctions.XMLFunctions xmlfunction = new CalculationCSharp.Models.XMLFunctions.XMLFunctions();
 
         // GET: Fire2006/Deferred
         [HttpGet()]
@@ -39,27 +36,31 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
         [HttpPost()]
         public ActionResult Input(Deferred InputForm, string ButtonType)
         {
-            List.Setup(InputForm);
+
+            String Scheme = this.Request.RequestContext.RouteData.DataTokens["area"].ToString();
+            String CalcType = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+            object Calculation = Calculate(InputForm, Scheme, CalcType, InputForm.CalcReference, false);
             string InputXML = xmlfunction.XMLStringBuilder(InputForm);
-            string OutputXML = xmlfunction.XMLStringBuilder(List.List);
+            string OutputXML = xmlfunction.XMLStringBuilder(Calculation);
 
             if (ButtonType == "Download")
             {
                 List<OutputList> Output = new List<OutputList>();
-                Output = List.List;
+                Output = Calculation as List<OutputList>;
                 return new DownloadFileActionResult(Output, "Output.xls");
             }
             else if (ButtonType == "Regression")
             {
-                CalculationRegressionAdd(InputXML, OutputXML, InputForm.CalcReference, this.Request.RequestContext.RouteData.DataTokens["area"].ToString(), this.ControllerContext.RouteData.Values["controller"].ToString(), false);
+                CalculationRegressionAdd(InputXML, OutputXML, InputForm.CalcReference, Scheme, CalcType, false);
                 return RedirectToAction("Input");
             }
             else
             {
-                CalculationRun(InputXML, OutputXML, InputForm.CalcReference);
-                return PartialView("_Output", List.List);
+                return PartialView("_Output", Calculation);
             }
             
         }
+
     }
 }

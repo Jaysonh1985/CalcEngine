@@ -211,7 +211,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CalculationViewModels.cs" />
-    <Compile Include="Models\Calculation\CalculationBase.cs" />
     <Compile Include="Models\Calculation\DownloadFileActionResult.cs" />
     <Compile Include="Models\Calculation\Index.cs" />
     <Compile Include="Models\Calculation\OutputList.cs" />
@@ -333,7 +332,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Regression\Views\Test\" />
-    <Folder Include="Views\CalcBase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

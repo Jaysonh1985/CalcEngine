@@ -8,8 +8,11 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 using CalculationCSharp.Areas.Fire2006.Models;
+using CalculationCSharp.Controllers;
 using CalculationCSharp.Models.Calculation;
 using System.Xml.Linq;
+using System;
+using System.Reflection;
 
 namespace CalculationCSharp.Areas.Regression.Controllers
 {
@@ -109,18 +112,9 @@ namespace CalculationCSharp.Areas.Regression.Controllers
                 result = serializer.Deserialize(reader);
             }
 
-            DeferredFunctions List = new DeferredFunctions();
+            CalculationBaseController Calculation = new CalculationBaseController();
 
-            var model = result as Deferred;
-
-            List.Setup(model);
-
-            CalculationCSharp.Models.XMLFunctions.XMLFunctions xmlfunction = new CalculationCSharp.Models.XMLFunctions.XMLFunctions();
-
-            string InputXML = xmlfunction.XMLStringBuilder(model);
-            string OutputXML = xmlfunction.XMLStringBuilder(List.List);
-
-            RunCalculation.CalculationRegressionAdd(InputXML, OutputXML, model.CalcReference,calculationRegression.Scheme,calculationRegression.Type, true);
+            Calculation.Calculate(result, calculationRegression.Scheme, calculationRegression.Type,calculationRegression.Reference, true);           
 
             return RedirectToAction("Index");
         }
@@ -141,18 +135,9 @@ namespace CalculationCSharp.Areas.Regression.Controllers
                     result = serializer.Deserialize(reader);
                 }
 
-                DeferredFunctions List = new DeferredFunctions();
+                CalculationBaseController Calculation = new CalculationBaseController();
 
-                var model = result as Deferred;
-
-                List.Setup(model);
-
-                CalculationCSharp.Models.XMLFunctions.XMLFunctions xmlfunction = new CalculationCSharp.Models.XMLFunctions.XMLFunctions();
-
-                string InputXML = xmlfunction.XMLStringBuilder(model);
-                string OutputXML = xmlfunction.XMLStringBuilder(List.List);
-
-                RunCalculation.CalculationRegressionAdd(InputXML, OutputXML, model.CalcReference, Calc.Scheme, Calc.Type, true);
+                Calculation.Calculate(result, Calc.Scheme, Calc.Type, Calc.Reference, true);
 
             }
 

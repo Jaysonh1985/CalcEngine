@@ -1,11 +1,6 @@
-﻿using System.IO;
-using System;
-using Microsoft.Office.Interop;
-using System.Web.Mvc;
+﻿using System;
 using System.Collections.Generic;
 using CalculationCSharp.Models.Calculation;
-using System.ComponentModel.DataAnnotations;
-using System.Collections;
 
 namespace CalculationCSharp.Areas.Fire2006.Models
 {
@@ -33,7 +28,6 @@ namespace CalculationCSharp.Areas.Fire2006.Models
 
     public class DeferredFunctions
     {
-        //public OutputList OutputList = new OutputList();
         public Deferred InputForm;
         public LookupFunctions LookupFunctions = new LookupFunctions();
         public DateFunctions DateFunctions = new DateFunctions();
@@ -43,15 +37,15 @@ namespace CalculationCSharp.Areas.Fire2006.Models
         public System.DateTime setHypotheticalPensionDate;
         private double setPotentialServicetoHRA;
 
-        public void Setup(Deferred Input)
+        public object Setup(object Input)
         {
-            InputForm = Input;
+            InputForm = Input as Deferred;
             getFactors();
 
-            List.Add(new OutputList { ID = "EGC1.0", Field = "Calculation Reference", Value = Convert.ToString(Input.CalcReference), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.0", Field = "Calculation Reference", Value = Convert.ToString(InputForm.CalcReference), Group = "Deferred Calculation"});
             List.Add(new OutputList { ID = "EGC1.1", Field = "Hypothetical Pension", Value = Convert.ToString(getHypotheticalPension()), Group = "Deferred Calculation"});
             List.Add(new OutputList { ID = "EGC1.2", Field = "Base Pension", Value = Convert.ToString(getBasePension()), Group = "Deferred Calculation"});
-            List.Add(new OutputList { ID = "EGC1.3", Field = "LSI Pension", Value = Convert.ToString(Input.LSI), Group = "Deferred Calculation"});
+            List.Add(new OutputList { ID = "EGC1.3", Field = "LSI Pension", Value = Convert.ToString(InputForm.LSI), Group = "Deferred Calculation"});
             List.Add(new OutputList { ID = "EGC1.4", Field = "Total CPD Pension", Value = Convert.ToString(getTotalCPDPension()), Group = "Deferred Calculation"});
             List.Add(new OutputList { ID = "EGC1.5", Field = "Added Years Pension", Value = Convert.ToString(getAddedYearsPension()), Group = "Deferred Calculation"});
             List.Add(new OutputList { ID = "EGC1.6", Field = "Total Gross Pension", Value = Convert.ToString(getTotalGrossPension()), Group = "Deferred Calculation"});
@@ -94,6 +88,9 @@ namespace CalculationCSharp.Areas.Fire2006.Models
             List.Add(new OutputList { ID = "EGR2.4", Field = "Survivor CPD Pension", Value = Convert.ToString(getSurvivorCPDPension()), Group = "Survivor Benefits" });
             List.Add(new OutputList { ID = "EGR2.5", Field = "Total Contingent Survivor Pension", Value = Convert.ToString(getTotalContingentSurvivorPension()), Group = "Survivor Benefits" });
             List.Add(new OutputList { ID = "EGR2.6", Field = "Survivor's Requisite Benefit Pension", Value = Convert.ToString(getSurvivorRequisiteBenefitPension()), Group = "Survivor Benefits" });
+
+            return List;
+
         }
 
         public void getFactors()
