@@ -47,9 +47,7 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
             {
                 List<OutputList> Output = new List<OutputList>();
                 Output = List.List;
-
-                string csv = "Charlie, Chaplin, Chuckles";
-                return File(new System.Text.UTF8Encoding().GetBytes(csv), "text/csv", "Report123.csv");
+                return new DownloadFileActionResult(Output, "Output.xls");
             }
             else if (ButtonType == "Regression")
             {
