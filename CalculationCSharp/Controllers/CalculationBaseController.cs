@@ -24,12 +24,12 @@ namespace CalculationCSharp.Controllers
 
         public object Calculate(Object Input, string Scheme, string CalcType, string CalcReference, bool Regression)
         {
-            Type input = Type.GetType("CalculationCSharp.Areas.Fire2006.Models.Deferred");
+            Type input = Type.GetType("CalculationCSharp.Areas."+Scheme+".Models."+CalcType);
             Object inputobj = Activator.CreateInstance(input);
 
             inputobj = Input;
 
-            Type type = Type.GetType("CalculationCSharp.Areas.Fire2006.Models.DeferredFunctions");
+            Type type = Type.GetType("CalculationCSharp.Areas." + Scheme + ".Models."+CalcType+"Functions");
             MethodInfo methodInfo = type.GetMethod("Setup");
             ParameterInfo[] parameters = methodInfo.GetParameters();
             object classInstance = Activator.CreateInstance(type, null);
