@@ -53,7 +53,7 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
             }
             else if (ButtonType == "Regression")
             {
-                Regression(InputXML, OutputXML, InputForm.CalcReference);
+                CalculationRegressionAdd(InputXML, OutputXML, InputForm.CalcReference, this.Request.RequestContext.RouteData.DataTokens["area"].ToString(), this.ControllerContext.RouteData.Values["controller"].ToString(), false);
                 return RedirectToAction("Input");
             }
             else

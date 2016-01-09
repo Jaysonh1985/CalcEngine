@@ -120,7 +120,7 @@ namespace CalculationCSharp.Areas.Regression.Controllers
             string InputXML = xmlfunction.XMLStringBuilder(model);
             string OutputXML = xmlfunction.XMLStringBuilder(List.List);
 
-            RunCalculation.CalculationRegressionAdd(InputXML, OutputXML, model.CalcReference, true);
+            RunCalculation.CalculationRegressionAdd(InputXML, OutputXML, model.CalcReference,calculationRegression.Scheme,calculationRegression.Type, true);
 
             return RedirectToAction("Index");
         }
@@ -129,14 +129,14 @@ namespace CalculationCSharp.Areas.Regression.Controllers
         {
             CalculationRegression calculationRegression = new CalculationRegression();
 
-            var test = db.CalculationRegression.ToList();
+            var AllCalcs = db.CalculationRegression.ToList();
 
-            foreach (var Tes in test)
+            foreach (var Calc in AllCalcs)
             {
                 var serializer = new XmlSerializer(typeof(Areas.Fire2006.Models.Deferred));
                 object result;
 
-                using (TextReader reader = new StringReader(Tes.Input))
+                using (TextReader reader = new StringReader(Calc.Input))
                 {
                     result = serializer.Deserialize(reader);
                 }
@@ -152,7 +152,7 @@ namespace CalculationCSharp.Areas.Regression.Controllers
                 string InputXML = xmlfunction.XMLStringBuilder(model);
                 string OutputXML = xmlfunction.XMLStringBuilder(List.List);
 
-                RunCalculation.CalculationRegressionAdd(InputXML, OutputXML, model.CalcReference, true);
+                RunCalculation.CalculationRegressionAdd(InputXML, OutputXML, model.CalcReference, Calc.Scheme, Calc.Type, true);
 
             }
 
