@@ -23,6 +23,8 @@ namespace CalculationCSharp.Areas.Regression.Controllers
         // GET: Regression/CalculationRegressions
         public ActionResult Index()
         {
+            ViewData["H1"] = "Calculation Regression";
+            ViewData["P1"] = "";
             return View(db.CalculationRegression.ToList());
         }
 

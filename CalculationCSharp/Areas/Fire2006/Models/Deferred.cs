@@ -8,6 +8,7 @@ namespace CalculationCSharp.Areas.Fire2006.Models
     public class Deferred
     {
         public string CalcReference { get; set; }
+        public DateTime CalcDate { get; set; }
         public DateTime DOL { get; set; }
         public double APP { get; set; }
         public double CPD { get; set; }
@@ -69,7 +70,7 @@ namespace CalculationCSharp.Areas.Fire2006.Models
             List.Add(new OutputList { ID = "EGI2.10", Field = "LSI Pension", Value = Convert.ToString(InputForm.LSI), Group = "Member Details" });
             List.Add(new OutputList { ID = "EGI2.11", Field = "CPD Pension", Value = Convert.ToString(InputForm.SCPDPension), Group = "Member Details" });
             List.Add(new OutputList { ID = "EGI3.1", Field = "Age at Date of leaving", Value = Convert.ToString(getAgeatDOL()), Group = "Dates Ages & Factors" });
-            List.Add(new OutputList { ID = "EGI3.2", Field = "Calculation Date", Value = Convert.ToString(System.DateTime.Now.ToShortDateString()), Group = "Dates Ages & Factors" });
+            List.Add(new OutputList { ID = "EGI3.2", Field = "Calculation Date", Value = Convert.ToString(InputForm.CalcDate.ToShortDateString()), Group = "Dates Ages & Factors" });
             List.Add(new OutputList { ID = "EGI3.3", Field = "Eligible Payment Date", Value = Convert.ToString(getEligiblePaymentDate().ToShortDateString()), Group = "Dates Ages & Factors" });
             List.Add(new OutputList { ID = "EGI3.4", Field = "Pension Increase Factor", Value = Convert.ToString(setPensionIncreaseFactor), Group = "Dates Ages & Factors" });
             List.Add(new OutputList { ID = "EGI3.5", Field = "CPD Pension Increase Factor", Value = Convert.ToString(getCPDPensionIncreaseFactor()), Group = "Dates Ages & Factors" });

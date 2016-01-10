@@ -1,16 +1,14 @@
 ﻿@model IEnumerable<CalculationCSharp.Models.CalculationRegression>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = " Calculation Regression";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Calculation Regression</h2>
-
 @Html.ActionLink("Run All", "RunAll",null,null, new { @class = "btn btn-default", title = "Run All Calcs" })
  <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">
-<table id="table" class="table table-bordered table">
-    <tr>
+<table id="table" class="table table-bordered table table-responsive">
+    <tr class="h5">
         <th>
             @Html.DisplayNameFor(model => model.Scheme)
         </th>
@@ -41,7 +39,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Pass)
         </th>
-        <th></th>
+        <th>
+            Action
+        </th>
     </tr>
 
 @foreach (var item in Model) {

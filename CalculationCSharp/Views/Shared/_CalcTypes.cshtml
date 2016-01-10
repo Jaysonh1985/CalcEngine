@@ -5,14 +5,12 @@
         <li class="dropdown dropdown-submenu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fire 2006</a>
             <ul class="dropdown-menu">
-                <li><a href="#">@Html.ActionLink("Deferred", "Input", new { Area = "Fire2006", controller = "Deferred" } )</a></li>
+                <li><a>@Html.ActionLink("Deferred", "Input", new { Area = "Fire2006", controller = "Deferred" } )</a></li>
             </ul>
         </li>
+        <li class="divider"></li>
         <li class="dropdown dropdown-submenu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Regression</a>
-            <ul class="dropdown-menu">
-                <li><a href="#">@Html.ActionLink("Index", "Index", new { Area = "Regression", controller = "CalculationRegressions"})</a></li>
-             </ul>
-        </li>
-            </ul>
+        <li><a>@Html.ActionLink("Regression", "Index", new { Area = "Regression", controller = "CalculationRegressions" })</a></li>
+        <li class="divider"></li>
+   </ul>
 </li>

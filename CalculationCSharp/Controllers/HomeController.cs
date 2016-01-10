@@ -10,20 +10,22 @@ namespace CalculationCSharp.Controllers
     {
         public ActionResult Index()
         {
+            ViewData["H1"] = "Project A.I.M";
+            ViewData["P1"] = "Providing a Web based calculation engine.";
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            ViewData["H1"] = "About";
+            ViewData["P1"] = "Your application description page.";
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewData["H1"] = "Contact";
+            ViewData["P1"] = "Your contact page.";
             return View();
         }
     }

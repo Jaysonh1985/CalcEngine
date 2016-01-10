@@ -78,21 +78,21 @@ label {
 .dropdown-menu{background-color:#fff}
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
-  color: #262626;
+  color: #fff;
   text-decoration: none;
-  background-color: #fff;
+  background-color: rgba(173, 0, 0, 1);
 }
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     color:#fff;
-    background-color: #cccccc;
-    border-color: #337ab7;
+    background-color: rgba(173, 0, 0, 1);
 }
 
 .jumbotron {
     
     padding-top: 30px;
     padding-bottom: 30px;
+    text-align:center;
     margin-bottom: 30px;
     border-width:1px;
     border-color:black;
@@ -127,34 +127,36 @@ element.style {
 .panel-default > .panel-heading {
     color: #fff;
     background-color: rgba(173, 0, 0, 1);
-    border-color: #ddd;
 }
 
 a:hover, a:focus {
     color: black;
-    text-decoration: underline;
-}
+    }
 
 a {
     color: black;
-    text-decoration: none;
-}
-
-.jumbotron1 {
-    
-    padding-top: 30px;
-    padding-bottom: 30px;
-    margin-bottom: 30px;
-    border-width:1px;
-    border-color:black;
-    font-size:larger;
-    font-weight:100;    
-    color: black;
-    background-color: #fff;
-   
 }
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     vertical-align: middle;
+    text-align: center;
 }
+
+a:hover, a:focus {
+    text-decoration:none;
+    border:none;
+}
+
+a:focus {
+    outline: none;
+    outline-offset: -2px;
+}
+
+.btn:focus, .btn:focus:active, .btn.active:focus, .btn.focus, .btn.focus:active, .btn.active.focus {
+    outline: none;
+    outline-offset: -2px;
+}
+
+
+
 

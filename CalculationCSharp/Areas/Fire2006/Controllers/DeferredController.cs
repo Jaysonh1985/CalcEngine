@@ -17,9 +17,11 @@ namespace CalculationCSharp.Areas.Fire2006.Controllers
         // GET: Fire2006/Deferred
         [HttpGet()]
         public ActionResult Input()
-        {  
-
+        {
+            ViewData["H1"] = "Fire 2006 " + this.ControllerContext.RouteData.Values["controller"].ToString();
+            ViewData["P1"] = "";
             InputForm.CalcReference = "1";
+            InputForm.CalcDate = Convert.ToDateTime("17/07/2015");
             InputForm.DOL = Convert.ToDateTime("17/07/2015");
             InputForm.APP = 23000;
             InputForm.CPD = 1200;

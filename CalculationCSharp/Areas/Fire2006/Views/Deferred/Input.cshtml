@@ -1,24 +1,21 @@
 ﻿@model CalculationCSharp.Areas.Fire2006.Models.Deferred
 
 @{
+    ViewBag.Title = ViewData["Name"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron1">
-    <h1>Fire 2006 Deferred</h1>
-</div>
-
 @Html.Partial("_BulkCalc")
-
-<link href="~/Content/Site.css" rel="stylesheet" />
 
 <div class="panel-group">
     <div class="panel panel-default">
+        
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" href="#collapseinput1">Calculation Input</a>
             </h4>
         </div>
+
         <div id="collapseinput1" class="panel-collapse collapse">
             <br />
 
@@ -33,6 +30,14 @@
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.CalcReference, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.CalcReference, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CalcDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CalcDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CalcDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
 

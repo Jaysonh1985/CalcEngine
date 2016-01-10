@@ -24,7 +24,7 @@
             <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">
 
             <table id="table" class="table table-bordered table">
-                <tr>
+                <tr class="h4">
                     <th>
                         @Html.DisplayNameFor(model => model.ID)
                     </th>
@@ -38,7 +38,7 @@
                 @{foreach (var group in Model.GroupBy(x => x.Group))
             {
                         <tr class="group-header">
-                            <td colspan="7">
+                            <td colspan="3">
                                 <span class="h4">@group.Key</span>
                             </td>
                         </tr>
