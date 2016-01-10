@@ -152,6 +152,7 @@
                             var form = $("#my-form");
                             form.attr("action", "@Url.Action("Input",null,new { ButtonType = "Regression" })");
                             form.submit();
+                            $('#Regression').hide()
                             $('#result').hide();
                         });
                         $('#Download').show();

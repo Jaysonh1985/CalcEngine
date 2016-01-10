@@ -5,9 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.Partial("_BulkCalc")
+
 
 <div class="container body-content">
+    @Html.Partial("_BulkCalc")
     <div class="panel-group">
         <div class="panel panel-default">
 
@@ -185,13 +186,7 @@
         </div>
     </div>
 </div>
-    <div id="result">
-    </div>
 
-    <div>
-        @Html.ActionLink("Back to Home", "Index", "Home")
-    </div>
-
-
-
+<div id="result">
+</div>
 
