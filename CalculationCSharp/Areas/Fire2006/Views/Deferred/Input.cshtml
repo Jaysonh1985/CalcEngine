@@ -185,42 +185,7 @@
 
     <script type="text/javascript">
 
-        $('#Download').hide();
-        $('#Regression').hide();
-
-         $(function () {
-            $("#my-form").on("submit", function (e) {
-                e.preventDefault();
-
-                 $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
-                    success: function (data) {
-                        $("#result").html(data);
-                        $("#Submit").click(function () {
-                            $('#result').show();
-                        });
-                        $("#Download").click(function () {
-                            var form = $("#my-form");
-                            form.attr("action", "@Url.Action("Input",null,new { ButtonType = "Download" })");
-                            form.submit();
-                            $('#result').hide();
-                            $('#Submit').hide();
-                        });                 
-                        $("#Regression").click(function () {
-                            var form = $("#my-form");
-                            form.attr("action", "@Url.Action("Input",null,new { ButtonType = "Regression" })");
-                            form.submit();
-                            $('#result').hide();
-                        });
-                        $('#Download').show();
-                        $('#Regression').show();
-                    }
-                 })
-
-            })
-        })
+        
 
 
 
