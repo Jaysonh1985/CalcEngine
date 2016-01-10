@@ -53,10 +53,18 @@ namespace CalculationCSharp.Models
 
     }
 
+    public class Codes
+    {
+        public int Id { get; set; }
+        public string Group { get; set; }
+        public string Code { get; set; }
+        public string Value { get; set; }
+    }
 
     public class CalculationDBContext : DbContext
     {
         public DbSet<CalculationResult> CalculationResult { get; set; }
         public DbSet<CalculationRegression> CalculationRegression { get; set; }
+        public DbSet<Codes> Codes { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace CalculationCSharp.Controllers
     {
         public CalculationDBContext db = new CalculationDBContext();
         public CalculationCSharp.Models.XMLFunctions.XMLFunctions xmlfunction = new CalculationCSharp.Models.XMLFunctions.XMLFunctions();
+        
 
         public object Calculate(Object Input, string Scheme, string CalcType, string CalcReference, bool Regression)
         {
