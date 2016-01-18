@@ -31,22 +31,22 @@ $BTN.click(function () {
     var headers = [];
     var data = [];
     // Get the headers (add special header logic here)
-    $($rows.shift()).find('th:not(:empty)').each(function () {
-        headers.push($(this).text().toLowerCase());
-    });
+    //$($rows.shift()).find('th:not(:empty)').each(function () {
+    //    headers.push($(this).text().toLowerCase());
+    //});
 
-    // Turn all existing rows into a loopable array
-    $rows.each(function () {
-        var $td = $(this).find('td');
-        var h = {};
+    //// Turn all existing rows into a loopable array
+    //$rows.each(function () {
+    //    var $td = $(this).find('td');
+    //    var h = {};
 
-        // Use the headers from earlier to name our hash keys
-        headers.forEach(function (header, i) {
-            h[header] = $td.eq(i).text();
-        });
+    //    // Use the headers from earlier to name our hash keys
+    //    headers.forEach(function (header, i) {
+    //        h[header] = $td.eq(i).text();
+    //    });
 
-        data.push(h);
-    });
+    //    data.push(h);
+    //});
 
     // Output the result
     $EXPORT.text(JSON.stringify(data));
@@ -73,12 +73,21 @@ $BTN.click(function () {
     //    // Don't forget .get() to convert the jQuery set to a regular array.
     //}).get();
 
+    var features = {};    // Create empty javascript object
+
+    $("tr :input").each(function () {           // Iterate over inputs
+        features[$(this).attr('name')] = $(this).val();
+        data.push(features);// Add each to features object
+    });
+
+    var json = JSON.stringify(data); // Stringify to create json object (requires json2 library)
+
     $.ajax({
 
         type: 'POST',
         dataType: 'text',
         url: "Index",
-        data: "jsonOfLog=" + JSON.stringify(data),
+        data: "jsonOfLog=" + json,
         success: function (data) {
            $("#table").html(data);
         },
@@ -126,3 +135,16 @@ $BTN.click(function () {
 //        $(this).find('.priority').html(count);
 //    });
 //}
+
+$(function()
+{
+    var arrLinks = $('#table td:nth-child(1)').map(function () {
+        return $(this).text();
+    }).get();
+    $('input[name=Test]').autocomplete({
+        source: arrLinks,
+        create: function () {
+            $(this).data("item.autocomplete", item)._renderItem = arrLinks;
+        }
+    })
+})

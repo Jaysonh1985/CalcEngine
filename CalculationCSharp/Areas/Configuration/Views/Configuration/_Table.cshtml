@@ -1,40 +1,27 @@
 ﻿@model IEnumerable<CalculationCSharp.Areas.Configuration.Models.ConfigViewModel>
 <span class="table-add glyphicon glyphicon-plus"></span>
-<table class="table">
-    <tr>
-        <th>Category</th>
-        <th>Function</th>
-        <th>Name</th>
-        <th>Parameter</th>
-        <th>Output</th>
-        <th></th>
-        <th></th>
-    </tr>
-    <tr class="hide">
-        <td contenteditable="true">Input</td>
-        <td contenteditable="true">Add</td>
-        <td contenteditable="true">Test</td>
-        <td contenteditable="true">undefined</td>
-        <td contenteditable="true">undefined</td>
-        <td>
-            <span class="table-remove glyphicon glyphicon-remove"></span>
-        </td>
-        <td>
-            <span class="table-up glyphicon glyphicon-arrow-up"></span>
-            <span class="table-down glyphicon glyphicon-arrow-down"></span>
-        </td>
-    </tr>
-
-    @if (Model != null)
-    {
-        foreach (var item in Model)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td id="search_row" contenteditable="true">@item.Category.ToString()</td>
-                <td contenteditable="true">@item.Function.ToString()</td>
-                <td contenteditable="true">@item.Name.ToString()</td>
-                <td contenteditable="true">@item.Parameter.ToString()</td>
-                <td contenteditable="true">@item.Output.ToString()</td>
+
+                <th>Category</th>
+                <th>Function</th>
+                <th>Name</th>
+                <th>Parameter</th>
+                <th>Output</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr class="hide">
+
+                <td> <input name="Category" type="text" value="Input" class="form-control" /> </td>
+                <td> <input name="Function" type="text" value="Add" class="form-control" /> </td>
+                <td> <input name="Name" type="text" value="Test" class="form-control" /> </td>
+                <td> <input name="Parameter" type="text" value="" class="form-control" /> </td>
+                <td> <input name ="Output" type="text" value="" class="form-control" /> </td>
                 <td>
                     <span class="table-remove glyphicon glyphicon-remove"></span>
                 </td>
@@ -43,10 +30,30 @@
                     <span class="table-down glyphicon glyphicon-arrow-down"></span>
                 </td>
             </tr>
-        }
-    }
 
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.EditorFor(modelItem => item.Category, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.EditorFor(modelItem => item.Function, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.EditorFor(modelItem => item.Name, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.EditorFor(modelItem => item.Parameter, new { htmlAttributes = new { @class = "form-control" } }) </td>
+                        <td>@Html.EditorFor(modelItem => item.Output, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>
+                            <span class="table-remove glyphicon glyphicon-remove"></span>
+                        </td>
+                        <td>
+                            <span class="table-up glyphicon glyphicon-arrow-up"></span>
+                            <span class="table-down glyphicon glyphicon-arrow-down"></span>
+                        </td>
+                    </tr>
+                }
+            }
+    </tbody>
 </table>
+
 
 
 
