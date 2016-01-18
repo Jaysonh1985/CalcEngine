@@ -196,6 +196,23 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
+    <Compile Include="Areas\Configuration\Controllers\ConfigurationController.cs" />
+    <Compile Include="Areas\Configuration\Models\ConfigViewModel.cs" />
+    <Compile Include="Areas\Configuration\Models\Input.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\CodeWriters\CSharpCodeWriter.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\CodeWriters\JavaCodeWriter.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\CodeWriters\TypeScriptCodeWriter.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\CodeWriters\VisualBasicCodeWriter.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\FieldInfo.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\ICodeWriter.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\IJsonClassGeneratorConfig.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\JsonClassGenerator.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\JsonClassHelper.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\JsonType.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\JsonTypeEnum.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\Properties\AssemblyInfo.cs" />
+    <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\Properties\Resources.Designer.cs" />
     <Compile Include="Areas\Fire2006\Fire2006AreaRegistration.cs" />
     <Compile Include="Areas\Regression\Controllers\CalculationRegressionsController.cs" />
     <Compile Include="Areas\Regression\RegressionAreaRegistration.cs" />
@@ -227,11 +244,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\JsonClassGeneratorLib.csproj" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\sample.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -253,11 +272,18 @@
     <Content Include="Areas\Regression\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Regression\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Regression\Views\CalculationRegressions\Delete.cshtml" />
+    <Content Include="Areas\Configuration\Views\web.config" />
+    <Content Include="Areas\Configuration\Views\Configuration\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Configuration\_Table.cshtml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim.pubxml" />
     <None Include="Properties\PublishProfiles\StandardImport.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\UTKFNVFZZE.jpg" />
+    <Content Include="Scripts\Calculation\DateFunctions.js" />
+    <Content Include="Scripts\Calculation\ModalFunctions.js" />
+    <Content Include="Scripts\Calculation\UI.js" />
+    <Content Include="Scripts\Configuration\Configuration.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -332,6 +358,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Configuration\Views\Shared\" />
     <Folder Include="Areas\Regression\Views\Test\" />
   </ItemGroup>
   <ItemGroup>
@@ -357,6 +384,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\Properties\Resources.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
