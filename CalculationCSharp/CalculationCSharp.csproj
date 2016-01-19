@@ -275,6 +275,7 @@
     <Content Include="Areas\Configuration\Views\web.config" />
     <Content Include="Areas\Configuration\Views\Configuration\Index.cshtml" />
     <Content Include="Areas\Configuration\Views\Configuration\_Table.cshtml" />
+    <Content Include="Areas\Configuration\Views\Configuration\_Add.cshtml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim.pubxml" />
     <None Include="Properties\PublishProfiles\StandardImport.pubxml" />

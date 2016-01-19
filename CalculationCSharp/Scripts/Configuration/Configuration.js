@@ -28,55 +28,23 @@ jQuery.fn.shift = [].shift;
 
 $BTN.click(function () {
     var $rows = $TABLE.find('tr:not(:hidden)');
+    var $input = $rows.find("input");
     var headers = [];
     var data = [];
     // Get the headers (add special header logic here)
-    //$($rows.shift()).find('th:not(:empty)').each(function () {
-    //    headers.push($(this).text().toLowerCase());
-    //});
+    $($rows.shift()).find('th:not(:empty)').each(function () {
+        headers.push($(this).text().toLowerCase());
+    });
 
-    //// Turn all existing rows into a loopable array
-    //$rows.each(function () {
-    //    var $td = $(this).find('td');
-    //    var h = {};
+    // Turn all existing rows into a loopable array
+    $rows.each(function () {
+        var $td = $(this).find('tr :input');
+        var h = {};
 
-    //    // Use the headers from earlier to name our hash keys
-    //    headers.forEach(function (header, i) {
-    //        h[header] = $td.eq(i).text();
-    //    });
-
-    //    data.push(h);
-    //});
-
-    // Output the result
-    $EXPORT.text(JSON.stringify(data));
-    //'data' is much more complicated in my real application
-
-    //var tableObject = $('#table tbody tr').map(function (i) {
-    //    var row = {};
-
-    //    // Find all of the table cells on this row.
-    //    $(this).find('td').each(function (i) {
-    //        // Determine the cell's column name by comparing its index
-    //        //  within the row with the columns list we built previously.
-    //        var rowName = columns[i];
-
-    //        // Add a new property to the row object, using this cell's
-    //        //  column name as the key and the cell's text as the value.
-    //        row[rowName] = $(this).text();
-    //    });
-
-    //    // Finally, return the row's object representation, to be included
-    //    //  in the array that $.map() ultimately returns.
-    //    return row;
-
-    //    // Don't forget .get() to convert the jQuery set to a regular array.
-    //}).get();
-
-    var features = {};    // Create empty javascript object
-
-    $("tr :input").each(function () {           // Iterate over inputs
-        features[$(this).attr('name')] = $(this).val();
+        var features = {};    // Create empty javascript object
+        $input.each(function () {           // Iterate over inputs
+            features[$(this).attr('name')] = $(this).val();           
+        });
         data.push(features);// Add each to features object
     });
 
@@ -138,10 +106,10 @@ $BTN.click(function () {
 
 $(function()
 {
-    var arrLinks = $('#table td:nth-child(1)').map(function () {
-        return $(this).text();
+    var arrLinks = $('#table td:input').map(function () {
+        return $(this).val();
     }).get();
-    $('input[name=Test]').autocomplete({
+    $('input[name=Name]').autocomplete({
         source: arrLinks,
         create: function () {
             $(this).data("item.autocomplete", item)._renderItem = arrLinks;

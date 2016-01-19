@@ -7,9 +7,9 @@ namespace CalculationCSharp.Areas.Configuration.Models
 {
     public class Input
     {
-        public string Add (string String)
+        public Double Add (double Input1)
         {
-            return String;
+            return Input1;
         }
     }
 }
