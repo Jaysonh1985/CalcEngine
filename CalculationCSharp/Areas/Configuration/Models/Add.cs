@@ -5,9 +5,11 @@ using System.Web;
 
 namespace CalculationCSharp.Areas.Configuration.Models
 {
-    public class Input
+    public class Add
     {
-        public Double Add (double Input1)
+        public Double Input1 { get; set;}
+
+        public Double AddFunction (double Input1)
         {
             return Input1;
         }

@@ -199,7 +199,7 @@
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigurationController.cs" />
     <Compile Include="Areas\Configuration\Models\ConfigViewModel.cs" />
-    <Compile Include="Areas\Configuration\Models\Input.cs" />
+    <Compile Include="Areas\Configuration\Models\Add.cs" />
     <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\CodeWriters\CSharpCodeWriter.cs" />
     <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\CodeWriters\JavaCodeWriter.cs" />
     <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\CodeWriters\TypeScriptCodeWriter.cs" />

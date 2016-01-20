@@ -1,5 +1,6 @@
 ﻿var $TABLE = $('#table');
 var $BTN = $('#export-btn');
+var $BTNSave = $('#save-btn');
 var $EXPORT = $('#export');
 
 $('.table-add').click(function () {
@@ -26,47 +27,51 @@ $('.table-down').click(function () {
 jQuery.fn.pop = [].pop;
 jQuery.fn.shift = [].shift;
 
-$BTN.click(function () {
-    var $rows = $TABLE.find('tr:not(:hidden)');
-    var $input = $rows.find("input");
-    var headers = [];
-    var data = [];
-    // Get the headers (add special header logic here)
-    $($rows.shift()).find('th:not(:empty)').each(function () {
-        headers.push($(this).text().toLowerCase());
-    });
+//$BTN.click(function () {
+//    var $rows = $TABLE.find('tr:not(:hidden)');
+//    var $input = $rows.find("input");
+//    var headers = [];
+//    var data = [];
+//    // Get the headers (add special header logic here)
+//    $($rows.shift()).find('th:not(:empty)').each(function () {
+//        headers.push($(this).text().toLowerCase());
+//    });
 
-    // Turn all existing rows into a loopable array
-    $rows.each(function () {
-        var $td = $(this).find('tr :input');
-        var h = {};
+//    // Turn all existing rows into a loopable array
+//    $rows.each(function () {
+//        var $td = $(this).find('tr :input');
+//        var h = {};
 
-        var features = {};    // Create empty javascript object
-        $input.each(function () {           // Iterate over inputs
-            features[$(this).attr('name')] = $(this).val();           
-        });
-        data.push(features);// Add each to features object
-    });
+//        var features = {};    // Create empty javascript object
+//        $input.each(function () {           // Iterate over inputs
+//            features[$(this).attr('name')] = $(this).val();           
+//        });
+//        data.push(features);// Add each to features object
+//    });
 
-    var json = JSON.stringify(data); // Stringify to create json object (requires json2 library)
+//    var json = JSON.stringify(data); // Stringify to create json object (requires json2 library)
 
-    $.ajax({
+//    $.ajax({
 
-        type: 'POST',
-        dataType: 'text',
-        url: "Index",
-        data: "jsonOfLog=" + json,
-        success: function (data) {
-           $("#table").html(data);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            console && console.log("request failed");
-        },
+//        type: 'POST',
+//        dataType: 'text',
+//        url: "Index",
+//        data: "jsonOfLog=" + json,
+//        success: function (data) {
+//           $("#table").html(data);
+//        },
+//        error: function (xhr, ajaxOptions, thrownError) {
+//            console && console.log("request failed");
+//        },
 
-        processData: false,
-        async: false
-    });
-});
+//        processData: false,
+//        async: false
+//    });
+//});
+
+$BTNSave.click(function(){
+
+})
 
 //$(document).ready(function () {
 //    //Helper function to keep table row from collapsing when being sorted

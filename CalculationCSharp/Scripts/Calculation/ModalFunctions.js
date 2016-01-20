@@ -10,9 +10,9 @@ $(function () {
         $('modal-container').modal('hide');
     });
 
-    $('#modal-container').on('hidden.bd.modal', function () {
-        $(this).removeData('bs.modal');
-    });
+    //$('#modal-container').on('hidden.bd.modal', function () {
+    //    $(this).removeData('bs.modal');
+    //});
 });
 
 
@@ -27,7 +27,7 @@ $(document).ready(function () {
     });
 });
 
-//Clear Modal on hide
-$('body').on('hidden.bs.modal', '.modal', function () {
-    $(this).removeData('bs.modal');
-});
+////Clear Modal on hide
+//$('body').on('hidden.bs.modal', '.modal', function () {
+//    $(this).removeData('bs.modal');
+//});
