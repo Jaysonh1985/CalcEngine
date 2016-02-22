@@ -1,4 +1,4 @@
-﻿using CalculationCSharp.Areas.Fire2006.Models;
+﻿using CalculationCSharp.Areas.Scheme.Models;
 using CalculationCSharp.Models;
 using CalculationCSharp.Models.Calculation;
 using CalculationCSharp.Models.StringFunctions;

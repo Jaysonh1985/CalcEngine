@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace CalculationCSharp.Areas.Fire2006
+namespace CalculationCSharp.Areas.Scheme
 {
-    public class Fire2006AreaRegistration : AreaRegistration 
+    public class SchemeAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "Fire2006";
+                return "Scheme";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Fire2006_default",
-                "Fire2006/{controller}/{action}/{id}",
+                "Scheme_default",
+                "Scheme/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

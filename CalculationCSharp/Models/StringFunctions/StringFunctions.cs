@@ -1,5 +1,4 @@
-﻿using CalculationCSharp.Areas.Fire2006.Models;
-using CalculationCSharp.Models.Calculation;
+﻿using CalculationCSharp.Models.Calculation;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using System;
 using System.Collections.Generic;

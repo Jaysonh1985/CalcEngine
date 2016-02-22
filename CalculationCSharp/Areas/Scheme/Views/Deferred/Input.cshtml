@@ -1,4 +1,4 @@
-﻿@model CalculationCSharp.Areas.Fire2006.Models.Deferred
+﻿@model CalculationCSharp.Areas.Scheme.Models.Deferred
 
 @{
     ViewBag.Title = ViewData["Name"];
@@ -60,10 +60,10 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.CPD, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.Contributions, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.CPD, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.CPD, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Contributions, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Contributions, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -132,14 +132,6 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             @Html.LabelFor(model => model.CVofPensionDebit, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.CVofPensionDebit, new { htmlAttributes = new { @class = "form-control" } })
@@ -148,26 +140,30 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.LSI, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.LSI, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.LSI, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.LSI, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.SCPDPension, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.SCPDPension, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.SCPDPension, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.SCPDPension, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.SumAVCCont, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.SumAVCCont, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.SumAVCCont, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.SumAVCCont, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.HiddenFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
                             </div>
                         </div>
 

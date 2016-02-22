@@ -7,7 +7,6 @@ using CalculationCSharp.Models;
 using System.Text;
 using System.Xml.Serialization;
 using System.IO;
-using CalculationCSharp.Areas.Fire2006.Models;
 using CalculationCSharp.Controllers;
 using CalculationCSharp.Models.Calculation;
 using System.Xml.Linq;
@@ -106,7 +105,7 @@ namespace CalculationCSharp.Areas.Regression.Controllers
                 return HttpNotFound();
             }
 
-            var serializer = new XmlSerializer(typeof(Areas.Fire2006.Models.Deferred));
+            var serializer = new XmlSerializer(typeof(Areas.Scheme.Models.Deferred));
             object result;
 
             using (TextReader reader = new StringReader(calculationRegression.Input))
@@ -129,7 +128,7 @@ namespace CalculationCSharp.Areas.Regression.Controllers
 
             foreach (var Calc in AllCalcs)
             {
-                var serializer = new XmlSerializer(typeof(Areas.Fire2006.Models.Deferred));
+                var serializer = new XmlSerializer(typeof(Areas.Scheme.Models.Deferred));
                 object result;
 
                 using (TextReader reader = new StringReader(Calc.Input))
