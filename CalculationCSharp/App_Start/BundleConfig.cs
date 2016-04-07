@@ -25,7 +25,9 @@ namespace CalculationCSharp
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/toastr.css"));
+
             //Create bundel for jQueryUI  
             //js  
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
@@ -36,6 +38,18 @@ namespace CalculationCSharp
             
             //Turns off bootstrap.min
             BundleTable.EnableOptimizations = false;
+            
+          //  //AngularJS
+          //  bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+          //"~/Scripts/angular.js",
+          //"~/Scripts/jquery.signalR-2.2.0.js",
+          //"~/Scripts/toastr.js",
+          //"~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
+          //"~/AppScript/main.js",
+          //"~/AppScript/kanbanBoardDragDrop.js",
+          //"~/AppScript/boardService.js",
+          //"~/AppScript/boardCtrl.js"));
+
         }
     }
 }
