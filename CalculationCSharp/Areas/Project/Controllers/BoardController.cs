@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using CalculationCSharp.Models;
 
 
-namespace CalculationCSharp.Controllers
+namespace CalculationCSharp.Areas.Project.Controllers
 {
     public class BoardController : Controller
     {

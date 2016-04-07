@@ -5,7 +5,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 
-namespace CalculationCSharp.Controllers
+namespace CalculationCSharp.Areas.Project.Controllers
 {
     [HubName("KanbanBoard")]
     public class BoardHub : Hub

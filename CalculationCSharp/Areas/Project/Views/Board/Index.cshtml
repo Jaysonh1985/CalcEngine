@@ -3,9 +3,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div style="width:80%; margin: 0 auto 0 auto;">
-
-    <div class="row" ng-controller="boardCtrl">
+<div style="width:80%; margin: 0 auto 0 auto;" ng-controller="boardCtrl">
+    <input class="btn btn-default" type="button" value="Add" ng-click="AddButtonClick()" />
+    <div class="row" >
 
         @*<div ng-include="'/AppScript/busyModal.html'" ng-show="isLoading"></div>*@
 
@@ -14,15 +14,13 @@
             <div class="panel-heading" style="margin-bottom: 10px;">
                 <h3 class="panel-title">{{col.Name}}</h3>
             </div>
-            <input class="btn btn-default" type="button" value="Add" ng-click="AddButtonClick()" />
+            
             <div class="thumbnail" draggable="true" kanban-board-dragg="task"
                  ng-repeat="task in col.Tasks" style="margin-bottom: 10px;" ng-click="UpdateButtonClick('lg')">
                 <div class="caption">
                     <h5><strong>{{task.Name}}</strong></h5>
                     @*<p>{{task.Description}}</p>*@
                     <p>
-                        
-                        
                     </p>
                 </div>
             </div>

@@ -23,7 +23,7 @@
 
      $scope.AddButtonClick = function AddTask() {
          $scope.isLoading = true;
-         boardService.moveTask(1,this.col.Id, "Add", "1").then(function (data) {
+         boardService.moveTask(1,1, "Add", "1").then(function (data) {
              $scope.isLoading = false;
              boardService.sendRequest();
          }, onError);

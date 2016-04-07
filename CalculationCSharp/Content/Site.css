@@ -171,6 +171,13 @@ input,
 select,
 textarea {
     max-width: 280px;
+        border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 @import "compass/css3";
@@ -213,4 +220,81 @@ textarea {
   }
 }
 
+.colStyle {
+    margin-right: 10px;
+    width: 24%;
+    padding-top: 10px;
+    margin-top: 20px;
+    border: 1px solid black;
+    min-height: 500px;
+}
 
+.busyIndicator .alert {
+    left: 40%;
+    top: 5%;
+    position: fixed;
+    z-index: 1050;
+    width: 400px;
+    height: 40px;
+    padding-left: 10px;
+    padding-top: 10px;
+    background-color: #AE0000;
+    color: black;
+    border-color: transparent;
+}
+
+.busyIndicator .backgroundMask {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background: black;
+    z-index: 1049;
+}
+
+.over {
+    background-color: #a84d4d;
+    border: 2px black;
+}
+
+.panel-primary > .panel-heading {
+  background-color: #ae0000
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, .075);
+    border: 1px solid;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px #333;
+}
+
+b, strong {
+    font-weight: normal;
+}
+
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    background-color: #eee;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px;
+    background: #eee;
+}
+
+.modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #eee;
+    background-color: #eee;
+}
+
+.textarea {
+
+}

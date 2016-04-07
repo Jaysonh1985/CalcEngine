@@ -246,9 +246,9 @@
     <Compile Include="Areas\Regression\Controllers\CalculationRegressionsController.cs" />
     <Compile Include="Areas\Regression\RegressionAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BoardController.cs" />
-    <Compile Include="Controllers\BoardHub.cs" />
-    <Compile Include="Controllers\BoardWebApiController.cs" />
+    <Compile Include="Areas\Project\Controllers\BoardController.cs" />
+    <Compile Include="Areas\Project\Controllers\BoardHub.cs" />
+    <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
     <Compile Include="Controllers\CalculationBaseController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -259,9 +259,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Board\BoardRepository.cs" />
-    <Compile Include="Models\Board\Column.cs" />
-    <Compile Include="Models\Board\Tasks.cs" />
+    <Compile Include="Areas\Project\Models\BoardRepository.cs" />
+    <Compile Include="Areas\Project\Models\Column.cs" />
+    <Compile Include="Areas\Project\Models\Tasks.cs" />
     <Compile Include="Models\CalculationViewModels.cs" />
     <Compile Include="Models\Calculation\DownloadFileActionResult.cs" />
     <Compile Include="Models\Calculation\Index.cs" />
@@ -417,15 +417,13 @@
     <Content Include="Areas\Regression\Views\CalculationRegressions\Index.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Areas\Regression\Views\CalculationRegressions\_RegModal.cshtml" />
-    <Content Include="Views\Board\Index.cshtml" />
+    <Content Include="Areas\Project\Views\Board\Index.cshtml" />
     <Content Include="Scripts\jquery-2.2.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Configuration\Controllers\" />
     <Folder Include="Areas\Configuration\Views\Shared\" />
-    <Folder Include="Areas\Project\Controllers\" />
-    <Folder Include="Areas\Project\Models\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Areas\Regression\Views\Test\" />
   </ItemGroup>

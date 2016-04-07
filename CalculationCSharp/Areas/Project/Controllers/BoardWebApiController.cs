@@ -1,11 +1,11 @@
-﻿using CalculationCSharp.Models;
+﻿using CalculationCSharp.Areas.Project.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace CalculationCSharp.Controllers
+namespace CalculationCSharp.Areas.Project.Controllers
 {
     public class BoardWebApiController : ApiController
     {
