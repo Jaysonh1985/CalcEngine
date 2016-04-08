@@ -10,7 +10,7 @@
     };
 
 
-    var canMoveTask = function (sourceColIdVal, targetColIdVal) {
+    var canMoveStory = function (sourceColIdVal, targetColIdVal) {
         return $http.get("/api/BoardWebApi/CanMove", { params: { sourceColId: sourceColIdVal, targetColId: targetColIdVal } })
             .then(function (response) {
                 return response.data.canMove;
@@ -19,8 +19,8 @@
             });
     };
 
-    var moveTask = function (taskIdVal, targetColIdVal, updateType, data) {
-        return $http.post("/api/BoardWebApi/MoveTask", { taskId: taskIdVal, targetColId: targetColIdVal, updateType: updateType, data: data })
+    var moveStory = function (storyIdVal, targetColIdVal, updateType, data, task) {
+        return $http.post("/api/BoardWebApi/MoveStory", { storyId: storyIdVal, targetColId: targetColIdVal, updateType: updateType, data: data, task:task })
             .then(function (response) {
                 return response.status == 200;
             }, function (error) {
@@ -56,7 +56,7 @@
         initialize: initialize,
         sendRequest: sendRequest,
         getColumns: getColumns,
-        canMoveTask: canMoveTask,
-        moveTask: moveTask
+        canMoveStory: canMoveStory,
+        moveStory: moveStory
     };
 });

@@ -10,6 +10,6 @@ namespace CalculationCSharp.Areas.Project.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public virtual List<Tasks> Tasks { get; set; }
+        public virtual List<Stories> Stories { get; set; }
     }
 }

@@ -38,29 +38,39 @@ namespace CalculationCSharp.Areas.Project.Controllers
         }
 
         [HttpPost]        
-        public HttpResponseMessage MoveTask(JObject moveTaskParams)
+        public HttpResponseMessage MoveStory(JObject moveTaskParams)
         {
             dynamic json = moveTaskParams;
             var repo = new BoardRepository();
 
-            if(json.updateType == "Add")
+            if (json.task == "true")
             {
-                repo.AddTask((int)json.targetColId);
-            }
-            else if(json.updateType == "Delete")
-            {
-                repo.DeleteTask((int)json.taskId, (int)json.targetColId);
-            }
-            else if (json.updateType == "Edit")
-            {
-                repo.EditTask((int)json.taskId, (int)json.targetColId, json.data);
+
+                repo.AddTask((int)json.storyId, (int)json.targetColId, json.data);
+
+
             }
             else
             {
-                repo.MoveTask((int)json.taskId, (int)json.targetColId);
+                if (json.updateType == "Add")
+                {
+                    repo.AddStory((int)json.targetColId);
+                }
+                else if (json.updateType == "Delete")
+                {
+                    repo.DeleteStory((int)json.storyId, (int)json.targetColId);
+                }
+                else if (json.updateType == "Edit")
+                {
+                    repo.EditStory((int)json.storyId, (int)json.targetColId, json.data);
+                }
+                else
+                {
+                    repo.MoveStory((int)json.storyId, (int)json.targetColId);
+                }
             }
-            
-                       
+
+
             var response = Request.CreateResponse();
             response.StatusCode = HttpStatusCode.OK;
 
