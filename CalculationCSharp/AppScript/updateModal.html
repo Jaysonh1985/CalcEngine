@@ -1,19 +1,12 @@
-﻿<html ng-app="kanbanBoardApp">
-<head>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.2.4.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+﻿<body>
     <div ng-controller="boardCtrl">
         <script type="text/ng-template" id="/AppScript/updateModal.html">
             <div class="modal-header">
-                    <textarea overflow:auto;resize:none" type="text" id="Name" placeholder="Please enter name of item here" class="form-control" ng-model="Name" rows="1">{{ Name }}</textarea>
+                <textarea overflow:auto;resize:none" type="text" id="Name" placeholder="Please enter name of item here" class="form-control" ng-model="Name" rows="1">{{ Name }}</textarea>
             </div>
             <div class="modal-body">
                 <div class="form-horizontal">
-                        <textarea style="overflow:auto;resize:none" type="text" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="5"> {{ Description }}</textarea>    
+                    <textarea style="overflow:auto;resize:none" type="text" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="5"> {{ Description }}</textarea>
                 </div>
                 <div class="form-horizontal">
                     <select name="singleSelect" ng-model="Moscow" placeholder="Enter M.o.S.C.o.W rating" class="form-control">
@@ -21,7 +14,7 @@
                         <option value="Should">Should</option>
                         <option value="Could">Could</option>
                         <option value="Won't">Won't</option>
-                    {{Moscow}}
+                        {{Moscow}}
                     </select>
                 </div>
                 <div class="form-horizontal">
@@ -34,36 +27,41 @@
                 <br />
 
                 <h1>Tasks</h1>
-                <input class="btn btn-default" type="button" value="Add" ng-click="AddButtonClickTask()" />
                 <br />
 
-                <form class="form-inline" id="it" ng-repeat="x in Tasks">
+                <form editable-form name="tableform">
+                    <!-- table -->
+                    <table class="table table-bordered table-hover table-condensed">
+                        <tr style="font-weight: bold">
+                            <td style="width:70%">Task</td>
+                            <td style="width:30%">User</td>
+                            <td style="width:8%">Remaining Time</td>
+                            <td style="width:20%">Status</td>
+                        </tr>
 
-                    <div class="form-group">
-                        <label for="exampleInputName2">Task</label>
-                        <input type="text" class="form-control" id="Name" placeholder="Enter Tasks Description" value="{{x.Name}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail2">User</label>
-                        <input type="text" class="form-control" id="Username" placeholder="Enter Username" value="{{x.User}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputName2">Remaining Time (Decimal)</label>
-                        <input type="number" class="input-group-sm" id="Remaining" placeholder="Enter Remaining Time" value="{{x.RemainingTime}}"> 
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail2">Complete</label>
-                        <input type="checkbox" class="form-control" id="Complete" placeholder="Complete" value="{{x.Complete}}">
-                    </div>
+
+                        <tr ng-repeat="Task in selected.Tasks">
+
+                            <td><input type="text" ng:model="Task.TaskName" class="form-control"></td>
+                            <td><input type="text" ng:model="Task.TaskUser" ng:required class="form-control"></td>
+                            <td><input type="number" ng:model="Task.RemainingTime" class="form-control"></td>
+                            <td><input type="text" ng:model="Task.Status" ng:required class="form-control"></td>
+                            <td>
+                                [<a ng:click="removeItem($index)">X</a>]
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a  ng:click="addItem()" class="btn btn-default">Add</a></td>
+                        </tr>
+
+                    </table>
                 </form>
-            </div>
-
-            <div class="modal-footer">
-                <input class="btn btn-default" type="button" value="Delete"  ng-click="DeleteButtonClick()" />
-                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-            </div>
+           </div>
+                    <div class="modal-footer">
+                        <input class="btn btn-default" type="button" value="Delete" ng-click="DeleteButtonClick()" />
+                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                    </div>
         </script>
     </div>
 </body>
-</html>

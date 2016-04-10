@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace CalculationCSharp.Areas.Project.Models
 {
@@ -92,35 +94,6 @@ namespace CalculationCSharp.Areas.Project.Models
             this.UpdateColumns(columns.OrderBy(c => c.Id).ToList());
         }
 
-        public void AddTask(int StoryId, int targetColId, JObject Data)
-        {
-            dynamic json = Data;
-            var columns = this.GetColumns();
-            var targetColumn = this.GetColumn(targetColId);
-            List<Tasks> Tasks = new List<Tasks>();
-
-            // Add Story to the target column
-            var Story = this.GetStories(StoryId);
-            var sourceColId = Story.ColumnId;
-            Story.Name = json.Name;
-            Story.Description = json.Description;
-            Story.Moscow = json.Moscow;
-            Story.User = json.User;
-
-            Tasks.Add(new Tasks() { Id = 1, Name = "Task 1", User = "Jayson Herbert", RemainingTime = 0, StoryId = StoryId });
-
-            if(Story.Tasks == null){
-                Story.Tasks = Tasks;
-            }
-            else
-            {
-                Tasks.AddRange(Story.Tasks);
-                Story.Tasks = Tasks;
-            }
-            
-             this.UpdateColumns(columns.OrderBy(c => c.Id).ToList());
-        }
-
         public void DeleteStory(int StoryId, int targetColId)
         {
             var columns = this.GetColumns();
@@ -141,7 +114,8 @@ namespace CalculationCSharp.Areas.Project.Models
             dynamic json = Data;
             var columns = this.GetColumns();
             var targetColumn = this.GetColumn(targetColId);
-
+            List<Tasks> Tasks = new List<Tasks>();
+   
             // Add Story to the target column
             var Story = this.GetStories(StoryId);
             var sourceColId = Story.ColumnId;
@@ -150,6 +124,13 @@ namespace CalculationCSharp.Areas.Project.Models
             Story.Moscow = json.Moscow;
             Story.User = json.User;
 
+            string jsonString = Convert.ToString(json.Tasks);
+
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            List<Tasks> jTasks = (List<Tasks>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<Tasks>));
+
+            Story.Tasks =jTasks;
+            
             this.UpdateColumns(columns.OrderBy(c => c.Id).ToList());
         }
 

@@ -46,8 +46,10 @@
                 $scope.Description = Description;
                 $scope.Moscow = Moscow;
                 $scope.User = User;
-                $scope.ID = ID;
                 $scope.Tasks = Tasks;
+               
+                $scope.ID = ID;
+                
                 $scope.colID = colID;
 
                 $scope.DeleteButtonClick = function AddStory() {
@@ -59,26 +61,32 @@
                     $uibModalInstance.dismiss('cancel')
                 };
 
-                $scope.AddButtonClickTask = function () {
-
-                    $scope.selected = {
-                        Name: $scope.Name,
-                        Description: $scope.Description,
-                        Moscow: $scope.Moscow,
-                        User: $scope.User,
-                        Tasks: $scope.Tasks
-                    };
-
-                    boardService.moveStory($scope.ID, $scope.colID, "Edit", $scope.selected, "true").then(function (data) {
-                        $scope.isLoading = false;
-                        boardService.sendRequest();
-                    }, onError);
-
-                    $scope.Tasks.push({
-
-                    });
-
+                $scope.selected = {
+                    Tasks: [{
+                        TaskName: "",
+                        TaskUser: "",
+                        RemainingTime: "",
+                        Status: ""
+                    }]
                 };
+            
+                if (Tasks !== null)
+                {
+                    $scope.selected.Tasks = ($scope.Tasks);
+                }
+                    
+                $scope.addItem = function () {
+                    $scope.selected.Tasks.push({
+                        TaskName: "",
+                        TaskUser: "",
+                        RemainingTime: "",
+                        Status: ""
+                    });
+                },
+
+                $scope.removeItem = function (index) {
+                    $scope.selected.Tasks.splice(index, 1);
+                },
 
                 //Click OK
                 $scope.ok = function () {
@@ -87,7 +95,8 @@
                         Name: $scope.Name,
                         Description: $scope.Description,
                         Moscow: $scope.Moscow,
-                        User: $scope.User
+                        User: $scope.User,
+                        Tasks: $scope.selected.Tasks
                     };
 
                     boardService.moveStory($scope.ID, $scope.colID, "Edit", $scope.selected, "false").then(function (data) {

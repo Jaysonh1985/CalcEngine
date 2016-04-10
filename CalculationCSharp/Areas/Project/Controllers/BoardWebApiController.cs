@@ -46,7 +46,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
             if (json.task == "true")
             {
 
-                repo.AddTask((int)json.storyId, (int)json.targetColId, json.data);
+                //repo.AddTask((int)json.storyId, (int)json.targetColId, json.data);
 
 
             }
