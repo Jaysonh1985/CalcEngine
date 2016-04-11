@@ -82,9 +82,11 @@ namespace CalculationCSharp.Areas.Project.Models
             // Add Story to the target column
             var Story = new Stories();
             Story.Description = "Story Description " + StoryId;
+            Story.AcceptanceCriteria = "Acceptance";
             Story.Id = StoryId;
             Story.Name = "Story " + StoryId;
             Story.Moscow = "Must";
+            Story.Timebox = "Timebox 1";
             Story.User = "Jayson Herbert";
 
             var sourceColId = Story.ColumnId;
@@ -121,16 +123,22 @@ namespace CalculationCSharp.Areas.Project.Models
             var sourceColId = Story.ColumnId;
             Story.Name = json.Name;
             Story.Description = json.Description;
+            Story.AcceptanceCriteria = json.AcceptanceCriteria;
             Story.Moscow = json.Moscow;
+            Story.Timebox = json.Timebox;
             Story.User = json.User;
+            
 
-            string jsonString = Convert.ToString(json.Tasks);
 
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            List<Tasks> jTasks = (List<Tasks>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<Tasks>));
+            string jsonString = Convert.ToString(json.Tasks);
+            string jsonStringComments = Convert.ToString(json.Comments);
 
+            List<Tasks> jTasks = (List<Tasks>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<Tasks>));
+            List<Comments> jComments = (List<Comments>)javaScriptSerializ­er.Deserialize(jsonStringComments, typeof(List<Comments>));
             Story.Tasks =jTasks;
-            
+            Story.Comments = jComments;
+
             this.UpdateColumns(columns.OrderBy(c => c.Id).ToList());
         }
 

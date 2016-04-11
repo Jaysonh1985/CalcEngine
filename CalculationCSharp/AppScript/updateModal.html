@@ -5,26 +5,65 @@
                 <textarea overflow:auto;resize:none" type="text" id="Name" placeholder="Please enter name of item here" class="form-control" ng-model="Name" rows="1">{{ Name }}</textarea>
             </div>
             <div class="modal-body">
-                <div class="form-horizontal">
-                    <textarea style="overflow:auto;resize:none" type="text" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="5"> {{ Description }}</textarea>
-                </div>
-                <div class="form-horizontal">
-                    <select name="singleSelect" ng-model="Moscow" placeholder="Enter M.o.S.C.o.W rating" class="form-control">
-                        <option value="Must">Must</option>
-                        <option value="Should">Should</option>
-                        <option value="Could">Could</option>
-                        <option value="Won't">Won't</option>
-                        {{Moscow}}
-                    </select>
-                </div>
-                <div class="form-horizontal">
-                    <select name="singleSelect" ng-model="User" placeholder="Select User" class="form-control">
-                        <option value="Jayson Herbert">Jayson Herbert</option>
-                        <option value="John Smith">John Smith</option>
-                        {{User}}
-                    </select>
-                </div>
+                <h1>Requirements</h1>
                 <br />
+                <form editable-form name="tableform">
+                    <!-- table -->
+                    <table class="table table-bordered table-hover table-condensed">
+                        <tr style="font-weight: bold">
+                            <td style="width:50%">Description</td>
+                            <td style="width:50%">Acceptance Criteria</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <textarea style="overflow:auto;resize:none" type="text" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="5"> {{ Description }}</textarea>
+                            </td>
+                            <td>
+                                <textarea style="overflow:auto;resize:none" type="text" id="AcceptanceCriteria" placeholder="Please enter Acceptance Criteria here" class="form-control" ng-model="AcceptanceCriteria" rows="5"> {{ AcceptanceCriteria }}</textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <form editable-form name="tableform">
+                    <table class="table table-bordered table-hover table-condensed">
+                        <tr style="font-weight: bold">
+                            <td style="width:33.3%">MoSCoW</td>
+                            <td style="width:33.3%">Timebox</td>
+                            <td style="width:33.3%">Allocation</td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <select name="singleSelect" ng-model="Moscow" placeholder="Enter M.o.S.C.o.W rating" class="form-control">
+                                    <option value="Must">Must</option>
+                                    <option value="Should">Should</option>
+                                    <option value="Could">Could</option>
+                                    <option value="Won't">Won't</option>
+                                    {{Moscow}}
+                                </select>
+                            </td>
+                            <td>
+                                <select name="singleSelect" ng-model="Timebox" placeholder="Enter Timebox" class="form-control">
+                                    <option value="Timebox 1">Timebox 1</option>
+                                    <option value="Timebox 2">Timebox 2</option>
+                                    <option value="Timebox 3">Timebox 3</option>
+                                    <option value="Timebox 4">Timebox 4</option>
+                                    <option value="Timebox 5">Timebox 5</option>
+                                    <option value="Timebox 6">Timebox 6</option>
+                                    {{Timebox}}
+                                </select>
+                            </td>
+                            <td>
+                                <select name="singleSelect" ng-model="User" placeholder="Select User" class="form-control">
+                                    <option value="Jayson Herbert">Jayson Herbert</option>
+                                    <option value="John Smith">John Smith</option>
+                                    {{User}}
+                                </select>
+                            </td>
+
+                        </tr>
+                    </table>
+                </form>
 
                 <h1>Tasks</h1>
                 <br />
@@ -56,6 +95,29 @@
 
                     </table>
                 </form>
+                <h1>Comments</h1>
+                <br />
+                <form editable-form name="commentform">
+                    <!-- table -->
+                    <table class="table table-bordered table-hover table-condensed">
+                        <tr style="font-weight: bold">
+                            <td style="width:70%">Comment Name</td>
+                            <td style="width:10%">Delete</td>
+                        </tr>
+                        <tr ng-repeat="comnt in Comments">
+                            <td><span><input type="text" ng:model="comnt.CommentName" class="form-control"></span></td>
+                            <td>
+                                [<a ng:click="remItem($index)">X</a>]
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span><textarea ng-model="txtcomment" placeholder="Your Comment" style='width:550px'></textarea></span></td>
+                            <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
+                        </tr>
+
+                    </table>
+                </form>
+
            </div>
                     <div class="modal-footer">
                         <input class="btn btn-default" type="button" value="Delete" ng-click="DeleteButtonClick()" />

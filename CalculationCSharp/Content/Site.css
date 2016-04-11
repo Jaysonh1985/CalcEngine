@@ -111,6 +111,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 element.style {
+
 }
 
 .panel-default {
@@ -120,14 +121,22 @@ element.style {
 .panel-title {
     margin-top: 0px;
     margin-bottom: 0px;
-    font-size: 36px;
+    font-size: 25px;
     color: inherit;
+    text-overflow: ellipsis;
+    text-align:center;
+}
+
+.panel-body {
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .panel-default > .panel-heading {
     color: #fff;
     background-color: rgba(173, 0, 0, 1);
     text-align:center;
+    text-overflow: ellipsis;
 }
 
 a:hover, a:focus {
@@ -294,6 +303,17 @@ b, strong {
     border-top: 1px solid #eee;
     background-color: #eee;
 }
+
+span
+{
+    display: block;
+    overflow: hidden;
+    padding-right: 5px;
+    padding-left: 10px;
+}
+
+span > input{ width: 100%; }
+
 
 .textarea {
 
