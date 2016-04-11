@@ -18,7 +18,7 @@ namespace CalculationCSharp.Areas.Project.Models
                 var stories = new List<Stories>();
                 for (int i = 1; i < 6; i++)
                 {
-                    stories.Add(new Stories { ColumnId = 1, Id = i, Name = "Story " + i, Description = "Story " + i + " Description", Moscow = "Must", User = "Jayson Herbert" });
+                    stories.Add(new Stories { ColumnId = 1, Id = i, Name = "Story " + i});
                 }
                 columns.Add(new Column { Description = "to do column", Id = 1, Name = "Backlog", Stories = stories });
                 columns.Add(new Column { Description = "in progress column", Id = 2, Name = "In Progress", Stories = new List<Stories>() });

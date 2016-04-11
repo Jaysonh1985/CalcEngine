@@ -11,8 +11,8 @@
                     <!-- table -->
                     <table class="table table-bordered table-hover table-condensed">
                         <tr style="font-weight: bold">
-                            <td style="width:50%">Description</td>
-                            <td style="width:50%">Acceptance Criteria</td>
+                            <td style="width:50%;background-color:#ae0000; color:white"><H4>Description</H4></td>
+                            <td style="width:50%;background-color:#ae0000; color:white"><H4>Acceptance Criteria</H4></td>
                         </tr>
                         <tr>
                             <td>
@@ -27,9 +27,9 @@
                 <form editable-form name="tableform">
                     <table class="table table-bordered table-hover table-condensed">
                         <tr style="font-weight: bold">
-                            <td style="width:33.3%">MoSCoW</td>
-                            <td style="width:33.3%">Timebox</td>
-                            <td style="width:33.3%">Allocation</td>
+                            <td style="width:33.3%;background-color:#ae0000; color:white"><h4>MoSCoW</h4></td>
+                            <td style="width:33.3%;background-color:#ae0000; color:white"><H4>Timebox</H4></td>
+                            <td style="width:33.3%;background-color:#ae0000; color:white"><H4>Allocation</H4></td>
                         </tr>
                         <tr>
 
@@ -72,10 +72,10 @@
                     <!-- table -->
                     <table class="table table-bordered table-hover table-condensed">
                         <tr style="font-weight: bold">
-                            <td style="width:70%">Task</td>
-                            <td style="width:30%">User</td>
-                            <td style="width:8%">Remaining Time</td>
-                            <td style="width:20%">Status</td>
+                            <td style="width:70%; background-color:#ae0000; color:white"><H4>Task</H4></td>
+                            <td style="width:30%;background-color:#ae0000; color:white"><H4>User</H4></td>
+                            <td style="width:8%;background-color:#ae0000; color:white"><H4>Remaining Time</H4></td>
+                            <td style="width:20%;background-color:#ae0000; color:white"><H4>Status</H4></td>
                         </tr>
 
 
@@ -101,8 +101,8 @@
                     <!-- table -->
                     <table class="table table-bordered table-hover table-condensed">
                         <tr style="font-weight: bold">
-                            <td style="width:70%">Comment Name</td>
-                            <td style="width:10%">Delete</td>
+                            <td style="width:70%;background-color:#ae0000; color:white"><H4>Comment Name</H4></td>
+                            <td style="width:10%;background-color:#ae0000; color:white"><H4>Delete</H4></td>
                         </tr>
                         <tr ng-repeat="comnt in Comments">
                             <td><span><input type="text" ng:model="comnt.CommentName" class="form-control"></span></td>
@@ -111,7 +111,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><span><textarea ng-model="txtcomment" placeholder="Your Comment" style='width:550px'></textarea></span></td>
+                            <td><span><input type="text" ng-model="txtcomment" placeholder="Your Comment"></span></td>
                             <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
                         </tr>
 
