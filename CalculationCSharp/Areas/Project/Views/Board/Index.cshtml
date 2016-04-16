@@ -1,30 +1,50 @@
-﻿@{
+﻿@model IEnumerable<CalculationCSharp.Models.ProjectBoard>
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div style="width:99%; padding-left:0%; margin-left:2%; margin-right:2%; padding-right:2%;" ng-controller="boardCtrl">
-    <input class="btn btn-default" type="button" value="Add" ng-click="AddButtonClick()" />
-    <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
-    <div class="row" >
+<p>
+    @Html.ActionLink("New", "Board", null, null, new { @class = "btn btn-default" })
+    <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">
+</p>
+<table class="table table-bordered table table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Group)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </th>
+        <th></th>
+    </tr>
 
-        @*<div ng-include="'/AppScript/busyModal.html'" ng-show="isLoading"></div>*@
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Group)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
 
-        <div class="col-sm-3 panel panel-primary colStyle" id="{{col.Id}}" kanban-board-drop="over"
-             ng-repeat="col in columns">
-            <div class="panel-heading" style="margin-bottom: 10px;">
-                <h3 class="panel-title">{{col.Name}}</h3>
-            </div>
-            
-            <div class="thumbnail" draggable="true" kanban-board-dragg="story"
-                 ng-repeat="story in col.Stories" style="margin-bottom: 10px;" ng-click="UpdateButtonClick('lg')">
-                <div class="caption">
-                    <h5><strong>{{story.Moscow}}</strong></h5>
-                    <h5><strong>{{story.User}}</strong></h5>
-                    <h5><strong>{{story.Name}}</strong></h5>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
+</table>

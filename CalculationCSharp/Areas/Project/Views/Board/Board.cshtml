@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="width:99%; padding-left:0%; margin-left:2%; margin-right:2%; padding-right:2%;" ng-controller="boardCtrl">
+    <input class="btn btn-default" type="button" value="Add" ng-click="AddButtonClick()" />
+    <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
+    <div class="row" >
+
+        @*<div ng-include="'/AppScript/busyModal.html'" ng-show="isLoading"></div>*@
+
+        <div class="col-sm-3 panel panel-primary colStyle" id="{{col.Id}}" kanban-board-drop="over"
+             ng-repeat="col in columns">
+            <div class="panel-heading" style="margin-bottom: 10px;">
+                <h3 class="panel-title">{{col.Name}}</h3>
+            </div>
+            
+            <div class="thumbnail" draggable="true" kanban-board-dragg="story"
+                 ng-repeat="story in col.Stories" style="margin-bottom: 10px;" ng-click="UpdateButtonClick('lg')">
+                <div class="caption">
+                    <h5><strong>{{story.Moscow}}</strong></h5>
+                    <h5><strong>{{story.User}}</strong></h5>
+                    <h5><strong>{{story.Name}}</strong></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
