@@ -1,77 +1,58 @@
 ﻿using CalculationCSharp.Areas.Project.Models;
+using CalculationCSharp.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Data.Entity;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace CalculationCSharp.Areas.Project.Controllers
 {
     public class BoardWebApiController : ApiController
     {
+        BoardRepository repo = new BoardRepository();
+
         // GET api/<controller>
-        [HttpGet]
-        public HttpResponseMessage Get()
-        {
-            var repo = new BoardRepository();
-            var response = Request.CreateResponse();
-
-            response.Content = new StringContent(JsonConvert.SerializeObject(repo.GetColumns()));
-            response.StatusCode = HttpStatusCode.OK;
-
-            return response;
-        }
-
-        [HttpGet]
-        public HttpResponseMessage CanMove(int sourceColId, int targetColId)
-        {            
-            var response = Request.CreateResponse();
-            response.StatusCode = HttpStatusCode.OK;
-            response.Content = new StringContent(JsonConvert.SerializeObject(new { canMove = false }));
-
-            if (sourceColId == (targetColId - 1))
-            {
-                response.Content = new StringContent(JsonConvert.SerializeObject(new { canMove = true }));
-            }
-
-            return response;
-        }
-
-        [HttpPost]        
-        public HttpResponseMessage MoveStory(JObject moveTaskParams)
+        [System.Web.Http.HttpGet]
+        public HttpResponseMessage Get(JObject moveTaskParams)
         {
             dynamic json = moveTaskParams;
-            var repo = new BoardRepository();
+            ProjectBoard ProjectBoard = repo.GetBoard(json);
+            var response = Request.CreateResponse();
 
-            if (json.task == "true")
+            //response.Content = new StringContent(JsonConvert.SerializeObject(repo.GetColumns()));
+            response.StatusCode = HttpStatusCode.OK;
+
+            return response;
+        }
+
+        [System.Web.Http.HttpPost]        
+        public HttpResponseMessage UpdateBoard(JObject moveTaskParams)
+        {
+            dynamic json = moveTaskParams;
+
+
+            var response = Request.CreateResponse();
+
+            if (json.boardId == null)
             {
+                response.StatusCode = HttpStatusCode.BadRequest;
+            }
 
-                //repo.AddTask((int)json.storyId, (int)json.targetColId, json.data);
+            ProjectBoard ProjectBoard = repo.GetBoard(json);
 
-
+            if (ProjectBoard == null)
+            {
+                repo.AddBoard(json);
             }
             else
             {
-                if (json.updateType == "Add")
-                {
-                    repo.AddStory((int)json.targetColId);
-                }
-                else if (json.updateType == "Delete")
-                {
-                    repo.DeleteStory((int)json.storyId, (int)json.targetColId);
-                }
-                else if (json.updateType == "Edit")
-                {
-                    repo.EditStory((int)json.storyId, (int)json.targetColId, json.data);
-                }
-                else
-                {
-                    repo.MoveStory((int)json.storyId, (int)json.targetColId);
-                }
+                repo.UpdateBoard(json);
             }
 
-
-            var response = Request.CreateResponse();
             response.StatusCode = HttpStatusCode.OK;
 
             return response;

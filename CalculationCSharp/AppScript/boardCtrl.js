@@ -29,6 +29,14 @@
          }, onError);
      };
 
+     $scope.SaveButtonClick = function SaveBoard() {
+         $scope.isLoading = true;
+         boardService.updateBoard(1, "TestBoard", $scope.columns).then(function (data) {
+             $scope.isLoading = false;
+             boardService.sendRequest();
+         }, onError);
+     };
+
     $scope.UpdateButtonClick = function (size) {
         $scope.Name = this.story.Name;
         $scope.Description = this.story.Description;

@@ -2,7 +2,7 @@
     var proxy = null;
 
     var getColumns = function () {
-        return $http.get("/api/BoardWebApi/").then(function (response) {
+        return $http.get("/api/ColumnWebApi/").then(function (response) {
             return response.data;
         }, function (error) {
             return $q.reject(error.data.Message);
@@ -11,7 +11,7 @@
 
 
     var canMoveStory = function (sourceColIdVal, targetColIdVal) {
-        return $http.get("/api/BoardWebApi/CanMove", { params: { sourceColId: sourceColIdVal, targetColId: targetColIdVal } })
+        return $http.get("/api/ColumnWebApi/CanMove", { params: { sourceColId: sourceColIdVal, targetColId: targetColIdVal } })
             .then(function (response) {
                 return response.data.canMove;
             }, function (error) {
@@ -20,14 +20,24 @@
     };
 
     var moveStory = function (storyIdVal, targetColIdVal, updateType, data, task) {
-        return $http.post("/api/BoardWebApi/MoveStory", { storyId: storyIdVal, targetColId: targetColIdVal, updateType: updateType, data: data, task:task })
+        return $http.post("/api/ColumnWebApi/MoveStory", { storyId: storyIdVal, targetColId: targetColIdVal, updateType: updateType, data: data, task:task })
             .then(function (response) {
                 return response.status == 200;
             }, function (error) {
                 return $q.reject(error.data.Message);
             });
     };
-    
+
+    var updateBoard = function (boardIdVal, boardName, data) {
+        return $http.post("/api/BoardWebApi/UpdateBoard", { boardId: boardIdVal, boardName: boardName, data: data })
+            .then(function (response) {
+                return response.status == 200;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+    };
+
+   
     var initialize = function () {      
 
         connection = jQuery.hubConnection();
@@ -57,6 +67,7 @@
         sendRequest: sendRequest,
         getColumns: getColumns,
         canMoveStory: canMoveStory,
-        moveStory: moveStory
+        moveStory: moveStory,
+        updateBoard: updateBoard
     };
 });

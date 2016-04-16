@@ -241,6 +241,9 @@
     <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\JsonTypeEnum.cs" />
     <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\Properties\Resources.Designer.cs" />
+    <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
+    <Compile Include="Areas\Project\Models\Board.cs" />
+    <Compile Include="Areas\Project\Models\BoardRepository.cs" />
     <Compile Include="Areas\Project\Models\Comments.cs" />
     <Compile Include="Areas\Project\Models\Tasks.cs" />
     <Compile Include="Areas\Project\ProjectAreaRegistration.cs" />
@@ -250,7 +253,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Project\Controllers\BoardController.cs" />
     <Compile Include="Areas\Project\Controllers\BoardHub.cs" />
-    <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
+    <Compile Include="Areas\Project\Controllers\ColumnWebApiController.cs" />
     <Compile Include="Controllers\CalculationBaseController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -261,7 +264,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Areas\Project\Models\BoardRepository.cs" />
+    <Compile Include="Areas\Project\Models\ColumnRepository.cs" />
     <Compile Include="Areas\Project\Models\Column.cs" />
     <Compile Include="Areas\Project\Models\Stories.cs" />
     <Compile Include="Models\CalculationViewModels.cs" />
