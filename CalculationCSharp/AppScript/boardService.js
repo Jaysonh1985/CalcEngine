@@ -2,7 +2,7 @@
     var proxy = null;
 
     var getColumns = function () {
-        return $http.get("/api/ColumnWebApi/").then(function (response) {
+        return $http.get("/api/ColumnWebApi/Get").then(function (response) {
             return response.data;
         }, function (error) {
             return $q.reject(error.data.Message);

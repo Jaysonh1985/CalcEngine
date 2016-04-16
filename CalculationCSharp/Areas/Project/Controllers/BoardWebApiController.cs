@@ -15,20 +15,6 @@ namespace CalculationCSharp.Areas.Project.Controllers
     {
         BoardRepository repo = new BoardRepository();
 
-        // GET api/<controller>
-        [System.Web.Http.HttpGet]
-        public HttpResponseMessage Get(JObject moveTaskParams)
-        {
-            dynamic json = moveTaskParams;
-            ProjectBoard ProjectBoard = repo.GetBoard(json);
-            var response = Request.CreateResponse();
-
-            //response.Content = new StringContent(JsonConvert.SerializeObject(repo.GetColumns()));
-            response.StatusCode = HttpStatusCode.OK;
-
-            return response;
-        }
-
         [System.Web.Http.HttpPost]        
         public HttpResponseMessage UpdateBoard(JObject moveTaskParams)
         {
