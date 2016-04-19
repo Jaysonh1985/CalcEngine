@@ -13,6 +13,7 @@ namespace CalculationCSharp.Areas.Project.Models
     public class BoardRepository
     {
         CalculationDBContext db = new CalculationDBContext();
+        ProjectBoard ProjectBoard = new ProjectBoard();
 
         public List<ProjectBoard> GetBoards()
         {
@@ -23,15 +24,20 @@ namespace CalculationCSharp.Areas.Project.Models
 
         public ProjectBoard GetBoard(dynamic json)
         {
-            ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(json.boardId));
-
-            return ProjectBoard;
+            if(json.boardId == null)
+            {
+                return null;
+            }
+            else
+            {
+                ProjectBoard Board  = db.ProjectBoard.Find(Convert.ToInt32(json.boardId));
+                return Board;
+            }
+                        
         }
 
         public void AddBoard(dynamic json)
         {
-            ProjectBoard ProjectBoard = new ProjectBoard();
-          
             ProjectBoard.Name = json.boardName;
             ProjectBoard.Configuration = Convert.ToString(json.data);
             ProjectBoard.Group = "Project Group";
@@ -43,8 +49,6 @@ namespace CalculationCSharp.Areas.Project.Models
         public void UpdateBoard(dynamic json)
         {
             ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(json.boardId));
-            
-
             ProjectBoard.Name = json.boardName;
             ProjectBoard.Configuration = Convert.ToString(json.data);
             ProjectBoard.Group = "Project Group";

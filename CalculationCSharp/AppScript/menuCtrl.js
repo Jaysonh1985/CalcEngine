@@ -6,7 +6,6 @@
     function init() {
         $scope.isLoading = true;
         boardService.initialize().then(function (data) {
-            $scope.isLoading = false;
             $scope.refreshBoard();
            
         }, onError);
@@ -23,10 +22,8 @@
 
         $scope.openBoard = function () {
             $scope.ID = this.board.ID;
-
             var earl = '/Board/' + $scope.ID;
             $window.location.assign('/Project/Board/Board/' + $scope.ID);
-        
         };
 
 
@@ -37,10 +34,11 @@
              boardService.updateBoard($scope.ID,"","","Delete")
             .then(function (data) {
                 $scope.isLoading = false;
+                $scope.Boards.splice($index, 1);
             }, onError);
           
          }
-         $scope.refreshBoard();
+         
 
      };
 

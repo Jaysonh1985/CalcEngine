@@ -1,7 +1,7 @@
 ﻿sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log, $location, $window, $routeParams,  boardService) {
     // Model
     $scope.columns = [];
-    $scope.isLoading = false;
+    $scope.isLoading = true;
 
 
 
@@ -9,7 +9,7 @@
         var id = $location.absUrl();
         $scope.isLoading = true;
         boardService.initialize().then(function (data) {
-            $scope.isLoading = false;
+            $scope.isLoading = true;
             $scope.refreshBoard();
 
 
@@ -28,7 +28,7 @@
 
         boardService.getColumns(id)
            .then(function (data) {               
-               $scope.isLoading = false;
+               $scope.isLoading = true;
                $scope.columns = data;
             }, onError);
     };    
@@ -43,7 +43,13 @@
 
      $scope.SaveButtonClick = function SaveBoard() {
          $scope.isLoading = true;
-         boardService.updateBoard(1, "TestBoard", $scope.columns).then(function (data) {
+         var url = location.pathname;
+         var id = url.substring(url.lastIndexOf('/') + 1);
+         id = parseInt(id, 10);
+         if (angular.isNumber(id) == false) {
+             id = null;
+         }
+         boardService.updateBoard(id, "TestBoard", $scope.columns).then(function (data) {
              $scope.isLoading = false;
              boardService.sendRequest();
          }, onError);

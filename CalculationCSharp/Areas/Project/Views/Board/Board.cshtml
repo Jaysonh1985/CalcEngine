@@ -8,8 +8,6 @@
     <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
     <div class="row" >
 
-        @*<div ng-include="'/AppScript/busyModal.html'" ng-show="isLoading"></div>*@
-
         <div class="col-sm-3 panel panel-primary colStyle" id="{{col.Id}}" kanban-board-drop="over"
              ng-repeat="col in columns">
             <div class="panel-heading" style="margin-bottom: 10px;">

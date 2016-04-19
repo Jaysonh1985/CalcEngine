@@ -26,14 +26,14 @@
         </tr>
 
 
-        <tr ng-repeat="board in Boards" ng-click="openBoard()">
-            <td width="50%">
+        <tr ng-repeat="board in Boards">
+            <td width="50%" ng-click="openBoard()">
                 {{board.Name}}
             </td>
-            <td width="25%">
+            <td width="25%" ng-click="openBoard()">
                 {{board.User}}
             </td>
-            <td width="25%">
+            <td width="25%" ng-click="openBoard()">
                 {{board.UpdateDate}}
             </td>
             <td>
