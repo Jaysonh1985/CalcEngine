@@ -14,6 +14,13 @@ namespace CalculationCSharp.Areas.Project.Models
     {
         CalculationDBContext db = new CalculationDBContext();
 
+        public List<ProjectBoard> GetBoards()
+        {
+            var ProjectBoard = db.ProjectBoard.ToList();
+
+            return ProjectBoard;
+        }
+
         public ProjectBoard GetBoard(dynamic json)
         {
             ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(json.boardId));
@@ -24,7 +31,7 @@ namespace CalculationCSharp.Areas.Project.Models
         public void AddBoard(dynamic json)
         {
             ProjectBoard ProjectBoard = new ProjectBoard();
-            ProjectBoard.ID = json.boardId;
+          
             ProjectBoard.Name = json.boardName;
             ProjectBoard.Configuration = Convert.ToString(json.data);
             ProjectBoard.Group = "Project Group";
@@ -45,6 +52,14 @@ namespace CalculationCSharp.Areas.Project.Models
 
             db.Entry(ProjectBoard).State = EntityState.Modified;
 
+            db.SaveChanges();
+        }
+
+        public void DeleteBoard(dynamic json)
+        {
+            var db = new CalculationDBContext();
+            ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(json.boardId));
+            db.ProjectBoard.Remove(ProjectBoard);
             db.SaveChanges();
         }
 

@@ -1,24 +1,36 @@
-﻿sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log, boardService) {
+﻿sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log, $location, $window, $routeParams,  boardService) {
     // Model
     $scope.columns = [];
     $scope.isLoading = false;
-  
+
+
+
     function init() {
+        var id = $location.absUrl();
         $scope.isLoading = true;
         boardService.initialize().then(function (data) {
             $scope.isLoading = false;
             $scope.refreshBoard();
-           
+
+
         }, onError);
     };
 
      $scope.refreshBoard = function refreshBoard() {        
-        $scope.isLoading = true;
-        boardService.getColumns()
+         $scope.isLoading = true;
+         var url = location.pathname;
+         var id = url.substring(url.lastIndexOf('/') + 1);
+         id = parseInt(id, 10);
+         if (angular.isNumber(id) == false)
+         {
+             id = null;
+         }
+
+        boardService.getColumns(id)
            .then(function (data) {               
                $scope.isLoading = false;
                $scope.columns = data;
-           }, onError);
+            }, onError);
     };    
 
      $scope.AddButtonClick = function AddStory() {

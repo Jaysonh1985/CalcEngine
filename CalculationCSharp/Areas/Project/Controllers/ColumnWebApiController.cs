@@ -2,6 +2,7 @@
 using CalculationCSharp.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Data.Entity;
 using System.Net;
 using System.Net.Http;
@@ -12,14 +13,18 @@ namespace CalculationCSharp.Areas.Project.Controllers
 {
     public class ColumnWebApiController : ApiController
     {
+         CalculationDBContext db = new CalculationDBContext();
+
         // GET api/<controller>
         [System.Web.Http.HttpGet]
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Get(int? id)
         {
             var repo = new ColumnRepository();
             var response = Request.CreateResponse();
 
-            response.Content = new StringContent(JsonConvert.SerializeObject(repo.GetColumns()));
+            ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(id));
+
+            response.Content = new StringContent(JsonConvert.SerializeObject(repo.GetColumns(ProjectBoard)));
 
             return response;
         }

@@ -242,7 +242,6 @@
     <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\Configuration\Models\JsonCSharpClassGeneratorLib\Properties\Resources.Designer.cs" />
     <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
-    <Compile Include="Areas\Project\Controllers\ProjectBoardsController.cs" />
     <Compile Include="Areas\Project\Models\Board.cs" />
     <Compile Include="Areas\Project\Models\BoardRepository.cs" />
     <Compile Include="Areas\Project\Models\Comments.cs" />
@@ -285,6 +284,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppScript\menuCtrl.js" />
     <Content Include="AppScript\boardCtrl.js" />
     <Content Include="AppScript\boardService.js" />
     <Content Include="AppScript\busyModal.html" />
@@ -329,10 +329,6 @@
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
     <Content Include="Areas\Project\Views\web.config" />
-    <Content Include="Areas\Project\Views\ProjectBoards\Create.cshtml" />
-    <Content Include="Areas\Project\Views\ProjectBoards\Delete.cshtml" />
-    <Content Include="Areas\Project\Views\ProjectBoards\Details.cshtml" />
-    <Content Include="Areas\Project\Views\ProjectBoards\Edit.cshtml" />
     <Content Include="Areas\Project\Views\Board\Index.cshtml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim.pubxml" />

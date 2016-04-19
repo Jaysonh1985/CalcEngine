@@ -1,8 +1,26 @@
 ﻿sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) {
     var proxy = null;
 
-    var getColumns = function () {
-        return $http.get("/api/ColumnWebApi/Get").then(function (response) {
+    
+    var getColumns = function (id) {
+        return $http.get("/api/ColumnWebApi/Get",{ params: { id: id } }).then(function (response) {
+            return response.data;
+        }, function (error) {
+            return $q.reject(error.data.Message);
+        });
+    };
+
+
+    var getBoards = function () {
+        return $http.get("/api/BoardWebApi/Get").then(function (response) {
+            return response.data;
+        }, function (error) {
+            return $q.reject(error.data.Message);
+        });
+    };
+
+    var openBoard = function (ID) {
+        return $http.get("/Project/Board/Board/" + ID).then(function (response) {
             return response.data;
         }, function (error) {
             return $q.reject(error.data.Message);
@@ -28,8 +46,8 @@
             });
     };
 
-    var updateBoard = function (boardIdVal, boardName, data) {
-        return $http.post("/api/BoardWebApi/UpdateBoard", { boardId: boardIdVal, boardName: boardName, data: data })
+    var updateBoard = function (boardIdVal, boardName, data, updateType) {
+        return $http.post("/api/BoardWebApi/UpdateBoard", { boardId: boardIdVal, boardName: boardName, data: data, updateType })
             .then(function (response) {
                 return response.status == 200;
             }, function (error) {
@@ -65,6 +83,8 @@
     return {
         initialize: initialize,
         sendRequest: sendRequest,
+        getBoards: getBoards,
+        openBoard: openBoard,
         getColumns: getColumns,
         canMoveStory: canMoveStory,
         moveStory: moveStory,

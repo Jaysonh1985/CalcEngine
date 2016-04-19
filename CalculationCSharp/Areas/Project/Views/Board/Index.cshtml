@@ -1,50 +1,46 @@
-﻿@model IEnumerable<CalculationCSharp.Models.ProjectBoard>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <p>
-    @Html.ActionLink("New", "Board", null, null, new { @class = "btn btn-default" })
+    @Html.ActionLink("New", "Board", null, null, new { id = 0, @class = "btn btn-default" })
     <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">
 </p>
-<table class="table table-bordered table table-responsive">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Group)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Group)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+<div ng-controller="menuCtrl">
+    <table class="table table-bordered table table-responsive">
 
-</table>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                User
+            </th>
+            <th>
+                Updated
+            </th>
+            <th>
+
+            </th>
+        </tr>
+
+
+        <tr ng-repeat="board in Boards" ng-click="openBoard()">
+            <td width="50%">
+                {{board.Name}}
+            </td>
+            <td width="25%">
+                {{board.User}}
+            </td>
+            <td width="25%">
+                {{board.UpdateDate}}
+            </td>
+            <td>
+                <input type="button" class="btn btn-xs btn-danger" value="Delete" ng-click="deleteBoard()" />
+            </td>
+        </tr>
+
+
+    </table>
+</div>

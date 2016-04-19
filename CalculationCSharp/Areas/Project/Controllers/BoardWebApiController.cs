@@ -8,12 +8,28 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
+using System.Web;
 
 namespace CalculationCSharp.Areas.Project.Controllers
 {
     public class BoardWebApiController : ApiController
     {
         BoardRepository repo = new BoardRepository();
+
+
+        // GET api/<controller>
+        [System.Web.Http.HttpGet]
+        public HttpResponseMessage Get()
+        {
+            var repo = new BoardRepository();
+            var response = Request.CreateResponse();
+
+            response.Content = new StringContent(JsonConvert.SerializeObject(repo.GetBoards()));
+
+            HttpContext.Current.Cache.Remove("columns");
+            
+            return response;
+        }
 
         [System.Web.Http.HttpPost]        
         public HttpResponseMessage UpdateBoard(JObject moveTaskParams)
@@ -33,6 +49,10 @@ namespace CalculationCSharp.Areas.Project.Controllers
             if (ProjectBoard == null)
             {
                 repo.AddBoard(json);
+            }
+            else if(json.updateType == "Delete")
+            {
+                repo.DeleteBoard(json);
             }
             else
             {

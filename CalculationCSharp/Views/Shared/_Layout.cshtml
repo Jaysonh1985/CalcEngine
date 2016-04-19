@@ -34,6 +34,7 @@
     <div class="jumbotron">
         <h1>@ViewData["H1"]</h1>
         <p class="lead">@ViewData["P1"]</p>
+        <h1 class="hidden">@ViewData["HID1"]</h1>
     </div>
 
     @RenderBody()
@@ -54,6 +55,7 @@
     <script src="~/Scripts/Calculation/ModalFunctions.js"></script>
     <script src="~/Scripts/Calculation/UI.js"></script>
     <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
     <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
     <script src="~/Scripts/jquery.ui.touch-punch.min.js"></script>
     <script src="~/Scripts/toastr.js"></script>
@@ -62,7 +64,8 @@
     <script src="~/AppScript/kanbanBoardDragDrop.js"></script>
     <script src="~/AppScript/boardService.js"></script>
     <script src="~/AppScript/boardCtrl.js"></script>
-
+    <script src="~/AppScript/menuCtrl.js"></script>
+   
     <script>
 
         //Calc Form Submission

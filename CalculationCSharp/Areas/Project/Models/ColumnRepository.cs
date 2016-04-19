@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CalculationCSharp.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -10,35 +11,43 @@ namespace CalculationCSharp.Areas.Project.Models
 {
     public class ColumnRepository
     {
-        public List<Column> GetColumns()
+
+        public List<Column> GetColumns(ProjectBoard ProjectBoard)
         {
             if (HttpContext.Current.Cache["columns"] == null)
             {
-                var columns = new List<Column>();
-                var stories = new List<Stories>();
-                for (int i = 1; i < 6; i++)
+                if (ProjectBoard == null)
                 {
-                    stories.Add(new Stories { ColumnId = 1, Id = i, Name = "Story " + i});
+                    var columns = new List<Column>();
+                    var stories = new List<Stories>();
+                    columns.Add(new Column { Description = "Backlog Column", Id = 1, Name = "Backlog", Stories = stories });
+                    columns.Add(new Column { Description = "In Progress Column", Id = 2, Name = "In Progress", Stories = new List<Stories>() });
+                    columns.Add(new Column { Description = "Test Column", Id = 3, Name = "Test", Stories = new List<Stories>() });
+                    columns.Add(new Column { Description = "Release Column", Id = 4, Name = "Release", Stories = new List<Stories>() });
+                    HttpContext.Current.Cache["columns"] = columns;
                 }
-                columns.Add(new Column { Description = "to do column", Id = 1, Name = "Backlog", Stories = stories });
-                columns.Add(new Column { Description = "in progress column", Id = 2, Name = "In Progress", Stories = new List<Stories>() });
-                columns.Add(new Column { Description = "test column", Id = 3, Name = "Test", Stories = new List<Stories>() });
-                columns.Add(new Column { Description = "done column", Id = 4, Name = "Release", Stories = new List<Stories>() });
-                HttpContext.Current.Cache["columns"] = columns;
+                else
+                {
+                    JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+                    string jsonString = Convert.ToString(ProjectBoard.Configuration);
+                    List<Column> columns = (List<Column>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<Column>));
+                    HttpContext.Current.Cache["columns"] = columns;
+                }
+                
             }
             return (List<Column>)HttpContext.Current.Cache["columns"];
         }
 
         public Column GetColumn(int colId)
         {
-            return (from c in this.GetColumns()
+            return (from c in this.GetColumns(null)
                     where c.Id == colId
                     select c).FirstOrDefault();
         }
 
         public Stories GetStories(int storyId)
         {
-            var columns = this.GetColumns();            
+            var columns = this.GetColumns(null);            
             foreach (var c in columns)
             {                
                 foreach (var story in c.Stories)
@@ -53,7 +62,7 @@ namespace CalculationCSharp.Areas.Project.Models
 
         public void MoveStory(int StoryId, int targetColId)
         {
-            var columns = this.GetColumns();
+            var columns = this.GetColumns(null);
             var targetColumn = this.GetColumn(targetColId);
             
             // Add Story to the target column
@@ -76,7 +85,7 @@ namespace CalculationCSharp.Areas.Project.Models
 
         public void AddStory(int targetColId)
         {
-            var columns = this.GetColumns();
+            var columns = this.GetColumns(null);
             var targetColumn = this.GetColumn(targetColId);
             var StoryId = targetColumn.Stories.Count;
             // Add Story to the target column
@@ -98,7 +107,7 @@ namespace CalculationCSharp.Areas.Project.Models
 
         public void DeleteStory(int StoryId, int targetColId)
         {
-            var columns = this.GetColumns();
+            var columns = this.GetColumns(null);
 
             // Add Story to the target column
             var Story = this.GetStories(StoryId);
@@ -114,7 +123,7 @@ namespace CalculationCSharp.Areas.Project.Models
         public void EditStory(int StoryId, int targetColId, JObject Data)
         {
             dynamic json = Data;
-            var columns = this.GetColumns();
+            var columns = this.GetColumns(null);
             var targetColumn = this.GetColumn(targetColId);
             List<Tasks> Tasks = new List<Tasks>();
    
