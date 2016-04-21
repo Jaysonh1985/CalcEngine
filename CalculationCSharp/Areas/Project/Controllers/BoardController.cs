@@ -26,6 +26,19 @@ namespace CalculationCSharp.Areas.Project.Controllers
         [HttpGet]
         public ActionResult Board(int? id)
         {
+
+            ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(id));
+
+            if(ProjectBoard == null)
+            {
+                ViewData["H1"] = "New Board";
+            }
+            else
+            {
+                ViewData["H1"] = ProjectBoard.Name;
+
+            }
+
             return View();
 
         }

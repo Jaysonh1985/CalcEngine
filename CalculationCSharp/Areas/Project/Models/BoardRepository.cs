@@ -40,6 +40,7 @@ namespace CalculationCSharp.Areas.Project.Models
         {
             ProjectBoard.Name = json.boardName;
             ProjectBoard.Configuration = Convert.ToString(json.data);
+            ProjectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
             ProjectBoard.Group = "Project Group";
             ProjectBoard.UpdateDate = DateTime.Now;
             db.ProjectBoard.Add(ProjectBoard);
@@ -51,6 +52,7 @@ namespace CalculationCSharp.Areas.Project.Models
             ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(json.boardId));
             ProjectBoard.Name = json.boardName;
             ProjectBoard.Configuration = Convert.ToString(json.data);
+            ProjectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
             ProjectBoard.Group = "Project Group";
             ProjectBoard.UpdateDate = DateTime.Now;
 

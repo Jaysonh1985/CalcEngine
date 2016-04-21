@@ -1,6 +1,6 @@
 ﻿sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log, $location, $window, boardService) {
     // Model
-    $scope.boards = [];
+    $scope.Boards = [];
     $scope.isLoading = false;
   
     function init() {
@@ -30,16 +30,38 @@
      $scope.deleteBoard = function () {
          var cf = confirm("Delete this Board?");
          $scope.ID = this.board.ID;
-         if (cf == true){
-             boardService.updateBoard($scope.ID,"","","Delete")
+         
+         if (cf == true) {
+            boardService.updateBoard($scope.ID,"","","Delete")
             .then(function (data) {
                 $scope.isLoading = false;
-                $scope.Boards.splice($index, 1);
+                
             }, onError);
           
          }
          
 
+     };
+
+
+     $scope.editingData = {};
+     
+     for (var i = 0, length = $scope.Boards.length; i < length; i++) {
+         $scope.editingData[$scope.Boards[i].ID] = false;
+     }
+
+
+     $scope.modify = function (Boards) {
+         $scope.editingData[Boards.ID] = true;
+     };
+
+
+     $scope.update = function (Boards) {
+         $scope.editingData[Boards.ID] = false;
+         boardService.updateBoard(Boards.ID, Boards.Name, Boards.Configuration).then(function (data) {
+             $scope.isLoading = false;
+             boardService.sendRequest();
+         }, onError);
      };
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
