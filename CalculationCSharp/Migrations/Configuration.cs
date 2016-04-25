@@ -11,6 +11,7 @@ namespace CalculationCSharp.Migrations
         {
             AutomaticMigrationsEnabled = true;
             ContextKey = "CalculationCSharp.Models.CalculationDBContext";
+            Database.SetInitializer(new DropCreateDatabaseAlways<CalculationCSharp.Models.CalculationDBContext>());
         }
 
         protected override void Seed(CalculationCSharp.Models.CalculationDBContext context)

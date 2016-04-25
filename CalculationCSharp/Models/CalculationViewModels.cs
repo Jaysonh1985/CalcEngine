@@ -68,7 +68,6 @@ namespace CalculationCSharp.Models
         public string Name { get; set; }
         public string User { get; set; }
         [Column(TypeName = "xml")]
-        [Required()]
         public string Configuration { get; set; }
         public DateTime UpdateDate { get; set; }
     }
