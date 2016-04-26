@@ -41,6 +41,7 @@
          }, onError);
      };
 
+
      $scope.SaveButtonClick = function SaveBoard() {
          $scope.isLoading = true;
          var url = location.pathname;
