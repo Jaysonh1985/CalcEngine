@@ -4,8 +4,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Data.Entity;
+using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Mvc;
 
@@ -73,6 +75,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
 
             return response;
         }
+
 
 
     }

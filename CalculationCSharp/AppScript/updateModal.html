@@ -16,7 +16,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <textarea style="overflow:auto;resize:none" type="text" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows=""> {{ Description }}</textarea>
+                                <textarea style="overflow:auto;resize:none" type="text" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="8"> {{ Description }}</textarea>
                             </td>
                             <td>
                                 <textarea style="overflow:auto;resize:none" type="text" id="AcceptanceCriteria" placeholder="Please enter Acceptance Criteria here" class="form-control" ng-model="AcceptanceCriteria" rows="8"> {{ AcceptanceCriteria }}</textarea>
@@ -72,19 +72,34 @@
                     <!-- table -->
                     <table class="table table-bordered table-hover table-condensed">
                         <tr style="font-weight: bold">
-                            <td style="width:70%; background-color:#ae0000; color:white"><H4>Task</H4></td>
+                            <td style="width:50%; background-color:#ae0000; color:white"><H4>Task</H4></td>
                             <td style="width:30%;background-color:#ae0000; color:white"><H4>User</H4></td>
                             <td style="width:8%;background-color:#ae0000; color:white"><H4>Remaining Time</H4></td>
-                            <td style="width:20%;background-color:#ae0000; color:white"><H4>Status</H4></td>
+                            <td style="width:20%;background-color:#ae0000;  color:white"><H4>Status</H4></td>
                         </tr>
 
 
                         <tr ng-repeat="Task in selected.Tasks">
 
                             <td><input type="text" ng:model="Task.TaskName" class="form-control"></td>
-                            <td><input type="text" ng:model="Task.TaskUser" ng:required class="form-control"></td>
+                            <td>
+                                <select name="singleSelect"  ng:model="Task.TaskUser" placeholder="Select User" class="form-control">
+                                    <option value="Jayson Herbert">Jayson Herbert</option>
+                                    <option value="John Smith">John Smith</option>
+                                    {{Task.TaskUser}}
+                                </select>
+                            </td>
+
                             <td><input type="number" ng:model="Task.RemainingTime" class="form-control"></td>
-                            <td><input type="text" ng:model="Task.Status" ng:required class="form-control"></td>
+                            <td>
+                                <select style="font-size:xx-small" name="singleSelect" ng:model="Task.Status" placeholder="Enter Status" class="form-control">
+                                    <option value="Timebox 1">To Do</option>
+                                    <option value="Timebox 2">In Progress</option>
+                                    <option value="Timebox 3">Done</option>
+                                    {{Task.Status}}
+                                </select>
+                            </td>
+
                             <td>
                                 [<a ng:click="removeItem($index)">X</a>]
                             </td>

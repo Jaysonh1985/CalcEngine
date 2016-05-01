@@ -10,6 +10,16 @@
         });
     };
 
+        
+    var getCSV = function (id) {
+        $http({
+            url: "/Project/Board/CSV",
+            method: "GET",
+            params: { id: id },
+            responseType : 'arraybuffer'
+        })
+    };
+
 
     var getBoards = function () {
         return $http.get("/api/BoardWebApi/Get").then(function (response) {
@@ -84,6 +94,7 @@
         initialize: initialize,
         sendRequest: sendRequest,
         getBoards: getBoards,
+        getCSV: getCSV,
         openBoard: openBoard,
         getColumns: getColumns,
         canMoveStory: canMoveStory,
