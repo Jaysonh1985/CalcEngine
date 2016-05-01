@@ -4,7 +4,7 @@ sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRo
     .config(function($routeProvider){
 
         $routeProvider.when('/Maths', {
-            controller: 'configCtrl',
+            controller: 'mathsCtrl',
             templateUrl: '/Areas/Configuration/Scripts/Maths.html'
 
         })

@@ -3,8 +3,6 @@
     $scope.config = [];
     $scope.isLoading = true;
 
-
-
     function init() {
         var id = $location.absUrl();
         $scope.isLoading = true;
@@ -41,21 +39,55 @@
 
      $scope.selectedRow = null;  // initialize our variable to null
      $scope.function = null;  // initialize our variable to null
+
      $scope.setClickedRow = function (index) {  //function that sets the value of selectedRow to current index
          $scope.selectedRow = index;
          $scope.function = this.rows.Function;
-         ;
-         if ($scope.function !== null & angular.isDefined($scope.function)) {
-             $location.path($scope.function);
+         $scope.getFunction($scope.function);
+     }
+
+     $scope.getClickedRow = function () {  //function that sets the value of selectedRow to current index
+        
+         return $scope.selectedRow;
+     }
+
+     $scope.getParameter = function () {
+
+        $scope.parameter = configService.getParameters();
+        return $scope.parameter
+
+     }
+
+     $scope.updateParameter = function (index) {
+                  
+         $scope.updateRow = $scope.getClickedRow();
+         $scope.parameters = $scope.getParameter()
+
+         $scope.config[$scope.updateRow].push = {
+
+             Function: "Test",
+             Variable: "Variable",
+             Parameter: $scope.parameters,
+             Type: "Type",
+             Output: "Output"
          }
-         else
-         {
+     }
+  
+
+     $scope.getFunction = function (func) {
+         if (func !== null & angular.isDefined(func)) {
+             $location.path(func);
+         }
+         else {
              $location.path('/');
          }
      }
      $scope.setFunction = function (index) {  //function that sets the value of selectedRow to current index
-         $scope.disableSelect = index;
-         $scope.function = $scope.Function;
+
+         $scope.function = this.rows.Function;
+         $scope.disableSelect = true;
+         $scope.getFunction($scope.function);
+
      }
 
     

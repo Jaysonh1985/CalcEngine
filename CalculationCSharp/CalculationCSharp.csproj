@@ -233,7 +233,7 @@
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Models\Config.cs" />
-    <Compile Include="Areas\Configuration\Models\Actions\Add.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Maths.cs" />
     <Compile Include="Areas\Configuration\Models\ConfigRepository.cs" />
     <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
     <Compile Include="Areas\Project\Models\Board.cs" />
@@ -279,6 +279,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppScript\Directives\additionalControls.js" />
+    <Content Include="Areas\Configuration\Scripts\mathsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\configService.js" />
     <Content Include="Areas\Configuration\Scripts\configCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Maths.html" />

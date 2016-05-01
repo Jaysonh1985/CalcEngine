@@ -5,10 +5,13 @@ using System.Web;
 
 namespace CalculationCSharp.Areas.Configuration.Models
 {
-    public class Add
+    public class Maths
     {
-        public Double Input1 { get; set; }
-        public Double Input2 { get; set; }
+        public double Input1 { get; set; }
+        public string Logic { get; set; }
+        public double Input2 { get; set; }
+        public double Rounding { get; set; }
+        public string RoundingType { get; set; }
 
         public Double AddFunction (double Input1, double Input2)
         {
