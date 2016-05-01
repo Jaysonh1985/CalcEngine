@@ -39,16 +39,6 @@ namespace CalculationCSharp
             //Turns off bootstrap.min
             BundleTable.EnableOptimizations = false;
             
-          //  //AngularJS
-          //  bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-          //"~/Scripts/angular.js",
-          //"~/Scripts/jquery.signalR-2.2.0.js",
-          //"~/Scripts/toastr.js",
-          //"~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
-          //"~/AppScript/main.js",
-          //"~/AppScript/kanbanBoardDragDrop.js",
-          //"~/AppScript/boardService.js",
-          //"~/AppScript/boardCtrl.js"));
 
         }
     }

@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Project A.I.M</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/angular-gridster.min.css" rel="stylesheet" />
 </head>
 <body>
     <link href="~/Content/Site.css" rel="stylesheet" />
@@ -37,7 +38,9 @@
         <h1 class="hidden">@ViewData["HID1"]</h1>
     </div>
 
+
     @RenderBody()
+
     <hr />
     <footer>
         <p>&copy; @DateTime.Now.Year - Project A.I.M</p>
@@ -55,25 +58,25 @@
     <script src="~/Scripts/Calculation/ModalFunctions.js"></script>
     <script src="~/Scripts/Calculation/UI.js"></script>
     <script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
     <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
     <script src="~/Scripts/jquery.ui.touch-punch.min.js"></script>
     <script src="~/Scripts/toastr.js"></script>
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="~/Scripts/angular-ui/sortable.js"></script>
     <script src="~/AppScript/main.js"></script>
-    <script src="~/AppScript/kanbanBoardDragDrop.js"></script>
-    <script src="~/AppScript/boardService.js"></script>
-    <script src="~/AppScript/boardCtrl.js"></script>
-    <script src="~/AppScript/menuCtrl.js"></script>
-
-    
+    <script src="~/Areas/Project/Scripts/kanbanBoardDragDrop.js"></script>
+    <script src="~/Areas/Project/Scripts/boardService.js"></script>
+    <script src="~/Areas/Project/Scripts/boardCtrl.js"></script>
+    <script src="~/Areas/Project/Scripts/menuCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/configCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/configService.js"></script>
+    <script src="~/Scripts/angular-gridster.min.js"></script>
     <script>
 
         //Calc Form Submission
         $('#Download').hide();
         $('#Regression').hide();
-        $('#widget').draggable();
         $(function () {
             $("#my-form").on("submit", function (e) {
                 e.preventDefault();

@@ -328,3 +328,9 @@ span > input{ width: 100%; }
 .div[ng-app] { margin: 10px; }
 .table {width: 100% }
 form[editable-form] > div {margin: 10px 0;}
+
+.selected {
+    background-color:#eee;
+    color:white;
+    font-weight:bold;
+}

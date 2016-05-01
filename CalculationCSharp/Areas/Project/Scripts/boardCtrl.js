@@ -85,7 +85,7 @@
 
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/AppScript/updateModal.html',
+            templateUrl: '/Areas/Project/Scripts/updateModal.html',
             controller: function ($scope, $uibModalInstance, Name, Description, AcceptanceCriteria, Moscow, Timebox, User, ID, Tasks, Comments, colID) {
                 $scope.Name = Name;
                 $scope.Description = Description;

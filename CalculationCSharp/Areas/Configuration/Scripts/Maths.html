@@ -1,0 +1,27 @@
+﻿<div>
+
+   <table class="table table-bordered table table-responsive" ng-controller="configCtrl">
+
+    <tr>
+        <th>Input 1</th>
+        <th>Logic</th>
+        <th>Input 2</th>
+    </tr>
+
+
+    <tr ng-repeat="rows in maths">
+
+        <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control"></span></td>
+        <td width="20%"><span><input type="text" ng:model="rows.Logic" class="form-control"></span></td>
+        <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control"></span></td>
+        <td width="1%">
+            [<a ng:click="remItem($index)">X</a>]
+        </td>
+    </tr>
+    <tr>
+        <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
+    </tr>
+
+
+    </table>
+</div>

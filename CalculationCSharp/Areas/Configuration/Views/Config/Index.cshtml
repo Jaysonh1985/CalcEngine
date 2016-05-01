@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6 col-xs-8">
+        <table class="table table-bordered table table-responsive" ng-controller="configCtrl">
+
+            <tr>
+
+                <th>Function</th>
+                <th>Variable</th>
+                <th>Type</th>
+                <th>Output</th>
+
+            </tr>
+
+
+            <tr ng-repeat="rows in config" ng-class="{'selected':$index == selectedRow}" >
+
+                <td width="10">
+                    <select name="singleSelect" ng:model="rows.Function" class="form-control">
+                        <option value=""></option>
+                        <option value="Maths">Maths</option>
+                    </select>
+                </td>
+
+                <td width="40%"><span><input type="text" ng:model="rows.Name" class="form-control" ng-click="setClickedRow($index)"></span></td>
+
+
+                <td width="20%">
+                    <select name="singleSelect" ng:model="rows.TaskUser" class="form-control" ng-disabled="disableSelect" ng-click="setClickedRow($index)">
+                        <option value=""></option>
+                        <option value="String">String</option>
+                        <option value="String">Date</option>
+                        <option value="String">Integar</option>
+                        <option value="String">Deci0</option>
+                        <option value="String">Deci1</option>
+                        <option value="String">Deci2</option>
+                        <option value="String">Deci3</option>
+                        <option value="String">Deci4</option>
+                        <option value="String">Deci5</option>
+                        <option value="String">Deci6</option>
+                    </select>
+                </td>
+                <td width="10%" ng-click="setClickedRow($index)">{{rows.Output}}</td>
+                <td width="1%">
+                    [<a ng:click="remItem($index)">X</a>]
+                </td>
+            </tr>
+            <tr>
+                <td><a href="#/addMaths" class="btn btn-default">Editor</a></td>
+                <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
+            </tr>
+
+
+        </table>
+    </div>
+
+    <div class="col-md-6 col-xs-4">
+
+        <div ng-view></div>
+
+     </div>
+</div>
