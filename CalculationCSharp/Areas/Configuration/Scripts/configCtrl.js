@@ -41,9 +41,27 @@
      $scope.function = null;  // initialize our variable to null
 
      $scope.setClickedRow = function (index) {  //function that sets the value of selectedRow to current index
-         $scope.selectedRow = index;
-         $scope.function = this.rows.Function;
-         $scope.getFunction($scope.function);
+
+         if (angular.isDefined($scope.selectedRow) & index == $scope.selectedRow)
+         {
+             $scope.selectedRow = null;
+             $scope.getFunction('/');
+         }
+         else
+         {
+             $scope.selectedRow = index;
+             $scope.function = this.rows.Function;
+
+
+             $scope.parameter = $scope.config[$scope.selectedRow].Parameter;
+
+             if ($scope.parameter == "") {
+                 $scope.parameter = null;
+             }
+             configService.setParameters($scope.parameter);
+             $scope.getFunction($scope.function);
+         }
+        
      }
 
      $scope.getClickedRow = function () {  //function that sets the value of selectedRow to current index
@@ -61,21 +79,25 @@
      $scope.updateParameter = function (index) {
                   
          $scope.updateRow = $scope.getClickedRow();
-         $scope.parameters = $scope.getParameter()
+         $scope.parameter = $scope.getParameter();
 
-         $scope.config[$scope.updateRow].push = {
-
-             Function: "Test",
-             Variable: "Variable",
-             Parameter: $scope.parameters,
-             Type: "Type",
-             Output: "Output"
+         if ($scope.updateRow !== null & angular.isDefined($scope.updateRow)) {
+             $scope.config[$scope.updateRow].Parameter = $scope.parameter;
          }
+
+         
      }
-  
+
+     $scope.$on('parameterupdated', function (event, data) {
+
+         console.log(data);
+     });
+
+ 
 
      $scope.getFunction = function (func) {
          if (func !== null & angular.isDefined(func)) {
+             
              $location.path(func);
          }
          else {

@@ -7,16 +7,32 @@
 
     function init() {
 
-       $scope.maths = configService.getParameters();
+        if (configService.getParameters() == null)
+        {
+            $scope.maths = [];
+        }
+        else
+        {
+            $scope.maths = configService.getParameters();
+        }
 
+     };
+
+    $scope.refreshConfig = function refreshBoard() {
+        configService.getConfig()
+          .then(function (data) {
+              $scope.isLoading = true;
+              $scope.config = data;
+          }, onError);
     };
-
 
     if ($scope.maths !== null) {
         $scope.maths = ($scope.maths);
     }
 
     $scope.btn_add = function () {
+
+
         $scope.maths.push({
                  
         });
@@ -27,6 +43,8 @@
     }
 
 
+
+
     $scope.get = function () {
 
         $scope.maths = configService.getParameters();
@@ -35,7 +53,7 @@
     $scope.save = function () {
         
         configService.setParameters($scope.maths);
-      
+     
     }
 
     $scope.btn_get = function () {
@@ -44,4 +62,6 @@
         parameter = configService.getParameters();
 
     }
+
+    init();
 })

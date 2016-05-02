@@ -18,7 +18,7 @@
             </tr>
 
 
-            <tr ng-repeat="rows in config" ng-class="{'selected':$index == selectedRow}" ng-mouseenter="updateParameter(selectedrow)"  ng-click="setClickedRow($index)">
+            <tr ng-repeat="rows in config" ng-class="{'selected':$index == selectedRow}" ng-click="setClickedRow($index)"  >
 
                 <td width="10">
                     <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
@@ -27,10 +27,9 @@
                     </select>
                 </td>
 
-                <td width="40%"><span><input type="text" ng:model="rows.Name" class="form-control" ></span></td>
+                <td width="40%" ng-mouseenter="updateParameter($index)"><span><input type="text" ng:model="rows.Name" class="form-control" ></span></td>
 
-                <td width="10%">{{rows.parameter}}</td>
-                <td width="20%">
+                 <td width="20%">
                     <select name="singleSelect" ng:model="rows.Type" class="form-control">
                         <option value=""></option>
                         <option value="String">String</option>
