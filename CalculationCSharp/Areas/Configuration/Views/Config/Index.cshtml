@@ -19,7 +19,7 @@
             </tr>
 
 
-            <tr ng-repeat="rows in config" ng-class="{'selected':$index == selectedRow}" ng-click="setClickedRow($index)"  >
+            <tr ng-repeat="rows in config" ng-class="{'selected':$index == selectedRow}" >
 
                 <td width="10">
                     <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
@@ -39,7 +39,8 @@
                         <option value="String">Decimal</option>
                     </select>
                 </td>
-                <td width="10%" ng-click="setClickedRow($index)">{{rows.Output}}</td>
+                <td ng-show="editingData[$index]" width="10%"><input class="form-control text-box single-line" type="text" ng-model="rows.Output" /></td>
+                <td ng-hide="editingData[$index]" width="10%" ng-click="setClickedRow($index)">{{rows.Output}}</td>
                 <td width="1%">
                     [<a ng:click="remItem($index)">X</a>]
                 </td>

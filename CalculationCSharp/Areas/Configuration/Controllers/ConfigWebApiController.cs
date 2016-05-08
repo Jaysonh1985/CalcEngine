@@ -51,24 +51,26 @@ namespace CalculationCSharp.Areas.Config.Controllers
             foreach (var item in jConfig)
             {
 
-                foreach(var param in item.Parameter)
+                if(item.Function == "Input")
                 {
 
-                    string jparameters = Newtonsoft.Json.JsonConvert.SerializeObject(param);
-
-                    if (item.Function == "Maths")
+                }
+                else
+                {
+                    foreach (var param in item.Parameter)
                     {
-                        Maths Maths = new Maths();
-                        Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
-                        answer = Maths.Setup(jConfig, parameters, item.ID);
+                        string jparameters = Newtonsoft.Json.JsonConvert.SerializeObject(param);
+
+                        if (item.Function == "Maths")
+                        {
+                            Maths Maths = new Maths();
+                            Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
+                            answer = Maths.Setup(jConfig, parameters, item.ID);
+                        }
                     }
-
-
+                    item.Output = Convert.ToString(answer);
 
                 }
-
-                item.Output = Convert.ToString(answer);
-
             }
 
             repo.UpdateConfig(jConfig);

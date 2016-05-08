@@ -98,6 +98,17 @@
          
      }
 
+    
+
+     $scope.modify = function (config) {
+
+         if ($scope.function == "Input")
+         {
+             $scope.editingData[config.ID] = true;
+         }
+
+     };
+
      $scope.$on('parameterupdated', function (event, data) {
 
          console.log(data);
@@ -119,6 +130,17 @@
          $scope.function = this.rows.Function;
          $scope.disableSelect = true;
          $scope.getFunction($scope.function);
+
+
+         $scope.editingData = {};
+
+         for (var i = 0, length = $scope.config.length; i < length; i++) {
+             $scope.editingData[$scope.config[i].ID] = false;
+         }
+
+         if ($scope.function == "Input") {
+             $scope.editingData[index] = true;
+         }
 
      }
 
