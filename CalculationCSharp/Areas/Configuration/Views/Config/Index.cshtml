@@ -5,8 +5,7 @@
 
 <div class="row"  ng-controller="configCtrl">
     <div class="col-md-6 col-xs-8">
-        <input class="btn btn-default" type="button" value="Add" ng-click="AddButtonClick()" />
-        <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
+
         <table class="table table-bordered table table-responsive">
 
             <tr>
@@ -19,10 +18,11 @@
             </tr>
 
 
-            <tr ng-repeat="rows in config" ng-class="{'selected':$index == selectedRow}" >
+            <tr ng-repeat="rows in config" ng-class="{'selected':$index == selectedRow}" ng-click="setClickedRow($index)">
 
                 <td width="10">
                     <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
+                        <option value=""></option>
                         <option value="Input">Input</option>
                         <option value="Maths">Maths</option>
                     </select>
@@ -40,17 +40,17 @@
                     </select>
                 </td>
                 <td ng-show="editingData[$index]" width="10%"><input class="form-control text-box single-line" type="text" ng-model="rows.Output" /></td>
-                <td ng-hide="editingData[$index]" width="10%" ng-click="setClickedRow($index)">{{rows.Output}}</td>
+                <td ng-hide="editingData[$index]" width="10%">{{rows.Output}}</td>
                 <td width="1%">
                     [<a ng:click="remItem($index)">X</a>]
                 </td>
             </tr>
             <tr>
                 <td><a ng:click="btn_add($index)" class="btn btn-default">Add</a></td>
+                <td><a ng:click="SaveButtonClick()" class="btn btn-default">Save</a></td>
             </tr>
-
-
         </table>
+
     </div>
 
     <div class="col-md-6 col-xs-4">

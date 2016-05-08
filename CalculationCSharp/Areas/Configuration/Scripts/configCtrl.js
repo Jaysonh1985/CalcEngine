@@ -70,6 +70,7 @@
              }
              configService.setParameters($scope.parameter);
              $scope.getFunction($scope.function);
+             $scope.modify(index);
          }
         
      }
@@ -98,13 +99,16 @@
          
      }
 
-    
+     $scope.modify = function (index) {
 
-     $scope.modify = function (config) {
+         $scope.editingData = {};
 
-         if ($scope.function == "Input")
-         {
-             $scope.editingData[config.ID] = true;
+         for (var i = 0, length = $scope.config.length; i < length; i++) {
+             $scope.editingData[$scope.config[i].ID] = false;
+         }
+
+         if ($scope.function == "Input") {
+             $scope.editingData[index] = true;
          }
 
      };
@@ -130,18 +134,7 @@
          $scope.function = this.rows.Function;
          $scope.disableSelect = true;
          $scope.getFunction($scope.function);
-
-
-         $scope.editingData = {};
-
-         for (var i = 0, length = $scope.config.length; i < length; i++) {
-             $scope.editingData[$scope.config[i].ID] = false;
-         }
-
-         if ($scope.function == "Input") {
-             $scope.editingData[index] = true;
-         }
-
+         $scope.modify(index);
      }
 
     
