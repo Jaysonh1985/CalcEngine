@@ -3,15 +3,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
+<div class="row"  ng-controller="configCtrl">
     <div class="col-md-6 col-xs-8">
-        <table class="table table-bordered table table-responsive" ng-controller="configCtrl">
+        <input class="btn btn-default" type="button" value="Add" ng-click="AddButtonClick()" />
+        <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
+        <table class="table table-bordered table table-responsive">
 
             <tr>
 
                 <th>Function</th>
                 <th>Variable</th>
-                <th>Parameter</th>
                 <th>Type</th>
                 <th>Output</th>
 
@@ -22,7 +23,7 @@
 
                 <td width="10">
                     <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
-                        <option value=""></option>
+                        <option value="Input">Input</option>
                         <option value="Maths">Maths</option>
                     </select>
                 </td>
@@ -44,7 +45,7 @@
                 </td>
             </tr>
             <tr>
-                <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
+                <td><a ng:click="btn_add($index)" class="btn btn-default">Add</a></td>
             </tr>
 
 

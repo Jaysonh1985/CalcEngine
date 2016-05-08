@@ -232,7 +232,8 @@
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
-    <Compile Include="Areas\Configuration\Models\Config.cs" />
+    <Compile Include="Areas\Configuration\Models\ConfigFunctions.cs" />
+    <Compile Include="Areas\Configuration\Models\ConfigViewModel.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Maths.cs" />
     <Compile Include="Areas\Configuration\Models\ConfigRepository.cs" />
     <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />

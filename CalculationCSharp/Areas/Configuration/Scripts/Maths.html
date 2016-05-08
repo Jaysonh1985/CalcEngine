@@ -1,61 +1,61 @@
 ﻿<div>
 
-   <table class="table table-bordered table table-responsive" ng-controller="mathsCtrl">
+    <table class="table table-bordered table table-responsive" ng-controller="mathsCtrl">
 
-    <tr>
-        <th>Input 1</th>
-        <th>Logic</th>
-        <th>Input 2</th>
-        <th>Rounding (dp)</th>
-        <th>Rouding Type</th>
-    </tr>
-
-
-    <tr  ng-repeat="rows in maths" >
+        <tr>
+            <th>Input 1</th>
+            <th>Logic</th>
+            <th>Input 2</th>
+            <th>Rounding (dp)</th>
+            <th>Rouding Type</th>
+        </tr>
 
 
-    
-        <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control" ng-change="save()"></span></td>
+        <tr ng-repeat="rows in maths">
 
-        <td width="10">
-            <select name="singleSelect" ng:model="rows.Logic" class="form-control" ng-change="save()">
-                <option value=""></option>
-                <option value="Add">+</option>
-                <option value="Subtract">-</option>
-                <option value="Divide">/</option>
-                <option value="Power">^</option>
-            </select>
-        </td>
 
-        <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control" ng-change="save()"></span></td>
-        <td width="10">
-            <select name="singleSelect" ng:model="rows.Rounding" class="form-control">
-                <option value=""></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select>
-        </td>
-        <td width="10">
-            <select name="singleSelect" ng:model="rows.RoundingType" class="form-control" ng-change="save()">
-                <option value=""></option>
-                <option value="down">Down</option>
-                <option value="up">Up</option>
-                <option value="midDown">Mid Down</option>
-                <option value="midUp">Mid Up</option>
-            </select>
-        </td>
-        <td width="5%">
-            [<a ng:click="remItem($index)">X</a>]
-        </td>
-    </tr>
-    <tr>
-        <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
-        <td><a ng:click="get()" class="btn btn-default">get</a></td>
-    </tr>
+
+            <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control" ng-change="save()"></span></td>
+
+            <td width="10">
+                <select name="singleSelect" ng:model="rows.Logic" class="form-control" ng-change="save()">
+                    <option value=""></option>
+                    <option value="Add">+</option>
+                    <option value="Subtract">-</option>
+                    <option value="Divide">/</option>
+                    <option value="Power">^</option>
+                </select>
+            </td>
+
+            <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control" ng-change="save()"></span></td>
+            <td width="10">
+                <select name="singleSelect" ng:model="rows.Rounding" class="form-control">
+                    <option value=""></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+            </td>
+            <td width="10">
+                <select name="singleSelect" ng:model="rows.RoundingType" class="form-control" ng-change="save()">
+                    <option value=""></option>
+                    <option value="down">Down</option>
+                    <option value="up">Up</option>
+                    <option value="midDown">Mid Down</option>
+                    <option value="midUp">Mid Up</option>
+                </select>
+            </td>
+            <td width="5%">
+                [<a ng:click="remItem($index)">X</a>]
+            </td>
+        </tr>
+        <tr>
+            <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
+            <td><a ng:click="get()" class="btn btn-default">get</a></td>
+        </tr>
 
 
     </table>

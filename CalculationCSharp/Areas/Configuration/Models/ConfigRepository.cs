@@ -5,84 +5,81 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Script.Serialization;
+
 
 namespace CalculationCSharp.Areas.Configuration.Models
 {
     public class ConfigRepository
     {
-        Config Configuration = new Config();
+        ConfigViewModel Configuration = new ConfigViewModel();
 
-        public List<Config> GetConfig(Config Config)
+        public List<ConfigViewModel> GetConfig(ConfigViewModel Config)
         {
         
-            if (HttpContext.Current.Cache["configuration"] == null)
+            if (HttpContext.Current.Cache["config"] == null)
             {
                 if (Config == null)
                 {
-                    var Configuration = new List<Config>();
+                    var Configuration = new List<ConfigViewModel>();
 
-                    Configuration.Add(new Config { ID = "1", Name = "Service", Category = "Service", Function = "Add", Output = "Start", Parameter = "", Type = "Type" });
+                    Configuration.Add(new ConfigViewModel { ID = 1, Name = "Service", Category = "Service", Function = "Add", Output = "Start", Type = "Type" });
 
-                    HttpContext.Current.Cache["configuration"] = Configuration;
+                    HttpContext.Current.Cache["config"] = Configuration;
                 }
                 else
-                { 
+                {
+
 
                 }
 
             }
-            return (List<Config>)HttpContext.Current.Cache["configuration"];
+            return (List<ConfigViewModel>)HttpContext.Current.Cache["config"];
         }
+
+        public void EditConfig(JObject Data)
+        {
+            
+            dynamic json = Data;
+
+            json = json.data;
+
+            Configuration.ID = json.ID;
+            Configuration.Name = json.Name;
+            Configuration.Function = json.Function;
+            Configuration.Category = json.Category;
+            Configuration.Type = json.Type;
+            Configuration.Output = json.Output;
+
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            string jsonString = Convert.ToString(json.Parameter);
+
+            List<dynamic> jMaths = (List<dynamic>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<dynamic>));
+            
+            Configuration.Parameter = jMaths;
+
+        }
+
+        public void Calculate()
+        {
+
+
+
+
+        }
+
+        public void UpdateConfig(List<ConfigViewModel> Config)
+        {
+            HttpContext.Current.Cache["config"] = Config;
+        }
+
+
     }
 
-        //public ProjectBoard GetBoard(dynamic json)
-        //{
-        //    if(json.boardId == null)
-        //    {
-        //        return null;
-        //    }
-        //    else
-        //    {
-        //        ProjectBoard Board  = db.ProjectBoard.Find(Convert.ToInt32(json.boardId));
-        //        return Board;
-        //    }
-                        
-        //}
 
-        //public void AddBoard(dynamic json)
-        //{
-        //    ProjectBoard.Name = json.boardName;
-        //    ProjectBoard.Configuration = Convert.ToString(json.data);
-        //    ProjectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
-        //    ProjectBoard.Group = "Project Group";
-        //    ProjectBoard.UpdateDate = DateTime.Now;
-        //    db.ProjectBoard.Add(ProjectBoard);
-        //    db.SaveChanges();
-        //}
 
-        //public void UpdateBoard(dynamic json)
-        //{
-        //    ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(json.boardId));
-        //    ProjectBoard.Name = json.boardName;
-        //    ProjectBoard.Configuration = Convert.ToString(json.data);
-        //    ProjectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
-        //    ProjectBoard.Group = "Project Group";
-        //    ProjectBoard.UpdateDate = DateTime.Now;
 
-        //    db.Entry(ProjectBoard).State = EntityState.Modified;
-
-        //    db.SaveChanges();
-        //}
-
-        //public void DeleteBoard(dynamic json)
-        //{
-        //    var db = new CalculationDBContext();
-        //    ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(json.boardId));
-        //    db.ProjectBoard.Remove(ProjectBoard);
-        //    db.SaveChanges();
-        //}
-
-    //}
+  
 }

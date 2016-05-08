@@ -27,11 +27,21 @@
          $scope.config = ($scope.config);
      }
 
-     $scope.btn_add = function () {
+     $scope.btn_add = function ($index) {
          $scope.config.push({
+
+             ID: this.config.length
                  
              });
-    }
+     }
+
+     $scope.SaveButtonClick = function SaveBoard() {
+         $scope.isLoading = true;
+         configService.updateConfig($scope.config).then(function (data) {
+             $scope.isLoading = false;
+             $scope.refreshConfig();
+         }, onError);
+     };
 
      $scope.remItem = function ($index) {
          $scope.config.splice($index, 1);
