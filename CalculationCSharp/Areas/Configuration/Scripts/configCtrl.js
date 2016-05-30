@@ -9,8 +9,6 @@
         configService.initialize().then(function (data) {
             $scope.isLoading = true;
             $scope.refreshConfig();
-
-
         }, onError);
     };
 
@@ -19,6 +17,7 @@
            .then(function (data) {               
                $scope.isLoading = true;
                $scope.config = data;
+               $scope.updateParameter();
             }, onError);
      };
 
@@ -63,14 +62,6 @@
              $scope.function = this.rows.Function;
 
 
-             $scope.parameter = $scope.config[$scope.selectedRow].Parameter;
-
-             if ($scope.parameter == "") {
-                 $scope.parameter = null;
-             }
-             configService.setParameters($scope.parameter);
-             $scope.getFunction($scope.function);
-             $scope.modify(index);
          }
         
      }
@@ -87,9 +78,16 @@
 
      }
 
+     $scope.getRowid = function () {
+
+         $scope.RowID = configService.getRowid();
+         return $scope.RowID
+
+     }
+
      $scope.updateParameter = function (index) {
                   
-         $scope.updateRow = $scope.getClickedRow();
+         $scope.updateRow = $scope.getRowid();
          $scope.parameter = $scope.getParameter();
 
          if ($scope.updateRow !== null & angular.isDefined($scope.updateRow)) {
@@ -133,8 +131,28 @@
 
          $scope.function = this.rows.Function;
          $scope.disableSelect = true;
-         $scope.getFunction($scope.function);
-         $scope.modify(index);
+     }
+
+     $scope.editFunction = function (index) {  //function that sets the value of selectedRow to current index
+
+         $scope.function = this.rows.Function;
+         $scope.disableSelect = true;
+         $scope.SaveButtonClick();
+
+
+         $scope.parameter = $scope.config[index].Parameter;
+
+         if ($scope.parameter == "") {
+             $scope.parameter = null;
+         }
+         configService.setParameters($scope.parameter, index);
+
+
+         if($scope.function != "Input")
+         {
+             $scope.getFunction($scope.function);
+             $scope.modify(index);
+         }
      }
 
     

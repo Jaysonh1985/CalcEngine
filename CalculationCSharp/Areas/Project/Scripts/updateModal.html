@@ -1,5 +1,5 @@
 ﻿<body>
-    <div ng-controller="boardCtrl">
+    <div ng-controller="storyCtrl">
         <script type="text/ng-template" id="/Areas/Project/Scripts/updateModal.html">
             <div class="modal-header">
                 <textarea overflow:auto;resize:none" type="text" id="Name" placeholder="Please enter name of item here" class="form-control" ng-model="Name" rows="1">{{ Name }}</textarea>
@@ -136,7 +136,7 @@
            </div>
                     <div class="modal-footer">
                         <input class="btn btn-default" type="button" value="Delete" ng-click="DeleteButtonClick()" />
-                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                        <button class="btn btn-primary" type="button" ng-click="ok($index)">OK</button>
                         <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                     </div>
         </script>

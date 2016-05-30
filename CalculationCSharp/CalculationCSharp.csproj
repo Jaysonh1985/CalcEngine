@@ -284,6 +284,8 @@
     <Content Include="Areas\Configuration\Scripts\configService.js" />
     <Content Include="Areas\Configuration\Scripts\configCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Maths.html" />
+    <Content Include="Areas\Configuration\Scripts\Input.html" />
+    <Content Include="Areas\Project\Scripts\storyCtrl.js" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\icons-png\action-black.png" />
     <Content Include="Content\images\icons-png\action-white.png" />

@@ -140,10 +140,16 @@ namespace CalculationCSharp.Areas.Project.Models
             string jsonString = Convert.ToString(json.Tasks);
             string jsonStringComments = Convert.ToString(json.Comments);
 
-            List<Tasks> jTasks = (List<Tasks>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<Tasks>));
-            List<Comments> jComments = (List<Comments>)javaScriptSerializ­er.Deserialize(jsonStringComments, typeof(List<Comments>));
-            Story.Tasks =jTasks;
-            Story.Comments = jComments;
+            //if(jsonString != ""){
+
+            //    List<Tasks> jTasks = (List<Tasks>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<Tasks>));
+            //    Story.Tasks = jTasks;
+            //}
+
+          
+            //List<Comments> jComments = (List<Comments>)javaScriptSerializ­er.Deserialize(jsonStringComments, typeof(List<Comments>));
+            
+            //Story.Comments = jComments;
 
 
             var sourceColId = Story.ColumnId;

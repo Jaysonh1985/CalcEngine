@@ -68,13 +68,24 @@
                             dnd-selected="col.Stories.selected = story"
                             ng-class="{'selected': col.Stories.selected === story}"
                             on-long-press="UpdateButtonClick('lg')"
-                            prevent-click="true">
+                            prevent-click="false">
                             {{story.Name}}
                         </li>
                     </ul>
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Generated Model</h3>
+            </div>
+            <div class="panel-body">
+                <pre class="code">{{modelAsJson}}</pre>
+            </div>
         </div>
     </div>
 
