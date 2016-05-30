@@ -67,7 +67,8 @@
                             dnd-effect-allowed="move"
                             dnd-selected="col.Stories.selected = story"
                             ng-class="{'selected': col.Stories.selected === story}"
-                            ng-dblclick="UpdateButtonClick('lg')">
+                            on-long-press="UpdateButtonClick('lg')"
+                            prevent-click="true">
                             {{story.Name}}
                         </li>
                     </ul>
