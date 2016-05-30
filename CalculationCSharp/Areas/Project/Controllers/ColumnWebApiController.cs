@@ -68,7 +68,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
             }
             else
             {
-                repo.MoveStory((int)json.storyId, (int)json.targetColId);
+                //repo.MoveStory((int)json.storyId, (int)json.targetColId);
             }
 
             response.StatusCode = HttpStatusCode.OK;

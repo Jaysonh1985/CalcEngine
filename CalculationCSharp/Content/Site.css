@@ -121,7 +121,7 @@ element.style {
 .panel-title {
     margin-top: 0px;
     margin-bottom: 0px;
-    font-size: 25px;
+    font-size: 22px;
     color: inherit;
     text-overflow: ellipsis;
     text-align:center;
@@ -130,6 +130,7 @@ element.style {
 .panel-body {
     text-overflow: ellipsis;
     overflow: hidden;
+    background-color: white
 }
 
 .panel-default > .panel-heading {
@@ -230,7 +231,7 @@ textarea {
 }
 
 .colStyle {
-    margin-right: 10px;
+    margin: 2px;
     width: 24%;
     padding-top: 10px;
     margin-top: 20px;
@@ -272,13 +273,20 @@ textarea {
   background-color: #ae0000
 }
 
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid #D8CCB8;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: white;
+}
+
 .panel {
-    margin-bottom: 20px;
-    background-color: rgba(0, 0, 0, .075);
-    border: 1px solid;
-    border-radius: 3px;
+    margin-bottom: 5px;
+    background-color: rgba(0, 0, 0, 0.00);
+    border: 0px solid;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    box-shadow: 0 1px 1px #333;
+
 }
 
 b, strong {
@@ -334,3 +342,70 @@ form[editable-form] > div {margin: 10px 0;}
     color:white;
     font-weight:bold;
 }
+
+<style>
+    /**
+    * For the correct positioning of the placeholder element, the dnd-list and
+    * it's children must have position: relative
+    */
+    .simpleDemo ul[dnd-list],
+    .simpleDemo ul[dnd-list] > li {
+        position: relative;
+    }
+
+    /**
+    * The dnd-list should always have a min-height,
+    * otherwise you can't drop to it once it's empty
+    */
+    .simpleDemo ul[dnd-list] {
+        min-height: 42px;
+        padding-left: 0px;
+    }
+
+        /**
+    * The dndDraggingSource class will be applied to
+    * the source element of a drag operation. It makes
+    * sense to hide it to give the user the feeling
+    * that he's actually moving it.
+    */
+        .simpleDemo ul[dnd-list] .dndDraggingSource {
+            display: none;
+        }
+
+        /**
+    * An element with .dndPlaceholder class will be
+    * added to the dnd-list while the user is dragging
+    * over it.
+    */
+        .simpleDemo ul[dnd-list] .dndPlaceholder {
+            display: block;
+            background-color: rgba(157, 157, 157, 0.41);
+            min-height: 42px;
+        }
+
+        /**
+    * The dnd-lists's child elements currently MUST have
+    * position: relative. Otherwise we can not determine
+    * whether the mouse pointer is in the upper or lower
+    * half of the element we are dragging over. In other
+    * browsers we can use event.offsetY for this.
+    */
+        .simpleDemo ul[dnd-list] li {
+            background-color: rgba(238, 238, 238, 0.25);
+            border: 1px solid #ddd;
+            border-top-right-radius: 4px;
+            border-top-left-radius: 4px;
+            display: block;
+            padding: 6px 10px;
+            margin-bottom: -1px;
+
+        }
+
+            /**
+    * Show selected elements in green
+    */
+            .simpleDemo ul[dnd-list] li.selected {
+                background-color: #dff0d8;
+                color: #3c763d;
+            }
+</style>

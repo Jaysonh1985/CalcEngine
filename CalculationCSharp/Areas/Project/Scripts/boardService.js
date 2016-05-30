@@ -47,7 +47,7 @@
             });
     };
 
-    var moveStory = function (storyIdVal, targetColIdVal, updateType, data, task) {
+    var moveStory = function (storyIdVal, targetColIdVal, updateType, data, task, current_columns) {
         return $http.post("/api/ColumnWebApi/MoveStory", { storyId: storyIdVal, targetColId: targetColIdVal, updateType: updateType, data: data, task:task })
             .then(function (response) {
                 return response.status == 200;

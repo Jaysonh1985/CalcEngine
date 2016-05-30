@@ -3,7 +3,14 @@
     $scope.columns = [];
     $scope.isLoading = true;
 
+    $scope.columns = {
+        selected: null,
+    };
 
+    // Model to JSON for demo purpose
+    $scope.$watch('columns', function (model) {
+        $scope.modelAsJson = angular.toJson(model, true);
+    }, true);
 
     function init() {
         var id = $location.absUrl();
@@ -168,6 +175,8 @@
                         Comments: $scope.Comments
                     };
 
+
+
                     boardService.moveStory($scope.ID, $scope.colID, "Edit", $scope.selected, "false").then(function (data) {
                         $scope.isLoading = false;
                         boardService.sendRequest();
@@ -193,7 +202,11 @@
                 Comments: function () { return $scope.Comments},
                 colID: function () { return $scope.colID; }
             }
+
+
         });
+
+
 
         modalInstance.result.then(function (selectedItem) {
             $scope.selected = selectedItem;
@@ -206,20 +219,7 @@
          $scope.animationsEnabled = !$scope.animationsEnabled;
      };
 
-    $scope.onDrop = function (data, targetColId) {        
-        boardService.canMoveStory(data.ColumnId, targetColId)
-            .then(function (canMove) {                
-                if (canMove) {                 
-                    boardService.moveStory(data.Id, targetColId, "Move","1").then(function (StoryMoved) {
-                        $scope.isLoading = false;                        
-                        boardService.sendRequest();
-                    }, onError);
-                    $scope.isLoading = true;
-                }
-
-            }, onError);
-    };
-
+   
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {

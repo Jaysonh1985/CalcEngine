@@ -11,7 +11,7 @@
 <body>
     <link href="~/Content/Site.css" rel="stylesheet" />
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -32,19 +32,16 @@
         </div>
     </div>
 
-    <div class="jumbotron">
+    @*<div class="jumbotron">
         <h1>@ViewData["H1"]</h1>
         <p class="lead">@ViewData["P1"]</p>
         <h1 class="hidden">@ViewData["HID1"]</h1>
-    </div>
+    </div>*@
 
 
     @RenderBody()
 
     <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - Project A.I.M</p>
-    </footer>
 
 
     @Scripts.Render("~/bundles/jquery")
@@ -73,6 +70,8 @@
     <script src="~/Areas/Configuration/Scripts/configService.js"></script>
     <script src="~/Scripts/angular-gridster.min.js"></script>
     <script src="~/Areas/Configuration/Scripts/mathsCtrl.js"></script>
+    <script src="~/Scripts/angular-drag-and-drop-lists.js"></script>
+    <script src="~/Scripts/ios-drag-drop.js"></script>
     <script>
 
         //Calc Form Submission

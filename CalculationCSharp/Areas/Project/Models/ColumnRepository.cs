@@ -60,28 +60,28 @@ namespace CalculationCSharp.Areas.Project.Models
             return null;
         }
 
-        public void MoveStory(int StoryId, int targetColId)
-        {
-            var columns = this.GetColumns(null);
-            var targetColumn = this.GetColumn(targetColId);
+        //public void MoveStory(int StoryId, int targetColId)
+        //{
+        //    var columns = this.GetColumns(null);
+        //    var targetColumn = this.GetColumn(targetColId);
             
-            // Add Story to the target column
-            var Story = this.GetStories(StoryId);
-            var sourceColId = Story.ColumnId;
-            Story.ColumnId = targetColId;
-            targetColumn.Stories.Add(Story);
+        //    // Add Story to the target column
+        //    var Story = this.GetStories(StoryId);
+        //    var sourceColId = Story.ColumnId;
+        //    Story.ColumnId = targetColId;
+        //    targetColumn.Stories.Add(Story);
 
-            // Remove Story from source column
-            var sourceCol = this.GetColumn(sourceColId);
-            sourceCol.Stories.RemoveAll(t => t.Id == StoryId);
+        //    // Remove Story from source column
+        //    var sourceCol = this.GetColumn(sourceColId);
+        //    sourceCol.Stories.RemoveAll(t => t.Id == StoryId);
 
-            // Update column collection
-            columns.RemoveAll(c => c.Id == sourceColId || c.Id == targetColId);
-            columns.Add(targetColumn);
-            columns.Add(sourceCol);
+        //    // Update column collection
+        //    columns.RemoveAll(c => c.Id == sourceColId || c.Id == targetColId);
+        //    columns.Add(targetColumn);
+        //    columns.Add(sourceCol);
 
-            this.UpdateColumns(columns.OrderBy(c => c.Id).ToList());
-        }
+        //    this.UpdateColumns(columns.OrderBy(c => c.Id).ToList());
+        //}
 
         public void AddStory(int targetColId)
         {
@@ -126,10 +126,9 @@ namespace CalculationCSharp.Areas.Project.Models
             var columns = this.GetColumns(null);
             var targetColumn = this.GetColumn(targetColId);
             List<Tasks> Tasks = new List<Tasks>();
-   
+            
             // Add Story to the target column
             var Story = this.GetStories(StoryId);
-            var sourceColId = Story.ColumnId;
             Story.Name = json.Name;
             Story.Description = json.Description;
             Story.AcceptanceCriteria = json.AcceptanceCriteria;
@@ -137,8 +136,6 @@ namespace CalculationCSharp.Areas.Project.Models
             Story.Timebox = json.Timebox;
             Story.User = json.User;
             
-
-
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             string jsonString = Convert.ToString(json.Tasks);
             string jsonStringComments = Convert.ToString(json.Comments);
@@ -147,6 +144,26 @@ namespace CalculationCSharp.Areas.Project.Models
             List<Comments> jComments = (List<Comments>)javaScriptSerializ­er.Deserialize(jsonStringComments, typeof(List<Comments>));
             Story.Tasks =jTasks;
             Story.Comments = jComments;
+
+
+            var sourceColId = Story.ColumnId;
+
+            if(targetColId != sourceColId)
+            {
+                Story.ColumnId = targetColId;
+                targetColumn.Stories.Add(Story);
+
+                // Remove Story from source column
+                var sourceCol = this.GetColumn(sourceColId);
+                sourceCol.Stories.RemoveAll(t => t.Id == StoryId);
+
+                // Update column collection
+                columns.RemoveAll(c => c.Id == sourceColId || c.Id == targetColId);
+                columns.Add(targetColumn);
+                columns.Add(sourceCol);
+            }
+
+
 
             this.UpdateColumns(columns.OrderBy(c => c.Id).ToList());
         }

@@ -7,19 +7,14 @@
     <input class="btn btn-default" type="button" value="Add" ng-click="AddButtonClick()" />
     <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
     <input class="btn btn-default" type="button" value="CSV" ng-click="CSVButtonClick()" />
-
-    <form editable-form name="tableform">
-        <table class="table table-bordered table-hover table-condensed">
-            <tr style="font-weight: bold">
-                <td style="width:33.3%;background-color:#ae0000; color:white"><h4>MoSCoW</h4></td>
-                <td style="width:33.3%;background-color:#ae0000; color:white"><H4>Timebox</H4></td>
-                <td style="width:33.3%;background-color:#ae0000; color:white"><H4>Allocation</H4></td>
-            </tr>
+     <form editable-form name="tableform">
+        <table class="table table-bordered col-sm-3">
             <tr>
 
                 <td>
-                    <select name="singleSelect" ng-model="search.Moscow" placeholder="Enter M.o.S.C.o.W rating" class="form-control">
-                        <option value=""></option>
+                    <select name="singleSelect" ng-model="search.Moscow" class="form-control">
+                        <option value="" disabled selected>Enter M.o.S.C.o.W rating</option>
+                        <option value="">All</option>
                         <option value="Must">Must</option>
                         <option value="Should">Should</option>
                         <option value="Could">Could</option>
@@ -28,8 +23,9 @@
                     </select>
                 </td>
                 <td>
-                    <select name="singleSelect" ng-model="search.Timebox" placeholder="Enter Timebox" class="form-control">
-                        <option value=""></option>
+                    <select name="singleSelect" ng-model="search.Timebox" class="form-control">
+                        <option value="" disabled selected>Enter Timebox</option>
+                        <option value="">All</option>
                         <option value="Timebox 1">Timebox 1</option>
                         <option value="Timebox 2">Timebox 2</option>
                         <option value="Timebox 3">Timebox 3</option>
@@ -40,8 +36,9 @@
                     </select>
                 </td>
                 <td>
-                    <select name="singleSelect" ng-model="search.User" placeholder="Select User" class="form-control">
-                        <option value=""></option>
+                    <select name="singleSelect" ng-model="search.User" class="form-control">
+                        <option value="">All</option>
+                        <option value="" disabled selected>Select User</option>
                         <option value="Jayson Herbert">Jayson Herbert</option>
                         <option value="John Smith">John Smith</option>
                         {{User}}
@@ -49,24 +46,36 @@
                 </td>
 
             </tr>
-            </table>
-           </form>
+        </table>
+    </form>
 
-            <div class="row">
+    <div class="simpleDemo row">
 
-                <div class="col-sm-3 panel panel-primary colStyle" id="{{col.Id}}" kanban-board-drop="over"
-                     ng-repeat="col in columns">
-                    <div class="panel-heading" style="margin-bottom: 10px;">
-                        <h3 class="panel-title">{{col.Name}}</h3>
-                    </div>
+        <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle" >
+            <div class="panel ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{col.Name}}</h3>
+                </div>
 
-                    <div id="Stories" class="thumbnail" draggable="true" kanban-board-dragg="story"
-                         ng-repeat="story in col.Stories | filter: search" style="margin-bottom: 10px;" ng-click="UpdateButtonClick('lg')">
-                        <div class="caption">
-                            <h5><strong>{{story.Name}}</strong></h5>
-                        </div>
-                    </div>
+                <div class="panel-body">
+
+                    <ul dnd-list="col.Stories">
+
+                        <li ng-repeat="story in col.Stories | filter: search"
+                            dnd-draggable="story"
+                            dnd-moved="col.Stories.splice($index, 1)"
+                            dnd-effect-allowed="move"
+                            dnd-selected="col.Stories.selected = story"
+                            ng-class="{'selected': col.Stories.selected === story}"
+                            ng-dblclick="UpdateButtonClick('lg')">
+                            {{story.Name}}
+                        </li>
+                    </ul>
                 </div>
             </div>
 
+        </div>
+    </div>
+
 </div>
+
