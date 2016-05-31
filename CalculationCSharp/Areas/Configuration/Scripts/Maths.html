@@ -1,6 +1,6 @@
 ﻿
-<div class="container-fluid" ng-controller="mathsCtrl">
-    <a href="#/" class="btn btn-default" ng-click="save()">Back</a> 
+<div ng-swipe-left="save()" class="container-fluid" ng-controller="mathsCtrl">
+    <button class="btn btn-secondary btn-lg btn-block" ng-click="save()">Back</button> 
 
     <table class="table table-bordered table table-responsive">
 
@@ -15,12 +15,10 @@
 
         <tr ng-repeat="rows in maths">
 
-
-
-            <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control" ng-change="save()"></span></td>
+            <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control"></span></td>
 
             <td width="10">
-                <select name="singleSelect" ng:model="rows.Logic" class="form-control" ng-change="save()">
+                <select name="singleSelect" ng:model="rows.Logic" class="form-control">
                     <option value=""></option>
                     <option value="Add">+</option>
                     <option value="Subtract">-</option>
@@ -29,7 +27,7 @@
                 </select>
             </td>
 
-            <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control" ng-change="save()"></span></td>
+            <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control" ></span></td>
             <td width="10">
                 <select name="singleSelect" ng:model="rows.Rounding" class="form-control">
                     <option value=""></option>
@@ -42,7 +40,7 @@
                 </select>
             </td>
             <td width="10">
-                <select name="singleSelect" ng:model="rows.RoundingType" class="form-control" ng-change="save()">
+                <select name="singleSelect" ng:model="rows.RoundingType" class="form-control">
                     <option value=""></option>
                     <option value="down">Down</option>
                     <option value="up">Up</option>
@@ -56,7 +54,6 @@
         </tr>
         <tr>
             <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
-            <td><a ng:click="get()" class="btn btn-default">get</a></td>
         </tr>
 
 

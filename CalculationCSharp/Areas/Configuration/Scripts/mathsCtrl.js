@@ -56,6 +56,7 @@
     $scope.save = function () {
         
         configService.setParameters($scope.maths, $scope.rowid);
+        $location.path('/');
      
     }
 
