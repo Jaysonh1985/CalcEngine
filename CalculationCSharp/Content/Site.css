@@ -121,7 +121,7 @@ element.style {
 .panel-title {
     margin-top: 0px;
     margin-bottom: 0px;
-    font-size: 22px;
+    font-size: 20px;
     color: inherit;
     text-overflow: ellipsis;
     text-align:center;
@@ -133,6 +133,7 @@ element.style {
     background-color: white;
     border: none;
     box-shadow: none;
+    padding:4px;
 }
 
 .panel-default > .panel-heading {
@@ -273,6 +274,8 @@ textarea {
     border: 2px black;
 }
 
+
+
 .panel-primary > .panel-heading {
   background-color: #fff
 }
@@ -293,6 +296,7 @@ textarea {
     box-shadow: none;
 
 }
+
 
 b, strong {
     font-weight: normal;
@@ -404,7 +408,7 @@ form[editable-form] > div {margin: 10px 0;}
         padding: 25px 5px;
         margin-bottom: -1px;
         align-items: center;
-        text-align: -webkit-center;
+        text-align: start;
         }
 
             /**
