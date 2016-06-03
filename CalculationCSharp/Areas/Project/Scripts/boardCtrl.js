@@ -34,7 +34,6 @@
         }, onError);
     };
 
-
      $scope.CSVButtonClick = function CSVButtonClick() {
          $scope.isLoading = true;
          var url = location.pathname;
@@ -58,15 +57,12 @@
              AcceptanceCriteria: '',
              ID: storyID
          });
-
      };
 
-     $scope.DeleteButtonClick = function AddStory(index) {
+     $scope.DeleteButtonClick = function AddStory(colIndex, index) {
          var cf = confirm("Delete this Story?");
          if (cf == true) {
-             $scope.columns.Stories[index].splice(index, 1);
-
-
+             $scope.columns[colIndex].Stories.splice(index, 1);
              $uibModalInstance.dismiss('cancel')
          }
      };
@@ -85,7 +81,7 @@
          }, onError);
      };
 
-     $scope.UpdateButtonClick = function (size, index) {
+     $scope.UpdateButtonClick = function (size, colIndex, index) {
 
         $scope.index = index;
         $scope.Name = this.story.Name;
@@ -97,7 +93,7 @@
         $scope.ID = this.story.ID;
         $scope.Tasks = this.story.Tasks;
         $scope.Comments = this.story.Comments;
-        $scope.colID = this.$parent.index;
+        $scope.colID = colIndex;
 
         var modalInstance = $uibModal.open({
             animation: true,
@@ -119,8 +115,6 @@
             }
         });
 
-
-
         modalInstance.result.then(function (selectedItem) {
 
             $scope.columns[$scope.colID].Stories[$scope.index].ID = selectedItem.ID;
@@ -134,20 +128,15 @@
             $scope.columns[$scope.colID].Stories[$scope.index].Tasks = selectedItem.Tasks;
             $scope.columns[$scope.colID].Stories[$scope.index].Comments = selectedItem.Comments;
 
-
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
-        });
-
-        
+        });      
 
     };
 
      $scope.toggleAnimation = function () {
          $scope.animationsEnabled = !$scope.animationsEnabled;
      };
-
-   
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {

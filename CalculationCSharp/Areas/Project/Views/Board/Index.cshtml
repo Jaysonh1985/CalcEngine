@@ -6,10 +6,8 @@
     @Html.ActionLink("New", "Board", null, null, new { id = 0, @class = "btn btn-default" })
     <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">
 </p>
-
 <div ng-controller="menuCtrl">
     <table class="table table-bordered table table-responsive">
-
         <tr>
             <th>
                 Name
@@ -21,13 +19,9 @@
                 Updated
             </th>
             <th>
-
             </th>
         </tr>
-
-
         <tr ng-repeat="board in Boards">
-
             <td ng-hide="editingData[board.ID]" width="50%" ng-click="openBoard()">{{board.Name}}</td>
             <td ng-show="editingData[board.ID]" width="50%" ><input class="form-control text-box single-line" type="text" ng-model="board.Name"/></td>
             <td width="15%" ng-click="openBoard()">{{board.User}}</td>
@@ -37,12 +31,7 @@
                 <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="update(board)">Update</button>
                 <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="update(board)">Cancel</button>
                 <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard($index)" />
-            </td>
-
-            
-            
+            </td>            
         </tr>
-
-
     </table>
 </div>

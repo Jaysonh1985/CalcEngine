@@ -10,9 +10,6 @@
     $scope.Tasks = Tasks;
     $scope.Comments = Comments;
 
-
-
-
     $scope.selected = {
         Tasks: [{
             TaskName: "",

@@ -10,24 +10,29 @@
     @*<input class="btn btn-default" type="button" value="CSV" ng-click="CSVButtonClick()" />*@
 
     <div class="simpleDemo row">
-        <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle">
+        <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle" ng-init="colIndex = $index">
             <div class="panel ">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{col.Name}}</h3>
                     <a ng-click="AddButtonClick($index)"><i class="glyphicon glyphicon-plus"></i></a>
                 </div>
                 <div class="panel-body">
-                    <ul class="caption"  dnd-list="col.Stories">
+                    <ul class="caption" dnd-list="col.Stories">
                         <li ng-repeat="story in col.Stories | filter: search"
                             dnd-draggable="story"
                             dnd-moved="col.Stories.splice($index, 1)"
                             dnd-effect-allowed="move"
                             dnd-selected="col.Stories.selected = story"
                             ng-class="{'selected': col.Stories.selected === story}"
-                            ng-click="UpdateButtonClick('lg', $index)"
-                            on-long-press="UpdateButtonClick('lg', $index)"
+                            ng-click="UpdateButtonClick('lg', colIndex, $index)"
+                            on-long-press="UpdateButtonClick('lg', colIndex, $index)"
                             prevent-click="true">
-                            {{story.Name}}                           
+                            <p>
+                                <a ng-click="DeleteButtonClick(colIndex, $index)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </a>
+                            {{story.Name}}
+                            </p>
                         </li>
                     </ul>
                 </div>
