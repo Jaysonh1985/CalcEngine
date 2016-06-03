@@ -3,56 +3,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div style="width:99%; padding-left:0%; margin-left:2%; margin-right:2%; padding-right:2%;" ng-controller="boardCtrl">
+<div ng-controller="boardCtrl">
     <br />
-    <input class="btn btn-default" type="button" value="Add" ng-click="AddButtonClick()" />
+    
     <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
     <input class="btn btn-default" type="button" value="CSV" ng-click="CSVButtonClick()" />
-     @*<form editable-form name="tableform">
-        <table class="table table-bordered col-sm-3">
-            <tr>
 
-                <td>
-                    <select name="singleSelect" ng-model="search.Moscow" class="form-control">
-                        <option value="" disabled selected>Enter M.o.S.C.o.W rating</option>
-                        <option value="">All</option>
-                        <option value="Must">Must</option>
-                        <option value="Should">Should</option>
-                        <option value="Could">Could</option>
-                        <option value="Won't">Won't</option>
-                        {{Moscow}}
-                    </select>
-                </td>
-                <td>
-                    <select name="singleSelect" ng-model="search.Timebox" class="form-control">
-                        <option value="" disabled selected>Enter Timebox</option>
-                        <option value="">All</option>
-                        <option value="Timebox 1">Timebox 1</option>
-                        <option value="Timebox 2">Timebox 2</option>
-                        <option value="Timebox 3">Timebox 3</option>
-                        <option value="Timebox 4">Timebox 4</option>
-                        <option value="Timebox 5">Timebox 5</option>
-                        <option value="Timebox 6">Timebox 6</option>
-                        {{Timebox}}
-                    </select>
-                </td>
-                <td>
-                    <select name="singleSelect" ng-model="search.User" class="form-control">
-                        <option value="">All</option>
-                        <option value="" disabled selected>Select User</option>
-                        <option value="Jayson Herbert">Jayson Herbert</option>
-                        <option value="John Smith">John Smith</option>
-                        {{User}}
-                    </select>
-                </td>
-
-            </tr>
-        </table>
-    </form>*@
 
     <div class="simpleDemo row">
 
-        <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle" >
+        <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle">
+            <input class="btn btn-default" type="button" value="Add" ng-click="AddButtonClick($index)" />
             <div class="panel ">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{col.Name}}</h3>
@@ -68,7 +29,7 @@
                             dnd-effect-allowed="move"
                             dnd-selected="col.Stories.selected = story"
                             ng-class="{'selected': col.Stories.selected === story}"
-                            on-long-press="UpdateButtonClick('lg')"
+                            on-long-press="UpdateButtonClick('lg', $index)"
                             prevent-click="false">
                             {{story.Name}}
                         </li>
@@ -78,17 +39,15 @@
 
         </div>
     </div>
-
-    @*<div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Generated Model</h3>
-            </div>
-            <div class="panel-body">
-                <pre class="code">{{modelAsJson}}</pre>
-            </div>
+   
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Generated Model</h3>
         </div>
-    </div>*@
-
+        <div class="panel-body">
+            <pre class="code">{{modelAsJson}}</pre>
+        </div>
+    </div>
 </div>
+
 
