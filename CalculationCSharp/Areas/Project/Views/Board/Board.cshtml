@@ -17,7 +17,7 @@
                     <a ng-click="AddButtonClick($index)"><i class="glyphicon glyphicon-plus"></i></a>
                 </div>
                 <div class="panel-body">
-                    <ul dnd-list="col.Stories">
+                    <ul class="caption"  dnd-list="col.Stories">
                         <li ng-repeat="story in col.Stories | filter: search"
                             dnd-draggable="story"
                             dnd-moved="col.Stories.splice($index, 1)"
@@ -27,7 +27,9 @@
                             ng-click="UpdateButtonClick('lg', $index)"
                             on-long-press="UpdateButtonClick('lg', $index)"
                             prevent-click="true">
+                            <a ng-click="DeleteButtonClick($index)"><small><i class="glyphicon glyphicon-remove"></i></small></a>
                             {{story.Name}}
+                            
                         </li>
                     </ul>
                 </div>

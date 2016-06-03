@@ -61,7 +61,15 @@
 
      };
 
+     $scope.DeleteButtonClick = function AddStory(index) {
+         var cf = confirm("Delete this Story?");
+         if (cf == true) {
+             $scope.columns.Stories[index].splice(index, 1);
 
+
+             $uibModalInstance.dismiss('cancel')
+         }
+     };
 
      $scope.SaveButtonClick = function SaveBoard() {
          $scope.isLoading = true;
@@ -125,10 +133,14 @@
             $scope.columns[$scope.colID].Stories[$scope.index].User = selectedItem.User;
             $scope.columns[$scope.colID].Stories[$scope.index].Tasks = selectedItem.Tasks;
             $scope.columns[$scope.colID].Stories[$scope.index].Comments = selectedItem.Comments;
-            
+
+
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });
+
+        
+
     };
 
      $scope.toggleAnimation = function () {
@@ -139,7 +151,6 @@
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {
-        $scope.refreshBoard();
         toastr.success("Board updated successfully", "Success");
     });
 

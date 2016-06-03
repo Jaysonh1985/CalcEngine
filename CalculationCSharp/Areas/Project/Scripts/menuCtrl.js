@@ -27,7 +27,7 @@
         };
 
 
-     $scope.deleteBoard = function () {
+     $scope.deleteBoard = function (index) {
          var cf = confirm("Delete this Board?");
          $scope.ID = this.board.ID;
          
@@ -35,7 +35,7 @@
             boardService.updateBoard($scope.ID,"","","Delete")
             .then(function (data) {
                 $scope.isLoading = false;
-                
+                $scope.Boards.splice(index, 1);
             }, onError);
           
          }

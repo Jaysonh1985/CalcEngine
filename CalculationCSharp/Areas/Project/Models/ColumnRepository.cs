@@ -60,29 +60,6 @@ namespace CalculationCSharp.Areas.Project.Models
             return null;
         }
 
-        //public void MoveStory(int StoryId, int targetColId)
-        //{
-        //    var columns = this.GetColumns(null);
-        //    var targetColumn = this.GetColumn(targetColId);
-            
-        //    // Add Story to the target column
-        //    var Story = this.GetStories(StoryId);
-        //    var sourceColId = Story.ColumnId;
-        //    Story.ColumnId = targetColId;
-        //    targetColumn.Stories.Add(Story);
-
-        //    // Remove Story from source column
-        //    var sourceCol = this.GetColumn(sourceColId);
-        //    sourceCol.Stories.RemoveAll(t => t.Id == StoryId);
-
-        //    // Update column collection
-        //    columns.RemoveAll(c => c.Id == sourceColId || c.Id == targetColId);
-        //    columns.Add(targetColumn);
-        //    columns.Add(sourceCol);
-
-        //    this.UpdateColumns(columns.OrderBy(c => c.Id).ToList());
-        //}
-
         public void AddStory(int targetColId)
         {
             var columns = this.GetColumns(null);

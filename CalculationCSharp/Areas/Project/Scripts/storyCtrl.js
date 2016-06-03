@@ -11,14 +11,7 @@
     $scope.Comments = Comments;
 
 
-    $scope.DeleteButtonClick = function AddStory() {
-        $scope.isLoading = true;
-        boardService.moveStory($scope.ID, $scope.colID, "Delete", "1", "false").then(function (data) {
-            $scope.isLoading = false;
-            boardService.sendRequest();
-        }, onError);
-        $uibModalInstance.dismiss('cancel')
-    };
+
 
     $scope.selected = {
         Tasks: [{
