@@ -17,28 +17,23 @@
         $scope.isLoading = true;
         boardService.initialize().then(function (data) {
             $scope.isLoading = true;
-            $scope.refreshBoard();
 
+            var url = location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            id = parseInt(id, 10);
+            if (angular.isNumber(id) == false) {
+                id = null;
+            }
+
+            boardService.getColumns(id)
+               .then(function (data) {
+                   $scope.isLoading = true;
+                   $scope.columns = data;
+               }, onError);
 
         }, onError);
     };
 
-     $scope.refreshBoard = function refreshBoard() {        
-         $scope.isLoading = true;
-         var url = location.pathname;
-         var id = url.substring(url.lastIndexOf('/') + 1);
-         id = parseInt(id, 10);
-         if (angular.isNumber(id) == false)
-         {
-             id = null;
-         }
-
-        boardService.getColumns(id)
-           .then(function (data) {               
-               $scope.isLoading = true;
-               $scope.columns = data;
-            }, onError);
-     };
 
      $scope.CSVButtonClick = function CSVButtonClick() {
          $scope.isLoading = true;

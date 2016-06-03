@@ -36,6 +36,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
         {
             dynamic json = moveTaskParams;
 
+            string data = Convert.ToString(json.data);
 
             var response = Request.CreateResponse();
 

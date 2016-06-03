@@ -7,47 +7,33 @@
     <br />
     
     <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
-    <input class="btn btn-default" type="button" value="CSV" ng-click="CSVButtonClick()" />
-
+    @*<input class="btn btn-default" type="button" value="CSV" ng-click="CSVButtonClick()" />*@
 
     <div class="simpleDemo row">
-
         <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle">
-            <input class="btn btn-default" type="button" value="Add" ng-click="AddButtonClick($index)" />
             <div class="panel ">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{col.Name}}</h3>
+                    <a ng-click="AddButtonClick($index)"><i class="glyphicon glyphicon-plus"></i></a>
                 </div>
-
                 <div class="panel-body">
-
                     <ul dnd-list="col.Stories">
-
                         <li ng-repeat="story in col.Stories | filter: search"
                             dnd-draggable="story"
                             dnd-moved="col.Stories.splice($index, 1)"
                             dnd-effect-allowed="move"
                             dnd-selected="col.Stories.selected = story"
                             ng-class="{'selected': col.Stories.selected === story}"
+                            ng-click="UpdateButtonClick('lg', $index)"
                             on-long-press="UpdateButtonClick('lg', $index)"
-                            prevent-click="false">
+                            prevent-click="true">
                             {{story.Name}}
                         </li>
                     </ul>
                 </div>
             </div>
-
         </div>
-    </div>
-   
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Generated Model</h3>
-        </div>
-        <div class="panel-body">
-            <pre class="code">{{modelAsJson}}</pre>
-        </div>
-    </div>
+    </div>  
 </div>
 
 

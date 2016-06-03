@@ -38,24 +38,6 @@
     };
 
 
-    var canMoveStory = function (sourceColIdVal, targetColIdVal) {
-        return $http.get("/api/ColumnWebApi/CanMove", { params: { sourceColId: sourceColIdVal, targetColId: targetColIdVal } })
-            .then(function (response) {
-                return response.data.canMove;
-            }, function (error) {
-                return $q.reject(error.data.Message);
-            });
-    };
-
-    var moveStory = function (storyIdVal, targetColIdVal, updateType, data, task, current_columns) {
-        return $http.post("/api/ColumnWebApi/MoveStory", { storyId: storyIdVal, targetColId: targetColIdVal, updateType: updateType, data: data, task:task, columns: current_columns})
-            .then(function (response) {
-                return response.status == 200;
-            }, function (error) {
-                return $q.reject(error.data.Message);
-            });
-    };
-
     var updateBoard = function (boardIdVal, boardName, data, updateType) {
         return $http.post("/api/BoardWebApi/UpdateBoard", { boardId: boardIdVal, boardName: boardName, data: data, updateType })
             .then(function (response) {
@@ -97,8 +79,6 @@
         getCSV: getCSV,
         openBoard: openBoard,
         getColumns: getColumns,
-        canMoveStory: canMoveStory,
-        moveStory: moveStory,
         updateBoard: updateBoard
     };
 });
