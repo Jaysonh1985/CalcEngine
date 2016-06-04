@@ -13,6 +13,9 @@ using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
+using NCalc;
+using Antlr.Runtime.Debug;
+using System.Text;
 
 namespace CalculationCSharp.Areas.Config.Controllers
 {
@@ -46,7 +49,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
 
             List<ConfigViewModel> jConfig = (List<ConfigViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<ConfigViewModel>));
 
-            double answer = 0;
+            decimal answer = 0;
 
             foreach (var item in jConfig)
             {
@@ -65,9 +68,26 @@ namespace CalculationCSharp.Areas.Config.Controllers
 
                             if (item.Function == "Maths")
                             {
+
+                                string formula = null;
+
                                 Maths Maths = new Maths();
                                 Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
-                                answer = Maths.Setup(jConfig, parameters, item.ID);
+                                string Input1 = Convert.ToString(parameters.Input1);
+                                string Logic = Convert.ToString(parameters.Logic);
+                                string Input2 = Convert.ToString(parameters.Input2);
+
+                                if(Logic == "Pow")
+                                {
+                                    formula = Logic + '(' + Input1 + ','  + Input2 + ')';
+                                }
+                                else
+                                {
+                                    formula = Input1 + Logic + Input2;
+                                }                     
+                                Expression e = new Expression(formula);
+                                var Calculation = e.Evaluate();
+                                answer = decimal.Round(Convert.ToDecimal(Calculation));
                             }
                         }
                         item.Output = Convert.ToString(answer);
