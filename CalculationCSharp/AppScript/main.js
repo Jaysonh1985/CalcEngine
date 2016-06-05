@@ -1,6 +1,6 @@
 ﻿// application global namespace
 var sulhome = sulhome || {};
-sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRoute', 'ui.sortable', 'gridster','dndLists','pr.longpress','ngTouch'])
+sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRoute', 'ui.sortable', 'gridster','dndLists','pr.longpress','ngTouch', 'ngAnimate'])
     .config(function ($routeProvider) {
 
         $routeProvider.when('/', {
@@ -16,6 +16,6 @@ sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRo
 
         })
         .otherwise({ redirectTo: '/' });
-    });
 
+    });
 

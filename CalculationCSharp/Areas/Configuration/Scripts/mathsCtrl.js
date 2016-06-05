@@ -3,7 +3,7 @@
     $scope.maths = [];
     $scope.rowid = 0;
     $scope.isLoading = true;
-
+    $scope.cssClass = 'Maths';
 
 
     function init() {

@@ -73,21 +73,36 @@ namespace CalculationCSharp.Areas.Config.Controllers
 
                                 Maths Maths = new Maths();
                                 Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
-                                string Input1 = Convert.ToString(parameters.Input1);
-                                string Logic = Convert.ToString(parameters.Logic);
-                                string Input2 = Convert.ToString(parameters.Input2);
 
-                                if(Logic == "Pow")
+                                CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
+
+                                dynamic InputA = Config.VariableReplace(jConfig, parameters.Input1, item.ID);
+                                dynamic InputB = Config.VariableReplace(jConfig, parameters.Input2, item.ID);
+
+                                string Input1 = Convert.ToString(InputA);
+                                string Logic = Convert.ToString(parameters.Logic);
+                                string Input2 = Convert.ToString(InputB);
+                                string Rounding = Convert.ToString(parameters.Rounding);
+
+                                if(Rounding == "0")
+                                {
+                                    Rounding = "2";
+                                }
+
+                                if (Logic == "Pow")
                                 {
                                     formula = Logic + '(' + Input1 + ','  + Input2 + ')';
                                 }
                                 else
                                 {
                                     formula = Input1 + Logic + Input2;
-                                }                     
+                                }
+                                
+                                //Apply rounding
+                                formula = "Round(" + formula + "," + Rounding + ")";                     
                                 Expression e = new Expression(formula);
                                 var Calculation = e.Evaluate();
-                                answer = decimal.Round(Convert.ToDecimal(Calculation));
+                                answer = Convert.ToDecimal(Calculation);
                             }
                         }
                         item.Output = Convert.ToString(answer);

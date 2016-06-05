@@ -2,6 +2,7 @@
     // Model
     $scope.config = [];
     $scope.isLoading = true;
+    $scope.cssClass = 'Input';
 
     function init() {
         var id = $location.absUrl();
@@ -11,6 +12,8 @@
             $scope.refreshConfig();
         }, onError);
     };
+
+    
 
      $scope.refreshConfig = function refreshBoard() {        
          configService.getConfig()

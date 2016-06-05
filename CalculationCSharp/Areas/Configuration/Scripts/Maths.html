@@ -1,13 +1,15 @@
 ﻿
-<div ng-swipe-left="save()" class="container-fluid" ng-controller="mathsCtrl">
+<div  ng-swipe-disable-mouse ng-swipe-left="save()"   class="Maths" ng-controller="mathsCtrl">
     <button class="btn btn-secondary btn-lg btn-block" ng-click="save()">Back</button> 
 
     <table class="table table-bordered table table-responsive">
 
         <tr>
+            <th></th>
             <th>Input 1</th>
             <th>Logic</th>
             <th>Input 2</th>
+            <th></th>
             <th>Rounding (dp)</th>
             <th>Rouding Type</th>
         </tr>
@@ -15,9 +17,17 @@
 
         <tr ng-repeat="rows in maths">
 
+
+            <td width="1%">
+                <select name="singleSelect" ng:model="rows.Bracket1" class="form-control">
+                    <option value=""></option>
+                    <option value="(">(</option>
+                </select>
+            </td>
+
             <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control"></span></td>
 
-            <td width="10">
+            <td width="10%">
                 <select name="singleSelect" ng:model="rows.Logic" class="form-control">
                     <option value=""></option>
                     <option value="+">+</option>
@@ -29,6 +39,12 @@
             </td>
 
             <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control" ></span></td>
+            <td width="1%">
+                <select name="singleSelect" ng:model="rows.Bracket2" class="form-control">
+                    <option value=""></option>
+                    <option value=")">)</option>
+                </select>
+            </td>
             <td width="10">
                 <select name="singleSelect" ng:model="rows.Rounding" class="form-control">
                     <option value=""></option>

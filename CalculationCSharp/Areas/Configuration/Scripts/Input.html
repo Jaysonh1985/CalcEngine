@@ -9,7 +9,7 @@
             <th>Output</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody ui:sortable ng:model="config">
         <tr ng-repeat="rows in config" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)">
 
             <td>
