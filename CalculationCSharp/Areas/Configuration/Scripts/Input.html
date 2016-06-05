@@ -1,90 +1,61 @@
 ﻿<br>
 
 <div ng-repeat="Category in config" class="panel-group" ng-init="colIndex = $index">
-    
-    <div class="panel-group">
-        <div class="panel panel-default">
-            <<accordion-group  class="panel-heading">
-                <h3 class="group-header">
-                    <a data-toggle="collapse" href="#collapseCat1">
-                        {{Category.Name}}
-                    </a>
-                </h3>
-                <a ng-click="AddFunction(colIndex, $index)"><i class="glyphicon glyphicon-plus"></i></a>
-            </div>
-            <div id="collapseCat1" class="panel-collapse collapse in">
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Function</th>
-                            <th>Variable</th>
-                            <th>Type</th>
-                            <th>Output</th>
-                            <th>Delete</th>
-                            <th>Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody ui:sortable ng:model="config">
-                        <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)">
-
-                            <td>
-                                <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
-                                    <option value=""></option>
-                                    <option value="Input">Input</option>
-                                    <option value="Maths">Maths</option>
-                                </select>
-                            </td>
-
-                            <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
-
-                            <td>
-                                <select name="singleSelect" ng:model="rows.Type" class="form-control">
-                                    <option value=""></option>
-                                    <option value="String">String</option>
-                                    <option value="String">Date</option>
-                                    <option value="String">Integar</option>
-                                    <option value="String">Decimal</option>
-                                </select>
-                            </td>
-                            <td ng-show="editingData[$index]"><input class="form-control text-box single-line" type="text" ng-model="rows.Output" /></td>
-                            <td ng-hide="editingData[$index]">{{rows.Output}}</td>
-                            <td width="1%">
-                                [<a ng:click="remItem($index)">X</a>]
-                            </td>
-                            <td width="1%">
-                                <a class="btn-xs" ng-click="editFunction(colIndex, $index)">Edit</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><a ng:click="SaveButtonClick()" class="btn btn-default">Calculate</a></td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
+    <a ng:click="AddCategory()" class="btn btn-default">Add Category</a>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="group-header">{{Category.Name}}</h3>
+            <a ng-click="AddFunction(colIndex, $index)"><i class="glyphicon glyphicon-plus"></i></a>
         </div>
-        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Function</th>
+                    <th>Variable</th>
+                    <th>Type</th>
+                    <th>Output</th>
+                    <th>Delete</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody ui:sortable ng:model="config">
+                <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)">
 
+                    <td>
+                        <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
+                            <option value=""></option>
+                            <option value="Input">Input</option>
+                            <option value="Maths">Maths</option>
+                        </select>
+                    </td>
+
+                    <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
+
+                    <td>
+                        <select name="singleSelect" ng:model="rows.Type" class="form-control">
+                            <option value=""></option>
+                            <option value="String">String</option>
+                            <option value="String">Date</option>
+                            <option value="String">Integar</option>
+                            <option value="String">Decimal</option>
+                        </select>
+                    </td>
+                    <td ng-show="editingData[$index]"><input class="form-control text-box single-line" type="text" ng-model="rows.Output" /></td>
+                    <td ng-hide="editingData[$index]">{{rows.Output}}</td>
+                    <td width="1%">
+                        [<a ng:click="remItem($index)">X</a>]
+                    </td>
+                    <td width="1%">
+                        <a class="btn-xs" ng-click="editFunction(colIndex, $index)">Edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a ng:click="SaveButtonClick()" class="btn btn-default">Calculate</a></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<script type="text/javascript">
-        $(function () {
-            $('.group-header').click(function () {
-                $(this).nextUntil('.group-header').toggle();
-            });
-        });
 
-        var $rows = $('#table tr');
-        $('#search').keyup(function () {
-
-            var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
-                reg = RegExp(val, 'i'),
-                text;
-
-            $rows.show().filter(function () {
-                text = $(this).text().replace(/\s+/g, ' ');
-                return !reg.test(text);
-            }).hide();
-        });
-</script>
