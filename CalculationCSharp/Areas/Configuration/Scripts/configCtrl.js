@@ -2,7 +2,6 @@
     // Model
     $scope.config = [];
     $scope.isLoading = true;
-    $scope.cssClass = 'Input';
 
     function init() {
         var id = $location.absUrl();
@@ -12,8 +11,6 @@
             $scope.refreshConfig();
         }, onError);
     };
-
-    
 
      $scope.refreshConfig = function refreshBoard() {        
          configService.getConfig()
@@ -29,12 +26,22 @@
          $scope.config = ($scope.config);
      }
 
-     $scope.btn_add = function ($index) {
-         $scope.config.push({
+     $scope.AddFunction = function (colIndex, index) {
+         $scope.config[colIndex].Functions.push({
 
-             ID: this.config.length
+             ID: this.config[colIndex].Functions.length
                  
              });
+     }
+
+     $scope.AddCategory = function (colIndex, index) {
+         $scope.config.push({
+
+             ID: this.config.length,
+             Name: "New Category"
+
+
+         });
      }
 
      $scope.SaveButtonClick = function SaveBoard() {
@@ -81,6 +88,13 @@
 
      }
 
+     $scope.getColid = function () {
+
+         $scope.ColID = configService.getColid();
+         return $scope.ColID
+
+     }
+
      $scope.getRowid = function () {
 
          $scope.RowID = configService.getRowid();
@@ -88,24 +102,25 @@
 
      }
 
-     $scope.updateParameter = function (index) {
+     $scope.updateParameter = function () {
                   
+         $scope.updateCol = $scope.getColid();
          $scope.updateRow = $scope.getRowid();
          $scope.parameter = $scope.getParameter();
 
          if ($scope.updateRow !== null & angular.isDefined($scope.updateRow)) {
-             $scope.config[$scope.updateRow].Parameter = $scope.parameter;
+             $scope.config[$scope.updateCol].Functions[$scope.updateRow].Parameter = $scope.parameter;
          }
 
          
-     }
+     }    
 
-     $scope.modify = function (index) {
+     $scope.modify = function (colIndex, index) {
 
          $scope.editingData = {};
 
-         for (var i = 0, length = $scope.config.length; i < length; i++) {
-             $scope.editingData[$scope.config[i].ID] = false;
+         for (var i = 0, length = $scope.config[colIndex].Functions.length; i < length; i++) {
+             $scope.editingData[$scope.config[colIndex].Functions[i].ID] = false;
          }
 
          if ($scope.function == "Input") {
@@ -136,25 +151,25 @@
          $scope.disableSelect = true;
      }
 
-     $scope.editFunction = function (index) {  //function that sets the value of selectedRow to current index
+     $scope.editFunction = function (colIndex,index) {  //function that sets the value of selectedRow to current index
 
          $scope.function = this.rows.Function;
          $scope.disableSelect = true;
          $scope.SaveButtonClick();
 
 
-         $scope.parameter = $scope.config[index].Parameter;
+         $scope.parameter = $scope.config[colIndex].Functions[index].Parameter;
 
          if ($scope.parameter == "") {
              $scope.parameter = null;
          }
-         configService.setParameters($scope.parameter, index);
+         configService.setParameters($scope.parameter, colIndex, index);
 
 
          if($scope.function != "Input")
          {
              $scope.getFunction($scope.function);
-             $scope.modify(index);
+             $scope.modify(colIndex,index);
          }
      }
 

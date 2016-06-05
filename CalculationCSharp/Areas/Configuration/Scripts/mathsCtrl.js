@@ -19,6 +19,7 @@
         }
 
         $scope.rowid = configService.getRowid();
+        $scope.colid = configService.getColid();
 
      };
 
@@ -51,11 +52,12 @@
 
         $scope.maths = configService.getParameters();
         $scope.rowid = configService.getRowid();
+        $scope.colid = configService.getColid();
                   
     }
     $scope.save = function () {
         
-        configService.setParameters($scope.maths, $scope.rowid);
+        configService.setParameters($scope.maths, $scope.colid, $scope.rowid);
         $location.path('/');
      
     }

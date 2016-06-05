@@ -14,29 +14,26 @@ namespace CalculationCSharp.Areas.Configuration.Models
 {
     public class ConfigRepository
     {
-        ConfigViewModel Configuration = new ConfigViewModel();
+        CategoryViewModel Configuration = new CategoryViewModel();
+        ConfigViewModel Functions = new ConfigViewModel();
 
-        public List<ConfigViewModel> GetConfig(ConfigViewModel Config)
+        public List<CategoryViewModel> GetConfig(CategoryViewModel Config)
         {
-        
+            var Configuration = new List<CategoryViewModel>();
             if (HttpContext.Current.Cache["config"] == null)
             {
                 if (Config == null)
                 {
-                    var Configuration = new List<ConfigViewModel>();
-
-                    Configuration.Add(new ConfigViewModel { ID = 1, Name = "Service", Category = "Service", Function = "Add", Output = "Start", Type = "Type" });
-
+                    Configuration.Add(new CategoryViewModel { ID = 1, Name = "Service", Functions = new List<ConfigViewModel>() });
                     HttpContext.Current.Cache["config"] = Configuration;
                 }
                 else
                 {
 
-
                 }
-
             }
-            return (List<ConfigViewModel>)HttpContext.Current.Cache["config"];
+
+            return (List<CategoryViewModel>)HttpContext.Current.Cache["config"];
         }
 
         public void EditConfig(JObject Data)
@@ -46,31 +43,23 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
             json = json.data;
 
-            Configuration.ID = json.ID;
-            Configuration.Name = json.Name;
-            Configuration.Function = json.Function;
-            Configuration.Category = json.Category;
-            Configuration.Type = json.Type;
-            Configuration.Output = json.Output;
+            Functions.ID = json.ID;
+            Functions.Name = json.Name;
+            Functions.Function = json.Function;
+            Functions.Category = json.Category;
+            Functions.Type = json.Type;
+            Functions.Output = json.Output;
 
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             string jsonString = Convert.ToString(json.Parameter);
 
             List<dynamic> jMaths = (List<dynamic>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<dynamic>));
-            
-            Configuration.Parameter = jMaths;
+
+            Functions.Parameter = jMaths;
 
         }
 
-        public void Calculate()
-        {
-
-
-
-
-        }
-
-        public void UpdateConfig(List<ConfigViewModel> Config)
+        public void UpdateConfig(List<CategoryViewModel> Config)
         {
             HttpContext.Current.Cache["config"] = Config;
         }

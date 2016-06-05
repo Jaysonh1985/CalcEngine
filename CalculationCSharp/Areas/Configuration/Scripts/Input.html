@@ -1,49 +1,65 @@
 ﻿<br>
 
-<table class="table table-bordered table table-responsive">
-    <thead>
-        <tr>
-            <th>Function</th>
-            <th>Variable</th>
-            <th>Type</th>
-            <th>Output</th>
-        </tr>
-    </thead>
-    <tbody ui:sortable ng:model="config">
-        <tr ng-repeat="rows in config" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)">
 
-            <td>
-                <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
-                    <option value=""></option>
-                    <option value="Input">Input</option>
-                    <option value="Maths">Maths</option>
-                </select>
-            </td>
 
-            <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
+<div ng-repeat="Category in config" class="panel panel-primary" ng-init="colIndex = $index">
+    <a ng-click="AddCategory($index)"><i class="glyphicon glyphicon-plus"></i></a>
+    <div class="panel ">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{Category.Name}}</h3>
+            <a ng-click="AddFunction(colIndex, $index)"><i class="glyphicon glyphicon-plus"></i></a>
+        </div>
+        <div class="panel-body">
 
-            <td>
-                <select name="singleSelect" ng:model="rows.Type" class="form-control">
-                    <option value=""></option>
-                    <option value="String">String</option>
-                    <option value="String">Date</option>
-                    <option value="String">Integar</option>
-                    <option value="String">Decimal</option>
-                </select>
-            </td>
-            <td ng-show="editingData[$index]"><input class="form-control text-box single-line" type="text" ng-model="rows.Output" /></td>
-            <td ng-hide="editingData[$index]">{{rows.Output}}</td>
-            <td width="1%">
-                [<a ng:click="remItem($index)">X</a>]
-            </td>
-            <td width="1%">
-                <a class="btn-xs" ng-click="editFunction($index)">Edit</a>
-            </td>
-        </tr>
-        <tr>
-            <td><a ng:click="btn_add($index)" class="btn btn-default">Add</a></td>
-            <td><a ng:click="SaveButtonClick()" class="btn btn-default">Calculate</a></td>
-        </tr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Variable</th>
+                        <th>Type</th>
+                        <th>Output</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody ui:sortable ng:model="config">
+                    <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)">
 
-    </tbody>
-</table>
+                        <td>
+                            <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
+                                <option value=""></option>
+                                <option value="Input">Input</option>
+                                <option value="Maths">Maths</option>
+                            </select>
+                        </td>
+
+                        <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
+
+                        <td>
+                            <select name="singleSelect" ng:model="rows.Type" class="form-control">
+                                <option value=""></option>
+                                <option value="String">String</option>
+                                <option value="String">Date</option>
+                                <option value="String">Integar</option>
+                                <option value="String">Decimal</option>
+                            </select>
+                        </td>
+                        <td ng-show="editingData[$index]"><input class="form-control text-box single-line" type="text" ng-model="rows.Output" /></td>
+                        <td ng-hide="editingData[$index]">{{rows.Output}}</td>
+                        <td width="1%">
+                            [<a ng:click="remItem($index)">X</a>]
+                        </td>
+                        <td width="1%">
+                            <a class="btn-xs" ng-click="editFunction(colIndex, $index)">Edit</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a ng:click="btn_add($index)" class="btn btn-default">Add</a></td>
+                        <td><a ng:click="SaveButtonClick()" class="btn btn-default">Calculate</a></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
