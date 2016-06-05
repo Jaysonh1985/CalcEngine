@@ -27,6 +27,11 @@
      }
 
      $scope.AddFunction = function (colIndex, index) {
+
+         $scope.Functions = [];
+
+         $scope.Functions = $scope.config[colIndex].Functions;
+
          $scope.config[colIndex].Functions.push({
 
              ID: this.config[colIndex].Functions.length
@@ -38,7 +43,8 @@
          $scope.config.push({
 
              ID: this.config.length,
-             Name: "New Category"
+             Name: "New Category",
+             Functions: []
 
 
          });
