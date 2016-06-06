@@ -1,5 +1,10 @@
 ﻿<br>
-
+<style>
+    .pass {
+  padding-top: 50px;
+  color: #ccc;
+}
+</style>
 <uib-accordion ng-repeat="Category in config" ng-init="colIndex = $index" close-others="oneAtATime" >
     <a ng:click="AddCategory()" class="btn btn-default">Add Category</a>
     <uib-accordion-group is-open="status.open">
@@ -14,12 +19,14 @@
                     <th>Variable</th>
                     <th>Type</th>
                     <th>Output</th>
-                    <th>Delete</th>
-                    <th>Edit</th>
+                    <th>Expected Results</th>
+                    <th>Pass</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody ui:sortable ng:model="config">
-                <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)">
+                <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}"  ng-click="setclickedrow($index)">
                     <td>
                         <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
                             <option value=""></option>
@@ -39,8 +46,10 @@
                     </td>
                     <td ng-show="editingData[$index]"><input class="form-control text-box single-line" type="text" ng-model="rows.Output" /></td>
                     <td ng-hide="editingData[$index]">{{rows.Output}}</td>
+                    <td><span><input type="text" ng:model="rows.ExpectedResult" class="form-control"></span></td>
+                    <td ng-class='{green : rows.Pass, red: !rows.Pass}'><span></span></td>
                     <td width="1%">
-                        [<a ng:click="remItem($index)">X</a>]
+                        [<a ng:click="remItem(colIndex, $index)">X</a>]
                     </td>
                     <td width="1%">
                         <a class="btn-xs" ng-click="editFunction(colIndex, $index)">Edit</a>

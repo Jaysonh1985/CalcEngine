@@ -110,6 +110,19 @@ namespace CalculationCSharp.Areas.Config.Controllers
                             }
                             item.Output = Convert.ToString(answer);
 
+                            if(item.ExpectedResult == null || item.ExpectedResult == "")
+                            {
+                                item.Pass = true;
+
+                            }
+                            else if (item.ExpectedResult == item.Output)
+                            {
+                                item.Pass = true;
+                            }
+                            else
+                            {
+                                item.Pass = false;
+                            }
                         }
 
 

@@ -14,6 +14,8 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Name { get; set; }
         public virtual List<dynamic> Parameter { get; set; }
         public string Output { get; set; }
+        public dynamic ExpectedResult { get; set; }
+        public bool Pass { get; set; }
 
     }
 }

@@ -33,26 +33,18 @@
      }
 
      $scope.AddFunction = function (colIndex, index) {
-
          $scope.Functions = [];
-
          $scope.Functions = $scope.config[colIndex].Functions;
-
          $scope.config[colIndex].Functions.push({
-
              ID: this.config[colIndex].Functions.length
-                 
              });
      }
 
      $scope.AddCategory = function (colIndex, index) {
          $scope.config.push({
-
              ID: this.config.length,
              Name: "New Category",
              Functions: []
-
-
          });
      }
 
@@ -64,8 +56,8 @@
          }, onError);
      };
 
-     $scope.remItem = function ($index) {
-         $scope.config.splice($index, 1);
+     $scope.remItem = function (colIndex,$index) {
+         $scope.config[colIndex].splice($index, 1);
      }
 
      $scope.selectedRow = null;  // initialize our variable to null
@@ -82,10 +74,8 @@
          {
              $scope.selectedRow = index;
              $scope.function = this.rows.Function;
-
-
          }
-        
+      
      }
 
      $scope.getClickedRow = function () {  //function that sets the value of selectedRow to current index
