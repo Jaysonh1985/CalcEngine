@@ -2,7 +2,13 @@
     // Model
     $scope.config = [];
     $scope.isLoading = true;
-
+    $scope.oneAtATime = true;
+    
+    $scope.status = {
+    isCustomHeaderOpen: false,
+    isFirstOpen: true,
+    isFirstDisabled: false
+  };
     function init() {
         var id = $location.absUrl();
         $scope.isLoading = true;
