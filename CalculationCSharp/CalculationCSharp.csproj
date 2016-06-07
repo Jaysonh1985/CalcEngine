@@ -293,6 +293,8 @@
     <Content Include="Areas\Project\Scripts\boardFilter.html" />
     <Content Include="Areas\Project\Scripts\storyCtrl.js" />
     <Content Include="Areas\Project\Scripts\viewXML.html" />
+    <Content Include="Content\angular-ui-tree.css" />
+    <Content Include="Content\angular-ui-tree.min.css" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\icons-png\action-black.png" />
     <Content Include="Content\images\icons-png\action-white.png" />
@@ -567,6 +569,8 @@
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\angular-ui-tree.js" />
+    <Content Include="Scripts\angular-ui-tree.min.js" />
     <Content Include="Scripts\angular-ui\sortable.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />

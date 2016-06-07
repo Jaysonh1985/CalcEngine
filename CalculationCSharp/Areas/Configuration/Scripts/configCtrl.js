@@ -56,8 +56,8 @@
          }, onError);
      };
 
-     $scope.remItem = function (colIndex,$index) {
-         $scope.config[colIndex].splice($index, 1);
+     $scope.remItem = function (colIndex, $index) {
+         $scope.config[colIndex].Functions.splice($index, 1);
      }
 
      $scope.selectedRow = null;  // initialize our variable to null

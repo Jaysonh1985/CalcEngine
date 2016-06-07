@@ -26,7 +26,9 @@ namespace CalculationCSharp
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/toastr.css"));
+                      "~/Content/toastr.css",
+                      "~/Content/angular-ui-tree.css"
+                      ));
 
             //Create bundel for jQueryUI  
             //js  
