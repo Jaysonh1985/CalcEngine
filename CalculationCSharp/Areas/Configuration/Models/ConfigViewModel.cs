@@ -8,6 +8,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
     public class ConfigViewModel
     {
         public int ID { get; set; }
+        public virtual List<dynamic> Logic { get; set; }
         public string Type {get;set;}
         public string Category { get; set; }
         public string Function { get; set; }

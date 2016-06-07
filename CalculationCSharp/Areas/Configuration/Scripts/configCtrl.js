@@ -2,13 +2,15 @@
     // Model
     $scope.config = [];
     $scope.isLoading = true;
-    $scope.oneAtATime = true;
+    $scope.oneAtATime = false;
     
     $scope.status = {
     isCustomHeaderOpen: false,
     isFirstOpen: true,
     isFirstDisabled: false
-  };
+    };
+
+
     function init() {
         var id = $location.absUrl();
         $scope.isLoading = true;
@@ -36,8 +38,11 @@
          $scope.Functions = [];
          $scope.Functions = $scope.config[colIndex].Functions;
          $scope.config[colIndex].Functions.push({
-             ID: this.config[colIndex].Functions.length
-             });
+
+             ID: this.config[colIndex].length,
+             logic: []
+
+         });
      }
 
      $scope.AddCategory = function (colIndex, index) {
@@ -174,6 +179,33 @@
              $scope.modify(colIndex,index);
          }
      }
+
+     $scope.LogicButtonClick = function (size, colIndex, index) {
+
+
+         $scope.logic = this.config[0].Functions[0].logic;
+  
+
+         var modalInstance = $uibModal.open({
+             animation: true,
+             templateUrl: '/Areas/Configuration/Scripts/LogicModal.html',
+             scope: $scope,
+             controller: 'logicCtrl',
+             size: size,
+             resolve: {
+                 logic: function () { return $scope.logic }
+             }
+         });
+
+         modalInstance.result.then(function (selectedItem) {
+
+             $scope.config[colIndex].Functions[index].logic = selectedItem;
+
+         }, function () {
+             $log.info('Modal dismissed at: ' + new Date());
+         });
+
+     };
 
     
     // Listen to the 'refreshBoard' event and refresh the board as a result

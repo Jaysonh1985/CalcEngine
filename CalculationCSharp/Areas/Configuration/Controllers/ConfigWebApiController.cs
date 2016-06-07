@@ -108,6 +108,8 @@ namespace CalculationCSharp.Areas.Config.Controllers
                                     answer = Convert.ToDecimal(Calculation);
                                 }
                             }
+
+                            item.Type = "Decimal";
                             item.Output = Convert.ToString(answer);
 
                             if(item.ExpectedResult == null || item.ExpectedResult == "")

@@ -1,5 +1,5 @@
 ﻿<br>
-<uib-accordion ng-repeat="Category in config" ng-init="colIndex = $index" close-others="oneAtATime">
+<uib-accordion ng-repeat="Category in config track by $index" ng-init="colIndex = $index" close-others="oneAtATime">
     <uib-accordion-group is-open="status.open">
         <uib-accordion-heading>
             {{Category.Name}}
@@ -11,6 +11,7 @@
             <thead>
                 <tr>
                     <th>Sort</th>
+                    <th>Logic</th>
                     <th>Function</th>
                     <th>Variable</th>
                     <th>Type</th>
@@ -22,9 +23,15 @@
                 </tr>
             </thead>
             <tbody ui-tree-nodes ng:model="config">
-                <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)" ui-tree-node>
+                <tr ng-repeat="rows in Category.Functions track by $index" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)" ui-tree-node>
                     <td>
-                        <i class="glyphicon glyphicon-resize-vertical" ui-tree-handle></i>
+                        <i class="glyphicon glyphicon-list" ui-tree-handle></i>
+                    </td>
+                    <td>
+                        <a ng-click="LogicButtonClick('lg', colIndex, $index)">
+                            <i class="glyphicon glyphicon-new-window" ></i>
+                        </a>
+                       
                     </td>
                     <td>
                         <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
@@ -35,13 +42,7 @@
                     </td>
                     <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
                     <td>
-                        <select name="singleSelect" ng:model="rows.Type" class="form-control">
-                            <option value=""></option>
-                            <option value="String">String</option>
-                            <option value="String">Date</option>
-                            <option value="String">Integar</option>
-                            <option value="String">Decimal</option>
-                        </select>
+                        {{rows.Type}}
                     </td>
                     <td ng-show="editingData[$index]"><input class="form-control text-box single-line" type="text" ng-model="rows.Output" /></td>
                     <td ng-hide="editingData[$index]">{{rows.Output}}</td>

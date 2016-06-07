@@ -236,6 +236,7 @@
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Logic.cs" />
     <Compile Include="Areas\Configuration\Models\CategoryViewModel.cs" />
     <Compile Include="Areas\Configuration\Models\ConfigFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\ConfigViewModel.cs" />
@@ -285,11 +286,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppScript\Directives\additionalControls.js" />
+    <Content Include="Areas\Configuration\Scripts\logicCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\mathsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\configService.js" />
     <Content Include="Areas\Configuration\Scripts\configCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Maths.html" />
     <Content Include="Areas\Configuration\Scripts\Input.html" />
+    <Content Include="Areas\Configuration\Scripts\LogicModal.html" />
     <Content Include="Areas\Project\Scripts\boardFilter.html" />
     <Content Include="Areas\Project\Scripts\storyCtrl.js" />
     <Content Include="Areas\Project\Scripts\viewXML.html" />
