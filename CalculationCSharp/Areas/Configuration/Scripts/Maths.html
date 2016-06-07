@@ -25,7 +25,7 @@
                 </select>
             </td>
 
-            <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control"></span></td>
+            <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control" typeahead="var for Input1 in maths | filter:$viewValue | limitTo:8"></span></td>
 
             <td width="10%">
                 <select name="singleSelect" ng:model="rows.Logic" class="form-control">
