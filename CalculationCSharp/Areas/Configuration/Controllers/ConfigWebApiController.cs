@@ -30,12 +30,8 @@ namespace CalculationCSharp.Areas.Config.Controllers
         public HttpResponseMessage Get()
         {
             var response = Request.CreateResponse();
-
             List<CategoryViewModel> json = repo.GetConfig(null);
-
-            response.Content = new StringContent(JsonConvert.SerializeObject(json));
-
-            
+            response.Content = new StringContent(JsonConvert.SerializeObject(json));          
             return response;
         }
 
@@ -43,19 +39,15 @@ namespace CalculationCSharp.Areas.Config.Controllers
         public HttpResponseMessage UpdateConfig(JObject moveTaskParams)
         {
             dynamic json = moveTaskParams;
-
             string jsonString = Convert.ToString(json.data);
-
             List<CategoryViewModel> jCategory = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<CategoryViewModel>));
             List<ConfigViewModel> jConfig = (List<ConfigViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<ConfigViewModel>));
-
             decimal answer = 0;
 
             foreach(var group in jCategory)
             {
                 foreach (var item in group.Functions)
                 {
-
                     if (item.Function == "Input")
                     {
 
@@ -64,94 +56,95 @@ namespace CalculationCSharp.Areas.Config.Controllers
                     {
                         if (item.Parameter != null)
                         {
+                            string logic = null;
+                            bool logicparse = true;
 
-                            foreach (var param in item.Parameter)
+                            foreach (var bit in item.Logic)
                             {
-                                string jparameters = Newtonsoft.Json.JsonConvert.SerializeObject(param);
 
-                                if (item.Function == "Maths")
+                                string inputA = bit.Input1;
+                                string Logic = bit.LogicInd;
+                                string inputB = bit.Input2;
+
+                                logic = "if(" + inputA + Logic + inputB + ",true,false)";
+                                Expression ex = new Expression(logic);
+                                logicparse = Convert.ToBoolean(ex.Evaluate());
+                            }
+                            
+
+
+                            if (logicparse == true)
+                            {
+
+                                foreach (var param in item.Parameter)
                                 {
+                                    string jparameters = Newtonsoft.Json.JsonConvert.SerializeObject(param);
 
-                                    string formula = null;
-
-                                    Maths Maths = new Maths();
-                                    Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
-
-                                    CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
-
-                                    dynamic InputA = Config.VariableReplace(jConfig, parameters.Input1, item.ID);
-                                    dynamic InputB = Config.VariableReplace(jConfig, parameters.Input2, item.ID);
-
-                                    string Input1 = Convert.ToString(InputA);
-                                    string Logic = Convert.ToString(parameters.Logic);
-                                    string Input2 = Convert.ToString(InputB);
-                                    string Rounding = Convert.ToString(parameters.Rounding);
-
-                                    if (Rounding == "0")
+                                    if (item.Function == "Maths")
                                     {
-                                        Rounding = "2";
-                                    }
+                                        string formula = null;
+                                        Maths Maths = new Maths();
+                                        Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
+                                        CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
+                                        dynamic InputA = Config.VariableReplace(jConfig, parameters.Input1, item.ID);
+                                        dynamic InputB = Config.VariableReplace(jConfig, parameters.Input2, item.ID);
+                                        string Input1 = Convert.ToString(InputA);
+                                        string Logic = Convert.ToString(parameters.Logic);
+                                        string Input2 = Convert.ToString(InputB);
+                                        string Rounding = Convert.ToString(parameters.Rounding);
 
-                                    if (Logic == "Pow")
-                                    {
-                                        formula = Logic + '(' + Input1 + ',' + Input2 + ')';
-                                    }
-                                    else
-                                    {
-                                        formula = Input1 + Logic + Input2;
-                                    }
+                                        if (Rounding == "0")
+                                        {
+                                            Rounding = "2";
+                                        }
 
-                                    //Apply rounding
-                                    formula = "Round(" + formula + "," + Rounding + ")";
-                                    Expression e = new Expression(formula);
-                                    var Calculation = e.Evaluate();
-                                    answer = Convert.ToDecimal(Calculation);
+                                        if (Logic == "Pow")
+                                        {
+                                            formula = Logic + '(' + Input1 + ',' + Input2 + ')';
+                                        }
+                                        else
+                                        {
+                                            formula = Input1 + Logic + Input2;
+                                        }
+
+                                        //Apply rounding
+                                        formula = "Round(" + formula + "," + Rounding + ")";
+                                        Expression e = new Expression(formula);
+                                        var Calculation = e.Evaluate();
+                                        answer = Convert.ToDecimal(Calculation);
+                                    }
                                 }
-                            }
 
-                            item.Type = "Decimal";
-                            item.Output = Convert.ToString(answer);
+                                item.Type = "Decimal";
+                                item.Output = Convert.ToString(answer);
 
-                            if(item.ExpectedResult == null || item.ExpectedResult == "")
-                            {
-                                item.Pass = true;
+                                if (item.ExpectedResult == null || item.ExpectedResult == "")
+                                {
+                                    item.Pass = "true";
 
-                            }
-                            else if (item.ExpectedResult == item.Output)
-                            {
-                                item.Pass = true;
+                                }
+                                else if (item.ExpectedResult == item.Output)
+                                {
+                                    item.Pass = "true";
+                                }
+                                else
+                                {
+                                    item.Pass = "false";
+                                }
                             }
                             else
                             {
-                                item.Pass = false;
+                                item.Pass = "miss";
                             }
                         }
-
-
                     }
                 }
-
-
             }
-
-
-
             repo.UpdateConfig(jCategory);
-
-
             var response = Request.CreateResponse();
-
             response.Content = new StringContent(JsonConvert.SerializeObject(jConfig));
-
             response.StatusCode = HttpStatusCode.OK;
-
             return response;
         }
-
-        
-
-
-
-
-    }
+     }
 }

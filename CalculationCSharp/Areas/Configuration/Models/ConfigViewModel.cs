@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculationCSharp.Areas.Configuration.Models.Actions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +9,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
     public class ConfigViewModel
     {
         public int ID { get; set; }
-        public virtual List<dynamic> Logic { get; set; }
+        public virtual List<Logic> Logic { get; set; }
         public string Type {get;set;}
         public string Category { get; set; }
         public string Function { get; set; }
@@ -16,7 +17,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public virtual List<dynamic> Parameter { get; set; }
         public string Output { get; set; }
         public dynamic ExpectedResult { get; set; }
-        public bool Pass { get; set; }
+        public string Pass { get; set; }
 
     }
 }

@@ -3,12 +3,7 @@
     $scope.logic = logic;
     $scope.addItem = function () {
         $scope.logic.push({
-            Bracket1: "",
-            Input1: "",
-            Input2: "",
-            LogicInd: "",
-            Bracket2: "",
-            Operator: ""
+            ID: this.logic.length
         });
     },
 

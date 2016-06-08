@@ -47,7 +47,7 @@
                     <td ng-show="editingData[$index]"><input class="form-control text-box single-line" type="text" ng-model="rows.Output" /></td>
                     <td ng-hide="editingData[$index]">{{rows.Output}}</td>
                     <td><span><input type="text" ng:model="rows.ExpectedResult" class="form-control"></span></td>
-                    <td ng-class='{green : rows.Pass, red: !rows.Pass}'><span></span></td>
+                    <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss' }"><span></span></td>
                     <td>
                         <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remItem(colIndex, $index)">
                             <span class="glyphicon glyphicon-remove"></span>
