@@ -15,6 +15,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 {
     public class ConfigController : Controller
     {
+        private CalculationDBContext db = new CalculationDBContext();
 
         // GET: Project/ProjectConfigs
         public ActionResult Index()
@@ -26,7 +27,19 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
             return View();
         }
 
-       
-        
+        [HttpGet]
+        public ActionResult Config(int? id)
+        {
+
+            CalcConfiguration ProjectBoard = db.CalcConfiguration.Find(Convert.ToInt32(id));
+
+
+            return View();
+
+        }
+
+
+
+
     }
 }

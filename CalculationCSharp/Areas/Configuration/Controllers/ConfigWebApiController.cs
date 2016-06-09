@@ -3,19 +3,12 @@ using CalculationCSharp.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Data.Entity;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
-using System.Web;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Linq;
 using NCalc;
-using Antlr.Runtime.Debug;
-using System.Text;
 
 namespace CalculationCSharp.Areas.Config.Controllers
 {

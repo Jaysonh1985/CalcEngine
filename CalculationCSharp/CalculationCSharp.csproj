@@ -234,6 +234,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
+    <Compile Include="Areas\Configuration\Controllers\CalcConfigurationsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Logic.cs" />
@@ -293,6 +294,7 @@
     <Content Include="Areas\Configuration\Scripts\Maths.html" />
     <Content Include="Areas\Configuration\Scripts\Input.html" />
     <Content Include="Areas\Configuration\Scripts\LogicModal.html" />
+    <Content Include="Areas\Configuration\Scripts\configMenuCtrl.js" />
     <Content Include="Areas\Project\Scripts\boardFilter.html" />
     <Content Include="Areas\Project\Scripts\storyCtrl.js" />
     <Content Include="Areas\Project\Scripts\viewXML.html" />
@@ -554,12 +556,13 @@
     <Content Include="Areas\Regression\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Regression\Views\CalculationRegressions\Delete.cshtml" />
     <Content Include="Areas\Configuration\Views\web.config" />
-    <Content Include="Areas\Configuration\Views\Config\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Config\Config.cshtml" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
     <Content Include="Areas\Project\Views\web.config" />
     <Content Include="Areas\Project\Views\Board\Index.cshtml" />
     <None Include=".bin\node.cmd" />
+    <Content Include="Areas\Configuration\Views\Config\Index.cshtml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim.pubxml" />
     <None Include="Properties\PublishProfiles\StandardImport.pubxml" />
