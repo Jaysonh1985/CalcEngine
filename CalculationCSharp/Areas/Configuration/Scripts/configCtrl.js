@@ -10,17 +10,34 @@
     isFirstDisabled: false
     };
 
+    
 
     function init() {
         var id = $location.absUrl();
         $scope.isLoading = true;
+
         configService.initialize().then(function (data) {
             $scope.isLoading = true;
-            $scope.refreshConfig();
+
+            var url = location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            id = parseInt(id, 10);
+            if (angular.isNumber(id) == false) {
+                id = null;
+            }
+
+            configService.getCalc(id)
+               .then(function (data) {
+                   $scope.isLoading = true;
+                   $scope.config = data;
+               }, onError);
+
+
         }, onError);
     };
 
-     $scope.refreshConfig = function refreshBoard() {        
+    $scope.refreshConfig = function refreshBoard() {
+        $scope.routeID = $routeParams.ID;
          configService.getConfig()
            .then(function (data) {               
                $scope.isLoading = true;
@@ -55,9 +72,16 @@
 
      $scope.SaveButtonClick = function SaveBoard() {
          $scope.isLoading = true;
-         configService.updateConfig($scope.config).then(function (data) {
+
+         var url = location.pathname;
+         var id = url.substring(url.lastIndexOf('/') + 1);
+         id = parseInt(id, 10);
+         if (angular.isNumber(id) == false) {
+             id = null;
+         }
+
+         configService.putCalc(id, $scope.config).then(function (data) {
              $scope.isLoading = false;
-             $scope.refreshConfig();
          }, onError);
      };
 

@@ -9,6 +9,9 @@ using System.Web.Http;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using NCalc;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
+using System.Web;
 
 namespace CalculationCSharp.Areas.Config.Controllers
 {
@@ -20,13 +23,56 @@ namespace CalculationCSharp.Areas.Config.Controllers
 
         // GET api/<controller>
         [System.Web.Http.HttpGet]
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Get(int? id)
         {
             var response = Request.CreateResponse();
-            List<CategoryViewModel> json = repo.GetConfig(null);
-            response.Content = new StringContent(JsonConvert.SerializeObject(json));          
+            CalcConfiguration calcConfiguration = db.CalcConfiguration.Find(id);
+            if (calcConfiguration == null)
+            {
+                
+                List<CategoryViewModel> json = repo.GetConfig(null);
+                response.Content = new StringContent(JsonConvert.SerializeObject(json));
+            }
+            else
+            {
+                if (calcConfiguration.Configuration == null)
+                {
+                    List<CategoryViewModel> json = repo.GetConfig(null);
+                    response.Content = new StringContent(JsonConvert.SerializeObject(json));
+                }
+                else
+                {
+                   
+                    response.Content = new StringContent(calcConfiguration.Configuration);
+                }
+                
+            }
+            
             return response;
         }
+
+
+        [System.Web.Http.HttpPut]
+        public HttpResponseMessage SetConfig(int id, JObject config)
+        {
+
+            dynamic json = config;
+
+            var response = Request.CreateResponse();
+            CalcConfiguration calcConfiguration = db.CalcConfiguration.Find(id);
+
+            calcConfiguration.Configuration = Convert.ToString(json.data);
+            calcConfiguration.User = HttpContext.Current.User.Identity.Name.ToString();
+            calcConfiguration.UpdateDate = DateTime.Now;
+
+            db.Entry(calcConfiguration).State = EntityState.Modified;
+
+            db.SaveChanges();
+            response.Content = new StringContent(JsonConvert.SerializeObject(json.data));
+
+            return response;
+        }
+
 
         [System.Web.Http.HttpPost]
         public HttpResponseMessage UpdateConfig(JObject moveTaskParams)

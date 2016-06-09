@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $uibModal, $log, $location, $window, configService) {
+﻿sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routeParams, $uibModal, $log, $location, $window, configService) {
     // Model
     $scope.Boards = [];
     $scope.isLoading = false;
@@ -23,8 +23,8 @@
 
         $scope.openBoard = function () {
             $scope.ID = this.board.ID;
-            var earl = '/Board/' + $scope.ID;
-            $window.location.assign('/Configuration/Config/Config#/' + $scope.ID);
+            var earl = '/Config/' + $scope.ID;
+            $window.location.assign('/Configuration/Config/Config/' + $scope.ID);
         };
 
      $scope.addBoard = function AddBoard() {
