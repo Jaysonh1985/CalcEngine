@@ -137,16 +137,32 @@
          });
      }
 
+     $scope.getFunctionCtrl = function getFunctionCtrl(Function) {
+         if (Function == 'Maths') {
+             return 'mathsCtrl';
+         }
+     }
+    
+     $scope.getFunctionTempURL = function getFunctionTempURL(Function) {
+         if (Function == 'Maths') {
+             return '/Areas/Configuration/Scripts/MathsModal.html';
+         }
+     }
+    
      $scope.FunctionButtonClick = function (size, colIndex, index) {
-
-         $scope.getVariableTypes();
-
          $scope.Parameter = this.config[colIndex].Functions[index].Parameter;
+         var Function = this.config[colIndex].Functions[index].Function;
+         $scope.getVariableTypes();
+         var FunctionCtrl = null;
+         var FunctionTemp = null;
+         FunctionCtrl = $scope.getFunctionCtrl(Function);
+         FunctionTemp = $scope.getFunctionTempURL(Function);       
+
          var modalInstance = $uibModal.open({
              animation: true,
-             templateUrl: '/Areas/Configuration/Scripts/MathsModal.html',
+             templateUrl: FunctionTemp,
              scope: $scope,
-             controller: 'mathsCtrl',
+             controller: FunctionCtrl,
              size: size,
              resolve: {
                  Functions: function () { return $scope.Parameter }

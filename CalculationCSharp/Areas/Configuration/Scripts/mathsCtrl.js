@@ -7,8 +7,8 @@
         });
     },
 
-    $scope.removeItem = function (index) {
-        $scope.selected.maths.splice(index, 1);
+    $scope.removeMathsItem = function (index) {
+        $scope.maths.splice(index, 1);
     },
 
     //Click OK

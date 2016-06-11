@@ -7,8 +7,8 @@
         });
     },
 
-    $scope.removeItem = function (index) {
-        $scope.selected.Logic.splice(index, 1);
+    $scope.removeLogicItem = function (index) {
+        $scope.Logic.splice(index, 1);
     },
 
     //Click OK
