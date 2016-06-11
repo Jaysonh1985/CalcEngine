@@ -1,69 +1,24 @@
-﻿sulhome.kanbanBoardApp.controller('mathsCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService) {
+﻿sulhome.kanbanBoardApp.controller('mathsCtrl', function ($scope, $uibModalInstance, $log, $http, $location, $window, $routeParams, Functions) {
     // Model
-    $scope.maths = [];
-    $scope.rowid = 0;
-    $scope.isLoading = true;
-    $scope.cssClass = 'Maths';
+    $scope.maths = Functions;
+    $scope.addItem = function () {
+        $scope.maths.push({
+            ID: this.maths.length
+        });
+    },
 
-    function init() {
+    $scope.removeItem = function (index) {
+        $scope.selected.maths.splice(index, 1);
+    },
 
-        if (configService.getParameters() == null)
-        {
-            $scope.maths = [];
-
-        }
-        else
-        {
-            $scope.maths = configService.getParameters();
-        }
-
-        $scope.rowid = configService.getRowid();
-        $scope.colid = configService.getColid();
-        $scope.decimal = configService.getDecimalList();
-
-
-     };
-
-    $scope.refreshConfig = function refreshBoard() {
-        configService.getConfig()
-          .then(function (data) {
-              $scope.isLoading = true;
-              $scope.config = data;
-          }, onError);
+    //Click OK
+    $scope.ok = function () {
+        $uibModalInstance.close($scope.maths);
     };
 
-    if ($scope.maths !== null) {
-        $scope.maths = ($scope.maths);
-    }
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 
-    $scope.btn_add = function () {
-
-
-        $scope.maths.push({
-                 
-        });
-    }
-
-    $scope.remItem = function ($index) {
-        $scope.maths.splice($index, 1);
-    }
-
-
-    $scope.get = function () {
-
-        $scope.maths = configService.getParameters();
-        $scope.rowid = configService.getRowid();
-        $scope.colid = configService.getColid();
-        $scope.decimal = configService.getDecimalList();
-                  
-    }
-    $scope.save = function () {
-        
-        configService.setParameters($scope.maths, $scope.colid, $scope.rowid,$scope.decimal);
-        $location.path('/');
-     
-    }
-
-
-    init();
+   
 })

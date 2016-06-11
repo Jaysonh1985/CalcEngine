@@ -2,6 +2,7 @@
         <div >
             <script type="text/ng-template" id="/Areas/Configuration/Scripts/LogicModal.html">
                 <div class="modal-header">
+                    <h4>Logic</h4>
                 </div>
                 <div class="modal-body">
                     <table class="table table-bordered table table-responsive">
@@ -17,7 +18,7 @@
                         </tr>
 
 
-                        <tr ng-repeat="rows in logic">
+                        <tr ng-repeat="rows in Logic">
                             <td width="1%">
                                 <select name="singleSelect" ng:model="rows.Bracket1" class="form-control">
                                     <option value=""></option>
@@ -59,7 +60,6 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <input class="btn btn-default" type="button" value="Delete" ng-click="DeleteButtonClick()" />
                     <button class="btn btn-primary" type="button" ng-click="ok($index)">OK</button>
                     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                 </div>

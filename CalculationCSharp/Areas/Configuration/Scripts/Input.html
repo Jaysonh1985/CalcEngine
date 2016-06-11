@@ -14,12 +14,12 @@
                     <th>Sort</th>
                     <th>Logic</th>
                     <th>Function</th>
+                    <th>Config</th>
                     <th>Variable</th>
                     <th>Type</th>
                     <th>Output</th>
                     <th>Expected Results</th>
                     <th>Pass</th>
-                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,7 +30,7 @@
                     </td>
                     <td>
                         <a ng-click="LogicButtonClick('lg', colIndex, $index)">
-                            <i class="glyphicon glyphicon-new-window" ></i>
+                            <span class="glyphicon glyphicon-wrench"></span>
                         </a>
                        
                     </td>
@@ -40,6 +40,12 @@
                             <option value="Input">Input</option>
                             <option value="Maths">Maths</option>
                         </select>
+                    </td>
+                    <td>
+                        <a ng-click="FunctionButtonClick('lg', colIndex, $index)">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+
                     </td>
                     <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
                     <td>
@@ -54,12 +60,9 @@
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
                     </td>
-                    <td width="1%">
-                        <a class="btn-xs" ng-click="editFunction(colIndex, $index)">Edit</a>
-                    </td>
                 </tr>
                 <tr>
-                    <td><a ng:click="SaveButtonClick()" class="btn btn-default">Calculate</a></td>
+                    <td><a ng:click="CalcButtonClick()" class="btn btn-default">Calculate</a></td>
                 </tr>
             </tbody>
         </table>

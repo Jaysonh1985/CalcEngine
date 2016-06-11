@@ -75,7 +75,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
 
 
         [System.Web.Http.HttpPost]
-        public HttpResponseMessage UpdateConfig(JObject moveTaskParams)
+        public HttpResponseMessage UpdateConfig(int id,  JObject moveTaskParams)
         {
             dynamic json = moveTaskParams;
             string jsonString = Convert.ToString(json.data);
@@ -181,7 +181,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             }
             repo.UpdateConfig(jCategory);
             var response = Request.CreateResponse();
-            response.Content = new StringContent(JsonConvert.SerializeObject(jConfig));
+            response.Content = new StringContent(JsonConvert.SerializeObject(jCategory));
             response.StatusCode = HttpStatusCode.OK;
             return response;
         }

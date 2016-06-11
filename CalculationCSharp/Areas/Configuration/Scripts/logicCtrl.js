@@ -1,19 +1,19 @@
-﻿sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstance, logic) {
+﻿sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstance, Logic) {
     
-    $scope.logic = logic;
+    $scope.Logic = Logic;
     $scope.addItem = function () {
-        $scope.logic.push({
-            ID: this.logic.length
+        $scope.Logic.push({
+            ID: this.Logic.length
         });
     },
 
     $scope.removeItem = function (index) {
-        $scope.selected.logic.splice(index, 1);
+        $scope.selected.Logic.splice(index, 1);
     },
 
     //Click OK
     $scope.ok = function () {
-        $uibModalInstance.close($scope.logic);
+        $uibModalInstance.close($scope.Logic);
     };
 
     $scope.cancel = function () {
