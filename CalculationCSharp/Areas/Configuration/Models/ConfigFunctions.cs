@@ -7,10 +7,19 @@ namespace CalculationCSharp.Areas.Configuration.Models
     public class ConfigFunctions
     {
 
-        public dynamic VariableReplace(List<ConfigViewModel> ConfigViewModel, string Input, int ID)
+        public dynamic VariableReplace(List<CategoryViewModel> CategoryViewModel, string Input, int ID)
         {
+           dynamic element = null;
 
-            var element = ConfigViewModel.Where(a => a.Name == Input && a.ID <= ID).LastOrDefault();
+            foreach (var item in CategoryViewModel)
+            {
+                List<ConfigViewModel> ConfigViewModel = new List<ConfigViewModel>();
+
+                ConfigViewModel = item.Functions;
+
+                element = ConfigViewModel.Where(a => a.Name == Input && a.ID <= ID).LastOrDefault();
+
+            }
 
             if (element == null)
             {
@@ -20,6 +29,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
             {
                 return element.Output;
             }
+
         }
 
     }

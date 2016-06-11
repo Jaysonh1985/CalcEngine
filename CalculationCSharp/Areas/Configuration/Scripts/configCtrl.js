@@ -122,7 +122,7 @@
          $scope.disableSelect = true;
      }
 
-     $scope.getVariableTypes = function () {  //function that sets the value of selectedRow to current index
+     $scope.getVariableTypes = function getVariableTypes() {  //function that sets the parameters available under the different variable types
          var counter = 0;
          var scopeid = 0;
          var functionID = 0;
@@ -138,6 +138,9 @@
      }
 
      $scope.FunctionButtonClick = function (size, colIndex, index) {
+
+         $scope.getVariableTypes();
+
          $scope.Parameter = this.config[colIndex].Functions[index].Parameter;
          var modalInstance = $uibModal.open({
              animation: true,

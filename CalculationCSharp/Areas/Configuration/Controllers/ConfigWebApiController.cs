@@ -125,8 +125,8 @@ namespace CalculationCSharp.Areas.Config.Controllers
                                         Maths Maths = new Maths();
                                         Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
                                         CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
-                                        dynamic InputA = Config.VariableReplace(jConfig, parameters.Input1, item.ID);
-                                        dynamic InputB = Config.VariableReplace(jConfig, parameters.Input2, item.ID);
+                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Input1, item.ID);
+                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Input2, item.ID);
                                         string Input1 = Convert.ToString(InputA);
                                         string Logic = Convert.ToString(parameters.Logic);
                                         string Input2 = Convert.ToString(InputB);
