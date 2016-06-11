@@ -5,7 +5,6 @@
     $scope.isLoading = true;
     $scope.cssClass = 'Maths';
 
-
     function init() {
 
         if (configService.getParameters() == null)
@@ -20,6 +19,8 @@
 
         $scope.rowid = configService.getRowid();
         $scope.colid = configService.getColid();
+        $scope.decimal = configService.getDecimalList();
+
 
      };
 
@@ -53,11 +54,12 @@
         $scope.maths = configService.getParameters();
         $scope.rowid = configService.getRowid();
         $scope.colid = configService.getColid();
+        $scope.decimal = configService.getDecimalList();
                   
     }
     $scope.save = function () {
         
-        configService.setParameters($scope.maths, $scope.colid, $scope.rowid);
+        configService.setParameters($scope.maths, $scope.colid, $scope.rowid,$scope.decimal);
         $location.path('/');
      
     }

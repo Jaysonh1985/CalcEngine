@@ -1,6 +1,7 @@
-﻿sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService) {
+﻿sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, $filter) {
     // Model
     $scope.config = [];
+    $scope.DecimalNames = [];
     $scope.isLoading = true;
     $scope.oneAtATime = false;
     
@@ -139,6 +140,8 @@
          $scope.updateRow = $scope.getRowid();
          $scope.parameter = $scope.getParameter();
 
+        
+
          if ($scope.updateRow !== null & angular.isDefined($scope.updateRow)) {
              $scope.config[$scope.updateCol].Functions[$scope.updateRow].Parameter = $scope.parameter;
          }
@@ -186,6 +189,23 @@
 
          $scope.function = this.rows.Function;
          $scope.disableSelect = true;
+
+         var counter = 0;
+         var scopeid = 0;
+         var functionID = 0;
+
+         angular.forEach($scope.config, function (groups) {
+             $scope.Decimal = $filter('filter')($scope.config[scopeid].Functions, { Type: 'Decimal' });
+
+             angular.forEach($scope.Decimal, function (functions) {
+                 $scope.DecimalNames.push($scope.Decimal[functionID].Name);
+                 functionID = functionID + 1
+             });
+
+             scopeid = scopeid + 1
+         });
+
+         
          $scope.SaveButtonClick();
 
 
@@ -194,7 +214,7 @@
          if ($scope.parameter == "") {
              $scope.parameter = null;
          }
-         configService.setParameters($scope.parameter, colIndex, index);
+         configService.setParameters($scope.parameter, colIndex, index, $scope.DecimalNames);
 
 
          if($scope.function != "Input")
