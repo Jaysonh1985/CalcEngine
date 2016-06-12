@@ -159,7 +159,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
 
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")
                                 {
-                                    item.Pass = "true";
+                                    item.Pass = "Nil";
 
                                 }
                                 else if (item.ExpectedResult == item.Output)

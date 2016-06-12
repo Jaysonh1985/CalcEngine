@@ -12,13 +12,12 @@
 
     function init() {
         var id = $location.absUrl();
-        $scope.isLoading = true;
         configService.initialize().then(function (data) {
             $scope.isLoading = true;
             var id = $scope.getConfigID();
              configService.getCalc(id)
                .then(function (data) {
-                   $scope.isLoading = true;
+                   $scope.isLoading = false;
                    $scope.config = data;
                }, onError);
  
@@ -44,6 +43,11 @@
              Parameter: []
 
          });
+     }
+
+     $scope.CopyFunction = function (colIndex, index) {
+         var Functions = $scope.config[colIndex].Functions[index];
+         $scope.config[colIndex].Functions.push(angular.copy(Functions));
      }
 
      $scope.AddCategory = function (colIndex) {
@@ -160,7 +164,7 @@
      $scope.FunctionButtonClick = function (size, colIndex, index) {
          $scope.Parameter = this.config[colIndex].Functions[index].Parameter;
          var Function = this.config[colIndex].Functions[index].Function;
-         $scope.getVariableTypes();
+         //$scope.getVariableTypes();
          var FunctionCtrl = null;
          var FunctionTemp = null;
          FunctionCtrl = $scope.getFunctionCtrl(Function);
