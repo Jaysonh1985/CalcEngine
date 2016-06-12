@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('groupCtrl', function ($scope, $uibModalInstance, $log, $http, $location, $window, $routeParams, Name, Description) {
+﻿sulhome.kanbanBoardApp.controller('groupCtrl', function ($scope, $uibModalInstance, $log, Name, Description) {
     // Model
     $scope.Name = Name;
     $scope.Description = Description;

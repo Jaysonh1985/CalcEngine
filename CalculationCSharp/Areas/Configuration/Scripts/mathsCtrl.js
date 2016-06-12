@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('mathsCtrl', function ($scope, $uibModalInstance, $log, $http, $location, $window, $routeParams, Functions) {
+﻿sulhome.kanbanBoardApp.controller('mathsCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions) {
     // Model
     $scope.maths = Functions;
     $scope.addItem = function () {
