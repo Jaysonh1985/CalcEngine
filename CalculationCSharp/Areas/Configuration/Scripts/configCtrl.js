@@ -49,9 +49,12 @@
      $scope.AddCategory = function (colIndex) {
          $scope.config.push({
              ID: this.config.length,
-             Name: "New Category",
+             Name: null,
+             Description: null,
              Functions: []
          });
+
+         $scope.GroupButtonClick('lg', this.config.length - 1);
      }
 
      $scope.SaveButtonClick = function SaveBoard() {
@@ -197,6 +200,30 @@
 
          modalInstance.result.then(function (selectedItem) {
              $scope.config[colIndex].Functions[index].Logic = selectedItem;
+         }, function () {
+             $log.info('Modal dismissed at: ' + new Date());
+         });
+     };
+
+     $scope.GroupButtonClick = function (size, colIndex) {
+         $scope.Name = this.config[colIndex].Name;
+         $scope.Description = this.config[colIndex].Description;
+         var modalInstance = $uibModal.open({
+             animation: true,
+             templateUrl: '/Areas/Configuration/Scripts/GroupModal.html',
+             scope: $scope,
+             controller: 'groupCtrl',
+             size: size,
+             resolve: {
+                 Name: function () { return $scope.Name },
+                 Description: function () { return $scope.Description }
+             }
+         });
+
+         modalInstance.result.then(function (selectedItem) {
+             $scope.config[colIndex].Name = selectedItem[0].Name;
+             $scope.config[colIndex].Description = selectedItem[0].Description;
+            
          }, function () {
              $log.info('Modal dismissed at: ' + new Date());
          });

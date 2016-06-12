@@ -3,15 +3,13 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<p>
-    
-    <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">
-</p>
-<div ng-controller="configMenuCtrl">
+<br />
+
+<div class="container body-content" ng-controller="configMenuCtrl">
+    <br />
     <button class="btn btn-default" ng-click="addBoard()">Add</button>
-
-
-    <table class="table table-bordered table table-responsive">
+    <br />
+    <table class="table table-responsive">
         <tr>
             <th>
                 Name

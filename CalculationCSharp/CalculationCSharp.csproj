@@ -288,6 +288,8 @@
   <ItemGroup>
     <Content Include="AppScript\Directives\additionalControls.js" />
     <Content Include="Areas\Configuration\Scripts\logicCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\GroupModal.html" />
+    <Content Include="Areas\Configuration\Scripts\groupCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\MathsModal.html" />
     <Content Include="Areas\Configuration\Scripts\mathsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\configService.js" />
