@@ -2,12 +2,12 @@
 <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
 <input class="btn btn-default" type="button" value="Calculate" ng-click="CalcButtonClick()" />
 <div ui-tree>
-    <uib-accordion ui-tree-nodes="" ng-model="config" close-others="oneAtATime">
-        <uib-accordion-group is-open="status.open" ng-repeat="Category in config" ng-init="colIndex = $index" ui-tree-node>
+    <uib-accordion close-others= false ui-tree-nodes="" ng-model="config" >
+        <uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open= true ui-tree-node>
             <uib-accordion-heading ui-tree-handle>
                 {{Category.Name}}
                 <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                <a ng:click="AddCategory()"><i class="pull-right glyphicon glyphicon-plus "></i></a>
+                <a ng:click="AddCategory($index)"><i class="pull-right glyphicon glyphicon-plus "></i></a>
             </uib-accordion-heading>
             <a ng-click="AddFunction(colIndex, $index)"><i class="glyphicon glyphicon-plus"></i></a>
             <table class="table">
@@ -58,8 +58,8 @@
                         <td><span><input type="text" ng:model="rows.ExpectedResult" class="form-control"></span></td>
                         <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss' }"><span></span></td>
                         <td>
-                            <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remItem(colIndex, $index)">
-                                <span class="glyphicon glyphicon-remove"></span>
+                            <a data-nodrag ng-click="remItem(colIndex, $index)">
+                                <span class="pull-right glyphicon glyphicon-remove"></span>
                             </a>
                         </td>
                     </tr>

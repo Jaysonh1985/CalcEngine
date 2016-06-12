@@ -4,6 +4,11 @@
     $scope.DecimalNames = [];
     $scope.isLoading = true;
     $scope.oneAtATime = false;
+    $scope.status = {
+        isCustomHeaderOpen: false,
+        isFirstOpen: true,
+        isFirstDisabled: false
+    };
 
     function init() {
         var id = $location.absUrl();
@@ -41,7 +46,7 @@
          });
      }
 
-     $scope.AddCategory = function (colIndex, index) {
+     $scope.AddCategory = function (colIndex) {
          $scope.config.push({
              ID: this.config.length,
              Name: "New Category",
