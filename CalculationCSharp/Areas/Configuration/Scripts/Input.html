@@ -1,74 +1,73 @@
 ﻿<br>
 <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
-<uib-accordion ng-repeat="Category in config track by $index" ng-init="colIndex = $index" close-others="oneAtATime">
-    <uib-accordion-group is-open="status.open">
-        <uib-accordion-heading>
-            {{Category.Name}}
-            <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-            <a ng:click="AddCategory()"><i class="pull-right glyphicon glyphicon-plus "></i></a>
-        </uib-accordion-heading>
-        <a ng-click="AddFunction(colIndex, $index)"><i class="glyphicon glyphicon-plus"></i></a>
-        <table class="table" ui-tree id="tree-root">
-            <thead>
-                <tr>
-                    <th>Sort</th>
-                    <th>Logic</th>
-                    <th>Function</th>
-                    <th>Config</th>
-                    <th>Variable</th>
-                    <th>Type</th>
-                    <th>Output</th>
-                    <th>Expected Results</th>
-                    <th>Pass</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody ui-tree-nodes ng:model="config">
-                <tr ng-repeat="rows in Category.Functions track by $index" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)" ui-tree-node>
-                    <td>
-                        <i class="glyphicon glyphicon-list" ui-tree-handle></i>
-                    </td>
-                    <td>
-                        <a ng-click="LogicButtonClick('lg', colIndex, $index)">
-                            <span class="glyphicon glyphicon-wrench"></span>
-                        </a>
-                       
-                    </td>
-                    <td>
-                        <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
-                            <option value=""></option>
-                            <option value="Input">Input</option>
-                            <option value="Maths">Maths</option>
-                        </select>
-                    </td>
-                    <td>
-                        <a ng-click="FunctionButtonClick('lg', colIndex, $index)">
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </a>
+<input class="btn btn-default" type="button" value="Calculate" ng-click="CalcButtonClick()" />
+<div ui-tree>
+    <uib-accordion ui-tree-nodes="" ng-model="config" close-others="oneAtATime">
+        <uib-accordion-group is-open="status.open" ng-repeat="Category in config" ng-init="colIndex = $index" ui-tree-node>
+            <uib-accordion-heading ui-tree-handle>
+                {{Category.Name}}
+                <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                <a ng:click="AddCategory()"><i class="pull-right glyphicon glyphicon-plus "></i></a>
+            </uib-accordion-heading>
+            <a ng-click="AddFunction(colIndex, $index)"><i class="glyphicon glyphicon-plus"></i></a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sort</th>
+                        <th>Logic</th>
+                        <th>Function</th>
+                        <th>Config</th>
+                        <th>Variable</th>
+                        <th>Type</th>
+                        <th>Output</th>
+                        <th>Expected Results</th>
+                        <th>Pass</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody ui-tree-nodes ="" ng:model="Category.Functions" >
+                    <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)" ui-tree-node>
+                        <td>
+                            <i class="glyphicon glyphicon-list" ui-tree-handle></i>
+                        </td>
+                        <td>
+                            <a ng-click="LogicButtonClick('lg', colIndex, $index)">
+                                <span class="glyphicon glyphicon-wrench"></span>
+                            </a>
 
-                    </td>
-                    <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
-                    <td>
-                        {{rows.Type}}
-                    </td>
-                    <td ng-show="editingData[$index]"><input class="form-control text-box single-line" type="text" ng-model="rows.Output" /></td>
-                    <td ng-hide="editingData[$index]">{{rows.Output}}</td>
-                    <td><span><input type="text" ng:model="rows.ExpectedResult" class="form-control"></span></td>
-                    <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss' }"><span></span></td>
-                    <td>
-                        <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remItem(colIndex, $index)">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a ng:click="CalcButtonClick()" class="btn btn-default">Calculate</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </uib-accordion-group>
-</uib-accordion>
+                        </td>
+                        <td>
+                            <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
+                                <option value=""></option>
+                                <option value="Input">Input</option>
+                                <option value="Maths">Maths</option>
+                            </select>
+                        </td>
+                        <td>
+                            <a ng-click="FunctionButtonClick('lg', colIndex, $index)">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </a>
 
+                        </td>
+                        <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
+                        <td>
+                            {{rows.Type}}
+                        </td>
+                        <td ng-show="editingData[$index]"><input class="form-control text-box single-line" type="text" ng-model="rows.Output" /></td>
+                        <td ng-hide="editingData[$index]">{{rows.Output}}</td>
+                        <td><span><input type="text" ng:model="rows.ExpectedResult" class="form-control"></span></td>
+                        <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss' }"><span></span></td>
+                        <td>
+                            <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remItem(colIndex, $index)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </uib-accordion-group>
+    </uib-accordion>
+</div>
 
 
 

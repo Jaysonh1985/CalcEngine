@@ -57,7 +57,7 @@
          }, onError);
      };
 
-     $scope.CalcButtonClick = function SaveBoard() {
+     $scope.CalcButtonClick = function CalcBoard() {
          $scope.isLoading = true;
          var id = $scope.getConfigID();
          configService.postCalc(id, $scope.config).then(function (data) {
@@ -157,23 +157,24 @@
          var FunctionTemp = null;
          FunctionCtrl = $scope.getFunctionCtrl(Function);
          FunctionTemp = $scope.getFunctionTempURL(Function);       
+         if (Function != 'Input') {
+             var modalInstance = $uibModal.open({
+                 animation: true,
+                 templateUrl: FunctionTemp,
+                 scope: $scope,
+                 controller: FunctionCtrl,
+                 size: size,
+                 resolve: {
+                     Functions: function () { return $scope.Parameter }
+                 }
+             });
+             modalInstance.result.then(function (selectedItem) {
+                 $scope.config[colIndex].Functions[index].Parameter = selectedItem;
+             }, function () {
+                 $log.info('Modal dismissed at: ' + new Date());
+             });
+         };
 
-         var modalInstance = $uibModal.open({
-             animation: true,
-             templateUrl: FunctionTemp,
-             scope: $scope,
-             controller: FunctionCtrl,
-             size: size,
-             resolve: {
-                 Functions: function () { return $scope.Parameter }
-             }
-         });
-
-         modalInstance.result.then(function (selectedItem) {
-             $scope.config[colIndex].Functions[index].Parameter = selectedItem;
-         }, function () {
-             $log.info('Modal dismissed at: ' + new Date());
-         });
      };
 
      $scope.LogicButtonClick = function (size, colIndex, index) {
