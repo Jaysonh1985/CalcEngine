@@ -54,7 +54,7 @@
                         <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
                         <td ng-hide="editingData[rows.ID]" width="5%">{{rows.Type}}</td>
                         <td ng-show="editingData[rows.ID]" width="10%">
-                            <select name="singleSelect" ng-model="rows.Type"  class="form-control">
+                            <select name="singleSelect" ng-model="rows.Type" class="form-control">
                                 <option value=""></option>
                                 <option value="String">String</option>
                                 <option value="Decimal">Decimal</option>
@@ -62,7 +62,10 @@
                                 <option value="Date">Date</option>
                             </select>
                         </td>
-                        <td>{{rows.Output}}</td>
+                        <td ng-hide="editingData[rows.ID]" width="5%">{{rows.Output}}</td>
+                        <td ng-show="editingData[rows.ID]" width="10%">
+                            <span><input type="text" ng:model="rows.Output" class="form-control"></span>
+                        </td>
                         <td><span><input type="text" ng:model="rows.ExpectedResult" class="form-control"></span></td>
                         <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss', 'white': rows.Pass == 'Nil' }"><span></span></td>
                         <td>

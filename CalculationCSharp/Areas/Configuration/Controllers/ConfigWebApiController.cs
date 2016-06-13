@@ -93,7 +93,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
                     }
                     else
                     {
-                        if (item.Parameter != null)
+                        if (item.Parameter.Count > 0)
                         {
                             string logic = null;
                             bool logicparse = true;
@@ -154,7 +154,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
                                     }
                                 }
 
-                                item.Type = "Decimal";
+                                
                                 item.Output = Convert.ToString(answer);
 
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")
