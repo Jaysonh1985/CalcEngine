@@ -40,7 +40,7 @@
 
                         </td>
                         <td>
-                            <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction($index)">
+                            <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction(colIndex, $index, rows)">
                                 <option value=""></option>
                                 <option value="Input">Input</option>
                                 <option value="Maths">Maths</option>
@@ -50,11 +50,17 @@
                             <a ng-click="FunctionButtonClick('lg', colIndex, $index)">
                                 <span class="glyphicon glyphicon-cog"></span>
                             </a>
-
                         </td>
                         <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
-                        <td>
-                            {{rows.Type}}
+                        <td ng-hide="editingData[rows.ID]" width="5%">{{rows.Type}}</td>
+                        <td ng-show="editingData[rows.ID]" width="10%">
+                            <select name="singleSelect" ng-model="rows.Type"  class="form-control">
+                                <option value=""></option>
+                                <option value="String">String</option>
+                                <option value="Decimal">Decimal</option>
+                                <option value="Period">Period</option>
+                                <option value="Date">Date</option>
+                            </select>
                         </td>
                         <td>{{rows.Output}}</td>
                         <td><span><input type="text" ng:model="rows.ExpectedResult" class="form-control"></span></td>

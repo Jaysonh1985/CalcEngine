@@ -38,7 +38,7 @@
          $scope.Functions = [];
          $scope.Functions = $scope.config[colIndex].Functions;
          $scope.config[colIndex].Functions.push({
-             ID: this.config[colIndex].length,
+             ID: this.config[colIndex].Functions.length,
              Logic: [],
              Parameter: []
 
@@ -128,21 +128,44 @@
          else {
              $location.path('/');
          }
-     }
-     $scope.setFunction = function (index) {  //function that sets the value of selectedRow to current index
-         $scope.function = this.rows.Function;
-         $scope.disableSelect = true;
+      }
+
+    $scope.editingData = [];
+
+     $scope.setFunction = function (colindex, index, rows) {  //function that sets the value of selectedRow to current index
+
+         $scope.function = $scope.config[colindex].Functions[index].Function;
+
+         if($scope.function == 'Maths')
+         {
+             $scope.config[colindex].Functions[index].Type = 'Decimal';
+             $scope.editingData[rows.ID] = false;
+         }
+         else if ($scope.function == 'Input')
+         {
+             $scope.config[colindex].Functions[index].Type = null;
+             $scope.editingData[rows.ID] = true;
+         }
+         else
+         {
+             $scope.config[colindex].Functions[index].Type = null;
+             $scope.editingData[rows.ID] = false;
+         }
+        
      }
 
      $scope.getVariableTypes = function getVariableTypes() {  //function that sets the parameters available under the different variable types
          var counter = 0;
          var scopeid = 0;
          var functionID = 0;
-
+         $scope.Decimal = [];
+         $scope.DecimalNames = [];
          angular.forEach($scope.config, function (groups) {
              $scope.Decimal = $filter('filter')($scope.config[scopeid].Functions, { Type: 'Decimal' });
              angular.forEach($scope.Decimal, function (functions) {
-                 $scope.DecimalNames.push($scope.Decimal[functionID].Name);
+                 if ($scope.Decimal[functionID].Name != null) {
+                     $scope.DecimalNames.push($scope.Decimal[functionID].Name);
+                 }
                  functionID = functionID + 1
              });
              scopeid = scopeid + 1
@@ -164,7 +187,7 @@
      $scope.FunctionButtonClick = function (size, colIndex, index) {
          $scope.Parameter = this.config[colIndex].Functions[index].Parameter;
          var Function = this.config[colIndex].Functions[index].Function;
-         //$scope.getVariableTypes();
+         $scope.getVariableTypes();
          var FunctionCtrl = null;
          var FunctionTemp = null;
          FunctionCtrl = $scope.getFunctionCtrl(Function);
