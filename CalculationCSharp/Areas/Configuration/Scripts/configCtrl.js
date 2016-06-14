@@ -141,6 +141,10 @@
              $scope.config[colindex].Functions[index].Type = 'Decimal';
              $scope.editingData[rows.ID] = false;
          }
+         else if ($scope.function == 'Dates') {
+             $scope.config[colindex].Functions[index].Type = 'Date';
+             $scope.editingData[rows.ID] = false;
+         }
          else if ($scope.function == 'Input')
          {
              $scope.config[colindex].Functions[index].Type = null;
@@ -176,11 +180,18 @@
          if (Function == 'Maths') {
              return 'mathsCtrl';
          }
+         else if (Function == 'Dates') {
+             return 'datesCtrl'
+         }
+
      }
     
      $scope.getFunctionTempURL = function getFunctionTempURL(Function) {
          if (Function == 'Maths') {
              return '/Areas/Configuration/Scripts/MathsModal.html';
+         }
+         else if (Function == 'Dates') {
+             return '/Areas/Configuration/Scripts/DatesModal.html'
          }
      }
     

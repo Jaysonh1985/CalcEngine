@@ -12,7 +12,7 @@ public class DateFunctions
         return months / 12;
 	}
 
-	 public double YearsDaysBetween(System.DateTime StartDate, System.DateTime EndDate, bool inclusive, int daysperyear)
+	 public double YearsDaysBetween(System.DateTime StartDate, System.DateTime EndDate, bool inclusive, double daysperyear)
 	{
 
 		daysperyear = 365;

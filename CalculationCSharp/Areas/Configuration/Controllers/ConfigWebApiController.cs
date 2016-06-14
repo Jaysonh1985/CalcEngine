@@ -81,7 +81,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             string jsonString = Convert.ToString(json.data);
             List<CategoryViewModel> jCategory = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<CategoryViewModel>));
             List<ConfigViewModel> jConfig = (List<ConfigViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<ConfigViewModel>));
-            decimal answer = 0;
+            Decimal answer = 0;
 
             foreach(var group in jCategory)
             {
@@ -151,11 +151,29 @@ namespace CalculationCSharp.Areas.Config.Controllers
                                         Expression e = new Expression(formula);
                                         var Calculation = e.Evaluate();
                                         answer = Convert.ToDecimal(Calculation);
+                                        item.Output = Convert.ToString(answer);
+                                    }
+                                    else if(item.Function == "Dates")
+                                    {
+                                        DateFunctions DateFunctions = new DateFunctions();
+                                        Dates Dates = new Dates();
+                                        Dates parameters = (Dates)javaScriptSerializ­er.Deserialize(jparameters, typeof(Dates));
+                                        System.DateTime Date1 = DateTime.Parse(parameters.Date1);
+                                        System.DateTime Date2 = DateTime.Parse(parameters.Date2);
+                                        String DateAdjustmentType = parameters.DateAdjustmentType;
+                                        Boolean Inclusive = parameters.Inclusive;
+                                        Double DaysinYear = parameters.DaysinYear;
+
+                                        if(DateAdjustmentType == "YearsDays")
+                                        {
+                                            item.Output = Convert.ToString(DateFunctions.YearsDaysBetween(Date1, Date2, Inclusive,DaysinYear));
+                                        }
+                                        else if(DateAdjustmentType == "YearsMonths")
+                                        {
+                                            item.Output = Convert.ToString(DateFunctions.YearsMonthsBetween(Date1, Date2, Inclusive));
+                                        }
                                     }
                                 }
-
-                                
-                                item.Output = Convert.ToString(answer);
 
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")
                                 {

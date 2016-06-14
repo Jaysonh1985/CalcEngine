@@ -238,6 +238,7 @@
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Logic.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Dates.cs" />
     <Compile Include="Areas\Configuration\Models\CategoryViewModel.cs" />
     <Compile Include="Areas\Configuration\Models\ConfigFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\ConfigViewModel.cs" />
@@ -290,6 +291,8 @@
     <Content Include="Areas\Configuration\Scripts\logicCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\GroupModal.html" />
     <Content Include="Areas\Configuration\Scripts\groupCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\datesCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\DatesModal.html" />
     <Content Include="Areas\Configuration\Scripts\MathsModal.html" />
     <Content Include="Areas\Configuration\Scripts\mathsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\configService.js" />
