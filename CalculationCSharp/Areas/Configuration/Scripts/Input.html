@@ -50,7 +50,7 @@
                         </td>
                         <td>
                             <a ng-click="FunctionButtonClick('lg', colIndex, $index)">
-                                <span uib-popover="{{rows.Parameter}}" popover-trigger="mouseenter" class="glyphicon glyphicon-cog"></span>
+                                <span uib-popover="{{data || rows.Parameter}}" popover-trigger="mouseenter" class="glyphicon glyphicon-cog"></span>
                             </a>
                         </td>
                         <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
@@ -75,7 +75,6 @@
                                 <span class="pull-right glyphicon glyphicon-duplicate"></span>
                             </a>
                         </td>
-
                         <td>
                             <a data-nodrag ng-click="remItem(colIndex, $index)">
                                 <span class="pull-right glyphicon glyphicon-remove"></span>
