@@ -237,8 +237,9 @@
     <Compile Include="Areas\Configuration\Controllers\CalcConfigurationsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Factors.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Logic.cs" />
-    <Compile Include="Areas\Configuration\Models\Actions\Dates.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Period.cs" />
     <Compile Include="Areas\Configuration\Models\CategoryViewModel.cs" />
     <Compile Include="Areas\Configuration\Models\ConfigFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\ConfigViewModel.cs" />
@@ -288,11 +289,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppScript\Directives\additionalControls.js" />
+    <Content Include="Areas\Configuration\Scripts\FactorsModal.html" />
+    <Content Include="Areas\Configuration\Scripts\factorsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\logicCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\GroupModal.html" />
     <Content Include="Areas\Configuration\Scripts\groupCtrl.js" />
-    <Content Include="Areas\Configuration\Scripts\datesCtrl.js" />
-    <Content Include="Areas\Configuration\Scripts\DatesModal.html" />
+    <Content Include="Areas\Configuration\Scripts\periodCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\PeriodModal.html" />
     <Content Include="Areas\Configuration\Scripts\MathsModal.html" />
     <Content Include="Areas\Configuration\Scripts\mathsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\configService.js" />

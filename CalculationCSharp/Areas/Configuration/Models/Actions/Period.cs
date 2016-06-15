@@ -7,7 +7,7 @@ using System.Dynamic;
 
 namespace CalculationCSharp.Areas.Configuration.Models
 {
-    public class Dates
+    public class Period
     {
         public string DateAdjustmentType { get; set; }
         public dynamic Date1 { get; set; }

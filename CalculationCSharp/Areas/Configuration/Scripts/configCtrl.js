@@ -141,8 +141,12 @@
              $scope.config[colindex].Functions[index].Type = 'Decimal';
              $scope.editingData[rows.ID] = false;
          }
-         else if ($scope.function == 'Dates') {
-             $scope.config[colindex].Functions[index].Type = 'Date';
+         else if ($scope.function == 'Period') {
+             $scope.config[colindex].Functions[index].Type = 'Decimal';
+             $scope.editingData[rows.ID] = false;
+         }
+         else if ($scope.function == 'Factors') {
+             $scope.config[colindex].Functions[index].Type = 'Decimal';
              $scope.editingData[rows.ID] = false;
          }
          else if ($scope.function == 'Input')
@@ -180,8 +184,11 @@
          if (Function == 'Maths') {
              return 'mathsCtrl';
          }
-         else if (Function == 'Dates') {
-             return 'datesCtrl'
+         else if (Function == 'Period') {
+             return 'periodCtrl'
+         }
+         else if (Function == 'Factors') {
+             return 'factorsCtrl'
          }
 
      }
@@ -190,8 +197,11 @@
          if (Function == 'Maths') {
              return '/Areas/Configuration/Scripts/MathsModal.html';
          }
-         else if (Function == 'Dates') {
-             return '/Areas/Configuration/Scripts/DatesModal.html'
+         else if (Function == 'Period') {
+             return '/Areas/Configuration/Scripts/PeriodModal.html'
+         }
+                  else if (Function == 'Factors') {
+             return '/Areas/Configuration/Scripts/FactorsModal.html'
          }
      }
     

@@ -153,11 +153,11 @@ namespace CalculationCSharp.Areas.Config.Controllers
                                         answer = Convert.ToDecimal(Calculation);
                                         item.Output = Convert.ToString(answer);
                                     }
-                                    else if(item.Function == "Dates")
+                                    else if(item.Function == "Period")
                                     {
                                         DateFunctions DateFunctions = new DateFunctions();
-                                        Dates Dates = new Dates();
-                                        Dates parameters = (Dates)javaScriptSerializ­er.Deserialize(jparameters, typeof(Dates));
+                                        Period Dates = new Period();
+                                        Period parameters = (Period)javaScriptSerializ­er.Deserialize(jparameters, typeof(Period));
                                         System.DateTime Date1 = DateTime.Parse(parameters.Date1);
                                         System.DateTime Date2 = DateTime.Parse(parameters.Date2);
                                         String DateAdjustmentType = parameters.DateAdjustmentType;
@@ -173,6 +173,13 @@ namespace CalculationCSharp.Areas.Config.Controllers
                                             item.Output = Convert.ToString(DateFunctions.YearsMonthsBetween(Date1, Date2, Inclusive));
                                         }
                                     }
+                                    else if (item.Function == "Factors")
+                                    {
+                                        LookupFunctions FactorFunctions = new LookupFunctions();
+                                        Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));   
+                                        item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, parameters.LookupValue,parameters.DataType,parameters.ColumnNo));
+                                    }
+
                                 }
 
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")

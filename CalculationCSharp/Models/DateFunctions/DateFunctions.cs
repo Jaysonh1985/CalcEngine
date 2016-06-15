@@ -24,7 +24,7 @@ public class DateFunctions
 		//if (isLeapYear(StartDate, EndDate) == true) {
 		//	daysperyear = 365;
 		//}
-		days = days / daysperyear;
+		days = Math.Round(days / daysperyear,3);
 
         return days;
 

@@ -1,0 +1,44 @@
+﻿<body ng-controller="datesCtrl">
+    <div>
+            <div class="modal-header">
+                <h4>Factors Lookup</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form">
+                    <fieldset>
+                        <legend>Factor Inputs</legend>
+                        <div class="form-group">
+                            <label for="TableName" class="control-label col-md-2">Table Name</label>
+                            <div class="col-sm-9">
+                                <input type="Text" id="TableName" name="TableName" class="form-control" ng-model="factors.TableName" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="LookupValue" class="control-label col-md-2">Lookup Value</label>
+                            <div class="col-sm-9">
+                                <input type="Text" id="LookupValue" name="LookupValue" class="form-control" ng-model="factors.LookupValue" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DataType" class="control-label col-md-2">Data Type</label>
+                            <div class="col-sm-9">
+                                <input type="Text" id="DataType" name="DataType" class="form-control" ng-model="factors.DataType" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ColumnNo" class="control-label col-md-2">Column Number</label>
+                            <div class="col-sm-9">
+                                <input type="Text" id="ColumnNo" name="ColumnNo" class="form-control" ng-model="factors.ColumnNo" />
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="ok($index)">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+    </div>
+
+</body>

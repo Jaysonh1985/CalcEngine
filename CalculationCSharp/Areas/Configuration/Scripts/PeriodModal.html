@@ -1,4 +1,4 @@
-﻿<body ng-controller="datesCtrl">
+﻿<body ng-controller="periodCtrl">
     <div>
             <div class="modal-header">
                 <h4>Date Calculations</h4>
@@ -7,11 +7,11 @@
 
                 <form class="form-horizontal" role="form">
                     <fieldset>
-                        <legend>Dates to Apply</legend>
+                        <legend>Period to Apply</legend>
                         <div class="form-group">
-                            <label for="DateAdjType" class="control-label col-md-2">Date Adjustment Type</label>
+                            <label for="DateAdjType" class="control-label col-md-2">Adjustment Type</label>
                             <div class="col-sm-9">
-                                <select id="DateAdjType" name="singleSelect" ng:model="dates.DateAdjustmentType" class="form-control">
+                                <select id="DateAdjType" name="singleSelect" ng:model="period.DateAdjustmentType" class="form-control">
                                     <option value=""></option>
                                     <option value="YearsDays">Years Days</option>
                                     <option value="YearsMonths">Years Months</option>
@@ -19,36 +19,34 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <legend>Dates to Apply</legend>
                         <div class="form-group">
                             <label for="Date1" class="control-label col-md-2">Start Date</label>
                             <div class="col-sm-9">
-                                <input type="Text" id="Date1" name="Date1" class="form-control" ng-model="dates.Date1" />
+                                <input type="Text" id="Date1" name="Date1" class="form-control" ng-model="period.Date1" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Date2" class="control-label col-md-2">End Date</label>
                             <div class="col-sm-9">
-                                <input type="Text" id="Date2" name="Date2" class="form-control" ng-model="dates.Date2" />
+                                <input type="Text" id="Date2" name="Date2" class="form-control" ng-model="period.Date2" />
                             </div>
                         </div>
-                    </fieldset>
                     <fieldset>
                         <legend>Rounding and Adjustment</legend>
                         <div class="form-group">
                             <label for="inclusive" class="control-label col-md-2">Inclusive</label>
                             <div class="col-sm-9">
-                                <select id="inclusive" name="singleSelect" ng:model="dates.Inclusive" class="form-control">
+                                <select id="inclusive" name="singleSelect" ng:model="period.Inclusive" class="form-control">
                                     <option value=""></option>
                                     <option value="True">True</option>
                                     <option value="False">False</option>
                                 </select>
                             </div>
-
+                        </div>
+                        <div class="form-group">
                             <label for="daysinyr" class="control-label col-md-2">Days in Year</label>
                             <div class="col-sm-9">
-                                <select id="daysinyr" name="singleSelect" ng:model="dates.DaysinYear" class="form-control">
+                                <select id="daysinyr" name="singleSelect" ng:model="period.DaysinYear" class="form-control">
                                     <option value=""></option>
                                     <option value="365">365</option>
                                     <option value="365.25">365.25</option>
