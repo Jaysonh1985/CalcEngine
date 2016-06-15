@@ -212,6 +212,10 @@ a:focus {
     outline-offset: -2px;
 }
 
+.popover-content {
+    word-wrap: break-word;
+}
+
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 

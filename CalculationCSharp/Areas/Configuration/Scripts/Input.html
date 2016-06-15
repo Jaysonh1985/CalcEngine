@@ -50,7 +50,7 @@
                         </td>
                         <td>
                             <a ng-click="FunctionButtonClick('lg', colIndex, $index)">
-                                <span class="glyphicon glyphicon-cog"></span>
+                                <span uib-popover="{{rows.Parameter}}" popover-trigger="mouseenter" class="glyphicon glyphicon-cog"></span>
                             </a>
                         </td>
                         <td><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>

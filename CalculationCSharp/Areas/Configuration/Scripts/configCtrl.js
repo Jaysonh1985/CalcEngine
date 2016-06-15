@@ -276,7 +276,6 @@
              $log.info('Modal dismissed at: ' + new Date());
          });
      };
-
     
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {
