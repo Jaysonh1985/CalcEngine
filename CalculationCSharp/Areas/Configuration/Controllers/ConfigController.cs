@@ -38,6 +38,13 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
         }
 
+        // GET: Project/ProjectConfigs
+        public ActionResult Input()
+        {
+
+            return View();
+        }
+
 
 
 

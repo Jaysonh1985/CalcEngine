@@ -291,6 +291,7 @@
     <Content Include="AppScript\Directives\additionalControls.js" />
     <Content Include="Areas\Configuration\Scripts\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\factorsCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\formCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\logicCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\GroupModal.html" />
     <Content Include="Areas\Configuration\Scripts\groupCtrl.js" />
@@ -525,6 +526,7 @@
     <Content Include="Content\jquery.mobile.theme-1.4.5.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="Images\Down_Arrow.jpg" />
+    <Content Include="Scripts\anguladynamicform.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-drag-and-drop-lists.js" />
@@ -573,6 +575,7 @@
     <Content Include="Areas\Project\Views\Board\Index.cshtml" />
     <None Include=".bin\node.cmd" />
     <Content Include="Areas\Configuration\Views\Config\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Config\Input.cshtml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim.pubxml" />
     <None Include="Properties\PublishProfiles\StandardImport.pubxml" />
