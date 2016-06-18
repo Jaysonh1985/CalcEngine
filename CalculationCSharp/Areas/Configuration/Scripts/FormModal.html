@@ -1,0 +1,51 @@
+﻿<body ng-controller="formCtrl">
+    <div>
+        <div class="modal-header">
+            <h4>Form Builder</h4>
+        </div>
+        <div class="modal-body">
+
+            <form class="form-horizontal" role="form">
+                <fieldset>
+                    <legend>Input Type</legend>
+                    <div class="form-group">
+                        <label for="model" class="control-label col-md-2">Parameter</label>
+                        <div class="col-sm-9">
+                            <input type="Text" id="model" name="caption" class="form-control" ng-model="form.model" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="caption" class="control-label col-md-2">Label</label>
+                        <div class="col-sm-9">
+                            <input type="Text" id="caption" name="caption" class="form-control" ng-model="form.caption" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="control-label col-md-2">Type</label>
+                        <div class="col-sm-9">
+                            <select name="singleSelect" ng-model="form.type" class="form-control">
+                                <option value=""></option>
+                                <option value="string">String</option>
+                                <option value="integer">Integer</option>
+                                <option value="date">Date</option>
+                                <option value="select">Select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="maxLength" class="control-label col-md-2">Max Length</label>
+                        <div class="col-sm-9">
+                            <input type="Text" id="maxLength" name="maxLength" class="form-control" ng-model="form.maxLength" />
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok($index)">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+
+</body>

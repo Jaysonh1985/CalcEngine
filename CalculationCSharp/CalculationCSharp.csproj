@@ -292,6 +292,7 @@
     <Content Include="Areas\Configuration\Scripts\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\factorsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\formCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\FormModal.html" />
     <Content Include="Areas\Configuration\Scripts\logicCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\GroupModal.html" />
     <Content Include="Areas\Configuration\Scripts\groupCtrl.js" />
