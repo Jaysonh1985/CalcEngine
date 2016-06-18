@@ -180,22 +180,7 @@
          });
      }
 
-     $scope.getFormFields = function getFormFields() {  //function that sets the parameters available under the different variable types
-         var counter = 0;
-         var scopeid = 0;
-         var functionID = 0;
-         $scope.fields = [];
-         $scope.fieldset = [];
-         angular.forEach($scope.config, function (groups) {
-            functionID = 0;
-            $scope.fields = $filter('filter')($scope.config[scopeid].Functions, { Function: 'Input' });
-            angular.forEach($scope.fields, function (functions) {
-                 $scope.fieldset.push($scope.fields[functionID].Parameter[0]);
-                 functionID = functionID + 1
-             });
-             scopeid = scopeid + 1
-         });
-     }
+
 
      $scope.getFunctionCtrl = function getFunctionCtrl(Function) {
          if (Function == 'Maths') {
@@ -208,7 +193,7 @@
              return 'factorsCtrl'
          }
          else if (Function == 'Input') {
-             return 'formCtrl'
+             return 'inputCtrl'
          }
 
      }
@@ -224,7 +209,7 @@
              return '/Areas/Configuration/Scripts/FactorsModal.html'
          }
          else if (Function == 'Input') {
-             return '/Areas/Configuration/Scripts/FormModal.html'
+             return '/Areas/Configuration/Scripts/InputModal.html'
          }
      }
     

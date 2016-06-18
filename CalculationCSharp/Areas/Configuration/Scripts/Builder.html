@@ -39,10 +39,15 @@
                             </a>
 
                         </td>
-                        <td>
+                        <td ng-if="Category.Name == 'Input'">
                             <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction(colIndex, $index, rows)">
                                 <option value=""></option>
                                 <option value="Input">Input</option>
+                            </select>
+                        </td>
+                        <td ng-if="Category.Name != 'Input'">
+                            <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction(colIndex, $index, rows)">
+                                <option value=""></option>
                                 <option value="Maths">Maths</option>
                                 <option value="Period">Period</option>
                                 <option value="Factors">Factors</option>

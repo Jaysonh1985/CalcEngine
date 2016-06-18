@@ -292,7 +292,8 @@
     <Content Include="Areas\Configuration\Scripts\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\factorsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\formCtrl.js" />
-    <Content Include="Areas\Configuration\Scripts\FormModal.html" />
+    <Content Include="Areas\Configuration\Scripts\inputCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\InputModal.html" />
     <Content Include="Areas\Configuration\Scripts\logicCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\GroupModal.html" />
     <Content Include="Areas\Configuration\Scripts\groupCtrl.js" />
@@ -302,7 +303,7 @@
     <Content Include="Areas\Configuration\Scripts\mathsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\configService.js" />
     <Content Include="Areas\Configuration\Scripts\configCtrl.js" />
-    <Content Include="Areas\Configuration\Scripts\Input.html" />
+    <Content Include="Areas\Configuration\Scripts\Builder.html" />
     <Content Include="Areas\Configuration\Scripts\LogicModal.html" />
     <Content Include="Areas\Configuration\Scripts\configMenuCtrl.js" />
     <Content Include="Areas\Project\Scripts\boardFilter.html" />
@@ -576,7 +577,7 @@
     <Content Include="Areas\Project\Views\Board\Index.cshtml" />
     <None Include=".bin\node.cmd" />
     <Content Include="Areas\Configuration\Views\Config\Index.cshtml" />
-    <Content Include="Areas\Configuration\Views\Config\Input.cshtml" />
+    <Content Include="Areas\Configuration\Views\Config\Form.cshtml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim.pubxml" />
     <None Include="Properties\PublishProfiles\StandardImport.pubxml" />

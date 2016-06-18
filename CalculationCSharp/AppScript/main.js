@@ -5,7 +5,7 @@ sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRo
 
         $routeProvider.when('/', {
             controller: 'configCtrl',
-            templateUrl: '/Areas/Configuration/Scripts/Input.html'
+            templateUrl: '/Areas/Configuration/Scripts/Builder.html'
 
         })
         .otherwise({ redirectTo: '/' });
