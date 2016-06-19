@@ -139,20 +139,20 @@
          if($scope.function == 'Maths')
          {
              $scope.config[colindex].Functions[index].Type = 'Decimal';
-             $scope.editingData[rows.ID] = false;
+             $scope.editingData[rows.ID] = true;
          }
          else if ($scope.function == 'Period') {
              $scope.config[colindex].Functions[index].Type = 'Decimal';
-             $scope.editingData[rows.ID] = false;
+             $scope.editingData[rows.ID] = true;
          }
          else if ($scope.function == 'Factors') {
              $scope.config[colindex].Functions[index].Type = 'Decimal';
-             $scope.editingData[rows.ID] = false;
+             $scope.editingData[rows.ID] = true;
          }
          else if ($scope.function == 'Input')
          {
              $scope.config[colindex].Functions[index].Type = null;
-             $scope.editingData[rows.ID] = true;
+             $scope.editingData[rows.ID] = false;
          }
          else
          {
@@ -160,6 +160,7 @@
              $scope.editingData[rows.ID] = false;
          }
         
+         $scope.paramSet[rows.ID] = true;
      }
 
      $scope.getVariableTypes = function getVariableTypes() {  //function that sets the parameters available under the different variable types
@@ -234,6 +235,11 @@
              });
              modalInstance.result.then(function (selectedItem) {
                  $scope.config[colIndex].Functions[index].Parameter = selectedItem;
+
+                 if ($scope.config[colIndex].Functions[index].Function == 'Input') {
+                     $scope.config[colIndex].Functions[index].Name = selectedItem[0].model;
+                     $scope.config[colIndex].Functions[index].Type = selectedItem[0].type;
+                 }
              }, function () {
                  $log.info('Modal dismissed at: ' + new Date());
              });

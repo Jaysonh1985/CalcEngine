@@ -1,10 +1,10 @@
 ﻿sulhome.kanbanBoardApp.controller('formCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, $filter) {
 
 function init() {
-        var id = 2;
+        var id = 1;
         configService.initialize().then(function (data) {
             $scope.isLoading = true;
-            var id = 1  ;
+            var id = 1;
              configService.getCalc(id)
                .then(function (data) {
                    $scope.isLoading = false;
@@ -34,6 +34,34 @@ function init() {
 $scope.data = {
 
 };
+
+function getIndexOf(arr, val, prop) {
+    var l = arr.length,
+      k = 0;
+    for (k = 0; k < l; k = k + 1) {
+        if (arr[k][prop] === val) {
+            return k;
+        }
+    }
+    return false;
+}
+
+    $scope.CalcButtonClick = function CalcBoard() {
+    $scope.isLoading = true;
+
+    
+    angular.forEach($scope.data, function (value, key) {
+        var index = getIndexOf($scope.config[0].Functions, key, 'Name');
+        $scope.config[0].Functions[index].Value = value;
+    });
+
+    configService.postCalc(1, $scope.config).then(function (data) {
+        $scope.isLoading = false;
+        $scope.config = data;
+    }, onError);
+
+    };
+  
         
 init();
 });
