@@ -17,7 +17,7 @@ using CalculationCSharp.Areas.Configuration.Models.Actions;
 
 namespace CalculationCSharp.Areas.Config.Controllers
 {
-    public class ConfigWebApiController : ApiController
+    public class CalculationWebApiController : ApiController
     {
         ConfigRepository repo = new ConfigRepository();
         CalculationDBContext db = new CalculationDBContext();
@@ -27,7 +27,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
         public HttpResponseMessage Get(int? id)
         {
             var response = Request.CreateResponse();
-            CalcConfiguration calcConfiguration = db.CalcConfiguration.Find(id);
+            CalcRelease calcConfiguration = db.CalcRelease.Find(id);
             if (calcConfiguration == null)
             {
                 
@@ -60,7 +60,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             dynamic json = config;
 
             var response = Request.CreateResponse();
-            CalcConfiguration calcConfiguration = db.CalcConfiguration.Find(id);
+            CalcRelease calcConfiguration = db.CalcRelease.Find(id);
 
             calcConfiguration.Configuration = Convert.ToString(json.data);
             calcConfiguration.User = HttpContext.Current.User.Identity.Name.ToString();
@@ -85,11 +85,10 @@ namespace CalculationCSharp.Areas.Config.Controllers
             List<OutputList> OutputList = new List<OutputList>();
             Calculate Calculate = new Calculate();
 
-            jCategory = Calculate.DebugResults(jCategory);
             OutputList = Calculate.OutputResults(jCategory);
             repo.UpdateConfig(jCategory);
             var response = Request.CreateResponse();
-            response.Content = new StringContent(JsonConvert.SerializeObject(jCategory));
+            response.Content = new StringContent(JsonConvert.SerializeObject(OutputList));
             response.StatusCode = HttpStatusCode.OK;
             return response;
         }

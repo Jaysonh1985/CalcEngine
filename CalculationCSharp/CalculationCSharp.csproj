@@ -233,6 +233,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Calculation\CalculationAreaRegistration.cs" />
+    <Compile Include="Areas\Calculation\Controllers\CalculationController.cs" />
+    <Compile Include="Areas\Calculation\Controllers\CalcReleasesController.cs" />
+    <Compile Include="Areas\Calculation\Controllers\CalculationWebApiController.cs" />
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcConfigurationsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
@@ -290,9 +294,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppScript\Directives\additionalControls.js" />
+    <Content Include="Areas\Calculation\Scripts\calculationMenuCtrl.js" />
+    <Content Include="Areas\Calculation\Scripts\calculationService.js" />
     <Content Include="Areas\Configuration\Scripts\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\factorsCtrl.js" />
-    <Content Include="Areas\Configuration\Scripts\formCtrl.js" />
+    <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\inputCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\InputModal.html" />
     <Content Include="Areas\Configuration\Scripts\logicCtrl.js" />
@@ -578,7 +584,9 @@
     <Content Include="Areas\Project\Views\Board\Index.cshtml" />
     <None Include=".bin\node.cmd" />
     <Content Include="Areas\Configuration\Views\Config\Index.cshtml" />
-    <Content Include="Areas\Configuration\Views\Config\Form.cshtml" />
+    <Content Include="Areas\Calculation\Views\Calculation\Form.cshtml" />
+    <Content Include="Areas\Calculation\Views\web.config" />
+    <Content Include="Areas\Calculation\Views\Calculation\Index.cshtml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim.pubxml" />
     <None Include="Properties\PublishProfiles\StandardImport.pubxml" />
@@ -690,6 +698,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Calculation\Models\" />
+    <Folder Include="Areas\Calculation\Views\Shared\" />
     <Folder Include="Areas\Configuration\Views\Shared\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Areas\Regression\Views\Test\" />

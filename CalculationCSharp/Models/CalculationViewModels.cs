@@ -75,7 +75,18 @@ namespace CalculationCSharp.Models
     public class CalcConfiguration
     {
         public int ID { get; set; }
-        public string Group { get; set; }
+        public string Scheme { get; set; }
+        public string Name { get; set; }
+        public string User { get; set; }
+        [Column(TypeName = "xml")]
+        public string Configuration { get; set; }
+        public DateTime UpdateDate { get; set; }
+    }
+
+    public class CalcRelease
+    {
+        public int ID { get; set; }
+        public string Scheme { get; set; }
         public string Name { get; set; }
         public string User { get; set; }
         [Column(TypeName = "xml")]
@@ -90,5 +101,6 @@ namespace CalculationCSharp.Models
         public DbSet<Codes> Codes { get; set; }
         public DbSet<ProjectBoard> ProjectBoard { get; set; }
         public DbSet<CalcConfiguration> CalcConfiguration { get; set; }
+        public DbSet<CalcRelease> CalcRelease { get; set; }
     }
 }
