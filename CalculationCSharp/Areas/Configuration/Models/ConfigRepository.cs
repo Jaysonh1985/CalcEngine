@@ -1,4 +1,5 @@
 ﻿using CalculationCSharp.Areas.Configuration.Models;
+using CalculationCSharp.Models.Calculation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -39,6 +40,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public void UpdateConfig(List<CategoryViewModel> Config)
         {
             HttpContext.Current.Cache["config"] = Config;
+
         }
 
 

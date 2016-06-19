@@ -1,5 +1,7 @@
 ﻿sulhome.kanbanBoardApp.controller('formCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, $filter) {
 
+    $scope.output = [];
+
 function init() {
         var id = 1;
         configService.initialize().then(function (data) {
@@ -58,7 +60,7 @@ function getIndexOf(arr, val, prop) {
     configService.postCalc(1, $scope.config).then(function (data) {
         $scope.isLoading = false;
         $scope.config = data;
-    }, onError);
+    });
 
     };
   

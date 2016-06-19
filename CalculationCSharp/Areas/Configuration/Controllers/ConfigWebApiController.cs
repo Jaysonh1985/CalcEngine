@@ -12,6 +12,7 @@ using NCalc;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity;
 using System.Web;
+using CalculationCSharp.Models.Calculation;
 
 namespace CalculationCSharp.Areas.Config.Controllers
 {
@@ -20,6 +21,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
         ConfigRepository repo = new ConfigRepository();
         CalculationDBContext db = new CalculationDBContext();
         JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+        public List<OutputList> OutputList = new List<OutputList>();
 
         // GET api/<controller>
         [System.Web.Http.HttpGet]
@@ -195,6 +197,9 @@ namespace CalculationCSharp.Areas.Config.Controllers
                                 {
                                     item.Pass = "false";
                                 }
+
+                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
+
                             }
                             else
                             {
@@ -204,6 +209,8 @@ namespace CalculationCSharp.Areas.Config.Controllers
                     }
                 }
             }
+
+
             repo.UpdateConfig(jCategory);
             var response = Request.CreateResponse();
             response.Content = new StringContent(JsonConvert.SerializeObject(jCategory));

@@ -3,10 +3,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <html>
-<body ng-controller="formCtrl" class="ng-cloak">
-    <input class="btn btn-default" type="button" value="Calculate" ng-click="CalcButtonClick()" />
+<body ng-controller="formCtrl" class="ng-cloak">   
     <div class="container">
-
+        <input class="btn btn-default" type="button" value="Calculate" ng-click="CalcButtonClick()" />
         <h1>Dynamic Form</h1>
 
         <dynamic-table-form fields="fieldset" data="data" class="form-horizontal">
@@ -24,7 +23,7 @@
 
         <h1>Raw Data</h1>
 
-        <pre>{{data|json}}</pre>
+        <pre>{{output|json}}</pre>
 
     </div>
 

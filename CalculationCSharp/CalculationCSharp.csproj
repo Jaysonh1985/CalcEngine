@@ -237,6 +237,7 @@
     <Compile Include="Areas\Configuration\Controllers\CalcConfigurationsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Factors.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Logic.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Period.cs" />
