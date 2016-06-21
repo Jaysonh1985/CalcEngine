@@ -17,4 +17,10 @@ namespace CalculationCSharp.Models.Calculation
 
     }
 
+    public class OutputListGroup
+    {
+        public int ID { get; set; }
+        public string Group { get; set; }
+        public List<OutputList> Output { get; set; }
+    }
 }

@@ -82,7 +82,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             string jsonString = Convert.ToString(json.data);
             List<CategoryViewModel> jCategory = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<CategoryViewModel>));
             List<ConfigViewModel> jConfig = (List<ConfigViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<ConfigViewModel>));
-            List<OutputList> OutputList = new List<OutputList>();
+            List<OutputListGroup> OutputList = new List<OutputListGroup>();
             Calculate Calculate = new Calculate();
 
             OutputList = Calculate.OutputResults(jCategory);

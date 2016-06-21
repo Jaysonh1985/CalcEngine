@@ -13,6 +13,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity;
 using System.Web;
 using CalculationCSharp.Models.Calculation;
+using System.Linq;
 
 namespace CalculationCSharp.Areas.Configuration.Models.Actions
 {
@@ -28,11 +29,32 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
             Calculate.CalculateAction(jCategory);
             return jCategory;
         }
-        public List<OutputList> OutputResults(List<CategoryViewModel> jCategory)
+        public List<OutputListGroup> OutputResults(List<CategoryViewModel> jCategory)
         {
             Calculate Calculate = new Calculate();
             Calculate.CalculateAction(jCategory);
-            return Calculate.OutputList;
+
+            var OutputListGroupOrdered = Calculate.OutputList.GroupBy(employees => employees.Group);
+            List<OutputListGroup> List = new List<OutputListGroup>();
+            List<OutputList> SubList = new List<OutputList>();
+
+            var i = 0;
+
+            foreach (var group in OutputListGroupOrdered)
+            {
+                foreach (var list in group)
+                {
+
+                    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
+
+                }
+
+                List.Add(new OutputListGroup { ID = i, Group = group.Key, Output = SubList});
+
+                i = i + 1;
+            }
+
+            return List;
         }
 
         public void CalculateAction(List<CategoryViewModel> jCategory)

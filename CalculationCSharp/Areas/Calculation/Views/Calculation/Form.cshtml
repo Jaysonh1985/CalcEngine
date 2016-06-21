@@ -30,21 +30,25 @@
                         </h4>
                     </div>
 
-                    <div id="collapse1" class="panel-collapse collapse in">
-                        <br />
+                    <uib-accordion close-others=false ng-model="output">
+                        <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open=true>
+                            <uib-accordion-heading>
+                                {{group.Group}}
+                                <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                            </uib-accordion-heading>
 
-                        <table id="table" class="table">
-                            <tr class="h4">
-                                <th>
-                                    ID
-                                </th>
-                                <th>
-                                    Field
-                                </th>
-                                <th>
-                                    Value
-                             </th>
-                                <tr ng-repeat="row in output">
+                            <table id="table" class="table">
+                                <tr class="h4">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Field
+                                    </th>
+                                    <th>
+                                        Value
+                                    </th>
+                                <tr ng-repeat="row in group.Output">
                                     <td>
                                         {{row.ID}}
                                     </td>
@@ -55,11 +59,12 @@
                                         {{row.Value}}
                                     </td>
                                 </tr>
-                        </table>
-                    </div>
+                            </table>
+                        </uib-accordion-group>
+                    </uib-accordion>
+                </div>
                 </div>
             </div>
-    </div>
-
+ 
 </body>
 </html>

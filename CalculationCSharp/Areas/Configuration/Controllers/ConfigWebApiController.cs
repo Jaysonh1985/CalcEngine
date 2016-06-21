@@ -82,11 +82,8 @@ namespace CalculationCSharp.Areas.Config.Controllers
             string jsonString = Convert.ToString(json.data);
             List<CategoryViewModel> jCategory = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<CategoryViewModel>));
             List<ConfigViewModel> jConfig = (List<ConfigViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<ConfigViewModel>));
-            List<OutputList> OutputList = new List<OutputList>();
             Calculate Calculate = new Calculate();
-
             jCategory = Calculate.DebugResults(jCategory);
-            OutputList = Calculate.OutputResults(jCategory);
             repo.UpdateConfig(jCategory);
             var response = Request.CreateResponse();
             response.Content = new StringContent(JsonConvert.SerializeObject(jCategory));

@@ -54,7 +54,13 @@
             }
         }
         return false;
-    }
+    };
+
+    function createArray(arr) {
+
+
+
+    };
 
     $scope.CalcButtonClick = function CalcBoard() {
         $scope.isLoading = true;
