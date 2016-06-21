@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CalculationCSharp.Models;
+using System.Web;
 
 namespace CalculationCSharp.Areas.Calculation.Controllers
 {
@@ -78,6 +79,10 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
             {
                 return BadRequest(ModelState);
             }
+
+            calcRelease.Configuration = Convert.ToString(calcRelease.Configuration);
+            calcRelease.User = HttpContext.Current.User.Identity.Name.ToString();
+            calcRelease.UpdateDate = DateTime.Now;
 
             db.CalcRelease.Add(calcRelease);
             db.SaveChanges();

@@ -34,6 +34,7 @@
                 <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="updateBoard($index, board)">Update</button>
                 <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Cancel</button>
                 <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard($index)" />
+                <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="releaseBoard($index)">Release</button>
             </td>
         </tr>
     </table>

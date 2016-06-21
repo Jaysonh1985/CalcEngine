@@ -10,8 +10,17 @@
         });
     };
 
+    var getSingleConfig = function (index) {
+        return $http.get("/api/CalcReleases/"+ index).then(function (response) {
+            return response.data;
+        }, function (error) {
+            return $q.reject(error.data.Message);
+        });
+    };
+
+
     var addConfig = function (data) {
-        return $http.post("/api/CalcReleases/PostCalcConfiguration", { data })
+        return $http.post("/api/CalcReleases/PostCalcConfiguration", data)
             .then(function (response) {
                 return response.data;
             }, function (error) {
@@ -104,6 +113,7 @@
         putConfig: putConfig,
         deleteConfig: deleteConfig,
         getConfig: getConfig,
+        getSingleConfig: getSingleConfig,
         getRowid: getRowid,
         getColid: getColid,
         getCalc: getCalc,

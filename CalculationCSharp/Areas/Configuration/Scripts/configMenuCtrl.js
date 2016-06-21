@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routeParams, $uibModal, $log, $location, $window, configService) {
+﻿sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routeParams, $uibModal, $log, $location, $window, configService, calculationService) {
     // Model
     $scope.Boards = [];
     $scope.isLoading = false;
@@ -52,6 +52,31 @@
              configService.sendRequest();
          }, onError);
      };
+
+     $scope.releaseBoard = function (index) {
+
+         $scope.calcrelease = [];
+    
+         calculationService.getSingleConfig(this.Boards[index].ID)
+           .then(function (data) {
+               $scope.isLoading = false;
+               $scope.calcrelease = data;
+           });
+
+         $scope.selected = {
+             Scheme: this.Boards[index].Scheme,
+             Name: this.Boards[index].Name,
+             User: '',
+             Configuration: this.Boards[index].Configuration
+
+            };
+
+         calculationService.addConfig($scope.selected).then(function (data) {
+             $scope.isLoading = false;
+       
+         }, onError);
+     };
+
 
         $scope.deleteBoard = function (index) {
         var cf = confirm("Delete this Board?");

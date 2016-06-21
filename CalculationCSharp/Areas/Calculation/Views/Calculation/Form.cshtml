@@ -6,7 +6,7 @@
 <body ng-controller="calculationCtrl" class="ng-cloak">   
     <div class="container">
 
-        <h1>Dynamic Form</h1>
+        <h1 class="center-block">Dynamic Form</h1>
 
         <dynamic-table-form fields="fieldset" data="data" class="form-horizontal">
 
@@ -22,15 +22,10 @@
         </dynamic-table-form>
         <input class="btn btn-default" type="button" value="Calculate" ng-click="CalcButtonClick()" />
 
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#collapse1">Calculation Ouput</a>
-                        </h4>
-                    </div>
-
-                    <uib-accordion close-others=false ng-model="output">
+        <h1>
+            Calculation Ouput
+        </h1>
+                   <uib-accordion close-others=false ng-model="output">
                         <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open=true>
                             <uib-accordion-heading>
                                 {{group.Group}}
@@ -63,8 +58,6 @@
                         </uib-accordion-group>
                     </uib-accordion>
                 </div>
-                </div>
-            </div>
- 
+
 </body>
 </html>

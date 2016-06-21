@@ -78,6 +78,9 @@
          }, onError);
      };
 
+
+
+
      $scope.remItem = function (colIndex, $index) {
          $scope.config[colIndex].Functions.splice($index, 1);
      }
