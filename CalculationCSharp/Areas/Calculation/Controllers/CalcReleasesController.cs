@@ -28,10 +28,10 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
         public IHttpActionResult GetCalcRelease(int id)
         {
             CalcRelease calcRelease = db.CalcRelease.Find(id);
-            if (calcRelease == null)
-            {
-                return NotFound();
-            }
+            //if (calcRelease == null)
+            ////{
+            ////    return NotFound();
+            ////}
 
             return Ok(calcRelease);
         }
@@ -49,6 +49,9 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
             {
                 return BadRequest();
             }
+
+            calcRelease.User = HttpContext.Current.User.Identity.Name.ToString();
+            calcRelease.UpdateDate = DateTime.Now;
 
             db.Entry(calcRelease).State = EntityState.Modified;
 

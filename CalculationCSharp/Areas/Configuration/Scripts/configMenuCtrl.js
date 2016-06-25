@@ -56,25 +56,49 @@
      $scope.releaseBoard = function (index) {
 
          $scope.calcrelease = [];
-    
-         calculationService.getSingleConfig(this.Boards[index].ID)
-           .then(function (data) {
-               $scope.isLoading = false;
-               $scope.calcrelease = data;
-           });
-
+         $scope.calcreleaseID = null;
+         $scope.calcreleaseID = this.Boards[index].ID;
+         $scope.selected = [];
          $scope.selected = {
+             ID: this.Boards[index].ID,
              Scheme: this.Boards[index].Scheme,
              Name: this.Boards[index].Name,
              User: '',
              Configuration: this.Boards[index].Configuration
 
-            };
+         };
+         calculationService.getSingleConfig(this.Boards[index].ID)
+           .then(function (data) {
+               $scope.isLoading = false;
+               $scope.calcrelease = data;
 
-         calculationService.addConfig($scope.selected).then(function (data) {
+
+
+               if ($scope.calcrelease == null) {
+                   $scope.relaseBoardAdd($scope.selected);
+               }
+               else
+               {
+                   $scope.relaseBoardUpdate($scope.calcreleaseID, $scope.selected);
+               }
+
+
+           });
+
+
+     };
+
+     $scope.relaseBoardAdd = function (data) {
+         calculationService.addConfig(data).then(function (data) {
              $scope.isLoading = false;
-       
          }, onError);
+
+     };
+     $scope.relaseBoardUpdate = function (ID, data) {
+         calculationService.putConfig(ID, data).then(function (data) {
+             $scope.isLoading = false;
+         }, onError);
+
      };
 
 
