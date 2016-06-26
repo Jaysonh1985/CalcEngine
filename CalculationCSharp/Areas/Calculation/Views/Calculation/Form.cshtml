@@ -8,18 +8,11 @@
 
         <h1 class="center-block">Dynamic Form</h1>
 
-        <dynamic-table-form fields="fieldset" data="data" class="form-horizontal">
+        <form>
+            <formly-form model="user" fields="fieldset">
+            </formly-form>
+        </form>
 
-            <input class="form-control text-box single-line" dynamic-field-type="string" ng-model="value" type="text" maxlength="{{config.maxLength}}" size="{{config.maxLength}}">
-
-            <input class="form-control uib-datepicker" dynamic-field-type="date" ng-model="value" type="date">
-
-            <select  class="form-control text-box" dynamic-field-type="select" ng-model="value"
-                    ng-options="option.value as option.caption for option in config.options"></select>
-
-            <input  class="form-control text-box" dynamic-field-type="integer" ng-model="value" type="number" size="{{config.maxLength}}" maxlength="{{config.maxLength}}" min="{{config.minValue}}" max="{{config.maxValue}}">
-
-        </dynamic-table-form>
         <input class="btn btn-default" type="button" value="Calculate" ng-click="CalcButtonClick()" />
 
         <h1>

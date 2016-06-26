@@ -19,5 +19,11 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
         {
             return View();
         }
+
+        // GET: Calculation/CalcReleasePage
+        public ActionResult Form2()
+        {
+            return View();
+        }
     }
 }

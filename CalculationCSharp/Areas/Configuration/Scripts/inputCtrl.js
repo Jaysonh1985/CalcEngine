@@ -2,13 +2,13 @@
 
     // Model
     $scope.form = [];
-
+    $scope.form.templateOptions = [];
     if (Functions.length > 0) {
 
-        $scope.form.caption = Functions[0].caption;
-        $scope.form.model = Functions[0].model;
-        $scope.form.type = Functions[0].type;
-        $scope.form.maxLength = Functions[0].maxLength;
+        $scope.form.key = Functions[0].key;
+        $scope.form.templateOptions.label = Functions[0].templateOptions.label;
+        $scope.form.templateOptions.type = Functions[0].templateOptions.type;
+        $scope.form.templateOptions.required = Functions[0].templateOptions.required;
     }
     else {
         $scope.form = Functions
@@ -17,10 +17,11 @@
     $scope.selected = [];
     $scope.addItem = function AddItem() {
         $scope.selected.push({
-            caption: $scope.form.caption,
-            model: $scope.form.model,
-            type: $scope.form.type,
-            maxLength: $scope.form.maxLength
+            key: $scope.form.key,
+            type:'input',
+            templateOptions:{
+                label: $scope.form.templateOptions.label,
+                required: $scope.form.templateOptions.required}
         })
     },
 
