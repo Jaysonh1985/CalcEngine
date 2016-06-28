@@ -1,7 +1,10 @@
 ﻿sulhome.kanbanBoardApp.controller('inputCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions) {
 
     // Model
+
     $scope.form = [];
+    $scope.data = [];
+
     $scope.form.templateOptions = [];
     if (Functions.length > 0) {
 
@@ -18,9 +21,10 @@
     $scope.addItem = function AddItem() {
         $scope.selected.push({
             key: $scope.form.key,
-            type:'input',
+            type: 'input',
             templateOptions:{
                 label: $scope.form.templateOptions.label,
+                type: $scope.form.templateOptions.type,
                 required: $scope.form.templateOptions.required}
         })
     },

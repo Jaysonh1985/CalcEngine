@@ -8,12 +8,11 @@
 
         <h1 class="center-block">Dynamic Form</h1>
 
-        <form>
-            <formly-form model="user" fields="fieldset">
+        <form ng-submit="CalcButtonClick()">
+            <formly-form  model="formset" fields="fieldset">
+                <button type="submit" class="btn btn-default submit-button">Submit</button>
             </formly-form>
         </form>
-
-        <input class="btn btn-default" type="button" value="Calculate" ng-click="CalcButtonClick()" />
 
         <h1>
             Calculation Ouput
@@ -51,6 +50,5 @@
                         </uib-accordion-group>
                     </uib-accordion>
                 </div>
-
 </body>
 </html>

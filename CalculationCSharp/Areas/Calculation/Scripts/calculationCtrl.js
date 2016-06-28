@@ -1,7 +1,8 @@
 ﻿sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, calculationService, $filter) {
 
     $scope.output = [];
-
+    $scope.formset = null;
+    $scope.fieldset = [];
     function init() {
         calculationService.initialize().then(function (data) {
                 $scope.isLoading = true;
@@ -14,34 +15,6 @@
                    });
             });
     };
-
-
-    $scope.userFields = [
-      {
-          // the key to be used in the model values
-          // so this will be bound to vm.user.username
-          key: 'username',
-          type: 'input',
-          templateOptions: {
-              label: 'Username',
-              placeholder: 'johndoe',
-              required: true,
-              description: 'Descriptive text'
-          }
-      },
-      {
-          key: 'password',
-          type: 'input',
-          templateOptions: {
-              type: 'password',
-              label: 'Password',
-              required: true
-          },
-          expressionProperties: {
-              'templateOptions.disabled': '!model.username' // disabled when username is blank
-          }
-      }
-    ];
 
 
     $scope.getConfigID = function getConfigID() {
@@ -70,9 +43,7 @@
                 scopeid = scopeid + 1
     });
     }
-    $scope.data = {
 
-    };
 
     function getIndexOf(arr, val, prop) {
         var l = arr.length,
@@ -91,9 +62,11 @@
 
     };
 
-    $scope.CalcButtonClick = function CalcBoard() {
+
+    $scope.CalcButtonClick = function CalcButtonClick() {
+     
         $scope.isLoading = true;
-        angular.forEach($scope.data, function (value, key) {
+        angular.forEach($scope.formset, function (value, key) {
             var index = getIndexOf($scope.config[0].Functions, key, 'Name');
             $scope.config[0].Functions[index].Value = value;
         });

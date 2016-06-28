@@ -240,8 +240,8 @@
                  $scope.config[colIndex].Functions[index].Parameter = selectedItem;
 
                  if ($scope.config[colIndex].Functions[index].Function == 'Input') {
-                     $scope.config[colIndex].Functions[index].Name = selectedItem[0].model;
-                     $scope.config[colIndex].Functions[index].Type = selectedItem[0].type;
+                     $scope.config[colIndex].Functions[index].Name = selectedItem[0].key;
+                     $scope.config[colIndex].Functions[index].Type = selectedItem[0].templateOptions.type;
                  }
              }, function () {
                  $log.info('Modal dismissed at: ' + new Date());
