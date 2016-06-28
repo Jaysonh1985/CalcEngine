@@ -3,52 +3,71 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <html>
-<body ng-controller="calculationCtrl" class="ng-cloak">   
+<body ng-controller="calculationCtrl" class="ng-cloak">
     <div class="container">
+        <br />
 
-        <h1 class="center-block">Dynamic Form</h1>
+        <uib-accordion close-others=false >
+            <uib-accordion-group  is-open=true>
+                <uib-accordion-heading>
+                    <h2 class="panel-title">
+                        Calculation Input
+                    </h2><i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </uib-accordion-heading>
+               
+                <form ng-submit="CalcButtonClick()">
+                    <formly-form model="formset" fields="fieldset">
+                        <button type="submit" class="btn btn-default submit-button">Submit</button>
+                    </formly-form>
+                </form>
+            </uib-accordion-group>
+        </uib-accordion>
 
-        <form ng-submit="CalcButtonClick()">
-            <formly-form  model="formset" fields="fieldset">
-                <button type="submit" class="btn btn-default submit-button">Submit</button>
-            </formly-form>
-        </form>
+        <uib-accordion close-others=false>
+            <uib-accordion-group is-open=true>
+                <uib-accordion-heading>
+                    <h2 class="panel-title">
+                        Calculation Output
+                    </h2><i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                </uib-accordion-heading>
 
-        <h1>
-            Calculation Ouput
-        </h1>
-                   <uib-accordion close-others=false ng-model="output">
-                        <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open=true>
-                            <uib-accordion-heading>
-                                {{group.Group}}
-                                <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                            </uib-accordion-heading>
+                <div class="container-fluid">
+                        <uib-accordion close-others=false ng-model="output">
+                            <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open=true>
 
-                            <table id="table" class="table">
-                                <tr class="h4">
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Field
-                                    </th>
-                                    <th>
-                                        Value
-                                    </th>
-                                <tr ng-repeat="row in group.Output">
-                                    <td>
-                                        {{row.ID}}
-                                    </td>
-                                    <td>
-                                        {{row.Field}}
-                                    </td>
-                                    <td>
-                                        {{row.Value}}
-                                    </td>
-                                </tr>
-                            </table>
-                        </uib-accordion-group>
-                    </uib-accordion>
-                </div>
+                                <uib-accordion-heading>
+                                    <h4 class="panel-title"> {{group.Group}} </h4>
+                                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                </uib-accordion-heading>
+                                <br />
+                                <table id="table" class="table table-bordered table">
+                                    <tr class="h4">
+                                        <th>
+                                            ID
+                                        </th>
+                                        <th>
+                                            Field
+                                        </th>
+                                        <th>
+                                            Value
+                                        </th>
+                                    <tr ng-repeat="row in group.Output">
+                                        <td>
+                                            {{row.ID}}
+                                        </td>
+                                        <td>
+                                            {{row.Field}}
+                                        </td>
+                                        <td>
+                                            {{row.Value}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </uib-accordion-group>
+                        </uib-accordion>
+                    </div>
+            </uib-accordion-group>
+        </uib-accordion>
+</div>
 </body>
 </html>
