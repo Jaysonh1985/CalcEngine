@@ -34,17 +34,24 @@
                 </thead>
                 <tbody ui-tree-nodes ="" ng:model="Category.Functions" >
                     <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)" ui-tree-node>
-                        <td>
+
+                        <td ng-if="Category.Name == 'Input'"></td>
+
+                        <td ng-if="Category.Name != 'Input'">
                             <i class="glyphicon glyphicon-list" ui-tree-handle></i>
                         </td>
-                        <td>
+
+                        <td ng-if="Category.Name == 'Input'"></td>
+
+                        <td ng-if="Category.Name != 'Input'">
                             <a ng-click="LogicButtonClick('lg', colIndex, $index)">
                                 <span class="glyphicon glyphicon-wrench"></span>
                             </a>
                         </td>
+
                         <td ng-if="Category.Name == 'Input'">
                             <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction(rows)">
-                                <option value="Input">Input</option>
+                                <option selected value="Input">Input</option>
                             </select>
                         </td>
                         <td ng-if="Category.Name != 'Input'">
@@ -55,28 +62,30 @@
                                 <option value="Factors">Factors</option>
                             </select>
                         </td>
+
                         <td>
                             <a ng-click="FunctionButtonClick('lg', colIndex, $index)">
                                 <span uib-popover="{{data || rows.Parameter}}" popover-trigger="mouseenter" class="glyphicon glyphicon-cog"></span>
                             </a>
                         </td>
-                        <td ng-hide="editingData[rows.ID]">{{rows.Name}}</td>
-                        <td ng-show="editingData[rows.ID]"><span><input type="text" ng:model="rows.Name" class="form-control"></span></td>
-                        <td ng-hide="editingData[rows.ID]" width="5%">{{rows.Type}}</td>
-                        <td ng-show="editingData[rows.ID]" width="10%">
-                            <select name="singleSelect" ng-model="rows.Type" class="form-control">
-                                <option value=""></option>
-                                <option value="string">String</option>
-                                <option value="decimal">Decimal</option>
-                                <option value="period">Period</option>
-                                <option value="date">Date</option>
-                            </select>
+
+                        <td ng-if="Category.Name == 'Input'">{{rows.Name}}</td>
+                        <td ng-if="Category.Name != 'Input'">
+                            <span><input type="text" ng:model="rows.Name" class="form-control"></span>
                         </td>
-                        <td ng-hide="editingData[rows.ID]" width="5%">{{rows.Output}}</td>
-                        <td ng-show="editingData[rows.ID]" width="10%">
+
+                        <td width="5%">{{rows.Type}}</td>
+
+
+                        <td ng-if="Category.Name == 'Input'" width="10%">
                             <span><input type="text" ng:model="rows.Output" class="form-control"></span>
                         </td>
-                        <td><span><input type="text" ng:model="rows.ExpectedResult" class="form-control"></span></td>
+
+                        <td ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
+
+                        <td ng-if="Category.Name == 'Input'" width="15%"></td>
+                        <td ng-if="Category.Name != 'Input'" width="15%"><span><input type="text" ng:model="rows.ExpectedResult" class="form-control"></span></td>
+
                         <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss', 'white': rows.Pass == 'Nil' }"><span></span></td>
                         <td>
                             <a data-nodrag ng-click="AddFunctionRows(colIndex, $index)">
