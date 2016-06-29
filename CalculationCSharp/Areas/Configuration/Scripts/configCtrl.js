@@ -35,8 +35,6 @@
     }
 
      $scope.AddFunction = function (colIndex, index) {
-         $scope.Functions = [];
-         $scope.Functions = $scope.config[colIndex].Functions;
          $scope.config[colIndex].Functions.push({
              ID: this.config[colIndex].Functions.length,
              Logic: [],
@@ -45,9 +43,23 @@
          });
      }
 
+     $scope.AddFunctionRows = function (colIndex, index) {
+         var item = null;
+         item = {
+             ID: this.config[colIndex].Functions.length,
+             Logic: [],
+             Parameter: []
+         };
+         $scope.config[colIndex].Functions.splice(index + 1, 0, item);
+     }
+
      $scope.CopyFunction = function (colIndex, index) {
          var Functions = $scope.config[colIndex].Functions[index];
          $scope.config[colIndex].Functions.push(angular.copy(Functions));
+     }
+
+     $scope.DeleteFunction = function (colIndex, $index) {
+         $scope.config[colIndex].Functions.splice($index, 1);
      }
 
      $scope.AddCategory = function (colIndex) {
@@ -78,92 +90,41 @@
          }, onError);
      };
 
-
-
-
-     $scope.remItem = function (colIndex, $index) {
-         $scope.config[colIndex].Functions.splice($index, 1);
-     }
-
      $scope.selectedRow = null;  // initialize our variable to null
      $scope.function = null;  // initialize our variable to null
-
-     $scope.setClickedRow = function (index) {  //function that sets the value of selectedRow to current index
-         if (angular.isDefined($scope.selectedRow) & index == $scope.selectedRow)
-         {
-             $scope.selectedRow = null;
-             $scope.getFunction('/');
-         }
-         else
-         {
-             $scope.selectedRow = index;
-             $scope.function = this.rows.Function;
-         }
-     }
-
-     $scope.getClickedRow = function () {  //function that sets the value of selectedRow to current index
-         return $scope.selectedRow;
-     }
-
-     $scope.getParameter = function () {
-        $scope.parameter = configService.getParameters();
-        return $scope.parameter
-     }
-
-     $scope.getColid = function () {
-         $scope.ColID = configService.getColid();
-         return $scope.ColID
-     }
-
-     $scope.getRowid = function () {
-         $scope.RowID = configService.getRowid();
-         return $scope.RowID
-     }
 
      $scope.$on('parameterupdated', function (event, data) {
          console.log(data);
      });
 
-      $scope.getFunction = function (func) {
-         if (func !== null & angular.isDefined(func)) {
-             $location.path(func);
-         }
-         else {
-             $location.path('/');
-         }
-      }
-
     $scope.editingData = [];
 
-     $scope.setFunction = function (colindex, index, rows) {  //function that sets the value of selectedRow to current index
+     $scope.setFunction = function (rows) {  //function that sets the value of selectedRow to current index
 
-         $scope.function = $scope.config[colindex].Functions[index].Function;
-
-         if($scope.function == 'Maths')
+         if(rows.Function == 'Maths')
          {
-             $scope.config[colindex].Functions[index].Type = 'Decimal';
+             rows.Type = 'Decimal';
              $scope.editingData[rows.ID] = true;
          }
-         else if ($scope.function == 'Period') {
-             $scope.config[colindex].Functions[index].Type = 'Decimal';
+         else if (rows.Function == 'Period') {
+             rows.Type = 'Decimal';
              $scope.editingData[rows.ID] = true;
          }
-         else if ($scope.function == 'Factors') {
-             $scope.config[colindex].Functions[index].Type = 'Decimal';
+         else if (rows.Function == 'Factors') {
+             rows.Type = 'Decimal';
              $scope.editingData[rows.ID] = true;
          }
-         else if ($scope.function == 'Input')
+         else if (rows.Function == 'Input')
          {
-             $scope.config[colindex].Functions[index].Type = null;
+             rows.Type = null;
              $scope.editingData[rows.ID] = false;
          }
          else
          {
-             $scope.config[colindex].Functions[index].Type = null;
+             rows.Type = null;
              $scope.editingData[rows.ID] = false;
          }
         
-         $scope.paramSet[rows.ID] = true;
      }
 
      $scope.getVariableTypes = function getVariableTypes() {  //function that sets the parameters available under the different variable types
@@ -183,8 +144,6 @@
              scopeid = scopeid + 1
          });
      }
-
-
 
      $scope.getFunctionCtrl = function getFunctionCtrl(Function) {
          if (Function == 'Maths') {
