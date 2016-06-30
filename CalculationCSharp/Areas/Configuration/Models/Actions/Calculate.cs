@@ -22,6 +22,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         public List<OutputList> OutputList = new List<OutputList>();
         public JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
         public List<CategoryViewModel> jCategory = new List<CategoryViewModel>();
+        CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
 
         public List<CategoryViewModel> DebugResults(List<CategoryViewModel> jCategory)
         {
@@ -97,7 +98,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         string formula = null;
                                         Maths Maths = new Maths();
                                         Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
-                                        CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
+                                        
                                         dynamic InputA = Config.VariableReplace(jCategory, parameters.Input1, item.ID);
                                         dynamic InputB = Config.VariableReplace(jCategory, parameters.Input2, item.ID);
                                         string Input1 = Convert.ToString(InputA);
@@ -130,8 +131,10 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         DateFunctions DateFunctions = new DateFunctions();
                                         Period Dates = new Period();
                                         Period parameters = (Period)javaScriptSerializ­er.Deserialize(jparameters, typeof(Period));
-                                        System.DateTime Date1 = DateTime.Parse(parameters.Date1);
-                                        System.DateTime Date2 = DateTime.Parse(parameters.Date2);
+                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, item.ID);
+                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Date2, item.ID);
+                                        System.DateTime Date1 = DateTime.Parse(InputA);
+                                        System.DateTime Date2 = DateTime.Parse(InputB);
                                         String DateAdjustmentType = parameters.DateAdjustmentType;
                                         Boolean Inclusive = parameters.Inclusive;
                                         Double DaysinYear = parameters.DaysinYear;

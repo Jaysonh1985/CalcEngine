@@ -234,6 +234,7 @@ select,
 textarea {
     max-width: 100%;
         border: none;
+        text-align:center;
     overflow: auto;
     outline: none;
 

@@ -17,7 +17,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
                 ConfigViewModel = item.Functions;
 
-                element = ConfigViewModel.Where(a => a.Name == Input && a.ID <= ID).LastOrDefault();
+                element = ConfigViewModel.Where(a => a.Name == Input).LastOrDefault();
 
             }
 

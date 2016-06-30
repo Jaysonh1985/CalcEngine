@@ -10,6 +10,32 @@
         });
     };
 
+    var addConfig = function (data) {
+        return $http.post("/api/ProjectBoards/PostProjectBoard", { data })
+            .then(function (response) {
+                return response.data;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+    };
+
+    var putConfig = function (index, data) {
+        return $http.put("/api/ProjectBoards/" + index, data)
+           .then(function (response) {
+               return response.status == 200;
+           }, function (error) {
+               return $q.reject(error.data.Message);
+           });
+    };
+
+    var deleteConfig = function (index) {
+        return $http.delete("/api/ProjectBoards/" + index)
+           .then(function (response) {
+               return response.status == 200;
+           }, function (error) {
+               return $q.reject(error.data.Message);
+           });
+    };
         
     var getCSV = function (id) {
         $http({
@@ -75,6 +101,9 @@
     return {
         initialize: initialize,
         sendRequest: sendRequest,
+        addConfig: addConfig,
+        putConfig: putConfig,
+        deleteConfig: deleteConfig,
         getBoards: getBoards,
         getCSV: getCSV,
         openBoard: openBoard,

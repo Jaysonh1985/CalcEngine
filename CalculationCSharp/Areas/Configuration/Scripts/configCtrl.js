@@ -127,23 +127,23 @@
         
      }
 
-     $scope.getVariableTypes = function getVariableTypes() {  //function that sets the parameters available under the different variable types
-         var counter = 0;
-         var scopeid = 0;
-         var functionID = 0;
-         $scope.Decimal = [];
-         $scope.DecimalNames = [];
-         angular.forEach($scope.config, function (groups) {
-             $scope.Decimal = $filter('filter')($scope.config[scopeid].Functions, { Type: 'Decimal' });
-             angular.forEach($scope.Decimal, function (functions) {
-                 if ($scope.Decimal[functionID].Name != null) {
-                     $scope.DecimalNames.push($scope.Decimal[functionID].Name);
-                 }
-                 functionID = functionID + 1
-             });
-             scopeid = scopeid + 1
-         });
-     }
+     //$scope.getVariableTypes = function getVariableTypes() {  //function that sets the parameters available under the different variable types
+     //    var counter = 0;
+     //    var scopeid = 0;
+     //    var functionID = 0;
+     //    $scope.Decimal = [];
+     //    $scope.DecimalNames = [];
+     //    angular.forEach($scope.config, function (groups) {
+     //        $scope.Decimal = $filter('filter')($scope.config[scopeid].Functions, { Type: 'Decimal' });
+     //        angular.forEach($scope.Decimal, function (functions) {
+     //            if ($scope.Decimal[functionID].Name != null) {
+     //                $scope.DecimalNames.push($scope.Decimal[functionID].Name);
+     //            }
+     //            functionID = functionID + 1
+     //        });
+     //        scopeid = scopeid + 1
+     //    });
+     //}
 
      $scope.getFunctionCtrl = function getFunctionCtrl(Function) {
          if (Function == 'Maths') {
@@ -179,7 +179,7 @@
      $scope.FunctionButtonClick = function (size, colIndex, index) {
          $scope.Parameter = this.config[colIndex].Functions[index].Parameter;
          var Function = this.config[colIndex].Functions[index].Function;
-         $scope.getVariableTypes();
+         //$scope.getVariableTypes();
          var FunctionCtrl = null;
          var FunctionTemp = null;
          FunctionCtrl = $scope.getFunctionCtrl(Function);

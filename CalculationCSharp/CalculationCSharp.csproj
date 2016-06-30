@@ -251,6 +251,7 @@
     <Compile Include="Areas\Configuration\Models\Actions\Maths.cs" />
     <Compile Include="Areas\Configuration\Models\ConfigRepository.cs" />
     <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
+    <Compile Include="Areas\Project\Controllers\ProjectBoardsController.cs" />
     <Compile Include="Areas\Project\Models\Board.cs" />
     <Compile Include="Areas\Project\Models\BoardRepository.cs" />
     <Compile Include="Areas\Project\Models\Comments.cs" />

@@ -2,11 +2,13 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<p>
-    @Html.ActionLink("New", "Board", null, null, new { id = 0, @class = "btn btn-default" })
-    <input class="form-control text-box single-line" type="text" id="search" placeholder="Type to search">
-</p>
-<div ng-controller="menuCtrl">
+<br />
+
+<div class="container body-content" ng-controller="menuCtrl">
+    <div ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
+    <br />
+    <button class="btn btn-default" ng-click="addBoard()">Add</button>
+    <br />
     <table class="table table-bordered table table-responsive">
         <tr>
             <th>
@@ -28,8 +30,8 @@
             <td width="10%" ng-click="openBoard()">{{board.UpdateDate}}</td>
             <td>
                 <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="modify(board)">Modify</button>
-                <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="update(board)">Update</button>
-                <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="update(board)">Cancel</button>
+                <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="updateBoard($index, board)">Update</button>
+                <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Cancel</button>
                 <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard($index)" />
             </td>            
         </tr>
