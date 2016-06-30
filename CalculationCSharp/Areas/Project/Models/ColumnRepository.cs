@@ -16,7 +16,7 @@ namespace CalculationCSharp.Areas.Project.Models
         {
             if (HttpContext.Current.Cache["columns"] == null)
             {
-                if (ProjectBoard.Configuration == "")
+                if (ProjectBoard.Configuration == "" || ProjectBoard.Configuration == null)
                 {
                     var columns = new List<Column>();
                     var stories = new List<Stories>();
