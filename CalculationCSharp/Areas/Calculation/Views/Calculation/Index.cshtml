@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
-
+<h4 class="text-center">Calculation Forms</h4>
 <div class="container body-content" ng-controller="calculationMenuCtrl">
     <div ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
     <br />
@@ -21,20 +21,12 @@
             <th>
                 Updated
             </th>
-            <th>
-            </th>
         </tr>
         <tr ng-repeat="board in Boards">
             <td ng-hide="editingData[board.ID]" width="50%" ng-click="openBoard()">{{board.Name}}</td>
             <td ng-show="editingData[board.ID]" width="50%"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
             <td width="15%" ng-click="openBoard()">{{board.User}}</td>
             <td width="10%" ng-click="openBoard()">{{board.UpdateDate}}</td>
-            <td>
-                <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="modify(board)">Modify</button>
-                <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="updateBoard($index, board)">Update</button>
-                <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Cancel</button>
-                <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard($index)" />
-            </td>
         </tr>
     </table>
 
