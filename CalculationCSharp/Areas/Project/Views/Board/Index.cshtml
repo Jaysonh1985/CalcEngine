@@ -4,8 +4,7 @@
 }
 <br />
 <h4 class="text-center">Project Boards</h4>
-<div class="container body-content" ng-controller="menuCtrl">
-    <div ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
+<div class="container body-content" ng-controller="menuCtrl" ng-cloak>
     <br />
     <button class="btn btn-default" ng-click="addBoard()">Add</button>
     <br />

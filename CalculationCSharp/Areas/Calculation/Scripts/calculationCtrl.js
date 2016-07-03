@@ -1,8 +1,12 @@
 ﻿sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, calculationService, $filter) {
 
     $scope.output = [];
-    $scope.formset = null;
+    $scope.formset = [];
     $scope.fieldset = [];
+    var vm = this;
+
+    vm.model = [];
+
     function init() {
         calculationService.initialize().then(function (data) {
                 $scope.isLoading = true;
@@ -66,21 +70,33 @@
     $scope.CalcButtonClick = function CalcButtonClick() {
      
         $scope.isLoading = true;
-        angular.forEach($scope.formset, function (value, key) {
-            var index = getIndexOf($scope.config[0].Functions, key, 'Name');
-            $scope.config[0].Functions[index].Value = value;
+
+        console.log("2");
+        $scope.array = [];
+
+        $scope.array.push($scope.formset);
+        $scope.prop = [];
+        $scope.val = [];
+        $scope.obj = [];
+
+        angular.forEach($scope.formset.fields, function (value, key, obj) {
+          
+                $scope.prop.push(value);
+                var index = getIndexOf($scope.config[0].Functions, key, 'Name');
+                $scope.config[0].Functions[index].Output = value;
+          
+
+
+
         });
+
+
         calculationService.postCalc(1, $scope.config).then(function (data) {
             $scope.isLoading = false;
             $scope.output = data;
         });
 
     };
-
-
-   
-
-  
         
     init();
 });

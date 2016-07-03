@@ -155,17 +155,6 @@
 
          scopeid = 0;
 
-         //angular.forEach($scope.Decimal[scopeid], function (functions) {
-
-         //    angular.forEach($scope.Decimal[scopeid]), function (subArray){
-         //        if ($scope.Decimal[functionID].Name != null) {
-         //            $scope.DecimalNames.push($scope.Decimal[functionID].Name);
-         //        }
-         //        functionID = functionID + 1
-         //    }
-             
-         //    scopeid = scopeid + 1;
-         //});
      }
 
      $scope.getFunctionCtrl = function getFunctionCtrl(Function) {

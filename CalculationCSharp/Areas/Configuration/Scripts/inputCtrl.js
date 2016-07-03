@@ -1,7 +1,6 @@
 ﻿sulhome.kanbanBoardApp.controller('inputCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions) {
 
     // Model
-
     $scope.form = [];
     $scope.data = [];
 
@@ -28,8 +27,6 @@
                 required: $scope.form.templateOptions.required}
         })
     },
-
-
 
     $scope.removeMathsItem = function (index) {
         $scope.form.splice(index, 1);
