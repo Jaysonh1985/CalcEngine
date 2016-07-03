@@ -59,7 +59,10 @@
      }
 
      $scope.DeleteFunction = function (colIndex, $index) {
-         $scope.config[colIndex].Functions.splice($index, 1);
+         var cf = confirm("Delete this line?");
+         if (cf == true) {
+             $scope.config[colIndex].Functions.splice($index, 1);
+         }
      }
 
      $scope.AddCategory = function (colIndex) {

@@ -6,11 +6,15 @@
     <uib-accordion close-others= false ui-tree-nodes="" ng-model="config" >
         <uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="true" ui-tree-node>
             <uib-accordion-heading>
-                     {{Category.Name}} 	
-                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                <table class='table table-borderless'>
+                    <tr>
+                        <th width="95%">{{Category.Name}}</th>
+                        <th width="5%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></th>
+                    </tr>
+                </table>
             </uib-accordion-heading>
             <a ng-click="GroupButtonClick('lg', $index)"><i class="pull-right glyphicon glyphicon-option-horizontal"></i></a>
-            <table class="table table-bordered table">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Sort</th>
@@ -49,12 +53,12 @@
                         </td>
 
                         <td ng-if="Category.Name == 'Input'">
-                            <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction(rows)">
+                            <select name="singleSelect" ng:model="rows.Function" class="form-control input-sm" ng-change="setFunction(rows)">
                                 <option selected value="Input">Input</option>
                             </select>
                         </td>
                         <td ng-if="Category.Name != 'Input'">
-                            <select name="singleSelect" ng:model="rows.Function" class="form-control" ng-change="setFunction(rows)">
+                            <select name="singleSelect" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)">
                                 <option value=""></option>
                                 <option value="Maths">Maths</option>
                                 <option value="Period">Period</option>
@@ -70,20 +74,20 @@
 
                         <td ng-if="Category.Name == 'Input'">{{rows.Name}}</td>
                         <td ng-if="Category.Name != 'Input'">
-                            <span><input type="text" ng:model="rows.Name" class="form-control"></span>
+                            <span><input type="text" ng:model="rows.Name" class="form-control  input-sm"></span>
                         </td>
 
                         <td width="5%">{{rows.Type}}</td>
 
 
-                        <td ng-if="Category.Name == 'Input'" width="30%">
-                            <span><input type="text" ng:model="rows.Output" class="form-control"></span>
+                        <td ng-if="Category.Name == 'Input'" width="25%">
+                            <span><input type="text" ng:model="rows.Output" class="form-control  input-sm"></span>
                         </td>
 
                         <td ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
 
                         <td ng-if="Category.Name == 'Input'" width="5%"></td>
-                        <td ng-if="Category.Name != 'Input'" width="15%"><span><input type="text" ng:model="rows.ExpectedResult" class="form-control"></span></td>
+                        <td ng-if="Category.Name != 'Input'" width="20%"><span><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span></td>
 
                         <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss', 'white': rows.Pass == 'Nil' }"><span></span></td>
                         <td>
