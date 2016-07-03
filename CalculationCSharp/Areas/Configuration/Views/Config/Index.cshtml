@@ -23,6 +23,9 @@
                 Updated
             </th>
             <th>
+                Version
+            </th>
+            <th>
             </th>
         </tr>
         <tr ng-repeat="board in Boards">
@@ -32,6 +35,7 @@
             <td ng-show="editingData[board.ID]"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
             <td width="15%" ng-click="openBoard()" ng-cloak>{{board.User}}</td>
             <td width="10%" ng-click="openBoard()" ng-cloak>{{board.UpdateDate}}</td>
+            <td width="10%" ng-click="openBoard()" ng-cloak>{{board.Version}}</td>
             <td width="25%">
                 <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="modify(board)">Modify</button>
                 <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="updateBoard($index, board)">Update</button>

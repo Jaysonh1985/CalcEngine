@@ -81,6 +81,7 @@
          var id = $scope.getConfigID();
          configService.putCalc(id, $scope.config).then(function (data) {
              $scope.isLoading = false;
+             configService.sendRequest();
          }, onError);
      };
 
@@ -142,7 +143,6 @@
          angular.forEach($scope.config, function (groups) {
              if (scopeid <= colIndex)
              {
-
                  $scope.DecimalValue = ($filter('filter')($scope.config[scopeid].Functions, { Type: 'Decimal' }));
 
                  functionID = 0;
@@ -270,8 +270,7 @@
     
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {
-        $scope.refreshBoard();
-        toastr.success("Board updated successfully", "Success");
+        toastr.success("Updated successfully", "Success");
     });
 
     var onError = function (errorMessage) {

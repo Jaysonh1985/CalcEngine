@@ -109,6 +109,5 @@
         getCalc: getCalc,
         putCalc: putCalc,
         postCalc: postCalc
-        
     };
 });

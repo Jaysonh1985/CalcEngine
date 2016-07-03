@@ -64,15 +64,14 @@
              Scheme: this.Boards[index].Scheme,
              Name: this.Boards[index].Name,
              User: '',
-             Configuration: this.Boards[index].Configuration
+             Configuration: this.Boards[index].Configuration,
+             Version: this.Boards[index].Version
 
          };
          calculationService.getSingleConfig(this.Boards[index].ID)
            .then(function (data) {
                $scope.isLoading = false;
                $scope.calcrelease = data;
-
-
 
                if ($scope.calcrelease == null) {
                    $scope.relaseBoardAdd($scope.selected);
@@ -81,7 +80,6 @@
                {
                    $scope.relaseBoardUpdate($scope.calcreleaseID, $scope.selected);
                }
-
 
            });
 
@@ -127,9 +125,9 @@
      
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
-    $scope.$parent.$on("refreshBoard", function (e) {
-        $scope.refreshBoard();
-        toastr.success("Board updated successfully", "Success");
+     $scope.$parent.$on("refreshBoard", function (e) {
+         $scope.refreshBoard();
+        toastr.success("Updated successfully", "Success");
     });
 
     var onError = function (errorMessage) {

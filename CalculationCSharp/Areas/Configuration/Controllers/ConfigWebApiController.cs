@@ -65,6 +65,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             calcConfiguration.Configuration = Convert.ToString(json.data);
             calcConfiguration.User = HttpContext.Current.User.Identity.Name.ToString();
             calcConfiguration.UpdateDate = DateTime.Now;
+            calcConfiguration.Version = calcConfiguration.Version + (decimal)0.01;
 
             db.Entry(calcConfiguration).State = EntityState.Modified;
 

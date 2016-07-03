@@ -18,12 +18,16 @@
             <th>
                 Updated
             </th>
+            <th>
+                Version
+            </th>
         </tr>
         <tr ng-repeat="board in Boards">
             <td ng-hide="editingData[board.ID]" ng-click="openBoard()">{{board.Scheme}}</td>
             <td ng-hide="editingData[board.ID]" ng-click="openBoard()">{{board.Name}}</td>
             <td ng-show="editingData[board.ID]"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
             <td width="10%" ng-click="openBoard()">{{board.UpdateDate}}</td>
+            <td width="10%" ng-click="openBoard()">{{board.Version}}</td>
         </tr>
     </table>
 

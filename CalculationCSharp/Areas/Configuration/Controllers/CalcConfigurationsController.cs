@@ -49,6 +49,8 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
                 return BadRequest();
             }
 
+            
+
             db.Entry(calcConfiguration).State = EntityState.Modified;
 
             try
