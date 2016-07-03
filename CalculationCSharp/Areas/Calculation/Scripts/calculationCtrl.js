@@ -60,13 +60,6 @@
         return false;
     };
 
-    function createArray(arr) {
-
-
-
-    };
-
-
     $scope.CalcButtonClick = function CalcButtonClick() {
      
         $scope.isLoading = true;
@@ -84,10 +77,6 @@
                 $scope.prop.push(value);
                 var index = getIndexOf($scope.config[0].Functions, key, 'Name');
                 $scope.config[0].Functions[index].Output = value;
-          
-
-
-
         });
 
 

@@ -10,7 +10,7 @@
     @*<input class="btn btn-default" type="button" value="CSV" ng-click="CSVButtonClick()" />*@
 
     <div class="simpleDemo row">
-        <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle" ng-init="colIndex = $index">
+        <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle" ng-init="colIndex = $index" ng-cloak>
             <div class="panel ">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{col.Name}}</h3>

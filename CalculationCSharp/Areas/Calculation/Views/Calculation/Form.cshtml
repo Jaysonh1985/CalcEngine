@@ -3,7 +3,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <html>
-<body ng-controller="calculationCtrl" class="ng-cloak">
+
+<body ng-controller="calculationCtrl">
+    <div ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading" ng-cloak></div>
     <div class="container">
         <br />
 

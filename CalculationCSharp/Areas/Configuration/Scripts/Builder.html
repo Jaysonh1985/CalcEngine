@@ -1,14 +1,13 @@
 ﻿<br>
-<div ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading" ng-cloak></div>
 <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
 <input class="btn btn-default" type="button" value="Calculate" ng-click="CalcButtonClick()" />
 <input class="btn btn-default" type="button" value="Add Category" ng-click="AddCategory()" />
 <div ui-tree data-clone-enabled="true">
     <uib-accordion close-others= false ui-tree-nodes="" ng-model="config" >
         <uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open= true ui-tree-node>
-            <uib-accordion-heading ui-tree-handle>
-                {{Category.Name}} 	
-                <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            <uib-accordion-heading>
+                     {{Category.Name}} 	
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </uib-accordion-heading>
             <a ng-click="GroupButtonClick('lg', $index)"><i class="pull-right glyphicon glyphicon-option-horizontal"></i></a>
             <table class="table table-bordered table">
