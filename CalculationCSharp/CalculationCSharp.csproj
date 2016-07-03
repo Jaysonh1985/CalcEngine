@@ -303,14 +303,6 @@
     <Content Include="App_Data\CalculationCSharp.Models.CalculationDBContext_log.ldf">
       <DependentUpon>CalculationCSharp.Models.CalculationDBContext.mdf</DependentUpon>
     </Content>
-    <Content Include="App_Data\CalculationDB\CalculationDB.sqlproj.user" />
-    <Content Include="App_Data\CalculationDB\dbo\Tables\CalcConfigurations.sql" />
-    <Content Include="App_Data\CalculationDB\dbo\Tables\CalcReleases.sql" />
-    <Content Include="App_Data\CalculationDB\dbo\Tables\CalculationRegressions.sql" />
-    <Content Include="App_Data\CalculationDB\dbo\Tables\CalculationResults.sql" />
-    <Content Include="App_Data\CalculationDB\dbo\Tables\Codes.sql" />
-    <Content Include="App_Data\CalculationDB\dbo\Tables\ProjectBoards.sql" />
-    <Content Include="App_Data\CalculationDB\dbo\Tables\__MigrationHistory.sql" />
     <Content Include="Areas\Calculation\Scripts\calculationMenuCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationService.js" />
     <Content Include="Areas\Configuration\Scripts\FactorsModal.html" />
@@ -604,8 +596,6 @@
     <Content Include="Areas\Calculation\Views\Calculation\Form.cshtml" />
     <Content Include="Areas\Calculation\Views\web.config" />
     <Content Include="Areas\Calculation\Views\Calculation\Index.cshtml" />
-    <Content Include="App_Data\CalculationDB\CalculationDB.sqlproj" />
-    <Content Include="App_Data\CalculationDB\Import Schema Logs\CalculationDB_20160626070800.log" />
     <Content Include="Areas\Project\Views\Board\Board - Copy.cshtml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy %282%29.pubxml" />
@@ -722,8 +712,6 @@
     <Content Include="Areas\Project\Views\Board\Board.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\CalculationDB\bin\Debug\" />
-    <Folder Include="App_Data\CalculationDB\obj\Debug\" />
     <Folder Include="Areas\Calculation\Models\" />
     <Folder Include="Areas\Calculation\Views\Shared\" />
     <Folder Include="Areas\Configuration\Views\Shared\" />
