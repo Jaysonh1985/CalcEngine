@@ -5,7 +5,7 @@
     $scope.isLoading = true;
     $scope.oneAtATime = false;
     $scope.status = {
-        isCustomHeaderOpen: false,
+
         isFirstOpen: true,
         isFirstDisabled: false
     };

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
@@ -20,6 +21,14 @@ namespace CalculationCSharp
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            if (bool.Parse(ConfigurationManager.AppSettings["MigrateDatabaseToLatestVersion"]))
+            {
+                var configuration = new CalculationCSharp.Migrations.Configuration();
+                var migrator = new DbMigrator(configuration);
+                migrator.Update();
+            }
+
         }
     }
 }

@@ -81,6 +81,7 @@ namespace CalculationCSharp.Models
         [Column(TypeName = "xml")]
         public string Configuration { get; set; }
         public DateTime UpdateDate { get; set; }
+        public decimal Version { get; set; }
     }
 
     public class CalcRelease
@@ -92,6 +93,7 @@ namespace CalculationCSharp.Models
         [Column(TypeName = "xml")]
         public string Configuration { get; set; }
         public DateTime UpdateDate { get; set; }
+        public decimal Version { get; set; }
     }
 
     public class CalculationDBContext : DbContext

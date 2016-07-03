@@ -10,19 +10,19 @@
     <table class="table table-bordered table table-responsive">
         <tr>
             <th>
-                Name
+                Scheme
             </th>
             <th>
-                User
+                Name
             </th>
             <th>
                 Updated
             </th>
         </tr>
         <tr ng-repeat="board in Boards">
-            <td ng-hide="editingData[board.ID]" width="50%" ng-click="openBoard()">{{board.Name}}</td>
-            <td ng-show="editingData[board.ID]" width="50%"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
-            <td width="15%" ng-click="openBoard()">{{board.User}}</td>
+            <td ng-hide="editingData[board.ID]" ng-click="openBoard()">{{board.Scheme}}</td>
+            <td ng-hide="editingData[board.ID]" ng-click="openBoard()">{{board.Name}}</td>
+            <td ng-show="editingData[board.ID]"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
             <td width="10%" ng-click="openBoard()">{{board.UpdateDate}}</td>
         </tr>
     </table>
