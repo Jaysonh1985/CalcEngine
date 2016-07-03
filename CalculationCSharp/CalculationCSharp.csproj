@@ -606,6 +606,7 @@
     <Content Include="Areas\Calculation\Views\Calculation\Index.cshtml" />
     <Content Include="App_Data\CalculationDB\CalculationDB.sqlproj" />
     <Content Include="App_Data\CalculationDB\Import Schema Logs\CalculationDB_20160626070800.log" />
+    <Content Include="Areas\Project\Views\Board\Board - Copy.cshtml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />

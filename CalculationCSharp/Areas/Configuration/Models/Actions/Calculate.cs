@@ -37,17 +37,17 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
             var OutputListGroupOrdered = Calculate.OutputList.GroupBy(employees => employees.Group);
             List<OutputListGroup> List = new List<OutputListGroup>();
-            List<OutputList> SubList = new List<OutputList>();
+            
 
             var i = 0;
 
             foreach (var group in OutputListGroupOrdered)
             {
+                List<OutputList> SubList = new List<OutputList>();
+                
                 foreach (var list in group)
-                {
-
+                { 
                     SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
-
                 }
 
                 List.Add(new OutputListGroup { ID = i, Group = group.Key, Output = SubList});

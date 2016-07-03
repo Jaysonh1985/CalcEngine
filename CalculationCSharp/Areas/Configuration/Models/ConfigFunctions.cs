@@ -9,7 +9,8 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
         public dynamic VariableReplace(List<CategoryViewModel> CategoryViewModel, string Input, int ID)
         {
-           dynamic element = null;
+            dynamic element = null;
+            dynamic Output = null;
 
             foreach (var item in CategoryViewModel)
             {
@@ -19,15 +20,20 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
                 element = ConfigViewModel.Where(a => a.Name == Input).LastOrDefault();
 
+                if(element != null)
+                {
+                    Output = element.Output; 
+                }
+
             }
 
-            if (element == null)
+            if (Output == null)
             {
                 return Input;
             }
             else
             {
-                return element.Output;
+                return Output;
             }
 
         }

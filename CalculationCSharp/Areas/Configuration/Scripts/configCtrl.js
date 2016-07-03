@@ -127,23 +127,46 @@
         
      }
 
-     //$scope.getVariableTypes = function getVariableTypes() {  //function that sets the parameters available under the different variable types
-     //    var counter = 0;
-     //    var scopeid = 0;
-     //    var functionID = 0;
-     //    $scope.Decimal = [];
-     //    $scope.DecimalNames = [];
-     //    angular.forEach($scope.config, function (groups) {
-     //        $scope.Decimal = $filter('filter')($scope.config[scopeid].Functions, { Type: 'Decimal' });
-     //        angular.forEach($scope.Decimal, function (functions) {
-     //            if ($scope.Decimal[functionID].Name != null) {
-     //                $scope.DecimalNames.push($scope.Decimal[functionID].Name);
-     //            }
-     //            functionID = functionID + 1
-     //        });
-     //        scopeid = scopeid + 1
-     //    });
-     //}
+     $scope.getVariableTypes = function getVariableTypes(colIndex) {  //function that sets the parameters available under the different variable types
+         var counter = 0;
+         var scopeid = 0;
+         var functionID = 0;
+         var arrayID = 0;
+         $scope.Decimal = [];
+         $scope.DecimalValue = [];
+         $scope.DecimalParameter = [];
+         $scope.DecimalNames = [];
+         angular.forEach($scope.config, function (groups) {
+             if (scopeid <= colIndex)
+             {
+
+                 $scope.DecimalValue = ($filter('filter')($scope.config[scopeid].Functions, { Type: 'Decimal' }));
+
+                 functionID = 0;
+                 angular.forEach($scope.DecimalValue, function (Names) {
+                     $scope.DecimalParameter = ($filter('filter')($scope.DecimalValue[functionID].Name));
+                     $scope.DecimalNames[arrayID] = $scope.DecimalParameter;
+                     functionID = functionID + 1;
+                     arrayID = arrayID + 1;
+                 });
+                scopeid = scopeid + 1
+             }
+         });
+
+         scopeid = 0;
+
+         //angular.forEach($scope.Decimal[scopeid], function (functions) {
+
+         //    angular.forEach($scope.Decimal[scopeid]), function (subArray){
+         //        if ($scope.Decimal[functionID].Name != null) {
+         //            $scope.DecimalNames.push($scope.Decimal[functionID].Name);
+         //        }
+         //        functionID = functionID + 1
+         //    }
+             
+         //    scopeid = scopeid + 1;
+         //});
+     }
 
      $scope.getFunctionCtrl = function getFunctionCtrl(Function) {
          if (Function == 'Maths') {
@@ -179,7 +202,7 @@
      $scope.FunctionButtonClick = function (size, colIndex, index) {
          $scope.Parameter = this.config[colIndex].Functions[index].Parameter;
          var Function = this.config[colIndex].Functions[index].Function;
-         //$scope.getVariableTypes();
+         $scope.getVariableTypes(colIndex);
          var FunctionCtrl = null;
          var FunctionTemp = null;
          FunctionCtrl = $scope.getFunctionCtrl(Function);

@@ -48,6 +48,10 @@
                  };
      };
 
+     $scope.toggle = function (scope) {
+         scope.toggle();
+     };
+
      $scope.AddButtonClick = function AddStory(ID) {
          $scope.isLoading = true;
          storyID = $scope.columns[ID].Stories.length;

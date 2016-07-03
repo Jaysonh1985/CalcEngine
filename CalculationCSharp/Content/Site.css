@@ -395,8 +395,19 @@ span > input{ width: 100%; }
 .table {width: 100% }
 form[editable-form] > div {margin: 10px 0;}
 
+.angular-ui-tree-empty {
+    border: 0px dashed #bbb;
+    min-height: 100px;
+    background-color: rgb(255, 255, 255);
+    background-image: -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+    background-image: -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+    background-image: linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff), linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+}
+
 .selected {
-    background-color:#eee;
+    background-color:#f1f0ed;
     color:white;
     font-weight:bold;
 }
@@ -510,35 +521,36 @@ CSS class since the keyframe will take charge of the animation */
         /**
 * Show selected elements in green
 */
-        .simpleDemo ul[dnd-list] li.selected {
-            background-color: #dff0d8;
-            color: #3c763d;
-        }
+.simpleDemo ul[dnd-list] li.selected {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+.typeahead-demo .custom-popup-wrapper {
+position: absolute;
+top: 100%;
+left: 0;
+z-index: 1000;
+display: none;
+background-color: #f9f9f9;
+}
 
-<style>
-    .typeahead-demo .custom-popup-wrapper {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 1000;
-        display: none;
-        background-color: #f9f9f9;
-    }
+.typeahead-demo .custom-popup-wrapper > .message {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    color: #868686;
+}
 
-        .typeahead-demo .custom-popup-wrapper > .message {
-            padding: 10px 20px;
-            border-bottom: 1px solid #ddd;
-            color: #868686;
-        }
+.typeahead-demo .custom-popup-wrapper > .dropdown-menu {
+    position: static;
+    float: none;
+    display: block;
+    min-width: 160px;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
 
-        .typeahead-demo .custom-popup-wrapper > .dropdown-menu {
-            position: static;
-            float: none;
-            display: block;
-            min-width: 160px;
-            background-color: transparent;
-            border: none;
-            border-radius: 0;
-            box-shadow: none;
-        }
-</style>
+
+
+
