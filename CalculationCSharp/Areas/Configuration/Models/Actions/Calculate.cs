@@ -154,7 +154,12 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
                                         item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, parameters.LookupValue, parameters.DataType, parameters.ColumnNo));
                                     }
-
+                                    else if (item.Function == "Dates")
+                                    {
+                                        DateFunctions DatesFunctions = new DateFunctions();
+                                        Dates parameters = (Dates)javaScriptSerializ­er.Deserialize(jparameters, typeof(Dates));
+                                        item.Output = Convert.ToString(DatesFunctions.DateAdjustment(parameters.Type, parameters.Date1, parameters.Date2, parameters.PeriodType, parameters.Period, parameters.Adjustment, parameters.Day));
+                                    }
                                 }
 
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")

@@ -170,6 +170,9 @@
          else if (Function == 'Factors') {
              return 'factorsCtrl'
          }
+         else if (Function == 'Dates') {
+             return 'dateAdjustmentCtrl'
+         }
          else if (Function == 'Input') {
              return 'inputCtrl'
          }
@@ -185,6 +188,9 @@
          }
          else if (Function == 'Factors') {
              return '/Areas/Configuration/Scripts/FactorsModal.html'
+         }
+         else if (Function == 'Dates') {
+             return '/Areas/Configuration/Scripts/DateAdjustmentModal.html'
          }
          else if (Function == 'Input') {
              return '/Areas/Configuration/Scripts/InputModal.html'
