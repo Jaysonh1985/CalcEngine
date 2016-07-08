@@ -5,6 +5,7 @@
     if (Functions.length > 0) {
         
         $scope.factors.TableName = Functions[0].TableName;
+        $scope.factors.LookupType = Functions[0].LookupType;
         $scope.factors.LookupValue = Functions[0].LookupValue;
         $scope.factors.DataType = Functions[0].DataType;
         $scope.factors.ColumnNo = Functions[0].ColumnNo;
@@ -17,6 +18,7 @@
     $scope.addItem = function AddItem () {
         $scope.selected.push({
             TableName: $scope.factors.TableName,
+            LookupType: $scope.factors.LookupType,
             LookupValue: $scope.factors.LookupValue,
             DataType: $scope.factors.DataType,
             ColumnNo: $scope.factors.ColumnNo

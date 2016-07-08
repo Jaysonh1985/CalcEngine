@@ -11,7 +11,7 @@
                         <div class="form-group">
                             <label for="DateAdjType" class="control-label col-md-2">Adjustment Type</label>
                             <div class="col-sm-9">
-                                <select id="DateAdjType" name="singleSelect" ng:model="period.DateAdjustmentType" class="form-control">
+                                <select id="DateAdjType" name="singleSelect" ng:model="period.DateAdjustmentType"  class="form-control">
                                     <option value=""></option>
                                     <option value="YearsDays">Years Days</option>
                                     <option value="YearsMonths">Years Months</option>
@@ -22,13 +22,13 @@
                         <div class="form-group">
                             <label for="Date1" class="control-label col-md-2">Start Date</label>
                             <div class="col-sm-9">
-                                <input type="Text" id="Date1" name="Date1" class="form-control" ng-model="period.Date1" />
+                                <input type="Text" id="Date1" name="Date1" class="form-control" ng-model="period.Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="Date2" class="control-label col-md-2">End Date</label>
                             <div class="col-sm-9">
-                                <input type="Text" id="Date2" name="Date2" class="form-control" ng-model="period.Date2" />
+                                <input type="Text" id="Date2" name="Date2" class="form-control" ng-model="period.Date2" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8"/>
                             </div>
                         </div>
                     <fieldset>

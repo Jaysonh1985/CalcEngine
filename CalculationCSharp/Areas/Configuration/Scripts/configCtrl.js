@@ -115,7 +115,10 @@
              $scope.editingData[rows.ID] = true;
          }
          else if (rows.Function == 'Factors') {
-             rows.Type = 'Decimal';
+             $scope.editingData[rows.ID] = true;
+         }
+         else if (rows.Function == 'Dates') {
+             rows.Type = 'Date';
              $scope.editingData[rows.ID] = true;
          }
          else if (rows.Function == 'Input')
@@ -131,7 +134,8 @@
         
      }
 
-     $scope.getVariableTypes = function getVariableTypes(colIndex) {  //function that sets the parameters available under the different variable types
+     $scope.variableArrayBuilder = function variableArrayBuilder(config, colIndex, type) {
+
          var counter = 0;
          var scopeid = 0;
          var functionID = 0;
@@ -139,11 +143,10 @@
          $scope.Decimal = [];
          $scope.DecimalValue = [];
          $scope.DecimalParameter = [];
-         $scope.DecimalNames = [];
-         angular.forEach($scope.config, function (groups) {
-             if (scopeid <= colIndex)
-             {
-                 $scope.DecimalValue = ($filter('filter')($scope.config[scopeid].Functions, { Type: 'Decimal' }));
+
+         angular.forEach(config, function (groups) {
+             if (scopeid <= colIndex) {
+                 $scope.DecimalValue = ($filter('filter')(config[scopeid].Functions, { Type: type }));
 
                  functionID = 0;
                  angular.forEach($scope.DecimalValue, function (Names) {
@@ -152,11 +155,25 @@
                      functionID = functionID + 1;
                      arrayID = arrayID + 1;
                  });
-                scopeid = scopeid + 1
+                 scopeid = scopeid + 1
              }
          });
-
          scopeid = 0;
+
+         return $scope.DecimalNames;
+
+     }
+
+
+     $scope.getVariableTypes = function getVariableTypes(colIndex) {  //function that sets the parameters available under the different variable types
+
+         $scope.DecimalNames = [];
+         $scope.DateNames = [];
+         $scope.StringNames = [];
+
+         $scope.DecimalNames = $scope.variableArrayBuilder($scope.config, colIndex, 'Decimal');
+         $scope.DateNames = $scope.variableArrayBuilder($scope.config, colIndex, 'Date');
+         $scope.StringNames = $scope.variableArrayBuilder($scope.config, colIndex, 'String');
 
      }
 
