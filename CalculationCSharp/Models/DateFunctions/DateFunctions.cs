@@ -8,8 +8,7 @@ public class DateFunctions
 
 	public int YearsMonthsBetween(System.DateTime StartDate, System.DateTime EndDate, bool inclusive)
 	{
-
-		int months = MonthsBetween(StartDate, EndDate, false);
+        int months = MonthsBetween(StartDate, EndDate, false);
 
         return months / 12;
 	}
@@ -17,17 +16,17 @@ public class DateFunctions
 	 public double YearsDaysBetween(System.DateTime StartDate, System.DateTime EndDate, bool inclusive, double daysperyear)
 	{
 
-		daysperyear = 365;
-		int Years = YearsMonthsBetween(StartDate, EndDate, false);
-		System.TimeSpan d;
+        System.TimeSpan d;
         double days;
         d = EndDate.Subtract(StartDate);
         days = d.Days;
-		//if (isLeapYear(StartDate, EndDate) == true) {
-		//	daysperyear = 365;
-		//}
-		days = Math.Round(days / daysperyear,3);
 
+        double Years = Math.Floor(days / daysperyear);
+
+		days = (days / daysperyear) - Years;
+        days = Math.Floor(days * daysperyear);
+        days = Math.Round((days / 1000),3,MidpointRounding.AwayFromZero);
+        days = Years + days;
         return days;
 
 	}
@@ -60,8 +59,6 @@ public class DateFunctions
 
     public DateTime? DateAdjustment(string Type, String DateA, String DateB, string PeriodType, decimal Period, string Adjustment, string Day)
     {
-       
-
         DateTime Date1;
         DateTime Date2;
 
