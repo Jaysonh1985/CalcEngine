@@ -160,10 +160,6 @@ public class DateFunctions
                 }
             }
 
-
-
-
-
         }
 
         else if (Type == "Earlier")

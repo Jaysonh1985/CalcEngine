@@ -174,6 +174,7 @@
          $scope.DecimalValue = [];
          $scope.DecimalParameter = [];
          $scope.Names = [];
+         var newArr = [];
 
          angular.forEach(config, function (groups) {
              if (scopeid <= colIndex) {
@@ -198,6 +199,7 @@
              }
          });
          scopeid = 0;
+
 
          return $scope.Names;
 

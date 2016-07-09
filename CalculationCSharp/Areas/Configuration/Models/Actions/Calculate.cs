@@ -90,6 +90,14 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 {
                                     Logic = "<>";
                                 }
+                                else if(bit.LogicInd == "Greater")
+                                {
+                                    Logic = ">";
+                                }
+                                else if (bit.LogicInd == "Less")
+                                {
+                                    Logic = "<";
+                                }
                                 else
                                 {
                                     Logic = bit.LogicInd;
