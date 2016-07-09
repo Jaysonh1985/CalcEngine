@@ -1,5 +1,6 @@
-﻿sulhome.kanbanBoardApp.controller('groupCtrl', function ($scope, $uibModalInstance, $log, Name, Description) {
+﻿sulhome.kanbanBoardApp.controller('groupCtrl', function ($scope, $uibModalInstance, $log, ID, Name, Description) {
     // Model
+    $scope.ID = ID;
     $scope.Name = Name;
     $scope.Description = Description;
     $scope.Group = [];
@@ -9,6 +10,7 @@
     $scope.ok = function () {
         
         $scope.Group.push({
+            ID: $scope.ID,
             Name: $scope.Name,
             Description: $scope.Description
         })

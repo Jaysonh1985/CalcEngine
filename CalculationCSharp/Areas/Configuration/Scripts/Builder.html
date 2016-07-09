@@ -1,19 +1,27 @@
 ﻿<br>
 <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
 <input class="btn btn-default" type="button" value="Calculate" ng-click="CalcButtonClick()" />
-<input class="btn btn-default" type="button" value="Add Category" ng-click="AddCategory()" />
 <div ui-tree data-clone-enabled="true">
-    <uib-accordion close-others= false ui-tree-nodes="" ng-model="config" >
+    <uib-accordion close-others=false ui-tree-nodes="" ng-model="config">
         <uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="true" ui-tree-node>
+
             <uib-accordion-heading>
                 <table class='table table-borderless'>
                     <tr>
-                        <th width="95%">{{Category.Name}}</th>
-                        <th width="5%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></th>
+                        <td width="25%"></td>
+                        <td width="50%">{{Category.Name}}</td>
+                        <td width="25%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></td>
                     </tr>
                 </table>
             </uib-accordion-heading>
-            <a ng-click="GroupButtonClick('lg', $index)"><i class="pull-right glyphicon glyphicon-option-horizontal"></i></a>
+            <table class='table table-borderless'>
+                <tr>
+                    <td width="25%"><a ng-click="AddCategoryRows(colIndex)"><i class="pull-left glyphicon glyphicon-plus"></i></a></td>
+                    <td width="50%"><a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a></td>
+                    <td width="25%"><a ng-click="DeleteCategory(colIndex)"><i class="pull-right glyphicon glyphicon-remove"></i></a></td>
+                </tr>
+            </table>
+
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -35,7 +43,7 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody ui-tree-nodes ="" ng:model="Category.Functions" >
+                <tbody ui-tree-nodes="" ng:model="Category.Functions">
                     <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)" ui-tree-node>
 
                         <td ng-if="Category.Name == 'Input'"></td>

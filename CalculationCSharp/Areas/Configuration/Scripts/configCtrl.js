@@ -76,6 +76,41 @@
          $scope.GroupButtonClick('lg', this.config.length - 1);
      }
 
+     $scope.AddCategoryRows = function (colIndex) {
+         var item = null;
+
+         item = {
+             ID: colIndex + 1,
+             Name: null,
+             Description: null,
+             Functions: []
+         };
+
+         $scope.config.splice(colIndex + 1, 0, item);
+
+         $scope.GroupButtonClick('lg', colIndex + 1);
+
+         $scope.rebuildCategoryIDs();
+     }
+
+     $scope.DeleteCategory = function (colIndex) {
+         var cf = confirm("Delete this line?");
+         if (cf == true) {
+             $scope.config.splice(colIndex, 1);
+             $scope.rebuildCategoryIDs();
+         }
+     }
+
+     $scope.rebuildCategoryIDs = function rebuildCategoryIDs() {
+
+         colid = 0;
+         angular.forEach($scope.config, function (groups) {
+             $scope.config[colid].ID = colid;
+             colid = colid + 1;
+         });
+     }
+
+
      $scope.SaveButtonClick = function SaveBoard() {
          $scope.isLoading = true;
          var id = $scope.getConfigID();
@@ -281,6 +316,7 @@
      };
 
      $scope.GroupButtonClick = function (size, colIndex) {
+         $scope.ID = this.config[colIndex].ID;   
          $scope.Name = this.config[colIndex].Name;
          $scope.Description = this.config[colIndex].Description;
          var modalInstance = $uibModal.open({
@@ -290,12 +326,14 @@
              controller: 'groupCtrl',
              size: size,
              resolve: {
+                 ID: function () { return $scope.ID },
                  Name: function () { return $scope.Name },
                  Description: function () { return $scope.Description }
              }
          });
 
          modalInstance.result.then(function (selectedItem) {
+             $scope.config[colIndex].ID = selectedItem[0].ID;
              $scope.config[colIndex].Name = selectedItem[0].Name;
              $scope.config[colIndex].Description = selectedItem[0].Description;
             
