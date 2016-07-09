@@ -7,7 +7,7 @@
         $scope.factors.TableName = Functions[0].TableName;
         $scope.factors.LookupType = Functions[0].LookupType;
         $scope.factors.LookupValue = Functions[0].LookupValue;
-        $scope.factors.DataType = Functions[0].DataType;
+        $scope.factors.OutputType = Functions[0].OutputType;
         $scope.factors.ColumnNo = Functions[0].ColumnNo;
     }
     else {
@@ -20,7 +20,7 @@
             TableName: $scope.factors.TableName,
             LookupType: $scope.factors.LookupType,
             LookupValue: $scope.factors.LookupValue,
-            DataType: $scope.factors.DataType,
+            OutputType: $scope.factors.OutputType,
             ColumnNo: $scope.factors.ColumnNo
         })
     },

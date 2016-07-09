@@ -143,15 +143,24 @@
          $scope.Decimal = [];
          $scope.DecimalValue = [];
          $scope.DecimalParameter = [];
+         $scope.Names = [];
 
          angular.forEach(config, function (groups) {
              if (scopeid <= colIndex) {
-                 $scope.DecimalValue = ($filter('filter')(config[scopeid].Functions, { Type: type }));
 
+                 if(type == null)
+                 {
+                     $scope.DecimalValue = ($filter('filter')(config[scopeid].Functions));
+                 }
+                 else
+                 {
+                     $scope.DecimalValue = ($filter('filter')(config[scopeid].Functions, { Type: type }));
+                 }
+                 
                  functionID = 0;
                  angular.forEach($scope.DecimalValue, function (Names) {
                      $scope.DecimalParameter = ($filter('filter')($scope.DecimalValue[functionID].Name));
-                     $scope.DecimalNames[arrayID] = $scope.DecimalParameter;
+                     $scope.Names[arrayID] = $scope.DecimalParameter;
                      functionID = functionID + 1;
                      arrayID = arrayID + 1;
                  });
@@ -160,7 +169,7 @@
          });
          scopeid = 0;
 
-         return $scope.DecimalNames;
+         return $scope.Names;
 
      }
 
@@ -249,6 +258,10 @@
 
      $scope.LogicButtonClick = function (size, colIndex, index) {
          $scope.Logic = this.config[colIndex].Functions[index].Logic;
+         
+         $scope.AllNames = [];
+         $scope.AllNames = $scope.variableArrayBuilder($scope.config, colIndex, null);
+
          var modalInstance = $uibModal.open({
              animation: true,
              templateUrl: '/Areas/Configuration/Scripts/LogicModal.html',

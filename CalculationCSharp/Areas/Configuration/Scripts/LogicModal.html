@@ -25,17 +25,17 @@
                                 </select>
                             </td>
 
-                            <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control"></span></td>
+                            <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8"></span></td>
 
                             <td width="10%">
                                 <select name="singleSelect" ng:model="rows.LogicInd" class="form-control">
                                     <option value=""></option>
                                     <option value="=">=</option>
-                                    <option value="<>"><></option>
+                                    <option value="NotEqual"><></option>
                                 </select>
                             </td>
 
-                            <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control"></span></td>
+                            <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8"></span></td>
                             <td width="1%">
                                 <select name="singleSelect" ng:model="rows.Bracket2" class="form-control">
                                     <option value=""></option>

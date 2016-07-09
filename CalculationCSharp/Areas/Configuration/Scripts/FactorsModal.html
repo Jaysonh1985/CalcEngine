@@ -46,9 +46,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="DataType" class="control-label col-md-2">Data Type</label>
+                            <label for="DataType" class="control-label col-md-2">Output Type</label>
                             <div class="col-sm-9">
-                                <input type="Text" id="DataType" name="DataType" class="form-control" ng-model="factors.DataType" />
+                                <select id="inclusive" name="singleSelect" ng:model="factors.OutputType" class="form-control">
+                                    <option value=""></option>
+                                    <option value="Date">Date</option>
+                                    <option value="Decimal">Decimal</option>
+                                    <option value="String">String</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">

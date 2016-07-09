@@ -78,11 +78,23 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                             foreach (var bit in item.Logic)
                             {
 
-                                string inputA = bit.Input1;
-                                string Logic = bit.LogicInd;
-                                string inputB = bit.Input2;
+                                dynamic InputA = Config.VariableReplace(jCategory, bit.Input1, group.ID, item.ID);
+                                dynamic InputB = Config.VariableReplace(jCategory, bit.Input2, group.ID, item.ID);
 
-                                logic = "if(" + inputA + Logic + inputB + ",true,false)";
+                                string inputA = Convert.ToString(InputA);
+                                string Logic = null;
+                                if(bit.LogicInd == "NotEqual")
+                                {
+                                    Logic = "<>";
+                                }
+                                else
+                                {
+                                    Logic = bit.LogicInd;
+                                }
+                                
+                                string inputB = Convert.ToString(InputB);
+
+                                logic = "if(" + "'"+ inputA + "'" + Logic  +"'" + inputB + "'" + ",true,false)";
                                 Expression ex = new Expression(logic);
                                 logicparse = Convert.ToBoolean(ex.Evaluate());
                             }
@@ -99,8 +111,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         Maths Maths = new Maths();
                                         Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
                                         
-                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Input1, item.ID);
-                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Input2, item.ID);
+                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Input1, group.ID, item.ID);
+                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Input2, group.ID, item.ID);
                                         string Input1 = Convert.ToString(InputA);
                                         string Logic = Convert.ToString(parameters.Logic);
                                         string Input2 = Convert.ToString(InputB);
@@ -135,8 +147,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         DateFunctions DateFunctions = new DateFunctions();
                                         Period Dates = new Period();
                                         Period parameters = (Period)javaScriptSerializ­er.Deserialize(jparameters, typeof(Period));
-                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, item.ID);
-                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Date2, item.ID);
+                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, group.ID, item.ID);
+                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Date2, group.ID, item.ID);
                                         System.DateTime Date1 = DateTime.Parse(InputA);
                                         System.DateTime Date2 = DateTime.Parse(InputB);
                                         String DateAdjustmentType = parameters.DateAdjustmentType;
@@ -159,49 +171,53 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     {
                                         LookupFunctions FactorFunctions = new LookupFunctions();
                                         Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
-                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.LookupValue, item.ID);
+                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.LookupValue, group.ID, item.ID);
                                         
                                         if(parameters.LookupType == "Date")
                                         {
                                             DateTime LookupValue;
                                             DateTime.TryParse(InputA, out LookupValue);
-                                            item.Type = "Date";
-                                            item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), parameters.DataType, parameters.ColumnNo));
+                                            item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
                                         }
                                         else if(parameters.LookupType == "Decimal")
                                         {
                                             decimal LookupValue;
                                             decimal.TryParse(InputA, out LookupValue);
-                                            item.Type = "Decimal";
-                                            item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), parameters.DataType, parameters.ColumnNo));
+                                            
+                                            item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
                                         }
                                         else
                                         {
                                             string LookupValue;
                                             LookupValue = InputA;
-                                            item.Type = "String";
-                                            item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), parameters.DataType, parameters.ColumnNo));
+                                            item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 2, parameters.ColumnNo));
                                         }
 
-                                       
+                                        item.Type = parameters.OutputType;
+
+
                                     }
                                     else if (item.Function == "Dates")
                                     {
                                         DateFunctions DatesFunctions = new DateFunctions();
                                         Dates parameters = (Dates)javaScriptSerializ­er.Deserialize(jparameters, typeof(Dates));
-                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, item.ID);
-                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Date2, item.ID);
+                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, group.ID, item.ID);
+                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Date2, group.ID, item.ID);
+                                        dynamic InputC = Config.VariableReplace(jCategory, parameters.Period, group.ID, item.ID);
 
                                         DateTime Date1;
                                         DateTime Date2;
+                                        Decimal Period;
 
                                         DateTime.TryParse(InputA, out Date1);
                                         DateTime.TryParse(InputB, out Date2);
+                                        Decimal.TryParse(InputC, out Period);
 
-                                        item.Output = Convert.ToString(DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, parameters.Period, parameters.Adjustment, parameters.Day));
+                                        item.Output = Convert.ToString(DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day));
 
                                         InputA = null;
                                         InputB = null;
+                                        InputC = null;
                                     }
                                 }
 
@@ -224,6 +240,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                             }
                             else
                             {
+                                item.Output = null;
                                 item.Pass = "miss";
                             }
                         }

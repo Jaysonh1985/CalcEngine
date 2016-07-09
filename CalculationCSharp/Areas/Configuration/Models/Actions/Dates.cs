@@ -13,7 +13,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public dynamic Date1 { get; set; }
         public dynamic Date2 { get; set; }
         public string PeriodType { get; set; }
-        public decimal Period { get; set; }
+        public dynamic Period { get; set; }
         public string Adjustment { get; set; }
         public string Day { get; set; }
     }

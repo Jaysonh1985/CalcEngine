@@ -25,7 +25,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
             {
                 if (Config == null)
                 {
-                    Configuration.Add(new CategoryViewModel { ID = 1, Name = "Input", Functions = new List<ConfigViewModel>() });
+                    Configuration.Add(new CategoryViewModel { ID = 0, Name = "Input", Functions = new List<ConfigViewModel>() });
                     HttpContext.Current.Cache["config"] = Configuration;
                 }
                 else
