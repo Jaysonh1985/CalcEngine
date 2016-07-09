@@ -60,6 +60,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
         public void CalculateAction(List<CategoryViewModel> jCategory)
         {
+   
+
             foreach (var group in jCategory)
             {
                 foreach (var item in group.Functions)
@@ -74,6 +76,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                         {
                             string logic = null;
                             bool logicparse = true;
+                            string MathString = null;
 
                             foreach (var bit in item.Logic)
                             {
@@ -100,7 +103,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                             }
                             if (logicparse == true)
                             {
-
+                                int paramCount = 1;
                                 foreach (var param in item.Parameter)
                                 {
                                     string jparameters = Newtonsoft.Json.JsonConvert.SerializeObject(param);
@@ -113,11 +116,13 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         
                                         dynamic InputA = Config.VariableReplace(jCategory, parameters.Input1, group.ID, item.ID);
                                         dynamic InputB = Config.VariableReplace(jCategory, parameters.Input2, group.ID, item.ID);
+                                        string Bracket1 = Convert.ToString(parameters.Bracket1);
                                         string Input1 = Convert.ToString(InputA);
                                         string Logic = Convert.ToString(parameters.Logic);
                                         string Input2 = Convert.ToString(InputB);
+                                        string Bracket2 = Convert.ToString(parameters.Bracket2);
                                         string Rounding = Convert.ToString(parameters.Rounding);
-
+                                        string Logic2 = Convert.ToString(parameters.Logic2);
                                         if (Rounding == "0")
                                         {
                                             Rounding = "2";
@@ -132,12 +137,22 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             formula = Input1 + Logic + Input2;
                                         }
 
-                                        //Apply rounding
-                                        formula = "Round(" + formula + "," + Rounding + ")";
-                                        Expression e = new Expression(formula);
-                                        var Calculation = e.Evaluate();
-                                        item.Output = Convert.ToString(Convert.ToDecimal(Calculation));
+                                        string MathString1 = string.Concat(MathString, Bracket1, formula, Bracket2, Logic2);
+                                        MathString = MathString1;
+                                        
+                                        if(paramCount == item.Parameter.Count)
+                                        {
+                                            //Apply rounding
 
+                                            MathString = "Round(" + MathString + "," + Rounding + ")";
+                                            Expression e = new Expression(MathString);
+                                            var Calculation = e.Evaluate();
+                                            decimal Output = Convert.ToDecimal(Calculation);
+
+                                            item.Output = Convert.ToString(Convert.ToDecimal(Calculation));
+                                        }
+
+                                        paramCount = paramCount + 1;
                                         InputA = null;
                                         InputB = null;
 

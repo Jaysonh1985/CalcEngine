@@ -5,7 +5,6 @@
     $scope.isLoading = true;
     $scope.oneAtATime = false;
     $scope.status = {
-
         isFirstOpen: true,
         isFirstDisabled: false
     };
@@ -87,9 +86,7 @@
          };
 
          $scope.config.splice(colIndex + 1, 0, item);
-
          $scope.GroupButtonClick('lg', colIndex + 1);
-
          $scope.rebuildCategoryIDs();
      }
 
@@ -102,14 +99,12 @@
      }
 
      $scope.rebuildCategoryIDs = function rebuildCategoryIDs() {
-
          colid = 0;
          angular.forEach($scope.config, function (groups) {
              $scope.config[colid].ID = colid;
              colid = colid + 1;
          });
      }
-
 
      $scope.SaveButtonClick = function SaveBoard() {
          $scope.isLoading = true;

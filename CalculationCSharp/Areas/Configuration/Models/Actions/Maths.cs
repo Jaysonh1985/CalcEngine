@@ -13,9 +13,10 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public dynamic Input1 { get; set; }
         public dynamic Input2 { get; set; }
         public string Logic { get; set; }
-        public double Rounding { get; set; }
+        public int Rounding { get; set; }
         public string RoundingType { get; set; }
         public string Bracket2 { get; set; }
+        public string Logic2 { get; set; }
 
     }
 }
