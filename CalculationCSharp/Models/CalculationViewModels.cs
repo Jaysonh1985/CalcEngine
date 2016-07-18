@@ -96,6 +96,21 @@ namespace CalculationCSharp.Models
         public decimal Version { get; set; }
     }
 
+    public class CalcHistory
+    {
+        [Key]
+        public int ID { get; set; }
+        public string Scheme { get; set; }
+        public string Name { get; set; }
+        public string User { get; set; }
+        [Column(TypeName = "xml")]
+        public string Configuration { get; set; }
+        public DateTime UpdateDate { get; set; }
+        public string Comment { get; set; }
+        [Required]
+        public decimal Version { get; set; }
+    }
+
     public class CalculationDBContext : DbContext
     {
         public DbSet<CalculationResult> CalculationResult { get; set; }
@@ -104,5 +119,6 @@ namespace CalculationCSharp.Models
         public DbSet<ProjectBoard> ProjectBoard { get; set; }
         public DbSet<CalcConfiguration> CalcConfiguration { get; set; }
         public DbSet<CalcRelease> CalcRelease { get; set; }
+        public DbSet<CalcHistory> CalcHistory { get; set; }
     }
 }

@@ -273,6 +273,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607181858125_init.cs" />
+    <Compile Include="Migrations\201607181858125_init.Designer.cs">
+      <DependentUpon>201607181858125_init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Areas\Project\Models\ColumnRepository.cs" />
@@ -296,14 +300,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppScript\Directives\additionalControls.js" />
-    <Content Include="App_Data\aspnet-CalculationCSharp-20160101040606.mdf" />
-    <Content Include="App_Data\aspnet-CalculationCSharp-20160101040606_log.ldf">
-      <DependentUpon>aspnet-CalculationCSharp-20160101040606.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\CalculationCSharp.Models.CalculationDBContext.mdf" />
-    <Content Include="App_Data\CalculationCSharp.Models.CalculationDBContext_log.ldf">
-      <DependentUpon>CalculationCSharp.Models.CalculationDBContext.mdf</DependentUpon>
-    </Content>
     <Content Include="Areas\Calculation\Scripts\calculationMenuCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationService.js" />
     <Content Include="Areas\Configuration\Scripts\FactorsModal.html" />
@@ -661,7 +657,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\server.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -715,6 +710,7 @@
     <Content Include="Areas\Project\Views\Board\Board.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Calculation\Models\" />
     <Folder Include="Areas\Calculation\Views\Shared\" />
     <Folder Include="Areas\Configuration\Views\Shared\" />
@@ -744,6 +740,11 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201607181858125_init.resx">
+      <DependentUpon>201607181858125_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
