@@ -14,6 +14,7 @@ using System.Data.Entity;
 using System.Web;
 using CalculationCSharp.Models.Calculation;
 using CalculationCSharp.Areas.Configuration.Models.Actions;
+using CalculationCSharp.Areas.Configuration.Controllers;
 
 namespace CalculationCSharp.Areas.Config.Controllers
 {
@@ -22,6 +23,9 @@ namespace CalculationCSharp.Areas.Config.Controllers
         ConfigRepository repo = new ConfigRepository();
         CalculationDBContext db = new CalculationDBContext();
         JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+        CalcHistoriesController CalcHistories = new CalcHistoriesController();
+        CalcHistory CalcHistory = new CalcHistory();
+
         // GET api/<controller>
         [System.Web.Http.HttpGet]
         public HttpResponseMessage Get(int? id)
@@ -70,6 +74,19 @@ namespace CalculationCSharp.Areas.Config.Controllers
             db.Entry(calcConfiguration).State = EntityState.Modified;
 
             db.SaveChanges();
+
+
+            CalcHistory.CalcID = calcConfiguration.ID;
+            CalcHistory.Name = calcConfiguration.Name;
+            CalcHistory.Scheme = calcConfiguration.Scheme;
+            CalcHistory.Configuration = calcConfiguration.Configuration;
+            CalcHistory.Comment = "Test";
+            CalcHistory.UpdateDate = DateTime.Now;
+            CalcHistory.User = calcConfiguration.User;
+            CalcHistory.Version = calcConfiguration.Version;
+
+            CalcHistories.PostCalcHistory(CalcHistory);
+
             response.Content = new StringContent(JsonConvert.SerializeObject(json.data));
 
             return response;
@@ -86,6 +103,9 @@ namespace CalculationCSharp.Areas.Config.Controllers
             Calculate Calculate = new Calculate();
             jCategory = Calculate.DebugResults(jCategory);
             repo.UpdateConfig(jCategory);
+
+
+
             var response = Request.CreateResponse();
             response.Content = new StringContent(JsonConvert.SerializeObject(jCategory));
             response.StatusCode = HttpStatusCode.OK;

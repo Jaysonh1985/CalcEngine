@@ -100,6 +100,7 @@ namespace CalculationCSharp.Models
     {
         [Key]
         public int ID { get; set; }
+        public int CalcID { get; set; }
         public string Scheme { get; set; }
         public string Name { get; set; }
         public string User { get; set; }
@@ -114,7 +115,7 @@ namespace CalculationCSharp.Models
     public class CalcRegressionInputs
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Scheme { get; set; }
         public string Type { get; set; }
         [Required]
@@ -127,7 +128,7 @@ namespace CalculationCSharp.Models
 
     public class CalcRegressionResults
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Scheme { get; set; }
         public string Type { get; set; }
         public DateTime OriginalRunDate { get; set; }

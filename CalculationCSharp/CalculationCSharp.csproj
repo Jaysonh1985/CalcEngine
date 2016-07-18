@@ -239,6 +239,7 @@
     <Compile Include="Areas\Calculation\Controllers\CalculationWebApiController.cs" />
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcConfigurationsController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\CalcHistoriesController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
@@ -273,10 +274,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607181939481_calcregression.cs" />
-    <Compile Include="Migrations\201607181939481_calcregression.Designer.cs">
-      <DependentUpon>201607181939481_calcregression.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Areas\Project\Models\ColumnRepository.cs" />
@@ -305,7 +302,9 @@
     <Content Include="Areas\Configuration\Scripts\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\factorsCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\historyCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\inputCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\HistoryModal.html" />
     <Content Include="Areas\Configuration\Scripts\InputModal.html" />
     <Content Include="Areas\Configuration\Scripts\logicCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\GroupModal.html" />
@@ -740,11 +739,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607181939481_calcregression.resx">
-      <DependentUpon>201607181939481_calcregression.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -14,6 +14,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 {
     public class CalcConfigurationsController : ApiController
     {
+
         private CalculationDBContext db = new CalculationDBContext();
 
         // GET: api/CalcConfigurations
@@ -52,6 +53,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
             
 
             db.Entry(calcConfiguration).State = EntityState.Modified;
+
 
             try
             {

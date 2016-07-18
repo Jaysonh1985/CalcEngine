@@ -63,6 +63,15 @@
             });
      };
 
+     var getHistory = function (id) {
+         return $http.get("/api/CalcHistories", { params: { id: id } }).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
+
+
     var rowid = 0;
     var colid = 0;
 
@@ -108,6 +117,7 @@
         getColid: getColid,
         getCalc: getCalc,
         putCalc: putCalc,
-        postCalc: postCalc
+        postCalc: postCalc,
+        getHistory: getHistory
     };
 });
