@@ -273,9 +273,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607181858125_init.cs" />
-    <Compile Include="Migrations\201607181858125_init.Designer.cs">
-      <DependentUpon>201607181858125_init.cs</DependentUpon>
+    <Compile Include="Migrations\201607181939481_calcregression.cs" />
+    <Compile Include="Migrations\201607181939481_calcregression.Designer.cs">
+      <DependentUpon>201607181939481_calcregression.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -742,8 +742,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607181858125_init.resx">
-      <DependentUpon>201607181858125_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607181939481_calcregression.resx">
+      <DependentUpon>201607181939481_calcregression.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

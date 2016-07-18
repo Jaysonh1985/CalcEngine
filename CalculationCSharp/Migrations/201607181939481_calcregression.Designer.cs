@@ -7,13 +7,13 @@ namespace CalculationCSharp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class init : IMigrationMetadata
+    public sealed partial class calcregression : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(calcregression));
         
         string IMigrationMetadata.Id
         {
-            get { return "201607181858125_init"; }
+            get { return "201607181939481_calcregression"; }
         }
         
         string IMigrationMetadata.Source

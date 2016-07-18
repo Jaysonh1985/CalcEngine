@@ -111,6 +111,39 @@ namespace CalculationCSharp.Models
         public decimal Version { get; set; }
     }
 
+    public class CalcRegressionInputs
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Scheme { get; set; }
+        public string Type { get; set; }
+        [Required]
+        public string Reference { get; set; }
+        [Column(TypeName = "xml")]
+        public String Input { get; set; }
+        public String Comment { get; set;}
+        public DateTime UpdateDate { get; set; }
+    }
+
+    public class CalcRegressionResults
+    {
+        public int Id { get; set; }
+        public string Scheme { get; set; }
+        public string Type { get; set; }
+        public DateTime OriginalRunDate { get; set; }
+        public DateTime LatestRunDate { get; set; }
+        public string Reference { get; set; }
+        [Column(TypeName = "xml")]
+        public String Input { get; set; }
+        [Column(TypeName = "xml")]
+        public String OutputOld { get; set; }
+        [Column(TypeName = "xml")]
+        public String OutputNew { get; set; }
+        [Column(TypeName = "xml")]
+        public String Difference { get; set; }
+        public String Pass { get; set; }
+    }
+
     public class CalculationDBContext : DbContext
     {
         public DbSet<CalculationResult> CalculationResult { get; set; }
@@ -120,5 +153,7 @@ namespace CalculationCSharp.Models
         public DbSet<CalcConfiguration> CalcConfiguration { get; set; }
         public DbSet<CalcRelease> CalcRelease { get; set; }
         public DbSet<CalcHistory> CalcHistory { get; set; }
+        public DbSet<CalcRegressionInputs> CalcRegressionInputs { get; set; }
+        public DbSet<CalcRegressionResults> CalcRegressionResults { get; set; }
     }
 }
