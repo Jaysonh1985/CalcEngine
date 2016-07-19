@@ -362,6 +362,28 @@
          });
      };
 
+     $scope.RegressionButtonClick = function (size) {
+         $scope.ID = $scope.getConfigID();
+         var modalInstance = $uibModal.open({
+             animation: true,
+             templateUrl: '/Areas/Configuration/Scripts/RegressionModal.html',
+             scope: $scope,
+             controller: 'regressionCtrl',
+             size: size,
+             resolve: {
+                 ID: function () { return $scope.ID },
+             }
+         });
+
+         modalInstance.result.then(function (selectedItem) {
+
+             $scope.config = JSON.parse(selectedItem);
+             toastr.success("Reverted successfully", "Success");
+
+         }, function () {
+             $log.info('Modal dismissed at: ' + new Date());
+         });
+     };
     
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {

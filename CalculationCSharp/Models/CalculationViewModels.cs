@@ -116,10 +116,10 @@ namespace CalculationCSharp.Models
     {
         [Key]
         public int ID { get; set; }
+        [Required]
+        public int CalcID { get; set; }
         public string Scheme { get; set; }
         public string Type { get; set; }
-        [Required]
-        public string Reference { get; set; }
         [Column(TypeName = "xml")]
         public String Input { get; set; }
         public String Comment { get; set;}

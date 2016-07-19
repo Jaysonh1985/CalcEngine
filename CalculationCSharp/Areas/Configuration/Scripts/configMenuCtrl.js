@@ -99,7 +99,6 @@
 
      };
 
-
         $scope.deleteBoard = function (index) {
         var cf = confirm("Delete this Board?");
         if (cf == true) {
@@ -121,8 +120,6 @@
          $scope.editingData[Boards.ID] = true;
      };
 
-
-     
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
      $scope.$parent.$on("refreshBoard", function (e) {

@@ -240,6 +240,7 @@
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcConfigurationsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcHistoriesController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\CalcRegressionInputsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
@@ -302,6 +303,8 @@
     <Content Include="Areas\Configuration\Scripts\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\factorsCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\RegressionModal.html" />
+    <Content Include="Areas\Configuration\Scripts\regressionCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\historyCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\inputCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\HistoryModal.html" />

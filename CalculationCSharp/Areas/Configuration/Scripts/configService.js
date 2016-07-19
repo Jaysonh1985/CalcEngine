@@ -71,6 +71,32 @@
          });
      };
 
+     var getRegression = function (id) {
+         return $http.get("/api/CalcRegressionInputs", { params: { id: id } }).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
+
+     var postRegression = function (index, data) {
+         return $http.post("/api/CalcRegressionInputs/" + index,  data )
+            .then(function (response) {
+                return response.data;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+     };
+    
+     var deleteRegression = function (index) {
+         return $http.delete("/api/CalcRegressionInputs/" + index)
+            .then(function (response) {
+                return response.status == 200;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+     };
+
 
     var rowid = 0;
     var colid = 0;
@@ -118,6 +144,9 @@
         getCalc: getCalc,
         putCalc: putCalc,
         postCalc: postCalc,
-        getHistory: getHistory
+        getHistory: getHistory,
+        getRegression: getRegression,
+        postRegression: postRegression,
+        deleteRegression: deleteRegression
     };
 });

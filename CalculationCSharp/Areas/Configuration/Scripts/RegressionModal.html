@@ -1,0 +1,47 @@
+﻿<body ng-controller="regressionCtrl">
+    <div class="modal-header">
+        <h3 class="modal-title">Regression</h3>
+    </div>
+    <div class="modal-body">
+        <table class="table table-bordered table table-responsive">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Input
+                </th>
+                <th>
+                    Comment
+                </th>
+                <th>
+                    Pass/Fail
+                </th>
+                <th>
+                    Differences
+                </th>
+                <th>
+
+                </th>
+            </tr>
+            <tr ng-repeat="Regress in Regression">
+                <td width="15%" ng-cloak>{{Regress.CalcID}}</td>
+                <td ng-click="FunctionButtonClick('lg', Regress.Input)">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </td>
+                <td width="25%" ng-cloak> <span><input type="text" ng:model="Regress.Comment" class="form-control"></span></td>
+                <td></td>
+                <td></td>
+                <td width="5%">
+                    [<a ng:click="removeRegressionItem($index)">X</a>]
+                </td>
+            </tr>
+        </table>
+    </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="Add($index)" data-dismiss="modal">Add</button>
+            <button type="button" class="btn btn-default" ng-click="Save($index)" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal">Close</button>
+        </div>
+</body>
