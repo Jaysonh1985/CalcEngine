@@ -8,10 +8,16 @@
                $scope.Boards = data;
            }, onError);
     };
+
     //Click OK
     $scope.ok = function () {
         $scope.addItem();
         $uibModalInstance.close($scope.selected);
+    };
+
+    $scope.revert = function (Board) {
+        
+        $uibModalInstance.close(Board.Configuration);
     };
 
     $scope.cancel = function () {

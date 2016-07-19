@@ -354,6 +354,9 @@
 
          modalInstance.result.then(function (selectedItem) {
 
+             $scope.config = JSON.parse(selectedItem);
+             toastr.success("Reverted successfully", "Success");
+
          }, function () {
              $log.info('Modal dismissed at: ' + new Date());
          });
