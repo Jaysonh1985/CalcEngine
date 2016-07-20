@@ -35,7 +35,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCalcRegressionInputs(int id, CalcRegressionInputs calcRegressionInputs)
         {
-            if (!ModelState.IsValid)
+                if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }

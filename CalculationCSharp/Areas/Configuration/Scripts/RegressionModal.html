@@ -26,7 +26,7 @@
             </tr>
             <tr ng-repeat="Regress in Regression">
                 <td width="15%" ng-cloak>{{Regress.CalcID}}</td>
-                <td ng-click="FunctionButtonClick('lg', Regress.Input)">
+                <td ng-click="FunctionButtonClick('lg', $index)">
                     <span class="glyphicon glyphicon-cog"></span>
                 </td>
                 <td width="25%" ng-cloak> <span><input type="text" ng:model="Regress.Comment" class="form-control"></span></td>

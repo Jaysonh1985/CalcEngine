@@ -1,5 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModalInstance, $log, $http, $location,configService, ID) {
-    
+﻿sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location,configService, ID) {
+
     function init() {
       $scope.isLoading = true;
         configService.getRegression(ID)
@@ -9,42 +9,40 @@
            }, onError);
     };
 
-    $scope.getFormFields = function getFormFields() {  //function that sets the parameters available under the different variable types
-        var counter = 0;
-        var scopeid = 0;
-        var functionID = 0;
-        $scope.fields = [];
-        $scope.fieldset = [];
-        angular.forEach($scope.config, function (groups) {
-            functionID = 0;
-            $scope.fields = $filter('filter')($scope.config[scopeid].Functions, { Function: 'Input' });
-            angular.forEach($scope.fields, function (functions) {
-                $scope.fieldset.push($scope.fields[functionID].Parameter[0]);
-                functionID = functionID + 1
-            });
-            scopeid = scopeid + 1
-        });
-    }
-
     $scope.FunctionButtonClick = function (size, colIndex, index) {
-
+        $scope.Input = this.Regression[colIndex].Input;
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: FunctionTemp,
+            templateUrl: '/Areas/Configuration/Scripts/RegressionInputModal.html',
             scope: $scope,
-            controller: FunctionCtrl,
+            controller: 'regressionInputCtrl',
             size: size,
             resolve: {
-                Functions: function () { return $scope.Parameter }
+                Functions: function () { return $scope.config },
+                Input: function () { return $scope.Input }
             }
         });
         modalInstance.result.then(function (selectedItem) {
-            $scope.config[colIndex].Functions[index].Parameter = selectedItem;
 
-            if ($scope.config[colIndex].Functions[index].Function == 'Input') {
-                $scope.config[colIndex].Functions[index].Name = selectedItem[0].key;
-                $scope.config[colIndex].Functions[index].Type = selectedItem[0].templateOptions.type;
-            }
+            $scope.Regression[colIndex].Input = selectedItem;
+
+            $scope.selected = {
+
+                ID: $scope.Regression[colIndex].ID,
+                CalcID: $scope.Regression[colIndex].CalcID ,
+                Scheme: $scope.Regression[colIndex].Scheme,
+                Type: $scope.Regression[colIndex].Type,
+                //Input: $scope.Regression[colIndex].Input,
+                Comment: $scope.Regression[colIndex].Comment,
+                UpdateDate: ""
+
+            };
+
+            configService.putRegression($scope.Regression[colIndex].ID, $scope.selected).then(function (data) {
+
+            }, onError);
+
+
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });
@@ -60,7 +58,7 @@
             Comment: "",
         };
 
-        configService.postRegression(ID, $scope.selected).then(function (data) {
+        configService.postRegression(ID, [$scope.selected]).then(function (data) {
             $scope.Regression.push(data);
             $scope.isLoading = false;
         }, onError);

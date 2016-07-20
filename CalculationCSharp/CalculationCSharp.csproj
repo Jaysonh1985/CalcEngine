@@ -303,6 +303,8 @@
     <Content Include="Areas\Configuration\Scripts\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\factorsCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\regressionInputCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\RegressionInputModal.html" />
     <Content Include="Areas\Configuration\Scripts\RegressionModal.html" />
     <Content Include="Areas\Configuration\Scripts\regressionCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\historyCtrl.js" />

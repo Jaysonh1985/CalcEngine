@@ -97,6 +97,15 @@
             });
      };
 
+     var putRegression = function (index, data) {
+         return $http.put("/api/CalcRegressionInputs/" + index,  data )
+            .then(function (response) {
+                return response.status == 200;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+     };
+
 
     var rowid = 0;
     var colid = 0;
@@ -147,6 +156,7 @@
         getHistory: getHistory,
         getRegression: getRegression,
         postRegression: postRegression,
-        deleteRegression: deleteRegression
+        deleteRegression: deleteRegression,
+        putRegression: putRegression
     };
 });
