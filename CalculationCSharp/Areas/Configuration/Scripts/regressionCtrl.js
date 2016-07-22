@@ -32,7 +32,7 @@
                 CalcID: $scope.Regression[colIndex].CalcID ,
                 Scheme: $scope.Regression[colIndex].Scheme,
                 Type: $scope.Regression[colIndex].Type,
-                Input: angular.toJson($scope.Regression[colIndex].Input),
+                Input: angular.toJson($scope.Regression[colIndex].Input, true),
                 Comment: $scope.Regression[colIndex].Comment,
                 UpdateDate: ""
 
