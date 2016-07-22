@@ -11,10 +11,10 @@
 
         $scope.isLoading = false;
         $scope.config = Functions;
-        $scope.Input = Input;
+        $scope.Input = angular.fromJson(Input);
         $scope.fieldset = [];
         $scope.getFormFields();
-        $scope.mapFormFields(Input);
+        $scope.mapFormFields($scope.Input);
 
     };
 

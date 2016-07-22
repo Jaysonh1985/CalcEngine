@@ -35,10 +35,12 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCalcRegressionInputs(int id, CalcRegressionInputs calcRegressionInputs)
         {
-                if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            calcRegressionInputs.UpdateDate = DateTime.Now;
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
             if (id != calcRegressionInputs.ID)
             {

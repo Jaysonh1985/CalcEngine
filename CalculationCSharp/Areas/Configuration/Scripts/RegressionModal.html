@@ -25,7 +25,6 @@
                 </th>
             </tr>
             <tr ng-repeat="Regress in Regression">
-                <td width="15%" ng-cloak>{{Regress.CalcID}}</td>
                 <td ng-click="FunctionButtonClick('lg', $index)">
                     <span class="glyphicon glyphicon-cog"></span>
                 </td>
@@ -41,7 +40,6 @@
 
         <div class="modal-footer">
             <button type="button" class="btn btn-default" ng-click="Add($index)" data-dismiss="modal">Add</button>
-            <button type="button" class="btn btn-default" ng-click="Save($index)" data-dismiss="modal">Save</button>
             <button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal">Close</button>
         </div>
 </body>

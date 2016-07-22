@@ -32,7 +32,7 @@
                 CalcID: $scope.Regression[colIndex].CalcID ,
                 Scheme: $scope.Regression[colIndex].Scheme,
                 Type: $scope.Regression[colIndex].Type,
-                //Input: $scope.Regression[colIndex].Input,
+                Input: angular.toJson($scope.Regression[colIndex].Input),
                 Comment: $scope.Regression[colIndex].Comment,
                 UpdateDate: ""
 
@@ -58,7 +58,7 @@
             Comment: "",
         };
 
-        configService.postRegression(ID, [$scope.selected]).then(function (data) {
+        configService.postRegression(ID, $scope.selected).then(function (data) {
             $scope.Regression.push(data);
             $scope.isLoading = false;
         }, onError);
