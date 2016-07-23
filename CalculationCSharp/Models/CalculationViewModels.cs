@@ -120,22 +120,12 @@ namespace CalculationCSharp.Models
         public int CalcID { get; set; }
         public string Scheme { get; set; }
         public string Type { get; set; }
-        [Column(TypeName = "xml")]
-        public String Input { get; set; }
-        public String Comment { get; set;}
-        public DateTime UpdateDate { get; set; }
-    }
-
-    public class CalcRegressionResults
-    {
-        public int ID { get; set; }
-        public string Scheme { get; set; }
-        public string Type { get; set; }
-        public DateTime OriginalRunDate { get; set; }
-        public DateTime LatestRunDate { get; set; }
         public string Reference { get; set; }
         [Column(TypeName = "xml")]
         public String Input { get; set; }
+        public String Comment { get; set;}
+        public Nullable<DateTime> OriginalRunDate { get; set; }
+        public Nullable<DateTime> LatestRunDate { get; set; }  
         [Column(TypeName = "xml")]
         public String OutputOld { get; set; }
         [Column(TypeName = "xml")]
@@ -155,6 +145,5 @@ namespace CalculationCSharp.Models
         public DbSet<CalcRelease> CalcRelease { get; set; }
         public DbSet<CalcHistory> CalcHistory { get; set; }
         public DbSet<CalcRegressionInputs> CalcRegressionInputs { get; set; }
-        public DbSet<CalcRegressionResults> CalcRegressionResults { get; set; }
     }
 }

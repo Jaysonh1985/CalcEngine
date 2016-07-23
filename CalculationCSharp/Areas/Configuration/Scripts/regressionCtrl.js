@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location,configService, ID) {
+﻿sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location, configService, ID, calculationService) {
 
     function init() {
       $scope.isLoading = true;
@@ -7,6 +7,17 @@
                $scope.isLoading = false;
                $scope.Regression = data;
            }, onError);
+    };
+
+    function getIndexOf(arr, val, prop) {
+        var l = arr.length,
+          k = 0;
+        for (k = 0; k < l; k = k + 1) {
+            if (arr[k][prop] === val) {
+                return k;
+            }
+        }
+        return false;
     };
 
     $scope.FunctionButtonClick = function (size, colIndex, index) {
@@ -79,6 +90,70 @@
             }
         };
     },
+
+
+     $scope.RunAllButtonClick = function CalcButtonClick() {
+
+         $scope.isLoading = true;
+
+         $scope.array = [];
+
+         $scope.array.push($scope.formset);
+         $scope.prop = [];
+         $scope.val = [];
+         $scope.obj = [];
+
+         angular.forEach($scope.Regression, function (value, key, obj) {
+
+             angular.forEach(angular.fromJson(angular.fromJson(angular.fromJson($scope.Regression[key].Input))), function (value, key, obj) {
+                 $scope.prop.push(value);
+                 var index = getIndexOf($scope.config[0].Functions, key, 'Name');
+                 $scope.config[0].Functions[index].Output = value;
+
+            });
+
+            calculationService.postCalc(1, $scope.config).then(function (data) {
+                $scope.isLoading = false;
+
+                if ($scope.Regression[key].OutputOld == null)
+                {
+                    $scope.Regression[key].OutputOld = angular.toJson(data,true);
+                }
+                else
+                {
+                    $scope.Regression[key].OutputNew = angular.toJson(data, true);
+                }
+
+                $scope.selected = {
+
+                    ID: $scope.Regression[key].ID,
+                    CalcID: $scope.Regression[key].CalcID,
+                    Scheme: $scope.Regression[key].Scheme,
+                    Input: $scope.Regression[key].Input,
+                    Type: $scope.Regression[key].Type,
+                    Comment: $scope.Regression[key].Comment,
+                    OriginalRunDate: $scope.Regression[key].OriginalRunDate,
+                    LatestRunDate: $scope.Regression[key].LatestRunDate,
+                    OutputOld: $scope.Regression[key].OutputOld,
+                    OutputNew: $scope.Regression[key].OutputNew,
+                    Difference: $scope.Regression[key].Difference,
+                    Pass: $scope.Regression[key].Pass,
+                    UpdateDate: ""
+
+                };
+
+                configService.putRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
+
+                }, onError);
+                
+            });
+
+         });
+
+
+        
+     };
+
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');

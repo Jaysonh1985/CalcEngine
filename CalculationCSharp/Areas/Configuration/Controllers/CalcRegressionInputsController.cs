@@ -35,12 +35,10 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCalcRegressionInputs(int id, CalcRegressionInputs calcRegressionInputs)
         {
-            calcRegressionInputs.UpdateDate = DateTime.Now;
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             if (id != calcRegressionInputs.ID)
             {
@@ -76,8 +74,6 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            calcRegressionInputs.UpdateDate = DateTime.Now;
 
             db.CalcRegressionInputs.Add(calcRegressionInputs);
             db.SaveChanges();

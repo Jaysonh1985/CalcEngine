@@ -79,7 +79,6 @@
 
         $scope.isLoading = true;
 
-        console.log("2");
         $scope.array = [];
 
         $scope.array.push($scope.formset);
@@ -87,7 +86,7 @@
         $scope.val = [];
         $scope.obj = [];
 
-        angular.forEach(Input, function (value, key, obj) {
+        angular.forEach(angular.fromJson(Input), function (value, key, obj) {
 
             $scope.prop.push(value);
             var index = getIndexOf($scope.fieldset, key, 'key');
