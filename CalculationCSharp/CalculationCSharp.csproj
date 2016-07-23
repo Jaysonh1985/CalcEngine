@@ -303,7 +303,11 @@
     <Content Include="Areas\Configuration\Scripts\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\factorsCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\regressionOutputCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\regressionDifferenceCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\RegressionOutputModal.html" />
     <Content Include="Areas\Configuration\Scripts\regressionInputCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\RegressionDifferenceModal.html" />
     <Content Include="Areas\Configuration\Scripts\RegressionInputModal.html" />
     <Content Include="Areas\Configuration\Scripts\RegressionModal.html" />
     <Content Include="Areas\Configuration\Scripts\regressionCtrl.js" />
@@ -328,6 +332,7 @@
     <Content Include="Areas\Project\Scripts\boardFilter.html" />
     <Content Include="Areas\Project\Scripts\storyCtrl.js" />
     <Content Include="Areas\Project\Scripts\viewXML.html" />
+    <Content Include="Content\angular-object-diff.css" />
     <Content Include="Content\angular-ui-tree.css" />
     <Content Include="Content\angular-ui-tree.min.css" />
     <Content Include="Content\images\ajax-loader.gif" />
@@ -606,6 +611,7 @@
     <Content Include="Scripts\angular-gridster.min.js" />
     <Content Include="Scripts\angular-long-press.js" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-object-diff.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular-touch.js" />

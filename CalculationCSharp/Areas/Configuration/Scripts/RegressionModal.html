@@ -12,6 +12,12 @@
                     Comment
                 </th>
                 <th>
+                    Old
+                </th>
+                <th>
+                    New
+                </th>
+                <th>
                     Pass/Fail
                 </th>
                 <th>
@@ -26,13 +32,25 @@
                     <span class="glyphicon glyphicon-cog"></span>
                 </td>
                 <td width="25%" ng-cloak> <span><input type="text" ng:model="Regress.Comment" class="form-control"></span></td>
+                <td><button type="button" class="btn btn-default" ng-click="OutputButtonClick('lg', $index, 'o')" data-dismiss="modal">Old</button></td>
+                <td><button type="button" class="btn btn-default" ng-click="OutputButtonClick('lg', $index, 'n')" data-dismiss="modal">New</button></td>
                 <td></td>
-                <td></td>
+                <td><button type="button" class="btn btn-default" ng-click="DifferencesButtonClick('lg', $index)" data-dismiss="modal">Differences</button></td>
                 <td width="5%">
                     [<a ng:click="removeRegressionItem($index)">X</a>]
                 </td>
             </tr>
         </table>
+
+
+        <!--<div>
+            <pre ng-bind-html="diffValue"></pre>
+            <pre ng-bind-html="diffValueChanges"></pre>
+            <pre ng-bind-html="yourObjectOneJsonView"></pre>
+            <pre ng-bind-html="yourObjectTwoJsonView"></pre>
+        </div>-->
+
+
     </div>
 
         <div class="modal-footer">
