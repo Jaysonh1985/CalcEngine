@@ -138,14 +138,14 @@
 
             var diff = changes.value;
             if (changes.changed == 'equal') {
-                return $sce.trustAsHtml(inspect(diff, shallow));
+                return inspect(diff, shallow);
             }
 
             for (var key in diff) {
                 properties.push(formatChange(key, diff[key], shallow));
             }
 
-            return $sce.trustAsHtml('<span>' + openChar + '</span>\n<div class="diff-level">' + properties.join('<span>,</span>\n') + '\n</div><span>' + closeChar + '</span>');
+            return '<span>' + openChar + '</span>\n<div class="diff-level">' + properties.join('<span>,</span>\n') + '\n</div><span>' + closeChar + '</span>';
 
         }
 
@@ -167,6 +167,7 @@
          */
         function formatChangesToXMLString(changes, shallow) {
             var properties = [];
+            var blank = [];
 
             if (changes.changed == 'equal') {
                 return '';
@@ -177,10 +178,11 @@
             for (var key in diff) {
                 var changed = diff[key].changed;
                 if (changed !== 'equal')
-                    properties.push(formatChange(key, diff[key], shallow, true));
+                   properties.push(formatChange(key, diff[key], diff['Field'], shallow, true));
+                    
             }
 
-            return $sce.trustAsHtml('<span>' + openChar + '</span>\n<div class="diff-level">' + properties.join('<span>,</span>\n') + '\n</div><span>' + closeChar + '</span>');
+            return  properties.join('\n');
 
         }
 
@@ -213,31 +215,34 @@
          * @param shallow
          * @param diffOnly
          */
-        function formatChange(key, diffItem, shallow, diffOnly) {
+        function formatChange(key, diffItem, fields, shallow, diffOnly) {
             var changed = diffItem.changed;
+            var fieldsvalue = null
+            if (fields != undefined) {
+                fieldsvalue = fields.value;
+            }
             var property;
             switch (changed) {
                 case 'equal':
                     property = (stringifyObjectKey(escapeHTML(key)) + '<span>: </span>' + inspect(diffItem.value));
                     break;
 
-                case 'removed':
-                    property = ('<del class="diff">' + stringifyObjectKey(escapeHTML(key)) + '<span>: </span>' + inspect(diffItem.value) + '</del>');
-                    break;
+                //case 'removed':
+                //    property = ('<del class="diff">' + stringifyObjectKey(escapeHTML(key)) + '<span>: </span>' + inspect(diffItem.value) + '</del>');
+                //    break;
 
-                case 'added':
-                    property = ('<ins class="diff">' + stringifyObjectKey(escapeHTML(key)) + '<span>: </span>' + inspect(diffItem.value) + '</ins>');
-                    break;
+                //case 'added':
+                //    property = ('<ins class="diff">' + stringifyObjectKey(escapeHTML(key)) + '<span>: </span>' + inspect(diffItem.value) + '</ins>');
+                //    break;
 
                 case 'primitive change':
-                    var prefix = stringifyObjectKey(escapeHTML(key)) + '<span>: </span>';
+                    var prefix = stringifyObjectKey(escapeHTML(key));
                     property = (
-                    '<del class="diff diff-key">' + prefix + inspect(diffItem.removed) + '</del><span>,</span>\n' +
-                    '<ins class="diff diff-key">' + prefix + inspect(diffItem.added) + '</ins>');
+                    '<tr> <td>' + fieldsvalue + '</td> <td>' + prefix + '</td> <td>' + inspect(diffItem.removed) + '</td><td>' + inspect(diffItem.added) + '</td></tr>');
                     break;
 
                 case 'object change':
-                    property = shallow ? '' : (stringifyObjectKey(key) + '<span>: </span>' + ( diffOnly ? formatChangesToXMLString(diffItem) : formatToJsonXMLString(diffItem)));
+                    property = ( diffOnly ? formatChangesToXMLString(diffItem) : formatToJsonXMLString(diffItem));
                     break;
             }
 

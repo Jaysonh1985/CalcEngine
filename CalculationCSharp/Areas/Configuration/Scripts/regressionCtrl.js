@@ -62,16 +62,15 @@
     };
 
     $scope.DifferencesButtonClick = function (size, colIndex, index) {
-        $scope.Input = this.Regression[colIndex].Input;
+        $scope.Difference = this.Regression[colIndex].Difference;
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/RegressionDifferencesModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/RegressionDifferenceModal.html',
             scope: $scope,
             controller: 'regressionDifferenceCtrl',
             size: size,
             resolve: {
-                Functions: function () { return $scope.config },
-                Input: function () { return $scope.Input }
+                Difference: function () { return $scope.Difference },
             }
         });
         modalInstance.result.then(function (selectedItem) {
@@ -185,13 +184,12 @@
                 // gives a full object view with Diff highlighted
                 $scope.diffValue = ObjectDiff.toJsonView(diff);
 
-
-
                 // gives object view with onlys Diff highlighted
                 $scope.diffValueChanges = ObjectDiff.toJsonDiffView(diff);
 
-                $scope.Regression[key].Difference = angular.toJson($scope.diffValueChanges, true);
-
+                $scope.Regression[key].Difference = '<table class="table table-bordered table table-responsive">' + 
+                                                    '<tr><th>Variable Name</th><th>Key</th><th>Old Value</th><th>New Value</th></tr>'+             
+                                                    $scope.diffValueChanges + '</table>';
 
                 $scope.selected = {
 
@@ -214,15 +212,10 @@
                 configService.putRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
 
                 }, onError);
-
-
-
-                
+               
             });
 
          });
-
-
         
      };
 

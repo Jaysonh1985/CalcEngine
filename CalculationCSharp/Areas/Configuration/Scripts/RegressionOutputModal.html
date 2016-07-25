@@ -5,23 +5,9 @@
     <div class="modal-body">
 
         <uib-accordion close-others=false>
-            <!--<uib-accordion-group is-open=false>
-                <uib-accordion-heading>
-                    <table class='table table-borderless'>
-                        <tr>
-                            <th width="95%">
-                                <h2 class="panel-title">
-                                    Calculation Output
-                                </h2>
-                            </th>
-                            <th width="5%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></th>
-                        </tr>
-                    </table>
-                </uib-accordion-heading>-->
-
                 <div class="container-fluid">
-                    <uib-accordion close-others=false is-open="false" ng-model="output">
-                        <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open=true>
+                    <uib-accordion close-others=false ng-model="output">
+                        <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open=false>
                             <uib-accordion-heading>
                                 <table class='table table-borderless'>
                                     <tr>
@@ -59,7 +45,6 @@
                         </uib-accordion-group>
                     </uib-accordion>
                 </div>
-            <!--</uib-accordion-group>-->
         </uib-accordion>
 
 
