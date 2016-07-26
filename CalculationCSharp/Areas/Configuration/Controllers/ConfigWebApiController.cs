@@ -42,6 +42,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             {
                 if (calcConfiguration.Configuration == null)
                 {
+                    HttpContext.Current.Cache.Remove("config");
                     List<CategoryViewModel> json = repo.GetConfig(null);
                     response.Content = new StringContent(JsonConvert.SerializeObject(json));
                 }

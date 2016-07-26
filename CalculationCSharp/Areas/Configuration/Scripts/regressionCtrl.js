@@ -37,6 +37,9 @@
 
             $scope.Regression[colIndex].Input = selectedItem;
 
+            var OutputOld = angular.fromJson($scope.Regression[colIndex].OutputOld, true);
+            var OutputNew = angular.fromJson($scope.Regression[colIndex].OutputNew, true);
+
             $scope.selected = {
 
                 ID: $scope.Regression[colIndex].ID,
@@ -44,6 +47,8 @@
                 Scheme: $scope.Regression[colIndex].Scheme,
                 Type: $scope.Regression[colIndex].Type,
                 Input: angular.toJson($scope.Regression[colIndex].Input, true),
+                OutputOld: angular.toJson(OutputOld, true),
+                OutputNew: angular.toJson(OutputNew, true),
                 Comment: $scope.Regression[colIndex].Comment,
                 UpdateDate: ""
 
@@ -169,35 +174,43 @@
             calculationService.postCalc(1, $scope.config).then(function (data) {
                 $scope.isLoading = false;
 
-                if ($scope.Regression[key].OutputOld == null)
+                if ($scope.Regression[key].OutputOld == null || $scope.Regression[key].OutputOld == "null")
                 {
                     $scope.Regression[key].OutputOld = angular.toJson(data,true);
                 }
                 else
                 {
                     $scope.Regression[key].OutputNew = angular.toJson(data, true);
+
+                    // you can directly diff your objects js now or parse a Json to object and diff
+                    var diff = ObjectDiff.diffOwnProperties(angular.fromJson($scope.Regression[key].OutputOld), angular.fromJson($scope.Regression[key].OutputNew));
+
+                    // gives object view with onlys Diff highlighted
+                    $scope.diffValueChanges = ObjectDiff.toJsonDiffView(diff);
+
+                    if ($scope.diffValueChanges != "") {
+                        $scope.Regression[key].Difference = '<table class="table table-bordered table table-responsive">' +
+                        '<tr><th>Variable Name</th><th>Key</th><th>Old Value</th><th>New Value</th></tr>' +
+                        $scope.diffValueChanges + '</table>';
+                    }
+                    else
+                    {
+                        $scope.Regression[key].OutputNew = null;
+                        $scope.Regression[key].Difference = null;
+                    }
+
+
+
                 }
 
-                // you can directly diff your objects js now or parse a Json to object and diff
-                var diff = ObjectDiff.diffOwnProperties(angular.fromJson($scope.Regression[key].OutputOld), angular.fromJson($scope.Regression[key].OutputNew));
-
-                // gives a full object view with Diff highlighted
-                $scope.diffValue = ObjectDiff.toJsonView(diff);
-
-                // gives object view with onlys Diff highlighted
-                $scope.diffValueChanges = ObjectDiff.toJsonDiffView(diff);
-
-                $scope.Regression[key].Difference = '<table class="table table-bordered table table-responsive">' + 
-                                                    '<tr><th>Variable Name</th><th>Key</th><th>Old Value</th><th>New Value</th></tr>'+             
-                                                    $scope.diffValueChanges + '</table>';
-
+                var Input = angular.fromJson($scope.Regression[key].Input, true)
                 $scope.selected = {
 
                     ID: $scope.Regression[key].ID,
                     CalcID: $scope.Regression[key].CalcID,
                     Scheme: $scope.Regression[key].Scheme,
-                    Input: $scope.Regression[key].Input,
                     Type: $scope.Regression[key].Type,
+                    Input: angular.toJson(Input, true),
                     Comment: $scope.Regression[key].Comment,
                     OriginalRunDate: $scope.Regression[key].OriginalRunDate,
                     LatestRunDate: $scope.Regression[key].LatestRunDate,
@@ -218,6 +231,41 @@
          });
         
      };
+
+    $scope.AcceptButtonClick = function CalcButtonClick() {
+
+        angular.forEach($scope.Regression, function (value, key, obj) {
+
+            $scope.Regression[key].OutputOld = $scope.Regression[key].OutputNew;
+            $scope.Regression[key].OutputNew = null;
+            $scope.Regression[key].Difference = null;
+
+            var Input = angular.fromJson($scope.Regression[key].Input, true)
+            $scope.selected = {
+
+                ID: $scope.Regression[key].ID,
+                CalcID: $scope.Regression[key].CalcID,
+                Scheme: $scope.Regression[key].Scheme,
+                Type: $scope.Regression[key].Type,
+                Input: angular.toJson(Input, true),
+                Comment: $scope.Regression[key].Comment,
+                OriginalRunDate: $scope.Regression[key].OriginalRunDate,
+                LatestRunDate: $scope.Regression[key].LatestRunDate,
+                OutputOld: $scope.Regression[key].OutputOld,
+                OutputNew: $scope.Regression[key].OutputNew,
+                Difference: $scope.Regression[key].Difference,
+                Pass: $scope.Regression[key].Pass,
+                UpdateDate: ""
+
+            };
+
+            configService.putRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
+
+            }, onError);
+       
+        })
+
+    };
 
 
     $scope.cancel = function () {
