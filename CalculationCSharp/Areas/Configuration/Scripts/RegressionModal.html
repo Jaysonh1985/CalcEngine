@@ -6,6 +6,9 @@
         <table class="table table-bordered table table-responsive">
             <tr>
                 <th>
+                    Reference
+                </th>
+                <th>
                     Input
                 </th>
                 <th>
@@ -23,20 +26,22 @@
                 <th>
                     Differences
                 </th>
-                <th>
+                <th ng-hide="showregressbuttons">
 
                 </th>
             </tr>
             <tr ng-repeat="Regress in Regression">
+                <td width="25%" ng-cloak> <span><input type="text" ng:model="Regress.Reference" class="form-control"></span></td>
                 <td ng-click="FunctionButtonClick('lg', $index)">
                     <span class="glyphicon glyphicon-cog"></span>
                 </td>
                 <td width="25%" ng-cloak> <span><input type="text" ng:model="Regress.Comment" class="form-control"></span></td>
-                <td><button type="button" class="btn btn-default" ng-click="OutputButtonClick('lg', $index, 'o')" data-dismiss="modal">Old</button></td>
-                <td><button  ng-if="Regress.OutputNew != null" type="button" class="btn btn-default" ng-click="OutputButtonClick('lg', $index, 'n')" data-dismiss="modal">New</button></td>
-                <td width="10%" ng-class="{'green' : Regress.Difference == null, 'red': Regress.Difference != null}"><span></span></td>
+                <td><button ng-if="Regress.OutputOld != null" type="button" class="btn btn-default" ng-click="OutputButtonClick('lg', $index, 'O')" data-dismiss="modal">Old</button></td>
+                <td><button ng-if="Regress.OutputNew != null" type="button" class="btn btn-default" ng-click="OutputButtonClick('lg', $index, 'N')" data-dismiss="modal">New</button></td>
+                <td ng-if="Regress.OutputOld == null"> </td> 
+                <td ng-if="Regress.OutputOld != null" width="10%" ng-class="{'green' : Regress.Difference == null, 'red': Regress.Difference != null}"><span></span></td>
                 <td><button ng-if="Regress.Difference != null" type="button" class="btn btn-default" ng-click="DifferencesButtonClick('lg', $index)" data-dismiss="modal">Differences</button></td>
-                <td width="5%">
+                <td ng-hide="showregressbuttons" width="5%">
                     [<a ng:click="removeRegressionItem($index)">X</a>]
                 </td>
             </tr>
@@ -46,9 +51,10 @@
     </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" ng-click="AcceptButtonClick()" data-dismiss="modal">Accept All</button>
-            <button type="button" class="btn btn-default" ng-click="RunAllButtonClick()" data-dismiss="modal">Run All</button>
-            <button type="button" class="btn btn-default" ng-click="Add($index)" data-dismiss="modal">Add</button>
+            <button type="button" class="btn btn-default" ng-show="showregressbuttons" ng-click="AcceptButtonClick()" data-dismiss="modal">Accept All</button>
+            <button type="button" class="btn btn-default" ng-show="showregressbuttons" ng-click="RejectButtonClick()" data-dismiss="modal">Reject All</button>
+            <button type="button" class="btn btn-default" ng-hide="showregressbuttons" ng-click="RunAllButtonClick()" data-dismiss="modal">Run All</button>
+            <button type="button" class="btn btn-default" ng-hide="showregressbuttons" ng-click="Add($index)" data-dismiss="modal">Add</button>
             <button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal">Close</button>
         </div>
 </body>

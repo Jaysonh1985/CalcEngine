@@ -6,7 +6,12 @@
            .then(function (data) {
                $scope.isLoading = false;
                $scope.Regression = data;
+
+               $scope.DifferencesCheck();
+
            }, onError);
+
+
     };
 
     function getIndexOf(arr, val, prop) {
@@ -18,6 +23,14 @@
             }
         }
         return false;
+    };
+
+    $scope.DifferencesCheck = function() {
+        angular.forEach($scope.Regression, function (value, key, obj) {
+            if ($scope.Regression[key].Pass == "false") {
+                $scope.showregressbuttons = true;
+            }
+        })
     };
 
     $scope.FunctionButtonClick = function (size, colIndex, index) {
@@ -45,10 +58,12 @@
                 ID: $scope.Regression[colIndex].ID,
                 CalcID: $scope.Regression[colIndex].CalcID ,
                 Scheme: $scope.Regression[colIndex].Scheme,
+                Reference: $scope.Regression[colIndex].Reference,
                 Type: $scope.Regression[colIndex].Type,
                 Input: angular.toJson($scope.Regression[colIndex].Input, true),
                 OutputOld: angular.toJson(OutputOld, true),
                 OutputNew: angular.toJson(OutputNew, true),
+                Pass: $scope.Regression[colIndex].Pass,
                 Comment: $scope.Regression[colIndex].Comment,
                 UpdateDate: ""
 
@@ -152,7 +167,7 @@
 
 
      $scope.RunAllButtonClick = function CalcButtonClick() {
-
+         
          $scope.isLoading = true;
 
          $scope.array = [];
@@ -176,7 +191,8 @@
 
                 if ($scope.Regression[key].OutputOld == null || $scope.Regression[key].OutputOld == "null")
                 {
-                    $scope.Regression[key].OutputOld = angular.toJson(data,true);
+                    $scope.Regression[key].OutputOld = angular.toJson(data, true);
+                    $scope.Regression[key].Pass = true;
                 }
                 else
                 {
@@ -192,14 +208,15 @@
                         $scope.Regression[key].Difference = '<table class="table table-bordered table table-responsive">' +
                         '<tr><th>Variable Name</th><th>Key</th><th>Old Value</th><th>New Value</th></tr>' +
                         $scope.diffValueChanges + '</table>';
+                        $scope.Regression[key].Pass = false;
+                        $scope.showregressbuttons = true;
                     }
                     else
                     {
                         $scope.Regression[key].OutputNew = null;
                         $scope.Regression[key].Difference = null;
+                        $scope.Regression[key].Pass = true;
                     }
-
-
 
                 }
 
@@ -209,6 +226,7 @@
                     ID: $scope.Regression[key].ID,
                     CalcID: $scope.Regression[key].CalcID,
                     Scheme: $scope.Regression[key].Scheme,
+                    Reference: $scope.Regression[key].Reference,
                     Type: $scope.Regression[key].Type,
                     Input: angular.toJson(Input, true),
                     Comment: $scope.Regression[key].Comment,
@@ -233,12 +251,13 @@
      };
 
     $scope.AcceptButtonClick = function CalcButtonClick() {
-
+        $scope.showregressbuttons = false;
         angular.forEach($scope.Regression, function (value, key, obj) {
 
             $scope.Regression[key].OutputOld = $scope.Regression[key].OutputNew;
             $scope.Regression[key].OutputNew = null;
             $scope.Regression[key].Difference = null;
+            $scope.Regression[key].Pass = true;
 
             var Input = angular.fromJson($scope.Regression[key].Input, true)
             $scope.selected = {
@@ -248,6 +267,7 @@
                 Scheme: $scope.Regression[key].Scheme,
                 Type: $scope.Regression[key].Type,
                 Input: angular.toJson(Input, true),
+                Reference: $scope.Regression[key].Reference,
                 Comment: $scope.Regression[key].Comment,
                 OriginalRunDate: $scope.Regression[key].OriginalRunDate,
                 LatestRunDate: $scope.Regression[key].LatestRunDate,
@@ -267,6 +287,42 @@
 
     };
 
+    $scope.RejectButtonClick = function CalcButtonClick() {
+        $scope.showregressbuttons = false;
+
+        angular.forEach($scope.Regression, function (value, key, obj) {
+
+            $scope.Regression[key].OutputNew = null;
+            $scope.Regression[key].Difference = null;
+            $scope.Regression[key].Pass = true;
+
+            var Input = angular.fromJson($scope.Regression[key].Input, true)
+            $scope.selected = {
+
+                ID: $scope.Regression[key].ID,
+                CalcID: $scope.Regression[key].CalcID,
+                Scheme: $scope.Regression[key].Scheme,
+                Type: $scope.Regression[key].Type,
+                Input: angular.toJson(Input, true),
+                Reference: $scope.Regression[key].Reference,
+                Comment: $scope.Regression[key].Comment,
+                OriginalRunDate: $scope.Regression[key].OriginalRunDate,
+                LatestRunDate: $scope.Regression[key].LatestRunDate,
+                OutputOld: $scope.Regression[key].OutputOld,
+                OutputNew: $scope.Regression[key].OutputNew,
+                Difference: $scope.Regression[key].Difference,
+                Pass: $scope.Regression[key].Pass,
+                UpdateDate: ""
+
+            };
+
+            configService.putRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
+
+            }, onError);
+
+        })
+
+    };
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
