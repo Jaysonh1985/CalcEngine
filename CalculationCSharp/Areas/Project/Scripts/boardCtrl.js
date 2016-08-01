@@ -59,7 +59,7 @@
              Name: 'New',
              Description: '',
              AcceptanceCriteria: '',
-             ID: storyID
+             ID: storyID,
          });
      };
 

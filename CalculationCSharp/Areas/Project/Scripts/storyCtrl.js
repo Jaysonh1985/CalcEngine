@@ -10,39 +10,44 @@
     $scope.Tasks = Tasks;
     $scope.Comments = Comments;
 
-    $scope.selected = {
-        Tasks: [{
-            TaskName: "",
-            TaskUser: "",
-            RemainingTime: "",
-            Status: ""
-        }]
-    };
-
-    if (Tasks !== null) {
-        $scope.selected.Tasks = ($scope.Tasks);
-    }
-
     $scope.addItem = function () {
-        $scope.selected.Tasks.push({
-            TaskName: "",
-            TaskUser: "",
-            RemainingTime: "",
-            Status: ""
-        });
+        if ($scope.Tasks == null) {
+            $scope.Tasks = [];
+            $scope.Tasks[0] = {
+                TaskName: null,
+                TaskUser: null,
+                RemainingTime: null,
+                Status: null
+            }
+        }
+        else
+        {
+            $scope.Tasks.push({
+                TaskName: "",
+                TaskUser: "",
+                RemainingTime: "",
+                Status: ""
+            });
+        }
     },
 
     $scope.removeItem = function (index) {
-        $scope.selected.Tasks.splice(index, 1);
+        $scope.Tasks.splice(index, 1);
     },
 
-    $scope.Comments = [];
 
-    if (Comments !== null) {
-        $scope.Comments = (Comments);
-    }
 
     $scope.btn_add = function () {
+
+        if ($scope.Comments == null) {
+            $scope.Comments = [];
+        }
+        
+
+        if (Comments !== null) {
+            $scope.Comments = (Comments);
+        }
+
         if ($scope.txtcomment != '') {
             $scope.Comments.push({
                 CommentName: $scope.txtcomment
@@ -66,7 +71,7 @@
             Moscow: $scope.Moscow,
             Timebox: $scope.Timebox,
             User: $scope.User,
-            Tasks: $scope.selected.Tasks,
+            Tasks: $scope.Tasks,
             Comments: $scope.Comments
         };
 
