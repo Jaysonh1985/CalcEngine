@@ -43,11 +43,6 @@
             $scope.Comments = [];
         }
         
-
-        if (Comments !== null) {
-            $scope.Comments = (Comments);
-        }
-
         if ($scope.txtcomment != '') {
             $scope.Comments.push({
                 CommentName: $scope.txtcomment

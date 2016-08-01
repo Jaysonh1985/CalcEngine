@@ -15,10 +15,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <textarea style="overflow:auto;resize:none" type="text" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="8"> {{ Description }}</textarea>
+                                    <textarea style="overflow:auto;resize:none; text-align:left; font-size:small" type="text" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="8"> {{ Description }}</textarea>
                                 </td>
                                 <td>
-                                    <textarea style="overflow:auto;resize:none" type="text" id="AcceptanceCriteria" placeholder="Please enter Acceptance Criteria here" class="form-control" ng-model="AcceptanceCriteria" rows="8"> {{ AcceptanceCriteria }}</textarea>
+                                    <textarea style="overflow:auto;resize:none; text-align:left; font-size:small" type="text" id="AcceptanceCriteria" placeholder="Please enter Acceptance Criteria here" class="form-control" ng-model="AcceptanceCriteria" rows="8"> {{ AcceptanceCriteria }}</textarea>
                                 </td>
                             </tr>
                         </table>
@@ -119,7 +119,7 @@
                                 <td style="width:10%;background-color:white; color:#000000"><H4></H4></td>
                             </tr>
                             <tr ng-repeat="comnt in Comments">
-                                <td><span><input type="text" ng:model="comnt.CommentName" class="form-control"></span></td>
+                                <td><span><input type="text" ng:model="comnt.CommentName" readonly></span></td>
                                 <td>
                                     [<a ng:click="remItem($index)">X</a>]
                                 </td>
