@@ -5,8 +5,30 @@
 <html>
 
 <body ng-controller="calculationCtrl" ng-cloak>
+    
     <div class="container">
         <br />
+        <uib-accordion close-others=false>
+            <uib-accordion-group is-open=false>
+                <uib-accordion-heading>
+                    <table class='table table-borderless'>
+                        <tr>
+                            <th width="95%">
+                                <h2 class="panel-title">
+                                    Calculation Bulk
+                                </h2>
+                            </th>
+                            <th width="5%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></th>
+                        </tr>
+                    </table>
+                </uib-accordion-heading>
+                <br />
+                <form>
+                    <button type="button" ng-csv="CSVfield" class="btn btn-default" csv-header="getHeader()" filename="test.csv">Export</button>
+
+                </form>
+            </uib-accordion-group>
+        </uib-accordion>
 
         <uib-accordion close-others=false>
             <uib-accordion-group is-open=true>
@@ -88,6 +110,7 @@
                 </div>
             </uib-accordion-group>
         </uib-accordion>
+ 
     </div>
 </body>
 </html>

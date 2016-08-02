@@ -16,6 +16,7 @@
                        $scope.isLoading = false;
                        $scope.config = data;
                        $scope.getFormFields();
+                       $scope.getCSVFields();
                    });
             });
     };
@@ -47,7 +48,16 @@
                 scopeid = scopeid + 1
     });
     }
+    $scope.getCSVFields = function getFormFields() {  //function that sets the parameters available under the different variable types
+        var CSVcounter = 0;
+        $scope.CSVfields = [];
+        angular.forEach($scope.fieldset, function (groups) {
+            $scope.CSVfields.push($scope.fieldset[CSVcounter].templateOptions.label);
+            CSVcounter = CSVcounter + 1
+        });
+    }
 
+    $scope.getHeader = function () { return $scope.CSVfields };
 
     function getIndexOf(arr, val, prop) {
         var l = arr.length,
