@@ -24,7 +24,19 @@
                 </uib-accordion-heading>
                 <br />
                 <form>
-                    <button type="button" ng-csv="CSVfield" class="btn btn-default" csv-header="getHeader()" filename="test.csv">Export</button>
+                    <div class="container">
+                        <h4>
+                            Export
+                        </h4> 
+                        <button type="button" ng-csv="CSVfield" class="btn btn-default" csv-header="getHeader()" filename="test.csv">Export Template</button>
+                        <h4>
+                            Import
+                        </h4>
+                        <ng-csv-import content="csv.content"
+                                       header="csv.header"
+                                       separator="csv.separator"
+                                       result="csv.result"></ng-csv-import>
+                    </div>
 
                 </form>
             </uib-accordion-group>

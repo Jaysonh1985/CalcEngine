@@ -601,6 +601,7 @@
     <Content Include="Scripts\anguladynamicform.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-csv-import.js" />
     <Content Include="Scripts\angular-drag-and-drop-lists.js" />
     <Content Include="Areas\Project\Scripts\menuCtrl.js" />
     <Content Include="Areas\Project\Scripts\boardCtrl.js" />
