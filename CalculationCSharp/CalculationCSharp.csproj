@@ -236,6 +236,7 @@
     <Compile Include="Areas\Calculation\CalculationAreaRegistration.cs" />
     <Compile Include="Areas\Calculation\Controllers\CalculationController.cs" />
     <Compile Include="Areas\Calculation\Controllers\CalcReleasesController.cs" />
+    <Compile Include="Areas\Calculation\Controllers\CalculationBulkWebApiController.cs" />
     <Compile Include="Areas\Calculation\Controllers\CalculationWebApiController.cs" />
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcConfigurationsController.cs" />

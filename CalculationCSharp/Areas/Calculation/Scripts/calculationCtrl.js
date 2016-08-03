@@ -63,7 +63,7 @@
         var CSVcounter = 0;
         $scope.CSVfields = [];
         angular.forEach($scope.fieldset, function (groups) {
-            $scope.CSVfields.push($scope.fieldset[CSVcounter].templateOptions.label);
+            $scope.CSVfields.push($scope.fieldset[CSVcounter].key);
             CSVcounter = CSVcounter + 1
         });
     }
@@ -86,6 +86,7 @@
     };
 
     $scope.getHeader = function () { return $scope.CSVfields };
+    $scope.getBulkOutput = function () { return $scope.BulkOutput };
 
     function getIndexOf(arr, val, prop) {
         var l = arr.length,
@@ -98,6 +99,31 @@
         return false;
     };
 
+
+    $scope.BulkCalcButtonClick = function CalcButtonClick(input) {
+
+        $scope.bulkarray = [];
+
+        angular.forEach(input, function (value, key, obj) {
+            
+            angular.forEach(value, function (value, key, obj) {
+
+                var index = getIndexOf($scope.config[0].Functions, key, 'Name');
+
+                $scope.config[0].Functions[index].Output = value;
+
+            })
+
+            $scope.bulkarray.push($scope.config);
+
+        })
+
+        calculationService.postBulkCalc(1, $scope.bulkarray).then(function (data) {
+            $scope.isLoading = false;
+            $scope.BulkOutput = data;
+        });
+
+    };
 
 
     $scope.CalcButtonClick = function CalcButtonClick() {
