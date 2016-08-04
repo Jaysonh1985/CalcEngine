@@ -80,6 +80,7 @@
                {
                    $scope.relaseBoardUpdate($scope.calcreleaseID, $scope.selected);
                }
+               toastr.success("Released successfully", "Success");
 
            });
 

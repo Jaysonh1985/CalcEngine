@@ -74,7 +74,7 @@
                 </form>
             </uib-accordion-group>
         </uib-accordion>
-
+       
         <uib-accordion close-others=false>
             <uib-accordion-group is-open=true>
                 <uib-accordion-heading>
@@ -89,10 +89,14 @@
                         </tr>
                     </table>
                 </uib-accordion-heading>
-
+                
                 <div class="container-fluid">
+                    <br />
+                    <input type="text" class="form-control  input-lg" ng-model="test" placeholder="Filter">
+                    <br />
                     <uib-accordion close-others=false ng-model="output">
-                        <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open=true>
+
+                        <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index"  is-open=true>
                             <uib-accordion-heading>
                                 <table class='table table-borderless'>
                                     <tr>
@@ -115,7 +119,7 @@
                                     <th>
                                         Value
                                     </th>
-                                <tr ng-repeat="row in group.Output">
+                                <tr ng-repeat="row in group.Output | filter : test">
                                     <td>
                                         {{row.ID}}
                                     </td>
