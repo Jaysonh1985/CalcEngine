@@ -27,58 +27,6 @@ namespace CalculationCSharp.Areas.Config.Controllers
         ConfigRepository repo = new ConfigRepository();
         CalculationDBContext db = new CalculationDBContext();
         JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-        //// GET api/<controller>
-        //[System.Web.Http.HttpGet]
-        //public HttpResponseMessage Get(int? id)
-        //{
-        //    var response = Request.CreateResponse();
-        //    CalcRelease calcConfiguration = db.CalcRelease.Find(id);
-        //    if (calcConfiguration == null)
-        //    {
-                
-        //        List<CategoryViewModel> json = repo.GetConfig(null);
-        //        response.Content = new StringContent(JsonConvert.SerializeObject(json));
-        //    }
-        //    else
-        //    {
-        //        if (calcConfiguration.Configuration == null)
-        //        {
-        //            List<CategoryViewModel> json = repo.GetConfig(null);
-        //            response.Content = new StringContent(JsonConvert.SerializeObject(json));
-        //        }
-        //        else
-        //        {
-                   
-        //            response.Content = new StringContent(calcConfiguration.Configuration);
-        //        }
-                
-        //    }
-            
-        //    return response;
-        //}
-
-
-        //[System.Web.Http.HttpPut]
-        //public HttpResponseMessage SetConfig(int id, JObject config)
-        //{
-
-        //    dynamic json = config;
-
-        //    var response = Request.CreateResponse();
-        //    CalcRelease calcConfiguration = db.CalcRelease.Find(id);
-
-        //    calcConfiguration.Configuration = Convert.ToString(json.data);
-        //    calcConfiguration.User = HttpContext.Current.User.Identity.Name.ToString();
-        //    calcConfiguration.UpdateDate = DateTime.Now;
-
-        //    db.Entry(calcConfiguration).State = EntityState.Modified;
-
-        //    db.SaveChanges();
-        //    response.Content = new StringContent(JsonConvert.SerializeObject(json.data));
-
-        //    return response;
-        //}
-
 
         [System.Web.Http.HttpPost]
         public HttpResponseMessage UpdateConfig(int id,  JObject moveTaskParams)
@@ -88,70 +36,62 @@ namespace CalculationCSharp.Areas.Config.Controllers
             var response = Request.CreateResponse();
             List<OutputListGroup> OutputList = new List<OutputListGroup>();
             List<List<OutputListGroup>> BulkOutputList = new List<List<OutputListGroup>>();
+            bool isNameDone = false;
             foreach (var group in json.data)
             {
                 List<CategoryViewModel> jCategory = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(Convert.ToString(group), typeof(List<CategoryViewModel>));
                 List<ConfigViewModel> jConfig = (List<ConfigViewModel>)javaScriptSerializ­er.Deserialize(Convert.ToString(group), typeof(List<ConfigViewModel>));
-
-                
-                
                 Calculate Calculate = new Calculate();
-
                 OutputList = Calculate.OutputResults(jCategory);
                 BulkOutputList.Add(OutputList);
-
                 
             }
 
-            StringBuilder sb = new StringBuilder();
-            List<string> propNames;
-            List<string> propValues;
-            bool isNameDone = false;
-
             //Iterate through data list collection
-            propNames = new List<string>();
-            propValues = new List<string>();
+            List <List <string>> propNames = new List<List<string>>();
+            List<string> propLabel = new List<string>();
+            List<string> propValues = new List<string>();
+            int LoopCounter = 0;
 
             foreach (var item in BulkOutputList)
             {
+                LoopCounter = 0;
+
                 foreach (var list in item)
                 {
-                    sb.AppendLine("");
 
+                    LoopCounter = LoopCounter + 1;
+                    if (isNameDone == false)
+                    {
+                        propValues.Add(list.Group);
+                        propNames.Add(propValues);
+                        propValues = new List<string>();
+                    }
                     //Iterate through property collection
                     foreach (var prop in list.Output)
                     {
-                        if (!isNameDone) propNames.Add(prop.Field);
-
-                    }
-
-                    //Add line for Names
-                    string line = string.Empty;
-                    if (!isNameDone)
-                    {
-                        line = string.Join(",", propNames);
-                        sb.AppendLine(line);
-                        sb.AppendLine("");
-                        isNameDone = true;
-                    }
-                    foreach (var col in OutputList)
-                    {
-                        foreach (var story in col.Output)
+                        LoopCounter = LoopCounter + 1;
+                        if (isNameDone == false)
                         {
-                            propValues.Add(story.Value);
-                            line = string.Join(",", propValues);
-                            sb.Append(line);
-                            sb.AppendLine("");
+                            propValues.Add(prop.Field);
+                            propValues.Add(prop.Value);
+                            propNames.Add(propValues);
+                            propValues = new List<string>();
+                        }
+                        else
+                        {
+                            propValues.Add(prop.Value);
+                            propNames[LoopCounter-1].Add(prop.Value);
+                            propValues = new List<string>();
                         }
 
                     }
-
                 }
+
+                isNameDone = true;
             }
 
-            var csv = Convert.ToString(sb);
-
-            response.Content = new StringContent(JsonConvert.SerializeObject(csv));
+            response.Content = new StringContent(JsonConvert.SerializeObject(propNames));
 
             response.StatusCode = HttpStatusCode.OK;
             return response;
