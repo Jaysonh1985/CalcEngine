@@ -121,6 +121,7 @@
         calculationService.postBulkCalc(1, $scope.bulkarray).then(function (data) {
             $scope.isLoading = false;
             $scope.BulkOutput = data;
+            toastr.success("Parsed successfully", "Success");
         });
 
     };
@@ -149,6 +150,7 @@
         calculationService.postCalc(1, $scope.config).then(function (data) {
             $scope.isLoading = false;
             $scope.output = data;
+            toastr.success("Calculated successfully", "Success");
         });
 
     };
