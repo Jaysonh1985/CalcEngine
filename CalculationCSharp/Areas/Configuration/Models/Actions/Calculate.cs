@@ -68,7 +68,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 {
                     if (item.Function == "Input")
                     {
-
+                        OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
                     }
                     else
                     {
