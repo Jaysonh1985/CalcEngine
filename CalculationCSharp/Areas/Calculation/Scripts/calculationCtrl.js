@@ -3,6 +3,8 @@
     $scope.output = [];
     $scope.formset = [];
     $scope.fieldset = [];
+    $scope.bulkarray = [];
+    $scope.bulkArrayOutput = [];
     var vm = this;
 
     $scope.csv = {
@@ -101,9 +103,7 @@
 
 
     $scope.BulkCalcButtonClick = function CalcButtonClick(input) {
-
-        $scope.bulkarray = [];
-
+       
         angular.forEach(input, function (value, key, obj) {
             
             angular.forEach(value, function (value, key, obj) {
@@ -114,15 +114,34 @@
 
             })
 
-            $scope.bulkarray.push($scope.config);
+            $scope.bulkarray = $scope.config;
+            $scope.BulkOutputBuilder($scope.bulkarray);
+            $scope.bulkarray = [];
+        })
+
+        $scope.BulkOutputArray = [];
+
+        angular.forEach($scope.bulkArrayOutput, function (value, key, obj) {
+            
+            $scope.BulkOutputArray.push(angular.fromJson(value));
 
         })
 
-        calculationService.postBulkCalc(1, $scope.bulkarray).then(function (data) {
+        calculationService.postBulkCalc(1, $scope.BulkOutputArray).then(function (data) {
             $scope.isLoading = false;
             $scope.BulkOutput = data;
             toastr.success("Parsed successfully", "Success");
         });
+
+    };
+
+    $scope.BulkOutputBuilder = function BulkOutputBuilder(Output) {
+
+        var Test = [];
+
+        Test = angular.toJson(Output);
+
+        $scope.bulkArrayOutput.push(Test);
 
     };
 
