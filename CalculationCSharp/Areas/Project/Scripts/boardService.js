@@ -64,8 +64,8 @@
     };
 
 
-    var updateBoard = function (boardIdVal, boardName, data, updateType) {
-        return $http.post("/api/BoardWebApi/UpdateBoard", { boardId: boardIdVal, boardName: boardName, data: data, updateType })
+    var updateBoard = function (boardIdVal, data, updateType) {
+        return $http.post("/api/BoardWebApi/UpdateBoard", { boardId: boardIdVal, data: data, updateType })
             .then(function (response) {
                 return response.status == 200;
             }, function (error) {

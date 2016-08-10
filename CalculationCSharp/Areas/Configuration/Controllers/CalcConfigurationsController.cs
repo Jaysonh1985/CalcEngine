@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CalculationCSharp.Models;
+using System.Web;
 
 namespace CalculationCSharp.Areas.Configuration.Controllers
 {
@@ -50,7 +51,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
                 return BadRequest();
             }
 
-            
+            calcConfiguration.User = HttpContext.Current.User.Identity.Name.ToString();
 
             db.Entry(calcConfiguration).State = EntityState.Modified;
 

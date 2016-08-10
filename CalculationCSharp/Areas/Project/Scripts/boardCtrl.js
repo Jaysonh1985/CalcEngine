@@ -79,7 +79,7 @@
          if (angular.isNumber(id) == false) {
              id = null;
          }
-         boardService.updateBoard(id, "TestBoard", $scope.columns).then(function (data) {
+         boardService.updateBoard(id, $scope.columns).then(function (data) {
              $scope.isLoading = false;
              boardService.sendRequest();
          }, onError);

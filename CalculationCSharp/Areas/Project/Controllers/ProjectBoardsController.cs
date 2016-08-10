@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CalculationCSharp.Models;
+using System.Web;
 
 namespace CalculationCSharp.Areas.Project.Controllers
 {
@@ -48,6 +49,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
             {
                 return BadRequest();
             }
+            projectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
 
             db.Entry(projectBoard).State = EntityState.Modified;
 

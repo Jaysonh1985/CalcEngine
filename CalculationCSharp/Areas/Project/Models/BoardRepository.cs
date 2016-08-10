@@ -50,7 +50,6 @@ namespace CalculationCSharp.Areas.Project.Models
         public void UpdateBoard(dynamic json)
         {
             ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(json.boardId));
-            ProjectBoard.Name = json.boardName;
             ProjectBoard.Configuration = Convert.ToString(json.data);
             ProjectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
             ProjectBoard.Group = "Project Group";

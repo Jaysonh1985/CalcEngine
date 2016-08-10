@@ -29,7 +29,7 @@ namespace CalculationCSharp.Areas.Project.Models
                 else
                 {
                     JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-                    string jsonString = Convert.ToString(ProjectBoard.Configuration);
+                    string jsonString = ProjectBoard.Configuration;
                     List<Column> columns = (List<Column>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<Column>));
                     HttpContext.Current.Cache["columns"] = columns;
                 }

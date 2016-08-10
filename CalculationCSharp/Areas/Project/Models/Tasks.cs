@@ -10,7 +10,7 @@ namespace CalculationCSharp.Areas.Project.Models
 
         public string TaskName { get; set; }
         public string TaskUser { get; set; }
-        public double RemainingTime { get; set; }
+        public string RemainingTime { get; set; }
         public string Status { get; set; }              
     }
 }
