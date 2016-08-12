@@ -57,6 +57,7 @@
      var postCalc = function (index, data) {
          return $http.post("/api/ConfigWebApi/" + index, { data: data })
             .then(function (response) {
+
                 return response.data;
             }, function (error) {
                 return $q.reject(error.data.Message);
