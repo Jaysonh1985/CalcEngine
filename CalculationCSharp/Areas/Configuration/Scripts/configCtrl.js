@@ -121,6 +121,7 @@
          configService.postCalc(id, $scope.config).then(function (data) {
              $scope.isLoading = false;
              $scope.config = data;
+             toastr.success("Calculated successfully", "Success");
          }, onError);
      };
 

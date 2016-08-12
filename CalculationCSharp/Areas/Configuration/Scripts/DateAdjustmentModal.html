@@ -5,7 +5,7 @@
         </div>
         <div class="modal-body">
 
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" ng-submit="ok($index)">
 
                 <div class="form-group">
                     <label for="Type" class="control-label col-md-2">Adjustment Type</label>
@@ -24,13 +24,13 @@
                 <div class="form-group">
                     <label for="Date1" class="control-label col-md-2">Start Date</label>
                     <div class="col-sm-9">
-                        <input type="Text" id="Date1" name="Date1" class="form-control" ng-model="period.Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" />
+                        <input type="Text" id="Date1" name="Date1" class="form-control" ng-model="period.Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required />
                     </div>
                 </div>
                 <div ng-if="period.Type == 'Earlier' || period.Type == 'Later'" class="form-group">
                     <label for="Date2" class="control-label col-md-2">End Date</label>
                     <div class="col-sm-9">
-                        <input type="Text" id="Date2" name="Date2" class="form-control" ng-model="period.Date2" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" />
+                        <input type="Text" id="Date2" name="Date2" class="form-control" ng-model="period.Date2" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required />
                     </div>
                 </div>
                 <fieldset ng-if="period.Type == 'Add'|| period.Type =='Subtract'">
@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label for="PeriodType" class="control-label col-md-2">Period Type</label>
                         <div class="col-sm-9">
-                            <select id="Adjustment" name="singleSelect" ng:model="period.PeriodType" class="form-control">
+                            <select id="Adjustment" name="singleSelect" ng:model="period.PeriodType" class="form-control" required>
                                 <option value=""></option>
                                 <option value="YearsDays">Years Days</option>
                                 <option value="YearsMonths">Year Months</option>
@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <label for="Period" class="control-label col-md-2">Period</label>
                         <div class="col-sm-9">
-                            <input type="Text" id="Period" name="Period" class="form-control" ng-model="period.Period"  uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8"/>
+                            <input type="Text" id="Period" name="Period" class="form-control" ng-model="period.Period"  uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8"required/>
                         </div>
                     </div>
                 </fieldset>
@@ -58,7 +58,7 @@
                         <div class="form-group">
                             <label for="inclusive" class="control-label col-md-2">Adjustment</label>
                             <div class="col-sm-9">
-                                <select id="Adjustment" name="singleSelect" ng:model="period.Adjustment" class="form-control">
+                                <select id="Adjustment" name="singleSelect" ng:model="period.Adjustment" class="form-control" required>
                                     <option value=""></option>
                                     <option value="Less"><</option>
                                     <option value="Greater">></option>
@@ -68,16 +68,17 @@
 
                         <label for="Day" class="control-label col-md-2">Day of the Year</label>
                         <div class="col-sm-9">
-                            <input type="Text" id="Day" name="Day" class="form-control" placeholder="dd/mm" ng-model="period.Day" />
+                            <input type="Text" id="Day" name="Day" class="form-control" placeholder="dd/mm" ng-model="period.Day" required />
                         </div>
 
                     </fieldset>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
             </form>
     </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="ok($index)">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-            </div>
+
     </div>
 
 </body>

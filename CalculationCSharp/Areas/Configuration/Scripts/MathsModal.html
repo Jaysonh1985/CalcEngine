@@ -32,69 +32,71 @@
                     </select>
                 </div>
             </div>-->
+            <form role="form" ng-submit="ok($index)">
+                <table class="table table-bordered table table-responsive">
 
-            <table class="table table-bordered table table-responsive">
+                    <tr>
+                        <th></th>
+                        <th>Input 1</th>
+                        <th>Logic</th>
+                        <th>Input 2</th>
+                        <th></th>
+                        <th>Logic</th>
+                    </tr>
 
-                <tr>
-                    <th></th>
-                    <th>Input 1</th>
-                    <th>Logic</th>
-                    <th>Input 2</th>
-                    <th></th>
-                    <th>Logic</th>
-                </tr>
+                    <tr ng-repeat="rows in maths">
+                        <td width="10%">
+                            <select name="singleSelect" ng:model="rows.Bracket1" class="form-control">
+                                <option value=""></option>
+                                <option value="(">(</option>
+                            </select>
+                        </td>
 
-                <tr ng-repeat="rows in maths">
-                    <td width="10%">
-                        <select name="singleSelect" ng:model="rows.Bracket1" class="form-control">
-                            <option value=""></option>
-                            <option value="(">(</option>
-                        </select>
-                    </td>
+                        <td width="20%"><span><input type="text" ng:model="rows.Input1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" class="form-control" required></span></td>
 
-                    <td width="20%"><span><input type="text" ng:model="rows.Input1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" class="form-control"></span></td>
+                        <td width="10%">
+                            <select name="singleSelect" ng:model="rows.Logic" class="form-control" required>
+                                <option value=""></option>
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                                <option value="/">/</option>
+                                <option value="*">*</option>
+                                <option value="Pow">^</option>
+                            </select>
+                        </td>
 
-                    <td width="10%">
-                        <select name="singleSelect" ng:model="rows.Logic" class="form-control">
-                            <option value=""></option>
-                            <option value="+">+</option>
-                            <option value="-">-</option>
-                            <option value="/">/</option>
-                            <option value="*">*</option>
-                            <option value="Pow">^</option>
-                        </select>
-                    </td>
-
-                    <td width="20%"><span><input type="text" ng:model="rows.Input2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" class="form-control"></span></td>
-                    <td width="10%">
-                        <select name="singleSelect" ng:model="rows.Bracket2" class="form-control">
-                            <option value=""></option>
-                            <option value=")">)</option>
-                        </select>
-                    </td>
-                    <td width="10%">
-                        <select name="singleSelect" ng:model="rows.Logic2" class="form-control">
-                            <option value=""></option>
-                            <option value="+">+</option>
-                            <option value="-">-</option>
-                            <option value="/">/</option>
-                            <option value="*">*</option>
-                            <option value="Pow">^</option>
-                        </select>
-                    </td>
-                    <td width="5%">
-                        [<a ng:click="removeMathsItem($index)">X</a>]
-                    </td>
-                </tr>
-                <tr>
-                    <td><a ng:click="addItem($index)" class="btn btn-default">Add</a></td>
-                </tr>
-            </table>
+                        <td width="20%"><span><input type="text" ng:model="rows.Input2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" class="form-control" required></span></td>
+                        <td width="10%">
+                            <select name="singleSelect" ng:model="rows.Bracket2" class="form-control">
+                                <option value=""></option>
+                                <option value=")">)</option>
+                            </select>
+                        </td>
+                        <td width="10%">
+                            <select name="singleSelect" ng:model="rows.Logic2" class="form-control">
+                                <option value=""></option>
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                                <option value="/">/</option>
+                                <option value="*">*</option>
+                                <option value="Pow">^</option>
+                            </select>
+                        </td>
+                        <td width="5%">
+                            [<a ng:click="removeMathsItem($index)">X</a>]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a ng:click="addItem($index)" class="btn btn-default">Add</a></td>
+                    </tr>
+                </table>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok($index)">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
+
     </div>
 
 </body>

@@ -103,7 +103,7 @@
 
 
     $scope.BulkCalcButtonClick = function CalcButtonClick(input) {
-       
+        $scope.bulkArrayOutput = [];
         angular.forEach(input, function (value, key, obj) {
             
             angular.forEach(value, function (value, key, obj) {
