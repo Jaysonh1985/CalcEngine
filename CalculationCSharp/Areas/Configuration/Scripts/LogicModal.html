@@ -19,7 +19,7 @@
 
 
                             <tr ng-repeat="rows in Logic">
-                                <td width="1%">
+                                <td width="10%">
                                     <select name="singleSelect" ng:model="rows.Bracket1" class="form-control">
                                         <option value=""></option>
                                         <option value="(">(</option>
@@ -39,13 +39,13 @@
                                 </td>
 
                                 <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" required></span></td>
-                                <td width="1%">
+                                <td width="10%">
                                     <select name="singleSelect" ng:model="rows.Bracket2" class="form-control">
                                         <option value=""></option>
                                         <option value=")">)</option>
                                     </select>
                                 </td>
-                                <td width="10">
+                                <td width="30%">
                                     <select name="Operator_{{$index}}" ng:model="rows.Operator" class="form-control" integer>
                                         <option value=""></option>
                                         <option value="AND">AND</option>
