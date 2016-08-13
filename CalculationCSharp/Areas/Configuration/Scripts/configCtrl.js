@@ -54,7 +54,11 @@
 
      $scope.CopyFunction = function (colIndex, index) {
          var Functions = $scope.config[colIndex].Functions[index];
-         $scope.config[colIndex].Functions.push(angular.copy(Functions));
+         var item = null;
+
+         item = angular.copy(Functions);
+         $scope.config[colIndex].Functions.splice(index + 1, 0, item);
+
      }
 
      $scope.DeleteFunction = function (colIndex, $index) {

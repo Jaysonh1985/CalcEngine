@@ -137,6 +137,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 element.style {
 
 }
+.form-control {
+    text-align-last: center;
+}
+
 
 .panel-default {
     border-color: #fff;

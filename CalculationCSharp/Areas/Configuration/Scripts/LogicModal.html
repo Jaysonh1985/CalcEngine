@@ -4,7 +4,7 @@
                     <h4>Logic</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" ng-submit="ok($index)">
+                    <form name="form" role="form" ng-submit="ok($index)">
                         <table class="table table-bordered table table-responsive">
 
                             <tr>
@@ -46,11 +46,12 @@
                                     </select>
                                 </td>
                                 <td width="10">
-                                    <select name="singleSelect" ng:model="rows.Operator" class="form-control">
+                                    <select name="Operator_{{$index}}" ng:model="rows.Operator" class="form-control" integer>
                                         <option value=""></option>
                                         <option value="AND">AND</option>
                                         <option value="OR">OR</option>
                                     </select>
+                                    <span ng-show="form['Operator_'+ $index].$error.integer">The value is not a valid integer!</span>
                                 </td>
                                 <td width="5%">
                                     [<a ng:click="removeLogicItem($index)">X</a>]
