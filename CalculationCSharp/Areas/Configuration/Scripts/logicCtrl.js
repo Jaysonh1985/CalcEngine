@@ -31,8 +31,7 @@
         })
     }
 
-    $scope.BracketsLeftValidations = function BracketsLeftValidations(form) {
-
+    $scope.BracketsValidations = function BracketsValidations(form) {
 
         var LBcounter = 0;
         var RBcounter = 0;
@@ -109,7 +108,7 @@
     $scope.ok = function (form) {
 
         $scope.OperatorClauseValidations(form);
-        $scope.BracketsLeftValidations(form);
+        $scope.BracketsValidations(form);
 
         if (form.$valid == true) {
             $uibModalInstance.close($scope.Logic);
