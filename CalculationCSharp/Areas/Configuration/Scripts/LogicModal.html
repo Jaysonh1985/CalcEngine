@@ -5,64 +5,66 @@
                 </div>
                 <div class="modal-body">
                     <form name="form" role="form" ng-submit="ok(form)">
-                        <table name="table" class="table table-bordered table table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Input 1</th>
+                                    <th>Logic</th>
+                                    <th>Input 2</th>
+                                    <th></th>
+                                    <th>Operator</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="rows in Logic">
+                                    <td width="10%">
+                                        <select name="BracketLeft_{{$index}}" ng:model="rows.Bracket1" class="form-control">
+                                            <option value=""></option>
+                                            <option value="(">(</option>
+                                        </select>
+                                        <span ng-show="form['BracketLeft_'+ $index].$error.bracketnotclosed">Not closed</span>
+                                    </td>
 
-                            <tr>
-                                <th></th>
-                                <th>Input 1</th>
-                                <th>Logic</th>
-                                <th>Input 2</th>
-                                <th></th>
-                                <th>Operator</th>
-                                <th></th>
-                            </tr>
+                                    <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" required></span></td>
 
+                                    <td width="10%">
+                                        <select name="singleSelect" ng:model="rows.LogicInd" class="form-control" required>
+                                            <option value=""></option>
+                                            <option value="=">=</option>
+                                            <option value="NotEqual"><></option>
+                                            <option value="Greater">></option>
+                                            <option value="Less"><</option>
+                                        </select>
+                                    </td>
 
-                            <tr  ng-repeat="rows in Logic">
-                                <td width="10%">
-                                    <select name="BracketLeft_{{$index}}" ng:model="rows.Bracket1" class="form-control">
-                                        <option value=""></option>
-                                        <option value="(">(</option>
-                                    </select>
-                                    <span ng-show="form['BracketLeft_'+ $index].$error.bracketnotclosed">Not closed</span>
-                                </td>
-                                    
-                                <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" required></span></td>
-
-                                <td width="10%">
-                                    <select name="singleSelect" ng:model="rows.LogicInd" class="form-control" required>
-                                        <option value=""></option>
-                                        <option value="=">=</option>
-                                        <option value="NotEqual"><></option>
-                                        <option value="Greater">></option>
-                                        <option value="Less"><</option>
-                                    </select>
-                                </td>
-
-                                <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" required></span></td>
-                                <td width="10%">
-                                    <select name="BracketRight_{{$index}}" ng:model="rows.Bracket2" class="form-control">
-                                        <option value=""></option>
-                                        <option value=")">)</option>
-                                    </select>
-                                    <span ng-show="form['BracketRight_'+ $index].$error.bracketnotopen">Not Open</span>
-                                </td>
-                                <td width="30%">
-                                    <select name="Operator_{{$index}}" ng:model="rows.Operator" class="form-control">
-                                        <option value=""></option>
-                                        <option value="AND">AND</option>
-                                        <option value="OR">OR</option>
-                                    </select>
-                                    <span ng-show="form['Operator_'+ $index].$error.clause">There is a clause and no row below</span>
-                                </td>
-                                <td width="5%">
-                                    [<a ng:click="removeLogicItem($index)">X</a>]
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a ng:click="addItem($index)" class="btn btn-default">Add</a></td>
-                            </tr>
+                                    <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" required></span></td>
+                                    <td width="10%">
+                                        <select name="BracketRight_{{$index}}" ng:model="rows.Bracket2" class="form-control">
+                                            <option value=""></option>
+                                            <option value=")">)</option>
+                                        </select>
+                                        <span ng-show="form['BracketRight_'+ $index].$error.bracketnotopen">Not Open</span>
+                                    </td>
+                                    <td width="30%">
+                                        <select name="Operator_{{$index}}" ng:model="rows.Operator" class="form-control">
+                                            <option value=""></option>
+                                            <option value="AND">AND</option>
+                                            <option value="OR">OR</option>
+                                        </select>
+                                        <span ng-show="form['Operator_'+ $index].$error.clause">There is a clause and no row below</span>
+                                    </td>
+                                    <td width="5%">
+                                        [<a ng:click="removeLogicItem($index)">X</a>]
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a ng:click="addItem($index)" class="btn btn-default">Add</a></td>
+                                </tr>
+                            </tbody>
                         </table>
+                        
                         <div class="modal-footer">
                             <button class="btn btn-primary" type="submit">OK</button>
                             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
