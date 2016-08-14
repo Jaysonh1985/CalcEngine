@@ -121,26 +121,13 @@
      };
 
      $scope.CalcButtonClick = function CalcBoard($event) {
-         $scope.isLoading = true;
-         if ($event) {
-             $event.stopPropagation();
-             $event.preventDefault();
-         }
          var id = $scope.getConfigID();
          configService.postCalc(id, $scope.config).then(function (data) {
              $scope.isLoading = false;
              $scope.config = data;
-             toastr.success("Updated successfully", "Success");
+             toastr.success("Calculated successfully", "Success");
          }, onError);
      };
-
-     $scope.alert = function ($event) {
-         if ($event) {
-             $event.stopPropagation();
-             $event.preventDefault();
-         }
-
-     }
 
      $scope.selectedRow = null;  // initialize our variable to null
      $scope.function = null;  // initialize our variable to null
@@ -402,11 +389,6 @@
              $log.info('Modal dismissed at: ' + new Date());
          });
      };
-    
-    // Listen to the 'refreshBoard' event and refresh the board as a result
-    $scope.$parent.$on("refreshBoard", function (e) {
-        toastr.success("Updated successfully", "Success");
-    });
 
     var onError = function (errorMessage) {
         $scope.isLoading = false;

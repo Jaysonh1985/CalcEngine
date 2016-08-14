@@ -236,7 +236,13 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         DateTime.TryParse(InputB, out Date2);
                                         Decimal.TryParse(InputC, out Period);
 
-                                        item.Output = Convert.ToString(DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day));
+                                        DateTime date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day);
+
+                                        DateTime datestring = date.Date;
+
+                                        var shortdatestring = datestring.ToShortDateString();
+
+                                        item.Output = Convert.ToString(shortdatestring);
 
                                         InputA = null;
                                         InputB = null;

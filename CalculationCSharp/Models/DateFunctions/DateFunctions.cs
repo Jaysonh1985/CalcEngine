@@ -57,7 +57,7 @@ public class DateFunctions
 
 	}
 
-    public DateTime? DateAdjustment(string Type, String DateA, String DateB, string PeriodType, decimal Period, string Adjustment, string Day)
+    public DateTime DateAdjustment(string Type, String DateA, String DateB, string PeriodType, decimal Period, string Adjustment, string Day)
     {
         DateTime Date1;
         DateTime Date2;
