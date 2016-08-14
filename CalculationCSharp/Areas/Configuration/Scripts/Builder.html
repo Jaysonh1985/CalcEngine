@@ -93,10 +93,7 @@
 
 
                             <td ng-if="Category.Name == 'Input'" width="25%">
-
-                                <span ng-if="rows.Type =='Decimal'"><input type="number" ng:model="rows.Output" class="form-control  input-sm"></span>
-                                <span ng-if="rows.Type =='Date'"><input type="text" ng:model="rows.Output" class="form-control  input-sm"></span>
-                                <span ng-if="rows.Type =='String'"><input type="text" ng:model="rows.Output" class="form-control  input-sm"></span>
+                                <span><input type="number" ng:model="rows.Output" class="form-control  input-sm"></span>
                             </td>
 
                             <td ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
