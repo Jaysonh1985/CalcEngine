@@ -28,6 +28,13 @@
                 }
 
             }
+            else if ($scope.Logic[key].Operator == "" || $scope.Logic[key].Operator == null) {
+                if ($scope.Logic[key + 1] != null) {
+
+                    form[AttName].$setValidity("clauseblank", false);
+
+                }
+            }
         })
     }
 

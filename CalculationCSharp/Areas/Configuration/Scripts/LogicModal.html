@@ -54,6 +54,7 @@
                                             <option value="OR">OR</option>
                                         </select>
                                         <span ng-show="form['Operator_'+ $index].$error.clause">There is a clause and no row below</span>
+                                        <span ng-show="form['Operator_'+ $index].$error.clauseblank">There is no clause and a row below</span>
                                     </td>
                                     <td width="5%">
                                         [<a ng:click="removeLogicItem($index)">X</a>]

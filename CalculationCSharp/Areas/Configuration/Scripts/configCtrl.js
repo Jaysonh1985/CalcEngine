@@ -116,7 +116,7 @@
          var id = $scope.getConfigID();
          configService.putCalc(id, $scope.config).then(function (data) {
              $scope.isLoading = false;
-             configService.sendRequest();
+             toastr.success("Saved successfully", "Success");
          }, onError);
      };
 

@@ -261,18 +261,13 @@
     <Compile Include="Areas\Project\Models\Comments.cs" />
     <Compile Include="Areas\Project\Models\Tasks.cs" />
     <Compile Include="Areas\Project\ProjectAreaRegistration.cs" />
-    <Compile Include="Areas\Scheme\Fire2006AreaRegistration.cs" />
-    <Compile Include="Areas\Regression\Controllers\CalculationRegressionsController.cs" />
-    <Compile Include="Areas\Regression\RegressionAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Project\Controllers\BoardController.cs" />
     <Compile Include="Areas\Project\Controllers\BoardHub.cs" />
     <Compile Include="Areas\Project\Controllers\ColumnWebApiController.cs" />
-    <Compile Include="Controllers\CalculationBaseController.cs" />
     <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Areas\Scheme\Controllers\DeferredController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -285,15 +280,10 @@
     <Compile Include="Models\Calculation\DownloadFileActionResult.cs" />
     <Compile Include="Models\Calculation\Index.cs" />
     <Compile Include="Models\Calculation\OutputList.cs" />
-    <Compile Include="Areas\Scheme\Models\Deferred.cs" />
-    <Compile Include="Areas\Regression\Models\RegressionViewModel.cs" />
     <Compile Include="Models\DateFunctions\DateFunctions.cs" />
-    <Compile Include="Models\Excel Import\ExcelImport.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LookupFunctions\LookupFunctions.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\StringFunctions\StringFunctions.cs" />
-    <Compile Include="Models\XMLFunctions\XMLFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -623,14 +613,6 @@
     <Content Include="Factor Tables\FIRE 1992 Scheme Factors.xlsx" />
     <Content Include="Factor Tables\Grade.csv" />
     <Content Include="Factor Tables\PIFactor.csv" />
-    <Content Include="Areas\Scheme\Views\web.config" />
-    <Content Include="Areas\Scheme\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Scheme\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Scheme\Views\Deferred\Input.cshtml" />
-    <Content Include="Areas\Regression\Views\web.config" />
-    <Content Include="Areas\Regression\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Regression\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Regression\Views\CalculationRegressions\Delete.cshtml" />
     <Content Include="Areas\Configuration\Views\web.config" />
     <Content Include="Areas\Configuration\Views\Config\Config.cshtml" />
     <Content Include="Content\toastr.scss" />
@@ -682,11 +664,7 @@
     <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\Calculation\DateFunctions.js" />
-    <Content Include="Scripts\Calculation\ModalFunctions.js" />
-    <Content Include="Scripts\Calculation\UI.js" />
     <Content Include="Scripts\api-check.js" />
-    <Content Include="Scripts\Configuration\Configuration.js" />
     <Content Include="Scripts\formly.js" />
     <Content Include="Scripts\ios-drag-drop.js" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
@@ -762,12 +740,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_CalcTypes.cshtml" />
-    <Content Include="Views\Calculation\Index.cshtml" />
     <Content Include="Views\Shared\_Output.cshtml" />
     <Content Include="Views\Shared\_BulkCalc.cshtml" />
-    <Content Include="Areas\Regression\Views\CalculationRegressions\Index.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
-    <Content Include="Areas\Regression\Views\CalculationRegressions\_RegModal.cshtml" />
     <Content Include="Areas\Project\Views\Board\Board.cshtml" />
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
@@ -778,7 +753,6 @@
     <Folder Include="Areas\Calculation\Views\Shared\" />
     <Folder Include="Areas\Configuration\Views\Shared\" />
     <Folder Include="Areas\Project\Views\Shared\" />
-    <Folder Include="Areas\Regression\Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
