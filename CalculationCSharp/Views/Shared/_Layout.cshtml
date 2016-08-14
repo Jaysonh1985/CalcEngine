@@ -34,28 +34,15 @@
         </div>
     </div>
 
-    @*<div class="jumbotron">
-            <h1>@ViewData["H1"]</h1>
-            <p class="lead">@ViewData["P1"]</p>
-            <h1 class="hidden">@ViewData["HID1"]</h1>
-        </div>*@
-
-
     @RenderBody()
 
     <hr />
-
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryui")
-    @*@Scripts.Render("~/bundles/angular")*@
     @Styles.Render("~/Content/cssjqryUi")
     @RenderSection("scripts", required: false)
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="~/Scripts/Calculation/DateFunctions.js"></script>
-    <script src="~/Scripts/Calculation/ModalFunctions.js"></script>
-    <script src="~/Scripts/Calculation/UI.js"></script>
 
     <script src="//npmcdn.com/api-check@latest/dist/api-check.js"></script>
     <script src="~/Scripts/angular.js"></script>
@@ -68,32 +55,36 @@
     <script src="~/Scripts/toastr.js"></script>
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="~/Scripts/angular-ui/sortable.js"></script>
+    
     <script src="~/AppScript/main.js"></script>
     <script src="~/Areas/Project/Scripts/kanbanBoardDragDrop.js"></script>
     <script src="~/Areas/Project/Scripts/boardService.js"></script>
     <script src="~/Areas/Project/Scripts/boardCtrl.js"></script>
     <script src="~/Areas/Project/Scripts/menuCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/groupCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/logicCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/configCtrl.js"></script>
     <script src="~/Areas/Project/Scripts/storyCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/configService.js"></script>
-    <script src="~/Areas/Configuration/Scripts/configMenuCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/dateAdjustmentCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/periodCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/factorsCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/historyCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/regressionCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/regressionInputCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/regressionDifferenceCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/regressionOutputCtrl.js"></script>
+
+    <script src="~/Areas/Configuration/Scripts/Group/groupCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Logic/logicCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Config/configCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Config/configService.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Config/configMenuCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Date Adjustment/dateAdjustmentCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Period/periodCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Factors/factorsCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/History/historyCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Regression/regressionCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Regression/regressionInputCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Regression/regressionDifferenceCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Regression/regressionOutputCtrl.js"></script>
     <script src="~/Areas/Configuration/Scripts/Custom Validations/CustomValidations.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Maths/mathsCtrl.js"></script>
+    <script src="~/Areas/Configuration/Scripts/Input/inputCtrl.js"></script>
+
     <script src="~/Areas/Calculation/Scripts/calculationCtrl.js"></script>
     <script src="~/Areas/Calculation/Scripts/calculationService.js"></script>
     <script src="~/Areas/Calculation/Scripts/calculationMenuCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/inputCtrl.js"></script>
-    <script src="~/Scripts/angular-gridster.min.js"></script>
-    <script src="~/Areas/Configuration/Scripts/mathsCtrl.js"></script>
+    
+    <script src="~/Scripts/angular-gridster.min.js"></script> 
     <script src="~/Scripts/angular-drag-and-drop-lists.js"></script>
     <script src="~/Scripts/angular-touch.js"></script>
     <script src="~/Scripts/ios-drag-drop.js"></script>
@@ -104,64 +95,6 @@
     <script src="~/Scripts/angular-sanitize.js"></script>
     <script src="~/Scripts/ng-csv.js"></script>
     <script src="~/Scripts/angular-csv-import.js"></script>
-    <script>
-
-        //Calc Form Submission
-        $('#Download').hide();
-        $('#Regression').hide();
-        $(function () {
-            $("#my-form").on("submit", function (e) {
-                e.preventDefault();
-
-                $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
-                    success: function (data) {
-                        $("#result").html(data);
-                        $("#Submit").click(function () {
-                            $('#result').show();
-                        });
-                        $("#Download").click(function () {
-                            var form = $("#my-form");
-                            form.attr("action", "@Url.Action("Input",null,new { ButtonType = "Download" })");
-                            form.submit();
-                            $('#result').hide();
-                            $('#Submit').hide();
-                        });
-                        $("#Regression").click(function () {
-                            var form = $("#my-form");
-                            form.attr("action", "@Url.Action("Input",null,new { ButtonType = "Regression" })");
-                            form.submit();
-                            $('#Regression').hide()
-                            $('#result').hide();
-                        });
-                        $('#Download').show();
-                        $('#Regression').show();
-                    }
-                })
-
-            })
-        })
-
-    </script>
-
-    <script type="text/ng-template" id="customPopupTemplate.html">
-        <div class="custom-popup-wrapper"
-             ng-style="{top: position().top+'px', left: position().left+'px'}"
-             style="display: block;"
-             ng-show="isOpen() && !moveInProgress"
-             aria-hidden="{{!isOpen()}}">
-            <p class="message">select location from drop down.</p>
-            <ul class="dropdown-menu" role="listbox">
-                <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
-                    ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
-                    <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
-                </li>
-            </ul>
-        </div>
-    </script>
-
 
 </body>
 

@@ -244,19 +244,19 @@
     
      $scope.getFunctionTempURL = function getFunctionTempURL(Function) {
          if (Function == 'Maths') {
-             return '/Areas/Configuration/Scripts/MathsModal.html';
+             return '/Areas/Configuration/Scripts/Maths/MathsModal.html';
          }
          else if (Function == 'Period') {
-             return '/Areas/Configuration/Scripts/PeriodModal.html'
+             return '/Areas/Configuration/Scripts/Period/PeriodModal.html'
          }
          else if (Function == 'Factors') {
-             return '/Areas/Configuration/Scripts/FactorsModal.html'
+             return '/Areas/Configuration/Scripts/Factors/FactorsModal.html'
          }
          else if (Function == 'Dates') {
-             return '/Areas/Configuration/Scripts/DateAdjustmentModal.html'
+             return '/Areas/Configuration/Scripts/Date Adjustment/DateAdjustmentModal.html'
          }
          else if (Function == 'Input') {
-             return '/Areas/Configuration/Scripts/InputModal.html'
+             return '/Areas/Configuration/Scripts/Input/InputModal.html'
          }
      }
     
@@ -301,7 +301,7 @@
 
          var modalInstance = $uibModal.open({
              animation: true,
-             templateUrl: '/Areas/Configuration/Scripts/LogicModal.html',
+             templateUrl: '/Areas/Configuration/Scripts/Logic/LogicModal.html',
              scope: $scope,
              controller: 'logicCtrl',
              size: size,
@@ -323,7 +323,7 @@
          $scope.Description = this.config[colIndex].Description;
          var modalInstance = $uibModal.open({
              animation: true,
-             templateUrl: '/Areas/Configuration/Scripts/GroupModal.html',
+             templateUrl: '/Areas/Configuration/Scripts/Group/GroupModal.html',
              scope: $scope,
              controller: 'groupCtrl',
              size: size,
@@ -348,7 +348,7 @@
          $scope.ID = $scope.getConfigID();
          var modalInstance = $uibModal.open({
              animation: true,
-             templateUrl: '/Areas/Configuration/Scripts/HistoryModal.html',
+             templateUrl: '/Areas/Configuration/Scripts/History/HistoryModal.html',
              scope: $scope,
              controller: 'historyCtrl',
              size: size,
