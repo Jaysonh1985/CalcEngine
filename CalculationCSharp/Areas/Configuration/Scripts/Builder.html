@@ -1,19 +1,19 @@
 ﻿<br>
-<form role="form" ng-submit="CalcButtonClick()">
+<form role="form" ng-submit="CalcButtonClick($event)">
     <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
     <input class="btn btn-default" type="submit" value="Calculate"/>
     <input class="btn btn-default" type="button" value="History" ng-click="HistoryButtonClick('lg')" />
     <input class="btn btn-default" type="button" value="Regression" ng-click="RegressionButtonClick('lg')" />
     <div ui-tree data-clone-enabled="true">
         <uib-accordion close-others=false ui-tree-nodes="" ng-model="config">
-            <uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="true" ui-tree-node>
+            <uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
 
                 <uib-accordion-heading>
                     <table class='table table-borderless'>
                         <tr>
                             <td width="25%"></td>
                             <td width="50%">{{Category.Name}}</td>
-                            <td width="25%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></td>
+                            <td width="25%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i></td>
                         </tr>
                     </table>
                 </uib-accordion-heading>
@@ -95,7 +95,7 @@
                             <td ng-if="Category.Name == 'Input'" width="25%">
 
                                 <span ng-if="rows.Type =='Decimal'"><input type="number" ng:model="rows.Output" class="form-control  input-sm"></span>
-                                <span ng-if="rows.Type =='Date'"><input type="date" ng:model="rows.Output" class="form-control  input-sm"></span>
+                                <span ng-if="rows.Type =='Date'"><input type="text" ng:model="rows.Output" class="form-control  input-sm"></span>
                                 <span ng-if="rows.Type =='String'"><input type="text" ng:model="rows.Output" class="form-control  input-sm"></span>
                             </td>
 

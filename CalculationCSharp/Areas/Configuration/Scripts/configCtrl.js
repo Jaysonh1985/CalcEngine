@@ -8,6 +8,7 @@
         isFirstOpen: true,
         isFirstDisabled: false
     };
+    $scope.openIndex = [true];
 
     function init() {
         var id = $location.absUrl();
@@ -119,8 +120,12 @@
          }, onError);
      };
 
-     $scope.CalcButtonClick = function CalcBoard() {
+     $scope.CalcButtonClick = function CalcBoard($event) {
          $scope.isLoading = true;
+         if ($event) {
+             $event.stopPropagation();
+             $event.preventDefault();
+         }
          var id = $scope.getConfigID();
          configService.postCalc(id, $scope.config).then(function (data) {
              $scope.isLoading = false;
@@ -128,6 +133,14 @@
              toastr.success("Updated successfully", "Success");
          }, onError);
      };
+
+     $scope.alert = function ($event) {
+         if ($event) {
+             $event.stopPropagation();
+             $event.preventDefault();
+         }
+
+     }
 
      $scope.selectedRow = null;  // initialize our variable to null
      $scope.function = null;  // initialize our variable to null
