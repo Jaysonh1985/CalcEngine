@@ -40,6 +40,18 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
             if (Output == null)
             {
+                if(element != null)
+                {
+                    if(element.Type == "Decimal")
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return Input;
+                    }
+                }
+
                 return Input;
             }
             else

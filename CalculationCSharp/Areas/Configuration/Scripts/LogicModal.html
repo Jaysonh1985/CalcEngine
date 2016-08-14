@@ -20,10 +20,11 @@
 
                             <tr  ng-repeat="rows in Logic">
                                 <td width="10%">
-                                    <select name="singleSelect" ng:model="rows.Bracket1" class="form-control">
+                                    <select name="BracketLeft_{{$index}}" ng:model="rows.Bracket1" class="form-control">
                                         <option value=""></option>
                                         <option value="(">(</option>
                                     </select>
+                                    <span ng-show="form['BracketLeft_'+ $index].$error.bracketnotclosed">Not closed</span>
                                 </td>
                                     
                                 <td width="20%"><span><input type="text" ng:model="rows.Input1" class="form-control" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" required></span></td>
@@ -40,10 +41,11 @@
 
                                 <td width="20%"><span><input type="text" ng:model="rows.Input2" class="form-control" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" required></span></td>
                                 <td width="10%">
-                                    <select name="singleSelect" ng:model="rows.Bracket2" class="form-control">
+                                    <select name="BracketRight_{{$index}}" ng:model="rows.Bracket2" class="form-control">
                                         <option value=""></option>
                                         <option value=")">)</option>
                                     </select>
+                                    <span ng-show="form['BracketRight_'+ $index].$error.bracketnotopen">Not Open</span>
                                 </td>
                                 <td width="30%">
                                     <select name="Operator_{{$index}}" ng:model="rows.Operator" class="form-control">
@@ -51,7 +53,7 @@
                                         <option value="AND">AND</option>
                                         <option value="OR">OR</option>
                                     </select>
-                                    <span ng-show="form['Operator_'+ $index].$error.integer">There is a clause and no row below</span>
+                                    <span ng-show="form['Operator_'+ $index].$error.clause">There is a clause and no row below</span>
                                 </td>
                                 <td width="5%">
                                     [<a ng:click="removeLogicItem($index)">X</a>]
