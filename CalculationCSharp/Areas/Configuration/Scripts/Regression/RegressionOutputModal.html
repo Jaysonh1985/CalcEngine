@@ -9,34 +9,22 @@
                     <uib-accordion close-others=false ng-model="output">
                         <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open=false>
                             <uib-accordion-heading>
-                                <table class='table table-borderless'>
-                                    <tr>
-                                        <th width="95%">
-                                            <h4 class="panel-title"> {{group.Group}} </h4>
-                                        </th>
-                                        <th width="5%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></th>
-                                    </tr>
-                                </table>
+                                {{group.Group}} 
+                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                             </uib-accordion-heading>
                             <br />
                             <table id="table" class="table table-bordered">
                                 <thead>
-                                    <tr class="h4">
-                                        <!--<th>
-                                            ID
-                                        </th>-->
-                                        <th>
+                                    <tr>
+                                        <th width="50%">
                                             Field
                                         </th>
-                                        <th>
+                                        <th width="50%">
                                             Value
                                         </th>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="row in group.Output">
-                                        <!--<td>
-                                            {{row.ID}}
-                                        </td>-->
                                         <td>
                                             {{row.Field}}
                                         </td>

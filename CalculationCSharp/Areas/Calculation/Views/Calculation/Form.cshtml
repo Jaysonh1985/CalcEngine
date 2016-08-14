@@ -11,16 +11,8 @@
         <uib-accordion close-others=false>
             <uib-accordion-group is-open=false>
                 <uib-accordion-heading>
-                    <table class='table table-borderless'>
-                        <tr>
-                            <th width="95%">
-                                <h2 class="panel-title">
-                                    Calculation Bulk
-                                </h2>
-                            </th>
-                            <th width="5%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></th>
-                        </tr>
-                    </table>
+                    Calculation Bulk
+                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                 </uib-accordion-heading>
                 <br />
                 <form>
@@ -55,16 +47,8 @@
         <uib-accordion close-others=false>
             <uib-accordion-group is-open=false>
                 <uib-accordion-heading>
-                    <table class='table table-borderless'>
-                        <tr>
-                            <th width="95%">
-                                <h2 class="panel-title">
-                                    Calculation Input
-                                </h2>
-                            </th>
-                            <th width="5%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></th>
-                        </tr>
-                    </table>
+                    Calculation Input
+                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                 </uib-accordion-heading>
                 <br />
                 <form ng-submit="CalcButtonClick()">
@@ -78,16 +62,8 @@
         <uib-accordion close-others=false>
             <uib-accordion-group is-open=true>
                 <uib-accordion-heading>
-                    <table class='table table-borderless'>
-                        <tr>
-                            <th width="95%">
-                                <h2 class="panel-title">
-                                    Calculation Output
-                                </h2>
-                            </th>
-                            <th width="5%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></th>
-                        </tr>
-                    </table>
+                    Calculation Output
+                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                 </uib-accordion-heading>
                 
                 <div class="container-fluid">
@@ -98,22 +74,13 @@
 
                         <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index"  is-open=true>
                             <uib-accordion-heading>
-                                <table class='table table-borderless'>
-                                    <tr>
-                                        <th width="95%">
-                                            <h4 class="panel-title"> {{group.Group}} </h4>
-                                        </th>
-                                        <th width="5%"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></th>
-                                    </tr>
-                                </table>
+                                {{group.Group}}
+                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
                             </uib-accordion-heading>
                             <br />
                             <table id="table" class="table table-bordered">
                                 <thead>
-                                    <tr class="h4">
-                                        @*<th>
-                                            ID
-                                        </th>*@
+                                    <tr>
                                         <th width="50%">
                                             Field
                                         </th>
@@ -123,9 +90,6 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="row in group.Output | filter : test">
-                                        @*<td>
-                                            {{row.ID}}
-                                        </td>*@
                                         <td>
                                             {{row.Field}}
                                         </td>

@@ -376,7 +376,7 @@
          $scope.ID = $scope.getConfigID();
          var modalInstance = $uibModal.open({
              animation: true,
-             templateUrl: '/Areas/Configuration/Scripts/RegressionModal.html',
+             templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionModal.html',
              scope: $scope,
              controller: 'regressionCtrl',
              size: size,

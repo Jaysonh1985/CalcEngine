@@ -37,7 +37,7 @@
         $scope.Input = this.Regression[colIndex].Input;
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/RegressionInputModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionInputModal.html',
             scope: $scope,
             controller: 'regressionInputCtrl',
             size: size,
@@ -85,7 +85,7 @@
         $scope.Difference = this.Regression[colIndex].Difference;
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/RegressionDifferenceModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionDifferenceModal.html',
             scope: $scope,
             controller: 'regressionDifferenceCtrl',
             size: size,
@@ -116,7 +116,7 @@
      }
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/RegressionOutputModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionOutputModal.html',
             scope: $scope,
             controller: 'regressionOutputCtrl',
             size: size,
