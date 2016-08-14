@@ -19,28 +19,32 @@
                                 </table>
                             </uib-accordion-heading>
                             <br />
-                            <table id="table" class="table table-bordered table">
-                                <tr class="h4">
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Field
-                                    </th>
-                                    <th>
-                                        Value
-                                    </th>
-                                <tr ng-repeat="row in group.Output">
-                                    <td>
-                                        {{row.ID}}
-                                    </td>
-                                    <td>
-                                        {{row.Field}}
-                                    </td>
-                                    <td>
-                                        {{row.Value}}
-                                    </td>
-                                </tr>
+                            <table id="table" class="table table-bordered">
+                                <thead>
+                                    <tr class="h4">
+                                        <!--<th>
+                                            ID
+                                        </th>-->
+                                        <th>
+                                            Field
+                                        </th>
+                                        <th>
+                                            Value
+                                        </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="row in group.Output">
+                                        <!--<td>
+                                            {{row.ID}}
+                                        </td>-->
+                                        <td>
+                                            {{row.Field}}
+                                        </td>
+                                        <td>
+                                            {{row.Value}}
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </uib-accordion-group>
                     </uib-accordion>

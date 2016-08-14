@@ -92,7 +92,7 @@
                 
                 <div class="container-fluid">
                     <br />
-                    <input type="text" class="form-control  input-lg" ng-model="test" placeholder="Filter">
+                    <input type="text" class="form-control  input" ng-model="test" placeholder="Filter">
                     <br />
                     <uib-accordion close-others=false ng-model="output">
 
@@ -108,28 +108,32 @@
                                 </table>
                             </uib-accordion-heading>
                             <br />
-                            <table id="table" class="table table-bordered table">
-                                <tr class="h4">
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Field
-                                    </th>
-                                    <th>
-                                        Value
-                                    </th>
-                                <tr ng-repeat="row in group.Output | filter : test">
-                                    <td>
-                                        {{row.ID}}
-                                    </td>
-                                    <td>
-                                        {{row.Field}}
-                                    </td>
-                                    <td>
-                                        {{row.Value}}
-                                    </td>
-                                </tr>
+                            <table id="table" class="table table-bordered">
+                                <thead>
+                                    <tr class="h4">
+                                        @*<th>
+                                            ID
+                                        </th>*@
+                                        <th width="50%">
+                                            Field
+                                        </th>
+                                        <th width="50%">
+                                            Value
+                                        </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="row in group.Output | filter : test">
+                                        @*<td>
+                                            {{row.ID}}
+                                        </td>*@
+                                        <td>
+                                            {{row.Field}}
+                                        </td>
+                                        <td>
+                                            {{row.Value}}
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </uib-accordion-group>
                     </uib-accordion>
