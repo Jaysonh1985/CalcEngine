@@ -80,7 +80,12 @@
          $scope.GroupButtonClick('lg', this.config.length - 1);
      }
 
-     $scope.AddCategoryRows = function (colIndex) {
+     $scope.AddCategoryRows = function (colIndex, e) {
+
+         if (e) {
+             e.preventDefault();
+             e.stopPropagation();
+         }
          var item = null;
 
          item = {
