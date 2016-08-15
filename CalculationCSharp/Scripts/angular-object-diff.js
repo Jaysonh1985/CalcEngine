@@ -227,13 +227,13 @@
                     property = (stringifyObjectKey(escapeHTML(key)) + '<span>: </span>' + inspect(diffItem.value));
                     break;
 
-                //case 'removed':
-                //    property = ('<del class="diff">' + stringifyObjectKey(escapeHTML(key)) + '<span>: </span>' + inspect(diffItem.value) + '</del>');
-                //    break;
+                case 'removed':
+                    property = ('<tr> <td>' + inspect(diffItem.value.Field) + '</td>' + '<td>' + 'Removed' + '</td> <td>' + inspect(diffItem.value.Value) + '</td> <td>' + '</td></tr>');
+                    break;
 
-                //case 'added':
-                //    property = ('<ins class="diff">' + stringifyObjectKey(escapeHTML(key)) + '<span>: </span>' + inspect(diffItem.value) + '</ins>');
-                //    break;
+                case 'added':
+                    property = ('<tr> <td>' + inspect(diffItem.value.Field) + '</td>' + '<td>' + 'Added' + '</td> <td>' + '</td> <td>' + inspect(diffItem.value.Value) + '</td></tr>');
+                    break;
 
                 case 'primitive change':
                     var prefix = stringifyObjectKey(escapeHTML(key));
