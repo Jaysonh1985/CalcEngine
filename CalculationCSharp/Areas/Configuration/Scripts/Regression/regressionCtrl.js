@@ -176,17 +176,20 @@
          $scope.prop = [];
          $scope.val = [];
          $scope.obj = [];
+         $scope.configReplace = JSON.stringify($scope.config);
+         $scope.configReplace = angular.fromJson($scope.configReplace);
+
 
          angular.forEach($scope.Regression, function (value, key, obj) {
 
              angular.forEach(angular.fromJson(angular.fromJson(angular.fromJson($scope.Regression[key].Input))), function (value, key, obj) {
                  $scope.prop.push(value);
-                 var index = getIndexOf($scope.config[0].Functions, key, 'Name');
-                 $scope.config[0].Functions[index].Output = value;
+                 var index = getIndexOf($scope.configReplace[0].Functions, key, 'Name');
+                 $scope.configReplace[0].Functions[index].Output = value;
 
             });
 
-            calculationService.postCalc(1, $scope.config).then(function (data) {
+             calculationService.postCalc(1, $scope.configReplace).then(function (data) {
                 $scope.isLoading = false;
 
                 if ($scope.Regression[key].OutputOld == null || $scope.Regression[key].OutputOld == "null")
