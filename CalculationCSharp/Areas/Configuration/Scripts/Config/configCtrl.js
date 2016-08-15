@@ -80,7 +80,7 @@
          $scope.GroupButtonClick('lg', this.config.length - 1);
      }
 
-     $scope.AddCategoryRows = function (colIndex, e) {
+     $scope.AddCategoryRows = function (colIndex, colIndex, $index) {
 
          if (e) {
              e.preventDefault();
@@ -98,6 +98,21 @@
          $scope.config.splice(colIndex + 1, 0, item);
          $scope.GroupButtonClick('lg', colIndex + 1);
          $scope.rebuildCategoryIDs();
+     }
+
+     $scope.CopyCategory = function (colIndex, index, e) {
+
+         if (e) {
+             e.preventDefault();
+             e.stopPropagation();
+         }
+
+         var Category = $scope.config[colIndex];
+         var item = null;
+
+         item = angular.copy(Category);
+         $scope.config.splice(index + 1, 0, item);
+
      }
 
      $scope.DeleteCategory = function (colIndex) {
