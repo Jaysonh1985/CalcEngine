@@ -71,7 +71,7 @@ public class DateFunctions
 
 	}
 
-    public DateTime DateAdjustment(string Type, String DateA, String DateB, string PeriodType, decimal Period, string Adjustment, string Day)
+    public DateTime DateAdjustment(string Type, String DateA, String DateB, string PeriodType, decimal Period, string Adjustment, string Day, string Month)
     {
         DateTime Date1;
         DateTime Date2;
@@ -155,17 +155,40 @@ public class DateFunctions
             string date = Day;
             string[] dateTokens = date.Split('/');
 
-            string strDay = dateTokens[0];
-            string strMonth = dateTokens[1];
+            string strDay = Day;
+            string strMonth = Month;
 
             int intDay = Convert.ToInt32(strDay);
             int intMonth = Convert.ToInt32(strMonth);
 
             DateTime Value = new DateTime(Date1.Year, intMonth, intDay);
 
-            if(Adjustment == "Less")
+            if (Adjustment == "Less")
             {
-                if (Value <= Date1)
+                if (Value < Date1)
+                {
+                    return Value;
+                }
+                else if (Value == Date1)
+                {
+                    Value = new DateTime(Date1.Year - 1, intMonth, intDay);
+
+                    return Value;
+                }
+                else
+                {
+                    Value = new DateTime(Date1.Year - 1, intMonth, intDay);
+
+                    return Value;
+                }
+            }
+            else if(Adjustment == "LessEqual")
+            {
+                if (Value < Date1)
+                {
+                    return Value;
+                }
+                else if (Value == Date1)
                 {
                     return Value;
                 }
@@ -176,9 +199,32 @@ public class DateFunctions
                     return Value;
                 }
             }
+            else if(Adjustment == "Greater")
+            {
+                if (Value > Date1)
+                {
+                    return Value;
+                }
+                else if (Value == Date1)
+                {
+                    Value = new DateTime(Date1.Year + 1, intMonth, intDay);
+
+                    return Value;
+                }
+                else
+                {
+                    Value = new DateTime(Date1.Year + 1, intMonth, intDay);
+
+                    return Value;
+                }
+            }
             else
             {
                 if (Value >= Date1)
+                {
+                    return Value;
+                }
+                else if (Value == Date1)
                 {
                     return Value;
                 }

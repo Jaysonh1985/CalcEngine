@@ -241,7 +241,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         DateTime.TryParse(InputB, out Date2);
                                         Decimal.TryParse(InputC, out Period);
 
-                                        DateTime date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day);
+                                        DateTime date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day, parameters.Month);
 
                                         DateTime datestring = date.Date;
 

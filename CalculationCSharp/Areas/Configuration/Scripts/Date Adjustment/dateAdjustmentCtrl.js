@@ -10,6 +10,7 @@
         $scope.period.Period = Functions[0].Period;
         $scope.period.Adjustment = Functions[0].Adjustment;
         $scope.period.Day = Functions[0].Day;
+        $scope.period.Month = Functions[0].Month;
     }
     else {
         $scope.period = Functions
@@ -24,7 +25,8 @@
             PeriodType: $scope.period.PeriodType,
             Period: $scope.period.Period,
             Adjustment: $scope.period.Adjustment,
-            Day: $scope.period.Day
+            Day: $scope.period.Day,
+            Month: $scope.period.Month
         })
     },
 

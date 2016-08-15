@@ -29,7 +29,7 @@
                                 <tr>
                                     <td ng-if="Category.Name != 'Input'"><a ng-click="DeleteCategory(colIndex)"><i class="center-block glyphicon glyphicon-remove"></i></a> </td>
                                     <td><a ng-click="AddCategoryRows(colIndex, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a></td>
-                                    <td><a ng-click="CopyCategory(colIndex, $index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a></td>
+                                    <td ng-if="Category.Name != 'Input'"><a ng-click="CopyCategory(colIndex, $index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a></td>
                                     <td><a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a></td>
                                 </tr>
                             </table>

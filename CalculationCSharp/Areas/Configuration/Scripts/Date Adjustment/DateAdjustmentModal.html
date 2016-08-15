@@ -53,45 +53,36 @@
                     </div>
                 </fieldset>
 
-                    <fieldset ng-if="period.Type == 'Adjust'">
-                        <legend>Adjustment to be Made</legend>
-                        <div class="form-group">
+                <fieldset ng-if="period.Type == 'Adjust'">
+                    <legend>Adjustment to be Made</legend>
+                    <div class="form-group">
 
-                            <label for="inclusive" class="control-label col-md-2">Adjustment Type</label>
-                            <div class="col-sm-9">
-                                <select id="Adjustment" name="singleSelect" ng:model="period.AdjustmentType" class="form-control" required>
-                                    <option value=""></option>
-                                    <option value="SelectDate">Select Date</option>
-                                    <option value="AdjustDate">Adjust Date</option>
-                                </select>
-                            </div>
-
-                            <label for="inclusive" class="control-label col-md-2">Adjustment</label>
-                            <div class="col-sm-9">
-                                <select id="Adjustment" name="singleSelect" ng:model="period.Adjustment" class="form-control" required>
-                                    <option value=""></option>
-                                    <option value="Less"><</option>
-                                    <option value="Greater">></option>
-                                </select>
-                            </div>
+                        <label for="inclusive" class="control-label col-md-2">Adjustment</label>
+                        <div class="col-sm-9">
+                            <select id="Adjustment" name="singleSelect" ng:model="period.Adjustment" class="form-control" required>
+                                <option value=""></option>
+                                <option value="Less">Before</option>
+                                <option value="LessEqual">On or Before</option>
+                                <option value="Greater">After</option>
+                                <option value="GreaterEqual">On or After</option>
+                            </select>
                         </div>
+                    </div>
 
-                        <label ng-if="period.AdjustmentType == 'SelectDate'" for="Day" class="control-label col-md-2">Select Date of the Year</label>
-                        <div ng-if="period.AdjustmentType == 'SelectDate'" class="col-sm-9">
-                            <input type="Text" id="Day" name="Day" class="form-control" placeholder="dd/mm" ng-model="period.Day" required />
+                    <div class="form-group">
+                        <label for="Day" class="control-label col-md-2">Select Day</label>
+                        <div class="col-sm-9">
+                            <input type="Text" id="Day" name="Day" class="form-control" ng-model="period.Day" required />
                         </div>
-
-                        <label ng-if="period.AdjustmentType == 'AdjustDate'" for="Day" class="control-label col-md-2">Adjust to Day of the Year</label>
-                        <div ng-if="period.AdjustmentType == 'AdjustDate'" class="col-sm-9">
-                            <input type="Text" id="Day" name="Day" class="form-control"  ng-model="period.AdjDay" required />
+                     </div>
+                    <div class="form-group">
+                        <label for="Day" class="control-label col-md-2">Select Month</label>
+                        <div class="col-sm-9">
+                            <input type="Text" id="Day" name="Day" class="form-control" ng-model="period.Month" required />
                         </div>
+                    </div>
 
-                        <label ng-if="period.AdjustmentType == 'AdjustDate'" for="month" class="control-label col-md-2">Adjust to Month of the Year</label>
-                        <div ng-if="period.AdjustmentType == 'AdjustDate'" class="col-sm-9">
-                            <input type="Text" id="month" name="month" class="form-control" ng-model="period.AdjMonth" required />
-                        </div>
-
-                    </fieldset>
+                </fieldset>
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="submit">OK</button>
                     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>

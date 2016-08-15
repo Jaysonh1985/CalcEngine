@@ -16,5 +16,6 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public dynamic Period { get; set; }
         public string Adjustment { get; set; }
         public string Day { get; set; }
+        public string Month { get; set; }
     }
 }
