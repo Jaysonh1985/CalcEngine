@@ -4,5 +4,130 @@
 }
 
 <div  ng-controller="configCtrl">
-    <div class="container body-content" ng-view></div>
+    <div class="container body-content" ng-cloak>
+
+        <br>
+        <form role="form" ng-submit="CalcButtonClick()">
+            <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
+            <input class="btn btn-default" type="submit" value="Calculate" />
+            <input class="btn btn-default" type="button" value="History" ng-click="HistoryButtonClick('lg')" />
+            <input class="btn btn-default" type="button" value="Regression" ng-click="RegressionButtonClick('lg')" />
+            <br />
+
+            <div ui-tree data-clone-enabled="true">
+                <br />
+                <uib-accordion close-others=false ui-tree-nodes="" ng-model="config">
+                    <uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
+
+                        <uib-accordion-heading>
+                            {{Category.Name}}
+                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
+                            <a ng-click="AddCategoryRows(colIndex, $event)"><i class="pull-left glyphicon glyphicon-plus"></i></a>
+                        </uib-accordion-heading>
+                        <a ng-if="Category.Name != 'Input'" ng-click="DeleteCategory(colIndex)"><i class="pull-left glyphicon glyphicon-remove"></i></a>
+                        <a ng-click="GroupButtonClick('lg', $index)"><i class="pull-right glyphicon glyphicon-option-horizontal"></i></a>
+                        <br />
+                        <br />
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Sort</th>
+                                    <th>Logic</th>
+                                    <th>Function</th>
+                                    <th>Config</th>
+                                    <th>Variable</th>
+                                    <th>Type</th>
+                                    <th>Output</th>
+                                    <th>Expected</th>
+                                    <th>Pass</th>
+                                    <th>
+                                        <a data-nodrag ng-click="AddFunction(colIndex, $index)">
+                                            <span class="pull-right glyphicon glyphicon-plus"></span>
+                                        </a>
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody ui-tree-nodes="" ng:model="Category.Functions">
+                                <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)" ui-tree-node>
+
+                                    <td ng-if="Category.Name == 'Input'"></td>
+
+                                    <td ng-if="Category.Name != 'Input'">
+                                        <i class="glyphicon glyphicon-list" ui-tree-handle></i>
+                                    </td>
+
+                                    <td ng-if="Category.Name == 'Input'"></td>
+
+                                    <td ng-if="Category.Name != 'Input'">
+                                        <a ng-click="LogicButtonClick('lg', colIndex, $index)">
+                                            <span class="glyphicon glyphicon-wrench"></span>
+                                        </a>
+                                    </td>
+
+                                    <td ng-if="Category.Name == 'Input'">
+                                        <select name="singleSelect" ng:model="rows.Function" class="form-control input-sm" ng-change="setFunction(rows)" required>
+                                            <option selected value="Input">Input</option>
+                                        </select>
+                                    </td>
+                                    <td ng-if="Category.Name != 'Input'">
+                                        <select name="singleSelect" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" required>
+                                            <option value=""></option>
+                                            <option value="Maths">Maths</option>
+                                            <option value="Period">Period</option>
+                                            <option value="Factors">Factors</option>
+                                            <option value="Dates">Date Adjustment</option>
+                                        </select>
+                                    </td>
+
+                                    <td>
+                                        <a ng-click="FunctionButtonClick('lg', colIndex, $index)">
+                                            <span uib-popover="{{data || rows.Parameter}}" popover-trigger="mouseenter" class="glyphicon glyphicon-cog"></span>
+                                        </a>
+                                    </td>
+
+                                    <td ng-if="Category.Name == 'Input'">{{rows.Name}}</td>
+                                    <td ng-if="Category.Name != 'Input'">
+                                        <span><input type="text" ng:model="rows.Name" class="form-control  input-sm" required></span>
+                                    </td>
+
+                                    <td width="5%">{{rows.Type}}</td>
+
+
+                                    <td ng-if="Category.Name == 'Input'" width="25%">
+                                        <span><input type="text" ng:model="rows.Output" class="form-control  input-sm"></span>
+                                    </td>
+
+                                    <td ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
+
+                                    <td ng-if="Category.Name == 'Input'" width="5%"></td>
+                                    <td ng-if="Category.Name != 'Input'" width="20%"><span><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span></td>
+
+                                    <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss', 'white': rows.Pass == 'Nil' }"><span></span></td>
+                                    <td>
+                                        <a data-nodrag ng-click="AddFunctionRows(colIndex, $index)">
+                                            <i class="center-block glyphicon glyphicon-plus"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a data-nodrag ng-click="CopyFunction(colIndex, $index)">
+                                            <i class="center-block glyphicon glyphicon-duplicate"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a data-nodrag ng-click="DeleteFunction(colIndex, $index)">
+                                            <i class="center-block glyphicon glyphicon-remove"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </uib-accordion-group>
+                </uib-accordion>
+            </div>
+        </form>
+
+    </div>
 </div>

@@ -9,17 +9,9 @@ sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRo
             templateUrl: '/Areas/Configuration/Scripts/Builder.html'
 
         })
-        .otherwise({ redirectTo: '/' });
-
-        $routeProvider.when('/Maths', {
-            controller: 'mathsCtrl',
-            templateUrl: '/Areas/Configuration/Scripts/Maths.html'
-
-        })
-        .otherwise({ redirectTo: '/' });
-
+        .otherwise({ redirectTo: '/' });    
         $routeProvider.
-                when('/Configuration/Config/Config#/:ID', {
+                when('/Configuration/Config/Config/:ID', {
                     templateUrl: '/Areas/Configuration/Views/Config/Index.cshtml',
                     controller: 'configCtrl'
                 }).
