@@ -31,7 +31,21 @@ public class DateFunctions
 
 	}
 
-	public int MonthsBetween(System.DateTime StartDate, System.DateTime EndDate, bool roundup)
+    public double YearsBetween(System.DateTime StartDate, System.DateTime EndDate, bool inclusive, double daysperyear)
+    {
+
+        System.TimeSpan d;
+        double days;
+        d = EndDate.Subtract(StartDate);
+        days = d.Days;
+
+        double Years = Math.Floor(days / daysperyear);
+
+        return Years;
+
+    }
+
+    public int MonthsBetween(System.DateTime StartDate, System.DateTime EndDate, bool roundup)
 	{
 
 		int Months;
@@ -104,6 +118,22 @@ public class DateFunctions
             }
 
             if (PeriodType == "YearsMonths")
+            {
+                Yrs = Yrs * Convert.ToDecimal(12);
+
+                int Total = Convert.ToInt32(Yrs + Frac);
+
+                if (Type == "Subtract")
+                {
+                    Total = Total * -1;
+                }
+
+                DateTime AdjDate = Date1.AddMonths(Total);
+
+                return AdjDate;
+            }
+
+            if (PeriodType == "Years")
             {
                 Yrs = Yrs * Convert.ToDecimal(12);
 

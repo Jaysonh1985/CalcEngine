@@ -187,6 +187,11 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             item.Output = Convert.ToString(DateFunctions.YearsMonthsBetween(Date1, Date2, Inclusive));
                                         }
 
+                                        else if (DateAdjustmentType == "Years")
+                                        {
+                                            item.Output = Convert.ToString(DateFunctions.YearsBetween(Date1, Date2, Inclusive, DaysinYear));
+                                        }
+
                                         InputA = null;
                                         InputB = null;
                                     }
