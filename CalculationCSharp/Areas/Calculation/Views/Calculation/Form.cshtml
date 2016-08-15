@@ -60,10 +60,10 @@
         </uib-accordion>
        
         <uib-accordion close-others=false>
-            <uib-accordion-group is-open=true>
+            <uib-accordion-group is-open="openIndex[$index]">
                 <uib-accordion-heading>
                     Calculation Output
-                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
                 </uib-accordion-heading>
                 
                 <div class="container-fluid">
@@ -72,10 +72,10 @@
                     <br />
                     <uib-accordion close-others=false ng-model="output">
 
-                        <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index"  is-open=true>
+                        <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index"  is-open="openIndex[$index]">
                             <uib-accordion-heading>
                                 {{group.Group}}
-                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}""></i>
                             </uib-accordion-heading>
                             <br />
                             <table id="table" class="table table-bordered">
