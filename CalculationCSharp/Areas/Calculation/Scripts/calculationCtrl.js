@@ -7,6 +7,7 @@
     $scope.bulkArrayOutput = [];
     var vm = this;
     $scope.openIndex = [true];
+    $scope.openIndexOuter = [true];
 
     $scope.csv = {
         content: null,

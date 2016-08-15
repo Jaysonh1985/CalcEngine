@@ -9,6 +9,7 @@
         isFirstDisabled: false
     };
     $scope.openIndex = [true];
+    $scope.openIndexRegression = [true];
 
     function init() {
         var id = $location.absUrl();
