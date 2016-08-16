@@ -22,13 +22,13 @@
                         <uib-accordion-heading>
                             {{Category.Name}}
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
-                            <a ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory(colIndex, $index, $event)"><i class="pull-left glyphicon glyphicon-arrow-down"></i></a>
+                            @*<a ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory(colIndex, $index, $event)"><i class="pull-left glyphicon glyphicon-arrow-down"></i></a>*@
                         </uib-accordion-heading>
                         <div>
                             <table class="table table-borderless">
                                 <tr>
                                     <td ng-if="Category.Name != 'Input'"><a ng-click="DeleteCategory(colIndex)"><i class="center-block glyphicon glyphicon-remove"></i></a> </td>
-                                    <td><a ng-click="AddCategoryRows(colIndex, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a></td>
+                                    <td><a ng-click="AddCategoryRows($index, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a></td>
                                     <td ng-if="Category.Name != 'Input'"><a ng-click="CopyCategory(colIndex, $index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a></td>
                                     <td><a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a></td>
                                 </tr>

@@ -120,6 +120,7 @@
          item = angular.copy(Category);
          $scope.config.splice(Index, 1);
          $scope.config.splice(Index + 1, 0, item);
+         $scope.colindex = Index;
 
      }
 

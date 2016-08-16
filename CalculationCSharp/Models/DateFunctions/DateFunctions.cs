@@ -236,7 +236,7 @@ public class DateFunctions
                     return Value;
                 }
             }
-            else
+            else if (Adjustment == "GreaterEqual")
             {
                 if (Value >= Date1)
                 {
@@ -252,6 +252,11 @@ public class DateFunctions
 
                     return Value;
                 }
+            }
+            else if (Adjustment == "Equal")
+            {
+                   Value = new DateTime(Date1.Year, intMonth, intDay);
+                   return Value;
             }
 
         }
