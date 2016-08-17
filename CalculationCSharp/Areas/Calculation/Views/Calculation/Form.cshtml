@@ -9,7 +9,7 @@
     <div class="container">
         <br />
         <uib-accordion close-others=false>
-            <uib-accordion-group is-open="openIndexOuter[$index]">
+            <uib-accordion-group is-open=false>
                 <uib-accordion-heading>
                     Calculation Bulk
                     <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexOuter[$index], 'glyphicon-chevron-right': !openIndexOuter[$index]}"></i>
@@ -45,7 +45,7 @@
         </uib-accordion>
 
         <uib-accordion close-others=false>
-            <uib-accordion-group is-open="openIndexOuter[$index]">
+            <uib-accordion-group is-open=false>
                 <uib-accordion-heading>
                     Calculation Input
                     <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexOuter[$index], 'glyphicon-chevron-right': !openIndexOuter[$index]}"></i>
@@ -60,7 +60,7 @@
         </uib-accordion>
        
         <uib-accordion close-others=false>
-            <uib-accordion-group is-open="openIndexOuter[$index]">
+            <uib-accordion-group is-open=false>
                 <uib-accordion-heading>
                     Calculation Output
                     <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexOuter[$index], 'glyphicon-chevron-right': !openIndexOuter[$index]}"></i>

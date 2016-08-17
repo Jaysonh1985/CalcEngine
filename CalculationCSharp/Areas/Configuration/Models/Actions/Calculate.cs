@@ -68,6 +68,13 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 {
                     if (item.Function == "Input")
                     {
+                        if(item.Type == "Date")
+                        {
+                            DateTime datestring = Convert.ToDateTime(item.Output);
+                            var shortdatestring = datestring.ToShortDateString();
+                            item.Output = Convert.ToString(shortdatestring);
+
+                        }
                         OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
                     }
                     else

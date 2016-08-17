@@ -8,7 +8,7 @@ public class DateFunctions
 
 	public double YearsMonthsBetween(System.DateTime StartDate, System.DateTime EndDate, bool inclusive, double daysperyear)
 	{
-        int months = MonthsBetween(StartDate, EndDate, false);
+        int months = MonthsBetween(StartDate, EndDate, inclusive);
 
         double output = months / 12;
 
@@ -24,6 +24,11 @@ public class DateFunctions
         double days;
         d = EndDate.Subtract(StartDate);
         days = d.Days;
+
+        if(inclusive == true)
+        {
+            days = days + 1;
+        }
 
         double Years = Math.Floor(days / daysperyear);
 
