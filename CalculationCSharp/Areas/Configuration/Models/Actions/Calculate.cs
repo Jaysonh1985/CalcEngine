@@ -137,6 +137,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         string Input2 = Convert.ToString(InputB);
                                         string Bracket2 = Convert.ToString(parameters.Bracket2);
                                         string Rounding = Convert.ToString(parameters.Rounding);
+                                        string RoundingType = Convert.ToString(parameters.RoundingType);
                                         string Logic2 = Convert.ToString(parameters.Logic2);
                                         if (Rounding == "")
                                         {
@@ -158,8 +159,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         if(paramCount == item.Parameter.Count)
                                         {
                                             //Apply rounding
-
-                                            MathString = "Round(" + MathString + "," + Rounding + ")";
+                                                MathString = "Round(" + MathString + "," + Rounding + ")"; 
                                             Expression e = new Expression(MathString);
                                             var Calculation = e.Evaluate();
                                             decimal Output = Convert.ToDecimal(Calculation);
@@ -206,6 +206,11 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             else if (DateAdjustmentType == "Months")
                                             {
                                                 item.Output = Convert.ToString(DateFunctions.MonthsBetween(Date1, Date2, false));
+                                            }
+
+                                            else if (DateAdjustmentType == "Days")
+                                            {
+                                                item.Output = Convert.ToString(DateFunctions.DaysBetween(Date1, Date2, Inclusive, DaysinYear));
                                             }
 
                                             InputA = null;

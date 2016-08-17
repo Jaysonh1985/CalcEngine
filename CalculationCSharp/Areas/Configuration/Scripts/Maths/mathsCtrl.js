@@ -1,9 +1,15 @@
-﻿sulhome.kanbanBoardApp.controller('mathsCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions) {
+﻿sulhome.kanbanBoardApp.controller('mathsCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions, Rounding) {
     // Model
     $scope.maths = Functions;
+    $scope.maths.Rounding({
+        Rounding: Rounding.Rounding,
+        RoundingType: Rounding.RoundingType
+    })
+
     $scope.addItem = function () {
         $scope.maths.push({
-            ID: this.maths.length
+            ID: this.maths.length,
+            
         });
     },
 
@@ -117,7 +123,6 @@
 
         $scope.OperatorClauseValidations(form);
         $scope.BracketsValidations(form);
-
         if (form.$valid == true) {
             $uibModalInstance.close($scope.maths);
         };

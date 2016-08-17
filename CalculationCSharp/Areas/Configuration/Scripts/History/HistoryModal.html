@@ -11,9 +11,9 @@
                 <th>
                     Updated
                 </th>
-                <th>
+                <!--<th>
                     Comment
-                </th>
+                </th>-->
                 <th>
                     Version
                 </th>
@@ -23,10 +23,10 @@
             <tr ng-repeat="board in Boards">
                 <td width="15%" ng-cloak>{{board.User}}</td>
                 <td width="10%" ng-cloak>{{board.UpdateDate}}</td>
-                <td width="25%" ng-cloak>{{board.Comment}}</td>
+                <!--<td width="25%" ng-cloak>{{board.Comment}}</td>-->
                 <td width="5%" ng-cloak>{{board.Version}}</td>
                 <td width="25%">
-                    <button class="btn btn-default" ng-hide="editingData[board.ID]" ng-click="modify(board)">Compare</button>
+                    <!--<button class="btn btn-default" ng-hide="editingData[board.ID]" ng-click="modify(board)">Compare</button>-->
                     <button class="btn btn-default" ng-hide="editingData[board.ID]" ng-click="revert(board)">Revert</button>
                 </td>
             </tr>

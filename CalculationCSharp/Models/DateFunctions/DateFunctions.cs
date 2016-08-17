@@ -80,6 +80,23 @@ public class DateFunctions
 
 	}
 
+    public double DaysBetween(System.DateTime StartDate, System.DateTime EndDate, bool inclusive, double daysperyear)
+    {
+
+        System.TimeSpan d;
+        double days;
+        d = EndDate.Subtract(StartDate);
+        days = d.Days;
+
+        if (inclusive == true)
+        {
+            days = days + 1;
+        }
+
+        return days;
+
+    }
+
     public DateTime DateAdjustment(string Type, String DateA, String DateB, string PeriodType, decimal Period, string Adjustment, string Day, string Month)
     {
         DateTime Date1;
