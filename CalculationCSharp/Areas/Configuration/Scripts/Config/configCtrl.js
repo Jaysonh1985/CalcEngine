@@ -210,7 +210,7 @@
         
      }
 
-     $scope.variableArrayBuilder = function variableArrayBuilder(config, colIndex, type) {
+     $scope.variableArrayBuilder = function variableArrayBuilder(config, colIndex, type, rowIndex) {
 
          var counter = 0;
          var scopeid = 0;
@@ -233,6 +233,17 @@
                  {
                      $scope.DecimalValue = ($filter('filter')(config[scopeid].Functions, { Type: type }));
                  }
+
+                 if (scopeid == colIndex) {
+                     var spliceid = rowIndex;
+                     var DecimalValueID = 0;
+
+                     angular.forEach($scope.DecimalValue, function (Names) {
+                          $scope.DecimalValue.splice(spliceid, 1);
+                     });
+
+                 };
+
                  
                  functionID = 0;
                  angular.forEach($scope.DecimalValue, function (Names) {
@@ -258,15 +269,15 @@
      }
 
 
-     $scope.getVariableTypes = function getVariableTypes(colIndex) {  //function that sets the parameters available under the different variable types
+     $scope.getVariableTypes = function getVariableTypes(colIndex, rowIndex) {  //function that sets the parameters available under the different variable types
 
          $scope.DecimalNames = [];
          $scope.DateNames = [];
          $scope.StringNames = [];
 
-         $scope.DecimalNames = $scope.variableArrayBuilder($scope.config, colIndex, 'Decimal');
-         $scope.DateNames = $scope.variableArrayBuilder($scope.config, colIndex, 'Date');
-         $scope.StringNames = $scope.variableArrayBuilder($scope.config, colIndex, 'String');
+         $scope.DecimalNames = $scope.variableArrayBuilder($scope.config, colIndex, 'Decimal', rowIndex);
+         $scope.DateNames = $scope.variableArrayBuilder($scope.config, colIndex, 'Date', rowIndex);
+         $scope.StringNames = $scope.variableArrayBuilder($scope.config, colIndex, 'String', rowIndex);
 
      }
 
@@ -310,7 +321,7 @@
      $scope.FunctionButtonClick = function (size, colIndex, index) {
          $scope.Parameter = this.config[colIndex].Functions[index].Parameter;
          var Function = this.config[colIndex].Functions[index].Function;
-         $scope.getVariableTypes(colIndex);
+         $scope.getVariableTypes(colIndex, index);
          var FunctionCtrl = null;
          var FunctionTemp = null;
          FunctionCtrl = $scope.getFunctionCtrl(Function);
@@ -344,7 +355,11 @@
          $scope.Logic = this.config[colIndex].Functions[index].Logic;
          
          $scope.AllNames = [];
-         $scope.AllNames = $scope.variableArrayBuilder($scope.config, colIndex, null);
+
+         $scope.configReplace = JSON.stringify($scope.config);
+         $scope.configReplace = angular.fromJson($scope.configReplace);
+        
+         $scope.AllNames = $scope.variableArrayBuilder($scope.configReplace, colIndex, null, index);
 
          var modalInstance = $uibModal.open({
              animation: true,
