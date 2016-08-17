@@ -182,12 +182,18 @@
 
          angular.forEach($scope.Regression, function (value, key, obj) {
 
+             $scope.configReplace = JSON.stringify($scope.config);
+             $scope.configReplace = angular.fromJson($scope.configReplace);
+
              angular.forEach(angular.fromJson(angular.fromJson(angular.fromJson($scope.Regression[key].Input))), function (value, key, obj) {
                  $scope.prop.push(value);
                  var index = getIndexOf($scope.configReplace[0].Functions, key, 'Name');
                  $scope.configReplace[0].Functions[index].Output = value;
 
-            });
+             });
+
+             $scope.configReplace = JSON.stringify($scope.configReplace);
+             $scope.configReplace = angular.fromJson($scope.configReplace);
 
              calculationService.postCalc(1, $scope.configReplace).then(function (data) {
                 $scope.isLoading = false;
@@ -257,34 +263,38 @@
         $scope.showregressbuttons = false;
         angular.forEach($scope.Regression, function (value, key, obj) {
 
-            $scope.Regression[key].OutputOld = $scope.Regression[key].OutputNew;
-            $scope.Regression[key].OutputNew = null;
-            $scope.Regression[key].Difference = null;
-            $scope.Regression[key].Pass = true;
+            if ($scope.Regression[key].Difference != null){
 
-            var Input = angular.fromJson($scope.Regression[key].Input, true)
-            $scope.selected = {
+                $scope.Regression[key].OutputOld = $scope.Regression[key].OutputNew;
+                $scope.Regression[key].OutputNew = null;
+                $scope.Regression[key].Difference = null;
+                $scope.Regression[key].Pass = true;
 
-                ID: $scope.Regression[key].ID,
-                CalcID: $scope.Regression[key].CalcID,
-                Scheme: $scope.Regression[key].Scheme,
-                Type: $scope.Regression[key].Type,
-                Input: angular.toJson(Input, true),
-                Reference: $scope.Regression[key].Reference,
-                Comment: $scope.Regression[key].Comment,
-                OriginalRunDate: $scope.Regression[key].OriginalRunDate,
-                LatestRunDate: $scope.Regression[key].LatestRunDate,
-                OutputOld: $scope.Regression[key].OutputOld,
-                OutputNew: $scope.Regression[key].OutputNew,
-                Difference: $scope.Regression[key].Difference,
-                Pass: $scope.Regression[key].Pass,
-                UpdateDate: ""
+                var Input = angular.fromJson($scope.Regression[key].Input, true)
+                $scope.selected = {
 
-            };
+                    ID: $scope.Regression[key].ID,
+                    CalcID: $scope.Regression[key].CalcID,
+                    Scheme: $scope.Regression[key].Scheme,
+                    Type: $scope.Regression[key].Type,
+                    Input: angular.toJson(Input, true),
+                    Reference: $scope.Regression[key].Reference,
+                    Comment: $scope.Regression[key].Comment,
+                    OriginalRunDate: $scope.Regression[key].OriginalRunDate,
+                    LatestRunDate: $scope.Regression[key].LatestRunDate,
+                    OutputOld: $scope.Regression[key].OutputOld,
+                    OutputNew: $scope.Regression[key].OutputNew,
+                    Difference: $scope.Regression[key].Difference,
+                    Pass: $scope.Regression[key].Pass,
+                    UpdateDate: ""
 
-            configService.putRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
+                };
 
-            }, onError);
+                configService.putRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
+
+                }, onError);
+
+                }
        
         })
 
@@ -295,34 +305,36 @@
 
         angular.forEach($scope.Regression, function (value, key, obj) {
 
-            $scope.Regression[key].OutputNew = null;
-            $scope.Regression[key].Difference = null;
-            $scope.Regression[key].Pass = true;
+            if ($scope.Regression[key].Difference != null) {
 
-            var Input = angular.fromJson($scope.Regression[key].Input, true)
-            $scope.selected = {
+                $scope.Regression[key].OutputNew = null;
+                $scope.Regression[key].Difference = null;
+                $scope.Regression[key].Pass = true;
 
-                ID: $scope.Regression[key].ID,
-                CalcID: $scope.Regression[key].CalcID,
-                Scheme: $scope.Regression[key].Scheme,
-                Type: $scope.Regression[key].Type,
-                Input: angular.toJson(Input, true),
-                Reference: $scope.Regression[key].Reference,
-                Comment: $scope.Regression[key].Comment,
-                OriginalRunDate: $scope.Regression[key].OriginalRunDate,
-                LatestRunDate: $scope.Regression[key].LatestRunDate,
-                OutputOld: $scope.Regression[key].OutputOld,
-                OutputNew: $scope.Regression[key].OutputNew,
-                Difference: $scope.Regression[key].Difference,
-                Pass: $scope.Regression[key].Pass,
-                UpdateDate: ""
+                var Input = angular.fromJson($scope.Regression[key].Input, true)
+                $scope.selected = {
 
-            };
+                    ID: $scope.Regression[key].ID,
+                    CalcID: $scope.Regression[key].CalcID,
+                    Scheme: $scope.Regression[key].Scheme,
+                    Type: $scope.Regression[key].Type,
+                    Input: angular.toJson(Input, true),
+                    Reference: $scope.Regression[key].Reference,
+                    Comment: $scope.Regression[key].Comment,
+                    OriginalRunDate: $scope.Regression[key].OriginalRunDate,
+                    LatestRunDate: $scope.Regression[key].LatestRunDate,
+                    OutputOld: $scope.Regression[key].OutputOld,
+                    OutputNew: $scope.Regression[key].OutputNew,
+                    Difference: $scope.Regression[key].Difference,
+                    Pass: $scope.Regression[key].Pass,
+                    UpdateDate: ""
 
-            configService.putRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
+                };
 
-            }, onError);
+                configService.putRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
 
+                }, onError);
+            }
         })
 
     };
