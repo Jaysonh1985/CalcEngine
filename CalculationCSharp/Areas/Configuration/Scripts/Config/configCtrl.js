@@ -136,6 +136,16 @@
          colid = 0;
          angular.forEach($scope.config, function (groups) {
              $scope.config[colid].ID = colid;
+
+             rowid = 0;
+
+             angular.forEach($scope.config[colid].Functions, function(rows){
+
+                 $scope.config[colid].Functions[rowid].ID = rowid;
+                 rowid = rowid +1;
+
+             });
+
              colid = colid + 1;
          });
      }
@@ -143,6 +153,7 @@
      $scope.SaveButtonClick = function SaveBoard() {
          $scope.isLoading = true;
          var id = $scope.getConfigID();
+         $scope.rebuildCategoryIDs();
          configService.putCalc(id, $scope.config).then(function (data) {
              $scope.isLoading = false;
              toastr.success("Saved successfully", "Success");
@@ -151,6 +162,7 @@
 
      $scope.CalcButtonClick = function CalcBoard($event) {
          var id = $scope.getConfigID();
+         $scope.rebuildCategoryIDs();
          configService.postCalc(id, $scope.config).then(function (data) {
              $scope.isLoading = false;
              $scope.config = data;

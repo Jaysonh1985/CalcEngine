@@ -131,7 +131,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         string Bracket2 = Convert.ToString(parameters.Bracket2);
                                         string Rounding = Convert.ToString(parameters.Rounding);
                                         string Logic2 = Convert.ToString(parameters.Logic2);
-                                        if (Rounding == "0")
+                                        if (Rounding == "")
                                         {
                                             Rounding = "2";
                                         }
@@ -167,6 +167,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     }
                                     else if (item.Function == "Period")
                                     {
+
                                         DateFunctions DateFunctions = new DateFunctions();
                                         Period Dates = new Period();
                                         Period parameters = (Period)javaScriptSerializ­er.Deserialize(jparameters, typeof(Period));
@@ -178,27 +179,38 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         Boolean Inclusive = parameters.Inclusive;
                                         Double DaysinYear = parameters.DaysinYear;
 
-                                        if (DateAdjustmentType == "YearsDays")
+                                        if (Date1 <= Date2)
                                         {
-                                            item.Output = Convert.ToString(DateFunctions.YearsDaysBetween(Date1, Date2, Inclusive, DaysinYear));
+
+                                            if (DateAdjustmentType == "YearsDays")
+                                            {
+                                                item.Output = Convert.ToString(DateFunctions.YearsDaysBetween(Date1, Date2, Inclusive, DaysinYear));
+                                            }
+                                            else if (DateAdjustmentType == "YearsMonths")
+                                            {
+                                                item.Output = Convert.ToString(DateFunctions.YearsMonthsBetween(Date1, Date2, Inclusive, DaysinYear));
+                                            }
+
+                                            else if (DateAdjustmentType == "Years")
+                                            {
+                                                item.Output = Convert.ToString(DateFunctions.YearsBetween(Date1, Date2, Inclusive, DaysinYear));
+                                            }
+
+                                            else if (DateAdjustmentType == "Months")
+                                            {
+                                                item.Output = Convert.ToString(DateFunctions.MonthsBetween(Date1, Date2, false));
+                                            }
+
+                                            InputA = null;
+                                            InputB = null;
                                         }
-                                        else if (DateAdjustmentType == "YearsMonths")
+                                        else
                                         {
-                                            item.Output = Convert.ToString(DateFunctions.YearsMonthsBetween(Date1, Date2, Inclusive, DaysinYear));
+                                            item.Output = Convert.ToString(0);
                                         }
 
-                                        else if (DateAdjustmentType == "Years")
-                                        {
-                                            item.Output = Convert.ToString(DateFunctions.YearsBetween(Date1, Date2, Inclusive, DaysinYear));
-                                        }
 
-                                        else if (DateAdjustmentType == "Months")
-                                        {
-                                            item.Output = Convert.ToString(DateFunctions.MonthsBetween(Date1, Date2, false));
-                                        }
-
-                                        InputA = null;
-                                        InputB = null;
+ 
                                     }
                                     else if (item.Function == "Factors")
                                     {
