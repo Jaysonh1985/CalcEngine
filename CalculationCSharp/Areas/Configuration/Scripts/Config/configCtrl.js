@@ -237,15 +237,21 @@
                  functionID = 0;
                  angular.forEach($scope.DecimalValue, function (Names) {
                      $scope.DecimalParameter = ($filter('filter')($scope.DecimalValue[functionID].Name));
-                     $scope.Names[arrayID] = $scope.DecimalParameter;
+
+                     if ($scope.Names.indexOf($scope.DecimalParameter) == -1) {
+
+                         $scope.Names[arrayID] = $scope.DecimalParameter;
+                         
+                         arrayID = arrayID + 1;
+
+                     }
                      functionID = functionID + 1;
-                     arrayID = arrayID + 1;
+
                  });
                  scopeid = scopeid + 1
              }
          });
          scopeid = 0;
-
 
          return $scope.Names;
 
