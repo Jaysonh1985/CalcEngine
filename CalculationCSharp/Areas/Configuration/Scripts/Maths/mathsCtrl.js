@@ -1,10 +1,7 @@
-﻿sulhome.kanbanBoardApp.controller('mathsCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions, Rounding) {
+﻿sulhome.kanbanBoardApp.controller('mathsCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions) {
     // Model
     $scope.maths = Functions;
-    $scope.maths.Rounding({
-        Rounding: Rounding.Rounding,
-        RoundingType: Rounding.RoundingType
-    })
+
 
     $scope.addItem = function () {
         $scope.maths.push({
