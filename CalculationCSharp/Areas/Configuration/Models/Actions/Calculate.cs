@@ -230,7 +230,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
                                             else if (DateAdjustmentType == "Months")
                                             {
-                                                item.Output = Convert.ToString(DateFunctions.MonthsBetween(Date1, Date2, false));
+                                                item.Output = Convert.ToString(DateFunctions.GetMonthsBetween(Date1, Date2, false));
                                             }
 
                                             else if (DateAdjustmentType == "Days")

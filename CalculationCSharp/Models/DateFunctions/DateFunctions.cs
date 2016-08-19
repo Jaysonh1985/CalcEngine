@@ -8,7 +8,7 @@ public class DateFunctions
 
 	public double YearsMonthsBetween(System.DateTime StartDate, System.DateTime EndDate, bool inclusive, double daysperyear)
 	{
-        int months = MonthsBetween(StartDate, EndDate, inclusive);
+        int months = GetMonthsBetween(StartDate, EndDate, inclusive);
 
         double output = months / 12;
 
@@ -54,29 +54,47 @@ public class DateFunctions
 
     }
 
-    public int MonthsBetween(System.DateTime StartDate, System.DateTime EndDate, bool roundup)
+    public int GetMonthsBetween(System.DateTime StartDate, System.DateTime EndDate, bool roundup)
 	{
+        if(roundup == true)
+        {
+            EndDate = EndDate.AddDays(1);
+        }
 
-		int i = 1;
-		if (EndDate < StartDate) {
-			i = i - 1;
 
-			StartDate = EndDate;
-			EndDate = StartDate;
-		}
+        //if (StartDate > EndDate) return GetMonthsBetween(EndDate, StartDate, true);
 
-        int Years = EndDate.Year - StartDate.Year;
-        int Months = (EndDate.Month - StartDate.Month);
+        var monthDiff = Math.Abs((EndDate.Year * 12 + (EndDate.Month - 1)) - (StartDate.Year * 12 + (StartDate.Month - 1)));
 
-		if (EndDate.Day < StartDate.Day) {
-			Months = Months - 1;
-		}
+        if (StartDate.AddMonths(monthDiff) > EndDate || EndDate.Day < StartDate.Day)
+        {
+            return monthDiff - 1;
+        }
+        else
+        {
+            return monthDiff;
+        }
 
-		if ((roundup == true & EndDate.Day != StartDate.Day)) {
-			Months = Months + 1;
-		}
+  //      int i = 1;
+		//if (EndDate < StartDate) {
+		//	i = i - 1;
 
-		return (Years*12)+ Months;
+		//	StartDate = EndDate;
+		//	EndDate = StartDate;
+		//}
+
+  //      int Years = EndDate.Year - StartDate.Year;
+  //      int Months = (EndDate.Month - StartDate.Month);
+
+		//if (EndDate.Day < StartDate.Day) {
+		//	Months = Months - 1;
+		//}
+
+		//if ((roundup == true & EndDate.Day != StartDate.Day)) {
+		//	Months = Months + 1;
+		//}
+
+		//return (Years*12)+ Months;
 
 	}
 

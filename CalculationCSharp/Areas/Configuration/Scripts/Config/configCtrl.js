@@ -128,7 +128,7 @@
          var cf = confirm("Delete this line?");
          if (cf == true) {
              $scope.config.splice(colIndex, 1);
-             $scope.rebuildCategoryIDs();
+             //$scope.rebuildCategoryIDs();
          }
      }
 
