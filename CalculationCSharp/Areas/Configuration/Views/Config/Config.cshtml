@@ -59,59 +59,66 @@
                             <tbody ui-tree-nodes="" ng:model="Category.Functions">
                                 <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)" ui-tree-node>
 
-                                    <td ng-if="Category.Name == 'Input'"></td>
+                                    <td ng-show="Category.Name == 'Input'"></td>
 
-                                    <td ng-if="Category.Name != 'Input'">
+                                    <td ng-show="Category.Name != 'Input'">
                                         <i class="glyphicon glyphicon-list" ui-tree-handle></i>
                                     </td>
 
-                                    <td ng-if="Category.Name == 'Input'"></td>
+                                    <td ng-show="Category.Name == 'Input'"></td>
 
-                                    <td ng-if="Category.Name != 'Input'">
+                                    <td ng-show="Category.Name != 'Input'">
                                         <a ng-click="LogicButtonClick('lg', $parent.$index, $index)">
                                             <span class="glyphicon glyphicon-wrench"></span>
                                         </a>
                                     </td>
 
-                                    <td ng-if="Category.Name == 'Input'">
+                                    <td ng-show="Category.Name == 'Input'">
                                         <select name="singleSelect" ng:model="rows.Function" class="form-control input-sm" ng-change="setFunction(rows)" required>
                                             <option selected value="Input">Input</option>
                                         </select>
                                     </td>
-                                    <td ng-if="Category.Name != 'Input'">
-                                        <select name="Input_{{$index}}" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" required>
+                                    <td ng-show="Category.Name != 'Input'">
+                                        <select name="Input_{{$parent.$index}}_{{$index}}" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" required>
                                             <option value=""></option>
                                             <option value="Maths">Maths</option>
                                             <option value="Period">Period</option>
                                             <option value="Factors">Factors</option>
                                             <option value="Dates">Date Adjustment</option>
                                         </select>
-                                        <p ng-show="form['Input_'+ $index].$invalid" class="help-block">Function is required.</p>
+                                        <p ng-show="form['Input_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Function is required.</p>
                                     </td>
 
                                     <td>
+                                        <span hidden><input type="text" name="FunctionCog_{{$parent.$index}}_{{$index}}" class="table-borderless" ng:model="rows.ID" hidden></span>
+                                        
+                                        
                                         <a ng-click="FunctionButtonClick('lg', $parent.$index, $index)">
                                             <span uib-popover="{{data || rows.Parameter}}" popover-trigger="mouseenter" class="glyphicon glyphicon-cog"></span>
+                                            <p ng-show="form['FunctionCog_'+ $parent.$index + '_' + $index].$error.input" class="help-block">Var Mismatch</p>
                                         </a>
+
+                                        
+
                                     </td>
 
-                                    <td ng-if="Category.Name == 'Input'">{{rows.Name}}</td>
-                                    <td ng-if="Category.Name != 'Input'">
-                                        <span><input type="text" name="Name_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
-                                        <p ng-show="form['Name_'+ $index].$invalid" class="help-block">Name is required.</p>
+                                    <td ng-show="Category.Name == 'Input'">{{rows.Name}}</td>
+                                    <td ng-show="Category.Name != 'Input'">
+                                        <span><input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
+                                        <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Name is required.</p>
                                     </td>
 
                                     <td width="5%">{{rows.Type}}</td>
 
 
-                                    <td ng-if="Category.Name == 'Input'" width="25%">
+                                    <td ng-show="Category.Name == 'Input'" width="25%">
                                         <span><input type="text" ng:model="rows.Output" class="form-control  input-sm"></span>
                                     </td>
 
-                                    <td ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
+                                    <td ng-show="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
 
-                                    <td ng-if="Category.Name == 'Input'" width="5%"></td>
-                                    <td ng-if="Category.Name != 'Input'" width="20%"><span><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span></td>
+                                    <td ng-show="Category.Name == 'Input'" width="5%"></td>
+                                    <td ng-show="Category.Name != 'Input'" width="20%"><span><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span></td>
 
                                     <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss', 'white': rows.Pass == 'Nil' }"><span></span></td>
                                     <td>
