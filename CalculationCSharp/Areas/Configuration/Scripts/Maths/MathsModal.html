@@ -32,7 +32,7 @@
                             <td width="20%"><span><input type="text" ng:model="rows.Input1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" class="form-control" required></span></td>
 
                             <td width="10%">
-                                <select name="singleSelect" ng:model="rows.Logic" class="form-control" required>
+                                <select name="LogicSelect" ng:model="rows.Logic" class="form-control" required>
                                     <option value=""></option>
                                     <option value="+">+</option>
                                     <option value="-">-</option>
@@ -52,7 +52,7 @@
                             </td>
                             <td width="10%" ng-show="!$last"></td>
                             <td width="10%" ng-show="$last">
-                                <select id="inclusive" name="singleSelect" ng:model="rows.Rounding" class="form-control" required>
+                                <select name="RoundSelect" ng:model="rows.Rounding" class="form-control">
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>

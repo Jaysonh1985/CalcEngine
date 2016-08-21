@@ -326,7 +326,7 @@
                if (Input1Bool == false) {
                    if (VariableNames.indexOf(valueN.Input2) == -1) {
 
-                       var Test = 1;
+                       $scope.form[AttName].$setValidity("input", false);
 
                    }
                }
