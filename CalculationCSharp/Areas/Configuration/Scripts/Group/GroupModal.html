@@ -1,17 +1,19 @@
 ﻿<body ng-controller="groupCtrl">
     <div>
-        <div class="modal-header">
-            <h3>Name</h3>
-            <input style="overflow:auto;resize:none" type="text" id="Name" class="form-control" ng-model="Name" rows="1" required>
-        </div>
-        <div class="modal-body">
-            <h3>Description</h3>
-            <textarea style="overflow:auto;resize:none" type="text" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="8"> {{ Description }}</textarea>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok($index)">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
-    </div>
+        <form class="form-horizontal" role="form" ng-submit="ok($index)">
+            <div class="modal-header">
+                <h3>Name</h3>
+                <input style="overflow:auto;resize:none" type="text" id="Name" class="form-control" ng-model="Name" rows="1" required>
+            </div>
+            <div class="modal-body">
+                <h3>Description</h3>
+                <textarea style="overflow:auto;resize:none" type="text" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="8"> {{ Description }}</textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+          </form>
+</div>
 
 </body>

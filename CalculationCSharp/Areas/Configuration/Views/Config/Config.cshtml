@@ -7,7 +7,7 @@
     <div class="container body-content" ng-cloak>
 
         <br>
-        <form name="form" role="form" ng-submit="CalcButtonClick()">
+        <form name="form" role="form" ng-submit="CalcButtonClick(form)">
             <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
             <input class="btn btn-default" type="submit" value="Calculate" />
             <input class="btn btn-default" type="button" value="History" ng-click="HistoryButtonClick('lg')" />
@@ -79,13 +79,14 @@
                                         </select>
                                     </td>
                                     <td ng-if="Category.Name != 'Input'">
-                                        <select name="singleSelect" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" required>
+                                        <select name="Input_{{$index}}" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" required>
                                             <option value=""></option>
                                             <option value="Maths">Maths</option>
                                             <option value="Period">Period</option>
                                             <option value="Factors">Factors</option>
                                             <option value="Dates">Date Adjustment</option>
                                         </select>
+                                        <p ng-show="form['Input_'+ $index].$invalid" class="help-block">Function is required.</p>
                                     </td>
 
                                     <td>
@@ -96,7 +97,8 @@
 
                                     <td ng-if="Category.Name == 'Input'">{{rows.Name}}</td>
                                     <td ng-if="Category.Name != 'Input'">
-                                        <span><input type="text" ng:model="rows.Name" class="form-control  input-sm" required></span>
+                                        <span><input type="text" name="Name_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
+                                        <p ng-show="form['Name_'+ $index].$invalid" class="help-block">Name is required.</p>
                                     </td>
 
                                     <td width="5%">{{rows.Type}}</td>

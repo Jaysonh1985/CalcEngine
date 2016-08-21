@@ -161,14 +161,21 @@
          }, onError);
      };
 
-     $scope.CalcButtonClick = function CalcBoard($event) {
+     $scope.CalcButtonClick = function CalcBoard(form) {
          var id = $scope.getConfigID();
          $scope.rebuildCategoryIDs();
-         configService.postCalc(id, $scope.config).then(function (data) {
-             $scope.isLoading = false;
-             $scope.config = data;
-             toastr.success("Calculated successfully", "Success");
-         }, onError);
+
+         if (form.$valid == true) {
+             configService.postCalc(id, $scope.config).then(function (data) {
+                 $scope.isLoading = false;
+                 $scope.config = data;
+                 toastr.success("Calculated successfully", "Success");
+             }, onError);
+         }
+         else
+         {
+             toastr.error("Failed Validations", "Error");
+         }
      };
 
      $scope.selectedRow = null;  // initialize our variable to null
