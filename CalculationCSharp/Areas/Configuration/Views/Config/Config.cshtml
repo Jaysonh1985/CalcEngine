@@ -22,14 +22,14 @@
                         <uib-accordion-heading>
                             {{Category.Name}}
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
-                            @*<a ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory(colIndex, $index, $event)"><i class="pull-left glyphicon glyphicon-arrow-down"></i></a>*@
+                            <a ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory($index, $event)"><i class="pull-left glyphicon glyphicon-arrow-down"></i></a>
                         </uib-accordion-heading>
                         <div>
                             <table class="table table-borderless">
                                 <tr>
-                                    <td ng-if="Category.Name != 'Input'"><a ng-click="DeleteCategory(colIndex)"><i class="center-block glyphicon glyphicon-remove"></i></a> </td>
+                                    <td ng-if="Category.Name != 'Input'"><a ng-click="DeleteCategory($index)"><i class="center-block glyphicon glyphicon-remove"></i></a> </td>
                                     <td><a ng-click="AddCategoryRows($index, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a></td>
-                                    <td ng-if="Category.Name != 'Input'"><a ng-click="CopyCategory(colIndex, $index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a></td>
+                                    <td ng-if="Category.Name != 'Input'"><a ng-click="CopyCategory($index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a></td>
                                     <td><a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a></td>
                                 </tr>
                             </table>
@@ -68,7 +68,7 @@
                                     <td ng-if="Category.Name == 'Input'"></td>
 
                                     <td ng-if="Category.Name != 'Input'">
-                                        <a ng-click="LogicButtonClick('lg', colIndex, $index)">
+                                        <a ng-click="LogicButtonClick('lg', $parent.$index, $index)">
                                             <span class="glyphicon glyphicon-wrench"></span>
                                         </a>
                                     </td>
@@ -89,7 +89,7 @@
                                     </td>
 
                                     <td>
-                                        <a ng-click="FunctionButtonClick('lg', colIndex, $index)">
+                                        <a ng-click="FunctionButtonClick('lg', $parent.$index, $index)">
                                             <span uib-popover="{{data || rows.Parameter}}" popover-trigger="mouseenter" class="glyphicon glyphicon-cog"></span>
                                         </a>
                                     </td>
@@ -113,17 +113,17 @@
 
                                     <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss', 'white': rows.Pass == 'Nil' }"><span></span></td>
                                     <td>
-                                        <a data-nodrag ng-click="AddFunctionRows(colIndex, $index)">
+                                        <a data-nodrag ng-click="AddFunctionRows($parent.$index, $index)">
                                             <i class="center-block glyphicon glyphicon-plus"></i>
                                         </a>
                                     </td>
                                     <td>
-                                        <a data-nodrag ng-click="CopyFunction(colIndex, $index)">
+                                        <a data-nodrag ng-click="CopyFunction($parent.$index, $index)">
                                             <i class="center-block glyphicon glyphicon-duplicate"></i>
                                         </a>
                                     </td>
                                     <td>
-                                        <a data-nodrag ng-click="DeleteFunction(colIndex, $index)">
+                                        <a data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
                                             <i class="center-block glyphicon glyphicon-remove"></i>
                                         </a>
                                     </td>

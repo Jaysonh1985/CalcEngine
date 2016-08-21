@@ -44,8 +44,9 @@
          });
      }
 
-     $scope.AddFunctionRows = function (colIndex, index) {
+     $scope.AddFunctionRows = function (colIndex, index, rows, parentIndex) {
          var item = null;
+
          item = {
              ID: this.config[colIndex].Functions.length,
              Logic: [],
@@ -97,9 +98,9 @@
          $scope.rebuildCategoryIDs();
      }
 
-     $scope.CopyCategory = function (colIndex, index, e) {
+     $scope.CopyCategory = function (index, e) {
 
-         var Category = $scope.config[colIndex];
+         var Category = $scope.config[index];
          var item = null;
 
          item = angular.copy(Category);
@@ -107,7 +108,7 @@
 
      }
 
-     $scope.MoveDownCategory = function (colIndex, Index, e) {
+     $scope.MoveDownCategory = function (Index, e) {
 
          if (e) {
              e.preventDefault();
