@@ -70,9 +70,16 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                     {
                         if(item.Type == "Date")
                         {
-                            DateTime datestring = Convert.ToDateTime(item.Output);
-                            var shortdatestring = datestring.ToShortDateString();
-                            item.Output = Convert.ToString(shortdatestring);
+                            if(item.Output != "" && item.Output != "0")
+                            {
+                                DateTime datestring = Convert.ToDateTime(item.Output);
+                                var shortdatestring = datestring.ToShortDateString();
+                                item.Output = Convert.ToString(shortdatestring);
+                            }
+                            else
+                            {
+                                item.Output = "";
+                            }
 
                         }
                         OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
@@ -205,41 +212,49 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         Period parameters = (Period)javaScriptSerializ­er.Deserialize(jparameters, typeof(Period));
                                         dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, group.ID, item.ID);
                                         dynamic InputB = Config.VariableReplace(jCategory, parameters.Date2, group.ID, item.ID);
-                                        System.DateTime Date1 = DateTime.Parse(InputA);
-                                        System.DateTime Date2 = DateTime.Parse(InputB);
-                                        String DateAdjustmentType = parameters.DateAdjustmentType;
-                                        Boolean Inclusive = parameters.Inclusive;
-                                        Double DaysinYear = parameters.DaysinYear;
 
-                                        if (Date1 <= Date2)
+                                        if(InputA != "" && InputB != "" && InputA != "01/01/0001" && InputB != "01/01/0001")
                                         {
+                                            System.DateTime Date1 = DateTime.Parse(InputA);
+                                            System.DateTime Date2 = DateTime.Parse(InputB);
+                                            String DateAdjustmentType = parameters.DateAdjustmentType;
+                                            Boolean Inclusive = parameters.Inclusive;
+                                            Double DaysinYear = parameters.DaysinYear;
 
-                                            if (DateAdjustmentType == "YearsDays")
+                                            if (Date1 <= Date2)
                                             {
-                                                item.Output = Convert.ToString(DateFunctions.YearsDaysBetween(Date1, Date2, Inclusive, DaysinYear));
-                                            }
-                                            else if (DateAdjustmentType == "YearsMonths")
-                                            {
-                                                item.Output = Convert.ToString(DateFunctions.YearsMonthsBetween(Date1, Date2, Inclusive, DaysinYear));
-                                            }
 
-                                            else if (DateAdjustmentType == "Years")
-                                            {
-                                                item.Output = Convert.ToString(DateFunctions.YearsBetween(Date1, Date2, Inclusive, DaysinYear));
-                                            }
+                                                if (DateAdjustmentType == "YearsDays")
+                                                {
+                                                    item.Output = Convert.ToString(DateFunctions.YearsDaysBetween(Date1, Date2, Inclusive, DaysinYear));
+                                                }
+                                                else if (DateAdjustmentType == "YearsMonths")
+                                                {
+                                                    item.Output = Convert.ToString(DateFunctions.YearsMonthsBetween(Date1, Date2, Inclusive, DaysinYear));
+                                                }
 
-                                            else if (DateAdjustmentType == "Months")
-                                            {
-                                                item.Output = Convert.ToString(DateFunctions.GetMonthsBetween(Date1, Date2, false));
-                                            }
+                                                else if (DateAdjustmentType == "Years")
+                                                {
+                                                    item.Output = Convert.ToString(DateFunctions.YearsBetween(Date1, Date2, Inclusive, DaysinYear));
+                                                }
 
-                                            else if (DateAdjustmentType == "Days")
-                                            {
-                                                item.Output = Convert.ToString(DateFunctions.DaysBetween(Date1, Date2, Inclusive, DaysinYear));
-                                            }
+                                                else if (DateAdjustmentType == "Months")
+                                                {
+                                                    item.Output = Convert.ToString(DateFunctions.GetMonthsBetween(Date1, Date2, false));
+                                                }
 
-                                            InputA = null;
-                                            InputB = null;
+                                                else if (DateAdjustmentType == "Days")
+                                                {
+                                                    item.Output = Convert.ToString(DateFunctions.DaysBetween(Date1, Date2, Inclusive, DaysinYear));
+                                                }
+
+                                                InputA = null;
+                                                InputB = null;
+                                            }
+                                            else
+                                            {
+                                                item.Output = Convert.ToString(0);
+                                            }
                                         }
                                         else
                                         {
@@ -328,7 +343,17 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                             }
                             else
                             {
-                                item.Output = null;
+                                dynamic LogicReplace = Config.VariableReplace(jCategory, item.Name, group.ID, item.ID);
+
+                                if(Convert.ToString(LogicReplace) == Convert.ToString(item.Name))
+                                {
+                                    item.Output = null;
+                                }
+                                else
+                                {
+                                    item.Output = Convert.ToString(LogicReplace);
+                                }
+                                
                                 item.Pass = "miss";
                             }
                         }

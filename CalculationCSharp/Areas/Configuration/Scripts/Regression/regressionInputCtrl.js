@@ -90,7 +90,14 @@
 
             $scope.prop.push(value);
             var index = getIndexOf($scope.fieldset, key, 'key');
-            $scope.fieldset[index].defaultValue = value;
+
+            var NumBool = angular.isNumber(index);
+
+            if (NumBool == true)
+            {
+                $scope.fieldset[index].defaultValue = value;
+            }
+
         });
 
         if (Input == null) {
