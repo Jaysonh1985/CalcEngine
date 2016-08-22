@@ -349,7 +349,13 @@
 
         angular.forEach(angular.fromJson(Input), function (value, key, obj) {
             var index = getIndexOf($scope.config[0].Functions, key, 'Name');
-            $scope.config[0].Functions[index].Output = value;
+
+            var NumBool = angular.isNumber(index);
+
+            if (NumBool == true) {
+                $scope.config[0].Functions[index].Output = value;
+            }
+           
 
         });
 
