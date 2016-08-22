@@ -304,8 +304,9 @@
                     if ($scope.config[key].Functions[keyF].Function == 'Factors') {
                         $scope.FactorsInputFieldPreviouslySet(key, keyF, obj, form);
                     }
-
-                    
+                    if ($scope.config[key].Functions[keyF].Function == 'Dates') {
+                        $scope.DateAdjInputFieldPreviouslySet(key, keyF, obj, form);
+                    }
 
                 })
            })
@@ -432,6 +433,85 @@
 
     }
 
+    $scope.DateAdjInputFieldPreviouslySet = function (colindex, index, obj, form) {
+
+        var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Date", index);
+        var AttName = 'FunctionCog_' + colindex + '_' + index;
+        $scope.form[AttName].$setValidity("input", true);
+
+        if (VariableNames.length > 0) {
+
+            angular.forEach(obj, function (valueN, keyN, obj) {
+
+                if (obj[0].Type == 'Add') {
+
+                    var Input1Bool = isNaN(Date.parse(valueN.Date1));
+
+                    if (Input1Bool == true) {
+                        if (VariableNames.indexOf(valueN.Date1) == -1) {
+
+                            $scope.form[AttName].$setValidity("input", false);
+
+                        }
+                    }
+
+                }
+                if (obj[0].Type == 'Adjust') {
+
+                    var Input1Bool = isNaN(Date.parse(valueN.Date1));
+
+                    if (Input1Bool == true) {
+                        if (VariableNames.indexOf(valueN.Date1) == -1) {
+
+                            $scope.form[AttName].$setValidity("input", false);
+
+                        }
+                    }
+
+                }
+
+                if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
+
+                    var Input1Bool = isNaN(Date.parse(valueN.Date1));
+                    var Input2Bool = isNaN(Date.parse(valueN.Date2));
+
+                    if (Input1Bool == true) {
+                        if (VariableNames.indexOf(valueN.Date1) == -1) {
+
+                            $scope.form[AttName].$setValidity("input", false);
+
+                        }
+                    }
+
+                    if (Input2Bool == true) {
+                        if (VariableNames.indexOf(valueN.Date2) == -1) {
+
+                            $scope.form[AttName].$setValidity("input", false);
+
+                        }
+                    }
+
+                }
+
+                if (obj[0].Type == 'Subtract') {
+
+                    var Input1Bool = isNaN(Date.parse(valueN.Date1));
+
+                    if (Input1Bool == true) {
+                        if (VariableNames.indexOf(valueN.Date1) == -1) {
+
+                            $scope.form[AttName].$setValidity("input", false);
+
+                        }
+                    }
+
+                }
+
+            });
+
+        }
+
+    }
 
 
     //ModalFunctions
