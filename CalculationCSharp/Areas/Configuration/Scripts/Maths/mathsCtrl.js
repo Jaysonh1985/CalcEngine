@@ -8,7 +8,7 @@
         var item = null;
 
         item = {
-            ID: Index + 1,
+            ID: index + 1,
 
         };
         $scope.maths.splice(index + 1, 0, item);
