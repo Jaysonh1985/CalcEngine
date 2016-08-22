@@ -16,8 +16,7 @@
         $scope.mapFormFields(Input);
 
     };
-
-
+    
     $scope.getFormFields = function getFormFields() {  //function that sets the parameters available under the different variable types
         var counter = 0;
         var scopeid = 0;
@@ -70,7 +69,6 @@
             }
         }
     }
-
 
     $scope.mapFormFields = function mapFormFields(Input) {
        var InputJson = angular.fromJson(Input);

@@ -669,7 +669,7 @@
         });
     };
 
-    $scope.RegressionButtonClick = function (size) {
+    $scope.RegressionButtonClick = function (size, form) {
         $scope.ID = $scope.getConfigID();
         var modalInstance = $uibModal.open({
             animation: true,
@@ -684,8 +684,7 @@
 
         modalInstance.result.then(function (selectedItem) {
 
-            $scope.config = JSON.parse(selectedItem);
-            toastr.success("Reverted successfully", "Success");
+            $scope.CalcButtonClick(form);
 
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());

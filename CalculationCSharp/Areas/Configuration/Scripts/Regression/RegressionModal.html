@@ -29,6 +29,10 @@
                 <th ng-hide="showregressbuttons">
 
                 </th>
+                <th>
+
+
+                </th>
             </tr>
             <tr ng-repeat="Regress in Regression" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)">
                 <td width="25%" ng-cloak> <span><input type="text" ng:model="Regress.Reference" class="form-control"></span></td>
@@ -44,6 +48,9 @@
                 <td ng-hide="showregressbuttons" width="5%">
                     [<a ng:click="removeRegressionItem($index)">X</a>]
                 </td>
+                <td width="5%">
+                    <span class="glyphicon glyphicon-transfer" ng-click="pushInputsToBuilder(Regress.Input)"> </span>
+                </td> 
             </tr>
         </table>
 

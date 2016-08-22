@@ -342,6 +342,20 @@
         $scope.selectedRow = rowIndex;  // initialize our variable to null
     }
 
+    var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;;
+
+
+    $scope.pushInputsToBuilder = function (Input) {
+
+        angular.forEach(angular.fromJson(Input), function (value, key, obj) {
+            var index = getIndexOf($scope.config[0].Functions, key, 'Name');
+            $scope.config[0].Functions[index].Output = value;
+
+        });
+
+        $uibModalInstance.close('run');
+    }
+
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
