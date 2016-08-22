@@ -48,11 +48,10 @@
         });
         modalInstance.result.then(function (selectedItem) {
 
-            $scope.Regression[colIndex].Input = selectedItem;
+            $scope.Regression[colIndex].Input = angular.toJson(selectedItem, true);
 
             var OutputOld = angular.fromJson($scope.Regression[colIndex].OutputOld, true);
             var OutputNew = angular.fromJson($scope.Regression[colIndex].OutputNew, true);
-
             $scope.selected = {
 
                 ID: $scope.Regression[colIndex].ID,
@@ -60,7 +59,7 @@
                 Scheme: $scope.Regression[colIndex].Scheme,
                 Reference: $scope.Regression[colIndex].Reference,
                 Type: $scope.Regression[colIndex].Type,
-                Input: angular.toJson($scope.Regression[colIndex].Input, true),
+                Input: $scope.Regression[colIndex].Input,
                 OutputOld: angular.toJson(OutputOld, true),
                 OutputNew: angular.toJson(OutputNew, true),
                 Pass: $scope.Regression[colIndex].Pass,

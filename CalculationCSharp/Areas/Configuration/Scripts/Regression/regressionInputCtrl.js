@@ -11,10 +11,9 @@
 
         $scope.isLoading = false;
         $scope.config = Functions;
-        $scope.Input = angular.fromJson(Input);
         $scope.fieldset = [];
         $scope.getFormFields();
-        $scope.mapFormFields($scope.Input);
+        $scope.mapFormFields(Input);
 
     };
 
@@ -47,7 +46,7 @@
         return false;
     };
     
-    var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
+    var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;;
 
     function convertDateStringsToDates(input) {
         // Ignore things that aren't objects.
@@ -55,6 +54,7 @@
 
         for (var key in input) {
             if (!input.hasOwnProperty(key)) continue;
+
 
             var value = input[key];
             var match;
@@ -72,10 +72,9 @@
     }
 
 
-
     $scope.mapFormFields = function mapFormFields(Input) {
-        
-       convertDateStringsToDates(Input);
+       var InputJson = angular.fromJson(Input);
+       convertDateStringsToDates([InputJson]);
 
         $scope.isLoading = true;
 
@@ -86,7 +85,7 @@
         $scope.val = [];
         $scope.obj = [];
 
-        angular.forEach(angular.fromJson(Input), function (value, key, obj) {
+        angular.forEach(angular.fromJson(InputJson), function (value, key, obj) {
 
             $scope.prop.push(value);
             var index = getIndexOf($scope.fieldset, key, 'key');
