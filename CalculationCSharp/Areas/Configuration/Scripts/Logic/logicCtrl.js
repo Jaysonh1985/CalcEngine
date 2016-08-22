@@ -1,10 +1,17 @@
 ﻿sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstance, Logic) {
     
     $scope.Logic = Logic;
-    $scope.addItem = function () {
-        $scope.Logic.push({
-            ID: this.Logic.length
-        });
+
+    $scope.addItem = function (index) {
+
+        var item = null;
+
+        item = {
+            ID: index + 1,
+
+        };
+        $scope.Logic.splice(index + 1, 0, item);
+
     },
 
     $scope.removeLogicItem = function (index) {

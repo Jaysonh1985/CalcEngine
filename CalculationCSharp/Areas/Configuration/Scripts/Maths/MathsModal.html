@@ -17,6 +17,11 @@
                             <th>Rounding</th>
                             <th>RType</th>
                             <th>Logic</th>
+                            <th>
+                                <a data-nodrag ng-click="addItem($index)">
+                                    <span class="center-block glyphicon glyphicon-plus"></span>
+                                </a>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,9 +90,14 @@
                             <td width="5%">
                                 [<a ng:click="removeMathsItem($index)">X</a>]
                             </td>
+                            <td>
+                                <a data-nodrag ng-click="addItem($index)">
+                                    <i class="center-block glyphicon glyphicon-plus"></i>
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td><a ng:click="addItem($index)" class="btn btn-default">Add</a></td>
+                            
                         </tr>
                     </tbody>
                 </table>

@@ -15,6 +15,11 @@
                                     <th></th>
                                     <th>Operator</th>
                                     <th></th>
+                                    <th>
+                                        <a data-nodrag ng-click="addItem($index)">
+                                            <span class="center-block glyphicon glyphicon-plus"></span>
+                                        </a>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,9 +66,11 @@
                                     <td width="5%">
                                         [<a ng:click="removeLogicItem($index)">X</a>]
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td><a ng:click="addItem($index)" class="btn btn-default">Add</a></td>
+                                    <td>
+                                        <a data-nodrag ng-click="addItem($index)">
+                                            <i class="center-block glyphicon glyphicon-plus"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
