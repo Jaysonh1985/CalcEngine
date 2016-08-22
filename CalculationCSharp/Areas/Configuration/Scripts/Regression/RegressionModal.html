@@ -30,7 +30,7 @@
 
                 </th>
             </tr>
-            <tr ng-repeat="Regress in Regression">
+            <tr ng-repeat="Regress in Regression" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)">
                 <td width="25%" ng-cloak> <span><input type="text" ng:model="Regress.Reference" class="form-control"></span></td>
                 <td ng-click="FunctionButtonClick('lg', $index)">
                     <span  ng-if="Regress.Difference == null" class="glyphicon glyphicon-cog"></span>

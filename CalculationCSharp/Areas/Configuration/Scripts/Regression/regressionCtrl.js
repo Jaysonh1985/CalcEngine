@@ -339,6 +339,10 @@
 
     };
 
+    $scope.setclickedrow = function (rowIndex) {
+        $scope.selectedRow = rowIndex;  // initialize our variable to null
+    }
+
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
