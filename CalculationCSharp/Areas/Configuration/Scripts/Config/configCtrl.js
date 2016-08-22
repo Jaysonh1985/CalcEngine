@@ -179,7 +179,13 @@
         }
     };
 
-    $scope.selectedRow = null;  // initialize our variable to null
+    $scope.setclickedrow = function(colIndex, rowIndex)
+    {
+        $scope.selectedRow = rowIndex;  // initialize our variable to null
+        $scope.selectedCol = colIndex;
+
+    }
+    
 
     $scope.function = null;  // initialize our variable to null
 

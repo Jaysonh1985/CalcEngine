@@ -57,7 +57,7 @@
                                 </tr>
                             </thead>
                             <tbody ui-tree-nodes="" ng:model="Category.Functions">
-                                <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)" ui-tree-node>
+                                <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow && $parent.$index == selectedCol}" ng-click="setclickedrow($parent.$index,$index)" ui-tree-node>
 
                                     <td ng-show="Category.Name == 'Input'"></td>
 

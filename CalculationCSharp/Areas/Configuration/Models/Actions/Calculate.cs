@@ -98,7 +98,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 dynamic InputA = Config.VariableReplace(jCategory, bit.Input1, group.ID, item.ID);
                                 dynamic InputB = Config.VariableReplace(jCategory, bit.Input2, group.ID, item.ID);
 
-                                string inputA = Convert.ToString(InputA);
+                                
                                 string Logic = null;
                                 if(bit.LogicInd == "NotEqual")
                                 {
@@ -108,18 +108,42 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 {
                                     Logic = ">";
                                 }
+                                else if (bit.LogicInd == "GreaterEqual")
+                                {
+                                    Logic = ">=";
+                                }
                                 else if (bit.LogicInd == "Less")
                                 {
                                     Logic = "<";
+                                }
+                                else if (bit.LogicInd == "LessEqual")
+                                {
+                                    Logic = "<=";
                                 }
                                 else
                                 {
                                     Logic = bit.LogicInd;
                                 }
-                                
-                                string inputB = Convert.ToString(InputB);
 
-                                logic = "if(" + "'"+ inputA + "'" + Logic  +"'" + inputB + "'" + ",true,false)";
+                                decimal InputADeci;
+                                decimal InputBDeci;
+                                decimal.TryParse(InputA, out InputADeci);
+                                decimal.TryParse(InputB, out InputBDeci);
+
+
+                                if (InputADeci >= 0 && InputBDeci >= 0)
+                                {
+
+                                    logic = "if(" + InputA + Logic + InputBDeci + ",true,false)";
+                                }
+                                else
+                                {
+                                    string inputA = Convert.ToString(InputA);
+                                    string inputB = Convert.ToString(InputB);
+                                    logic = "if(" + "'" + inputA + "'" + Logic + "'" + inputB + "'" + ",true,false)";
+                                }
+
+
                                 Expression ex = new Expression(logic);
                                 logicparse = Convert.ToBoolean(ex.Evaluate());
                             }
