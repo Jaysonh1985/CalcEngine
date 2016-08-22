@@ -91,20 +91,17 @@
 
                                     <td>
                                         <span hidden><input type="text" name="FunctionCog_{{$parent.$index}}_{{$index}}" class="table-borderless" ng:model="rows.ID" hidden></span>
-                                        
-                                        
+      
                                         <a ng-click="FunctionButtonClick('lg', $parent.$index, $index)">
                                             <span uib-popover="{{data || rows.Parameter}}" popover-trigger="mouseenter" class="glyphicon glyphicon-cog"></span>
                                             <p ng-show="form['FunctionCog_'+ $parent.$index + '_' + $index].$error.input" class="help-block">Variable Mismatch</p>
-                                        </a>
-
-                                        
+                                        </a>                                  
 
                                     </td>
 
                                     <td ng-show="Category.Name == 'Input'">{{rows.Name}}</td>
                                     <td ng-show="Category.Name != 'Input'">
-                                        <span><input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
+                                        <span uib-popover="{{data || rows.Name}}" popover-trigger="mouseenter" ><input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
                                         <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Name is required.</p>
                                     </td>
 
