@@ -301,6 +301,9 @@
                     if ($scope.config[key].Functions[keyF].Function == 'Period') {
                         $scope.PeriodInputFieldPreviouslySet(key, keyF, obj, form);
                     }
+                    if ($scope.config[key].Functions[keyF].Function == 'Factors') {
+                        $scope.FactorsInputFieldPreviouslySet(key, keyF, obj, form);
+                    }
 
                     
 
@@ -376,6 +379,56 @@
             });
 
         }
+
+    }
+
+    $scope.FactorsInputFieldPreviouslySet = function (colindex, index, obj, form) {
+
+        if (obj[0].LookupType == 'Date')
+        {
+            var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Date", index);
+            var AttName = 'FunctionCog_' + colindex + '_' + index;
+            $scope.form[AttName].$setValidity("input", true);
+            if (VariableNames.length > 0) {
+                angular.forEach(obj, function (valueN, keyN, obj) {
+
+                    var Input1Bool = isNaN(Date.parse(valueN.LookupValue));
+                   
+                    if (Input1Bool == true) {
+                        if (VariableNames.indexOf(valueN.LookupValue) == -1) {
+
+                            $scope.form[AttName].$setValidity("input", false);
+
+                        }
+                    }
+
+                });
+
+            }
+        }
+        else if (obj[0].LookupType == 'Decimal')
+        {
+            var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Decimal", index);
+            var AttName = 'FunctionCog_' + colindex + '_' + index;
+            $scope.form[AttName].$setValidity("input", true);
+            if (VariableNames.length > 0) {
+                angular.forEach(obj, function (valueN, keyN, obj) {
+
+                    var Input1Bool = isNaN(parseFloat(valueN.LookupValue));
+
+                    if (Input1Bool == true) {
+                        if (VariableNames.indexOf(valueN.LookupValue) == -1) {
+
+                            $scope.form[AttName].$setValidity("input", false);
+
+                        }
+                    }
+
+                });
+
+            }
+        }
+
 
     }
 
