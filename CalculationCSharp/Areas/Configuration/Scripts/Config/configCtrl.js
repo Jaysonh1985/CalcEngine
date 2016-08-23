@@ -367,6 +367,12 @@
                     if ($scope.config[key].Functions[keyF].Function == 'Dates') {
                         $scope.DateAdjInputFieldPreviouslySet(key, keyF, obj, form);
                     }
+                    if ($scope.config[key].Functions[keyF].Function == 'DatePart') {
+                        $scope.DatePartInputFieldPreviouslySet(key, keyF, obj, form);
+                    }
+                    if ($scope.config[key].Functions[keyF].Function == 'MathsFunctions') {
+                        $scope.MathsFunctionsInputFieldPreviouslySet(key, keyF, obj, form);
+                    }
 
                 })
            })
@@ -432,6 +438,66 @@
 
                 if (Input2Bool == true) {
                     if (VariableNames.indexOf(valueN.Date2) == -1) {
+
+                        $scope.form[AttName].$setValidity("input", false);
+
+                    }
+                }
+
+            });
+
+        }
+
+    }
+
+
+    $scope.MathsFunctionsInputFieldPreviouslySet = function (colindex, index, obj, form) {
+
+        var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Decimal", index);
+        var AttName = 'FunctionCog_' + colindex + '_' + index;
+        $scope.form[AttName].$setValidity("input", true);
+        if (VariableNames.length > 0) {
+            angular.forEach(obj, function (valueN, keyN, obj) {
+
+                var Input1Bool = isNaN(Date.parse(valueN.Number1));
+                var Input2Bool = isNaN(Date.parse(valueN.Number2));
+
+                if (Input1Bool == true) {
+                    if (VariableNames.indexOf(valueN.Number1) == -1) {
+
+
+                        $scope.form[AttName].$setValidity("input", false);
+
+                    }
+                }
+
+                if (Input2Bool == true) {
+                    if (VariableNames.indexOf(valueN.Number2) == -1) {
+
+                        $scope.form[AttName].$setValidity("input", false);
+
+                    }
+                }
+
+            });
+
+        }
+
+    }
+
+    $scope.DatePartInputFieldPreviouslySet = function (colindex, index, obj, form) {
+
+        var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Date", index);
+        var AttName = 'FunctionCog_' + colindex + '_' + index;
+        $scope.form[AttName].$setValidity("input", true);
+        if (VariableNames.length > 0) {
+            angular.forEach(obj, function (valueN, keyN, obj) {
+
+                var Input1Bool = isNaN(Date.parse(valueN.Date1));
+
+                if (Input1Bool == true) {
+                    if (VariableNames.indexOf(valueN.Date1) == -1) {
+
 
                         $scope.form[AttName].$setValidity("input", false);
 
