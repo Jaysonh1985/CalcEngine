@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data.OleDb;
+using System.IO;
+using System.Linq;
 using System.Web;
 
 public class LookupFunctions
@@ -44,46 +46,15 @@ public class LookupFunctions
 
 	}
 
+    public int CSVColumnNumber(string Tablename, int RowNo, string LookupValue)
+    {
 
+        var lines = File.ReadAllLines(HttpContext.Current.Server.MapPath("\\Factor Tables\\" + Tablename + ".csv"));
 
-    
-	//public object Vlookup(string id, Microsoft.Office.Interop.Excel.Application xlapp, Microsoft.Office.Interop.Excel.Workbook xlbook, string Sheets, int Column, bool Match, bool isdate)
-	//{
+        //Number of rows columns
+        var columnNo = lines[RowNo].IndexOf("B");
 
- //       Microsoft.Office.Interop.Excel.Worksheet xlSheet;
- //       Microsoft.Office.Interop.Excel.Range xlRange;
-	//	string VlResult = ("");
-
-	//	xlSheet = xlbook.Worksheets(Sheets);
-	//	xlRange = xlSheet.UsedRange;
-
-	//	if (isdate == true) {
-	//		string DateText;
-	//		DateTime ConvertedDateTest;
-	//		int oadays;
-
-	//		DateText = id;
-	//		ConvertedDateTest = DateTime.Parse(DateText);
-	//		oadays = ConvertedDateTest.ToOADate;
-
-	//		try {
-	//			VlResult = xlapp.WorksheetFunction.VLookup(oadays, xlRange, Column, Match);
-
-	//		} catch (Exception ex) {
-	//		}
-
-
-	//	} else {
-	//		try {
-	//			VlResult = xlapp.WorksheetFunction.VLookup(id, xlRange, Column, Match);
-
-	//		} catch (Exception ex) {
-	//		}
-
-	//	}
-
-	//	return VlResult;
-
-	//}
+        return columnNo; 
+    }
 
 }

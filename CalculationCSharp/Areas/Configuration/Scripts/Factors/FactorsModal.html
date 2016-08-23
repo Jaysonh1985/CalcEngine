@@ -57,9 +57,31 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="RowMatch" class="control-label col-md-2">Row Match Required?</label>
+                            <div class="col-sm-9">
+                                <select id="RowMatch" name="RowMatch" ng:model="factors.RowMatch" class="form-control" required>
+                                    <option value=""></option>
+                                    <option value="True">True</option>
+                                    <option value="False">False</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div ng-if="factors.RowMatch == 'True'"  class="form-group">
+                            <label for="RowMatchRowNo" class="control-label col-md-2">Row Match Row Number</label>
+                            <div class="col-sm-9">
+                                <input type="Text" id="RowMatchRowNo" name="RowMatchRowNo" class="form-control" ng-model="factors.RowMatchRowNo" required />
+                            </div>
+                        </div>
+                        <div ng-if="factors.RowMatch == 'True'" class="form-group">
+                            <label for="RowMatchValue" class="control-label col-md-2">Row Match Value</label>
+                            <div class="col-sm-9">
+                                <input type="Text" id="RowMatchValue" name="RowMatchValue" class="form-control" ng-model="factors.RowMatchValue" required/>
+                            </div>
+                        </div>
+                        <div ng-if="factors.RowMatch == 'False'" class="form-group">
                             <label for="ColumnNo" class="control-label col-md-2">Column Number</label>
                             <div class="col-sm-9">
-                                <input type="Text" id="ColumnNo" name="ColumnNo" class="form-control" ng-model="factors.ColumnNo" required/>
+                                <input type="Text" id="ColumnNo" name="ColumnNo" class="form-control" ng-model="factors.ColumnNo" required />
                             </div>
                         </div>
                     </fieldset>

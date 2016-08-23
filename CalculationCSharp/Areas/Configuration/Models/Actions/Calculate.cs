@@ -132,14 +132,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 InputADeciSucceeded = decimal.TryParse(InputA, out InputADeci);
                                 InputBDeciSucceeded = decimal.TryParse(InputB, out InputBDeci);
 
-                                //bool InputADateSucceeded;
-                                //bool InputBDateSucceeded;
-                                //DateTime InputADate;
-                                //DateTime InputBDate;
-                                //InputADateSucceeded = DateTime.TryParse(InputA, out InputADate);
-                                //InputBDateSucceeded = DateTime.TryParse(InputB, out InputBDate);
-
-
                                 if (InputADeciSucceeded == true && InputBDeciSucceeded == true)
                                 {
                                     logic = "if(" + InputADeci + Logic + InputBDeci + ",true,false)";
@@ -205,8 +197,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         
                                         if(paramCount == item.Parameter.Count)
                                         {
-                                            //Apply rounding
-                                            //MathString = "Round(" + MathString + "," + Rounding + ")"; 
                                             Expression e = new Expression(MathString);
                                             var Calculation = e.Evaluate();
                                             decimal Output = Convert.ToDecimal(Calculation);
@@ -309,29 +299,41 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         LookupFunctions FactorFunctions = new LookupFunctions();
                                         Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
                                         dynamic InputA = Config.VariableReplace(jCategory, parameters.LookupValue, group.ID, item.ID);
-                                        
-                                        if(parameters.LookupType == "Date")
+
+                                        if(parameters.RowMatch == true)
                                         {
-                                            DateTime LookupValue;
-                                            DateTime.TryParse(InputA, out LookupValue);
-                                            item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
+                                           parameters.ColumnNo =  FactorFunctions.CSVColumnNumber(parameters.TableName, parameters.RowMatchRowNo, parameters.RowMatchValue);
                                         }
-                                        else if(parameters.LookupType == "Decimal")
+
+                                        if(parameters.ColumnNo >= 0 )
                                         {
-                                            decimal LookupValue;
-                                            decimal.TryParse(InputA, out LookupValue);
-                                            
-                                            item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
+                                            if (parameters.LookupType == "Date")
+                                            {
+                                                DateTime LookupValue;
+                                                DateTime.TryParse(InputA, out LookupValue);
+                                                item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
+                                            }
+                                            else if (parameters.LookupType == "Decimal")
+                                            {
+                                                decimal LookupValue;
+                                                decimal.TryParse(InputA, out LookupValue);
+
+                                                item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
+                                            }
+                                            else
+                                            {
+                                                string LookupValue;
+                                                LookupValue = InputA;
+                                                item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 2, parameters.ColumnNo));
+                                            }
+
+                                            item.Type = parameters.OutputType;
+
                                         }
                                         else
                                         {
-                                            string LookupValue;
-                                            LookupValue = InputA;
-                                            item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 2, parameters.ColumnNo));
+                                            item.Output = "";
                                         }
-
-                                        item.Type = parameters.OutputType;
-
 
                                     }
                                     else if (item.Function == "Dates")
