@@ -15,12 +15,17 @@
             <input class="btn btn-default" type="button" value="Open All" ng-click="OpenAllButton()" />
             <input class="btn btn-default" type="button" value="Close All" ng-click="CloseAllButton()" />
             <br />
-
+            <br />
+            <div>
+                    <div>
+                        <input type="text" class="form-control form-inline input" ng-model="searchText" placeholder="Filter">
+                    </div>
+            </div>
             <div ui-tree data-clone-enabled="true">
                 <br />
                 <uib-accordion close-others=false ui-tree-nodes="" ng-model="config">
                     <uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
-
+                       
                         <uib-accordion-heading>
                             {{Category.Name}}
                             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
@@ -59,7 +64,7 @@
                                 </tr>
                             </thead>
                             <tbody ui-tree-nodes="" ng:model="Category.Functions">
-                                <tr ng-repeat="rows in Category.Functions" ng-class="{'selected':$index == selectedRow && $parent.$index == selectedCol}" ng-click="setclickedrow($parent.$index,$index)" ui-tree-node>
+                                <tr ng-repeat="rows in Category.Functions | filter:searchText" ng-class="{'selected':$index == selectedRow && $parent.$index == selectedCol}" ng-click="setclickedrow($parent.$index,$index)" ui-tree-node>
 
                                     <td ng-show="Category.Name == 'Input'"></td>
 
