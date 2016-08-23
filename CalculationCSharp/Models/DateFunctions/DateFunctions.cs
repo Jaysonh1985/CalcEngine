@@ -340,4 +340,24 @@ public class DateFunctions
         return Convert.ToDateTime("01/01/1900"); 
     }
 
+    public int GetDatePart(string Part, System.DateTime Date)
+    {
+        if(Part == "Year")
+        {
+            return Date.Year;
+        }
+        else if(Part == "Month")
+        {
+            return Date.Month;
+        }
+        else if(Part == "Day")
+        {
+            return Date.Day;
+        }
+        else
+        {
+            return 0;
+        }
+
+    }
 }

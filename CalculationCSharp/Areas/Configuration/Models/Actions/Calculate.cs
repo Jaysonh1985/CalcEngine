@@ -362,6 +362,22 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         InputB = null;
                                         InputC = null;
                                     }
+                                    else if (item.Function == "DatePart")
+                                    {
+                                        DateFunctions DatesFunctions = new DateFunctions();
+                                        DatePart parameters = (DatePart)javaScriptSerializ­er.Deserialize(jparameters, typeof(DatePart));
+                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, group.ID, item.ID);
+    
+                                        DateTime Date1;
+                                        DateTime.TryParse(InputA, out Date1);
+
+                                        int DatePart = DatesFunctions.GetDatePart(parameters.Part, Date1);
+
+                                        item.Output = Convert.ToString(DatePart);
+
+                                        InputA = null;
+
+                                    }
                                 }
 
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")

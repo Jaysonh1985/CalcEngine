@@ -245,6 +245,7 @@
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\DatePart.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Factors.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Logic.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Period.cs" />
@@ -292,6 +293,8 @@
     <Content Include="Areas\Calculation\Scripts\calculationMenuCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationService.js" />
     <Content Include="Areas\Configuration\Scripts\Custom Validations\CustomValidations.js" />
+    <Content Include="Areas\Configuration\Scripts\Date Part\datePartCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Date Part\DatePartModal.html" />
     <Content Include="Areas\Configuration\Scripts\Factors\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Factors\factorsCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />

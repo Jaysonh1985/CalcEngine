@@ -208,6 +208,10 @@
             rows.Type = 'Date';
             $scope.editingData[rows.ID] = true;
         }
+        else if (rows.Function == 'DatePart') {
+            rows.Type = 'Decimal';
+            $scope.editingData[rows.ID] = true;
+        }
         else if (rows.Function == 'Input')
         {
             rows.Type = null;
@@ -551,6 +555,9 @@
         else if (Function == 'Dates') {
             return 'dateAdjustmentCtrl'
         }
+        else if (Function == 'DatePart') {
+            return 'datePartCtrl'
+        }
         else if (Function == 'Input') {
             return 'inputCtrl'
         }
@@ -569,6 +576,9 @@
         }
         else if (Function == 'Dates') {
             return '/Areas/Configuration/Scripts/Date Adjustment/DateAdjustmentModal.html'
+        }
+        else if (Function == 'DatePart') {
+            return '/Areas/Configuration/Scripts/Date Part/DatePartModal.html'
         }
         else if (Function == 'Input') {
             return '/Areas/Configuration/Scripts/Input/InputModal.html'
