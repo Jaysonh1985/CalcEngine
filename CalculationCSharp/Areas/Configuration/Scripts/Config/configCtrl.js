@@ -280,6 +280,23 @@
 
     }
 
+    $scope.OpenAllButton = function () {
+
+        angular.forEach($scope.config, function(value,key,obj){
+
+            $scope.openIndex[key] = true;
+        })
+
+    }
+    $scope.CloseAllButton = function () {
+
+        angular.forEach($scope.openIndex, function (value, key, obj) {
+
+            $scope.openIndex[key] = false;
+        })
+
+    }
+
     $scope.getVariableTypes = function getVariableTypes(colIndex, rowIndex) {  //function that sets the parameters available under the different variable types
 
         $scope.DecimalNames = [];
