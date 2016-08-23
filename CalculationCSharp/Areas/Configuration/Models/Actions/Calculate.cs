@@ -82,6 +82,14 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                             }
 
                         }
+                        else if (item.Type == "Decimal")
+                        {
+                            if(item.Output == "" || item.Output == null)
+                            {
+                                item.Output = "0";
+                            }
+                        }
+
                         OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
                     }
                     else
