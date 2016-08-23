@@ -125,16 +125,32 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     Logic = bit.LogicInd;
                                 }
 
+                                bool InputADeciSucceeded;
+                                bool InputBDeciSucceeded;
                                 decimal InputADeci;
                                 decimal InputBDeci;
-                                decimal.TryParse(InputA, out InputADeci);
-                                decimal.TryParse(InputB, out InputBDeci);
+                                InputADeciSucceeded = decimal.TryParse(InputA, out InputADeci);
+                                InputBDeciSucceeded = decimal.TryParse(InputB, out InputBDeci);
+
+                                //bool InputADateSucceeded;
+                                //bool InputBDateSucceeded;
+                                //DateTime InputADate;
+                                //DateTime InputBDate;
+                                //InputADateSucceeded = DateTime.TryParse(InputA, out InputADate);
+                                //InputBDateSucceeded = DateTime.TryParse(InputB, out InputBDate);
 
 
-                                if (InputADeci >= 0 && InputBDeci >= 0)
+                                if (InputADeciSucceeded == true && InputBDeciSucceeded == true)
                                 {
-
-                                    logic = "if(" + InputA + Logic + InputBDeci + ",true,false)";
+                                    logic = "if(" + InputADeci + Logic + InputBDeci + ",true,false)";
+                                }
+                                else if(InputADeciSucceeded == true && InputBDeciSucceeded == false)
+                                {
+                                    logic = "if(" + InputADeci + Logic + "'" + InputBDeci + "'" + ",true,false)";
+                                }
+                                else if (InputADeciSucceeded == false && InputBDeciSucceeded == true)
+                                {
+                                    logic = "if(" + "'" + InputADeci + "'" + Logic + InputBDeci + ",true,false)";
                                 }
                                 else
                                 {

@@ -119,7 +119,7 @@
                                     <td ng-show="Category.Name == 'Input'" width="5%"></td>
                                     <td ng-show="Category.Name != 'Input'" width="20%"><span><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span></td>
 
-                                    <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss', 'white': rows.Pass == 'Nil' }"><span></span></td>
+                                    <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss'}"><span></span></td>
                                     <td>
                                         <a data-nodrag ng-click="AddFunctionRows($parent.$index, $index)">
                                             <i class="center-block glyphicon glyphicon-plus"></i>

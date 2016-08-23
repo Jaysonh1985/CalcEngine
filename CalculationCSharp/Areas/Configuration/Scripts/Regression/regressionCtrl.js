@@ -255,7 +255,7 @@
             });
 
          });
-        
+         toastr.success("Regression Ran successfully", "Success");
      };
 
     $scope.AcceptButtonClick = function CalcButtonClick() {
