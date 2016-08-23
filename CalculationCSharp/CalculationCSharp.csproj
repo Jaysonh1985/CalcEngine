@@ -245,6 +245,7 @@
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\MathsFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\DatePart.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Factors.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Logic.cs" />
@@ -285,6 +286,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LookupFunctions\LookupFunctions.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MathsFunctions\MathFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -298,6 +300,8 @@
     <Content Include="Areas\Configuration\Scripts\Factors\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Factors\factorsCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Maths Functions\mathsFunctionsCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Maths Functions\MathsFunctionsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Regression\regressionOutputCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Regression\regressionDifferenceCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Regression\RegressionOutputModal.html" />

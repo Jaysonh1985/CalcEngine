@@ -418,6 +418,54 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         InputA = null;
 
                                     }
+
+                                    else if (item.Function == "MathsFunctions")
+                                    {
+                                        MathFunctions MathFunctions = new MathFunctions();
+                                        MathsFunctions parameters = (MathsFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(MathsFunctions));
+                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Number1, group.ID, item.ID);
+                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Number2, group.ID, item.ID);
+
+                                        decimal InputADeci;
+                                        decimal InputBDeci;
+
+                                        decimal.TryParse(InputA, out InputADeci);
+                                        decimal.TryParse(InputB, out InputBDeci);
+                                        Decimal Output;
+
+                                        Output = 0;
+
+                                        if(parameters.Type == "Abs")
+                                        {
+                                            Output = MathFunctions.Abs(InputADeci);
+                                        }
+                                        else if(parameters.Type == "Ceiling")
+                                        {
+                                            Output = MathFunctions.Ceiling(InputADeci);
+                                        }
+                                        else if (parameters.Type == "Floor")
+                                        {
+                                            Output = MathFunctions.Floor(InputADeci);
+                                        }
+                                        else if (parameters.Type == "Max")
+                                        {
+                                            Output = MathFunctions.Max(InputADeci, InputBDeci);
+                                        }
+                                        else if (parameters.Type == "Min")
+                                        {
+                                            Output = MathFunctions.Min(InputADeci, InputBDeci);
+                                        }
+                                        else if (parameters.Type == "Truncate")
+                                        {
+                                            Output = MathFunctions.Truncate(InputADeci);
+                                        }
+
+                                        item.Output = Convert.ToString(Output);
+
+                                        InputA = null;
+                                        InputB = null;
+
+                                    }
                                 }
 
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")

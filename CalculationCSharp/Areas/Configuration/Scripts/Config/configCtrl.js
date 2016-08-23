@@ -226,6 +226,10 @@
             rows.Type = 'Decimal';
             $scope.editingData[rows.ID] = true;
         }
+        else if (rows.Function == 'MathsFunctions') {
+            rows.Type = 'Decimal';
+            $scope.editingData[rows.ID] = true;
+        }
         else if (rows.Function == 'Period') {
             rows.Type = 'Decimal';
             $scope.editingData[rows.ID] = true;
@@ -575,6 +579,9 @@
         if (Function == 'Maths') {
             return 'mathsCtrl';
         }
+        else if (Function == 'MathsFunctions') {
+            return 'mathsFunctionsCtrl';
+        }
         else if (Function == 'Period') {
             return 'periodCtrl'
         }
@@ -596,6 +603,9 @@
     $scope.getFunctionTempURL = function getFunctionTempURL(Function) {
         if (Function == 'Maths') {
             return '/Areas/Configuration/Scripts/Maths/MathsModal.html';
+        }
+        else if (Function == 'MathsFunctions') {
+            return '/Areas/Configuration/Scripts/Maths Functions/MathsFunctionsModal.html'
         }
         else if (Function == 'Period') {
             return '/Areas/Configuration/Scripts/Period/PeriodModal.html'
