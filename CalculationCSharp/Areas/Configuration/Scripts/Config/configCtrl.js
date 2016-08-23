@@ -36,22 +36,51 @@
     }
     //Functions
     $scope.AddFunction = function (colIndex, index) {
-         $scope.config[colIndex].Functions.push({
-             ID: this.config[colIndex].Functions.length,
-             Logic: [],
-             Parameter: []
+        
+        if (colIndex == 0)
+        {
+            $scope.config[colIndex].Functions.push({
+                ID: this.config[colIndex].Functions.length,
+                Function: 'Input',
+                Logic: [],
+                Parameter: []
 
-         });
+            });
+        }
+        else
+        {
+            $scope.config[colIndex].Functions.push({
+                ID: this.config[colIndex].Functions.length,
+                Logic: [],
+                Parameter: []
+
+            });
+        }
+
      }
 
     $scope.AddFunctionRows = function (colIndex, index, rows, parentIndex) {
         var item = null;
 
-        item = {
-            ID: this.config[colIndex].Functions.length,
-            Logic: [],
-            Parameter: []
-        };
+        if (colIndex == 0)
+        {
+            item = {
+                ID: this.config[colIndex].Functions.length,
+                Function: 'Input',
+                Logic: [],
+                Parameter: []
+            };
+
+        }
+        else
+        {
+            item = {
+                ID: this.config[colIndex].Functions.length,
+                Logic: [],
+                Parameter: []
+            };
+        }
+
         $scope.config[colIndex].Functions.splice(index + 1, 0, item);
     }
 

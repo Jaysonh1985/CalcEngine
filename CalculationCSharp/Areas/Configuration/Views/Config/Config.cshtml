@@ -81,9 +81,7 @@
                                     </td>
 
                                     <td ng-show="Category.Name == 'Input'">
-                                        <select name="singleSelect" ng:model="rows.Function" class="form-control input-sm" ng-change="setFunction(rows)" required>
-                                            <option selected value="Input">Input</option>
-                                        </select>
+                                        {{rows.Function}}
                                     </td>
                                     <td ng-show="Category.Name != 'Input'">
                                         <select name="Input_{{$parent.$index}}_{{$index}}" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" required>
