@@ -305,7 +305,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                            parameters.ColumnNo =  FactorFunctions.CSVColumnNumber(parameters.TableName, parameters.RowMatchRowNo, InputB);
                                         }
 
-                                        if(parameters.ColumnNo >= 0 )
+                                        if(parameters.ColumnNo > 0 )
                                         {
                                             if (parameters.LookupType == "Date")
                                             {
@@ -332,6 +332,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         }
                                         else
                                         {
+                                            item.Type = parameters.OutputType;
                                             item.Output = "";
                                         }
 
