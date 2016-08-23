@@ -354,7 +354,15 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         else
                                         {
                                             item.Type = parameters.OutputType;
-                                            item.Output = "";
+                                            if(parameters.OutputType == "Decimal")
+                                            {
+                                                item.Output = "0";
+                                            }
+                                            else
+                                            {
+                                                item.Output = "";
+                                            }
+                                           
                                         }
 
                                     }
