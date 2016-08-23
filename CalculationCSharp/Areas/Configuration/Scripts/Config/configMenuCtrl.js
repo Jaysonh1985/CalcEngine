@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routeParams, $uibModal, $log, $location, $window, configService, calculationService) {
+﻿sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routeParams, $uibModal, $log, $location, $window, $filter, configService, calculationService) {
     // Model
     $scope.Boards = [];
     $scope.isLoading = false;
@@ -10,6 +10,17 @@
             $scope.refreshBoard();
            
         }, onError);
+    };
+
+    function getIndexOf(arr, val, prop) {
+        var l = arr.length,
+          k = 0;
+        for (k = 0; k < l; k = k + 1) {
+            if (arr[k][prop] === val) {
+                return k;
+            }
+        }
+        return false;
     };
 
      $scope.refreshBoard = function refreshBoard() {        
@@ -63,11 +74,40 @@
              ID: this.Boards[index].ID,
              Scheme: this.Boards[index].Scheme,
              Name: this.Boards[index].Name,
-             User: '',
+             User: this.Boards[index].User,
              Configuration: this.Boards[index].Configuration,
-             Version: this.Boards[index].Version
+             Version: Math.ceil(this.Boards[index].Version)
 
          };
+
+         configService.putConfig(this.Boards[index].ID, $scope.selected).then(function (data) {
+             $scope.isLoading = false;
+         }, onError);
+
+         configService.getHistory(this.Boards[index].ID).then(function (data) {
+             $scope.isLoading = false;
+
+             $scope.historySelected = {
+                 CalcID: $scope.selected.ID,
+                 Scheme: $scope.selected.Scheme,
+                 Name: $scope.selected.Name,
+                 User: $scope.selected.User,
+                 Comment: 'Released',
+                 Configuration: $scope.selected.Configuration,
+                 Version: Math.ceil($scope.selected.Version)
+             };
+
+             var index = getIndexOf(data, $scope.historySelected.Version, 'Version');
+
+             if (index == false)
+             {
+                configService.postHistory($scope.selected.ID, $scope.historySelected).then(function (data) {
+                    $scope.isLoading = false;
+                }, onError);
+             }
+
+         }, onError);
+
          calculationService.getSingleConfig(this.Boards[index].ID)
            .then(function (data) {
                $scope.isLoading = false;

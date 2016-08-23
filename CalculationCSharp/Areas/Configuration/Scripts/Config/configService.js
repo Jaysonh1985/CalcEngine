@@ -72,6 +72,22 @@
          });
      };
 
+     var putHistory = function (id, data) {
+         return $http.put("/api/CalcHistories/" + id, data).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
+
+     var postHistory = function (id, data) {
+         return $http.post("/api/CalcHistories/" + id, data).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
+
      var getRegression = function (id) {
          return $http.get("/api/CalcRegressionInputs", { params: { id: id } }).then(function (response) {
              return response.data;
@@ -155,6 +171,8 @@
         putCalc: putCalc,
         postCalc: postCalc,
         getHistory: getHistory,
+        putHistory: putHistory,
+        postHistory: postHistory,
         getRegression: getRegression,
         postRegression: postRegression,
         deleteRegression: deleteRegression,

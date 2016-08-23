@@ -40,10 +40,12 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != calcHistory.ID)
-            {
-                return BadRequest();
-            }
+            //if (id != calcHistory.ID)
+            //{
+            //    return BadRequest();
+            //}
+
+            calcHistory.UpdateDate = DateTime.Now;
 
             db.Entry(calcHistory).State = EntityState.Modified;
 
@@ -70,11 +72,12 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         [ResponseType(typeof(CalcHistory))]
         public IHttpActionResult PostCalcHistory(CalcHistory calcHistory)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            calcHistory.UpdateDate = DateTime.Now;
             db.CalcHistory.Add(calcHistory);
             db.SaveChanges();
 

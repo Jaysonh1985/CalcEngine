@@ -15,6 +15,8 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 {
     public class CalcConfigurationsController : ApiController
     {
+        CalcHistoriesController CalcHistories = new CalcHistoriesController();
+        CalcHistory CalcHistory = new CalcHistory();
 
         private CalculationDBContext db = new CalculationDBContext();
 
@@ -51,6 +53,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
                 return BadRequest();
             }
 
+            calcConfiguration.UpdateDate = DateTime.Now;
             calcConfiguration.User = HttpContext.Current.User.Identity.Name.ToString();
 
             db.Entry(calcConfiguration).State = EntityState.Modified;

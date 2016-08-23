@@ -184,8 +184,7 @@
         $scope.selectedRow = rowIndex;  // initialize our variable to null
         $scope.selectedCol = colIndex;
 
-    }
-    
+    }  
 
     $scope.function = null;  // initialize our variable to null
 
@@ -288,6 +287,7 @@
         })
 
     }
+
     $scope.CloseAllButton = function () {
 
         angular.forEach($scope.openIndex, function (value, key, obj) {
@@ -336,6 +336,7 @@
          })
 
     };
+
     $scope.MathsInputFieldPreviouslySet = function (colindex, index, obj, form) {
 
        var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Decimal", index);
@@ -535,7 +536,6 @@
         }
 
     }
-
 
     //ModalFunctions
     $scope.getFunctionCtrl = function getFunctionCtrl(Function) {
