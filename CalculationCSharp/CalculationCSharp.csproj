@@ -635,6 +635,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Factor Tables\CSVColumnTest.csv" />
     <Content Include="Factor Tables\Pre09StatReval5Cap.csv" />
+    <Content Include="Factor Tables\Post09NonStatReval5.csv" />
+    <Content Include="Factor Tables\Post09StatReval25cap.csv" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy %282%29.pubxml" />

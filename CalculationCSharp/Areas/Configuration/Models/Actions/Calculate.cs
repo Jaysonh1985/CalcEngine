@@ -91,6 +91,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                             string logic = null;
                             bool logicparse = true;
                             string MathString = null;
+                            bool PowOpen = false;
 
                             foreach (var bit in item.Logic)
                             {
@@ -192,13 +193,33 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             formula = Input1 + Logic + Input2;
                                         }
 
-                                        string MathString1 = string.Concat(MathString, Bracket1, formula, Bracket2, Logic2);
+                                        string MathString1;
+                                        
+
+                                        if (Logic2 == "Pow")
+                                        {
+                                            MathString1 = string.Concat(Logic2,"(",MathString, Bracket1, formula, Bracket2, ",");
+                                            PowOpen = true;
+                                        }
+                                        else
+                                        {
+                                            MathString1 = string.Concat(MathString, Bracket1, formula, Bracket2, Logic2);
+                                        }
+
+                                        if(Logic2 != "Pow" && PowOpen == true)
+                                        {
+                                            MathString1 = string.Concat(MathString1, ")");
+                                            PowOpen = false;
+                                        }
+                                        
                                         MathString = MathString1;
                                         
                                         if(paramCount == item.Parameter.Count)
                                         {
+
                                             Expression e = new Expression(MathString);
                                             var Calculation = e.Evaluate();
+
                                             decimal Output = Convert.ToDecimal(Calculation);
 
                                             if(RoundingType == "up")
