@@ -80,6 +80,8 @@
 
          };
 
+         this.Boards[index].Version = Math.ceil(this.Boards[index].Version);
+
          configService.putConfig(this.Boards[index].ID, $scope.selected).then(function (data) {
              $scope.isLoading = false;
          }, onError);
