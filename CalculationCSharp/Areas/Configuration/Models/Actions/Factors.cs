@@ -14,6 +14,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public dynamic LookupValue { get; set; }
         public string OutputType { get; set; }
         public bool RowMatch { get; set; }
+        public string RowMatchLookupType { get; set; }
         public int RowMatchRowNo { get; set; }
         public string RowMatchValue { get; set; }
         public int ColumnNo { get; set; }

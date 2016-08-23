@@ -66,18 +66,46 @@
                                 </select>
                             </div>
                         </div>
-                        <div ng-if="factors.RowMatch == 'True'"  class="form-group">
+
+                        <div ng-if="factors.RowMatch == 'True'" class="form-group">
                             <label for="RowMatchRowNo" class="control-label col-md-2">Row Match Row Number</label>
                             <div class="col-sm-9">
                                 <input type="Text" id="RowMatchRowNo" name="RowMatchRowNo" class="form-control" ng-model="factors.RowMatchRowNo" required />
                             </div>
                         </div>
+
                         <div ng-if="factors.RowMatch == 'True'" class="form-group">
-                            <label for="RowMatchValue" class="control-label col-md-2">Row Match Value</label>
+                            <label for="Type" class="control-label col-md-2">Row Match Lookup Type</label>
                             <div class="col-sm-9">
-                                <input type="Text" id="RowMatchValue" name="RowMatchValue" class="form-control" ng-model="factors.RowMatchValue" required/>
+                                <select id="inclusive" name="singleSelect" ng:model="factors.RowMatchLookupType" class="form-control" required>
+                                    <option value=""></option>
+                                    <option value="Date">Date</option>
+                                    <option value="Decimal">Decimal</option>
+                                    <option value="String">String</option>
+                                </select>
                             </div>
                         </div>
+
+                        <div ng-if="factors.RowMatch == 'True' && factors.RowMatchLookupType == 'Date'" class="form-group">
+                            <label for="RowMatchValue" class="control-label col-md-2">Row Match Value</label>
+                            <div class="col-sm-9">
+                                <input type="Text" id="RowMatchValue" name="RowMatchValue" class="form-control" ng-model="factors.RowMatchValue" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required/>
+                            </div>
+                        </div>
+                        <div ng-if="factors.RowMatch == 'True' && factors.RowMatchLookupType == 'Decimal'" class="form-group">
+                            <label for="RowMatchValue" class="control-label col-md-2">Row Match Value</label>
+                            <div class="col-sm-9">
+                                <input type="Text" id="RowMatchValue" name="RowMatchValue" class="form-control" ng-model="factors.RowMatchValue" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8"  required />
+                            </div>
+                        </div>
+                        <div ng-if="factors.RowMatch == 'True' && factors.RowMatchLookupType == 'String'" class="form-group">
+                            <label for="RowMatchValue" class="control-label col-md-2">Row Match Value</label>
+                            <div class="col-sm-9">
+                                <input type="Text" id="RowMatchValue" name="RowMatchValue" class="form-control" ng-model="factors.RowMatchValue" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required />
+                            </div>
+                        </div>
+
+
                         <div ng-if="factors.RowMatch == 'False'" class="form-group">
                             <label for="ColumnNo" class="control-label col-md-2">Column Number</label>
                             <div class="col-sm-9">

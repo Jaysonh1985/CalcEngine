@@ -299,10 +299,10 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         LookupFunctions FactorFunctions = new LookupFunctions();
                                         Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
                                         dynamic InputA = Config.VariableReplace(jCategory, parameters.LookupValue, group.ID, item.ID);
-
-                                        if(parameters.RowMatch == true)
+                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.RowMatchValue, group.ID, item.ID);
+                                        if (parameters.RowMatch == true)
                                         {
-                                           parameters.ColumnNo =  FactorFunctions.CSVColumnNumber(parameters.TableName, parameters.RowMatchRowNo, parameters.RowMatchValue);
+                                           parameters.ColumnNo =  FactorFunctions.CSVColumnNumber(parameters.TableName, parameters.RowMatchRowNo, InputB);
                                         }
 
                                         if(parameters.ColumnNo >= 0 )

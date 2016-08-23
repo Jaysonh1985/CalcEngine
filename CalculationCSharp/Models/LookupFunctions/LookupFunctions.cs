@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.OleDb;
 using System.IO;
 using System.Linq;
@@ -21,14 +22,12 @@ public class LookupFunctions
 
      	if (DataType == 1) {
 			//Date
-			command.CommandText = "SELECT top 1 " + Column + " FROM " + Tablename + ".csv " + " where F1 <= " + "@Date" + " order by F1 desc";
+			command.CommandText = "SELECT top 1 " + Column + " FROM " + Tablename + ".csv " + " where F1 <= " + LookupValue + " order by F1 desc";
 		} else if (DataType == 2) {
 			//String
-			command.CommandText = "SELECT top 1 " + Column + " FROM " + Tablename + ".csv " + " where F1 = " + "@Date";
+			command.CommandText = "SELECT top 1 " + Column + " FROM " + Tablename + ".csv " + " where F1 = " + LookupValue;
 		}
 
-       
-		command.Parameters.AddWithValue("@Value", LookupValue);
 		con.Open();
         OleDbDataReader reader = command.ExecuteReader();
         object nameObj = null;
@@ -51,10 +50,15 @@ public class LookupFunctions
 
         var lines = File.ReadAllLines(HttpContext.Current.Server.MapPath("\\Factor Tables\\" + Tablename + ".csv"));
 
-        //Number of rows columns
-        var columnNo = lines[RowNo].IndexOf("B");
+        List<string> Tables = File.ReadAllLines(HttpContext.Current.Server.MapPath("\\Factor Tables\\" + Tablename + ".csv")).ToList();
 
-        return columnNo; 
+        //Number of rows columns
+        List<string> columnNo = lines[RowNo].Split(',').ToList();
+
+        var col = columnNo.IndexOf(LookupValue) + 1;
+        
+
+        return col; 
     }
 
 }
