@@ -10,6 +10,8 @@
     };
     $scope.openIndex = [true];
     $scope.openIndexRegression = [true];
+    $scope.validationError = false;
+    $scope.openIndexBackup = null;
 
     function init() {
         var id = $location.absUrl();
@@ -223,7 +225,12 @@
 
     $scope.CalcButtonClick = function CalcBoard(form) {
 
-        var openIndexBackup = angular.toJson($scope.openIndex, true);
+        if ($scope.validationError == false)
+        {
+            $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
+        }
+
+        
         $scope.OpenAllButton();
 
         var id = $scope.getConfigID();
@@ -231,16 +238,20 @@
         $scope.InputFieldPreviouslySet(form);
 
         if (form.$valid == true) {
+
+            $scope.validationError = false;
+
             configService.postCalc(id, $scope.config).then(function (data) {
                 $scope.isLoading = false;
                 $scope.config = data;
                 setInputTypes();
-                $scope.openIndex = angular.fromJson(openIndexBackup, true);
+                $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
                 toastr.success("Calculated successfully", "Success");
             }, onError);
         }
         else
         {
+            $scope.validationError = true;
             toastr.error("Failed Validations", "Error");
         }
     };
