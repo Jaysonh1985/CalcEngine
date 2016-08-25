@@ -34,6 +34,30 @@
         });
     }
 
+    $scope.mapFormFieldsfromBuilder = function()
+    {
+        var counter = 0;
+        var scopeid = 0;
+        var functionID = 0;
+
+        $scope.Input = {};
+        var string;
+
+        angular.forEach($scope.config, function (groups) {
+            functionID = 0;
+            $scope.Inputs = $filter('filter')($scope.config[scopeid].Functions, { Function: 'Input' });
+            angular.forEach($scope.Inputs, function (functions, key, value) {              
+                $scope.Input[functions.Name] = functions.Output;
+                functionID = functionID + 1
+            });
+            scopeid = scopeid + 1
+            
+        });
+
+        $scope.formset.fields = $scope.Input;
+
+    };
+
     function getIndexOf(arr, val, prop) {
         var l = arr.length,
           k = 0;
@@ -93,6 +117,7 @@
             if (NumBool == true)
             {
                 $scope.fieldset[index].defaultValue = value;
+                $scope.fieldset[index].initialValue = value;
             }
 
         });
