@@ -222,6 +222,10 @@
     };
 
     $scope.CalcButtonClick = function CalcBoard(form) {
+
+        var openIndexBackup = angular.toJson($scope.openIndex, true);
+        $scope.OpenAllButton();
+
         var id = $scope.getConfigID();
         $scope.rebuildCategoryIDs();
         $scope.InputFieldPreviouslySet(form);
@@ -231,6 +235,7 @@
                 $scope.isLoading = false;
                 $scope.config = data;
                 setInputTypes();
+                $scope.openIndex = angular.fromJson(openIndexBackup, true);
                 toastr.success("Calculated successfully", "Success");
             }, onError);
         }
