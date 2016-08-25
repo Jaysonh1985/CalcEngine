@@ -115,11 +115,22 @@
                                     <td width="5%">{{rows.Type}}</td>
 
 
-                                    <td ng-show="Category.Name == 'Input'" width="25%">
+                                    <td ng-if="Category.Name == 'Input' && rows.Type == null" width="25%">
+                                    
+                                    </td>
+
+                                    <td ng-if="Category.Name == 'Input' && rows.Type == 'Decimal'" width="25%">
+                                        <span><input type="number" ng:model="rows.Output" step="0.00001" class="form-control  input-sm"></span>
+                                    </td>
+
+                                    <td ng-if="Category.Name == 'Input' && rows.Type == 'Date'" width="25%">
+                                        <span><input type="date" ng:model="rows.Output" class="form-control  input-sm"></span>
+                                    </td>
+                                    <td ng-if="Category.Name == 'Input' && rows.Type == 'String'" width="25%">
                                         <span><input type="text" ng:model="rows.Output" class="form-control  input-sm"></span>
                                     </td>
 
-                                    <td ng-show="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
+                                    <td ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
 
                                     <td ng-show="Category.Name == 'Input'" width="5%"></td>
                                     <td ng-show="Category.Name != 'Input'" width="20%"><span><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span></td>

@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location, configService, ID, calculationService, ObjectDiff) {
+﻿sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location, $filter, configService, ID, calculationService, ObjectDiff) {
 
     function init() {
       $scope.isLoading = true;
@@ -24,6 +24,33 @@
         }
         return false;
     };
+
+    function setInputTypes() {
+
+        angular.forEach($scope.config[0].Functions, function (value, key, obj) {
+
+            if (value.Type == "Date") {
+
+                if ($scope.config[0].Functions[key].Output != null) {
+                    var _date = $filter('date')(new Date($scope.config[0].Functions[key].Output), 'MMM dd yyyy');
+
+                    var newDate1 = new Date(_date);
+                    $scope.config[0].Functions[key].Output = newDate1;
+                }
+
+            }
+            if (value.Type == "Decimal") {
+
+                if ($scope.config[0].Functions[key].Output != null) {
+                    var decimal = parseFloat($scope.config[0].Functions[key].Output);
+                    $scope.config[0].Functions[key].Output = decimal;
+                }
+
+            }
+
+        });
+
+    }
 
     $scope.DifferencesCheck = function() {
         angular.forEach($scope.Regression, function (value, key, obj) {
@@ -358,7 +385,7 @@
            
 
         });
-
+        setInputTypes();
         $uibModalInstance.close('run');
     }
 

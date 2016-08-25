@@ -20,10 +20,41 @@
                .then(function (data) {
                    $scope.isLoading = false;
                    $scope.config = data;
+
+                   setInputTypes();
+                                                         
                }, onError);
  
         }, onError);
     };
+
+    function setInputTypes() {
+
+        angular.forEach($scope.config[0].Functions, function (value, key, obj) {
+
+            if (value.Type == "Date") {
+
+                if ($scope.config[0].Functions[key].Output != null)
+                {
+                    var _date = $filter('date')(new Date($scope.config[0].Functions[key].Output), 'MMM dd yyyy');
+
+                    var newDate1 = new Date(_date);
+                    $scope.config[0].Functions[key].Output = newDate1;
+                }
+
+            }
+            if (value.Type == "Decimal") {
+
+                if ($scope.config[0].Functions[key].Output != null) {
+                    var decimal = parseFloat($scope.config[0].Functions[key].Output);
+                    $scope.config[0].Functions[key].Output = decimal;
+                }
+
+            }
+
+        });
+
+    }
 
     $scope.getConfigID = function getConfigID() {
         var url = location.pathname;
@@ -199,6 +230,7 @@
             configService.postCalc(id, $scope.config).then(function (data) {
                 $scope.isLoading = false;
                 $scope.config = data;
+                setInputTypes();
                 toastr.success("Calculated successfully", "Success");
             }, onError);
         }

@@ -72,9 +72,9 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                         {
                             if(item.Output != "" && item.Output != "0")
                             {
-                                DateTime datestring = Convert.ToDateTime(item.Output);
-                                var shortdatestring = datestring.ToShortDateString();
-                                item.Output = Convert.ToString(shortdatestring);
+                            //    DateTime datestring = Convert.ToDateTime(item.Output);
+                            //    var shortdatestring = datestring.ToShortDateString();
+                            //    item.Output = Convert.ToString(shortdatestring);
                             }
                             else
                             {
