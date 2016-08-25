@@ -11,7 +11,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         {
             dynamic element = null;
             dynamic Output = null;
-
+            dynamic elementType = null;
             foreach (var item in CategoryViewModel)
             {
                 List<ConfigViewModel> ConfigViewModel = new List<ConfigViewModel>();
@@ -33,6 +33,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
                 if(element != null)
                 {
+                    elementType = element;
                     Output = element.Output; 
                 }
 
@@ -40,11 +41,15 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
             if (Output == null)
             {
-                if(element != null)
+                if(elementType != null)
                 {
-                    if(element.Type == "Decimal")
+                    if(elementType.Type == "Decimal")
                     {
                         return 0;
+                    }
+                    else if(elementType.Type == "Date")
+                    {
+                        return "";
                     }
                     else
                     {
