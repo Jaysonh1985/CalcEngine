@@ -871,6 +871,99 @@
         });
     };
 
+    var selectedRowsIndexes = [];
+
+    $scope.selectRow = function (event, rowIndex, colIndex) {
+        if (event.ctrlKey) {
+
+            if (selectedRowsIndexes[colIndex] != null) {
+                changeSelectionStatus(rowIndex, colIndex);
+            }
+            else {
+                resetSelection();
+                selectedRowsIndexes[colIndex] = [rowIndex];
+            }
+           
+        } else if (event.shiftKey) {
+
+            if (selectedRowsIndexes[colIndex] != null) {
+                selectWithShift(rowIndex, colIndex);
+            }
+            else {
+                resetSelection();
+                selectedRowsIndexes[colIndex] = [rowIndex];
+            }
+            
+        } else {
+
+            if (selectedRowsIndexes[colIndex] != null) {
+                selectedRowsIndexes[colIndex] = [rowIndex];
+            }
+            else
+            {
+                resetSelection();
+                selectedRowsIndexes[colIndex] = [rowIndex];
+            }
+        }
+    };
+
+    function selectWithShift(rowIndex, colIndex) {
+        var lastSelectedRowIndexInSelectedRowsList = selectedRowsIndexes.length - 1;
+        var lastSelectedRowIndex = selectedRowsIndexes[lastSelectedRowIndexInSelectedRowsList];
+        var selectFromIndex = Math.min(rowIndex, lastSelectedRowIndex);
+        var selectToIndex = Math.max(rowIndex, lastSelectedRowIndex);
+        selectRows(selectFromIndex, selectToIndex, colIndex);
+    }
+
+    //function getSelectedRows() {
+    //    var selectedRows = [];
+    //    angular.forEach(selectedRowsIndexes, function (rowIndex,colIndex) {
+    //        selectedRows[colIndex].push($scope.config[colIndex].Functions[rowIndex]);
+    //    });
+    //    return selectedRows;
+    //}
+
+    function selectRows(selectFromIndex, selectToIndex, colIndex) {
+        for (var rowToSelect = selectFromIndex; rowToSelect <= selectToIndex; rowToSelect++) {
+            select(rowToSelect, colIndex);
+        }
+    }
+
+    function changeSelectionStatus(rowIndex, colIndex) {
+        if ($scope.isRowSelected(rowIndex, colIndex)) {
+            unselect(rowIndex, colIndex);
+        } else {
+            select(rowIndex, colIndex);
+        }
+    }
+
+    function select(rowIndex, colIndex) {
+        if (!$scope.isRowSelected(rowIndex, colIndex)) {
+            selectedRowsIndexes[colIndex].push(rowIndex)
+        }
+    }
+
+    function unselect(rowIndex, colIndex) {
+        var rowIndexInSelectedRowsList = selectedRowsIndexes[colIndex].indexOf(rowIndex);
+        var unselectOnlyOneRow = 1;
+        selectedRowsIndexes[colIndex].splice(rowIndexInSelectedRowsList, unselectOnlyOneRow);
+    }
+
+    function resetSelection() {
+        selectedRowsIndexes = [];
+    }
+
+    $scope.isRowSelected = function (rowIndex, colIndex) {
+
+        if (selectedRowsIndexes[colIndex] != null)
+        {
+            return selectedRowsIndexes[colIndex].indexOf(rowIndex) > -1;
+        }
+        return false;
+        
+    };
+
+
     var onError = function (errorMessage) {
         $scope.isLoading = false;
         toastr.error(errorMessage, "Error");
