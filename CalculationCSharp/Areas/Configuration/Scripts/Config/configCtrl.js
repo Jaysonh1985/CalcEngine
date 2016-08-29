@@ -29,7 +29,7 @@
  
         }, onError);
     };
-
+    //Fix so that the input fields apply to the html input fields correctly
     function setInputTypes() {
 
         angular.forEach($scope.config[0].Functions, function (value, key, obj) {
@@ -368,7 +368,7 @@
         return $scope.Names;
 
     }
-
+    //UI
     $scope.OpenAllButton = function () {
 
         angular.forEach($scope.config, function(value,key,obj){
@@ -398,7 +398,7 @@
         $scope.StringNames = $scope.variableArrayBuilder($scope.config, colIndex, 'String', rowIndex);
 
     }
-    //Input Previously Set
+    //Input Previously Set Validations
     $scope.InputFieldPreviouslySet = function InputFieldPreviouslySet(form) {
 
         angular.forEach($scope.config, function (value, key, obj) {
@@ -502,7 +502,6 @@
         }
 
     }
-
 
     $scope.MathsFunctionsInputFieldPreviouslySet = function (colindex, index, obj, form) {
 
@@ -692,7 +691,6 @@
         }
 
     }
-
     //ModalFunctions
     $scope.getFunctionCtrl = function getFunctionCtrl(Function) {
         if (Function == 'Maths') {
@@ -875,7 +873,7 @@
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
-
+    //Higlight rows functions
     var selectedRowsIndexes = [];
 
     $scope.selectRow = function (event, rowIndex, colIndex) {
@@ -968,7 +966,6 @@
         return false;
         
     };
-
 
     var onError = function (errorMessage) {
         $scope.isLoading = false;
