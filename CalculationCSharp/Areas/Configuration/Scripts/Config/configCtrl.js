@@ -118,18 +118,30 @@
     }
 
     $scope.CopyFunction = function (colIndex, index) {
-        var Functions = $scope.config[colIndex].Functions[index];
-        var item = null;
-
-        item = angular.copy(Functions);
-        $scope.config[colIndex].Functions.splice(index + 1, 0, item);
+        var selectedRows = getSelectedRows(colIndex);
+        angular.forEach(selectedRows, function (value, key, prop) {
+            var Functions = selectedRows[key];
+            var item = null;
+            item = angular.copy(Functions);
+            $scope.config[colIndex].Functions.splice(index + 1, 0, item);
+            index =  index + 1;
+        });
 
     }
 
     $scope.DeleteFunction = function (colIndex, $index) {
-        var cf = confirm("Delete this line?");
+        var cf = confirm("Delete these lines?");
         if (cf == true) {
-            $scope.config[colIndex].Functions.splice($index, 1);
+            var selectedRows = [];
+            selectedRows = selectedRowsIndexes[colIndex];
+
+            selectedRows = $filter('orderBy')(selectedRows);
+            selectRowsReverse = selectedRows.reverse();
+            angular.forEach(selectRowsReverse, function (value, key, prop) {
+                $scope.config[colIndex].Functions.splice(value, 1);
+            });
+
+            resetSelection();
         }
     }
     //Categories
@@ -255,13 +267,6 @@
             toastr.error("Failed Validations", "Error");
         }
     };
-
-    $scope.setclickedrow = function(colIndex, rowIndex)
-    {
-        $scope.selectedRow = rowIndex;  // initialize our variable to null
-        $scope.selectedCol = colIndex;
-
-    }  
 
     $scope.function = null;  // initialize our variable to null
 
@@ -915,13 +920,14 @@
         selectRows(selectFromIndex, selectToIndex, colIndex);
     }
 
-    //function getSelectedRows() {
-    //    var selectedRows = [];
-    //    angular.forEach(selectedRowsIndexes, function (rowIndex,colIndex) {
-    //        selectedRows[colIndex].push($scope.config[colIndex].Functions[rowIndex]);
-    //    });
-    //    return selectedRows;
-    //}
+    function getSelectedRows(colIndex) {
+        var selectedRows = [];
+        selectedRowsIndexesOrdered = $filter('orderBy')(selectedRowsIndexes[colIndex]);
+        angular.forEach(selectedRowsIndexesOrdered, function (value, key, prop) {
+            selectedRows.push($scope.config[colIndex].Functions[value]);
+        });
+        return selectedRows;
+    }
 
     function selectRows(selectFromIndex, selectToIndex, colIndex) {
         for (var rowToSelect = selectFromIndex; rowToSelect <= selectToIndex; rowToSelect++) {

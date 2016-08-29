@@ -64,7 +64,7 @@
                                 </tr>
                             </thead>
                             <tbody ui-tree-nodes="" ng:model="Category.Functions">
-                                <tr ng-repeat="rows in Category.Functions | filter:searchText" ng-click="selectRow($event, $index, $parent.$index)" ng-class="{selected: isRowSelected($index, $parent.$index)}" ui-tree-node>
+                                <tr unselectable="on" ng-repeat="rows in Category.Functions | filter:searchText" ng-click="selectRow($event, $index, $parent.$index)" ng-class="{selected: isRowSelected($index, $parent.$index)}" ui-tree-node>
 
                                     <td ng-show="Category.Name == 'Input'"></td>
 
@@ -157,12 +157,12 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a data-nodrag ng-click="CopyFunction($parent.$index, $index)">
+                                        <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="CopyFunction($parent.$index, $index)">
                                             <i class="center-block glyphicon glyphicon-duplicate"></i>
                                         </a>
                                     </td>
                                     <td>
-                                        <a data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
+                                        <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
                                             <i class="center-block glyphicon glyphicon-remove"></i>
                                         </a>
                                     </td>
