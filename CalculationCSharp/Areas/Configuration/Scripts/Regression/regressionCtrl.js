@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location, $filter, configService, ID, calculationService, ObjectDiff) {
+﻿sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location, $filter, configService, ID, calculationService, configFunctionFactory, ObjectDiff) {
 
     function init() {
       $scope.isLoading = true;
@@ -14,16 +14,6 @@
 
     };
 
-    function getIndexOf(arr, val, prop) {
-        var l = arr.length,
-          k = 0;
-        for (k = 0; k < l; k = k + 1) {
-            if (arr[k][prop] === val) {
-                return k;
-            }
-        }
-        return false;
-    };
 
     function setInputTypes() {
 
@@ -213,7 +203,7 @@
 
              angular.forEach(angular.fromJson(angular.fromJson(angular.fromJson($scope.Regression[key].Input))), function (value, key, obj) {
                  $scope.prop.push(value);
-                 var index = getIndexOf($scope.configReplace[0].Functions, key, 'Name');
+                 var index = configFunctionFactory.getIndexOf($scope.configReplace[0].Functions, key, 'Name');
                  $scope.configReplace[0].Functions[index].Output = value;
 
              });

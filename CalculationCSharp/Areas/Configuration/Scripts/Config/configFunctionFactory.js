@@ -10,7 +10,20 @@
             }
             return id;
 
+        },
+        //get index of an array
+        getIndexOf: function(arr, val, prop) {
+        var l = arr.length,
+          k = 0;
+        for (k = 0; k < l; k = k + 1) {
+            if (arr[k][prop] === val) {
+                return k;
+            }
         }
+        return false;
+        },
+
     }
+
 
 });
