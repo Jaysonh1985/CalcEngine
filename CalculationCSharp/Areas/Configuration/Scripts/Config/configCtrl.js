@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, $filter) {
+﻿sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, $filter) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
@@ -17,7 +17,7 @@
         var id = $location.absUrl();
         configService.initialize().then(function (data) {
             $scope.isLoading = true;
-            var id = $scope.getConfigID();
+            var id = configFunctionFactory.getConfigID();
              configService.getCalc(id)
                .then(function (data) {
                    $scope.isLoading = false;
@@ -58,15 +58,6 @@
 
     }
 
-    $scope.getConfigID = function getConfigID() {
-        var url = location.pathname;
-        var id = url.substring(url.lastIndexOf('/') + 1);
-        id = parseInt(id, 10);
-        if (angular.isNumber(id) == false) {
-            id = null;
-        }
-        return id;
-    }
     //Functions
     $scope.AddFunction = function (colIndex, index) {
         
@@ -227,7 +218,7 @@
     ///Form Submission
     $scope.SaveButtonClick = function SaveBoard() {
         $scope.isLoading = true;
-        var id = $scope.getConfigID();
+        var id = configFunctionFactory.getConfigID();
         $scope.rebuildCategoryIDs();
         configService.putCalc(id, $scope.config).then(function (data) {
             $scope.isLoading = false;
@@ -241,11 +232,10 @@
         {
             $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
         }
-
         
         $scope.OpenAllButton();
 
-        var id = $scope.getConfigID();
+        var id = configFunctionFactory.getConfigID();
         $scope.rebuildCategoryIDs();
         $scope.InputFieldPreviouslySet(form);
 
@@ -830,7 +820,7 @@
     };
 
     $scope.HistoryButtonClick = function (size) {
-        $scope.ID = $scope.getConfigID();
+        $scope.ID = configFunctionFactory.getConfigID();
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/Areas/Configuration/Scripts/History/HistoryModal.html',
@@ -853,7 +843,7 @@
     };
 
     $scope.RegressionButtonClick = function (size, form) {
-        $scope.ID = $scope.getConfigID();
+        $scope.ID = configFunctionFactory.getConfigID();
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionModal.html',

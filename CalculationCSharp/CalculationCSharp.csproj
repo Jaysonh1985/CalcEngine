@@ -294,6 +294,7 @@
     <Content Include="AppScript\Directives\additionalControls.js" />
     <Content Include="Areas\Calculation\Scripts\calculationMenuCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationService.js" />
+    <Content Include="Areas\Configuration\Scripts\Config\configFunctionFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Custom Validations\CustomValidations.js" />
     <Content Include="Areas\Configuration\Scripts\Date Part\datePartCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Date Part\DatePartModal.html" />
