@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, $filter) {
+﻿sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, configModalFactory, $filter) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
@@ -258,45 +258,31 @@
         }
     };
 
-    $scope.function = null;  // initialize our variable to null
+    $scope.setFunction = function (rows) {  //function that sets the type of the row
 
-    $scope.editingData = [];
-
-    $scope.setFunction = function (rows) {  //function that sets the value of selectedRow to current index
-
-        if(rows.Function == 'Maths')
-        {
+        if(rows.Function == 'Maths'){
             rows.Type = 'Decimal';
-            $scope.editingData[rows.ID] = true;
         }
         else if (rows.Function == 'MathsFunctions') {
             rows.Type = 'Decimal';
-            $scope.editingData[rows.ID] = true;
         }
         else if (rows.Function == 'Period') {
             rows.Type = 'Decimal';
-            $scope.editingData[rows.ID] = true;
         }
         else if (rows.Function == 'Factors') {
-            $scope.editingData[rows.ID] = true;
+
         }
         else if (rows.Function == 'Dates') {
             rows.Type = 'Date';
-            $scope.editingData[rows.ID] = true;
         }
         else if (rows.Function == 'DatePart') {
             rows.Type = 'Decimal';
-            $scope.editingData[rows.ID] = true;
         }
-        else if (rows.Function == 'Input')
-        {
+        else if (rows.Function == 'Input') {
             rows.Type = null;
-            $scope.editingData[rows.ID] = false;
         }
-        else
-        {
+        else {
             rows.Type = null;
-            $scope.editingData[rows.ID] = false;
         }
         
     }
@@ -681,55 +667,6 @@
         }
 
     }
-    //ModalFunctions
-    $scope.getFunctionCtrl = function getFunctionCtrl(Function) {
-        if (Function == 'Maths') {
-            return 'mathsCtrl';
-        }
-        else if (Function == 'MathsFunctions') {
-            return 'mathsFunctionsCtrl';
-        }
-        else if (Function == 'Period') {
-            return 'periodCtrl'
-        }
-        else if (Function == 'Factors') {
-            return 'factorsCtrl'
-        }
-        else if (Function == 'Dates') {
-            return 'dateAdjustmentCtrl'
-        }
-        else if (Function == 'DatePart') {
-            return 'datePartCtrl'
-        }
-        else if (Function == 'Input') {
-            return 'inputCtrl'
-        }
-
-    }
-    
-    $scope.getFunctionTempURL = function getFunctionTempURL(Function) {
-        if (Function == 'Maths') {
-            return '/Areas/Configuration/Scripts/Maths/MathsModal.html';
-        }
-        else if (Function == 'MathsFunctions') {
-            return '/Areas/Configuration/Scripts/Maths Functions/MathsFunctionsModal.html'
-        }
-        else if (Function == 'Period') {
-            return '/Areas/Configuration/Scripts/Period/PeriodModal.html'
-        }
-        else if (Function == 'Factors') {
-            return '/Areas/Configuration/Scripts/Factors/FactorsModal.html'
-        }
-        else if (Function == 'Dates') {
-            return '/Areas/Configuration/Scripts/Date Adjustment/DateAdjustmentModal.html'
-        }
-        else if (Function == 'DatePart') {
-            return '/Areas/Configuration/Scripts/Date Part/DatePartModal.html'
-        }
-        else if (Function == 'Input') {
-            return '/Areas/Configuration/Scripts/Input/InputModal.html'
-        }
-    }
 
     $scope.FunctionButtonClick = function (size, colIndex, index) {
         $scope.Parameter = this.config[colIndex].Functions[index].Parameter;
@@ -737,8 +674,8 @@
         $scope.getVariableTypes(colIndex, index);
         var FunctionCtrl = null;
         var FunctionTemp = null;
-        FunctionCtrl = $scope.getFunctionCtrl(Function);
-        FunctionTemp = $scope.getFunctionTempURL(Function);       
+        FunctionCtrl = configModalFactory.getFunctionCtrl(Function);
+        FunctionTemp = configModalFactory.getFunctionTempURL(Function);
 
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -758,7 +695,7 @@
                     $scope.config[colIndex].Functions[index].Type = selectedItem[0].templateOptions.type;
                 }
             }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
+                
             });
         
 
@@ -769,8 +706,7 @@
          
         $scope.AllNames = [];
 
-        $scope.configReplace = JSON.stringify($scope.config);
-        $scope.configReplace = angular.fromJson($scope.configReplace);
+        $scope.configReplace = configFunctionFactory.convertToFromJson($scope.config);
         
         $scope.AllNames = $scope.variableArrayBuilder($scope.configReplace, colIndex, null, index);
 
@@ -788,7 +724,7 @@
         modalInstance.result.then(function (selectedItem) {
             $scope.config[colIndex].Functions[index].Logic = selectedItem;
         }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
+           
         });
     };
 
@@ -815,7 +751,7 @@
             $scope.config[colIndex].Description = selectedItem[0].Description;
             
         }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
+           
         });
     };
 
@@ -838,7 +774,7 @@
             toastr.success("Reverted successfully", "Success");
 
         }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
+         
         });
     };
 
@@ -860,7 +796,7 @@
             $scope.CalcButtonClick(form);
 
         }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
+           
         });
     };
     //Higlight rows functions

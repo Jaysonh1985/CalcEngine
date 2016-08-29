@@ -22,6 +22,14 @@
         }
         return false;
         },
+        //function to store the array as a new array if linked back to a previous $scope
+        convertToFromJson: function (arr) {
+            var array = [];
+
+            array = JSON.stringify(arr);
+
+            return angular.fromJson(array);
+        },
 
     }
 
