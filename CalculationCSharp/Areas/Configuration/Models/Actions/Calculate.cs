@@ -1,17 +1,7 @@
-﻿using CalculationCSharp.Areas.Configuration.Models;
-using CalculationCSharp.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
 using NCalc;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity;
-using System.Web;
 using CalculationCSharp.Models.Calculation;
 using System.Linq;
 
@@ -24,8 +14,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         public List<CategoryViewModel> jCategory = new List<CategoryViewModel>();
         CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
         public Input InputFunctions = new Input();
-
-
         public List<CategoryViewModel> DebugResults(List<CategoryViewModel> jCategory)
         {
             Calculate Calculate = new Calculate();
@@ -228,8 +216,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 else
                                 {
                                     item.Output = Convert.ToString(LogicReplace);
-                                }
-                                
+                                }                           
                                 item.Pass = "miss";
                             }
                         }
@@ -237,7 +224,5 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 }
             }
         }
-
-
     }
 }
