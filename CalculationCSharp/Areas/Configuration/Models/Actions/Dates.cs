@@ -4,6 +4,7 @@ using CalculationCSharp.Areas.Config.Controllers;
 using System.Linq;
 using System.Web;
 using System.Dynamic;
+using System.Web.Script.Serialization;
 
 namespace CalculationCSharp.Areas.Configuration.Models
 {
@@ -17,5 +18,37 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Adjustment { get; set; }
         public string Day { get; set; }
         public string Month { get; set; }
+
+        public JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+        CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
+
+        public string Output(string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID)
+        {
+            DateFunctions DatesFunctions = new DateFunctions();
+            Dates parameters = (Dates)javaScriptSerializ­er.Deserialize(jparameters, typeof(Dates));
+            dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, GroupID, ItemID);
+            dynamic InputB = Config.VariableReplace(jCategory, parameters.Date2, GroupID, ItemID);
+            dynamic InputC = Config.VariableReplace(jCategory, parameters.Period, GroupID, ItemID);
+
+            DateTime Date1;
+            DateTime Date2;
+            Decimal Period;
+
+            DateTime.TryParse(InputA, out Date1);
+            DateTime.TryParse(InputB, out Date2);
+            Decimal.TryParse(InputC, out Period);
+
+            DateTime date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day, parameters.Month);
+
+            DateTime datestring = date.Date;
+
+            var shortdatestring = datestring.ToShortDateString();
+
+            return Convert.ToString(shortdatestring);
+
+            InputA = null;
+            InputB = null;
+            InputC = null;
+        }
     }
 }

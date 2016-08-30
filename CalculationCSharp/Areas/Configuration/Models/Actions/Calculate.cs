@@ -255,82 +255,13 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     }
                                     else if (item.Function == "Factors")
                                     {
-                                        LookupFunctions FactorFunctions = new LookupFunctions();
-                                        Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
-                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.LookupValue, group.ID, item.ID);
-                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.RowMatchValue, group.ID, item.ID);
-                                        if (parameters.RowMatch == true)
-                                        {
-                                           parameters.ColumnNo =  FactorFunctions.CSVColumnNumber(parameters.TableName, parameters.RowMatchRowNo, InputB);
-                                        }
-
-                                        if(parameters.ColumnNo > 0 )
-                                        {
-                                            if (parameters.LookupType == "Date")
-                                            {
-                                                DateTime LookupValue;
-                                                DateTime.TryParse(InputA, out LookupValue);
-                                                item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
-                                            }
-                                            else if (parameters.LookupType == "Decimal")
-                                            {
-                                                decimal LookupValue;
-                                                decimal.TryParse(InputA, out LookupValue);
-
-                                                item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
-                                            }
-                                            else
-                                            {
-                                                string LookupValue;
-                                                LookupValue = InputA;
-                                                item.Output = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 2, parameters.ColumnNo));
-                                            }
-
-                                            item.Type = parameters.OutputType;
-
-                                        }
-                                        else
-                                        {
-                                            item.Type = parameters.OutputType;
-                                            if(parameters.OutputType == "Decimal")
-                                            {
-                                                item.Output = "0";
-                                            }
-                                            else
-                                            {
-                                                item.Output = "";
-                                            }
-                                           
-                                        }
-
+                                        Factors Factors = new Factors();
+                                        item.Output = Factors.Output(jparameters, jCategory, group.ID, item.ID, item.Type);
                                     }
                                     else if (item.Function == "Dates")
                                     {
-                                        DateFunctions DatesFunctions = new DateFunctions();
-                                        Dates parameters = (Dates)javaScriptSerializ­er.Deserialize(jparameters, typeof(Dates));
-                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, group.ID, item.ID);
-                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Date2, group.ID, item.ID);
-                                        dynamic InputC = Config.VariableReplace(jCategory, parameters.Period, group.ID, item.ID);
-
-                                        DateTime Date1;
-                                        DateTime Date2;
-                                        Decimal Period;
-
-                                        DateTime.TryParse(InputA, out Date1);
-                                        DateTime.TryParse(InputB, out Date2);
-                                        Decimal.TryParse(InputC, out Period);
-
-                                        DateTime date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day, parameters.Month);
-
-                                        DateTime datestring = date.Date;
-
-                                        var shortdatestring = datestring.ToShortDateString();
-
-                                        item.Output = Convert.ToString(shortdatestring);
-
-                                        InputA = null;
-                                        InputB = null;
-                                        InputC = null;
+                                        Dates Dates = new Dates();
+                                        item.Output = Dates.Output(jparameters, jCategory, group.ID, item.ID);
                                     }
                                     else if (item.Function == "DatePart")
                                     {
