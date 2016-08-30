@@ -45,6 +45,14 @@
          });
      };
 
+     var getCalcName = function (id) {
+         return $http.get("/api/ConfigNameWebApi/Get", { params: { id: id } }).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
+
      var putCalc = function (index, data) {
          return $http.put("/api/ConfigWebApi/" + index, { data: data })
             .then(function (response) {
@@ -168,6 +176,7 @@
         getRowid: getRowid,
         getColid: getColid,
         getCalc: getCalc,
+        getCalcName: getCalcName,
         putCalc: putCalc,
         postCalc: postCalc,
         getHistory: getHistory,

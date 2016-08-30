@@ -24,6 +24,12 @@
                    $scope.config = data;
 
                    setInputTypes();
+                   configService.getCalcName(id)
+                        .then(function (data) {
+                            $scope.isLoading = false;
+                            $scope.configName = data;
+                        }, onError);
+
                                                          
                }, onError);
  
