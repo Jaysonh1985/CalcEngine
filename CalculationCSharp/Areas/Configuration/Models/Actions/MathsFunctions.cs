@@ -19,10 +19,8 @@ namespace CalculationCSharp.Areas.Configuration.Models
             MathsFunctions parameters = (MathsFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(MathsFunctions));
             dynamic InputA = Config.VariableReplace(jCategory, parameters.Number1, GroupID, ItemID);
             dynamic InputB = Config.VariableReplace(jCategory, parameters.Number2, GroupID, ItemID);
-
             decimal InputADeci;
             decimal InputBDeci;
-
             decimal.TryParse(InputA, out InputADeci);
             decimal.TryParse(InputB, out InputBDeci);
             Decimal Output;
@@ -53,12 +51,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
             {
                 Output = MathFunctions.Truncate(InputADeci);
             }
-
             return Convert.ToString(Output);
-
-            InputA = null;
-            InputB = null;
-
         }
 
     }

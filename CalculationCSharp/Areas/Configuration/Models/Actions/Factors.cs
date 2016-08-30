@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CalculationCSharp.Areas.Config.Controllers;
-using System.Linq;
-using System.Web;
-using System.Dynamic;
 using System.Web.Script.Serialization;
 
 namespace CalculationCSharp.Areas.Configuration.Models
@@ -20,14 +16,11 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string RowMatchValue { get; set; }
         public int ColumnNo { get; set; }
 
-
         public JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
         CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
 
-
         public string Output (string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID, string itemType)
         {
-
             LookupFunctions FactorFunctions = new LookupFunctions();
             Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
             dynamic InputA = Config.VariableReplace(jCategory, parameters.LookupValue, GroupID, ItemID);
@@ -74,9 +67,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 {
                     return  "";
                 }
-
             }
-
         }
     }
 }

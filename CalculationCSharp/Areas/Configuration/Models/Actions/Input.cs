@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CalculationCSharp.Areas.Configuration.Models.Actions
+﻿namespace CalculationCSharp.Areas.Configuration.Models.Actions
 {
     public class Input
     {
         public string Output (string Type, string Output)
         {
-
             if (Type == "Date")
             {
                 if (Output != "" && Output != "0")
@@ -20,7 +14,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 {
                     return  "";
                 }
-
             }
             else if (Type == "Decimal")
             {
@@ -36,8 +29,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
             else
             {
                 return Output;
-            }
-            
+            }         
         }
     }
 }

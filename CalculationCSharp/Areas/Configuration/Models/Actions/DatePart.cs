@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CalculationCSharp.Areas.Config.Controllers;
-using System.Linq;
-using System.Web;
-using System.Dynamic;
 using System.Web.Script.Serialization;
 
 namespace CalculationCSharp.Areas.Configuration.Models
@@ -21,15 +17,10 @@ namespace CalculationCSharp.Areas.Configuration.Models
             DateFunctions DatesFunctions = new DateFunctions();
             DatePart parameters = (DatePart)javaScriptSerializ­er.Deserialize(jparameters, typeof(DatePart));
             dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, GroupID, ItemID);
-
             DateTime Date1;
             DateTime.TryParse(InputA, out Date1);
-
             int DatePart = DatesFunctions.GetDatePart(parameters.Part, Date1);
-
             return Convert.ToString(DatePart);
-
-            InputA = null;
         }
 
     }

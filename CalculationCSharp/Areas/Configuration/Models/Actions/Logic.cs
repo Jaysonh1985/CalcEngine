@@ -1,5 +1,4 @@
-﻿using NCalc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 
@@ -21,9 +20,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         {
             dynamic InputA = Config.VariableReplace(jCategory, bit.Input1, GroupID, ItemID);
             dynamic InputB = Config.VariableReplace(jCategory, bit.Input2, GroupID, ItemID);
-
-
             string Logic = null;
+
             if (bit.LogicInd == "NotEqual")
             {
                 Logic = "<>";
@@ -93,10 +91,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 string inputB = Convert.ToString(InputB);
                 return "if(" + "'" + inputA + "'" + Logic + "'" + inputB + "'" + ",true,false)";
             }
-
-
-
         }
-
     }
 }

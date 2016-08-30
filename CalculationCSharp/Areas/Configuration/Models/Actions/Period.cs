@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
-using CalculationCSharp.Areas.Config.Controllers;
-using System.Linq;
-using System.Web;
-using System.Dynamic;
 
 namespace CalculationCSharp.Areas.Configuration.Models
 {
@@ -21,8 +17,6 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
         public string Output(string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID)
         {
-            
-
             DateFunctions DateFunctions = new DateFunctions();
             Period Dates = new Period();
             Period parameters = (Period)javaScriptSerializ­er.Deserialize(jparameters, typeof(Period));
@@ -39,7 +33,6 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
                 if (Date1 <= Date2)
                 {
-
                     if (DateAdjustmentType == "YearsDays")
                     {
                         return Convert.ToString(DateFunctions.YearsDaysBetween(Date1, Date2, Inclusive, DaysinYear));
@@ -68,8 +61,6 @@ namespace CalculationCSharp.Areas.Configuration.Models
                         return "0";
                     }
 
-                    InputA = null;
-                    InputB = null;
                 }
                 else
                 {
