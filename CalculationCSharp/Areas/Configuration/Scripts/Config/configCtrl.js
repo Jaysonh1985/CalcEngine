@@ -505,11 +505,14 @@
                     }
                 }
 
-                if (Input2Bool == true) {
-                    if (VariableNames.indexOf(valueN.Number2) == -1) {
+                if (valueN.Type == "Max" || valueN.Type == "Min")
+                {
+                    if (Input2Bool == true) {
+                        if (VariableNames.indexOf(valueN.Number2) == -1) {
 
-                        $scope.form[AttName].$setValidity("input", false);
+                            $scope.form[AttName].$setValidity("input", false);
 
+                        }
                     }
                 }
 

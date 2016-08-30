@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-public class MathFunctions
+public class MathematicalFunctions
 {
 
 	public decimal Abs(decimal Number1)

@@ -159,7 +159,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         string formula = null;
                                         Maths Maths = new Maths();
                                         Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
-                                        
+
                                         dynamic InputA = Config.VariableReplace(jCategory, parameters.Input1, group.ID, item.ID);
                                         dynamic InputB = Config.VariableReplace(jCategory, parameters.Input2, group.ID, item.ID);
                                         string Bracket1 = Convert.ToString(parameters.Bracket1);
@@ -185,11 +185,11 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         }
 
                                         string MathString1;
-                                        
+
 
                                         if (Logic2 == "Pow")
                                         {
-                                            MathString1 = string.Concat(Logic2,"(",MathString, Bracket1, formula, Bracket2, ",");
+                                            MathString1 = string.Concat(Logic2, "(", MathString, Bracket1, formula, Bracket2, ",");
                                             PowOpen = true;
                                         }
                                         else
@@ -197,15 +197,15 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             MathString1 = string.Concat(MathString, Bracket1, formula, Bracket2, Logic2);
                                         }
 
-                                        if(Logic2 != "Pow" && PowOpen == true)
+                                        if (Logic2 != "Pow" && PowOpen == true)
                                         {
                                             MathString1 = string.Concat(MathString1, ")");
                                             PowOpen = false;
                                         }
-                                        
+
                                         MathString = MathString1;
-                                        
-                                        if(paramCount == item.Parameter.Count)
+
+                                        if (paramCount == item.Parameter.Count)
                                         {
 
                                             Expression e = new Expression(MathString);
@@ -213,16 +213,16 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
                                             decimal Output = Convert.ToDecimal(Calculation);
 
-                                            if(RoundingType == "up")
+                                            if (RoundingType == "up")
                                             {
 
-                                               Output = Math.Round(Math.Ceiling(Output * 100) / 100, Convert.ToInt16(Rounding));
+                                                Output = Math.Round(Math.Ceiling(Output * 100) / 100, Convert.ToInt16(Rounding));
 
                                             }
-                                            else if(RoundingType == "down")
+                                            else if (RoundingType == "down")
                                             {
 
-                                                if(Convert.ToInt16(Rounding) == 0)
+                                                if (Convert.ToInt16(Rounding) == 0)
                                                 {
                                                     Output = Math.Truncate(Output);
                                                 }
@@ -230,7 +230,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                                 {
                                                     Output = Math.Round(Math.Floor(Output * 100) / 100, Convert.ToInt16(Rounding));
                                                 }
-                                                
+
 
                                             }
                                             else
@@ -265,67 +265,14 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     }
                                     else if (item.Function == "DatePart")
                                     {
-                                        DateFunctions DatesFunctions = new DateFunctions();
-                                        DatePart parameters = (DatePart)javaScriptSerializ­er.Deserialize(jparameters, typeof(DatePart));
-                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, group.ID, item.ID);
-    
-                                        DateTime Date1;
-                                        DateTime.TryParse(InputA, out Date1);
-
-                                        int DatePart = DatesFunctions.GetDatePart(parameters.Part, Date1);
-
-                                        item.Output = Convert.ToString(DatePart);
-
-                                        InputA = null;
-
+                                        DatePart DateParts = new DatePart();
+                                        item.Output = DateParts.Output(jparameters, jCategory, group.ID, item.ID);
                                     }
 
                                     else if (item.Function == "MathsFunctions")
                                     {
-                                        MathFunctions MathFunctions = new MathFunctions();
-                                        MathsFunctions parameters = (MathsFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(MathsFunctions));
-                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Number1, group.ID, item.ID);
-                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Number2, group.ID, item.ID);
-
-                                        decimal InputADeci;
-                                        decimal InputBDeci;
-
-                                        decimal.TryParse(InputA, out InputADeci);
-                                        decimal.TryParse(InputB, out InputBDeci);
-                                        Decimal Output;
-
-                                        Output = 0;
-
-                                        if(parameters.Type == "Abs")
-                                        {
-                                            Output = MathFunctions.Abs(InputADeci);
-                                        }
-                                        else if(parameters.Type == "Ceiling")
-                                        {
-                                            Output = MathFunctions.Ceiling(InputADeci);
-                                        }
-                                        else if (parameters.Type == "Floor")
-                                        {
-                                            Output = MathFunctions.Floor(InputADeci);
-                                        }
-                                        else if (parameters.Type == "Max")
-                                        {
-                                            Output = MathFunctions.Max(InputADeci, InputBDeci);
-                                        }
-                                        else if (parameters.Type == "Min")
-                                        {
-                                            Output = MathFunctions.Min(InputADeci, InputBDeci);
-                                        }
-                                        else if (parameters.Type == "Truncate")
-                                        {
-                                            Output = MathFunctions.Truncate(InputADeci);
-                                        }
-
-                                        item.Output = Convert.ToString(Output);
-
-                                        InputA = null;
-                                        InputB = null;
-
+                                        MathsFunctions MathsFunctions = new MathsFunctions();
+                                        item.Output = MathsFunctions.Output(jparameters, jCategory, group.ID, item.ID);
                                     }
                                 }
 

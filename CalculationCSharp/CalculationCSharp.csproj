@@ -288,7 +288,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LookupFunctions\LookupFunctions.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MathsFunctions\MathFunctions.cs" />
+    <Compile Include="Models\MathsFunctions\MathmaticalFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
