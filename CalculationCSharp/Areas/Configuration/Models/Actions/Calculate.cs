@@ -62,17 +62,13 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
         public void CalculateAction(List<CategoryViewModel> jCategory)
         {
-   
-
             foreach (var group in jCategory)
             {
                 foreach (var item in group.Functions)
                 {
                     if (item.Function == "Input")
                     {
-
                         item.Output = InputFunctions.Output(item.Type, item.Output);
-
                         OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
                     }
                     else
@@ -86,64 +82,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
                             foreach (var bit in item.Logic)
                             {
-
-                                dynamic InputA = Config.VariableReplace(jCategory, bit.Input1, group.ID, item.ID);
-                                dynamic InputB = Config.VariableReplace(jCategory, bit.Input2, group.ID, item.ID);
-
-                                
-                                string Logic = null;
-                                if(bit.LogicInd == "NotEqual")
-                                {
-                                    Logic = "<>";
-                                }
-                                else if(bit.LogicInd == "Greater")
-                                {
-                                    Logic = ">";
-                                }
-                                else if (bit.LogicInd == "GreaterEqual")
-                                {
-                                    Logic = ">=";
-                                }
-                                else if (bit.LogicInd == "Less")
-                                {
-                                    Logic = "<";
-                                }
-                                else if (bit.LogicInd == "LessEqual")
-                                {
-                                    Logic = "<=";
-                                }
-                                else
-                                {
-                                    Logic = bit.LogicInd;
-                                }
-
-                                bool InputADeciSucceeded;
-                                bool InputBDeciSucceeded;
-                                decimal InputADeci;
-                                decimal InputBDeci;
-                                InputADeciSucceeded = decimal.TryParse(InputA, out InputADeci);
-                                InputBDeciSucceeded = decimal.TryParse(InputB, out InputBDeci);
-
-                                if (InputADeciSucceeded == true && InputBDeciSucceeded == true)
-                                {
-                                    logic = "if(" + InputADeci + Logic + InputBDeci + ",true,false)";
-                                }
-                                else if(InputADeciSucceeded == true && InputBDeciSucceeded == false)
-                                {
-                                    logic = "if(" + InputADeci + Logic + "'" + InputBDeci + "'" + ",true,false)";
-                                }
-                                else if (InputADeciSucceeded == false && InputBDeciSucceeded == true)
-                                {
-                                    logic = "if(" + "'" + InputADeci + "'" + Logic + InputBDeci + ",true,false)";
-                                }
-                                else
-                                {
-                                    string inputA = Convert.ToString(InputA);
-                                    string inputB = Convert.ToString(InputB);
-                                    logic = "if(" + "'" + inputA + "'" + Logic + "'" + inputB + "'" + ",true,false)";
-                                }
-
-
+                                Logic Logic = new Logic();                            
+                                logic = Logic.Output(jCategory, bit, group.ID, item.ID);
                                 Expression ex = new Expression(logic);
                                 logicparse = Convert.ToBoolean(ex.Evaluate());
                             }
@@ -159,7 +99,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         string formula = null;
                                         Maths Maths = new Maths();
                                         Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
-
                                         dynamic InputA = Config.VariableReplace(jCategory, parameters.Input1, group.ID, item.ID);
                                         dynamic InputB = Config.VariableReplace(jCategory, parameters.Input2, group.ID, item.ID);
                                         string Bracket1 = Convert.ToString(parameters.Bracket1);
@@ -186,7 +125,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
                                         string MathString1;
 
-
                                         if (Logic2 == "Pow")
                                         {
                                             MathString1 = string.Concat(Logic2, "(", MathString, Bracket1, formula, Bracket2, ",");
@@ -207,21 +145,16 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
                                         if (paramCount == item.Parameter.Count)
                                         {
-
                                             Expression e = new Expression(MathString);
                                             var Calculation = e.Evaluate();
-
                                             decimal Output = Convert.ToDecimal(Calculation);
 
                                             if (RoundingType == "up")
                                             {
-
                                                 Output = Math.Round(Math.Ceiling(Output * 100) / 100, Convert.ToInt16(Rounding));
-
                                             }
                                             else if (RoundingType == "down")
                                             {
-
                                                 if (Convert.ToInt16(Rounding) == 0)
                                                 {
                                                     Output = Math.Truncate(Output);
@@ -230,25 +163,19 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                                 {
                                                     Output = Math.Round(Math.Floor(Output * 100) / 100, Convert.ToInt16(Rounding));
                                                 }
-
-
                                             }
                                             else
                                             {
                                                 Output = Math.Round(Output, Convert.ToInt16(Rounding));
                                             }
-
                                             item.Output = Convert.ToString(Output);
                                         }
-
                                         paramCount = paramCount + 1;
                                         InputA = null;
                                         InputB = null;
-
                                     }
                                     else if (item.Function == "Period")
                                     {
-
                                         DateFunctions DateFunctions = new DateFunctions();
                                         Period Periods = new Period();
                                         item.Output = Periods.Output(jparameters, jCategory, group.ID, item.ID);
@@ -279,7 +206,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")
                                 {
                                     item.Pass = "Nil";
-
                                 }
                                 else if (item.ExpectedResult == item.Output)
                                 {
@@ -289,14 +215,12 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 {
                                     item.Pass = "false";
                                 }
-
                                 OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
-
                             }
                             else
                             {
                                 dynamic LogicReplace = Config.VariableReplace(jCategory, item.Name, group.ID, item.ID);
-
+                  
                                 if(Convert.ToString(LogicReplace) == Convert.ToString(item.Name))
                                 {
                                     item.Output = null;
