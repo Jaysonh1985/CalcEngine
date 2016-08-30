@@ -587,3 +587,11 @@ ul#menu li {
     background-color: #a02e2e;
     font-size: small;
 }
+.second-navbar{
+    top: 50px;
+    background-color: #AE0000;
+    border: black;
+    border-style: outset;
+    border-width: thin;
+    padding-top: 10px;
+}

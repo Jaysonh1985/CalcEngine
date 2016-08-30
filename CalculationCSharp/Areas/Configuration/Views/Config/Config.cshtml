@@ -4,21 +4,36 @@
 }
 
 <div  ng-controller="configCtrl">
-    <div class="container body-content" ng-cloak>
+    
 
+    <div class="container body-content" ng-cloak>
+       
         <br>
         <form name="form" role="form" ng-submit="CalcButtonClick(form)" novalidate>
-            <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
-            <input class="btn btn-default" type="submit" value="Calculate" />
-            <input class="btn btn-default" type="button" value="History" ng-click="HistoryButtonClick('lg')" />
-            <input class="btn btn-default" type="button" value="Regression" ng-click="RegressionButtonClick('lg', form)" />
-            <input class="btn btn-default" type="button" value="Open All" ng-click="OpenAllButton()" />
-            <input class="btn btn-default" type="button" value="Close All" ng-click="CloseAllButton()" />
+            <div class="navbar navbar-inverse navbar-fixed-top second-navbar">
+                <div class="container">
+                    <div class="collapse navbar-collapse main-nav">
+                        <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
+                        <input class="btn btn-default" type="submit" value="Calculate" />
+                        <input class="btn btn-default" type="button" value="History" ng-click="HistoryButtonClick('lg')" />
+                        <input class="btn btn-default" type="button" value="Regression" ng-click="RegressionButtonClick('lg', form)" />
+                        <input class="btn btn-default" type="button" value="Open All" ng-click="OpenAllButton()" />
+                        <input class="btn btn-default" type="button" value="Close All" ng-click="CloseAllButton()" />
+                        <div class="col-sm-3 col-md-3 pull-right">
+                            <div class="navbar-text">Search</div>
+                                <div class="input-group">
+                                    <input type="text" class="form-control form-inline input" ng-model="searchText" placeholder="Filter">
+                                </div>
+                        </div>
+ 
+                    </div>
+                </div>
+            </div>
             <br />
             <br />
             <div>
                     <div>
-                        <input type="text" class="form-control form-inline input" ng-model="searchText" placeholder="Filter">
+                        
                     </div>
             </div>
             <div ui-tree data-clone-enabled="true">
