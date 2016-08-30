@@ -13,5 +13,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         public string LogicInd { get; set; }
         public string Bracket2 { get; set; }
         public string Operator { get; set; }
+
     }
 }
