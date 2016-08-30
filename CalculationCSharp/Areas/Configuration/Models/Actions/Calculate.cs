@@ -23,6 +23,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         public JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
         public List<CategoryViewModel> jCategory = new List<CategoryViewModel>();
         CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
+        public Input InputFunctions = new Input();
 
         public List<CategoryViewModel> DebugResults(List<CategoryViewModel> jCategory)
         {
@@ -68,27 +69,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 {
                     if (item.Function == "Input")
                     {
-                        if(item.Type == "Date")
-                        {
-                            if(item.Output != "" && item.Output != "0")
-                            {
-                            //    DateTime datestring = Convert.ToDateTime(item.Output);
-                            //    var shortdatestring = datestring.ToShortDateString();
-                            //    item.Output = Convert.ToString(shortdatestring);
-                            }
-                            else
-                            {
-                                item.Output = "";
-                            }
 
-                        }
-                        else if (item.Type == "Decimal")
-                        {
-                            if(item.Output == "" || item.Output == null)
-                            {
-                                item.Output = "0";
-                            }
-                        }
+                        item.Output = InputFunctions.Output(item.Type, item.Output);
 
                         OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
                     }
