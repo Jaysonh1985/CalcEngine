@@ -40,18 +40,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             }
             else
             {
-                if (calcConfiguration.Configuration == null)
-                {
-                    HttpContext.Current.Cache.Remove("config");
-                    List<CategoryViewModel> json = repo.GetConfig(null);
-                    response.Content = new StringContent(JsonConvert.SerializeObject(json));
-                }
-                else
-                {
-
-                    response.Content = new StringContent(calcConfiguration.Scheme + " " + calcConfiguration.Name);
-                }
-                
+                response.Content = new StringContent(calcConfiguration.Scheme + " " + calcConfiguration.Name); 
             }
             
             return response;

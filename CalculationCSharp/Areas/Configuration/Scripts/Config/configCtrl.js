@@ -24,15 +24,19 @@
                    $scope.config = data;
 
                    setInputTypes();
-                   configService.getCalcName(id)
-                        .then(function (data) {
-                            $scope.isLoading = false;
-                            $scope.configName = data;
-                        }, onError);
+
 
                                                          
                }, onError);
+
+
  
+        }, onError);
+        var id = configFunctionFactory.getConfigID();
+        configService.getCalcName(id)
+        .then(function (namedata) {
+                $scope.isLoading = false;
+                $scope.configName = namedata;
         }, onError);
     };
     //Fix so that the input fields apply to the html input fields correctly
