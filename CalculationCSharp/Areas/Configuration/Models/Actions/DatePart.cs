@@ -16,11 +16,20 @@ namespace CalculationCSharp.Areas.Configuration.Models
         {
             DateFunctions DatesFunctions = new DateFunctions();
             DatePart parameters = (DatePart)javaScriptSerializ­er.Deserialize(jparameters, typeof(DatePart));
-            dynamic InputA = Config.VariableReplace(jCategory, parameters.Date1, GroupID, ItemID);
-            DateTime Date1;
-            DateTime.TryParse(InputA, out Date1);
-            int DatePart = DatesFunctions.GetDatePart(parameters.Part, Date1);
-            return Convert.ToString(DatePart);
+            string[] parts = parameters.Date1.Split(',');
+            string Output = null;
+            foreach(string part in parts)
+            {
+                dynamic InputA = Config.VariableReplace(jCategory, part, GroupID, ItemID);
+                DateTime Date1;
+                DateTime.TryParse(InputA, out Date1);
+                int DatePart = DatesFunctions.GetDatePart(parameters.Part, Date1);
+                Output = Output + Convert.ToString(DatePart) + ",";
+            }
+
+            Output = Output.Remove(Output.Length - 1);
+
+            return Convert.ToString(Output);
         }
 
     }

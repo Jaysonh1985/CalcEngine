@@ -534,16 +534,21 @@
         if (VariableNames.length > 0) {
             angular.forEach(obj, function (valueN, keyN, obj) {
 
-                var Input1Bool = isNaN(Date.parse(valueN.Date1));
+                var array = valueN.Date1.split(',');
+                angular.forEach(array, function (valueNA, keyNA, obj) {
+                    var Input1Bool = isNaN(Date.parse(valueNA));
 
-                if (Input1Bool == true) {
-                    if (VariableNames.indexOf(valueN.Date1) == -1) {
+                    if (Input1Bool == true) {
+                        if (VariableNames.indexOf(valueNA) == -1) {
 
 
-                        $scope.form[AttName].$setValidity("input", false);
+                            $scope.form[AttName].$setValidity("input", false);
 
+                        }
                     }
-                }
+                })
+
+
 
             });
 
