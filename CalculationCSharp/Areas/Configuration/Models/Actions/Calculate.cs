@@ -189,6 +189,11 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         MathsFunctions MathsFunctions = new MathsFunctions();
                                         item.Output = MathsFunctions.Output(jparameters, jCategory, group.ID, item.ID);
                                     }
+                                    else if (item.Function == "ArrayFunctions")
+                                    {
+                                        ArrayFunctions ArrayFunctions = new ArrayFunctions();
+                                        item.Output = ArrayFunctions.Output(jparameters, jCategory, group.ID, item.ID);
+                                    }
                                 }
 
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")

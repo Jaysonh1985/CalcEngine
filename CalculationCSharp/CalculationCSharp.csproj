@@ -247,6 +247,7 @@
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Input.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\ArrayFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\MathsFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\DatePart.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Factors.cs" />
@@ -296,6 +297,8 @@
     <Content Include="AppScript\Directives\additionalControls.js" />
     <Content Include="Areas\Calculation\Scripts\calculationMenuCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationService.js" />
+    <Content Include="Areas\Configuration\Scripts\Array Functions\arrayFunctionsCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Array Functions\ArrayFunctionsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configRowSelectFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configModalFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configValidationFactory.js" />

@@ -24,6 +24,9 @@
             else if (Function == 'Input') {
                 return 'inputCtrl'
             }
+            else if (Function == 'ArrayFunctions') {
+                return 'arrayFunctionsCtrl'
+            }
 
         },
         //get URL for modal file path
@@ -49,6 +52,9 @@
             }
             else if (Function == 'Input') {
                 return '/Areas/Configuration/Scripts/Input/InputModal.html'
+            }
+            else if (Function == 'ArrayFunctions') {
+                return '/Areas/Configuration/Scripts/Array Functions/ArrayFunctionsModal.html'
             }
 
         },
