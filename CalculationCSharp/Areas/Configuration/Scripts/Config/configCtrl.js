@@ -540,20 +540,12 @@
 
                     if (Input1Bool == true) {
                         if (VariableNames.indexOf(valueNA) == -1) {
-
-
                             $scope.form[AttName].$setValidity("input", false);
-
                         }
                     }
                 })
-
-
-
             });
-
         }
-
     }
 
     $scope.FactorsInputFieldPreviouslySet = function (colindex, index, obj, form) {
@@ -616,70 +608,46 @@
 
             angular.forEach(obj, function (valueN, keyN, obj) {
 
-                if (obj[0].Type == 'Add') {
-
-                    var Input1Bool = isNaN(Date.parse(valueN.Date1));
-
-                    if (Input1Bool == true) {
-                        if (VariableNames.indexOf(valueN.Date1) == -1) {
-
-                            $scope.form[AttName].$setValidity("input", false);
-
+                if (obj[0].Type == 'Add' || obj[0].Type == 'Adjust' || obj[0].Type == 'Subtract') {
+                    var Date1array = valueN.Date1.split(',');
+                    angular.forEach(Date1array, function (valueNA, keyNA, obj) {
+                        var Input1Bool = isNaN(Date.parse(valueNA));
+                        if (Input1Bool == true) {
+                            if (VariableNames.indexOf(valueNA) == -1) {
+                                $scope.form[AttName].$setValidity("input", false);
+                            }
                         }
-                    }
-
-                }
-                if (obj[0].Type == 'Adjust') {
-
-                    var Input1Bool = isNaN(Date.parse(valueN.Date1));
-
-                    if (Input1Bool == true) {
-                        if (VariableNames.indexOf(valueN.Date1) == -1) {
-
-                            $scope.form[AttName].$setValidity("input", false);
-
-                        }
-                    }
-
+                    });
                 }
 
                 if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
+                    var Date1array = valueN.Date1.split(',');
+                    
 
-                    var Input1Bool = isNaN(Date.parse(valueN.Date1));
-                    var Input2Bool = isNaN(Date.parse(valueN.Date2));
+                        
+                    angular.forEach(Date1array, function (valueD1, keyD1, objD1) {    
+                        var Input1Bool = isNaN(Date.parse(valueD1));
+                        if (Input1Bool == true) {
+                            if (VariableNames.indexOf(valueD1) == -1) {
 
-                    if (Input1Bool == true) {
-                        if (VariableNames.indexOf(valueN.Date1) == -1) {
+                                $scope.form[AttName].$setValidity("input", false);
 
-                            $scope.form[AttName].$setValidity("input", false);
-
+                            }
                         }
-                    }
+                    });
+                    var Date2array = valueN.Date2.split(',');
+                    angular.forEach(Date2array, function (valueD2, keyD2, objD2) {
+                        var Input2Bool = isNaN(Date.parse(valueD2));
+                        if (Input2Bool == true) {
+                            if (VariableNames.indexOf(valueD2) == -1) {
 
-                    if (Input2Bool == true) {
-                        if (VariableNames.indexOf(valueN.Date2) == -1) {
+                                $scope.form[AttName].$setValidity("input", false);
 
-                            $scope.form[AttName].$setValidity("input", false);
-
+                            }
                         }
-                    }
-
+                    });
                 }
-
-                if (obj[0].Type == 'Subtract') {
-
-                    var Input1Bool = isNaN(Date.parse(valueN.Date1));
-
-                    if (Input1Bool == true) {
-                        if (VariableNames.indexOf(valueN.Date1) == -1) {
-
-                            $scope.form[AttName].$setValidity("input", false);
-
-                        }
-                    }
-
-                }
-
+            
             });
 
         }
