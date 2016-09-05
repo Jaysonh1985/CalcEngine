@@ -37,17 +37,18 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 
                 foreach (var list in group)
                 {
-                    var index = SubList.FindIndex(a => a.Field == list.Field);
+                    int index = SubList.FindIndex(a => a.Field == list.Field);
                     if (index == -1)
                     {
                         SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
                     }
                     else
                     {
-                        SubList[index].Value = list.Value;
+                        SubList.RemoveAt(index);
+                        SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
                     }
-                    
-                }
+
+                }              
 
                 List.Add(new OutputListGroup { ID = i, Group = group.Key, Output = SubList});
 
