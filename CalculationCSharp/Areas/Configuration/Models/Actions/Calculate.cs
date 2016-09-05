@@ -36,8 +36,17 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 List<OutputList> SubList = new List<OutputList>();
                 
                 foreach (var list in group)
-                { 
-                    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
+                {
+                    var index = SubList.FindIndex(a => a.Field == list.Field);
+                    if (index == -1)
+                    {
+                        SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
+                    }
+                    else
+                    {
+                        SubList[index].Value = list.Value;
+                    }
+                    
                 }
 
                 List.Add(new OutputListGroup { ID = i, Group = group.Key, Output = SubList});
