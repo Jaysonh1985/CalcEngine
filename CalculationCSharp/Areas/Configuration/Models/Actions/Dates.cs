@@ -36,14 +36,36 @@ namespace CalculationCSharp.Areas.Configuration.Models
             string Output = null;
             int Counter = 0;
 
-            foreach (string part in Date1parts)
+            int Date1Length = 0;
+            if (Date1parts != null)
+            {
+                Date1Length = Date1parts.Length;
+            }
+
+            int Date2Length = 0;
+            if (Date2parts != null)
+            {
+                Date2Length = Date2parts.Length;
+            }
+
+            int MaxLength = Math.Max(Date1Length, Date2Length);
+
+            for (int i = 0; i < MaxLength; i++)
             {
                 dynamic InputA = null;
                 dynamic InputB = null;
 
                 if (Date1parts != null)
                 {
-                    InputA = Config.VariableReplace(jCategory, Date1parts[Counter], GroupID, ItemID);
+                    if (Counter >= Date1parts.Length)
+                    {
+                        InputA = Config.VariableReplace(jCategory, Date1parts[Date1parts.GetUpperBound(0)], GroupID, ItemID);
+                    }
+                    else
+                    {
+                        InputA = Config.VariableReplace(jCategory, Date1parts[Counter], GroupID, ItemID);
+                    }
+
                 }
                 if (Date2parts!= null)
                 {
@@ -55,14 +77,16 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     {
                         InputB = Config.VariableReplace(jCategory, Date2parts[Counter], GroupID, ItemID);
                     }
-
-                    
+  
                 }
 
                 dynamic InputC = Config.VariableReplace(jCategory, parameters.Period, GroupID, ItemID);
                 DateTime Date1;
                 DateTime Date2;
                 Decimal Period;
+
+
+
                 DateTime.TryParse(InputA, out Date1);
                 DateTime.TryParse(InputB, out Date2);
                 Decimal.TryParse(InputC, out Period);
