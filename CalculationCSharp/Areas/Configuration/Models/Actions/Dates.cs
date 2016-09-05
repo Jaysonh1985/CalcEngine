@@ -85,15 +85,78 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 DateTime Date2;
                 Decimal Period;
 
+                string[] InputAparts = null;
+                string[] InputBparts = null;
+                if (!string.IsNullOrEmpty(InputA))
+                {
+                    InputAparts = InputA.Split(',');
+                }
+                if (!string.IsNullOrEmpty(InputB))
+                {
+                    InputBparts = InputB.Split(',');
+                }
 
+                int InputALength = 0;
+                if (InputAparts != null)
+                {
+                    InputALength = InputAparts.Length;
+                }
 
-                DateTime.TryParse(InputA, out Date1);
-                DateTime.TryParse(InputB, out Date2);
-                Decimal.TryParse(InputC, out Period);
-                DateTime date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day, parameters.Month);
-                DateTime datestring = date.Date;
-                var shortdatestring = datestring.ToShortDateString();
-                Output = Output + Convert.ToString(shortdatestring) + ",";
+                int InputBLength = 0;
+                if (InputBparts != null)
+                {
+                    InputBLength = InputBparts.Length;
+                }
+
+                int InputsMaxLength = Math.Max(InputALength, InputBLength);
+                int InputCounter = 0;
+                for (int c = 0; c < InputsMaxLength; c++)
+                {
+                    if(InputAparts != null)
+                    {
+
+                        if (InputCounter >= InputAparts.Length)
+                        {
+                            DateTime.TryParse(InputAparts[InputAparts.GetUpperBound(0)], out Date1);
+
+                        }
+                        else
+                        {
+                            DateTime.TryParse(InputAparts[InputCounter], out Date1);
+                        }
+                       
+
+                    }
+                    else
+                    {
+                        Date1 = Convert.ToDateTime("01/01/0001");
+                    }
+
+                    if(InputBparts!= null)
+                    {
+                        if (InputCounter >= InputBparts.Length)
+                        {
+                            DateTime.TryParse(InputBparts[InputBparts.GetUpperBound(0)], out Date2);
+
+                        }
+                        else
+                        {
+                            DateTime.TryParse(InputBparts[InputCounter], out Date2);
+                        }
+                    }
+                    else
+                    {
+                        Date2 = Convert.ToDateTime("01/01/0001");
+                    }
+                    
+
+                    Decimal.TryParse(InputC, out Period);
+                    DateTime date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day, parameters.Month);
+                    DateTime datestring = date.Date;
+                    var shortdatestring = datestring.ToShortDateString();
+                    Output = Output + Convert.ToString(shortdatestring) + ",";
+                    InputCounter = InputCounter + 1;
+                }
                 Counter = Counter + 1;
             }       
 
