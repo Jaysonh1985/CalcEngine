@@ -189,8 +189,10 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     }
                 }
             }
-            Output = Output.Remove(Output.Length - 1);
-
+            if (Output != null)
+            {
+                Output = Output.Remove(Output.Length - 1);
+            }
             return Output;
         }
     }

@@ -493,36 +493,34 @@
         var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Decimal", index);
         var AttName = 'FunctionCog_' + colindex + '_' + index;
         $scope.form[AttName].$setValidity("input", true);
+
         if (VariableNames.length > 0) {
             angular.forEach(obj, function (valueN, keyN, obj) {
-
-                var Input1Bool = isNaN(Date.parse(valueN.Number1));
-                var Input2Bool = isNaN(Date.parse(valueN.Number2));
-
-                if (Input1Bool == true) {
-                    if (VariableNames.indexOf(valueN.Number1) == -1) {
-
-
-                        $scope.form[AttName].$setValidity("input", false);
-
+                var Number1array = valueN.Number1.split(',');
+                angular.forEach(Number1array, function (valueD1, keyD1, objD1) {
+                    var Input1Bool = isNaN(parseFloat(valueD1));
+                    if (Input1Bool == true) {
+                        if (VariableNames.indexOf(valueD1) == -1) {
+                            $scope.form[AttName].$setValidity("input", false);
+                        }
                     }
-                }
+                });
 
                 if (valueN.Type == "Max" || valueN.Type == "Min")
                 {
-                    if (Input2Bool == true) {
-                        if (VariableNames.indexOf(valueN.Number2) == -1) {
-
-                            $scope.form[AttName].$setValidity("input", false);
-
+                    var Number2array = valueN.Number2.split(',');
+                    angular.forEach(Number2array, function (valueD2, keyD2, objD2) {
+                        var Input2Bool = isNaN(parseFloat(valueD2));
+                        if (Input2Bool == true) {
+                            if (VariableNames.indexOf(valueD2) == -1) {
+                                $scope.form[AttName].$setValidity("input", false);
+                            }
                         }
-                    }
+                    });
                 }
 
             });
-
         }
-
     }
 
     $scope.DatePartInputFieldPreviouslySet = function (colindex, index, obj, form) {
