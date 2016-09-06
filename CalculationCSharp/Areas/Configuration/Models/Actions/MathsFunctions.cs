@@ -53,65 +53,61 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
                 if (Numbers1parts != null)
                 {
-                    InputA = Config.VariableReplace(jCategory, Numbers1parts[Counter], GroupID, ItemID);                   
+                    InputA = Config.VariableReplace(jCategory, Numbers1parts[Counter], GroupID, ItemID);
                     decimal.TryParse(InputA, out InputADeci);
                 }
 
-                if(Numbers2parts != null)
+                if (Numbers2parts != null)
                 {
                     InputB = Config.VariableReplace(jCategory, Numbers2parts[Counter], GroupID, ItemID);
                     decimal.TryParse(InputB, out InputBDeci);
                 }
 
-                    if (InputA != null)
-                    {
-                            Decimal.TryParse(InputA, out InputADeci);
-         
-                    }
-                    else
-                    {
-                        InputADeci = 0;
-                    }
-                    if (InputB != null)
-                    {
-                       
-                        Decimal.TryParse(InputB, out InputBDeci);
-                    }
-                    else
-                    {
-                        InputBDeci = 0;
-                    }
+                if (InputA != null)
+                {
+                    Decimal.TryParse(InputA, out InputADeci);
+                }
+                else
+                {
+                    InputADeci = 0;
+                }
+                if (InputB != null)
+                {
+                    Decimal.TryParse(InputB, out InputBDeci);
+                }
+                else
+                {
+                    InputBDeci = 0;
+                }
 
-                    if (parameters.Type == "Abs")
-                    {
-                        OutputValue = MathFunctions.Abs(InputADeci);
-                    }
-                    else if (parameters.Type == "Ceiling")
-                    {
-                        OutputValue = MathFunctions.Ceiling(InputADeci);
-                    }
-                    else if (parameters.Type == "Floor")
-                    {
-                        OutputValue = MathFunctions.Floor(InputADeci);
-                    }
-                    else if (parameters.Type == "Max")
-                    {
-                        OutputValue = MathFunctions.Max(InputADeci, InputBDeci);
-                    }
-                    else if (parameters.Type == "Min")
-                    {
-                        OutputValue = MathFunctions.Min(InputADeci, InputBDeci);
-                    }
-                    else if (parameters.Type == "Truncate")
-                    {
-                        OutputValue = MathFunctions.Truncate(InputADeci);
-                    }
+                if (parameters.Type == "Abs")
+                {
+                    OutputValue = MathFunctions.Abs(InputADeci);
+                }
+                else if (parameters.Type == "Ceiling")
+                {
+                    OutputValue = MathFunctions.Ceiling(InputADeci);
+                }
+                else if (parameters.Type == "Floor")
+                {
+                    OutputValue = MathFunctions.Floor(InputADeci);
+                }
+                else if (parameters.Type == "Max")
+                {
+                    OutputValue = MathFunctions.Max(InputADeci, InputBDeci);
+                }
+                else if (parameters.Type == "Min")
+                {
+                    OutputValue = MathFunctions.Min(InputADeci, InputBDeci);
+                }
+                else if (parameters.Type == "Truncate")
+                {
+                    OutputValue = MathFunctions.Truncate(InputADeci);
+                }
 
-                    Output = Output + OutputValue + ",";
-                    Counter = Counter + 1;
-
-            }
-                
+                Output = Output + OutputValue + ",";
+                Counter = Counter + 1;
+            }            
 
             Output = Output.Remove(Output.Length - 1);
             return Convert.ToString(Output);
