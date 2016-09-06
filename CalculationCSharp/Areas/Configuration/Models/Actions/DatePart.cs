@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculationCSharp.Models.ArrayFunctions;
+using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 
@@ -15,10 +16,19 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Output(string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID)
         {
             DateFunctions DatesFunctions = new DateFunctions();
+            ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
             DatePart parameters = (DatePart)javaScriptSerializ­er.Deserialize(jparameters, typeof(DatePart));
-            string[] parts = parameters.Date1.Split(',');
+            List<string> D1parts = null;
+            string[] Date1parts = null;
+            D1parts = ArrayBuilder.InputArrayBuilder(parameters.Date1, jCategory, GroupID, ItemID);
+
+            if (D1parts != null)
+            {
+                Date1parts = D1parts.ToArray();
+            }
+
             string Output = null;
-            foreach(string part in parts)
+            foreach(string part in Date1parts)
             {
                 dynamic InputA = Config.VariableReplace(jCategory, part, GroupID, ItemID);
                 DateTime Date1;

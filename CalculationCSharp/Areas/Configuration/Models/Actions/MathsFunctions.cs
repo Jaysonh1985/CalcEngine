@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculationCSharp.Models.ArrayFunctions;
+using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 
@@ -16,33 +17,30 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Output (string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID)
         {
             MathematicalFunctions MathFunctions = new MathematicalFunctions();
+            ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
             MathsFunctions parameters = (MathsFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(MathsFunctions));
-            string Output = null;
-            Decimal OutputValue = 0;
+
+            List<string> D1parts = null;
+            List<string> D2parts = null;
             string[] Numbers1parts = null;
             string[] Numbers2parts = null;
-            if (!string.IsNullOrEmpty(parameters.Number1))
+
+            D1parts = ArrayBuilder.InputArrayBuilder(parameters.Number1, jCategory, GroupID, ItemID);
+            D2parts = ArrayBuilder.InputArrayBuilder(parameters.Number2, jCategory, GroupID, ItemID);
+
+            if (D1parts != null)
             {
-                Numbers1parts = parameters.Number1.Split(',');
+                Numbers1parts = D1parts.ToArray();
             }
-            if (!string.IsNullOrEmpty(parameters.Number2))
+            if (D2parts != null)
             {
-                Numbers2parts = parameters.Number2.Split(',');
+                Numbers2parts = D2parts.ToArray();
             }
 
-            int Numbers1Length = 0;
-            if (Numbers1parts != null)
-            {
-                Numbers1Length = Numbers1parts.Length;
-            }
-
-            int Numbers2Length = 0;
-            if (Numbers2parts != null)
-            {
-                Numbers2Length = Numbers2parts.Length;
-            }
-
-            int MaxLength = Math.Max(Numbers1Length, Numbers2Length);
+            string Output = null;
+            Decimal OutputValue = 0;
+            
+            int MaxLength = ArrayBuilder.GetMaxLength(Numbers1parts, Numbers2parts);
 
             int Counter = 0;
 
@@ -65,59 +63,19 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     decimal.TryParse(InputB, out InputBDeci);
                 }
 
-                string[] InputAparts = null;
-                string[] InputBparts = null;
-                if (!string.IsNullOrEmpty(InputA))
-                {
-                    InputAparts = InputA.Split(',');
-                }
-                if (!string.IsNullOrEmpty(InputB))
-                {
-                    InputBparts = InputB.Split(',');
-                }
-
-                int InputALength = 0;
-                if (InputAparts != null)
-                {
-                    InputALength = InputAparts.Length;
-                }
-
-                int InputBLength = 0;
-                if (InputBparts != null)
-                {
-                    InputBLength = InputBparts.Length;
-                }
-
-                int InputsMaxLength = Math.Max(InputALength, InputBLength);
-                int InputCounter = 0;
-
-                for (int c = 0; c < InputsMaxLength; c++)
-                {
-                    if (InputAparts != null)
+                    if (InputA != null)
                     {
-                        if (InputCounter >= InputAparts.Length)
-                        {
-                            Decimal.TryParse(InputAparts[InputAparts.GetUpperBound(0)], out InputADeci);
-                        }
-                        else
-                        {
-                            Decimal.TryParse(InputAparts[InputCounter], out InputADeci);
-                        }
+                            Decimal.TryParse(InputA, out InputADeci);
+         
                     }
                     else
                     {
                         InputADeci = 0;
                     }
-                    if (InputBparts != null)
+                    if (InputB != null)
                     {
-                        if (InputCounter >= InputBparts.Length)
-                        {
-                            Decimal.TryParse(InputBparts[InputBparts.GetUpperBound(0)], out InputBDeci);
-                        }
-                        else
-                        {
-                            Decimal.TryParse(InputBparts[InputCounter], out InputBDeci);
-                        }
+                       
+                        Decimal.TryParse(InputB, out InputBDeci);
                     }
                     else
                     {
@@ -150,11 +108,11 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     }
 
                     Output = Output + OutputValue + ",";
-                    InputCounter = InputCounter + 1;
-                }
-                Counter = Counter + 1;  
+                    Counter = Counter + 1;
 
             }
+                
+
             Output = Output.Remove(Output.Length - 1);
             return Convert.ToString(Output);
         }
