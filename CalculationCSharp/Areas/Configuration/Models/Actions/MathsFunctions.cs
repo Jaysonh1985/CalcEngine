@@ -31,9 +31,17 @@ namespace CalculationCSharp.Areas.Configuration.Models
             {
                 Output = MathFunctions.Abs(InputADeci);
             }
+            else if (parameters.Type == "Add")
+            {
+                Output = MathFunctions.Add(InputADeci, InputBDeci);
+            }
             else if (parameters.Type == "Ceiling")
             {
                 Output = MathFunctions.Ceiling(InputADeci);
+            }
+            else if (parameters.Type == "Divide")
+            {
+                Output = MathFunctions.Divide(InputADeci, InputBDeci);
             }
             else if (parameters.Type == "Floor")
             {
@@ -47,6 +55,15 @@ namespace CalculationCSharp.Areas.Configuration.Models
             {
                 Output = MathFunctions.Min(InputADeci, InputBDeci);
             }
+            else if (parameters.Type == "Multiply")
+            {
+                Output = MathFunctions.Multiply(InputADeci, InputBDeci);
+            }
+            else if (parameters.Type == "Subtract")
+            {
+                Output = MathFunctions.Subtract(InputADeci, InputBDeci);
+            }
+
             else if (parameters.Type == "Truncate")
             {
                 Output = MathFunctions.Truncate(InputADeci);

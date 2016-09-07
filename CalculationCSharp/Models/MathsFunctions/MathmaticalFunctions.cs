@@ -37,4 +37,27 @@ public class MathematicalFunctions
     {
         return Math.Truncate(Number1);
     }
+
+    public decimal Add(decimal Number1, decimal Number2)
+    {
+        return Number1 + Number2;
+    }
+
+    public decimal Subtract(decimal Number1, decimal Number2)
+    {
+        return Number1 - Number2;
+    }
+
+    public decimal Divide(decimal Number1, decimal Number2)
+    {
+        return Number1 / Number2;
+    }
+    public decimal Multiply(decimal Number1, decimal Number2)
+    {
+        return  Number1 * Number2;
+    }
+    public decimal Power(decimal Number1, decimal Number2)
+    {
+        return Convert.ToDecimal(Math.Pow(Convert.ToDouble(Number1), Convert.ToDouble(Number2)));
+    }
 }

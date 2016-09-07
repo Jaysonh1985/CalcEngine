@@ -508,7 +508,7 @@
                     }
                 }
 
-                if (valueN.Type == "Max" || valueN.Type == "Min")
+                if (valueN.Type == "Add" || value.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract")
                 {
                     if (Input2Bool == true) {
                         if (VariableNames.indexOf(valueN.Number2) == -1) {
