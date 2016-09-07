@@ -25,7 +25,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 if(parameters.Function == "Sum")
                 {
                     string[] Deci1parts = null;
-                    Deci1parts = InputA.Split(',');
+                    Deci1parts = InputA.Split('~');
                     decimal Sum = 0;
 
                     foreach (string output in Deci1parts)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
+using CalculationCSharp.Models.ArrayFunctions;
 
 namespace CalculationCSharp.Areas.Configuration.Models
 {
@@ -18,133 +19,89 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Output(string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID)
         {
             DateFunctions DateFunctions = new DateFunctions();
+            ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
             Period Dates = new Period();
             Period parameters = (Period)javaScriptSerializ­er.Deserialize(jparameters, typeof(Period));
 
+            List<string> D1parts = null;
+            List<string> D2parts = null;
             string[] Date1parts = null;
             string[] Date2parts = null;
-            if (!string.IsNullOrEmpty(parameters.Date1))
+
+            D1parts = ArrayBuilder.InputArrayBuilder(parameters.Date1, jCategory, GroupID, ItemID);
+            D2parts = ArrayBuilder.InputArrayBuilder(parameters.Date2, jCategory, GroupID, ItemID);
+
+            if (D1parts != null)
             {
-                Date1parts = parameters.Date1.Split(',');
+                Date1parts = D1parts.ToArray();
             }
-            if (!string.IsNullOrEmpty(parameters.Date2))
+            if (D2parts != null)
             {
-                Date2parts = parameters.Date2.Split(',');
+                Date2parts = D2parts.ToArray();
             }
 
             string OutputValue = null;
             string Output = null;
             int Counter = 0;
 
-            int Date1Length = 0;
-            if (Date1parts != null)
-            {
-                Date1Length = Date1parts.Length;
-            }
-
-            int Date2Length = 0;
-            if (Date2parts != null)
-            {
-                Date2Length = Date2parts.Length;
-            }
-
-            int MaxLength = Math.Max(Date1Length, Date2Length);
+            int MaxLength = ArrayBuilder.GetMaxLength(Date1parts, Date2parts);
 
             for (int i = 0; i < MaxLength; i++)
             {
-
                 dynamic InputA = null;
                 dynamic InputB = null;
 
                 if (Date1parts != null)
                 {
-                    InputA = Config.VariableReplace(jCategory, Date1parts[Counter], GroupID, ItemID);
+                    if (Counter >= Date1parts.Length)
+                    {
+                        InputA = Date1parts[Date1parts.GetUpperBound(0)];
+                    }
+                    else
+                    {
+                        InputA = Date1parts[Counter];
+                    }
+
                 }
                 if (Date2parts != null)
                 {
                     if (Counter >= Date2parts.Length)
                     {
-                        InputB = Config.VariableReplace(jCategory, Date2parts[Date2parts.GetUpperBound(0)], GroupID, ItemID);
+                        InputB = Date2parts[Date2parts.GetUpperBound(0)]; ;
                     }
                     else
                     {
-                        InputB = Config.VariableReplace(jCategory, Date2parts[Counter], GroupID, ItemID);
+                        InputB = Date2parts[Counter];
                     }
 
-
+                    Counter = Counter + 1;
                 }
-                Counter = Counter + 1;
-
-                string[] InputAparts = null;
-                string[] InputBparts = null;
-                if (!string.IsNullOrEmpty(InputA))
-                {
-                    InputAparts = InputA.Split(',');
-                }
-                if (!string.IsNullOrEmpty(InputB))
-                {
-                    InputBparts = InputB.Split(',');
-                }
-
-                int InputALength = 0;
-                if (InputAparts != null)
-                {
-                    InputALength = InputAparts.Length;
-                }
-
-                int InputBLength = 0;
-                if (InputBparts != null)
-                {
-                    InputBLength = InputBparts.Length;
-                }
-
-                int InputsMaxLength = Math.Max(InputALength, InputBLength);
-                int InputCounter = 0;
-                for (int c = 0; c < InputsMaxLength; c++)
-                {
-    
 
                     if (InputA != "" && InputB != "" && InputA != "01/01/0001" && InputB != "01/01/0001")
                     {
                         DateTime Date1;
                         DateTime Date2;
-                        if (InputAparts != null)
-                        {
-                            if (InputCounter >= InputAparts.Length)
-                            {
-                                DateTime.TryParse(InputAparts[InputAparts.GetUpperBound(0)], out Date1);
-                            }
-                            else
-                            {
-                                DateTime.TryParse(InputAparts[InputCounter], out Date1);
-                            }
-                        }
-                        else
-                        {
-                            Date1 = Convert.ToDateTime("01/01/0001");
-                        }
+                    if (InputA != null)
+                    {
+                        DateTime.TryParse(InputA, out Date1);
+                    }
+                    else
+                    {
+                        Date1 = Convert.ToDateTime("01/01/0001");
+                    }
 
-                        if (InputBparts != null)
-                        {
-                            if (InputCounter >= InputBparts.Length)
-                            {
-                                DateTime.TryParse(InputBparts[InputBparts.GetUpperBound(0)], out Date2);
-                            }
-                            else
-                            {
-                                DateTime.TryParse(InputBparts[InputCounter], out Date2);
-                            }
-                        }
-                        else
-                        {
-                            Date2 = Convert.ToDateTime("01/01/0001");
-                        }
+                    if (InputB != null)
+                    {
+                        DateTime.TryParse(InputB, out Date2);
+                    }
+                    else
+                    {
+                        Date2 = Convert.ToDateTime("01/01/0001");
+                    }
 
-                        InputCounter = InputCounter + 1;
-
-                        String DateAdjustmentType = parameters.DateAdjustmentType;
-                        Boolean Inclusive = parameters.Inclusive;
-                        Double DaysinYear = parameters.DaysinYear;
+                    String DateAdjustmentType = parameters.DateAdjustmentType;
+                    Boolean Inclusive = parameters.Inclusive;
+                    Double DaysinYear = parameters.DaysinYear;
 
                         if (Date1 <= Date2)
                         {
@@ -180,17 +137,19 @@ namespace CalculationCSharp.Areas.Configuration.Models
                         {
                             OutputValue = Convert.ToString(0);
                         }
-                        Output = Output + OutputValue + ",";
+                        Output = Output + OutputValue + "~";
                     }
                     else
                     {
                         OutputValue = Convert.ToString(0);
-                        Output = Output + OutputValue + ",";
+                        Output = Output + OutputValue + "~";
                     }
                 }
+            
+            if (Output != null)
+            {
+                Output = Output.Remove(Output.Length - 1);
             }
-            Output = Output.Remove(Output.Length - 1);
-
             return Output;
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculationCSharp.Models.ArrayFunctions;
+using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 
@@ -16,58 +17,99 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Output (string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID)
         {
             MathematicalFunctions MathFunctions = new MathematicalFunctions();
+            ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
             MathsFunctions parameters = (MathsFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(MathsFunctions));
-            dynamic InputA = Config.VariableReplace(jCategory, parameters.Number1, GroupID, ItemID);
-            dynamic InputB = Config.VariableReplace(jCategory, parameters.Number2, GroupID, ItemID);
-            decimal InputADeci;
-            decimal InputBDeci;
-            decimal.TryParse(InputA, out InputADeci);
-            decimal.TryParse(InputB, out InputBDeci);
-            Decimal Output;
 
-            Output = 0;
+            List<string> D1parts = null;
+            List<string> D2parts = null;
+            string[] Numbers1parts = null;
+            string[] Numbers2parts = null;
 
-            if (parameters.Type == "Abs")
+            D1parts = ArrayBuilder.InputArrayBuilder(parameters.Number1, jCategory, GroupID, ItemID);
+            D2parts = ArrayBuilder.InputArrayBuilder(parameters.Number2, jCategory, GroupID, ItemID);
+
+            if (D1parts != null)
             {
-                Output = MathFunctions.Abs(InputADeci);
+                Numbers1parts = D1parts.ToArray();
             }
-            else if (parameters.Type == "Add")
+            if (D2parts != null)
             {
-                Output = MathFunctions.Add(InputADeci, InputBDeci);
-            }
-            else if (parameters.Type == "Ceiling")
-            {
-                Output = MathFunctions.Ceiling(InputADeci);
-            }
-            else if (parameters.Type == "Divide")
-            {
-                Output = MathFunctions.Divide(InputADeci, InputBDeci);
-            }
-            else if (parameters.Type == "Floor")
-            {
-                Output = MathFunctions.Floor(InputADeci);
-            }
-            else if (parameters.Type == "Max")
-            {
-                Output = MathFunctions.Max(InputADeci, InputBDeci);
-            }
-            else if (parameters.Type == "Min")
-            {
-                Output = MathFunctions.Min(InputADeci, InputBDeci);
-            }
-            else if (parameters.Type == "Multiply")
-            {
-                Output = MathFunctions.Multiply(InputADeci, InputBDeci);
-            }
-            else if (parameters.Type == "Subtract")
-            {
-                Output = MathFunctions.Subtract(InputADeci, InputBDeci);
+                Numbers2parts = D2parts.ToArray();
             }
 
-            else if (parameters.Type == "Truncate")
+            string Output = null;
+            Decimal OutputValue = 0;
+            
+            int MaxLength = ArrayBuilder.GetMaxLength(Numbers1parts, Numbers2parts);
+
+            int Counter = 0;
+
+            for (int i = 0; i < MaxLength; i++)
             {
-                Output = MathFunctions.Truncate(InputADeci);
-            }
+                dynamic InputA = null;
+                dynamic InputB = null;
+                decimal InputADeci = 0;
+                decimal InputBDeci = 0;
+
+                if (Numbers1parts != null)
+                {
+                    InputA = Config.VariableReplace(jCategory, Numbers1parts[Counter], GroupID, ItemID);
+                    decimal.TryParse(InputA, out InputADeci);
+                }
+
+                if (Numbers2parts != null)
+                {
+                    InputB = Config.VariableReplace(jCategory, Numbers2parts[Counter], GroupID, ItemID);
+                    decimal.TryParse(InputB, out InputBDeci);
+                }
+
+                if (InputA != null)
+                {
+                    Decimal.TryParse(InputA, out InputADeci);
+                }
+                else
+                {
+                    InputADeci = 0;
+                }
+                if (InputB != null)
+                {
+                    Decimal.TryParse(InputB, out InputBDeci);
+                }
+                else
+                {
+                    InputBDeci = 0;
+                }
+
+                if (parameters.Type == "Abs")
+                {
+                    OutputValue = MathFunctions.Abs(InputADeci);
+                }
+                else if (parameters.Type == "Ceiling")
+                {
+                    OutputValue = MathFunctions.Ceiling(InputADeci);
+                }
+                else if (parameters.Type == "Floor")
+                {
+                    OutputValue = MathFunctions.Floor(InputADeci);
+                }
+                else if (parameters.Type == "Max")
+                {
+                    OutputValue = MathFunctions.Max(InputADeci, InputBDeci);
+                }
+                else if (parameters.Type == "Min")
+                {
+                    OutputValue = MathFunctions.Min(InputADeci, InputBDeci);
+                }
+                else if (parameters.Type == "Truncate")
+                {
+                    OutputValue = MathFunctions.Truncate(InputADeci);
+                }
+
+                Output = Output + OutputValue + "~";
+                Counter = Counter + 1;
+            }            
+
+            Output = Output.Remove(Output.Length - 1);
             return Convert.ToString(Output);
         }
 

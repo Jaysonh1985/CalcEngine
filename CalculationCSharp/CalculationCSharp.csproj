@@ -281,6 +281,7 @@
     <Compile Include="Areas\Project\Models\ColumnRepository.cs" />
     <Compile Include="Areas\Project\Models\Column.cs" />
     <Compile Include="Areas\Project\Models\Stories.cs" />
+    <Compile Include="Models\ArrayFunctions\ArrayBuildingFunctions.cs" />
     <Compile Include="Models\CalculationViewModels.cs" />
     <Compile Include="Models\Calculation\DownloadFileActionResult.cs" />
     <Compile Include="Models\Calculation\Index.cs" />
