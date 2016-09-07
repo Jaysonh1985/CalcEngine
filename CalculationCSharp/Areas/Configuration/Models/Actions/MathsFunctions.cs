@@ -10,6 +10,8 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Type { get; set; }
         public dynamic Number1 { get; set; }
         public dynamic Number2 { get; set; }
+        public string Rounding { get; set; }
+        public string RoundingType { get; set; }
 
         public JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
         CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
@@ -53,40 +55,45 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
                 if (Numbers1parts != null)
                 {
-                    InputA = Config.VariableReplace(jCategory, Numbers1parts[Counter], GroupID, ItemID);
+                    if (Counter >= Numbers1parts.Length)
+                    {
+                        InputA = Numbers1parts[Numbers1parts.GetUpperBound(0)];
+                    }
+                    else
+                    {
+                        InputA = Numbers1parts[Counter];
+                    }
                     decimal.TryParse(InputA, out InputADeci);
                 }
-
                 if (Numbers2parts != null)
                 {
-                    InputB = Config.VariableReplace(jCategory, Numbers2parts[Counter], GroupID, ItemID);
+                    if (Counter >= Numbers2parts.Length)
+                    {
+                        InputB = Numbers2parts[Numbers2parts.GetUpperBound(0)]; ;
+                    }
+                    else
+                    {
+                        InputB = Numbers2parts[Counter];
+                    }
                     decimal.TryParse(InputB, out InputBDeci);
                 }
 
-                if (InputA != null)
-                {
-                    Decimal.TryParse(InputA, out InputADeci);
-                }
-                else
-                {
-                    InputADeci = 0;
-                }
-                if (InputB != null)
-                {
-                    Decimal.TryParse(InputB, out InputBDeci);
-                }
-                else
-                {
-                    InputBDeci = 0;
-                }
 
                 if (parameters.Type == "Abs")
                 {
                     OutputValue = MathFunctions.Abs(InputADeci);
                 }
+                else if (parameters.Type == "Add")
+                {
+                    OutputValue = MathFunctions.Add(InputADeci, InputBDeci);
+                }
                 else if (parameters.Type == "Ceiling")
                 {
                     OutputValue = MathFunctions.Ceiling(InputADeci);
+                }
+                else if (parameters.Type == "Divide")
+                {
+                    OutputValue = MathFunctions.Divide(InputADeci, InputBDeci);
                 }
                 else if (parameters.Type == "Floor")
                 {
@@ -100,10 +107,21 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 {
                     OutputValue = MathFunctions.Min(InputADeci, InputBDeci);
                 }
+                else if (parameters.Type == "Multiply")
+                {
+                    OutputValue = MathFunctions.Multiply(InputADeci, InputBDeci);
+                }
+                else if (parameters.Type == "Subtract")
+                {
+                    OutputValue = MathFunctions.Subtract(InputADeci, InputBDeci);
+                }
+
                 else if (parameters.Type == "Truncate")
                 {
                     OutputValue = MathFunctions.Truncate(InputADeci);
                 }
+
+                OutputValue = MathFunctions.Rounding(parameters.RoundingType, parameters.Rounding, OutputValue);
 
                 Output = Output + OutputValue + "~";
                 Counter = Counter + 1;

@@ -60,4 +60,27 @@ public class MathematicalFunctions
     {
         return Convert.ToDecimal(Math.Pow(Convert.ToDouble(Number1), Convert.ToDouble(Number2)));
     }
+
+    public decimal Rounding (string RoundingType, string Rounding, decimal Output)
+    {
+        if (RoundingType == "up")
+        {
+            return  Math.Round(Math.Ceiling(Output * 100) / 100, Convert.ToInt16(Rounding));
+        }
+        else if (RoundingType == "down")
+        {
+            if (Convert.ToInt16(Rounding) == 0)
+            {
+                return Math.Truncate(Output);
+            }
+            else
+            {
+                return Math.Round(Math.Floor(Output * 100) / 100, Convert.ToInt16(Rounding));
+            }
+        }
+        else
+        {
+            return Math.Round(Output, Convert.ToInt16(Rounding));
+        }
+    }
 }

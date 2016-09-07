@@ -146,26 +146,29 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             Expression e = new Expression(MathString);
                                             var Calculation = e.Evaluate();
                                             decimal Output = Convert.ToDecimal(Calculation);
+                                            MathematicalFunctions MathematicalFunctions = new MathematicalFunctions();
 
-                                            if (RoundingType == "up")
-                                            {
-                                                Output = Math.Round(Math.Ceiling(Output * 100) / 100, Convert.ToInt16(Rounding));
-                                            }
-                                            else if (RoundingType == "down")
-                                            {
-                                                if (Convert.ToInt16(Rounding) == 0)
-                                                {
-                                                    Output = Math.Truncate(Output);
-                                                }
-                                                else
-                                                {
-                                                    Output = Math.Round(Math.Floor(Output * 100) / 100, Convert.ToInt16(Rounding));
-                                                }
-                                            }
-                                            else
-                                            {
-                                                Output = Math.Round(Output, Convert.ToInt16(Rounding));
-                                            }
+                                            Output = MathematicalFunctions.Rounding(RoundingType, Rounding, Output);
+
+                                            //if (RoundingType == "up")
+                                            //{
+                                            //    Output = Math.Round(Math.Ceiling(Output * 100) / 100, Convert.ToInt16(Rounding));
+                                            //}
+                                            //else if (RoundingType == "down")
+                                            //{
+                                            //    if (Convert.ToInt16(Rounding) == 0)
+                                            //    {
+                                            //        Output = Math.Truncate(Output);
+                                            //    }
+                                            //    else
+                                            //    {
+                                            //        Output = Math.Round(Math.Floor(Output * 100) / 100, Convert.ToInt16(Rounding));
+                                            //    }
+                                            //}
+                                            //else
+                                            //{
+                                            //    Output = Math.Round(Output, Convert.ToInt16(Rounding));
+                                            //}
                                             item.Output = Convert.ToString(Output);
                                         }
                                         paramCount = paramCount + 1;
