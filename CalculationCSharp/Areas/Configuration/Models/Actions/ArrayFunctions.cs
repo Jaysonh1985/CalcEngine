@@ -36,6 +36,29 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     }
                     OutputValue = Convert.ToString(Sum);
                 }
+                else if (parameters.Function == "Product")
+                {
+                    string[] Deci1parts = null;
+                    Deci1parts = InputA.Split('~');
+                    decimal Sum = 0;
+                    int counter = 0;
+                    foreach (string output in Deci1parts)
+                    {
+                        decimal InputADeci = 0;
+                        decimal.TryParse(output, out InputADeci);
+                        if(counter == 0)
+                        {
+                            Sum = InputADeci;
+                        }
+                        else
+                        {
+                            Sum = decimal.Multiply(Sum, InputADeci);
+                        }
+                        
+                        counter = counter + 1;
+                    }
+                    OutputValue = Convert.ToString(Sum);
+                }
                 else
                 {
                     OutputValue = Convert.ToString(0);
