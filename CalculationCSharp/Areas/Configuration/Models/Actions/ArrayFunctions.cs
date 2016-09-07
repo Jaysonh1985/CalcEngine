@@ -65,6 +65,23 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 }
 
             }
+            else if(parameters.LookupType == "Date")
+            {
+
+                if (parameters.Function == "FirstDate")
+                {
+                    string[] Date1parts = null;
+                    Date1parts = InputA.Split('~');
+                    OutputValue = Convert.ToString(Date1parts[0]);
+                }
+                else if(parameters.Function == "LastDate")
+                {
+                    string[] Date1parts = null;
+                    Date1parts = InputA.Split('~');           
+                    OutputValue = Convert.ToString(Date1parts[Date1parts.GetUpperBound(0)]);
+                }
+
+            }
             else
             {
                 OutputValue = Convert.ToString(0);

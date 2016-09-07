@@ -13,7 +13,7 @@
                             <div class="col-sm-9">
                                 <select id="inclusive" name="singleSelect" ng:model="array.LookupType" class="form-control" required>
                                     <option value=""></option>
-                                    <!--<option value="Date">Date</option>-->
+                                    <option value="Date">Date</option>
                                     <option value="Decimal">Decimal</option>
                                     <!--<option value="String">String</option>-->
                                 </select>
@@ -42,7 +42,11 @@
                         <div ng-if="array.LookupType == 'Date'" class="form-group">
                             <label for="ArrayFunction" class="control-label col-md-2">Array Function</label>
                             <div class="col-sm-9">
-                                
+                                <select id="inclusive" name="ArrayFunction" ng:model="array.Function" class="form-control" required>
+                                    <option value=""></option>
+                                    <option value="FirstDate">First Date</option>
+                                    <option value="LastDate">Last Date</option>
+                                </select>
                             </div>
                         </div>
                         <div ng-if="array.LookupType == 'Decimal'" class="form-group">
