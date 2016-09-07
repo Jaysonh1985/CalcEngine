@@ -104,7 +104,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 DateTime date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day, parameters.Month);
                 DateTime datestring = date.Date;
                 var shortdatestring = datestring.ToShortDateString();
-                Output = Output + Convert.ToString(shortdatestring) + ",";
+                Output = Output + Convert.ToString(shortdatestring) + "~";
                 Counter = Counter + 1;
             }
  

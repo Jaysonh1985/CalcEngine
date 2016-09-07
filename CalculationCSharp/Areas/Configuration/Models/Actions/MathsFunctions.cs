@@ -105,7 +105,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     OutputValue = MathFunctions.Truncate(InputADeci);
                 }
 
-                Output = Output + OutputValue + ",";
+                Output = Output + OutputValue + "~";
                 Counter = Counter + 1;
             }            
 

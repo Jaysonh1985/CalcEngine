@@ -137,12 +137,12 @@ namespace CalculationCSharp.Areas.Configuration.Models
                         {
                             OutputValue = Convert.ToString(0);
                         }
-                        Output = Output + OutputValue + ",";
+                        Output = Output + OutputValue + "~";
                     }
                     else
                     {
                         OutputValue = Convert.ToString(0);
-                        Output = Output + OutputValue + ",";
+                        Output = Output + OutputValue + "~";
                     }
                 }
             

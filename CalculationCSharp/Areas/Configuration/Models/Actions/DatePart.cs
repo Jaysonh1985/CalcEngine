@@ -34,7 +34,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 DateTime Date1;
                 DateTime.TryParse(InputA, out Date1);
                 int DatePart = DatesFunctions.GetDatePart(parameters.Part, Date1);
-                Output = Output + Convert.ToString(DatePart) + ",";
+                Output = Output + Convert.ToString(DatePart) + "~";
             }
 
             Output = Output.Remove(Output.Length - 1);

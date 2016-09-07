@@ -116,7 +116,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                             OutputValue = "";
                         }
                     }
-                Output = Output + OutputValue + ",";
+                Output = Output + OutputValue + "~";
                 Counter = Counter + 1;
             }
 

@@ -16,7 +16,7 @@ namespace CalculationCSharp.Models.ArrayFunctions
             if (!string.IsNullOrEmpty(Input))
             {
                 string[] parts = null;
-                parts = Input.Split(',');
+                parts = Input.Split('~');
                 string outputstring = null;
                 string[] partsSplit = null;
                 List<string> OutputList = new List<string>();
@@ -24,9 +24,9 @@ namespace CalculationCSharp.Models.ArrayFunctions
                 foreach (string date in parts)
                 {
                     outputstring = Config.VariableReplace(jCategory, date, GroupID, ItemID);
-                    if (outputstring.Contains(","))
+                    if (outputstring.Contains("~"))
                     {
-                        partsSplit = outputstring.Split(',');
+                        partsSplit = outputstring.Split('~');
 
                         foreach (string date2 in partsSplit)
                         {
