@@ -38,7 +38,6 @@
 
                             <td width="10%">
                                 <select name="LogicSelect" ng:model="rows.Logic" class="form-control" required>
-                                    <option value=""></option>
                                     <option value="+">+</option>
                                     <option value="-">-</option>
                                     <option value="/">/</option>
@@ -57,8 +56,7 @@
                             </td>
                             <td width="10%" ng-show="!$last"></td>
                             <td width="10%" ng-show="$last">
-                                <select name="RoundSelect" ng:model="rows.Rounding" class="form-control" required>
-                                    <option value=""> </option>
+                                <select name="RoundSelect" ng:model="rows.Rounding" class="form-control" ng-init="rows.Rounding = 2" >
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
