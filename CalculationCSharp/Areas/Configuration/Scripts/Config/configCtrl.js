@@ -506,7 +506,7 @@
                     }
                 });
 
-                if (valueN.Type == "Add" || value.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract")
+                if (valueN.Type == "Add" || valueN.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract")
                 {
                     var Number2array = valueN.Number2.split('~');
                     angular.forEach(Number2array, function (valueD2, keyD2, objD2) {
