@@ -91,6 +91,10 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 {
                     OutputValue = MathFunctions.Ceiling(InputADeci);
                 }
+                else if (parameters.Type == "DecimalPart")
+                {
+                    OutputValue = MathFunctions.DecimalPart(InputADeci);
+                }
                 else if (parameters.Type == "Divide")
                 {
                     OutputValue = MathFunctions.Divide(InputADeci, InputBDeci);
