@@ -237,10 +237,52 @@ sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeahead
 
                                 }
                             }
+
                         })
                     })
                 })
             })
+        }
+    }
+});
+
+sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeaheadFactory) {
+    return {
+        replace: true,
+        restrict: 'A',
+        require: '^form',
+        scope: { config: '=', rowIndex: '=' },
+        link: function (scope, element, attrs, form, scopectrl) {
+
+            element.on('blur', function () {
+
+                var dataType = scope.config[0].Functions[attrs.rowindex].Type;
+
+                if(dataType == 'Date')
+                {
+                    var AttName = 'Output_' + attrs.rowindex + '_' + attrs.rowindex;
+                    form[AttName].$setValidity("inputformat", true);
+                    var array = scope.config[0].Functions[attrs.rowindex].Output.split('~');
+                    angular.forEach(array, function (valueNA, keyNA, obj) {
+                        var Input1Bool = isNaN(Date.parse(valueNA));
+                        if (Input1Bool == true) {
+                            form[AttName].$setValidity("inputformat", false);
+                        }
+                    })
+                }
+                if(dataType == 'Decimal')
+                {
+                    var AttName = 'Output_' + attrs.rowindex + '_' + attrs.rowindex;
+                    form[AttName].$setValidity("inputformat", true);
+                    var array = scope.config[0].Functions[attrs.rowindex].Output.split('~');
+                    angular.forEach(array, function (valueNA, keyNA, obj) {
+                        var Input1Bool = isNaN(parseFloat(valueNA));
+                        if (Input1Bool == true) {
+                            form[AttName].$setValidity("inputformat", false);
+                        }
+                    })
+                }
+            });
         }
     }
 });
