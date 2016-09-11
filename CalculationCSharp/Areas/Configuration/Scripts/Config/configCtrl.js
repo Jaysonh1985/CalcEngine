@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, configModalFactory, $filter) {
+﻿sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, configModalFactory, $filter, $timeout) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
@@ -21,16 +21,8 @@
              configService.getCalc(id)
                .then(function (data) {
                    $scope.isLoading = false;
-                   $scope.config = data;
-
-                   setInputTypes();
-
-
-                                                         
+                   $scope.config = data;                                                        
                }, onError);
-
-
- 
         }, onError);
         var id = configFunctionFactory.getConfigID();
         configService.getCalcName(id)
@@ -39,38 +31,9 @@
                 $scope.configName = namedata;
         }, onError);
     };
-    //Fix so that the input fields apply to the html input fields correctly
-    function setInputTypes() {
-
-        angular.forEach($scope.config[0].Functions, function (value, key, obj) {
-
-            if (value.Type == "Date") {
-
-                if ($scope.config[0].Functions[key].Output != null)
-                {
-                    var _date = $filter('date')(new Date($scope.config[0].Functions[key].Output), 'MMM dd yyyy');
-
-                    var newDate1 = new Date(_date);
-                    $scope.config[0].Functions[key].Output = newDate1;
-                }
-
-            }
-            if (value.Type == "Decimal") {
-
-                if ($scope.config[0].Functions[key].Output != null) {
-                    var decimal = parseFloat($scope.config[0].Functions[key].Output);
-                    $scope.config[0].Functions[key].Output = decimal;
-                }
-
-            }
-
-        });
-
-    }
 
     //Functions
-    $scope.AddFunction = function (colIndex, index) {
-        
+    $scope.AddFunction = function (colIndex, index) {      
         if (colIndex == 0)
         {
             $scope.config[colIndex].Functions.push({
@@ -78,7 +41,6 @@
                 Function: 'Input',
                 Logic: [],
                 Parameter: []
-
             });
         }
         else
@@ -87,15 +49,12 @@
                 ID: this.config[colIndex].Functions.length,
                 Logic: [],
                 Parameter: []
-
             });
         }
-
      }
 
     $scope.AddFunctionRows = function (colIndex, index, rows, parentIndex) {
         var item = null;
-
         if (colIndex == 0)
         {
             item = {
@@ -104,7 +63,6 @@
                 Logic: [],
                 Parameter: []
             };
-
         }
         else
         {
@@ -114,7 +72,6 @@
                 Parameter: []
             };
         }
-
         $scope.config[colIndex].Functions.splice(index + 1, 0, item);
     }
 
@@ -127,7 +84,6 @@
             $scope.config[colIndex].Functions.splice(index + 1, 0, item);
             index =  index + 1;
         });
-
     }
 
     $scope.DeleteFunction = function (colIndex, $index) {
@@ -141,7 +97,6 @@
             angular.forEach(selectRowsReverse, function (value, key, prop) {
                 $scope.config[colIndex].Functions.splice(value, 1);
             });
-
             resetSelection();
         }
     }
@@ -153,34 +108,27 @@
             Description: null,
             Functions: []
         });
-
         $scope.GroupButtonClick('lg', this.config.length - 1);
     }
 
     $scope.AddCategoryRows = function (colIndex) {
-
         var item = null;
-
         item = {
             ID: colIndex + 1,
             Name: null,
             Description: null,
             Functions: []
         };
-
         $scope.config.splice(colIndex + 1, 0, item);
         $scope.GroupButtonClick('lg', colIndex + 1);
         $scope.rebuildCategoryIDs();
     }
 
     $scope.CopyCategory = function (index, e) {
-
         var Category = $scope.config[index];
         var item = null;
-
         item = angular.copy(Category);
         $scope.config.splice(index + 1, 0, item);
-
     }
 
     $scope.MoveDownCategory = function (Index, e) {
@@ -189,15 +137,12 @@
             e.preventDefault();
             e.stopPropagation();
         }
-
         var Category = $scope.config[Index];
         var item = null;
-
         item = angular.copy(Category);
         $scope.config.splice(Index, 1);
         $scope.config.splice(Index + 1, 0, item);
         $scope.colindex = Index;
-
     }
 
     $scope.DeleteCategory = function (colIndex) {
@@ -212,16 +157,11 @@
         colid = 0;
         angular.forEach($scope.config, function (groups) {
             $scope.config[colid].ID = colid;
-
             rowid = 0;
-
             angular.forEach($scope.config[colid].Functions, function(rows){
-
                 $scope.config[colid].Functions[rowid].ID = rowid;
                 rowid = rowid +1;
-
             });
-
             colid = colid + 1;
         });
     }
@@ -241,22 +181,15 @@
         if ($scope.validationError == false)
         {
             $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
-        }
-        
+        }    
         $scope.OpenAllButton();
-
         var id = configFunctionFactory.getConfigID();
         $scope.rebuildCategoryIDs();
-        $scope.InputFieldPreviouslySet(form);
-
         if (form.$valid == true) {
-
             $scope.validationError = false;
-
             configService.postCalc(id, $scope.config).then(function (data) {
                 $scope.isLoading = false;
                 $scope.config = data;
-                setInputTypes();
                 $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
                 toastr.success("Calculated successfully", "Success");
             }, onError);
@@ -293,8 +226,7 @@
         }
         else {
             rows.Type = null;
-        }
-        
+        }      
     }
     //TypeAhead Functions
     $scope.variableArrayBuilder = function variableArrayBuilder(config, colIndex, type, rowIndex) {
@@ -330,8 +262,7 @@
                     });
 
                 };
-
-                 
+ 
                 functionID = 0;
                 angular.forEach($scope.DecimalValue, function (Names) {
                     $scope.DecimalParameter = ($filter('filter')($scope.DecimalValue[functionID].Name));
@@ -350,303 +281,28 @@
             }
         });
         scopeid = 0;
-
         return $scope.Names;
-
     }
     //UI
     $scope.OpenAllButton = function () {
-
         angular.forEach($scope.config, function(value,key,obj){
-
             $scope.openIndex[key] = true;
         })
-
     }
 
     $scope.CloseAllButton = function () {
-
         angular.forEach($scope.openIndex, function (value, key, obj) {
-
             $scope.openIndex[key] = false;
         })
-
     }
 
     $scope.getVariableTypes = function getVariableTypes(colIndex, rowIndex) {  //function that sets the parameters available under the different variable types
-
         $scope.DecimalNames = [];
         $scope.DateNames = [];
         $scope.StringNames = [];
-
         $scope.DecimalNames = $scope.variableArrayBuilder($scope.config, colIndex, 'Decimal', rowIndex);
         $scope.DateNames = $scope.variableArrayBuilder($scope.config, colIndex, 'Date', rowIndex);
         $scope.StringNames = $scope.variableArrayBuilder($scope.config, colIndex, 'String', rowIndex);
-
-    }
-    //Input Previously Set Validations
-    $scope.InputFieldPreviouslySet = function InputFieldPreviouslySet(form) {
-
-        angular.forEach($scope.config, function (value, key, obj) {
-
-            angular.forEach($scope.config[key].Functions, function (valueF, keyF, obj) {
-
-                angular.forEach($scope.config[key].Functions[keyF].Parameter, function (valueP, keyP, obj) {               
-
-                    if ($scope.config[key].Functions[keyF].Function == 'Maths')
-                    {
-                        $scope.MathsInputFieldPreviouslySet(key, keyF, obj, form);
-                    }
-                    if ($scope.config[key].Functions[keyF].Function == 'Period') {
-                        $scope.PeriodInputFieldPreviouslySet(key, keyF, obj, form);
-                    }
-                    if ($scope.config[key].Functions[keyF].Function == 'Factors') {
-                        $scope.FactorsInputFieldPreviouslySet(key, keyF, obj, form);
-                    }
-                    if ($scope.config[key].Functions[keyF].Function == 'Dates') {
-                        $scope.DateAdjInputFieldPreviouslySet(key, keyF, obj, form);
-                    }
-                    if ($scope.config[key].Functions[keyF].Function == 'DatePart') {
-                        $scope.DatePartInputFieldPreviouslySet(key, keyF, obj, form);
-                    }
-                    if ($scope.config[key].Functions[keyF].Function == 'MathsFunctions') {
-                        $scope.MathsFunctionsInputFieldPreviouslySet(key, keyF, obj, form);
-                    }
-
-                })
-           })
-         })
-
-    };
-
-    $scope.MathsInputFieldPreviouslySet = function (colindex, index, obj, form) {
-
-       var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Decimal", index);
-       var AttName = 'FunctionCog_' + colindex + '_' + index;
-       $scope.form[AttName].$setValidity("input", true);
-       if (VariableNames.length > 0)
-       {
-           angular.forEach(obj, function (valueN, keyN, obj) {
-               
-               var Input1Bool = isNaN(parseFloat(valueN.Input1));
-               var Input2Bool = isNaN(parseFloat(valueN.Input2));
-
-               if (Input1Bool == true)
-               {
-                   if (VariableNames.indexOf(valueN.Input1) == -1) {
-
-                       
-                       $scope.form[AttName].$setValidity("input", false);
-
-                   }
-               }
-
-               if (Input2Bool == true) {
-                   if (VariableNames.indexOf(valueN.Input2) == -1) {
-
-                       $scope.form[AttName].$setValidity("input", false);
-
-                   }
-               }
-
-           });
-
-        }
-
-    }
-
-    $scope.PeriodInputFieldPreviouslySet = function (colindex, index, obj, form) {
-
-        var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Date", index);
-        var AttName = 'FunctionCog_' + colindex + '_' + index;
-        $scope.form[AttName].$setValidity("input", true);
-        if (VariableNames.length > 0) {
-            angular.forEach(obj, function (valueN, keyN, obj) {
-
-                var Date1array = valueN.Date1.split('~');
-
-                angular.forEach(Date1array, function (valueD1, keyD1, objD1) {
-                    var Input1Bool = isNaN(Date.parse(valueD1));
-                    if (Input1Bool == true) {
-                        if (VariableNames.indexOf(valueD1) == -1) {
-                            $scope.form[AttName].$setValidity("input", false);
-                        }
-                    }
-                });
-
-                var Date2array = valueN.Date2.split('~');
-                angular.forEach(Date2array, function (valueD2, keyD2, objD2) {
-                    var Input2Bool = isNaN(Date.parse(valueD2));
-
-                    if (Input2Bool == true) {
-                        if (VariableNames.indexOf(valueD2) == -1) {
-                            $scope.form[AttName].$setValidity("input", false);
-                        }
-                    }
-                });
-            });
-        }
-    }
-
-    $scope.MathsFunctionsInputFieldPreviouslySet = function (colindex, index, obj, form) {
-
-        var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Decimal", index);
-        var AttName = 'FunctionCog_' + colindex + '_' + index;
-        $scope.form[AttName].$setValidity("input", true);
-
-        if (VariableNames.length > 0) {
-            angular.forEach(obj, function (valueN, keyN, obj) {
-                var Number1array = valueN.Number1.split('~');
-                angular.forEach(Number1array, function (valueD1, keyD1, objD1) {
-                    var Input1Bool = isNaN(parseFloat(valueD1));
-                    if (Input1Bool == true) {
-                        if (VariableNames.indexOf(valueD1) == -1) {
-                            $scope.form[AttName].$setValidity("input", false);
-                        }
-                    }
-                });
-
-                if (valueN.Type == "Add" || valueN.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract")
-                {
-                    var Number2array = valueN.Number2.split('~');
-                    angular.forEach(Number2array, function (valueD2, keyD2, objD2) {
-                        var Input2Bool = isNaN(parseFloat(valueD2));
-                        if (Input2Bool == true) {
-                            if (VariableNames.indexOf(valueD2) == -1) {
-                                $scope.form[AttName].$setValidity("input", false);
-                            }
-                        }
-                    });
-                }
-
-            });
-        }
-    }
-
-    $scope.DatePartInputFieldPreviouslySet = function (colindex, index, obj, form) {
-
-        var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Date", index);
-        var AttName = 'FunctionCog_' + colindex + '_' + index;
-        $scope.form[AttName].$setValidity("input", true);
-        if (VariableNames.length > 0) {
-            angular.forEach(obj, function (valueN, keyN, obj) {
-
-                var array = valueN.Date1.split('~');
-                angular.forEach(array, function (valueNA, keyNA, obj) {
-                    var Input1Bool = isNaN(Date.parse(valueNA));
-
-                    if (Input1Bool == true) {
-                        if (VariableNames.indexOf(valueNA) == -1) {
-                            $scope.form[AttName].$setValidity("input", false);
-                        }
-                    }
-                })
-            });
-        }
-    }
-
-    $scope.FactorsInputFieldPreviouslySet = function (colindex, index, obj, form) {
-
-        if (obj[0].LookupType == 'Date')
-        {
-            var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Date", index);
-            var AttName = 'FunctionCog_' + colindex + '_' + index;
-            $scope.form[AttName].$setValidity("input", true);
-            if (VariableNames.length > 0) {
-                angular.forEach(obj, function (valueN, keyN, obj) {
-
-                    var Input1Bool = isNaN(Date.parse(valueN.LookupValue));
-                   
-                    if (Input1Bool == true) {
-                        if (VariableNames.indexOf(valueN.LookupValue) == -1) {
-
-                            $scope.form[AttName].$setValidity("input", false);
-
-                        }
-                    }
-
-                });
-
-            }
-        }
-        else if (obj[0].LookupType == 'Decimal')
-        {
-            var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Decimal", index);
-            var AttName = 'FunctionCog_' + colindex + '_' + index;
-            $scope.form[AttName].$setValidity("input", true);
-            if (VariableNames.length > 0) {
-                angular.forEach(obj, function (valueN, keyN, obj) {
-
-                    var Input1Bool = isNaN(parseFloat(valueN.LookupValue));
-
-                    if (Input1Bool == true) {
-                        if (VariableNames.indexOf(valueN.LookupValue) == -1) {
-
-                            $scope.form[AttName].$setValidity("input", false);
-
-                        }
-                    }
-
-                });
-
-            }
-        }
-
-
-    }
-
-    $scope.DateAdjInputFieldPreviouslySet = function (colindex, index, obj, form) {
-
-        var VariableNames = $scope.variableArrayBuilder($scope.config, colindex, "Date", index);
-        var AttName = 'FunctionCog_' + colindex + '_' + index;
-        $scope.form[AttName].$setValidity("input", true);
-
-        if (VariableNames.length > 0) {
-
-            angular.forEach(obj, function (valueN, keyN, obj) {
-
-                if (obj[0].Type == 'Add' || obj[0].Type == 'Adjust' || obj[0].Type == 'Subtract') {
-                    var Date1array = valueN.Date1.split('~');
-                    angular.forEach(Date1array, function (valueNA, keyNA, obj) {
-                        var Input1Bool = isNaN(Date.parse(valueNA));
-                        if (Input1Bool == true) {
-                            if (VariableNames.indexOf(valueNA) == -1) {
-                                $scope.form[AttName].$setValidity("input", false);
-                            }
-                        }
-                    });
-                }
-
-                if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
-                    var Date1array = valueN.Date1.split('~');
-                        
-                    angular.forEach(Date1array, function (valueD1, keyD1, objD1) {    
-                        var Input1Bool = isNaN(Date.parse(valueD1));
-                        if (Input1Bool == true) {
-                            if (VariableNames.indexOf(valueD1) == -1) {
-
-                                $scope.form[AttName].$setValidity("input", false);
-
-                            }
-                        }
-                    });
-                    var Date2array = valueN.Date2.split('~');
-                    angular.forEach(Date2array, function (valueD2, keyD2, objD2) {
-                        var Input2Bool = isNaN(Date.parse(valueD2));
-                        if (Input2Bool == true) {
-                            if (VariableNames.indexOf(valueD2) == -1) {
-
-                                $scope.form[AttName].$setValidity("input", false);
-
-                            }
-                        }
-                    });
-                }
-            
-            });
-
-        }
-
     }
 
     $scope.FunctionButtonClick = function (size, colIndex, index) {
@@ -655,9 +311,9 @@
         $scope.getVariableTypes(colIndex, index);
         var FunctionCtrl = null;
         var FunctionTemp = null;
+        $scope.AttName = 'Row_' + colIndex + '_' + index;
         FunctionCtrl = configModalFactory.getFunctionCtrl(Function);
         FunctionTemp = configModalFactory.getFunctionTempURL(Function);
-
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: FunctionTemp,
@@ -675,22 +331,21 @@
                     $scope.config[colIndex].Functions[index].Name = selectedItem[0].key;
                     $scope.config[colIndex].Functions[index].Type = selectedItem[0].templateOptions.type;
                 }
-            }, function () {
-                
-            });
-        
+                $timeout(function () {
+                    var el = document.getElementById($scope.AttName);
+                    angular.element(el).triggerHandler('click');
+                });
 
+            }, function () {
+
+            });
     };
 
     $scope.LogicButtonClick = function (size, colIndex, index) {
-        $scope.Logic = this.config[colIndex].Functions[index].Logic;
-         
+        $scope.Logic = this.config[colIndex].Functions[index].Logic;      
         $scope.AllNames = [];
-
-        $scope.configReplace = configFunctionFactory.convertToFromJson($scope.config);
-        
+        $scope.configReplace = configFunctionFactory.convertToFromJson($scope.config);     
         $scope.AllNames = $scope.variableArrayBuilder($scope.configReplace, colIndex, null, index);
-
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/Areas/Configuration/Scripts/Logic/LogicModal.html',
@@ -701,11 +356,9 @@
                 Logic: function () { return $scope.Logic }
             }
         });
-
         modalInstance.result.then(function (selectedItem) {
             $scope.config[colIndex].Functions[index].Logic = selectedItem;
-        }, function () {
-           
+        }, function () {       
         });
     };
 
@@ -729,10 +382,8 @@
         modalInstance.result.then(function (selectedItem) {
             $scope.config[colIndex].ID = selectedItem[0].ID;
             $scope.config[colIndex].Name = selectedItem[0].Name;
-            $scope.config[colIndex].Description = selectedItem[0].Description;
-            
-        }, function () {
-           
+            $scope.config[colIndex].Description = selectedItem[0].Description;            
+        }, function () {          
         });
     };
 
@@ -750,12 +401,9 @@
         });
 
         modalInstance.result.then(function (selectedItem) {
-
             $scope.config = JSON.parse(selectedItem);
             toastr.success("Reverted successfully", "Success");
-
-        }, function () {
-         
+        }, function () {        
         });
     };
 
@@ -773,11 +421,8 @@
         });
 
         modalInstance.result.then(function (selectedItem) {
-
             $scope.CalcButtonClick(form);
-
-        }, function () {
-           
+        }, function () {           
         });
     };
     //Higlight rows functions
@@ -785,25 +430,21 @@
 
     $scope.selectRow = function (event, rowIndex, colIndex) {
         if (event.ctrlKey) {
-
             if (selectedRowsIndexes[colIndex] != null) {
                 changeSelectionStatus(rowIndex, colIndex);
             }
             else {
                 resetSelection();
                 selectedRowsIndexes[colIndex] = [rowIndex];
-            }
-           
+            }          
         } else if (event.shiftKey) {
-
             if (selectedRowsIndexes[colIndex] != null) {
                 selectWithShift(rowIndex, colIndex);
             }
             else {
                 resetSelection();
                 selectedRowsIndexes[colIndex] = [rowIndex];
-            }
-            
+            }         
         } else {
 
             if (selectedRowsIndexes[colIndex] != null) {
@@ -865,13 +506,11 @@
     }
 
     $scope.isRowSelected = function (rowIndex, colIndex) {
-
         if (selectedRowsIndexes[colIndex] != null)
         {
             return selectedRowsIndexes[colIndex].indexOf(rowIndex) > -1;
         }
-        return false;
-        
+        return false;       
     };
 
     var onError = function (errorMessage) {

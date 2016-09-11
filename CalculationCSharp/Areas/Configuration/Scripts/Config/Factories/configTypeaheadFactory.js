@@ -33,14 +33,11 @@
 
                     };
 
-
                     functionID = 0;
-                    angular.forEach(DecimalValue, function (Names) {
+                    angular.forEach(DecimalValue, function (NamesDecimalValue) {
                         DecimalParameter = ($filter('filter')(DecimalValue[functionID].Name));
-                        
-                        var NamesIndex = configFunctionFactory.getIndexOf(Names, DecimalParameter, 'Name');
 
-                        if (Names.indexOf(DecimalParameter) == -1) {
+                        if (DecimalValue.indexOf(DecimalParameter) == -1) {
 
                             Names[arrayID] = DecimalParameter;
 
