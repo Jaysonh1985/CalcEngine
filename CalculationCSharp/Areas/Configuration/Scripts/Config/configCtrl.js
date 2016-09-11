@@ -334,6 +334,7 @@
                 $timeout(function () {
                     var el = document.getElementById($scope.AttName);
                     angular.element(el).triggerHandler('click');
+                    $scope.form.$setDirty();
                 });
 
             }, function () {
