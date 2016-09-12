@@ -318,6 +318,7 @@
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: FunctionTemp,
+                backdrop: false,
                 scope: $scope,
                 controller: FunctionCtrl,
                 size: size,
@@ -353,6 +354,7 @@
             templateUrl: '/Areas/Configuration/Scripts/Logic/LogicModal.html',
             scope: $scope,
             controller: 'logicCtrl',
+            backdrop: false,
             size: size,
             resolve: {
                 Logic: function () { return $scope.Logic }
