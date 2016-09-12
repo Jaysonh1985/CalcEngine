@@ -75,8 +75,15 @@
         });
     }
 
-    $scope.SaveButtonClick = function getFormFields() {  //function that sets the parameters available under the different variable types     
-        $uibModalInstance.close($scope.configreg);
+    $scope.SaveButtonClick = function SaveButtonClick(form) {  //function that sets the parameters available under the different variable types     
+
+        if (form.$valid == true) {
+            $uibModalInstance.close($scope.configreg);
+            toastr.success("Saved successfully", "Success");
+        }
+        else {
+            toastr.error("Failed Validations", "Error");
+        }
     }
 
     init();

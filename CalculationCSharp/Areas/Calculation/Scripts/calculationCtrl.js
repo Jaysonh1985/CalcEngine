@@ -103,69 +103,50 @@
 
     $scope.BulkCalcButtonClick = function CalcButtonClick(input) {
         $scope.bulkArrayOutput = [];
-        angular.forEach(input, function (value, key, obj) {
-            
+        angular.forEach(input, function (value, key, obj) {       
             angular.forEach(value, function (value, key, obj) {
-
                 var index = getIndexOf($scope.config[0].Functions, key, 'Name');
-
                 $scope.config[0].Functions[index].Output = value;
-
             })
-
             $scope.bulkarray = $scope.config;
             $scope.BulkOutputBuilder($scope.bulkarray);
             $scope.bulkarray = [];
         })
-
         $scope.BulkOutputArray = [];
-
-        angular.forEach($scope.bulkArrayOutput, function (value, key, obj) {
-            
+        angular.forEach($scope.bulkArrayOutput, function (value, key, obj) {         
             $scope.BulkOutputArray.push(angular.fromJson(value));
-
         })
-
         calculationService.postBulkCalc(1, $scope.BulkOutputArray).then(function (data) {
             $scope.isLoading = false;
             $scope.BulkOutput = data;
             toastr.success("Parsed successfully", "Success");
         });
-
     };
 
     $scope.BulkOutputBuilder = function BulkOutputBuilder(Output) {
-
         var Test = [];
-
         Test = angular.toJson(Output);
-
         $scope.bulkArrayOutput.push(Test);
-
     };
+    
+    $scope.CalcButtonClick = function CalcButtonClick(form) {
+        if (form.$valid == true) {
+            $scope.isLoading = true;
+            angular.forEach($scope.configreg.Functions, function (value, key, obj) {
 
-
-    $scope.CalcButtonClick = function CalcButtonClick() {
-     
-        $scope.isLoading = true;
-
-        $scope.prop = [];
-        $scope.val = [];
-        $scope.obj = [];
-
-        angular.forEach($scope.configreg.Functions, function (value, key, obj) {
-          
-            var index = configFunctionFactory.getIndexOf($scope.config[0].Functions, value.Name, 'Name');
-            $scope.config[0].Functions[index].Output = value.Output;
-        });
-
-
-        calculationService.postCalc(1, $scope.config).then(function (data) {
-            $scope.isLoading = false;
-            $scope.output = data;
-            toastr.success("Calculated successfully", "Success");
-        });
-
+                var index = configFunctionFactory.getIndexOf($scope.config[0].Functions, value.Name, 'Name');
+                $scope.config[0].Functions[index].Output = value.Output;
+            });
+            calculationService.postCalc(1, $scope.config).then(function (data) {
+                $scope.isLoading = false;
+                $scope.output = data;
+                toastr.success("Calculated successfully", "Success");
+            });
+        }
+        else {
+            $scope.validationError = true;
+            toastr.error("Failed Validations", "Error");
+        }
     };
         
     init();
