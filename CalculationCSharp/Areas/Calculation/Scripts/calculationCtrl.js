@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, calculationService, $filter) {
+﻿sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configFunctionFactory, calculationService, $filter) {
 
     $scope.output = [];
     $scope.formset = [];
@@ -53,15 +53,12 @@
         var functionID = 0;
         $scope.fields = [];
         $scope.fieldset = [];
-        angular.forEach($scope.config, function (groups) {
+        $scope.configreg = configFunctionFactory.convertToFromJson($scope.config[0]);
+        angular.forEach($scope.configreg.Functions, function (groups) {
             functionID = 0;
-            $scope.fields = $filter('filter')($scope.config[scopeid].Functions, { Function: 'Input' });
-            angular.forEach($scope.fields, function (functions) {
-                    $scope.fieldset.push($scope.fields[functionID].Parameter[0]);
-                    functionID = functionID + 1
-                });
-                scopeid = scopeid + 1
-    });
+            $scope.configreg.Functions[scopeid].Output = null;
+            scopeid = scopeid + 1
+        });
     }
     $scope.getCSVFields = function getFormFields() {  //function that sets the parameters available under the different variable types
         var CSVcounter = 0;
@@ -152,19 +149,14 @@
      
         $scope.isLoading = true;
 
-        console.log("2");
-        $scope.array = [];
-
-        $scope.array.push($scope.formset);
         $scope.prop = [];
         $scope.val = [];
         $scope.obj = [];
 
-        angular.forEach($scope.formset.fields, function (value, key, obj) {
+        angular.forEach($scope.configreg.Functions, function (value, key, obj) {
           
-                $scope.prop.push(value);
-                var index = getIndexOf($scope.config[0].Functions, key, 'Name');
-                $scope.config[0].Functions[index].Output = value;
+            var index = configFunctionFactory.getIndexOf($scope.config[0].Functions, value.Name, 'Name');
+            $scope.config[0].Functions[index].Output = value.Output;
         });
 
 
