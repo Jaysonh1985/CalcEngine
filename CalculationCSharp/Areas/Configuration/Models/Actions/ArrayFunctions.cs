@@ -22,7 +22,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
             if(parameters.LookupType == "Decimal")
             {
-                if(parameters.Function == "Sum")
+                if (parameters.Function == "Sum")
                 {
                     string[] Deci1parts = null;
                     Deci1parts = InputA.Split('~');
@@ -46,7 +46,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     {
                         decimal InputADeci = 0;
                         decimal.TryParse(output, out InputADeci);
-                        if(counter == 0)
+                        if (counter == 0)
                         {
                             Sum = InputADeci;
                         }
@@ -54,10 +54,23 @@ namespace CalculationCSharp.Areas.Configuration.Models
                         {
                             Sum = decimal.Multiply(Sum, InputADeci);
                         }
-                        
+
                         counter = counter + 1;
                     }
                     OutputValue = Convert.ToString(Sum);
+                }
+                else if (parameters.Function == "FirstNumber")
+                {
+                    string[] Deci1parts = null;
+                    Deci1parts = InputA.Split('~');
+                    OutputValue = Convert.ToString(Deci1parts[0]);
+
+                }
+                else if (parameters.Function == "LastNumber")
+                {
+                    string[] Deci1parts = null;
+                    Deci1parts = InputA.Split('~');
+                    OutputValue = Convert.ToString(Deci1parts[Deci1parts.GetUpperBound(0)]);
                 }
                 else
                 {
