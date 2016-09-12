@@ -173,6 +173,7 @@
         configService.putCalc(id, $scope.config).then(function (data) {
             $scope.isLoading = false;
             toastr.success("Saved successfully", "Success");
+            $scope.form.$setPristine();
         }, onError);
     };
 

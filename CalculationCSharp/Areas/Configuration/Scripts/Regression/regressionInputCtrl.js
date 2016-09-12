@@ -1,4 +1,4 @@
-﻿sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions, Input, $filter) {
+﻿sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions, configFunctionFactory, Input, $filter) {
     
     $scope.output = [];
     $scope.formset = [];
@@ -8,13 +8,14 @@
     vm.model = [];
 
     function init() {
-
         $scope.isLoading = false;
         $scope.config = Functions;
         $scope.fieldset = [];
         $scope.getFormFields();
-        $scope.mapFormFields(Input);
-
+        if (Input != null)
+        {
+            $scope.mapFormFields(Input);
+        }
     };
     
     $scope.getFormFields = function getFormFields() {  //function that sets the parameters available under the different variable types
@@ -23,52 +24,22 @@
         var functionID = 0;
         $scope.fields = [];
         $scope.fieldset = [];
-        angular.forEach($scope.config, function (groups) {
+        $scope.configreg = configFunctionFactory.convertToFromJson($scope.config[0]);
+        angular.forEach($scope.configreg.Functions, function (groups) {
             functionID = 0;
-            $scope.fields = $filter('filter')($scope.config[scopeid].Functions, { Function: 'Input' });
-            angular.forEach($scope.fields, function (functions) {
-                $scope.fieldset.push($scope.fields[functionID].Parameter[0]);
-                functionID = functionID + 1
-            });
+            $scope.configreg.Functions[scopeid].Output = null;
             scopeid = scopeid + 1
         });
     }
 
     $scope.mapFormFieldsfromBuilder = function()
     {
-        var counter = 0;
-        var scopeid = 0;
-        var functionID = 0;
-
-        $scope.Input = {};
-        var string;
-
-        angular.forEach($scope.config, function (groups) {
-            functionID = 0;
-            $scope.Inputs = $filter('filter')($scope.config[scopeid].Functions, { Function: 'Input' });
-            angular.forEach($scope.Inputs, function (functions, key, value) {              
-                $scope.Input[functions.Name] = functions.Output;
-                functionID = functionID + 1
-            });
-            scopeid = scopeid + 1
-            
+        angular.forEach($scope.config[0].Functions, function (value, key, obj) {
+            var index = configFunctionFactory.getIndexOf($scope.configreg.Functions, value.Name, 'Name');
+            $scope.configreg.Functions[index].Output = value.Output;
         });
-
-        $scope.formset.fields = $scope.Input;
-
     };
-
-    function getIndexOf(arr, val, prop) {
-        var l = arr.length,
-          k = 0;
-        for (k = 0; k < l; k = k + 1) {
-            if (arr[k][prop] === val) {
-                return k;
-            }
-        }
-        return false;
-    };
-    
+        
     var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;;
 
     function convertDateStringsToDates(input) {
@@ -97,43 +68,15 @@
     $scope.mapFormFields = function mapFormFields(Input) {
        var InputJson = angular.fromJson(Input);
        convertDateStringsToDates([InputJson]);
-
         $scope.isLoading = true;
-
-        $scope.array = [];
-
-        $scope.array.push($scope.formset);
-        $scope.prop = [];
-        $scope.val = [];
-        $scope.obj = [];
-
-        angular.forEach(angular.fromJson(InputJson), function (value, key, obj) {
-
-            $scope.prop.push(value);
-            var index = getIndexOf($scope.fieldset, key, 'key');
-
-            var NumBool = angular.isNumber(index);
-
-            if (NumBool == true)
-            {
-                $scope.fieldset[index].defaultValue = value;
-                $scope.fieldset[index].initialValue = value;
-            }
-
+        angular.forEach(angular.fromJson(InputJson.Functions), function (value, key, obj) {
+            var index = configFunctionFactory.getIndexOf($scope.configreg.Functions, value.Name, 'Name');
+            $scope.configreg.Functions[index].Output = value.Output;
         });
-
-        if (Input == null) {
-            angular.forEach($scope.fieldset, function (value, obj, iterator) {
-
-                $scope.fieldset[obj].defaultValue = null;
-            })
-        };
-
     }
 
     $scope.SaveButtonClick = function getFormFields() {  //function that sets the parameters available under the different variable types     
-
-        $uibModalInstance.close($scope.formset.fields);
+        $uibModalInstance.close($scope.configreg);
     }
 
     init();

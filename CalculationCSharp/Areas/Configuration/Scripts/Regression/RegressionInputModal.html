@@ -5,15 +5,31 @@
         <input class="btn btn-default" type="button" value="User Current Inputs" ng-click="mapFormFieldsfromBuilder()" />
     </div>
     <div class="modal-body">
-        <form ng-submit="SaveButtonClick()">
-            <formly-form model="formset.fields" fields="fieldset">
-                <button type="submit" class="btn btn-default submit-button">Save</button>
-            </formly-form>
-        </form>
-    </div>
+            <form name="form" role="form" novalidate>
+                    <div class="modal-body">
+                        <table class="table table-bordered ">
+                            <thead>
+                                <tr>
+                                    <th width="25%">Name</th>
+                                    <th width="75%">Input</th>
+                                </tr>
+                            </thead>
+                            <tbody ng:model="configreg.Functions">
+                                <tr unselectable="on" ng-repeat="rows in configreg.Functions | filter:searchText">
+                                    <td width="5%">{{rows.Parameter[0].templateOptions.label}}</td>
+                                    <td ng-if="(rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
+                                        <span><input inputformat-Validation rowIndex="{{$index}}" config='config' type="text" ng:model="rows.Output" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" class="form-control   input-sm"></span>
+                                        <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
+            </form>
 
-    <div class="modal-footer">
-
-    </div>
+        </div>
+                    <div class="modal-footer">
+                        <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
+                    </div>
 </body>
