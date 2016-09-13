@@ -60,8 +60,10 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
         public void CalculateAction(List<CategoryViewModel> jCategory)
         {
+
             foreach (var group in jCategory)
             {
+
                 foreach (var item in group.Functions)
                 {
                     if (item.Function == "Input")
@@ -71,6 +73,19 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                     }
                     else
                     {
+                        string colLogic = null;
+                        bool colLogicParse = true;
+                        if(group.Logic != null)
+                        {
+                            foreach (var bit in group.Logic)
+                            {
+                                Logic Logic = new Logic();
+                                colLogic = Logic.Output(jCategory, bit, group.ID, 0);
+                                Expression ex = new Expression(colLogic);
+                                colLogicParse = Convert.ToBoolean(ex.Evaluate());
+                            }
+                        }
+
                         if (item.Parameter.Count > 0)
                         {
                             string logic = null;
@@ -78,13 +93,21 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                             string MathString = null;
                             bool PowOpen = false;
 
-                            foreach (var bit in item.Logic)
+                            if (colLogicParse == true)
                             {
-                                Logic Logic = new Logic();                            
-                                logic = Logic.Output(jCategory, bit, group.ID, item.ID);
-                                Expression ex = new Expression(logic);
-                                logicparse = Convert.ToBoolean(ex.Evaluate());
+                              foreach (var bit in item.Logic)
+                                {
+                                    Logic Logic = new Logic();
+                                    logic = Logic.Output(jCategory, bit, group.ID, item.ID);
+                                    Expression ex = new Expression(logic);
+                                    logicparse = Convert.ToBoolean(ex.Evaluate());
+                                }
                             }
+                            else
+                            {
+                                logicparse = false;
+                            }
+
                             if (logicparse == true)
                             {
                                 int paramCount = 1;

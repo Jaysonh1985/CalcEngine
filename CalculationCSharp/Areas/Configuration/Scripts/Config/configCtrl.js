@@ -106,7 +106,8 @@
             ID: this.config.length,
             Name: null,
             Description: null,
-            Functions: []
+            Functions: [],
+            Logic: []
         });
         $scope.GroupButtonClick('lg', this.config.length - 1);
     }
@@ -117,7 +118,8 @@
             ID: colIndex + 1,
             Name: null,
             Description: null,
-            Functions: []
+            Functions: [],
+            Logic: []
         };
         $scope.config.splice(colIndex + 1, 0, item);
         $scope.GroupButtonClick('lg', colIndex + 1);
@@ -344,6 +346,7 @@
             });
     };
 
+
     $scope.LogicButtonClick = function (size, colIndex, index) {
         $scope.Logic = this.config[colIndex].Functions[index].Logic;      
         $scope.AllNames = [];
@@ -363,6 +366,33 @@
         modalInstance.result.then(function (selectedItem) {
             $scope.config[colIndex].Functions[index].Logic = selectedItem;
         }, function () {       
+        });
+    };
+
+    $scope.CategoryLogicButtonClick = function (size, index) {
+        $scope.Logic = this.config[index].Logic;
+
+        $scope.AllNames = [];
+
+        $scope.configReplace = configFunctionFactory.convertToFromJson($scope.config);
+
+        $scope.AllNames = $scope.variableArrayBuilder($scope.configReplace, index, null, 0);
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/Areas/Configuration/Scripts/Logic/LogicModal.html',
+            scope: $scope,
+            controller: 'logicCtrl',
+            size: size,
+            resolve: {
+                Logic: function () { return $scope.Logic }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.config[index].Logic = selectedItem;
+        }, function () {
+
         });
     };
 

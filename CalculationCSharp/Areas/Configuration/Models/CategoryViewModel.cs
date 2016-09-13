@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CalculationCSharp.Areas.Configuration.Models.Actions;
+using System.Collections.Generic;
 
 namespace CalculationCSharp.Areas.Configuration.Models
 {
@@ -8,5 +9,6 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public virtual List<ConfigViewModel> Functions { get; set; }
+        public virtual List<Logic> Logic { get; set; }
     }
 }

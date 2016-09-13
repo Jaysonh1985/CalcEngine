@@ -11,6 +11,17 @@
         $scope.form.templateOptions.label = Functions[0].templateOptions.label;
         $scope.form.templateOptions.type = Functions[0].templateOptions.type;
         $scope.form.templateOptions.required = Functions[0].templateOptions.required;
+        var Output = '';
+        angular.forEach(Functions[0].templateOptions.options, function (object) {
+            
+            Output += object.Name + ',';
+
+        });
+
+        Output = Output.substring(0, Output.length - 1);
+
+        $scope.form.templateOptions.options = Output;
+
     }
     else {
         $scope.form = Functions
@@ -18,13 +29,38 @@
 
     $scope.selected = [];
     $scope.addItem = function AddItem() {
+
+        var input = angular.isArray($scope.form.templateOptions.options);
+        var options = [];
+        var array = null;
+        if (angular.isArray($scope.form.templateOptions.options) == false)
+        {
+            array = $scope.form.templateOptions.options.split(',');
+            angular.forEach(array, function (object) {
+
+                options.push({
+                    Name: object
+                });
+
+            });
+           
+        }
+        else
+        {
+            options = $scope.form.templateOptions.options;
+        }
+
         $scope.selected.push({
             key: $scope.form.key,
             type: 'input',
             templateOptions:{
                 label: $scope.form.templateOptions.label,
                 type: $scope.form.templateOptions.type,
-                required: $scope.form.templateOptions.required}
+                required: $scope.form.templateOptions.required,
+                options: options
+
+                
+            }
         })
     },
 
