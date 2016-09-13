@@ -85,8 +85,9 @@ namespace CalculationCSharp.Models
     }
 
     public class CalcRelease
-    {
+    {   [Key]
         public int ID { get; set; }
+        public int CalcID { get; set; }
         public string Scheme { get; set; }
         public string Name { get; set; }
         public string User { get; set; }

@@ -12,15 +12,11 @@
         $scope.form.templateOptions.type = Functions[0].templateOptions.type;
         $scope.form.templateOptions.required = Functions[0].templateOptions.required;
         var Output = '';
-        angular.forEach(Functions[0].templateOptions.options, function (object) {
-            
-            Output += object.Name + ',';
-
-        });
-
-        Output = Output.substring(0, Output.length - 1);
-
-        $scope.form.templateOptions.options = Output;
+            angular.forEach(Functions[0].templateOptions.options, function (object) { 
+                Output += object.Name + ',';
+            });
+            Output = Output.substring(0, Output.length - 1);
+            $scope.form.templateOptions.options = Output;
 
     }
     else {
@@ -33,22 +29,24 @@
         var input = angular.isArray($scope.form.templateOptions.options);
         var options = [];
         var array = null;
-        if (angular.isArray($scope.form.templateOptions.options) == false)
+        if ($scope.form.templateOptions.type == 'List')
         {
-            array = $scope.form.templateOptions.options.split(',');
-            angular.forEach(array, function (object) {
+            if (angular.isArray($scope.form.templateOptions.options) == false) {
+                array = $scope.form.templateOptions.options.split(',');
+                angular.forEach(array, function (object) {
 
-                options.push({
-                    Name: object
+                    options.push({
+                        Name: object
+                    });
+
                 });
 
-            });
-           
+            }
+            else {
+                options = $scope.form.templateOptions.options;
+            }
         }
-        else
-        {
-            options = $scope.form.templateOptions.options;
-        }
+
 
         $scope.selected.push({
             key: $scope.form.key,

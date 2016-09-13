@@ -115,7 +115,7 @@
                $scope.isLoading = false;
                $scope.calcrelease = data;
 
-               if ($scope.calcrelease == null) {
+               if ($scope.calcrelease == null || $scope.calcrelease.length == 0) {
                    $scope.relaseBoardAdd($scope.selected);
                }
                else

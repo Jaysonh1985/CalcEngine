@@ -27,13 +27,13 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
         [ResponseType(typeof(CalcRelease))]
         public IHttpActionResult GetCalcRelease(int id)
         {
-            CalcRelease calcRelease = db.CalcRelease.Find(id);
+            var List = db.CalcRelease.Where(i => i.CalcID == id);
             //if (calcRelease == null)
             ////{
             ////    return NotFound();
             ////}
 
-            return Ok(calcRelease);
+            return Ok(List);
         }
 
         // PUT: api/CalcReleases/5
@@ -82,7 +82,7 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            calcRelease.CalcID = calcRelease.ID;
             calcRelease.Configuration = Convert.ToString(calcRelease.Configuration);
             calcRelease.User = HttpContext.Current.User.Identity.Name.ToString();
             calcRelease.UpdateDate = DateTime.Now;
