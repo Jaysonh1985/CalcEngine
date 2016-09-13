@@ -365,6 +365,7 @@
         });
         modalInstance.result.then(function (selectedItem) {
             $scope.config[colIndex].Functions[index].Logic = selectedItem;
+            $scope.form.$setDirty();
         }, function () {       
         });
     };
@@ -391,6 +392,7 @@
 
         modalInstance.result.then(function (selectedItem) {
             $scope.config[index].Logic = selectedItem;
+            $scope.form.$setDirty();
         }, function () {
 
         });
