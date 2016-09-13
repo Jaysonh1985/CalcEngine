@@ -166,6 +166,17 @@
                                         <span><input  type="text" ng:model="rows.Output" class="form-control  input-sm"></span>
                                     </td>
 
+                                    <td ng-if="Category.Name == 'Input' && rows.Type == 'List'  && rows.Parameter[0].templateOptions.required == true" width="25%">
+                                        <select class="form-control  input-sm" name="repeatSelect" id="repeatSelect" ng-model="rows.Output">
+                                            <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                                        </select>
+                                    </td>
+                                    <td ng-if="Category.Name == 'Input' && rows.Type == 'List'  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
+                                        <select class="form-control  input-sm" name="repeatSelect" id="repeatSelect" ng-model="rows.Output" >
+                                            <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                                        </select>
+                                    </td>
+
                                     <td ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
 
                                     <td ng-show="Category.Name == 'Input'" width="5%"></td>
