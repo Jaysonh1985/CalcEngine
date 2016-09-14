@@ -72,6 +72,12 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     Deci1parts = InputA.Split('~');
                     OutputValue = Convert.ToString(Deci1parts[Deci1parts.GetUpperBound(0)]);
                 }
+                else if (parameters.Function == "Count")
+                {
+                    string[] Deci1parts = null;
+                    Deci1parts = InputA.Split('~');
+                    OutputValue = Convert.ToString(Deci1parts.Length);
+                }
                 else
                 {
                     OutputValue = Convert.ToString(0);
@@ -92,6 +98,16 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     string[] Date1parts = null;
                     Date1parts = InputA.Split('~');           
                     OutputValue = Convert.ToString(Date1parts[Date1parts.GetUpperBound(0)]);
+                }
+                else if (parameters.Function == "Count")
+                {
+                    string[] Deci1parts = null;
+                    Deci1parts = InputA.Split('~');
+                    OutputValue = Convert.ToString(Deci1parts.Length);
+                }
+                else
+                {
+                    OutputValue = Convert.ToString(0);
                 }
 
             }
