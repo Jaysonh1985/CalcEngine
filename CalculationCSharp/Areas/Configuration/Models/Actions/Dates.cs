@@ -101,10 +101,8 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 }
 
                 Decimal.TryParse(InputC, out Period);
-                DateTime date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day, parameters.Month);
-                DateTime datestring = date.Date;
-                var shortdatestring = datestring.ToShortDateString();
-                Output = Output + Convert.ToString(shortdatestring) + "~";
+                string date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day, parameters.Month);
+                Output = Output + date + "~";
                 Counter = Counter + 1;
             }
  

@@ -17,6 +17,7 @@
                             <option value="Earlier">Earlier</option>
                             <option value="Later">Later</option>
                             <option value="Subtract">Subtract</option>
+                            <option value="DatesBetween">Dates Between Two Dates</option>
                         </select>
                     </div>
                 </div>
@@ -27,13 +28,13 @@
                         <input type="Text" id="Date1" name="Date1" class="form-control" ng-model="period.Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required />
                     </div>
                 </div>
-                <div ng-if="period.Type == 'Earlier' || period.Type == 'Later'" class="form-group">
+                <div ng-if="period.Type == 'Earlier' || period.Type == 'Later' || period.Type == 'DatesBetween'" class="form-group">
                     <label for="Date2" class="control-label col-md-2">End Date</label>
                     <div class="col-sm-9">
                         <input type="Text" id="Date2" name="Date2" class="form-control" ng-model="period.Date2" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required />
                     </div>
                 </div>
-                <fieldset ng-if="period.Type == 'Add'|| period.Type =='Subtract'">
+                <fieldset ng-if="period.Type == 'Add'|| period.Type =='Subtract' ">
                     <legend>Period Adjustment</legend>
                     <div class="form-group">
                         <label for="PeriodType" class="control-label col-md-2">Period Type</label>
@@ -55,9 +56,9 @@
                     </div>
                 </fieldset>
 
-                <fieldset ng-if="period.Type == 'Adjust'">
+                <fieldset ng-if="period.Type == 'Adjust' || period.Type == 'DatesBetween'">
                     <legend>Adjustment to be Made</legend>
-                    <div class="form-group">
+                    <div ng-if="period.Type == 'Adjust'" class="form-group">
 
                         <label for="inclusive" class="control-label col-md-2">Adjustment</label>
                         <div class="col-sm-9">

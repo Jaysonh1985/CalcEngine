@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 
@@ -115,7 +116,7 @@ public class DateFunctions
 
     }
 
-    public DateTime DateAdjustment(string Type, String DateA, String DateB, string PeriodType, decimal Period, string Adjustment, string Day, string Month)
+    public string DateAdjustment(string Type, String DateA, String DateB, string PeriodType, decimal Period, string Adjustment, string Day, string Month)
     {
         DateTime Date1;
         DateTime Date2;
@@ -158,7 +159,7 @@ public class DateFunctions
 
                 DateTime AdjDate = Date1.AddDays(Total);
 
-                return AdjDate;
+                return AdjDate.ToShortDateString();
             }
 
             if (PeriodType == "YearsMonths")
@@ -174,7 +175,7 @@ public class DateFunctions
 
                 DateTime AdjDate = Date1.AddMonths(Total);
 
-                return AdjDate;
+                return AdjDate.ToShortDateString();
             }
 
             if (PeriodType == "Years")
@@ -190,7 +191,7 @@ public class DateFunctions
 
                 DateTime AdjDate = Date1.AddMonths(Total);
 
-                return AdjDate;
+                return AdjDate.ToShortDateString();
             }
 
             if (PeriodType == "Months")
@@ -204,7 +205,7 @@ public class DateFunctions
 
                 DateTime AdjDate = Date1.AddMonths(Total);
 
-                return AdjDate;
+                return AdjDate.ToShortDateString();
             }
 
         }
@@ -225,78 +226,78 @@ public class DateFunctions
             {
                 if (Value < Date1)
                 {
-                    return Value;
+                    return Value.ToShortDateString();
                 }
                 else if (Value == Date1)
                 {
                     Value = new DateTime(Date1.Year - 1, intMonth, intDay);
 
-                    return Value;
+                    return Value.ToShortDateString();
                 }
                 else
                 {
                     Value = new DateTime(Date1.Year - 1, intMonth, intDay);
 
-                    return Value;
+                    return Value.ToShortDateString();
                 }
             }
             else if(Adjustment == "LessEqual")
             {
                 if (Value < Date1)
                 {
-                    return Value;
+                    return Value.ToShortDateString();
                 }
                 else if (Value == Date1)
                 {
-                    return Value;
+                    return Value.ToShortDateString();
                 }
                 else
                 {
                     Value = new DateTime(Date1.Year - 1, intMonth, intDay);
 
-                    return Value;
+                    return Value.ToShortDateString();
                 }
             }
             else if(Adjustment == "Greater")
             {
                 if (Value > Date1)
                 {
-                    return Value;
+                    return Value.ToShortDateString();
                 }
                 else if (Value == Date1)
                 {
                     Value = new DateTime(Date1.Year + 1, intMonth, intDay);
 
-                    return Value;
+                    return Value.ToShortDateString();
                 }
                 else
                 {
                     Value = new DateTime(Date1.Year + 1, intMonth, intDay);
 
-                    return Value;
+                    return Value.ToShortDateString();
                 }
             }
             else if (Adjustment == "GreaterEqual")
             {
                 if (Value >= Date1)
                 {
-                    return Value;
+                    return Value.ToShortDateString();
                 }
                 else if (Value == Date1)
                 {
-                    return Value;
+                    return Value.ToShortDateString();
                 }
                 else
                 {
                     Value = new DateTime(Date1.Year + 1, intMonth, intDay);
 
-                    return Value;
+                    return Value.ToShortDateString();
                 }
             }
             else if (Adjustment == "Equal")
             {
                    Value = new DateTime(Date1.Year, intMonth, intDay);
-                   return Value;
+                   return Value.ToShortDateString();
             }
 
         }
@@ -307,15 +308,15 @@ public class DateFunctions
 
             if(result < 0)
             {
-                return Date1;
+                return Date1.ToShortDateString();
             }
             else if(result > 0)
             {
-                return Date2;
+                return Date2.ToShortDateString();
             }
             else
             {
-                return Date1;
+                return Date1.ToShortDateString();
             }
 
         }
@@ -325,19 +326,60 @@ public class DateFunctions
 
             if (result < 0)
             {
-                return Date2;
+                return Date2.ToShortDateString();
             }
             else if (result > 0)
             {
-                return Date1;
+                return Date1.ToShortDateString();
             }
             else
             {
-                return Date1;
+                return Date1.ToShortDateString();
             }
 
         }
-        return Convert.ToDateTime("01/01/1900"); 
+        else if(Type == "DatesBetween")
+        {
+            if(Date1 <= Date2)
+            {
+                var DatesList = new List<String>();
+
+                string strDay = Day;
+                string strMonth = Month;
+
+                int intDay = Convert.ToInt32(strDay);
+                int intMonth = Convert.ToInt32(strMonth);
+
+                DateTime dateIncrement = Date1;
+
+                DateTime FirstValue = new DateTime(Date1.Year, intMonth, intDay);
+                if (FirstValue >= Date1)
+                {
+                    dateIncrement = new DateTime(Date1.Year, intMonth, intDay);
+                }
+                else
+                {
+                    dateIncrement = new DateTime(Date1.Year + 1, intMonth, intDay);
+                }
+
+                /* do loop execution */
+                do
+                {
+                    DatesList.Add(dateIncrement.ToShortDateString());
+                    dateIncrement = dateIncrement.AddYears(1);
+                }
+                while (dateIncrement <= Date2);
+
+                return string.Join("~", DatesList.ToArray());
+            }
+            else
+            {
+                return "";
+            }
+
+        }
+
+        return Convert.ToDateTime("01/01/1900").ToShortDateString(); 
     }
 
     public int GetDatePart(string Part, System.DateTime Date)
