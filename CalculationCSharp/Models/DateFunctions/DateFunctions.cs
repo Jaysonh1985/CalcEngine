@@ -353,7 +353,7 @@ public class DateFunctions
                 DateTime dateIncrement = Date1;
 
                 DateTime FirstValue = new DateTime(Date1.Year, intMonth, intDay);
-                if (FirstValue >= Date1)
+                if (FirstValue > Date1)
                 {
                     dateIncrement = new DateTime(Date1.Year, intMonth, intDay);
                 }
@@ -362,15 +362,23 @@ public class DateFunctions
                     dateIncrement = new DateTime(Date1.Year + 1, intMonth, intDay);
                 }
 
-                /* do loop execution */
-                do
+                if(dateIncrement < Date2)
                 {
-                    DatesList.Add(dateIncrement.ToShortDateString());
-                    dateIncrement = dateIncrement.AddYears(1);
-                }
-                while (dateIncrement <= Date2);
+                    /* do loop execution */
+                    do
+                    {
+                        DatesList.Add(dateIncrement.ToShortDateString());
+                        dateIncrement = dateIncrement.AddYears(1);
+                    }
+                    while (dateIncrement <= Date2);
 
-                return string.Join("~", DatesList.ToArray());
+                    return string.Join("~", DatesList.ToArray());
+                }
+                else
+                {
+                    return "";
+                }
+
             }
             else
             {

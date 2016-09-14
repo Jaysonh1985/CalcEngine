@@ -102,8 +102,15 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 else if (parameters.Function == "Count")
                 {
                     string[] Deci1parts = null;
-                    Deci1parts = InputA.Split('~');
-                    OutputValue = Convert.ToString(Deci1parts.Length);
+                    if(InputA != "")
+                    {
+                        Deci1parts = InputA.Split('~');
+                        OutputValue = Convert.ToString(Deci1parts.Length);
+                    }
+                    else
+                    {
+                        OutputValue = Convert.ToString(0);
+                    }
                 }
                 else
                 {
