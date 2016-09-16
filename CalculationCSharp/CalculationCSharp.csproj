@@ -248,6 +248,7 @@
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Input.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\ArrayFunctions.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\StringFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\MathsFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\DatePart.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Factors.cs" />
@@ -312,6 +313,8 @@
     <Content Include="Areas\Configuration\Scripts\Factors\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Factors\factorsCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\String Functions\stringFunctionsCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\String Functions\StringFunctionsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Maths Functions\mathsFunctionsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Maths Functions\MathsFunctionsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Regression\regressionOutputCtrl.js" />

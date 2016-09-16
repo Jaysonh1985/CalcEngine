@@ -27,6 +27,9 @@
             else if (Function == 'ArrayFunctions') {
                 return 'arrayFunctionsCtrl'
             }
+            else if (Function == 'StringFunctions') {
+                return 'stringFunctionsCtrl'
+            }
 
         },
         //get URL for modal file path
@@ -56,7 +59,9 @@
             else if (Function == 'ArrayFunctions') {
                 return '/Areas/Configuration/Scripts/Array Functions/ArrayFunctionsModal.html'
             }
-
+            else if (Function == 'StringFunctions') {
+                return '/Areas/Configuration/Scripts/String Functions/StringFunctionsModal.html'
+            }
         },
         
 

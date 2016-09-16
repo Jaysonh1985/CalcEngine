@@ -6,7 +6,6 @@
         }
     }  
 });
-
 sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeaheadFactory) {
     return {
         replace: true,
@@ -236,6 +235,25 @@ sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeahead
                                     }
 
                                 }
+                                if (scope.config[key].Functions[keyF].Function == 'StringFunctions') {
+
+                                    if (obj[0].LookupType == 'Left' || obj[0].LookupType == 'Right') {
+                                        var VariableNames = configTypeaheadFactory.variableArrayBuilder(scope.config, key, "Decimal", keyF);
+                                        var AttName = 'FunctionCog_' + key + '_' + keyF;
+                                        form[AttName].$setValidity("input", true);
+                                        if (VariableNames.length > 0) {
+                                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                                var Input1Bool = isNaN(parseFloat(valueN.Number1));
+                                                if (Input1Bool == true) {
+                                                    if (VariableNames.indexOf(valueN.Number) == -1) {
+                                                        form[AttName].$setValidity("input", false);
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                }
                             }
 
                         })
@@ -245,7 +263,6 @@ sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeahead
         }
     }
 });
-
 sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeaheadFactory) {
     return {
         replace: true,

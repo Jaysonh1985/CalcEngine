@@ -227,6 +227,9 @@
         else if (rows.Function == 'Input') {
             rows.Type = null;
         }
+        else if (rows.Function == 'StringFunctions') {
+            
+        }
         else {
             rows.Type = null;
         }      
