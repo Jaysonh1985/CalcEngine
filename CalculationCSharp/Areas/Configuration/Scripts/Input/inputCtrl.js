@@ -10,6 +10,7 @@
         $scope.form.key = Functions[0].key;
         $scope.form.templateOptions.label = Functions[0].templateOptions.label;
         $scope.form.templateOptions.type = Functions[0].templateOptions.type;
+        $scope.form.templateOptions.list = Functions[0].templateOptions.list;
         $scope.form.templateOptions.required = Functions[0].templateOptions.required;
         var Output = '';
             angular.forEach(Functions[0].templateOptions.options, function (object) { 
@@ -29,7 +30,7 @@
         var input = angular.isArray($scope.form.templateOptions.options);
         var options = [];
         var array = null;
-        if ($scope.form.templateOptions.type == 'List')
+        if ($scope.form.templateOptions.list == true)
         {
             if (angular.isArray($scope.form.templateOptions.options) == false) {
                 array = $scope.form.templateOptions.options.split(',');
@@ -55,6 +56,7 @@
                 label: $scope.form.templateOptions.label,
                 type: $scope.form.templateOptions.type,
                 required: $scope.form.templateOptions.required,
+                list: $scope.form.templateOptions.list,
                 options: options
 
                 

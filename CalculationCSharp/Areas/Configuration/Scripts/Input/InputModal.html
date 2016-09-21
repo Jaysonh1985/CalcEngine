@@ -28,14 +28,7 @@
                                 <option value="String">String</option>
                                 <option value="Decimal">Decimal</option>
                                 <option value="Date">Date</option>
-                                <option value="List">List</option>
                             </select>
-                        </div>
-                    </div>
-                    <div ng-if="form.templateOptions.type == 'List'" class="form-group">
-                        <label for="caption" class="control-label col-md-2"> List in Comma Seperated List</label>
-                        <div class="col-sm-9">
-                            <input type="Text" id="caption" name="caption" class="form-control" ng-model="form.templateOptions.options" required />
                         </div>
                     </div>
                     <div class="form-group">
@@ -44,6 +37,20 @@
                             <input type="checkbox" ng-model="form.templateOptions.required" />
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="maxLength" class="control-label col-md-2">List</label>
+                        <div class="col-sm-9">
+                            <input type="checkbox" ng-model="form.templateOptions.list" />
+                        </div>
+                    </div>
+                    
+                    <div ng-if="form.templateOptions.list == true" class="form-group">
+                        <label for="caption" class="control-label col-md-2"> List in Comma Seperated List</label>
+                        <div class="col-sm-9">
+                            <input type="Text" id="caption" name="caption" class="form-control" ng-model="form.templateOptions.options" required />
+                        </div>
+                    </div>
+
 
                 </fieldset>
                 <div class="modal-footer">
