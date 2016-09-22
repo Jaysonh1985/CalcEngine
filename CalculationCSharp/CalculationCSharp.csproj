@@ -246,6 +246,7 @@
     <Compile Include="Areas\Configuration\Controllers\ConfigNameWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Comments.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Input.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\ArrayFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\ErrorsWarnings.cs" />
@@ -311,6 +312,8 @@
     <Content Include="Areas\Configuration\Scripts\Date Adjustment\dateAdjustmentCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Date Part\datePartCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Date Part\DatePartModal.html" />
+    <Content Include="Areas\Configuration\Scripts\Comments\commentsCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Comments\CommentsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Errors Warnings\errorswarningsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Errors Warnings\ErrorsWarningsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Factors\FactorsModal.html" />

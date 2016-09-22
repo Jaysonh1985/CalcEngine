@@ -186,6 +186,12 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         item.Name = parameters.Type;
                                         item.Output = parameters.String1;
                                     }
+                                    else if (item.Function == "Comments")
+                                    {
+                                        Comments Errors = new Comments();
+                                        Comments parameters = (Comments)javaScriptSerializ­er.Deserialize(jparameters, typeof(Comments));
+                                        item.Output = parameters.String1;
+                                    }
                                     else if (item.Function == "Period")
                                     {
                                         DateFunctions DateFunctions = new DateFunctions();

@@ -343,6 +343,9 @@
                 }
                 if ($scope.config[colIndex].Functions[index].Function == 'ErrorsWarnings') {
                     $scope.config[colIndex].Functions[index].Name = selectedItem[0].Type;
+                } if ($scope.config[colIndex].Functions[index].Function == 'Comments') {
+                    $scope.config[colIndex].Functions[index].Name = "Comments";
+                    $scope.config[colIndex].Functions[index].Output = selectedItem[0].String1;
                 }
                 $timeout(function () {
                     var el = document.getElementById($scope.AttName);

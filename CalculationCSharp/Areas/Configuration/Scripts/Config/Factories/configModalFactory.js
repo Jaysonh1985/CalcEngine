@@ -12,6 +12,9 @@
             else if (Function == 'Period') {
                 return 'periodCtrl'
             }
+            else if (Function == 'Comments') {
+                return 'commentsCtrl'
+            }
             else if (Function == 'ErrorsWarnings') {
                 return 'errorswarningsCtrl'
             }
@@ -43,6 +46,9 @@
             }
             else if (Function == 'MathsFunctions') {
                 return '/Areas/Configuration/Scripts/Maths Functions/MathsFunctionsModal.html'
+            }
+            else if (Function == 'Comments') {
+                return '/Areas/Configuration/Scripts/Comments/CommentsModal.html'
             }
             else if (Function == 'ErrorsWarnings') {
                 return '/Areas/Configuration/Scripts/Errors Warnings/ErrorsWarningsModal.html'

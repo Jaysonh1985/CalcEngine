@@ -6,6 +6,7 @@
 
         <uib-accordion close-others=false>
                 <div class="container-fluid">
+                    <input type="text" class="form-control  input" ng-model="test" placeholder="Filter">
                     <uib-accordion close-others=false ng-model="output">
                         <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open="openIndexRegression[$index]">
                             <uib-accordion-heading>
@@ -24,7 +25,7 @@
                                         </th>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="row in group.Output">
+                                    <tr ng-repeat="row in group.Output | filter : test" ng-class="{'redrow': row.Field == 'Comments'}">
                                         <td>
                                             {{row.Field}}
                                         </td>

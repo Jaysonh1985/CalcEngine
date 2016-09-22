@@ -84,14 +84,16 @@
                                 </tr>
                             </thead>
                             <tbody ui-tree-nodes="" ng:model="Category.Functions">
-                                <tr id="Row_{{$parent.$index}}_{{$index}}" inputpreviously-Set config ='config' colIndex="{{$parent.$index}}" rowIndex ="{{$index}}" unselectable="on" ng-repeat="rows in Category.Functions | filter:searchText" ng-click="selectRow($event, $index, $parent.$index)" ng-class="{selected: isRowSelected($index, $parent.$index)}" ui-tree-node>
+                                <tr id="Row_{{$parent.$index}}_{{$index}}" inputpreviously-Set config ='config' colIndex="{{$parent.$index}}" rowIndex ="{{$index}}" unselectable="on" 
+                                    ng-repeat="rows in Category.Functions | filter:searchText" ng-click="selectRow($event, $index, $parent.$index)" 
+                                    ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}" ui-tree-node>
 
                                     <td>
                                         <i ng-show="Category.Name != 'Input'" class="glyphicon glyphicon-list" ui-tree-handle></i>
                                     </td>
 
                                     <td >
-                                        <a ng-show="Category.Name != 'Input'" ng-click="LogicButtonClick('lg', $parent.$index, $index)">
+                                        <a ng-show="Category.Name != 'Input' && rows.Function != 'Comments'" ng-click="LogicButtonClick('lg', $parent.$index, $index)">
                                             <span class="glyphicon glyphicon-wrench"></span>
                                         </a>
                                     </td>
@@ -99,14 +101,15 @@
                                     <td>
                                         <select ng-show="Category.Name != 'Input'" name="Input_{{$parent.$index}}_{{$index}}" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" ng-required="true">
                                             <option value=""></option>
-                                            <option value="Maths">Maths</option>
-                                            <option value="MathsFunctions">Maths Functions</option>
-                                            <option value="ErrorsWarnings">Errors & Warnings</option>
-                                            <option value="Period">Period</option>
-                                            <option value="Factors">Factors</option>
+                                            <option value="ArrayFunctions">Array Functions</option>
+                                            <option value="Comments">Comments</option>
                                             <option value="Dates">Date Adjustment</option>
                                             <option value="DatePart">Date Part</option>
-                                            <option value="ArrayFunctions">Array Functions</option>
+                                            <option value="ErrorsWarnings">Errors & Warnings</option>
+                                            <option value="Factors">Factors</option>
+                                            <option value="Maths">Maths</option>
+                                            <option value="MathsFunctions">Maths Functions</option>
+                                            <option value="Period">Period</option>
                                             <option value="StringFunctions">String Functions</option>
                                         </select>
                                         <p ng-show="form['Input_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Function is required.</p>
@@ -122,9 +125,9 @@
                                     </td>
 
                                     <td >
-                                        <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' " uib-popover="{{data || rows.Name}}" popover-trigger="mouseenter" popover-popup-delay="1000" ><input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
+                                        <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Comments' " uib-popover="{{data || rows.Name}}" popover-trigger="mouseenter" popover-popup-delay="1000" ><input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
                                         <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Name is required.</p>
-                                        <p ng-show="Category.Name == 'Input' || rows.Function == 'ErrorsWarnings'">{{rows.Name}}</p>
+                                        <span ng-show="Category.Name == 'Input' || rows.Function == 'ErrorsWarnings' || rows.Function == 'Comments'">{{rows.Name}}</span>
                                     </td>
 
                                     <td width="5%">{{rows.Type}}</td>
@@ -159,7 +162,7 @@
                                     <td style="word-wrap: break-word;min-width: 180px;max-width: 180px;" ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
 
                                     <td width="10%">
-                                        <span ng-show="Category.Name != 'Input'"><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span>
+                                        <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Comments'"><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span>
                                     </td>
 
                                     <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss'}"><span></span></td>

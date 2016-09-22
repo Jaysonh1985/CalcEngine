@@ -120,7 +120,7 @@
                                         </th>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="row in group.Output | filter : test">
+                                    <tr ng-repeat="row in group.Output | filter : test" ng-class="{'redrow': row.Field == 'Comments'}">
                                         <td>
                                             {{row.Field}}
                                         </td>
