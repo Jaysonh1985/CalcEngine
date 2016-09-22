@@ -51,10 +51,41 @@
                     <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexOuter[$index], 'glyphicon-chevron-right': !openIndexOuter[$index]}"></i>
                 </uib-accordion-heading>
                 <br />
-                <form ng-submit="CalcButtonClick()">
-                    <formly-form model="formset.fields" fields="fieldset">
-                        <button type="submit" class="btn btn-default submit-button">Submit</button>
-                    </formly-form>
+                <form name="formregress" role="form" ng-submit="CalcButtonClick(formregress)" novalidate>
+                   <table class="table table-bordered ">
+                        <thead>
+                            <tr>
+                                <th width="25%">Name</th>
+                                <th width="75%">Input</th>
+                            </tr>
+                        </thead>
+                        <tbody ng:model="configreg.Functions">
+                            <tr unselectable="on" ng-repeat="rows in configreg.Functions | filter:searchText">
+                                <td width="5%">{{rows.Parameter[0].templateOptions.label}}</td>
+                                <td ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined)  && rows.Parameter[0].templateOptions.required == true" width="25%">
+                                    <span show-errors rows='Category.Functions'><input inputformat-Validation config='[configreg]' rowIndex="{{$index}}" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control  input-sm" ng-required="true"></span>
+                                    <p ng-show="formregress['Output_'+ $index + '_' + $index].$invalid" class="help-block">Value is required.</p>
+                                    <p ng-show="formregress['Output_'+ $index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
+                                </td>
+                                <td ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined)  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
+                                    <span><input inputformat-Validation rowIndex="{{$index}}" config='[configreg]' type="text" ng:model="rows.Output" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" class="form-control   input-sm"></span>
+                                    <p ng-show="formregress['Output_'+ $index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
+                                </td>
+                                <td ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" width="25%">
+                                    <select class="form-control  input-sm" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
+                                        <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                                    </select>
+                                    <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Value is required.</p>
+                                </td>
+                                <td ng-if="rows.Parameter[0].templateOptions.list == true  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
+                                    <select class="form-control  input-sm" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
+                                        <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-default submit-button">Submit</button>
                 </form>
             </uib-accordion-group>
         </uib-accordion>

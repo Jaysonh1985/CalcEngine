@@ -10,17 +10,14 @@
         $scope.form.key = Functions[0].key;
         $scope.form.templateOptions.label = Functions[0].templateOptions.label;
         $scope.form.templateOptions.type = Functions[0].templateOptions.type;
+        $scope.form.templateOptions.list = Functions[0].templateOptions.list;
         $scope.form.templateOptions.required = Functions[0].templateOptions.required;
         var Output = '';
-        angular.forEach(Functions[0].templateOptions.options, function (object) {
-            
-            Output += object.Name + ',';
-
-        });
-
-        Output = Output.substring(0, Output.length - 1);
-
-        $scope.form.templateOptions.options = Output;
+            angular.forEach(Functions[0].templateOptions.options, function (object) { 
+                Output += object.Name + ',';
+            });
+            Output = Output.substring(0, Output.length - 1);
+            $scope.form.templateOptions.options = Output;
 
     }
     else {
@@ -33,22 +30,24 @@
         var input = angular.isArray($scope.form.templateOptions.options);
         var options = [];
         var array = null;
-        if (angular.isArray($scope.form.templateOptions.options) == false)
+        if ($scope.form.templateOptions.list == true)
         {
-            array = $scope.form.templateOptions.options.split(',');
-            angular.forEach(array, function (object) {
+            if (angular.isArray($scope.form.templateOptions.options) == false) {
+                array = $scope.form.templateOptions.options.split(',');
+                angular.forEach(array, function (object) {
 
-                options.push({
-                    Name: object
+                    options.push({
+                        Name: object
+                    });
+
                 });
 
-            });
-           
+            }
+            else {
+                options = $scope.form.templateOptions.options;
+            }
         }
-        else
-        {
-            options = $scope.form.templateOptions.options;
-        }
+
 
         $scope.selected.push({
             key: $scope.form.key,
@@ -57,6 +56,7 @@
                 label: $scope.form.templateOptions.label,
                 type: $scope.form.templateOptions.type,
                 required: $scope.form.templateOptions.required,
+                list: $scope.form.templateOptions.list,
                 options: options
 
                 

@@ -37,6 +37,10 @@ public class MathematicalFunctions
     {
         return Math.Truncate(Number1);
     }
+    public decimal DecimalPart(decimal Number1)
+    {     
+        return Number1 - Math.Truncate(Number1);
+    }
 
     public decimal Add(decimal Number1, decimal Number2)
     {

@@ -215,6 +215,21 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         item.Output = ArrayFunctions.Output(jparameters, jCategory, group.ID, item.ID);
                                         item.Type = parameters.LookupType;
                                     }
+                                    else if (item.Function == "StringFunctions")
+                                    {
+                                        StringFunctions StringFunctions = new StringFunctions();
+                                        StringFunctions  parameters = (StringFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(StringFunctions));
+                                        item.Output = StringFunctions.Output(jparameters, jCategory, group.ID, item.ID);
+                                        if(parameters.Type == "Len")
+                                        {
+                                            item.Type = "Decimal";
+                                        }
+                                        else
+                                        {
+                                            item.Type = "String";
+                                        }
+                                    }
+
                                 }
 
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")

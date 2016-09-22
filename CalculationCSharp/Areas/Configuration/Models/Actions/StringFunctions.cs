@@ -5,13 +5,12 @@ using System.Web.Script.Serialization;
 
 namespace CalculationCSharp.Areas.Configuration.Models
 {
-    public class MathsFunctions
+    public class StringFunctions
     {
         public string Type { get; set; }
+        public dynamic String1 { get; set; }
         public dynamic Number1 { get; set; }
-        public dynamic Number2 { get; set; }
-        public string Rounding { get; set; }
-        public string RoundingType { get; set; }
+        public dynamic String2 { get; set; }
 
         public JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
         CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
@@ -20,15 +19,15 @@ namespace CalculationCSharp.Areas.Configuration.Models
         {
             MathematicalFunctions MathFunctions = new MathematicalFunctions();
             ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
-            MathsFunctions parameters = (MathsFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(MathsFunctions));
+            StringFunctions parameters = (StringFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(StringFunctions));
 
             List<string> D1parts = null;
             List<string> D2parts = null;
             string[] Numbers1parts = null;
             string[] Numbers2parts = null;
 
-            D1parts = ArrayBuilder.InputArrayBuilder(parameters.Number1, jCategory, GroupID, ItemID);
-            D2parts = ArrayBuilder.InputArrayBuilder(parameters.Number2, jCategory, GroupID, ItemID);
+            D1parts = ArrayBuilder.InputArrayBuilder(parameters.String1, jCategory, GroupID, ItemID);
+            D2parts = ArrayBuilder.InputArrayBuilder(parameters.Number1, jCategory, GroupID, ItemID);
 
             if (D1parts != null)
             {
@@ -40,8 +39,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
             }
 
             string Output = null;
-            Decimal OutputValue = 0;
-            
+            string OutputValue = null;
             int MaxLength = ArrayBuilder.GetMaxLength(Numbers1parts, Numbers2parts);
 
             int Counter = 0;
@@ -49,9 +47,9 @@ namespace CalculationCSharp.Areas.Configuration.Models
             for (int i = 0; i < MaxLength; i++)
             {
                 dynamic InputA = null;
+                string InputAString = null;
                 dynamic InputB = null;
-                decimal InputADeci = 0;
-                decimal InputBDeci = 0;
+                int InputBDeci = 0;
 
                 if (Numbers1parts != null)
                 {
@@ -63,7 +61,8 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     {
                         InputA = Numbers1parts[Counter];
                     }
-                    decimal.TryParse(InputA, out InputADeci);
+
+                    InputAString = Convert.ToString(InputA);
                 }
                 if (Numbers2parts != null)
                 {
@@ -75,64 +74,48 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     {
                         InputB = Numbers2parts[Counter];
                     }
-                    decimal.TryParse(InputB, out InputBDeci);
+                    int.TryParse(InputB, out InputBDeci);
                 }
 
+                if (parameters.Type == "Left")
+                {
+                    OutputValue = InputAString.Substring(0, InputBDeci);
+                }
+                else if (parameters.Type == "Right")
+                {
+                    OutputValue = InputAString.Substring(InputAString.Length - InputBDeci);
+                }
+                else if (parameters.Type == "Mid")
+                {
+                    OutputValue = "0";
+                }
+                else if (parameters.Type == "Find")
+                {
+                    int FindValue = InputAString.IndexOf(String2);
 
-                if (parameters.Type == "Abs")
-                {
-                    OutputValue = MathFunctions.Abs(InputADeci);
-                }
-                else if (parameters.Type == "Add")
-                {
-                    OutputValue = MathFunctions.Add(InputADeci, InputBDeci);
-                }
-                else if (parameters.Type == "Ceiling")
-                {
-                    OutputValue = MathFunctions.Ceiling(InputADeci);
-                }
-                else if (parameters.Type == "DecimalPart")
-                {
-                    OutputValue = MathFunctions.DecimalPart(InputADeci);
-                }
-                else if (parameters.Type == "Divide")
-                {
-                    OutputValue = MathFunctions.Divide(InputADeci, InputBDeci);
-                }
-                else if (parameters.Type == "Floor")
-                {
-                    OutputValue = MathFunctions.Floor(InputADeci);
-                }
-                else if (parameters.Type == "Max")
-                {
-                    OutputValue = MathFunctions.Max(InputADeci, InputBDeci);
-                }
-                else if (parameters.Type == "Min")
-                {
-                    OutputValue = MathFunctions.Min(InputADeci, InputBDeci);
-                }
-                else if (parameters.Type == "Multiply")
-                {
-                    OutputValue = MathFunctions.Multiply(InputADeci, InputBDeci);
-                }
-                else if (parameters.Type == "Subtract")
-                {
-                    OutputValue = MathFunctions.Subtract(InputADeci, InputBDeci);
-                }
+                    if( FindValue != -1)
+                    {
+                        OutputValue = Convert.ToString(FindValue);
+                    }
+                    else
+                    {
+                        OutputValue = "0";
+                    }
 
-                else if (parameters.Type == "Truncate")
-                {
-                    OutputValue = MathFunctions.Truncate(InputADeci);
                 }
-
-                OutputValue = MathFunctions.Rounding(parameters.RoundingType, parameters.Rounding, OutputValue);
+                else if (parameters.Type == "Len")
+                {
+                    OutputValue = Convert.ToString(InputAString.Length);
+                }
 
                 Output = Output + OutputValue + "~";
+
                 Counter = Counter + 1;
-            }            
+            }
 
             Output = Output.Remove(Output.Length - 1);
             return Convert.ToString(Output);
+
         }
 
     }
