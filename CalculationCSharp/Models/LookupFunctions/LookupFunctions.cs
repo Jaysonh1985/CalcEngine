@@ -41,7 +41,15 @@ public class LookupFunctions
             Name = nameObj.ToString();
         }
 
-        return Convert.ToDouble(nameObj);
+        if(nameObj == "")
+        {
+            return 0;
+        }
+        else
+        {
+            return Convert.ToDouble(nameObj);
+        }
+        
 
 	}
 

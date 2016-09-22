@@ -421,7 +421,8 @@
         modalInstance.result.then(function (selectedItem) {
             $scope.config[colIndex].ID = selectedItem[0].ID;
             $scope.config[colIndex].Name = selectedItem[0].Name;
-            $scope.config[colIndex].Description = selectedItem[0].Description;            
+            $scope.config[colIndex].Description = selectedItem[0].Description;
+            $scope.form.$setDirty();
         }, function () {          
         });
     };

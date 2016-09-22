@@ -14,7 +14,7 @@
                 <div class="container">
                     <div class="collapse navbar-collapse main-nav">
                         <ul class="nav navbar-nav center-block">
-                            <li><button ng-disabled="!form.$dirty" class="btn btn-default navbar-btn" type="button" ng-click="SaveButtonClick()"> Save </button> </li>
+                            <li><button ng-disabled="!form.$dirty || form.$invalid" class="btn btn-default navbar-btn" type="button" ng-click="SaveButtonClick()"> Save </button> </li>
                             <li>
                                 <br />
                             </li>
@@ -161,7 +161,7 @@
                                     <td style="word-wrap: break-word;min-width: 280px;max-width: 280px;" ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
 
                                     <td ng-show="Category.Name == 'Input'" width="5%"></td>
-                                    <td ng-show="Category.Name != 'Input'" width="20%"><span><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span></td>
+                                    <td ng-show="Category.Name != 'Input'" width="10%"><span><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span></td>
 
                                     <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss'}"><span></span></td>
                                     <td>

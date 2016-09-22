@@ -213,7 +213,15 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         ArrayFunctions ArrayFunctions = new ArrayFunctions();
                                         ArrayFunctions parameters = (ArrayFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(ArrayFunctions));
                                         item.Output = ArrayFunctions.Output(jparameters, jCategory, group.ID, item.ID);
-                                        item.Type = parameters.LookupType;
+                                        if(parameters.Function == "Count")
+                                        {
+                                            item.Type = "Decimal";
+                                        }
+                                        else
+                                        {
+                                            item.Type = parameters.LookupType;
+                                        }
+                                        
                                     }
                                     else if (item.Function == "StringFunctions")
                                     {

@@ -115,6 +115,10 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 {
                     OutputValue = MathFunctions.Multiply(InputADeci, InputBDeci);
                 }
+                else if (parameters.Type == "Power")
+                {
+                    OutputValue = MathFunctions.Power(InputADeci, InputBDeci);
+                }
                 else if (parameters.Type == "Subtract")
                 {
                     OutputValue = MathFunctions.Subtract(InputADeci, InputBDeci);
