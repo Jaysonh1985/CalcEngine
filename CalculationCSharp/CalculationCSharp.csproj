@@ -656,6 +656,10 @@
     <Content Include="Factor Tables\Post09NonStatReval5.csv" />
     <Content Include="Factor Tables\Post09StatReval25cap.csv" />
     <Content Include="Factor Tables\S148.csv" />
+    <Content Include="Factor Tables\Po05PI.csv" />
+    <Content Include="Factor Tables\Pre05PI.csv" />
+    <Content Include="Factor Tables\TARMACUKRF_60.csv" />
+    <Content Include="Factor Tables\TARMACUKRF_65.csv" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy %282%29.pubxml" />

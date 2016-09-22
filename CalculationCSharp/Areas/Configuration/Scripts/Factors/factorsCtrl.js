@@ -13,6 +13,7 @@
         $scope.factors.RowMatchRowNo = Functions[0].RowMatchRowNo;
         $scope.factors.RowMatchValue = Functions[0].RowMatchValue;
         $scope.factors.ColumnNo = Functions[0].ColumnNo;
+        $scope.factors.Interpolate = Functions[0].Interpolate;
     }
     else {
         $scope.factors = Functions
@@ -29,7 +30,8 @@
             RowMatchLookupType: $scope.factors.RowMatchLookupType,
             RowMatchRowNo: $scope.factors.RowMatchRowNo,
             RowMatchValue: $scope.factors.RowMatchValue,
-            ColumnNo: $scope.factors.ColumnNo
+            ColumnNo: $scope.factors.ColumnNo,
+            Interpolate: $scope.factors.Interpolate
         })
     },
 

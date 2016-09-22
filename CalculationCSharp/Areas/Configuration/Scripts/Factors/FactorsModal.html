@@ -112,6 +112,14 @@
                                 <input type="Text" id="ColumnNo" name="ColumnNo" class="form-control" ng-model="factors.ColumnNo" required />
                             </div>
                         </div>
+
+                        <div ng-if ="factors.LookupType == 'Decimal'" class="form-group">
+                            <label for="Interpolate" class="control-label col-md-2">Interpolate Years and Months</label>
+                            <div class="col-sm-9">
+                                <input type="checkbox" ng-model="factors.Interpolate" />
+                            </div>
+                        </div>
+
                     </fieldset>
                     <div class="modal-footer">
                         <button class="btn btn-primary" type="submit">OK</button>

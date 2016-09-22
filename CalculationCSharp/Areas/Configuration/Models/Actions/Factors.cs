@@ -16,13 +16,13 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public int RowMatchRowNo { get; set; }
         public string RowMatchValue { get; set; }
         public int ColumnNo { get; set; }
+        public bool Interpolate { get; set; }
 
         public JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
         CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
-
+        public LookupFunctions FactorFunctions = new LookupFunctions();
         public string Output(string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID, string itemType)
         {
-            LookupFunctions FactorFunctions = new LookupFunctions();
             ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
             Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
             List<string> D1parts = null;
@@ -77,45 +77,16 @@ namespace CalculationCSharp.Areas.Configuration.Models
                         InputB = RowMatchValueparts[Counter];
                     }
                 }
-                
-                    if (parameters.RowMatch == true)
-                    {
-                        parameters.ColumnNo = FactorFunctions.CSVColumnNumber(parameters.TableName, parameters.RowMatchRowNo, InputB);
-                    }
 
-                    if (parameters.ColumnNo > 0)
-                    {
-                        if (parameters.LookupType == "Date")
-                        {
-                            DateTime LookupValue;
-                            DateTime.TryParse(InputA, out LookupValue);
-                            OutputValue = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
-                        }
-                        else if (parameters.LookupType == "Decimal")
-                        {
-                            decimal LookupValue;
-                            decimal.TryParse(InputA, out LookupValue);
-                            OutputValue = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
-                        }
-                        else
-                        {
-                            string LookupValue;
-                            LookupValue = InputA;
-                            OutputValue = Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 2, parameters.ColumnNo));
-                        }
-                    }
-                    else
-                    {
-                        itemType = parameters.OutputType;
-                        if (parameters.OutputType == "Decimal")
-                        {
-                            OutputValue = "0";
-                        }
-                        else
-                        {
-                            OutputValue = "";
-                        }
-                    }
+                if(parameters.Interpolate == true)
+                {
+                    OutputValue = Interpolation(jparameters, InputA, InputB);
+                }
+                else
+                {
+                    OutputValue = Calculate(jparameters, InputA, InputB);
+                }
+             
                 Output = Output + OutputValue + "~";
                 Counter = Counter + 1;
             }
@@ -125,6 +96,66 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 Output = Output.Remove(Output.Length - 1);
             }
             return Output;
+        }
+
+        public string Calculate(string jparameters, dynamic InputA, dynamic InputB)
+        {
+            Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
+
+            if (parameters.RowMatch == true)
+            {
+                parameters.ColumnNo = FactorFunctions.CSVColumnNumber(parameters.TableName, parameters.RowMatchRowNo, InputB);
+            }
+
+            if (parameters.ColumnNo > 0)
+            {
+                if (parameters.LookupType == "Date")
+                {
+                    DateTime LookupValue;
+                    DateTime.TryParse(InputA, out LookupValue);
+                    return Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
+                }
+                else if (parameters.LookupType == "Decimal")
+                {
+                    decimal LookupValue;
+                    decimal.TryParse(InputA, out LookupValue);
+                    return Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
+                }
+                else
+                {
+                    string LookupValue;
+                    LookupValue = InputA;
+                    return Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 2, parameters.ColumnNo));
+                }
+            }
+            else
+            {
+                if (parameters.OutputType == "Decimal")
+                {
+                    return "0";
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
+
+        public string Interpolation (string jparameters, dynamic InputA, dynamic InputB)
+        {
+
+            string Year = Convert.ToString(Math.Floor(Convert.ToDecimal(InputA)));
+            string Year1 = Convert.ToString(Convert.ToDecimal(Year) + 1);
+
+            string Factor1 = Calculate(jparameters, Year, InputB);
+            string Factor2 = Calculate(jparameters, Year1, InputB);
+
+            dynamic Months = (Convert.ToDecimal(InputA) - Convert.ToDecimal(Year)) * 100;
+
+            Decimal Output = Math.Round(((Convert.ToDecimal(Factor2) - Convert.ToDecimal(Factor1)) / 12 * Months) + Convert.ToDecimal(Factor1),6);
+
+            return Convert.ToString(Output);
+
         }
     }
 }
