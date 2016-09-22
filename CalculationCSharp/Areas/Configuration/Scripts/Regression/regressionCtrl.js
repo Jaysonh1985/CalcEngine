@@ -267,13 +267,13 @@
                 };
 
                 configService.putRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
-
+                    toastr.success("Regression Ran successfully", "Success");
                 }, onError);
                
             });
 
          });
-         toastr.success("Regression Ran successfully", "Success");
+        
      };
 
     $scope.AcceptButtonClick = function CalcButtonClick() {
@@ -364,19 +364,11 @@
 
 
     $scope.pushInputsToBuilder = function (Input) {
-
-        angular.forEach(angular.fromJson(Input), function (value, key, obj) {
-            var index = getIndexOf($scope.config[0].Functions, key, 'Name');
-
-            var NumBool = angular.isNumber(index);
-
-            if (NumBool == true) {
-                $scope.config[0].Functions[index].Output = value;
-            }
-           
-
+        var InputJson = angular.fromJson(Input);
+        angular.forEach(angular.fromJson(InputJson.Functions), function (value, key, obj) {
+            var index = configFunctionFactory.getIndexOf($scope.config[0].Functions, value.Name, 'Name');
+            $scope.config[0].Functions[index].Output = value.Output;
         });
-        setInputTypes();
         $uibModalInstance.close('run');
     }
 

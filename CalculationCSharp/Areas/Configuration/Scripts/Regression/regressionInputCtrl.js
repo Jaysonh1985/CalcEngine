@@ -48,8 +48,6 @@
 
         for (var key in input) {
             if (!input.hasOwnProperty(key)) continue;
-
-
             var value = input[key];
             var match;
             // Check for string properties which look like dates.
