@@ -86,25 +86,18 @@
                             <tbody ui-tree-nodes="" ng:model="Category.Functions">
                                 <tr id="Row_{{$parent.$index}}_{{$index}}" inputpreviously-Set config ='config' colIndex="{{$parent.$index}}" rowIndex ="{{$index}}" unselectable="on" ng-repeat="rows in Category.Functions | filter:searchText" ng-click="selectRow($event, $index, $parent.$index)" ng-class="{selected: isRowSelected($index, $parent.$index)}" ui-tree-node>
 
-                                    <td ng-show="Category.Name == 'Input'"></td>
-
-                                    <td ng-show="Category.Name != 'Input'">
-                                        <i class="glyphicon glyphicon-list" ui-tree-handle></i>
+                                    <td>
+                                        <i ng-show="Category.Name != 'Input'" class="glyphicon glyphicon-list" ui-tree-handle></i>
                                     </td>
 
-                                    <td ng-show="Category.Name == 'Input'"></td>
-
-                                    <td ng-show="Category.Name != 'Input'">
-                                        <a ng-click="LogicButtonClick('lg', $parent.$index, $index)">
+                                    <td >
+                                        <a ng-show="Category.Name != 'Input'" ng-click="LogicButtonClick('lg', $parent.$index, $index)">
                                             <span class="glyphicon glyphicon-wrench"></span>
                                         </a>
                                     </td>
 
-                                    <td ng-show="Category.Name == 'Input'">
-                                        {{rows.Function}}
-                                    </td>
-                                    <td ng-show="Category.Name != 'Input'">
-                                        <select name="Input_{{$parent.$index}}_{{$index}}" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" ng-required="true">
+                                    <td>
+                                        <select ng-show="Category.Name != 'Input'" name="Input_{{$parent.$index}}_{{$index}}" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" ng-required="true">
                                             <option value=""></option>
                                             <option value="Maths">Maths</option>
                                             <option value="MathsFunctions">Maths Functions</option>
@@ -116,52 +109,56 @@
                                             <option value="StringFunctions">String Functions</option>
                                         </select>
                                         <p ng-show="form['Input_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Function is required.</p>
+                                        <p ng-show="Category.Name == 'Input'">{{rows.Function}}</p>
                                     </td>
 
                                     <td>
                                         <span hidden><input type="text" name="FunctionCog_{{$parent.$index}}_{{$index}}" id="FunctionCog_{{$parent.$index}}_{{$index}}" class="table-borderless" ng:model="rows.ID" hidden></span>
-      
                                         <a ng-click="FunctionButtonClick('lg', $parent.$index, $index)">
                                             <span uib-popover="{{data || rows.Parameter}}" popover-trigger="mouseenter" popover-popup-delay="1000" class="glyphicon glyphicon-cog"></span>
                                             <p ng-show="form['FunctionCog_'+ $parent.$index + '_' + $index].$error.input" class="help-block">Variable Mismatch</p>
                                         </a>                                  
-
                                     </td>
 
-                                    <td ng-show="Category.Name == 'Input'">{{rows.Name}}</td>
-                                    <td ng-show="Category.Name != 'Input'">
-                                        <span uib-popover="{{data || rows.Name}}" popover-trigger="mouseenter" popover-popup-delay="1000" ><input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
+                                    <td >
+                                        <span ng-show="Category.Name != 'Input'" uib-popover="{{data || rows.Name}}" popover-trigger="mouseenter" popover-popup-delay="1000" ><input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
                                         <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Name is required.</p>
+                                        <p ng-show="Category.Name == 'Input'">{{rows.Name}}</p>
                                     </td>
 
                                     <td width="5%">{{rows.Type}}</td>
 
-                                    <td ng-if="Category.Name == 'Input' && (rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) && rows.Parameter[0].templateOptions.required == true" width="25%">
-                                        <span show-errors rows ='Category.Functions'><input inputformat-Validation config ='config' rowIndex ="{{$index}}" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control  input-sm" ng-required="true"></span>
-                                        <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Value is required.</p>
+                                    <td style="word-wrap: break-word;min-width: 175px;max-width: 175px;">
+                                        <span ng-if="Category.Name == 'Input'" show-errors rows ='Category.Functions'>
+                                            <input ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) && 
+                                                   rows.Parameter[0].templateOptions.required == true"
+                                                    inputformat-Validation config ='config' rowIndex ="{{$index}}" 
+                                                   name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control input-sm" ng-required="true">
+                                                                                       
+                                            <input ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) &&
+                                                    (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" 
+                                                   inputformat-Validation rowIndex="{{$index}}" config='config' type="text" ng:model="rows.Output" 
+                                                   name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" class="form-control input-sm">
+
+                                            <select ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" class="form-control  input-sm" 
+                                                    name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
+                                                <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                                            </select>
+
+                                            <select ng-if="rows.Parameter[0].templateOptions.list == true  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" class="form-control  input-sm" 
+                                                    name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
+                                                <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                                            </select>
+
+                                        </span>
+                                        <p ng-if="rows.Parameter[0].templateOptions.required == true" ng-show="form['Output_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Value is required.</p>
                                         <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
-                                    </td>
-                                    <td ng-if="Category.Name == 'Input' && (rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%" >
-                                        <span><input inputformat-Validation rowIndex ="{{$index}}" config ='config' type="text" ng:model="rows.Output" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" class="form-control   input-sm"></span>
-                                        <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
+                                        <p ng-if="Category.Name != 'Input'">{{rows.Output}}</p>
                                     </td>
 
-                                    <td ng-if="Category.Name == 'Input' && rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" width="25%">
-                                        <select class="form-control  input-sm" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}"  ng-model="rows.Output">
-                                            <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
-                                        </select>
-                                        <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Value is required.</p>
+                                    <td width="10%">
+                                        <span ng-show="Category.Name != 'Input'"><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span>
                                     </td>
-                                    <td ng-if="Category.Name == 'Input' && rows.Parameter[0].templateOptions.list == true  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
-                                        <select class="form-control  input-sm" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}"  ng-model="rows.Output" >
-                                            <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
-                                        </select>
-                                    </td>
-
-                                    <td style="word-wrap: break-word;min-width: 175px;max-width: 175px;" ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
-
-                                    <td ng-show="Category.Name == 'Input'" width="5%"></td>
-                                    <td ng-show="Category.Name != 'Input'" width="10%"><span><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span></td>
 
                                     <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss'}"><span></span></td>
                                     <td>
