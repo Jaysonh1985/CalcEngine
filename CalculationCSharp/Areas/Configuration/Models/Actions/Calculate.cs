@@ -179,6 +179,13 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         InputA = null;
                                         InputB = null;
                                     }
+                                    else if (item.Function == "ErrorsWarnings")
+                                    {
+                                        ErrorsWarnings Errors = new ErrorsWarnings();
+                                        ErrorsWarnings parameters = (ErrorsWarnings)javaScriptSerializ­er.Deserialize(jparameters, typeof(ErrorsWarnings));
+                                        item.Name = parameters.Type;
+                                        item.Output = parameters.String1;
+                                    }
                                     else if (item.Function == "Period")
                                     {
                                         DateFunctions DateFunctions = new DateFunctions();

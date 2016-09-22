@@ -101,6 +101,7 @@
                                             <option value=""></option>
                                             <option value="Maths">Maths</option>
                                             <option value="MathsFunctions">Maths Functions</option>
+                                            <option value="ErrorsWarnings">Errors & Warnings</option>
                                             <option value="Period">Period</option>
                                             <option value="Factors">Factors</option>
                                             <option value="Dates">Date Adjustment</option>
@@ -121,14 +122,14 @@
                                     </td>
 
                                     <td >
-                                        <span ng-show="Category.Name != 'Input'" uib-popover="{{data || rows.Name}}" popover-trigger="mouseenter" popover-popup-delay="1000" ><input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
+                                        <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' " uib-popover="{{data || rows.Name}}" popover-trigger="mouseenter" popover-popup-delay="1000" ><input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
                                         <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Name is required.</p>
-                                        <p ng-show="Category.Name == 'Input'">{{rows.Name}}</p>
+                                        <p ng-show="Category.Name == 'Input' || rows.Function == 'ErrorsWarnings'">{{rows.Name}}</p>
                                     </td>
 
                                     <td width="5%">{{rows.Type}}</td>
 
-                                    <td style="word-wrap: break-word;min-width: 175px;max-width: 175px;">
+                                    <td ng-if="Category.Name == 'Input'">
                                         <span ng-if="Category.Name == 'Input'" show-errors rows ='Category.Functions'>
                                             <input ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) && 
                                                    rows.Parameter[0].templateOptions.required == true"
@@ -153,8 +154,9 @@
                                         </span>
                                         <p ng-if="rows.Parameter[0].templateOptions.required == true" ng-show="form['Output_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Value is required.</p>
                                         <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
-                                        <p ng-if="Category.Name != 'Input'">{{rows.Output}}</p>
+                                      
                                     </td>
+                                    <td style="word-wrap: break-word;min-width: 180px;max-width: 180px;" ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
 
                                     <td width="10%">
                                         <span ng-show="Category.Name != 'Input'"><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span>

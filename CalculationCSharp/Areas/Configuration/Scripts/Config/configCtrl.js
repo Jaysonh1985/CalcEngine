@@ -212,6 +212,9 @@
         else if (rows.Function == 'MathsFunctions') {
             rows.Type = 'Decimal';
         }
+        else if (rows.Function == 'ErrorsWarnings') {
+           
+        }
         else if (rows.Function == 'Period') {
             rows.Type = 'Decimal';
         }
@@ -337,6 +340,9 @@
                 if ($scope.config[colIndex].Functions[index].Function == 'Input') {
                     $scope.config[colIndex].Functions[index].Name = selectedItem[0].key;
                     $scope.config[colIndex].Functions[index].Type = selectedItem[0].templateOptions.type;
+                }
+                if ($scope.config[colIndex].Functions[index].Function == 'ErrorsWarnings') {
+                    $scope.config[colIndex].Functions[index].Name = selectedItem[0].Type;
                 }
                 $timeout(function () {
                     var el = document.getElementById($scope.AttName);
