@@ -344,7 +344,7 @@
                 if ($scope.config[colIndex].Functions[index].Function == 'ErrorsWarnings') {
                     $scope.config[colIndex].Functions[index].Name = selectedItem[0].Type;
                 } if ($scope.config[colIndex].Functions[index].Function == 'Comments') {
-                    $scope.config[colIndex].Functions[index].Name = "Comments";
+                    $scope.config[colIndex].Functions[index].Name = "Comment";
                     $scope.config[colIndex].Functions[index].Output = selectedItem[0].String1;
                 }
                 $timeout(function () {
@@ -476,6 +476,11 @@
     };
     //Higlight rows functions
     var selectedRowsIndexes = [];
+
+    $scope.deselectRow = function ()
+    {
+        resetSelection();
+    }
 
     $scope.selectRow = function (event, rowIndex, colIndex) {
         if (event.ctrlKey) {

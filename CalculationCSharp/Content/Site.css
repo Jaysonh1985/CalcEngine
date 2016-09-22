@@ -213,6 +213,7 @@ a {
     vertical-align: middle;
     text-align: center;
     padding: 5px;
+    font-size:small;
 }
 
 a:hover, a:focus {
