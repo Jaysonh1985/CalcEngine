@@ -168,12 +168,25 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         {
                                             Expression e = new Expression(MathString);
                                             var Calculation = e.Evaluate();
-                                            decimal Output = Convert.ToDecimal(Calculation);
-                                            MathematicalFunctions MathematicalFunctions = new MathematicalFunctions();
 
-                                            Output = MathematicalFunctions.Rounding(RoundingType, Rounding, Output);
+                                            bool DeciParse;
+                                            decimal CalculationDeci;
 
-                                            item.Output = Convert.ToString(Output);
+                                            DeciParse = decimal.TryParse(Convert.ToString(Calculation), out CalculationDeci);
+
+                                            if(DeciParse == true)
+                                            {
+                                                decimal Output = CalculationDeci;
+                                                MathematicalFunctions MathematicalFunctions = new MathematicalFunctions();
+                                                Output = MathematicalFunctions.Rounding(RoundingType, Rounding, Output);
+                                                item.Output = Convert.ToString(Output);
+                                            }
+                                            else
+                                            {
+                                                item.Output = "0";
+                                            }    
+                                                    
+
                                         }
                                         paramCount = paramCount + 1;
                                         InputA = null;
