@@ -160,7 +160,7 @@
                                         <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
                                       
                                     </td>
-                                    <td style="word-wrap: break-word;" ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
+                                    <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;" ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
 
                                     <td width="10%">
                                         <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Comments'"><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span>
