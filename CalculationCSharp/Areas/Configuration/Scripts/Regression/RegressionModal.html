@@ -3,6 +3,7 @@
         <h3 class="modal-title">Regression</h3>
     </div>
     <div class="modal-body">
+        <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
         <table class="table table-bordered table table-responsive">
             <tr>
                 <th>
@@ -34,7 +35,7 @@
 
                 </th>
             </tr>
-            <tr ng-repeat="Regress in Regression" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)">
+            <tr ng-hide="isLoading" ng-repeat="Regress in Regression" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)">
                 <td width="25%" ng-cloak> <span><input type="text" ng:model="Regress.Reference" class="form-control"></span></td>
                 <td ng-click="FunctionButtonClick('lg', $index)">
                     <span  ng-if="Regress.Difference == null" class="glyphicon glyphicon-cog"></span>
