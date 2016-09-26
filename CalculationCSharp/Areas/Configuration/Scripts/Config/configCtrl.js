@@ -342,9 +342,9 @@
                     $scope.config[colIndex].Functions[index].Type = selectedItem[0].templateOptions.type;
                 }
                 if ($scope.config[colIndex].Functions[index].Function == 'ErrorsWarnings') {
-                    $scope.config[colIndex].Functions[index].Name = selectedItem[0].Type;
+                    $scope.config[colIndex].Functions[index].Name = selectedItem[0].Type + '_' + colIndex + '_' + index;
                 } if ($scope.config[colIndex].Functions[index].Function == 'Comments') {
-                    $scope.config[colIndex].Functions[index].Name = "Comment";
+                    $scope.config[colIndex].Functions[index].Name = 'Comments_' + colIndex + '_' + index;
                     $scope.config[colIndex].Functions[index].Output = selectedItem[0].String1;
                 }
                 $timeout(function () {

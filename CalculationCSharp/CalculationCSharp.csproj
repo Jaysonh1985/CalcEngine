@@ -667,6 +667,9 @@
     <Content Include="Factor Tables\TARMACUKRF_60.csv" />
     <Content Include="Factor Tables\TARMACUKRF_65.csv" />
     <Content Include="Factor Tables\LTA.csv" />
+    <Content Include="Factor Tables\TARMACAVCAUG.csv" />
+    <Content Include="Factor Tables\TARMACComm.csv" />
+    <Content Include="Factor Tables\TARMACTrivialCommuation.csv" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy %282%29.pubxml" />
