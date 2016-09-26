@@ -184,7 +184,8 @@
         if ($scope.validationError == false)
         {
             $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
-        }    
+        }
+        $scope.isLoading = true;
         $scope.OpenAllButton();
         var id = configFunctionFactory.getConfigID();
         $scope.rebuildCategoryIDs();

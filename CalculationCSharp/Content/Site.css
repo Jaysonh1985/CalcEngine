@@ -308,17 +308,16 @@ textarea {
 }
 
 .busyIndicator .alert {
-    left: 40%;
-    top: 5%;
-    position: fixed;
-    z-index: 1050;
+    position: center;
     width: 400px;
     height: 40px;
     padding-left: 10px;
     padding-top: 10px;
-    background-color: #fff;
-    color: black;
+    background-color: #AE0000;
+    color: white;
     border-color: transparent;
+    align-content:center;
+    text-align:center;
 }
 
 .busyIndicator .backgroundMask {
@@ -329,6 +328,41 @@ textarea {
     height: 100%;
     opacity: 0;
     z-index: 1049;
+    opacity: 0.7;
+}
+
+.spin {
+     -webkit-transform-origin: 50% 50%;
+     transform-origin:50% 50%;
+     -ms-transform-origin:50% 50%; /* IE 9 */
+     -webkit-animation: spin 1000ms infinite linear;
+     -moz-animation: spin 1000ms infinite linear;
+     -o-animation: spin 1000ms infinite linear;
+     animation: spin 1000ms infinite linear;
+}
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .over {

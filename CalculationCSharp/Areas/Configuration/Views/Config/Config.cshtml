@@ -6,8 +6,8 @@
 <div ng-controller="configCtrl">
     
 
-    <div class="container body-content" ng-cloak>
-       
+    <div class="container body-content"  ng-cloak>
+        
         <br>
         <form name="form" role="form" ng-submit="CalcButtonClick(form)" novalidate>
             <div class="navbar navbar-inverse navbar-fixed-top second-navbar">
@@ -40,7 +40,10 @@
             <br />
             <br />
             <h5></h5>
-            <div ui-tree data-clone-enabled="true">
+
+            <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
+
+            <div ng-hide="isLoading" ui-tree data-clone-enabled="true">
                 <br />
                 <uib-accordion close-others=false ui-tree-nodes="" ng-model="config">
                     <uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
