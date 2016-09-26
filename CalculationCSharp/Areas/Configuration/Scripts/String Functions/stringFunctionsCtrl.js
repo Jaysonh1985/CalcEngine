@@ -7,6 +7,7 @@
         $scope.period.Number1 = Functions[0].Number1;
         $scope.period.String1 = Functions[0].String1;
         $scope.period.String2 = Functions[0].String2;
+        $scope.period.String3 = Functions[0].String3;
     }
     else {
         $scope.period = Functions
@@ -19,6 +20,7 @@
             Number1: $scope.period.Number1,
             String1: $scope.period.String1,
             String2: $scope.period.String2,
+            String3: $scope.period.String3
 
         })
     },

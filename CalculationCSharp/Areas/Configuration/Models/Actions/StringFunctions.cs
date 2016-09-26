@@ -11,6 +11,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public dynamic String1 { get; set; }
         public dynamic Number1 { get; set; }
         public dynamic String2 { get; set; }
+        public dynamic String3 { get; set; }
 
         public JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
         CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
@@ -23,11 +24,14 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
             List<string> D1parts = null;
             List<string> D2parts = null;
+            List<string> D3parts = null;
             string[] Numbers1parts = null;
             string[] Numbers2parts = null;
+            string[] Numbers3parts = null;
 
             D1parts = ArrayBuilder.InputArrayBuilder(parameters.String1, jCategory, GroupID, ItemID);
             D2parts = ArrayBuilder.InputArrayBuilder(parameters.Number1, jCategory, GroupID, ItemID);
+            D3parts = ArrayBuilder.InputArrayBuilder(parameters.String3, jCategory, 0, 0);
 
             if (D1parts != null)
             {
@@ -37,10 +41,45 @@ namespace CalculationCSharp.Areas.Configuration.Models
             {
                 Numbers2parts = D2parts.ToArray();
             }
+            if (D3parts != null)
+            {
+                Numbers3parts = D3parts.ToArray();
+            }
 
             string Output = null;
             string OutputValue = null;
-            int MaxLength = ArrayBuilder.GetMaxLength(Numbers1parts, Numbers2parts);
+
+            int Numbers1;
+            int Numbers2;
+            int Numbers3;
+
+            if (Numbers1parts == null || Numbers1parts.Length == 0)
+            {
+                Numbers1 = 0;
+            }
+            else
+            {
+                Numbers1 = Numbers1parts.Length;
+            }
+            if (Numbers2parts == null || Numbers2parts.Length == 0)
+            {
+                Numbers2 = 0;
+            }
+            else
+            {
+                Numbers2 = Numbers2parts.Length;
+            }
+            if (Numbers3parts == null || Numbers3parts.Length == 0)
+            {
+                Numbers3 = 0;
+            }
+            else
+            {
+                Numbers3 = Numbers3parts.Length;
+            }
+
+            int MaxLength = Math.Max(Numbers1, Numbers2);
+            MaxLength = Math.Max(MaxLength, Numbers3);
 
             int Counter = 0;
 
@@ -50,6 +89,8 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 string InputAString = null;
                 dynamic InputB = null;
                 int InputBDeci = 0;
+                dynamic InputC = null;
+                string InputCString = null;
 
                 if (Numbers1parts != null)
                 {
@@ -76,6 +117,19 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     }
                     int.TryParse(InputB, out InputBDeci);
                 }
+                if (Numbers3parts != null)
+                {
+                    if (Counter >= Numbers3parts.Length)
+                    {
+                        InputC = Numbers3parts[Numbers3parts.GetUpperBound(0)];
+                    }
+                    else
+                    {
+                        InputC = Numbers3parts[Counter];
+                    }
+
+                    InputCString = Convert.ToString(InputC);
+                }
 
                 if (parameters.Type == "Left")
                 {
@@ -88,6 +142,10 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 else if (parameters.Type == "Mid")
                 {
                     OutputValue = "0";
+                }
+                else if (parameters.Type == "Set")
+                {
+                    OutputValue = InputCString;
                 }
                 else if (parameters.Type == "Find")
                 {

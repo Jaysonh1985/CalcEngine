@@ -20,7 +20,7 @@
                             </li>
                             <li><button ng-disabled="form.$invalid" class="btn btn-default navbar-btn" type="submit">Calculate </button></li>
                             <li><button class="btn btn-default navbar-btn" type="button" ng-click="HistoryButtonClick('lg')"> History </button></li>
-                            <li><button ng-disabled="form.$invalid" class="btn btn-default navbar-btn" type="button" ng-click="RegressionButtonClick('lg', form)"> Regression </button></li>
+                            <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" type="button" ng-click="RegressionButtonClick('lg', form)"> Regression </button></li>
                             <li><button class="btn btn-default navbar-btn" type="button" ng-click="OpenAllButton()"> Open All </button></li>
                             <li><button class="btn btn-default navbar-btn" type="button" ng-click="CloseAllButton()"> Close All </button></li>
                             <li><a>{{configName}}</a></li>

@@ -130,9 +130,13 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         string Rounding = Convert.ToString(parameters.Rounding);
                                         string RoundingType = Convert.ToString(parameters.RoundingType);
                                         string Logic2 = Convert.ToString(parameters.Logic2);
-                                        if (Rounding == "")
+                                        if (Rounding == "0")
                                         {
                                             Rounding = "2";
+                                        }
+                                        if(Rounding == "10")
+                                        {
+                                            Rounding = "0";
                                         }
 
                                         if (Logic == "Pow")
