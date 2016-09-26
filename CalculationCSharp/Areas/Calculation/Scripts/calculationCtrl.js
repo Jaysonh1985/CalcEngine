@@ -63,8 +63,8 @@
     $scope.getCSVFields = function getFormFields() {  //function that sets the parameters available under the different variable types
         var CSVcounter = 0;
         $scope.CSVfields = [];
-        angular.forEach($scope.fieldset, function (groups) {
-            $scope.CSVfields.push($scope.fieldset[CSVcounter].key);
+        angular.forEach($scope.configreg.Functions, function (groups) {
+            $scope.CSVfields.push($scope.configreg.Functions[CSVcounter].Name);
             CSVcounter = CSVcounter + 1
         });
     }

@@ -143,7 +143,7 @@
      };
 
         $scope.deleteBoard = function (index) {
-        var cf = confirm("Delete this Board?");
+        var cf = confirm("Delete this Calculation?");
         if (cf == true) {
             configService.deleteConfig(this.Boards[index].ID)
         .then(function (data) {
