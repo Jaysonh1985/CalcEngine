@@ -11,7 +11,7 @@
     };
 
     var addConfig = function (data) {
-        return $http.post("/api/CalcConfigurations/PostCalcConfiguration", { data })
+        return $http.post("/api/CalcConfigurations/PostCalcConfiguration",  data )
             .then(function (response) {
                 return response.data;
             }, function (error) {
