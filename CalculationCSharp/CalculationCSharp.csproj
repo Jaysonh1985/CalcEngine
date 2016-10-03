@@ -645,7 +645,6 @@
     <Content Include="Content\toastr.less" />
     <Content Include="Areas\Project\Views\web.config" />
     <Content Include="Areas\Project\Views\Board\Index.cshtml" />
-    <None Include=".bin\node.cmd" />
     <Content Include="Areas\Configuration\Views\Config\Index.cshtml" />
     <Content Include="Areas\Calculation\Views\Calculation\Form.cshtml" />
     <Content Include="Areas\Calculation\Views\web.config" />
@@ -786,6 +785,7 @@
     <Content Include="Scripts\jquery-3.1.0.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include=".bin\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Calculation\Models\" />
     <Folder Include="Areas\Calculation\Views\Shared\" />
