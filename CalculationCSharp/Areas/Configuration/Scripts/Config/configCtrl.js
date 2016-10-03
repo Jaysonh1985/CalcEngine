@@ -385,11 +385,8 @@
 
     $scope.CategoryLogicButtonClick = function (size, index) {
         $scope.Logic = this.config[index].Logic;
-
         $scope.AllNames = [];
-
         $scope.configReplace = configFunctionFactory.convertToFromJson($scope.config);
-
         $scope.AllNames = $scope.variableArrayBuilder($scope.configReplace, index, null, 0);
 
         var modalInstance = $uibModal.open({
@@ -475,6 +472,19 @@
         }, function () {           
         });
     };
+
+    $scope.SpecButtonClick = function ( form) {
+        $scope.ID = configFunctionFactory.getConfigID();
+
+        configService.postCalc(id, $scope.config).then(function (data) {
+            $scope.isLoading = false;
+            $scope.config = data;
+            $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
+            toastr.success("Calculated successfully", "Success");
+        }, onError);
+
+    };
+
     //Higlight rows functions
     var selectedRowsIndexes = [];
 

@@ -46,7 +46,7 @@
              Name: '',
              User: '',
              Group: '',
-             Configuration: ''
+             Configuration: null
 
             };
 

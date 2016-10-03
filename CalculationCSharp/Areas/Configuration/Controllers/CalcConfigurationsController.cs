@@ -82,10 +82,10 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         [ResponseType(typeof(CalcConfiguration))]
         public IHttpActionResult PostCalcConfiguration(CalcConfiguration calcConfiguration)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
             calcConfiguration.UpdateDate = DateTime.Now;
             db.CalcConfiguration.Add(calcConfiguration);
             db.SaveChanges();
