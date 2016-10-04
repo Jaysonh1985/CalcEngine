@@ -42,12 +42,11 @@
          $scope.isLoading = true;
 
          $scope.selected = {
-             ID: '',
-             Name: '',
-             User: '',
-             Group: '',
+             ID: null,
+             Name: null,
+             User: null,
+             Group: null,
              Configuration: null
-
             };
 
          configService.addConfig($scope.selected).then(function (data) {

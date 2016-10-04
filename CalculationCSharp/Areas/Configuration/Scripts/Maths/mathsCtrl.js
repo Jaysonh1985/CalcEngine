@@ -2,14 +2,12 @@
     // Model
     $scope.maths = Functions;
 
-
     $scope.addItem = function (index) {
 
         var item = null;
 
         item = {
             ID: index + 1,
-
         };
         $scope.maths.splice(index + 1, 0, item);
 

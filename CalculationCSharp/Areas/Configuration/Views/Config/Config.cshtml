@@ -23,7 +23,7 @@
                             <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" type="button" ng-click="RegressionButtonClick('lg', form)"> Regression </button></li>
                             <li><button class="btn btn-default navbar-btn" type="button" ng-click="OpenAllButton()"> Open All </button></li>
                             <li><button class="btn btn-default navbar-btn" type="button" ng-click="CloseAllButton()"> Close All </button></li>
-                            <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" type="button" ng-click="SpecButtonClick(form)"> Specification </button></li>
+                            <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" ng-csv="SpecOutput" csv-header="getHeader" filename="{{configName}} Specification.csv" type="button" ng-click="SpecButtonClick(form)"> Specification </button></li>
                             <li><a>{{configName}}</a></li>
                         </ul>
                         <div class="col-sm-3 col-md-3 pull-right">

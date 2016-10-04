@@ -54,8 +54,8 @@
                                 </select>
                                 <p ng-show="form['BracketRight_'+ $index].$error.bracketnotopen" class="help-block">Not Open</p>
                             </td>
-                            <td width="10%" ng-show="!$last"></td>
-                            <td width="10%" ng-show="$last">
+                            <td width="10%" ng-if="!$last" ng-model="rows.Rounding" ng-init="rows.Rounding = null"></td>
+                            <td width="10%" ng-if="$last">
                                 <select name="RoundSelect" ng:model="rows.Rounding" class="form-control">
                                     <option value="10">0</option>
                                     <option value="1">1</option>
@@ -66,8 +66,8 @@
                                     <option value="6">6</option>
                                 </select>
                             </td>
-                            <td width="10%" ng-show="!$last"></td>
-                            <td width="10%" ng-show="$last">
+                            <td width="10%" ng-if="!$last" ng-model="rows.RoundingType" ng-init="rows.RoundingType = null"></td>
+                            <td width="10%" ng-if="$last">
                                 <select id="inclusive" name="singleSelect" ng:model="rows.RoundingType" class="form-control">
                                     <option value=""></option>
                                     <option value="up">Up</option>

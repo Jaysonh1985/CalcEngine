@@ -71,7 +71,7 @@
             });
      };
 
-     var SpecBuild = function (index, data) {
+     var specBuilder = function (index, data) {
          return $http.post("/api/CalcSpecification/" + index, { data: data })
             .then(function (response) {
                 return response.data;
@@ -193,6 +193,7 @@
         getRegression: getRegression,
         postRegression: postRegression,
         deleteRegression: deleteRegression,
-        putRegression: putRegression
+        putRegression: putRegression,
+        specBuilder: specBuilder
     };
 });

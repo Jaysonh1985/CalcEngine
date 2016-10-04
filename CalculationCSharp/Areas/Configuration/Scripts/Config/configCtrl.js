@@ -13,6 +13,17 @@
     $scope.validationError = false;
     $scope.openIndexBackup = null;
 
+    $scope.csv = {
+        content: null,
+        header: true,
+        headerVisible: true,
+        separator: ',',
+        separatorVisible: true,
+        result: null,
+        encoding: 'ISO-8859-1',
+        encodingVisible: true,
+    };
+
     function init() {
         var id = $location.absUrl();
         configService.initialize().then(function (data) {
@@ -473,17 +484,17 @@
         });
     };
 
-    $scope.SpecButtonClick = function ( form) {
-        $scope.ID = configFunctionFactory.getConfigID();
-
-        configService.postCalc(id, $scope.config).then(function (data) {
+    $scope.SpecButtonClick = function (form) {
+        var id = configFunctionFactory.getConfigID();
+        $scope.isLoading = true;
+        configService.specBuilder(id, $scope.config).then(function (data) {
             $scope.isLoading = false;
-            $scope.config = data;
-            $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
-            toastr.success("Calculated successfully", "Success");
+            $scope.SpecOutput = data;
+            toastr.success("Specification Produced", "Success");
         }, onError);
-
     };
+
+    $scope.getHeader = ["Function ID", "Name","Function","Type", "Logic", "Parameter"];
 
     //Higlight rows functions
     var selectedRowsIndexes = [];

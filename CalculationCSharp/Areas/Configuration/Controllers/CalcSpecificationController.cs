@@ -34,68 +34,186 @@ namespace CalculationCSharp.Areas.Config.Controllers
             dynamic json = moveTaskParams;
             string jsonString = Convert.ToString(json.data);
             var response = Request.CreateResponse();
-            List<OutputListGroup> OutputList = new List<OutputListGroup>();
-            List<List<OutputListGroup>> BulkOutputList = new List<List<OutputListGroup>>();
-            bool isNameDone = false;
-            foreach (var group in json.data)
-            {
-                List<CategoryViewModel> jCategory = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(Convert.ToString(group), typeof(List<CategoryViewModel>));
-                List<ConfigViewModel> jConfig = (List<ConfigViewModel>)javaScriptSerializ­er.Deserialize(Convert.ToString(group), typeof(List<ConfigViewModel>));
-                Calculate Calculate = new Calculate();
-                OutputList = Calculate.OutputResults(jCategory);
-                BulkOutputList.Add(OutputList);
-                
-            }
+            List<CategoryViewModel> jCategory = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<CategoryViewModel>));
 
             //Iterate through data list collection
             List <List <string>> propNames = new List<List<string>>();
+            List<List<string>> propParamsVal = new List<List<string>>();
             List<string> propLabel = new List<string>();
             List<string> propValues = new List<string>();
+            List<string> propParams = new List<string>();
+            List<string> propMathsParams = new List<string>();
+            List<string> propInputParams = new List<string>();
             int LoopCounter = 0;
+            LoopCounter = 0;
 
-            foreach (var item in BulkOutputList)
+            foreach (var item in jCategory)
             {
                 LoopCounter = 0;
+                propValues.Add(item.Name);
+                propValues.Add(item.Description);
+                propNames.Add(propValues);
+                propValues = new List<string>();
 
-                foreach (var list in item)
+                foreach (var list in item.Functions)
                 {
-
                     LoopCounter = LoopCounter + 1;
-                    if (isNameDone == false)
+                    propValues.Add(Convert.ToString(list.ID));
+                    propValues.Add(Convert.ToString(list.Name));
+                    propValues.Add(Convert.ToString(list.Function));
+                    propValues.Add(Convert.ToString(list.Type));
+
+                    //Logic
+                    List<string> logicString = new List<string>();
+                    foreach (var logicvar in list.Logic)
                     {
-                        propValues.Add(list.Group);
-                        propNames.Add(propValues);
-                        propValues = new List<string>();
+                        logicString.Add(Convert.ToString(logicvar.Bracket1 + " " + logicvar.Input1 + " "
+                            + " " + logicvar.LogicInd + " " + logicvar.Input2 + " " + logicvar.Bracket2 + " " + logicvar.Operator));
                     }
-                    //Iterate through property collection
-                    foreach (var prop in list.Output)
+
+                    StringBuilder builderLogic = new StringBuilder();
+                    foreach (var logiclevel in logicString)
                     {
-                        LoopCounter = LoopCounter + 1;
-                        if (isNameDone == false)
+                        // Append each int to the StringBuilder overload.
+                        builderLogic.Append(logiclevel).Append(" ");
+                    }
+                    propValues.Add(Convert.ToString(builderLogic));
+
+                    //Functions
+                    if (list.Function != "Input")
+                    {
+                        if(list.Function == "Maths")
                         {
-                            propValues.Add(prop.Field);
-                            propValues.Add(prop.Value);
-                            propNames.Add(propValues);
-                            propValues = new List<string>();
+                            //Maths
+                            List<string> mathString = new List<string>();
+                            foreach (var Mathvar in list.Parameter)
+                            {
+                                Maths MathsObject = new Maths();
+                                foreach (var MathvarLevel in Mathvar)
+                                {
+                                    if(MathvarLevel.Key == "Bracket1")
+                                    {
+                                        MathsObject.Bracket1 = MathvarLevel.Value; 
+                                    }
+                                    else if (MathvarLevel.Key == "Input1")
+                                    {
+                                        MathsObject.Input1 = MathvarLevel.Value;
+                                    }
+                                    else if (MathvarLevel.Key == "Logic")
+                                    {
+                                        MathsObject.Logic = MathvarLevel.Value;
+                                    }
+                                    else if (MathvarLevel.Key == "Input2")
+                                    {
+                                        MathsObject.Input2 = MathvarLevel.Value;
+                                    }
+                                    else if (MathvarLevel.Key == "Bracket2")
+                                    {
+                                        MathsObject.Bracket2 = MathvarLevel.Value;
+                                    }
+                                    else if (MathvarLevel.Key == "Rounding")
+                                    {
+                                        if(MathvarLevel.Value != null)
+                                        {
+                                            MathsObject.Rounding = Convert.ToInt16(MathvarLevel.Value);
+                                        }
+                                        else
+                                        {
+                                            MathsObject.Rounding = null;
+                                        }
+                                    }
+                                    else if (MathvarLevel.Key == "RoundingType")
+                                    {
+                                        MathsObject.RoundingType = MathvarLevel.Value;
+                                    }
+                                    else if (MathvarLevel.Key == "Logic2")
+                                    {
+                                        MathsObject.Logic2 = MathvarLevel.Value;
+                                    }
+                                }
+                                if(MathsObject.Rounding > 0)
+                                {
+                                    mathString.Add(Convert.ToString(MathsObject.Bracket1 + "" + MathsObject.Input1 + " "
+                                   + MathsObject.Logic + " " + MathsObject.Input2 + "" + MathsObject.Bracket2 + " "
+                                   + MathsObject.Rounding + "dp " + MathsObject.RoundingType + " " + MathsObject.Logic2));
+                                }
+                                else
+                                {
+                                    mathString.Add(Convert.ToString(MathsObject.Bracket1 + "" + MathsObject.Input1 + " "
+                                   + MathsObject.Logic + " " + MathsObject.Input2 + "" + MathsObject.Bracket2 + " "
+                                   + MathsObject.Rounding + "" + MathsObject.RoundingType + "" + MathsObject.Logic2));
+                                }
+                            }
+                            StringBuilder MathStringbuilder = new StringBuilder();
+                            foreach (var bitmathlevel in mathString)
+                            {
+                                // Append each int to the StringBuilder overload.
+                                MathStringbuilder.Append(bitmathlevel).Append(" ");
+                            }
+                            propValues.Add(Convert.ToString(MathStringbuilder));
+                            propMathsParams = new List<string>();
                         }
                         else
                         {
-                            propValues.Add(prop.Value);
-                            propNames[LoopCounter-1].Add(prop.Value);
-                            propValues = new List<string>();
-                        }
-
+                            foreach (var bit in list.Parameter)
+                            {
+                                foreach (var bitlevel in bit)
+                                {
+                                    propParams.Add(Convert.ToString(bitlevel.Key));
+                                    propParams.Add(":");
+                                    propParams.Add(Convert.ToString(bitlevel.Value));
+                                    propParams.Add("~");
+                                }
+                                propParams.RemoveAt(propParams.LastIndexOf("~"));
+                                StringBuilder builder = new StringBuilder();
+                                foreach (var bitlevel in propParams)
+                                {
+                                    // Append each int to the StringBuilder overload.
+                                    builder.Append(bitlevel).Append(" ");
+                                }
+                                propValues.Add(Convert.ToString(builder));
+                                propParams = new List<string>();
+                            }
+                        }                      
                     }
+                    else
+                    {
+                        foreach(var InputVal in list.Parameter)
+                        {
+                            foreach(var InputVal1 in InputVal)
+                            {
+                                if(InputVal1.Key == "templateOptions")
+                                {
+                                    foreach(var InputVal2 in InputVal1.Value)
+                                    {
+                                        if(InputVal2.Key != "options")
+                                        {
+                                            propInputParams.Add(InputVal2.Key);
+                                            propInputParams.Add(":");
+                                            propInputParams.Add(Convert.ToString(InputVal2.Value));
+                                            propInputParams.Add("~");
+                                        }
+                                    }
+                                }                              
+                            }
+                        }
+                        propInputParams.RemoveAt(propInputParams.LastIndexOf("~"));
+                        StringBuilder inputbuilder = new StringBuilder();
+                        foreach (var bitlevel2 in propInputParams)
+                        {
+                            // Append each int to the StringBuilder overload.
+                            inputbuilder.Append(bitlevel2).Append(" ");
+                        }
+                        propValues.Add(Convert.ToString(inputbuilder));
+                        propInputParams = new List<string>();
+                    }
+                    propNames.Add(propValues);
+                    propValues = new List<string>();
                 }
-
-                isNameDone = true;
             }
-
             response.Content = new StringContent(JsonConvert.SerializeObject(propNames));
-
             response.StatusCode = HttpStatusCode.OK;
             return response;
         }
-
     }
 }
