@@ -13,6 +13,8 @@
     $scope.validationError = false;
     $scope.openIndexBackup = null;
 
+    $scope.noSpacesPattern = /^[a-zA-Z0-9-_]+$/;
+
     $scope.csv = {
         content: null,
         header: true,

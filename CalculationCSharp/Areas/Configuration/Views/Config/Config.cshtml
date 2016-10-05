@@ -130,8 +130,12 @@
                                     </td>
 
                                     <td >
-                                        <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Comments' " uib-popover="{{data || rows.Name}}" popover-trigger="mouseenter" popover-popup-delay="1000" ><input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" class="form-control  input-sm" ng-required="true"></span>
-                                        <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Name is required.</p>
+                                        <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Comments' " uib-popover="{{data || rows.Name}}" 
+                                              popover-trigger="mouseenter" popover-popup-delay="1000" >
+                                              <input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" ng-pattern="noSpacesPattern" class="form-control  input-sm" ng-required="true" ng-trim="false">
+                                        </span>
+                                        <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$error.pattern" class="help-block">No Spaces or Special Characters</p>
+                                        <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$error.required" class="help-block">Name is required.</p>
                                         <span ng-show="Category.Name == 'Input' || rows.Function == 'ErrorsWarnings' || rows.Function == 'Comments'">{{rows.Name}}</span>
                                     </td>
 

@@ -3,6 +3,7 @@
     // Model
     $scope.form = [];
     $scope.data = [];
+    $scope.noSpacesPattern = /^[a-zA-Z0-9-_]+$/;
 
     $scope.form.templateOptions = [];
     if (Functions.length > 0) {
