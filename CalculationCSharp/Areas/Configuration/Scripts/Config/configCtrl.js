@@ -489,11 +489,15 @@
     $scope.SpecButtonClick = function (form) {
         var id = configFunctionFactory.getConfigID();
         $scope.isLoading = true;
-        configService.specBuilder(id, $scope.config).then(function (data) {
+       var promise = configService.specBuilder(id, $scope.config).then(function (data) {
             $scope.isLoading = false;
             $scope.SpecOutput = data;
             toastr.success("Specification Produced", "Success");
+            return data;
         }, onError);
+
+       return promise;
+
     };
 
     $scope.getHeader = ["Function ID", "Name","Function","Type", "Logic", "Parameter"];

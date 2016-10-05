@@ -31,13 +31,9 @@
 
                         </ng-csv-import>
                         <h4>
-                            Parse
-                        </h4>
-                        <button type="button" ng-click="BulkCalcButtonClick(csv.result)" class="btn btn-default" >Parse</button>
-                        <h4>
                             Download
                         </h4>
-                        <button type="button" ng-csv="BulkOutput"  @*csv-header="getBulkOutput()"*@ class="btn btn-default" filename="Calculation Output.csv">Download</button>
+                        <button type="button" ng-csv="BulkCalcButtonClick(csv.result)"  class="btn btn-default" filename="Calculation Output.csv">Download</button>
                     </div>
 
                 </form>

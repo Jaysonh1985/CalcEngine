@@ -116,11 +116,14 @@
         angular.forEach($scope.bulkArrayOutput, function (value, key, obj) {         
             $scope.BulkOutputArray.push(angular.fromJson(value));
         })
-        calculationService.postBulkCalc(1, $scope.BulkOutputArray).then(function (data) {
+       var promise = calculationService.postBulkCalc(1, $scope.BulkOutputArray).then(function (data) {
             $scope.isLoading = false;
             $scope.BulkOutput = data;
             toastr.success("Parsed successfully", "Success");
-        });
+            return data;
+       });
+
+       return promise;
     };
 
     $scope.BulkOutputBuilder = function BulkOutputBuilder(Output) {

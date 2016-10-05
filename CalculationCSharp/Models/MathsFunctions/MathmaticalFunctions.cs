@@ -84,7 +84,14 @@ public class MathematicalFunctions
         }
         else
         {
-            return Math.Round(Output, Convert.ToInt16(Rounding));
+            if(Rounding != "")
+            {
+                return Math.Round(Output, Convert.ToInt16(Rounding));
+            }
+            else
+            {
+                return Math.Round(Output, 2);
+            }
         }
     }
 }
