@@ -1,12 +1,23 @@
 ﻿<body ng-controller="regressionOutputCtrl">
     <div class="modal-header">
         <h3 class="modal-title">Regression Output</h3>
+        <ul class="nav navbar-nav center-block">
+            <li></li>
+            <li><button class="btn btn-default navbar-btn" type="button" ng-click="OpenAllButton()"> Open All </button></li>
+            <li><button class="btn btn-default navbar-btn" type="button" ng-click="CloseAllButton()"> Close All </button></li>
+        </ul>
+
+        <div class="nav navbar-nav pull-right">
+            <div class="navbar-text">Search</div>
+            <div class="input-group">
+                <input type="text" class="form-control form-inline input" ng-model="test" placeholder="Filter">
+            </div>
+        </div>
     </div>
     <div class="modal-body">
 
         <uib-accordion close-others=false>
                 <div class="container-fluid">
-                    <input type="text" class="form-control  input" ng-model="test" placeholder="Filter">
                     <uib-accordion close-others=false ng-model="output">
                         <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open="openIndexRegression[$index]">
                             <uib-accordion-heading>
@@ -25,7 +36,7 @@
                                         </th>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="row in group.Output | filter : test" ng-class="{'redrow': row.Field.indexOf('Comments') > -1}">
+                                    <tr ng-repeat="row in group.Output | filter : test" ng-class="{'redrow': row.Field.indexOf('Comment') > -1}">
                                         <td>
                                             {{row.Field}}
                                         </td>
