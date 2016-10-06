@@ -61,7 +61,7 @@
                                     <td ng-if="Category.Name != 'Input'"><a ng-click="DeleteCategory($index)"><i class="center-block glyphicon glyphicon-remove"></i></a> </td>
                                     <td><a ng-click="AddCategoryRows($index, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a></td>
                                     <td ng-if="Category.Name != 'Input'"><a ng-click="CopyCategory($index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a></td>
-                                    <td><a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a></td>
+                                    <td ng-if="Category.Name != 'Input'"><a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a></td>
                                 </tr>
                             </table>
                         </div>
