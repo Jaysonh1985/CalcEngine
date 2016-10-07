@@ -640,7 +640,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Factor Tables\FIRE 1992 Scheme Factors.xlsx" />
     <Content Include="Factor Tables\Grade.csv" />
     <Content Include="Factor Tables\PIFactor.csv" />
     <Content Include="Areas\Configuration\Views\web.config" />
