@@ -1,8 +1,7 @@
 ﻿// Copyright (c) 2016 Project AIM
 sulhome.kanbanBoardApp.service('calculationService', function ($http, $q, $rootScope) {
     var proxy = null;
-
-    
+    //Get Config List
     var getConfig = function () {
         return $http.get("/api/CalcReleases").then(function (response) {
             return response.data;
@@ -10,7 +9,7 @@ sulhome.kanbanBoardApp.service('calculationService', function ($http, $q, $rootS
             return $q.reject(error.data.Message);
         });
     };
-
+    //Get particular Config
     var getSingleConfig = function (index) {
         return $http.get("/api/CalcReleases/"+ index).then(function (response) {
             return response.data;
@@ -18,7 +17,6 @@ sulhome.kanbanBoardApp.service('calculationService', function ($http, $q, $rootS
             return $q.reject(error.data.Message);
         });
     };
-
 
     var addConfig = function (data) {
         return $http.post("/api/CalcReleases/PostCalcConfiguration", data)
@@ -72,6 +70,7 @@ sulhome.kanbanBoardApp.service('calculationService', function ($http, $q, $rootS
                 return $q.reject(error.data.Message);
             });
      };
+
      var postBulkCalc = function (index, data) {
          return $http.post("/api/CalculationBulkWebApi/" + index, { data: data })
             .then(function (response) {
@@ -80,27 +79,14 @@ sulhome.kanbanBoardApp.service('calculationService', function ($http, $q, $rootS
                 return $q.reject(error.data.Message);
             });
      };
-
-    var rowid = 0;
-    var colid = 0;
-
-    var getRowid = function () {
-        return rowid;
-    }
-    var getColid = function () {
-        return colid;
-    }
-     
+    
     var initialize = function () {      
-
         connection = jQuery.hubConnection();
         this.proxy = connection.createHubProxy('KanbanBoard');
-
         // Listen to the 'BoardUpdated' event that will be pushed from SignalR server
         this.proxy.on('BoardUpdated', function () {
             $rootScope.$emit("refreshBoard");
         });
-
         // Connecting to SignalR server        
         return connection.start()
         .then(function (connectionObj) {
@@ -123,8 +109,6 @@ sulhome.kanbanBoardApp.service('calculationService', function ($http, $q, $rootS
         deleteConfig: deleteConfig,
         getConfig: getConfig,
         getSingleConfig: getSingleConfig,
-        getRowid: getRowid,
-        getColid: getColid,
         getCalc: getCalc,
         putCalc: putCalc,
         postCalc: postCalc,

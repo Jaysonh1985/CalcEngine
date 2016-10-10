@@ -9,6 +9,9 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
 {
     public class CalculationController : Controller
     {
+        /// <summary>Controller for displaying the calculation release pages
+        /// </summary>
+
         // GET: Calculation/CalcReleasePage
         public ActionResult Index()
         {
@@ -21,10 +24,5 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
             return View();
         }
 
-        // GET: Calculation/CalcReleasePage
-        public ActionResult Form2()
-        {
-            return View();
-        }
     }
 }

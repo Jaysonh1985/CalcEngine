@@ -16,6 +16,9 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
 {
     public class CalcReleasesController : ApiController
     {
+        /// <summary>Controller for updating the calculation releases table and displays this on the Index page.
+        /// </summary>
+
         private CalculationDBContext db = new CalculationDBContext();
 
         // GET: api/CalcReleases
@@ -24,18 +27,22 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
             return db.CalcRelease;
         }
 
+        /// <summary>Get list of Calcs available in the Calculation System.
+        /// <para>id = CalculationID on DB Table </para>
+        /// </summary>
+
         // GET: api/CalcReleases/5
         [ResponseType(typeof(CalcRelease))]
         public IHttpActionResult GetCalcRelease(int id)
         {
             var List = db.CalcRelease.Where(i => i.CalcID == id);
-            //if (calcRelease == null)
-            ////{
-            ////    return NotFound();
-            ////}
-
             return Ok(List);
         }
+
+        /// <summary>Put calculation in CalcReleases Table.
+        /// <para>id = CalculationID on DB Table</para>
+        /// <para>calcRelease = Configuration to update</para>
+        /// </summary>
 
         // PUT: api/CalcReleases/5
         [ResponseType(typeof(void))]
@@ -45,17 +52,13 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            if (id != calcRelease.ID)
-            {
-                return BadRequest();
-            }
-
-            calcRelease.User = HttpContext.Current.User.Identity.Name.ToString();
-            calcRelease.UpdateDate = DateTime.Now;
-
-            db.Entry(calcRelease).State = EntityState.Modified;
-
+            CalcRelease CalcReleaseFind = db.CalcRelease.FirstOrDefault(i => i.CalcID == id);
+            CalcReleaseFind.User = HttpContext.Current.User.Identity.Name.ToString();
+            CalcReleaseFind.UpdateDate = DateTime.Now;
+            CalcReleaseFind.Configuration = calcRelease.Configuration;
+            CalcReleaseFind.Version = calcRelease.Version;
+            db.Entry(CalcReleaseFind).State = EntityState.Modified;
+            
             try
             {
                 db.SaveChanges();
@@ -75,6 +78,11 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+
+        /// <summary>Post calculation in CalcReleases Table.
+        /// <para>calcRelease = Configuration to update</para>
+        /// </summary>
+
         // POST: api/CalcReleases
         [ResponseType(typeof(CalcRelease))]
         public IHttpActionResult PostCalcRelease(CalcRelease calcRelease)
@@ -91,9 +99,12 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
             db.CalcRelease.Add(calcRelease);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = calcRelease.ID }, calcRelease);
+            return Ok(calcRelease);
         }
 
+        /// <summary>Delete calculation in CalcReleases Table.
+        /// <para>id = calculation ID in Table</para>
+        /// </summary>
         // DELETE: api/CalcReleases/5
         [ResponseType(typeof(CalcRelease))]
         public IHttpActionResult DeleteCalcRelease(int id)

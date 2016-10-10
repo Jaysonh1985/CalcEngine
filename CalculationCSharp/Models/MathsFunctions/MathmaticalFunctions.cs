@@ -55,7 +55,15 @@ public class MathematicalFunctions
 
     public decimal Divide(decimal Number1, decimal Number2)
     {
-        return Number1 / Number2;
+        try
+        {
+            return Number1 / Number2;
+        }
+        catch (Exception)
+        {
+            return 0;
+        }
+        
     }
     public decimal Multiply(decimal Number1, decimal Number2)
     {

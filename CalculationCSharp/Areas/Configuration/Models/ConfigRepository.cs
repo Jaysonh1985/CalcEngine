@@ -18,7 +18,6 @@ namespace CalculationCSharp.Areas.Configuration.Models
     {
         CategoryViewModel Configuration = new CategoryViewModel();
         ConfigViewModel Functions = new ConfigViewModel();
-
         public List<CategoryViewModel> GetConfig(CategoryViewModel Config)
         {
             var Configuration = new List<CategoryViewModel>();
@@ -34,21 +33,12 @@ namespace CalculationCSharp.Areas.Configuration.Models
 
                 }
             }
-
             return (List<CategoryViewModel>)HttpContext.Current.Cache["config"];
         }
 
         public void UpdateConfig(List<CategoryViewModel> Config)
         {
             HttpContext.Current.Cache["config"] = Config;
-
         }
-
-
-    }
-
-
-
-
-  
+    } 
 }

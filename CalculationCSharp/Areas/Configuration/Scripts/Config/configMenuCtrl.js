@@ -116,7 +116,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                $scope.calcrelease = data;
 
                if ($scope.calcrelease == null || $scope.calcrelease.length == 0) {
-                   $scope.relaseBoardAdd($scope.selected);
+                   $scope.relaseBoardAdd(index, $scope.selected);
                }
                else
                {
@@ -129,7 +129,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
 
      };
 
-     $scope.relaseBoardAdd = function (data) {
+     $scope.relaseBoardAdd = function (index, data) {
          calculationService.addConfig(data).then(function (data) {
              $scope.isLoading = false;
          }, onError);
@@ -141,8 +141,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
          }, onError);
 
      };
-
-        $scope.deleteBoard = function (index) {
+     $scope.deleteBoard = function (index) {
         var cf = confirm("Delete this Calculation?");
         if (cf == true) {
             configService.deleteConfig(this.Boards[index].ID)
@@ -151,7 +150,6 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
             $scope.Boards.splice(index, 1);
         }, onError);
         }};
-
      $scope.editingData = {};
      
      for (var i = 0, length = $scope.Boards.length; i < length; i++) {

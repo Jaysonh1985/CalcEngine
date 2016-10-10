@@ -9,7 +9,6 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
     var vm = this;
     $scope.openIndex = [true];
     $scope.openIndexOuter = [true];
-
     $scope.csv = {
         content: null,
         header: true,
@@ -22,11 +21,11 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
     };
 
     vm.model = [];
-
+    //Initialise
     function init() {
         calculationService.initialize().then(function (data) {
                 $scope.isLoading = true;
-                var id = $scope.getConfigID();
+                var id = configFunctionFactory.getConfigID();
                  calculationService.getCalc(id)
                    .then(function (data) {
                        $scope.isLoading = false;
@@ -36,18 +35,8 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
                    });
             });
     };
-
-
-    $scope.getConfigID = function getConfigID() {
-        var url = location.pathname;
-        var id = url.substring(url.lastIndexOf('/') + 1);
-        id = parseInt(id, 10);
-        if (angular.isNumber(id) == false) {
-            id = null;
-        }
-        return id;
-    }
-    
+    //Single Calculation
+    //Get the fields for the input form and null the values out
     $scope.getFormFields = function getFormFields() {  //function that sets the parameters available under the different variable types
         var counter = 0;
         var scopeid = 0;
@@ -61,6 +50,26 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
             scopeid = scopeid + 1
         });
     }
+    $scope.CalcButtonClick = function CalcButtonClick(form) {
+        if (form.$valid == true) {
+            $scope.isLoading = true;
+            angular.forEach($scope.configreg.Functions, function (value, key, obj) {
+                var index = configFunctionFactory.getIndexOf($scope.config[0].Functions, value.Name, 'Name');
+                $scope.config[0].Functions[index].Output = value.Output;
+            });
+            calculationService.postCalc(1, $scope.config).then(function (data) {
+                $scope.isLoading = false;
+                $scope.output = data;
+                toastr.success("Calculated successfully", "Success");
+            });
+        }
+        else {
+            $scope.validationError = true;
+            toastr.error("Failed Validations", "Error");
+        }
+    };
+    //Bulk Calculations
+    //Get the row and group names for the CSV file in the bulk calculations
     $scope.getCSVFields = function getFormFields() {  //function that sets the parameters available under the different variable types
         var CSVcounter = 0;
         $scope.CSVfields = [];
@@ -69,44 +78,13 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
             CSVcounter = CSVcounter + 1
         });
     }
-
-    var _lastGoodResult = '';
-    $scope.toPrettyJSON = function (json, tabWidth) {
-        var objStr = JSON.stringify(json);
-        var obj = null;
-        try {
-            obj = $parse(objStr)({});
-        } catch (e) {
-            // eat $parse error
-            return _lastGoodResult;
-        }
-
-        var result = JSON.stringify(obj, null, Number(tabWidth));
-        _lastGoodResult = result;
-
-        return result;
-    };
-
+    //Get Header row for the CSV file
     $scope.getHeader = function () { return $scope.CSVfields };
-    $scope.getBulkOutput = function () { return $scope.BulkOutput };
-
-    function getIndexOf(arr, val, prop) {
-        var l = arr.length,
-          k = 0;
-        for (k = 0; k < l; k = k + 1) {
-            if (arr[k][prop] === val) {
-                return k;
-            }
-        }
-        return false;
-    };
-
-
     $scope.BulkCalcButtonClick = function CalcButtonClick(input) {
         $scope.bulkArrayOutput = [];
         angular.forEach(input, function (value, key, obj) {       
             angular.forEach(value, function (value, key, obj) {
-                var index = getIndexOf($scope.config[0].Functions, key, 'Name');
+                var index = configFunctionFactory.getIndexOf($scope.config[0].Functions, key, 'Name');
                 $scope.config[0].Functions[index].Output = value;
             })
             $scope.bulkarray = $scope.config;
@@ -123,35 +101,14 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
             toastr.success("Parsed successfully", "Success");
             return data;
        });
-
        return promise;
     };
-
+    //Creates the array of the output
     $scope.BulkOutputBuilder = function BulkOutputBuilder(Output) {
         var Test = [];
         Test = angular.toJson(Output);
         $scope.bulkArrayOutput.push(Test);
     };
-    
-    $scope.CalcButtonClick = function CalcButtonClick(form) {
-        if (form.$valid == true) {
-            $scope.isLoading = true;
-            angular.forEach($scope.configreg.Functions, function (value, key, obj) {
 
-                var index = configFunctionFactory.getIndexOf($scope.config[0].Functions, value.Name, 'Name');
-                $scope.config[0].Functions[index].Output = value.Output;
-            });
-            calculationService.postCalc(1, $scope.config).then(function (data) {
-                $scope.isLoading = false;
-                $scope.output = data;
-                toastr.success("Calculated successfully", "Success");
-            });
-        }
-        else {
-            $scope.validationError = true;
-            toastr.error("Failed Validations", "Error");
-        }
-    };
-        
     init();
 });
