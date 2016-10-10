@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('regressionOutputCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Output, $filter) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('regressionOutputCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Output, $filter) {
     
 
     function init() {

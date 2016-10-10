@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('groupCtrl', function ($scope, $uibModalInstance, $log, ID, Name, Description) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('groupCtrl', function ($scope, $uibModalInstance, $log, ID, Name, Description) {
     // Model
     $scope.ID = ID;
     $scope.Name = Name;

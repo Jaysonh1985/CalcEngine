@@ -1,4 +1,5 @@
-﻿using CalculationCSharp.Areas.Configuration.Models.Actions;
+﻿// Copyright (c) 2016 Project AIM
+using CalculationCSharp.Areas.Configuration.Models.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

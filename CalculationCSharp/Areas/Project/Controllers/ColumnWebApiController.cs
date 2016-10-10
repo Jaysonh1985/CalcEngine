@@ -1,4 +1,5 @@
-﻿using CalculationCSharp.Areas.Project.Models;
+﻿// Copyright (c) 2016 Project AIM
+using CalculationCSharp.Areas.Project.Models;
 using CalculationCSharp.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

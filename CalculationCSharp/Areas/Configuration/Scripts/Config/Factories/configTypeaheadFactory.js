@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, configFunctionFactory) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, configFunctionFactory) {
     return {
         //get ctrl file path for functions modal
         variableArrayBuilder: function (config, colIndex, type, rowIndex) {

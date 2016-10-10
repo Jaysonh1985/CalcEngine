@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Copyright (c) 2016 Project AIM
+using System;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;

@@ -1,4 +1,5 @@
-﻿using CalculationCSharp.Models.ArrayFunctions;
+﻿// Copyright (c) 2016 Project AIM
+using CalculationCSharp.Models.ArrayFunctions;
 using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;

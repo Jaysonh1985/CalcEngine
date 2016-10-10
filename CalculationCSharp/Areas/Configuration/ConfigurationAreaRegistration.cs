@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿// Copyright (c) 2016 Project AIM
+using System.Web.Mvc;
 
 namespace CalculationCSharp.Areas.Configuration
 {

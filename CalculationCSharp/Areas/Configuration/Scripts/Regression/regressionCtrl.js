@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location, $filter, configService, ID, calculationService, configFunctionFactory, ObjectDiff) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location, $filter, configService, ID, calculationService, configFunctionFactory, ObjectDiff) {
 
     function init() {
       $scope.isLoading = true;

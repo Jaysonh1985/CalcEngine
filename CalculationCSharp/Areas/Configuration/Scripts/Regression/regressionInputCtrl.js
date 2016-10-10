@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions, configFunctionFactory, Input, $filter) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions, configFunctionFactory, Input, $filter) {
     
     $scope.output = [];
     $scope.formset = [];

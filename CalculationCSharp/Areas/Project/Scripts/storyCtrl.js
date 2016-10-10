@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, ID, Name, Description, AcceptanceCriteria, Moscow, Timebox, User, Tasks, Comments) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, ID, Name, Description, AcceptanceCriteria, Moscow, Timebox, User, Tasks, Comments) {
     
     $scope.ID = ID;
     $scope.Name = Name;

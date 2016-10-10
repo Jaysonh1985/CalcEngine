@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, configModalFactory, $filter, $timeout) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, configModalFactory, $filter, $timeout) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];

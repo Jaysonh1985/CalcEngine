@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.directive('uibModalWindow', function () {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.directive('uibModalWindow', function () {
     return {
         restrict: 'EA',
         link: function(scope, element) {

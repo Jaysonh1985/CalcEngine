@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿// Copyright (c) 2016 Project AIM
+using System.Linq;
 using System.Web.Mvc;
 using System.IO;
 using System.Web.UI;

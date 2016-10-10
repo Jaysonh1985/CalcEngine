@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log, $location, $window, boardService) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log, $location, $window, boardService) {
     // Model
     $scope.Boards = [];
     $scope.isLoading = false;

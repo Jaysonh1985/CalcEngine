@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
     return {
         //get ctrl file path for functions modal
         getFunctionCtrl: function (Function) {

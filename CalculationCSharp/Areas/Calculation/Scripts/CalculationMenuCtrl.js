@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('calculationMenuCtrl', function ($scope,  $routeParams, $uibModal, $log, $location, $window, calculationService) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('calculationMenuCtrl', function ($scope,  $routeParams, $uibModal, $log, $location, $window, calculationService) {
     // Model
     $scope.Boards = [];
     $scope.isLoading = false;

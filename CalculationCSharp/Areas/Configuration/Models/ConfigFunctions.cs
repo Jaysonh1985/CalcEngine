@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) 2016 Project AIM
+using System.Collections.Generic;
 using System.Linq;
 
 

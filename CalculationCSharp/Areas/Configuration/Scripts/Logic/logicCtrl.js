@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstance, Logic) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstance, Logic) {
     
     $scope.Logic = Logic;
 

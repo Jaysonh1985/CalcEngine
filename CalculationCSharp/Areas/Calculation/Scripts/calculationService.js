@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.service('calculationService', function ($http, $q, $rootScope) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.service('calculationService', function ($http, $q, $rootScope) {
     var proxy = null;
 
     

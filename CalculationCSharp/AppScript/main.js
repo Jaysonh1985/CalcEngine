@@ -1,4 +1,6 @@
-﻿// application global namespace
+﻿// Copyright (c) 2016 Project AIM
+
+// application global namespace
 var sulhome = sulhome || {};
 sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRoute', 'ui.sortable', 'gridster', 'dndLists', 'ngTouch', 'ngAnimate', 'ui.tree', 'dynamic-form', 'formly','formlyBootstrap', 'ds.objectDiff', 'ngCsv', 'ngSanitize', 'ngCsvImport'])
     .config(function ($routeProvider) {

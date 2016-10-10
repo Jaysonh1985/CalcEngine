@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿// Copyright (c) 2016 Project AIM
+using System.Web;
 using System.Web.Optimization;
 
 namespace CalculationCSharp

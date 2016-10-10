@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿// Copyright (c) 2016 Project AIM
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

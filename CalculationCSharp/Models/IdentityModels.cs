@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿// Copyright (c) 2016 Project AIM
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;

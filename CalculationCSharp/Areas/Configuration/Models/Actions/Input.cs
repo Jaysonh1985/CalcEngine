@@ -1,4 +1,5 @@
-﻿namespace CalculationCSharp.Areas.Configuration.Models.Actions
+﻿// Copyright (c) 2016 Project AIM
+namespace CalculationCSharp.Areas.Configuration.Models.Actions
 {
     public class Input
     {

@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.directive('kanbanBoardDragg', function () {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.directive('kanbanBoardDragg', function () {
     return {
         link: function ($scope, element, attrs) {
 

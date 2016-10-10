@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('historyCtrl', function ($scope, $uibModalInstance, $log, $http, $location,configService, ID) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('historyCtrl', function ($scope, $uibModalInstance, $log, $http, $location,configService, ID) {
     
     function init() {
       $scope.isLoading = true;

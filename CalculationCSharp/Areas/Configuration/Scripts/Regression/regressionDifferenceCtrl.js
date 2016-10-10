@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('regressionDifferenceCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Difference, $filter, $sce) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('regressionDifferenceCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Difference, $filter, $sce) {
     
 
     function init() {

@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configFunctionFactory, calculationService, $filter) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configFunctionFactory, calculationService, $filter) {
 
     $scope.output = [];
     $scope.formset = [];

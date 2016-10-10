@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿// Copyright (c) 2016 Project AIM
+using System.IO;
 using System;
 using System.Web.Mvc;
 using System.Collections.Generic;

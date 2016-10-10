@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Copyright (c) 2016 Project AIM
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;

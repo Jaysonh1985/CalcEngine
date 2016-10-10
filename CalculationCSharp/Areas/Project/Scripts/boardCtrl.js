@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, boardService) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, boardService) {
     // Model
     $scope.columns = [];
     $scope.isLoading = true;

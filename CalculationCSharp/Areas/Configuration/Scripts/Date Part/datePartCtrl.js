@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.controller('datePartCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.controller('datePartCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions) {
     // Model
     $scope.period = [];
 

@@ -1,4 +1,5 @@
-﻿using CalculationCSharp.Models;
+﻿// Copyright (c) 2016 Project AIM
+using CalculationCSharp.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;

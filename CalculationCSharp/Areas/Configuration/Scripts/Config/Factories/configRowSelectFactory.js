@@ -1,4 +1,5 @@
-﻿sulhome.kanbanBoardApp.factory('configValidationFactory', function ($location) {
+﻿// Copyright (c) 2016 Project AIM
+sulhome.kanbanBoardApp.factory('configValidationFactory', function ($location) {
     return {
         //get config ID from url
         getConfigID: function () {
