@@ -277,7 +277,6 @@
     <Compile Include="Areas\Project\Controllers\BoardController.cs" />
     <Compile Include="Areas\Project\Controllers\BoardHub.cs" />
     <Compile Include="Areas\Project\Controllers\ColumnWebApiController.cs" />
-    <Compile Include="Controllers\CalculationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -290,8 +289,6 @@
     <Compile Include="Areas\Project\Models\Stories.cs" />
     <Compile Include="Models\ArrayFunctions\ArrayBuildingFunctions.cs" />
     <Compile Include="Models\CalculationViewModels.cs" />
-    <Compile Include="Models\Calculation\DownloadFileActionResult.cs" />
-    <Compile Include="Models\Calculation\Index.cs" />
     <Compile Include="Models\Calculation\OutputList.cs" />
     <Compile Include="Models\DateFunctions\DateFunctions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -784,7 +781,6 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_CalcTypes.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Areas\Project\Views\Board\Board.cshtml" />
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
@@ -802,26 +798,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>7</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Excel">
-      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>8</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

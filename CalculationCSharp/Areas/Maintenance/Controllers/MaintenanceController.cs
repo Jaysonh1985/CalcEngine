@@ -12,16 +12,19 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
 {
     public class MaintenanceController : Controller
     {
+        /// <summary>Controller for getting the factor tables from the server and applying CRUD.
+        /// </summary>
+        /// 
+
+        /// <summary>Gets a list of available CSV files in server map path and returns them to the presentation layer as a dropdown list.
+        /// </summary>
         // GET: Maintenance/Maintenance
         public ActionResult Index()
         {
-
             // Put all file names in root directory into array.
             string[] array1 = Directory.GetFiles(@HttpContext.Server.MapPath("\\Factor Tables\\"));
-
             List<SelectListItem> li = new List<SelectListItem>();
             int i = 0;
-
             // Display all files.
             Console.WriteLine("--- Files: ---");
             foreach (string name in array1)
@@ -30,26 +33,15 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
                 var pathParts = name.Split(Path.DirectorySeparatorChar);
                 string fileName = pathParts.Last();
                 li.Add(new SelectListItem { Text = fileName, Value = fileName });
-
                 i += i;
             }
             ViewData["Dropdown"] = li;
-
             return View();
         }
 
-        // GET: Maintenance/Maintenance/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Maintenance/Maintenance/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
+        /// <summary>Downloads the relevant selected CSV File
+        /// <para>value = String that has been selected in the dropdown list</para>
+        /// </summary>
         [HttpPost]
         public ActionResult DownloadFile(FormCollection value)
         {
@@ -57,18 +49,17 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
             string filepath = HttpContext.Server.MapPath("\\Factor Tables\\" + filename);
             byte[] filedata = System.IO.File.ReadAllBytes(filepath);
             string contentType = MimeMapping.GetMimeMapping(filepath);
-
             var cd = new System.Net.Mime.ContentDisposition
             {
                 FileName = filename,
                 Inline = true,
             };
-
             Response.AppendHeader("Content-Disposition", cd.ToString());
-
             return File(filedata, contentType);
         }
-
+        /// <summary>Creates the csv file on the server and stores it in the relevant map path
+        /// <para>value = String that has been selected in the dropdown list</para>
+        /// </summary>
         // POST: Maintenance/Maintenance/Create
         [HttpPost]
         public ActionResult Create(HttpPostedFileBase file)
@@ -90,47 +81,21 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
                 return RedirectToAction("Error");
             }
         }
-
-        // GET: Maintenance/Maintenance/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
+        /// <summary>Error handler
+        /// </summary>
         public ActionResult Error()
         {
             return View();
         }
-
-        // POST: Maintenance/Maintenance/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Maintenance/Maintenance/Delete/5
-        public ActionResult DeleteFile(int id)
-        {
-            return View();
-        }
-
+        /// <summary>Deletes CSV file from the map path
+        /// <para>value = String that has been selected in the dropdown list</para>
+        /// </summary>
         // POST: Maintenance/Maintenance/Delete/5
         [HttpPost]
         public ActionResult DeleteFile(FormCollection value)
         {
             try
             {
-                // TODO: Add delete logic here
                 string filename = value["Dropdown"];
                 string filepath = HttpContext.Server.MapPath("\\Factor Tables\\" + filename);
                 System.IO.File.Delete(filepath);

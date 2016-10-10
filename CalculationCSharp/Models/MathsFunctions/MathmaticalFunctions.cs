@@ -8,32 +8,26 @@ using System.Web;
 
 public class MathematicalFunctions
 {
-
 	public decimal Abs(decimal Number1)
 	{
         return Math.Abs(Number1);
 	}
-
     public decimal Ceiling(decimal Number1)
     {
         return Math.Ceiling(Number1);
     }
-
     public decimal Floor(decimal Number1)
     {
         return Math.Floor(Number1);
     }
-
     public decimal Max(decimal Number1, Decimal Number2)
     {
         return Math.Max(Number1, Number2);
     }
-
     public decimal Min(decimal Number1, Decimal Number2)
     {
         return Math.Min(Number1, Number2);
     }
-
     public decimal Truncate(decimal Number1)
     {
         return Math.Truncate(Number1);
@@ -42,17 +36,14 @@ public class MathematicalFunctions
     {     
         return Number1 - Math.Truncate(Number1);
     }
-
     public decimal Add(decimal Number1, decimal Number2)
     {
         return Number1 + Number2;
     }
-
     public decimal Subtract(decimal Number1, decimal Number2)
     {
         return Number1 - Number2;
     }
-
     public decimal Divide(decimal Number1, decimal Number2)
     {
         try
@@ -63,7 +54,6 @@ public class MathematicalFunctions
         {
             return 0;
         }
-        
     }
     public decimal Multiply(decimal Number1, decimal Number2)
     {
@@ -73,7 +63,6 @@ public class MathematicalFunctions
     {
         return Convert.ToDecimal(Math.Pow(Convert.ToDouble(Number1), Convert.ToDouble(Number2)));
     }
-
     public decimal Rounding (string RoundingType, string Rounding, decimal Output)
     {
         if (RoundingType == "up")
