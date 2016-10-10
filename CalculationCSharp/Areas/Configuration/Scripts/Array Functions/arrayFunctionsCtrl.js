@@ -2,7 +2,7 @@
 sulhome.kanbanBoardApp.controller('arrayFunctionsCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions) {
     // Model
     $scope.array = [];
-
+    //Map Back the input values if they exist
     if (Functions.length > 0) {
         $scope.array.LookupType = Functions[0].LookupType;
         $scope.array.LookupValue = Functions[0].LookupValue;
@@ -10,32 +10,24 @@ sulhome.kanbanBoardApp.controller('arrayFunctionsCtrl', function ($scope, $uibMo
     }
     else {
         $scope.array = Functions
-    }
-    
+    };
+    //Set up new object  
     $scope.selected = [];
-    $scope.addItem = function AddItem () {
+    //Add new Item to the selected array
+    $scope.addItem = function AddItem() {
         $scope.selected.push({
             LookupType: $scope.array.LookupType,
             LookupValue: $scope.array.LookupValue,
             Function: $scope.array.Function,
         })
-    },
-
-
-
-    $scope.removeMathsItem = function (index) {
-        $scope.array.splice(index, 1);
-    },
-
-    //Click OK
+    };
+    //Click OK moves back to modal instantiation
     $scope.ok = function () {
         $scope.addItem();
         $uibModalInstance.close($scope.selected);
     };
-
+    //Cancel Modal destroy modal values
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-
-   
 })

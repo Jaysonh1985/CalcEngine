@@ -6,9 +6,7 @@
     angular.module("additionalControls", [])
         .directive("isloading", isloading);
 
-    function isloading() {
-
-   
+    function isloading() {  
     }
 
 })();

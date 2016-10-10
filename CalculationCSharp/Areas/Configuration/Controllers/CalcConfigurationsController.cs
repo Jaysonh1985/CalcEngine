@@ -16,6 +16,9 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 {
     public class CalcConfigurationsController : ApiController
     {
+        /// <summary>Controller for updating the calcConfigurations table on the db.
+        /// </summary>
+
         CalcHistoriesController CalcHistories = new CalcHistoriesController();
         CalcHistory CalcHistory = new CalcHistory();
 
@@ -26,7 +29,9 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         {
             return db.CalcConfiguration;
         }
-
+        /// <summary>Get list of Calcs available in the Calculation System.
+        /// <para>id = ID on DB Table </para>
+        /// </summary>
         // GET: api/CalcConfigurations/5
         [ResponseType(typeof(CalcConfiguration))]
         public IHttpActionResult GetCalcConfiguration(int id)
@@ -39,7 +44,10 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
             return Ok(calcConfiguration);
         }
-
+        /// <summary>Updates the configuration on the database.
+        /// <para>id = ID on DB Table </para>
+        /// <para>calcConfiguration = Database Object entity </para>
+        /// </summary>
         // PUT: api/CalcConfigurations/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCalcConfiguration(int id, CalcConfiguration calcConfiguration)
@@ -78,7 +86,9 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        /// <summary>Posts new configuration on the database.
+        /// <para>calcConfiguration = Database Object entity </para>
+        /// </summary>
         // POST: api/CalcConfigurations
         [ResponseType(typeof(CalcConfiguration))]
         public IHttpActionResult PostCalcConfiguration(CalcConfiguration calcConfiguration)
@@ -93,7 +103,9 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = calcConfiguration.ID }, calcConfiguration);
         }
-
+        /// <summary>Posts new configuration on the database.
+        /// <para>id = ID on DB Table </para>
+        /// </summary>
         // DELETE: api/CalcConfigurations/5
         [ResponseType(typeof(CalcConfiguration))]
         public IHttpActionResult DeleteCalcConfiguration(int id)
@@ -109,7 +121,8 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
             return Ok(calcConfiguration);
         }
-
+        /// <summary>Disposes the controller if error has occured.
+        /// </summary>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

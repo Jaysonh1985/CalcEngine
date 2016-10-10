@@ -26,11 +26,9 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
         {
             return db.CalcRelease;
         }
-
-        /// <summary>Get list of Calcs available in the Calculation System.
+        /// <summary>Get list of Calcs available in the Configuration System.
         /// <para>id = CalculationID on DB Table </para>
         /// </summary>
-
         // GET: api/CalcReleases/5
         [ResponseType(typeof(CalcRelease))]
         public IHttpActionResult GetCalcRelease(int id)
@@ -38,12 +36,10 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
             var List = db.CalcRelease.Where(i => i.CalcID == id);
             return Ok(List);
         }
-
         /// <summary>Put calculation in CalcReleases Table.
         /// <para>id = CalculationID on DB Table</para>
         /// <para>calcRelease = Configuration to update</para>
         /// </summary>
-
         // PUT: api/CalcReleases/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCalcRelease(int id, CalcRelease calcRelease)

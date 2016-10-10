@@ -39,11 +39,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                }, onError);
         }, onError);
         var id = configFunctionFactory.getConfigID();
-        configService.getCalcName(id)
-        .then(function (namedata) {
-                $scope.isLoading = false;
-                $scope.configName = namedata;
-        }, onError);
     };
 
     //Functions

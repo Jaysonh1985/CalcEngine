@@ -2,7 +2,7 @@
 sulhome.kanbanBoardApp.controller('dateAdjustmentCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions) {
     // Model
     $scope.period = [];
-
+    //Map Back the input values if they exist
     if (Functions.length > 0) {
         $scope.period.Type = Functions[0].Type;
         $scope.period.Date1 = Functions[0].Date1;
@@ -16,9 +16,10 @@ sulhome.kanbanBoardApp.controller('dateAdjustmentCtrl', function ($scope, $uibMo
     else {
         $scope.period = Functions
     }
-    
+    //Set up new object
     $scope.selected = [];
-    $scope.addItem = function AddItem () {
+    //Add new Item to the selected array
+    $scope.addItem = function AddItem() {
         $scope.selected.push({
             Type: $scope.period.Type,
             Date1: $scope.period.Date1,
@@ -29,23 +30,14 @@ sulhome.kanbanBoardApp.controller('dateAdjustmentCtrl', function ($scope, $uibMo
             Day: $scope.period.Day,
             Month: $scope.period.Month
         })
-    },
-
-
-
-    $scope.removeMathsItem = function (index) {
-        $scope.period.splice(index, 1);
-    },
-
-    //Click OK
+    };
+    //Click OK moves back to modal instantiation
     $scope.ok = function () {
         $scope.addItem();
         $uibModalInstance.close($scope.selected);
     };
-
+    //Cancel Modal destroy modal values
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
-    };
-
-   
+    };  
 })

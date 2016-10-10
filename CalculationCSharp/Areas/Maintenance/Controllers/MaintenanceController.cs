@@ -14,7 +14,6 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
     {
         /// <summary>Controller for getting the factor tables from the server and applying CRUD.
         /// </summary>
-        /// 
 
         /// <summary>Gets a list of available CSV files in server map path and returns them to the presentation layer as a dropdown list.
         /// </summary>

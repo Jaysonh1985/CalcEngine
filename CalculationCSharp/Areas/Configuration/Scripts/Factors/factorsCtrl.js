@@ -2,9 +2,8 @@
 sulhome.kanbanBoardApp.controller('factorsCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions) {
     // Model
     $scope.factors = [];
-
+    //Map Back the input values if they exist
     if (Functions.length > 0) {
-        
         $scope.factors.TableName = Functions[0].TableName;
         $scope.factors.LookupType = Functions[0].LookupType;
         $scope.factors.LookupValue = Functions[0].LookupValue;
@@ -18,10 +17,11 @@ sulhome.kanbanBoardApp.controller('factorsCtrl', function ($scope, $uibModalInst
     }
     else {
         $scope.factors = Functions
-    }
-    
+    };
+    //Set up new object
     $scope.selected = [];
-    $scope.addItem = function AddItem () {
+    //Add new Item to the selected array
+    $scope.addItem = function AddItem() {
         $scope.selected.push({
             TableName: $scope.factors.TableName,
             LookupType: $scope.factors.LookupType,
@@ -34,23 +34,14 @@ sulhome.kanbanBoardApp.controller('factorsCtrl', function ($scope, $uibModalInst
             ColumnNo: $scope.factors.ColumnNo,
             Interpolate: $scope.factors.Interpolate
         })
-    },
-
-
-
-    $scope.removeMathsItem = function (index) {
-        $scope.factors.splice(index, 1);
-    },
-
-    //Click OK
+    };
+    //Click OK moves back to modal instantiation
     $scope.ok = function () {
         $scope.addItem();
         $uibModalInstance.close($scope.selected);
     };
-
+    //Cancel Modal destroy modal values
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-
-   
 })

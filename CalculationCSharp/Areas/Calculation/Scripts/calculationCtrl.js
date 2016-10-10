@@ -50,6 +50,7 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
             scopeid = scopeid + 1
         });
     }
+    //Calculation Button click - this checks the form is valid then maps the inputs into the config and passes the calculation over to the server for calculation
     $scope.CalcButtonClick = function CalcButtonClick(form) {
         if (form.$valid == true) {
             $scope.isLoading = true;

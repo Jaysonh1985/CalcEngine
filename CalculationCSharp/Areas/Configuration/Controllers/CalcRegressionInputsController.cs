@@ -15,6 +15,8 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 {
     public class CalcRegressionInputsController : ApiController
     {
+        /// <summary>Controller for getting the Calculation Reg.
+        /// </summary>
         private CalculationDBContext db = new CalculationDBContext();
 
         // GET: api/CalcRegressionInputs
@@ -22,7 +24,9 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         {
             return db.CalcRegressionInputs;
         }
-
+        /// <summary>Get list of Calc Regressions Members available in the for the configuration working on.
+        /// <para>id = ID on DB Table </para>
+        /// </summary>
         // GET: api/CalcRegressionInputs/5
         [ResponseType(typeof(CalcRegressionInputs))]
         public IHttpActionResult GetCalcRegressionInputs(int id)
@@ -31,7 +35,10 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
             return Ok(List);
         }
-
+        /// <summary>Put calculation and member inputs into in calcRegression Table.
+        /// <para>id = CalculationID on DB Table</para>
+        /// <para>calcRegressionInputs = Calc Regression Object to be applied to DB</para>
+        /// </summary>
         // PUT: api/CalcRegressionInputs/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCalcRegressionInputs(int id, CalcRegressionInputs calcRegressionInputs)
@@ -66,7 +73,9 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        /// <summary>Post calculation and member inputs into in calcRegression Table.
+        /// <para>calcRegressionInputs = Calc Regression Object to be applied to DB</para>
+        /// </summary>
         // POST: api/CalcRegressionInputs
         [ResponseType(typeof(CalcRegressionInputs))]
         public IHttpActionResult PostCalcRegressionInputs(CalcRegressionInputs calcRegressionInputs)
@@ -81,7 +90,9 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = calcRegressionInputs.ID }, calcRegressionInputs);
         }
-
+        /// <summary>Delete calculation and member inputs from calcRegression Table.
+        /// <para>id = CalculationID on DB Table</para>
+        /// </summary>
         // DELETE: api/CalcRegressionInputs/5
         [ResponseType(typeof(CalcRegressionInputs))]
         public IHttpActionResult DeleteCalcRegressionInputs(int id)

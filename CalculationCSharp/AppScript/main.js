@@ -4,8 +4,6 @@
 var sulhome = sulhome || {};
 sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRoute', 'ui.sortable', 'gridster', 'dndLists', 'ngTouch', 'ngAnimate', 'ui.tree', 'dynamic-form', 'formly','formlyBootstrap', 'ds.objectDiff', 'ngCsv', 'ngSanitize', 'ngCsvImport'])
     .config(function ($routeProvider) {
-
-
         $routeProvider.when('/', {
             controller: 'configCtrl',
             templateUrl: '/Areas/Configuration/Scripts/Builder.html'
@@ -20,6 +18,5 @@ sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRo
                 otherwise({
                     redirectTo: '/'
                 });
-
     });
 

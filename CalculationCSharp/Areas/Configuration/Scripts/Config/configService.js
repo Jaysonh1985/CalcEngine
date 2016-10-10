@@ -46,14 +46,6 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
          });
      };
 
-     var getCalcName = function (id) {
-         return $http.get("/api/ConfigNameWebApi/Get", { params: { id: id } }).then(function (response) {
-             return response.data;
-         }, function (error) {
-             return $q.reject(error.data.Message);
-         });
-     };
-
      var putCalc = function (index, data) {
          return $http.put("/api/ConfigWebApi/" + index, { data: data })
             .then(function (response) {
@@ -139,17 +131,6 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
-
-
-    var rowid = 0;
-    var colid = 0;
-
-    var getRowid = function () {
-        return rowid;
-    }
-    var getColid = function () {
-        return colid;
-    }
      
     var initialize = function () {      
 
@@ -182,10 +163,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
         putConfig: putConfig,
         deleteConfig: deleteConfig,
         getConfig: getConfig,
-        getRowid: getRowid,
-        getColid: getColid,
         getCalc: getCalc,
-        getCalcName: getCalcName,
         putCalc: putCalc,
         postCalc: postCalc,
         getHistory: getHistory,

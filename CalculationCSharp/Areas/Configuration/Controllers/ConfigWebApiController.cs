@@ -34,8 +34,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             var response = Request.CreateResponse();
             CalcConfiguration calcConfiguration = db.CalcConfiguration.Find(id);
             if (calcConfiguration == null)
-            {
-                
+            {            
                 List<CategoryViewModel> json = repo.GetConfig(null);
                 response.Content = new StringContent(JsonConvert.SerializeObject(json));
             }

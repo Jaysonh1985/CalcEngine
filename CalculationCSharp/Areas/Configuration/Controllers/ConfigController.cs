@@ -16,32 +16,22 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 {
     public class ConfigController : Controller
     {
+        /// <summary>Controller for calculation configuration to view the views pages.
+        /// </summary>
         private CalculationDBContext db = new CalculationDBContext();
-
         // GET: Project/ProjectConfigs
         public ActionResult Index()
         {
-
-            ViewData["H1"] = "Configuration";
-            ViewData["P1"] = "";
-
             return View();
         }
 
         [HttpGet]
         public ActionResult Config(int? id)
         {
-
             CalcConfiguration ProjectBoard = db.CalcConfiguration.Find(Convert.ToInt32(id));
-
-
+            ViewData["SchemeName"] = ProjectBoard.Scheme;
+            ViewData["CalcName"] = ProjectBoard.Name;
             return View();
-
         }
-
-
-
-
-
     }
 }

@@ -2,7 +2,7 @@
 sulhome.kanbanBoardApp.controller('stringFunctionsCtrl', function ($scope, $uibModalInstance, $log, $http, $location, Functions) {
     // Model
     $scope.period = [];
-
+    //Map Back the input values if they exist
     if (Functions.length > 0) {
         $scope.period.Type = Functions[0].Type;
         $scope.period.Number1 = Functions[0].Number1;
@@ -12,10 +12,11 @@ sulhome.kanbanBoardApp.controller('stringFunctionsCtrl', function ($scope, $uibM
     }
     else {
         $scope.period = Functions
-    }
-    
+    };
+    //Set up new object
     $scope.selected = [];
-    $scope.addItem = function AddItem () {
+    //Add new Item to the selected array
+    $scope.addItem = function AddItem() {
         $scope.selected.push({
             Type: $scope.period.Type,
             Number1: $scope.period.Number1,
@@ -24,23 +25,14 @@ sulhome.kanbanBoardApp.controller('stringFunctionsCtrl', function ($scope, $uibM
             String3: $scope.period.String3
 
         })
-    },
-
-
-
-    $scope.removeMathsItem = function (index) {
-        $scope.period.splice(index, 1);
-    },
-
-    //Click OK
+    };
+    //Click OK moves back to modal instantiation
     $scope.ok = function () {
         $scope.addItem();
         $uibModalInstance.close($scope.selected);
     };
-
+    //Cancel Modal destroy modal values
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-
-   
 })

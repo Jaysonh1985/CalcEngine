@@ -26,6 +26,7 @@ sulhome.kanbanBoardApp.controller('calculationMenuCtrl', function ($scope,  $rou
         var earl = '/Config/' + $scope.ID;
         $window.location.assign('/Calculation/Calculation/Form/' + $scope.ID);
     };
+    
     $scope.editingData = {};   
      for (var i = 0, length = $scope.Boards.length; i < length; i++) {
          $scope.editingData[$scope.Boards[i].ID] = false;
