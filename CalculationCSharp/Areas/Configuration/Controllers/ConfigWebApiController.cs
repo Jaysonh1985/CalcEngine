@@ -21,12 +21,19 @@ namespace CalculationCSharp.Areas.Config.Controllers
 {
     public class ConfigWebApiController : ApiController
     {
+
+        /// <summary>Controller for the configuration builder.
+        /// </summary>
+
         ConfigRepository repo = new ConfigRepository();
         CalculationDBContext db = new CalculationDBContext();
         JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
         CalcHistoriesController CalcHistories = new CalcHistoriesController();
         CalcHistory CalcHistory = new CalcHistory();
 
+        /// <summary>Gets the relevant configuration and returns this as JSON object, if no configuration is available creates the default template.
+        /// <para>id = CalculationID on DB Table</para>
+        /// </summary>
         // GET api/<controller>
         [System.Web.Http.HttpGet]
         public HttpResponseMessage Get(int? id)
@@ -47,36 +54,31 @@ namespace CalculationCSharp.Areas.Config.Controllers
                     response.Content = new StringContent(JsonConvert.SerializeObject(json));
                 }
                 else
-                {
-                   
+                {                
                     response.Content = new StringContent(calcConfiguration.Configuration);
-                }
-                
-            }
-            
+                }                
+            }          
             return response;
         }
 
-
+        /// <summary>Saves the configuration from the builder
+        /// <para>id = CalculationID on DB Table</para>
+        /// <para>config = JSON configuration from builder</para>
+        /// </summary>
         [System.Web.Http.HttpPut]
         public HttpResponseMessage SetConfig(int id, JObject config)
         {
-
+            //Deserialise the JSON to C# object
             dynamic json = config;
-
-            var response = Request.CreateResponse();
+            //Save configuration to calcConfigurations
             CalcConfiguration calcConfiguration = db.CalcConfiguration.Find(id);
-
             calcConfiguration.Configuration = Convert.ToString(json.data);
             calcConfiguration.User = HttpContext.Current.User.Identity.Name.ToString();
             calcConfiguration.UpdateDate = DateTime.Now;
             calcConfiguration.Version = calcConfiguration.Version + (decimal)0.01;
-
             db.Entry(calcConfiguration).State = EntityState.Modified;
-
             db.SaveChanges();
-
-
+            //Build CalcHistory object
             CalcHistory.CalcID = calcConfiguration.ID;
             CalcHistory.Name = calcConfiguration.Name;
             CalcHistory.Scheme = calcConfiguration.Scheme;
@@ -85,28 +87,29 @@ namespace CalculationCSharp.Areas.Config.Controllers
             CalcHistory.UpdateDate = DateTime.Now;
             CalcHistory.User = calcConfiguration.User;
             CalcHistory.Version = calcConfiguration.Version;
-
+            //Save calcHistory object
             CalcHistories.PostCalcHistory(CalcHistory);
-
-            response.Content = new StringContent(JsonConvert.SerializeObject(json.data));
-
+            //Return the response
+            var response = Request.CreateResponse();
+            response.Content = new StringContent(JsonConvert.SerializeObject(json.data));            
             return response;
         }
-
-
+        /// <summary>Runs the calculation from builder
+        /// <para>id = CalculationID on DB Table</para>
+        /// <para>config = JSON configuration from builder</para>
+        /// </summary>
         [System.Web.Http.HttpPost]
-        public HttpResponseMessage UpdateConfig(int id,  JObject moveTaskParams)
+        public HttpResponseMessage UpdateConfig(int id,  JObject config)
         {
-            dynamic json = moveTaskParams;
+            dynamic json = config;
             string jsonString = Convert.ToString(json.data);
+            //Deserialize JSON to CategoryViewModel then calculate
             List<CategoryViewModel> jCategory = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<CategoryViewModel>));
-            List<ConfigViewModel> jConfig = (List<ConfigViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<ConfigViewModel>));
             Calculate Calculate = new Calculate();
             jCategory = Calculate.DebugResults(jCategory);
+            //Update Cache
             repo.UpdateConfig(jCategory);
-
-
-
+            //Return the response
             var response = Request.CreateResponse();
             response.Content = new StringContent(JsonConvert.SerializeObject(jCategory));
             response.StatusCode = HttpStatusCode.OK;

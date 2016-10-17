@@ -100,7 +100,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         if (cf == true) {
             var selectedRows = [];
             selectedRows = selectedRowsIndexes[colIndex];
-
             selectedRows = $filter('orderBy')(selectedRows);
             selectRowsReverse = selectedRows.reverse();
             angular.forEach(selectRowsReverse, function (value, key, prop) {

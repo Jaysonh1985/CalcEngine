@@ -58,13 +58,10 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
             return List;
         }
-
         public void CalculateAction(List<CategoryViewModel> jCategory)
         {
-
             foreach (var group in jCategory)
             {
-
                 foreach (var item in group.Functions)
                 {
                     if (item.Function == "Input")
@@ -86,7 +83,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 colLogicParse = Convert.ToBoolean(ex.Evaluate());
                             }
                         }
-
                         if (item.Parameter.Count > 0)
                         {
                             string logic = null;
