@@ -16,8 +16,9 @@ namespace CalculationCSharp.Areas.Configuration.Models
 {
     public class ConfigRepository
     {
-        CategoryViewModel Configuration = new CategoryViewModel();
-        ConfigViewModel Functions = new ConfigViewModel();
+        /// <summary>Sets the updated configuration in the browser cache, if no config is available then return the input column only
+        /// <para>Config = JSON config </para>
+        /// </summary>
         public List<CategoryViewModel> GetConfig(CategoryViewModel Config)
         {
             var Configuration = new List<CategoryViewModel>();
@@ -28,14 +29,12 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     Configuration.Add(new CategoryViewModel { ID = 0, Name = "Input", Functions = new List<ConfigViewModel>() });
                     HttpContext.Current.Cache["config"] = Configuration;
                 }
-                else
-                {
-
-                }
             }
             return (List<CategoryViewModel>)HttpContext.Current.Cache["config"];
         }
-
+        /// <summary>Updates browser Cache on change of config
+        /// <para>Config = JSON config </para>
+        /// </summary>
         public void UpdateConfig(List<CategoryViewModel> Config)
         {
             HttpContext.Current.Cache["config"] = Config;

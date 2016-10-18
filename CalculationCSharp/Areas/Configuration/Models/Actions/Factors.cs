@@ -18,67 +18,35 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string RowMatchValue { get; set; }
         public int ColumnNo { get; set; }
         public bool Interpolate { get; set; }
-
+        /// <summary>Output Factor function is used, includes the array builder.
+        /// <para>jparameters = JSON congifurations relating to this function</para>
+        /// <para>jCategory = the whole configuration which is required to do the variable replace</para>
+        /// <para>GroupID = current Group ID</para>
+        /// <para>ItemID = current row ID</para>
+        /// </summary>
         public JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-        CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
         public LookupFunctions FactorFunctions = new LookupFunctions();
-        public string Output(string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID, string itemType)
+        public string Output(string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID)
         {
             ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
             Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
-            List<string> D1parts = null;
-            List<string> D2parts = null;
             string[] LookupValueparts = null;
             string[] RowMatchValueparts = null;
-
-            D1parts = ArrayBuilder.InputArrayBuilder(parameters.LookupValue, jCategory, GroupID, ItemID);
-            D2parts = ArrayBuilder.InputArrayBuilder(parameters.RowMatchValue, jCategory, GroupID, ItemID);
-
-            if (D1parts != null)
-            {
-                LookupValueparts = D1parts.ToArray();
-            }
-            if (D2parts != null)
-            {
-                RowMatchValueparts = D2parts.ToArray();
-            }
-
+            //Returns array
+            LookupValueparts = ArrayBuilder.InputArrayBuilder(parameters.LookupValue, jCategory, GroupID, ItemID);
+            RowMatchValueparts = ArrayBuilder.InputArrayBuilder(parameters.RowMatchValue, jCategory, GroupID, ItemID);
             string Output = null;
             int Counter = 0;
             string OutputValue = null;
-
             int MaxLength = ArrayBuilder.GetMaxLength(LookupValueparts, RowMatchValueparts);
-
+            //Loop through the array to calculate each value in array
             for (int i = 0; i < MaxLength; i++)
             {
-
                 dynamic InputA = null;
                 dynamic InputB = null;
-
-                if (LookupValueparts != null)
-                {
-                    if (Counter >= LookupValueparts.Length)
-                    {
-                        InputA = LookupValueparts[LookupValueparts.GetUpperBound(0)];
-                    }
-                    else
-                    {
-                        InputA = LookupValueparts[Counter];
-                    }
-
-                }
-                if (RowMatchValueparts != null)
-                {
-                    if (Counter >= RowMatchValueparts.Length)
-                    {
-                        InputB = RowMatchValueparts[RowMatchValueparts.GetUpperBound(0)];
-                    }
-                    else
-                    {
-                        InputB = RowMatchValueparts[Counter];
-                    }
-                }
-
+                //Gets the current array to use in the loop
+                InputA = ArrayBuilder.GetArrayPart(LookupValueparts, Counter);
+                InputB = ArrayBuilder.GetArrayPart(RowMatchValueparts, Counter);
                 if(parameters.Interpolate == true)
                 {
                     OutputValue = Interpolation(jparameters, InputA, InputB);
@@ -86,12 +54,10 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 else
                 {
                     OutputValue = Calculate(jparameters, InputA, InputB);
-                }
-             
+                }          
                 Output = Output + OutputValue + "~";
                 Counter = Counter + 1;
             }
-
             if (Output != null)
             {
                 Output = Output.Remove(Output.Length - 1);
@@ -99,15 +65,20 @@ namespace CalculationCSharp.Areas.Configuration.Models
             return Output;
         }
 
+        /// <summary>Calculates a simple look up without interpolation.
+        /// <para>jparameters = JSON congifurations relating to this function</para>
+        /// <para>InputA = Lookup value vertically</para>
+        /// <para>InputA = Lookup value Horizontally</para>
+        /// </summary>
         public string Calculate(string jparameters, dynamic InputA, dynamic InputB)
         {
             Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
-
+            //Rowmatch does a match on a selected row if looking for a value horizontally
             if (parameters.RowMatch == true)
             {
                 parameters.ColumnNo = FactorFunctions.CSVColumnNumber(parameters.TableName, parameters.RowMatchRowNo, InputB);
             }
-
+           
             if (parameters.ColumnNo > 0)
             {
                 if (parameters.LookupType == "Date")
@@ -141,22 +112,20 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 }
             }
         }
-
+        /// <summary>Provides an interpolation calculation based on previous two values.
+        /// <para>jparameters = JSON congifurations relating to this function</para>
+        /// <para>InputA = Lookup value vertically</para>
+        /// <para>InputA = Lookup value Horizontally</para>
+        /// </summary>
         public string Interpolation (string jparameters, dynamic InputA, dynamic InputB)
         {
-
             string Year = Convert.ToString(Math.Floor(Convert.ToDecimal(InputA)));
             string Year1 = Convert.ToString(Convert.ToDecimal(Year) + 1);
-
             string Factor1 = Calculate(jparameters, Year, InputB);
             string Factor2 = Calculate(jparameters, Year1, InputB);
-
             dynamic Months = (Convert.ToDecimal(InputA) - Convert.ToDecimal(Year)) * 100;
-
             Decimal Output = Math.Round(((Convert.ToDecimal(Factor2) - Convert.ToDecimal(Factor1)) / 12 * Months) + Convert.ToDecimal(Factor1),6);
-
             return Convert.ToString(Output);
-
         }
     }
 }

@@ -10,26 +10,25 @@ namespace CalculationCSharp.Areas.Configuration.Models
     {
         public string Part { get; set; }
         public dynamic Date1 { get; set; }
-
-        public JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-        CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
-
+        /// <summary>Outputs where Date Part function is used includes the array builder.
+        /// <para>jparameters = JSON congifurations relating to this function</para>
+        /// <para>jCategory = the whole configuration which is required to do the variable replace</para>
+        /// <para>GroupID = current Group ID</para>
+        /// <para>ItemID = current row ID</para>
+        /// </summary>
         public string Output(string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID)
         {
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
             DateFunctions DatesFunctions = new DateFunctions();
             ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
             DatePart parameters = (DatePart)javaScriptSerializ­er.Deserialize(jparameters, typeof(DatePart));
-            List<string> D1parts = null;
             string[] Date1parts = null;
-            D1parts = ArrayBuilder.InputArrayBuilder(parameters.Date1, jCategory, GroupID, ItemID);
-
-            if (D1parts != null)
-            {
-                Date1parts = D1parts.ToArray();
-            }
-
+            //Returns Array
+            Date1parts = ArrayBuilder.InputArrayBuilder(parameters.Date1, jCategory, GroupID, ItemID);
             string Output = null;
-            foreach(string part in Date1parts)
+            //Loop through the array to calculate each value in array
+            foreach (string part in Date1parts)
             {
                 dynamic InputA = Config.VariableReplace(jCategory, part, GroupID, ItemID);
                 DateTime Date1;
@@ -37,9 +36,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 int DatePart = DatesFunctions.GetDatePart(parameters.Part, Date1);
                 Output = Output + Convert.ToString(DatePart) + "~";
             }
-
             Output = Output.Remove(Output.Length - 1);
-
             return Convert.ToString(Output);
         }
 

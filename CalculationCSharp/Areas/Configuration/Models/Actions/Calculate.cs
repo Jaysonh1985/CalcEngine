@@ -216,7 +216,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     {
                                         Factors Factors = new Factors();
                                         Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
-                                        item.Output = Factors.Output(jparameters, jCategory, group.ID, item.ID, item.Type);
+                                        item.Output = Factors.Output(jparameters, jCategory, group.ID, item.ID);
                                         item.Type = parameters.OutputType;
                                     }
                                     else if (item.Function == "Dates")
