@@ -28,7 +28,6 @@ namespace CalculationCSharp.Areas.Config.Controllers
         ConfigRepository repo = new ConfigRepository();
         CalculationDBContext db = new CalculationDBContext();
         JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-
         [System.Web.Http.HttpPost]
         public HttpResponseMessage SpecBuild(int id,  JObject moveTaskParams)
         {
@@ -50,6 +49,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
 
             foreach (var item in jCategory)
             {
+                //
                 LoopCounter = 0;
                 propValues.Add(item.Name);
                 propValues.Add(item.Description);
@@ -58,13 +58,14 @@ namespace CalculationCSharp.Areas.Config.Controllers
 
                 foreach (var list in item.Functions)
                 {
+                    //Propoerties for the row
                     LoopCounter = LoopCounter + 1;
                     propValues.Add(Convert.ToString(list.ID));
                     propValues.Add(Convert.ToString(list.Name));
                     propValues.Add(Convert.ToString(list.Function));
                     propValues.Add(Convert.ToString(list.Type));
 
-                    //Logic
+                    //Logic string
                     List<string> logicString = new List<string>();
                     foreach (var logicvar in list.Logic)
                     {
@@ -78,6 +79,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
                         // Append each int to the StringBuilder overload.
                         builderLogic.Append(logiclevel).Append(" ");
                     }
+                    //Add row
                     propValues.Add(Convert.ToString(builderLogic));
 
                     //Functions
@@ -85,7 +87,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
                     {
                         if(list.Function == "Maths")
                         {
-                            //Maths
+                            //Maths string builder
                             List<string> mathString = new List<string>();
                             foreach (var Mathvar in list.Parameter)
                             {
@@ -132,6 +134,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
                                         MathsObject.Logic2 = MathvarLevel.Value;
                                     }
                                 }
+                                //Show maths formula with rounding
                                 if(MathsObject.Rounding > 0)
                                 {
                                     mathString.Add(Convert.ToString(MathsObject.Bracket1 + "" + MathsObject.Input1 + " "
@@ -151,6 +154,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
                                 // Append each int to the StringBuilder overload.
                                 MathStringbuilder.Append(bitmathlevel).Append(" ");
                             }
+                            //Add to List
                             propValues.Add(Convert.ToString(MathStringbuilder));
                             propMathsParams = new List<string>();
                         }
