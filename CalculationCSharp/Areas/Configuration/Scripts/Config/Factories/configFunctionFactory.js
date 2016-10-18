@@ -1,4 +1,6 @@
 ﻿// Copyright (c) 2016 Project AIM
+//Functions available to user at Config Level
+
 sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
     return {
         //get config ID from url

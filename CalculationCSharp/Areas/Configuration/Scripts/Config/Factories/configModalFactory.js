@@ -1,9 +1,9 @@
 ﻿// Copyright (c) 2016 Project AIM
+//Modal functions from configuration
 sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
     return {
         //get ctrl file path for functions modal
         getFunctionCtrl: function (Function) {
-
             if (Function == 'Maths') {
                 return 'mathsCtrl';
             }
@@ -37,11 +37,9 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             else if (Function == 'StringFunctions') {
                 return 'stringFunctionsCtrl'
             }
-
         },
         //get URL for modal file path
         getFunctionTempURL: function (Function) {
-
             if (Function == 'Maths') {
                 return '/Areas/Configuration/Scripts/Maths/MathsModal.html';
             }
@@ -75,10 +73,6 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             else if (Function == 'StringFunctions') {
                 return '/Areas/Configuration/Scripts/String Functions/StringFunctionsModal.html'
             }
-        },
-        
-
+        },     
     }
-
-
 });

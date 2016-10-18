@@ -303,10 +303,8 @@
     <Content Include="Areas\Calculation\Scripts\calculationService.js" />
     <Content Include="Areas\Configuration\Scripts\Array Functions\arrayFunctionsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Array Functions\ArrayFunctionsModal.html" />
-    <Content Include="Areas\Configuration\Scripts\Config\Factories\configRowSelectFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configModalFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configTypeaheadFactory.js" />
-    <Content Include="Areas\Configuration\Scripts\Config\Factories\configValidationFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configFunctionFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Custom Validations\CustomValidations.js" />
     <Content Include="Areas\Configuration\Scripts\Date Adjustment\dateAdjustmentCtrl.js" />

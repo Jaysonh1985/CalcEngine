@@ -13,9 +13,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.openIndexRegression = [true];
     $scope.validationError = false;
     $scope.openIndexBackup = null;
-
     $scope.noSpacesPattern = /^[a-zA-Z0-9-_]+$/;
-
+    $scope.getHeader = ["Function ID", "Name", "Function", "Type", "Logic", "Parameter"];
     $scope.csv = {
         content: null,
         header: true,
@@ -142,7 +141,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     }
 
     $scope.MoveDownCategory = function (Index, e) {
-
         if (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -188,7 +186,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.CalcButtonClick = function CalcBoard(form) {
-
         if ($scope.validationError == false)
         {
             $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
@@ -214,21 +211,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.setFunction = function (rows) {  //function that sets the type of the row
-
         if(rows.Function == 'Maths'){
             rows.Type = 'Decimal';
         }
         else if (rows.Function == 'MathsFunctions') {
             rows.Type = 'Decimal';
         }
-        else if (rows.Function == 'ErrorsWarnings') {
-           
-        }
         else if (rows.Function == 'Period') {
             rows.Type = 'Decimal';
-        }
-        else if (rows.Function == 'Factors') {
-
         }
         else if (rows.Function == 'Dates') {
             rows.Type = 'Date';
@@ -248,7 +238,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     }
     //TypeAhead Functions
     $scope.variableArrayBuilder = function variableArrayBuilder(config, colIndex, type, rowIndex) {
-
         var counter = 0;
         var scopeid = 0;
         var functionID = 0;
@@ -258,10 +247,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.DecimalParameter = [];
         $scope.Names = [];
         var newArr = [];
-
         angular.forEach(config, function (groups) {
             if (scopeid <= colIndex) {
-
                 if(type == null)
                 {
                     $scope.DecimalValue = ($filter('filter')(config[scopeid].Functions));
@@ -270,7 +257,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 {
                     $scope.DecimalValue = ($filter('filter')(config[scopeid].Functions, { Type: type }));
                 }
-
                 if (scopeid == colIndex) {
                     var spliceid = rowIndex;
                     var DecimalValueID = 0;
@@ -280,20 +266,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                     });
 
                 };
- 
                 functionID = 0;
                 angular.forEach($scope.DecimalValue, function (Names) {
                     $scope.DecimalParameter = ($filter('filter')($scope.DecimalValue[functionID].Name));
-
                     if ($scope.Names.indexOf($scope.DecimalParameter) == -1) {
-
-                        $scope.Names[arrayID] = $scope.DecimalParameter;
-                         
+                        $scope.Names[arrayID] = $scope.DecimalParameter;                       
                         arrayID = arrayID + 1;
-
                     }
                     functionID = functionID + 1;
-
                 });
                 scopeid = scopeid + 1
             }
@@ -367,7 +347,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             });
     };
 
-
     $scope.LogicButtonClick = function (size, colIndex, index) {
         $scope.Logic = this.config[colIndex].Functions[index].Logic;      
         $scope.AllNames = [];
@@ -396,7 +375,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.AllNames = [];
         $scope.configReplace = configFunctionFactory.convertToFromJson($scope.config);
         $scope.AllNames = $scope.variableArrayBuilder($scope.configReplace, index, null, 0);
-
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/Areas/Configuration/Scripts/Logic/LogicModal.html',
@@ -407,12 +385,10 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 Logic: function () { return $scope.Logic }
             }
         });
-
         modalInstance.result.then(function (selectedItem) {
             $scope.config[index].Logic = selectedItem;
             $scope.form.$setDirty();
         }, function () {
-
         });
     };
 
@@ -432,7 +408,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 Description: function () { return $scope.Description }
             }
         });
-
         modalInstance.result.then(function (selectedItem) {
             $scope.config[colIndex].ID = selectedItem[0].ID;
             $scope.config[colIndex].Name = selectedItem[0].Name;
@@ -454,7 +429,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 ID: function () { return $scope.ID },
             }
         });
-
         modalInstance.result.then(function (selectedItem) {
             $scope.config = JSON.parse(selectedItem);
             toastr.success("Reverted successfully", "Success");
@@ -474,7 +448,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 ID: function () { return $scope.ID },
             }
         });
-
         modalInstance.result.then(function (selectedItem) {
             $scope.CalcButtonClick(form);
         }, function () {           
@@ -490,12 +463,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             toastr.success("Specification Produced", "Success");
             return data;
         }, onError);
-
        return promise;
-
     };
-
-    $scope.getHeader = ["Function ID", "Name","Function","Type", "Logic", "Parameter"];
 
     //Higlight rows functions
     var selectedRowsIndexes = [];
