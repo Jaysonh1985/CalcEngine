@@ -126,12 +126,26 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             var Calculation = e.Evaluate();
                                             bool DeciParse;
                                             decimal CalculationDeci;
+                                            string Rounding;
+
                                             DeciParse = decimal.TryParse(Convert.ToString(Calculation), out CalculationDeci);
-                                            if(DeciParse == true)
+
+                                            //TODO bug with the way the rounding calculation works in that if the dropdown is blank it populates with 0 when it should populate with nil, we want the rounding to default to 2
+                                            Rounding = Convert.ToString(parameters.Rounding);
+
+                                            if (Convert.ToString(parameters.Rounding) == "0")
+                                            {
+                                                Rounding = "2";
+                                            }
+                                            if (Convert.ToString(parameters.Rounding) == "10")
+                                            {
+                                                Rounding = "0";
+                                            }
+                                            if (DeciParse == true)
                                             {
                                                 decimal Output = CalculationDeci;
                                                 MathematicalFunctions MathematicalFunctions = new MathematicalFunctions();
-                                                Output = MathematicalFunctions.Rounding(Convert.ToString(parameters.RoundingType), Convert.ToString(parameters.Rounding), Output);
+                                                Output = MathematicalFunctions.Rounding(Convert.ToString(parameters.RoundingType), Rounding, Output);
                                                 item.Output = Convert.ToString(Output);
                                             }
                                             else
@@ -213,7 +227,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         }
                                     }
                                 }
-
+                                //Expected results on the builder this sets the required ones
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")
                                 {
                                     item.Pass = "Nil";
@@ -230,6 +244,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                             }
                             else
                             {
+                                //Ignores the row if logic is not met
                                 dynamic LogicReplace = Config.VariableReplace(jCategory, item.Name, group.ID, item.ID);
                   
                                 if(Convert.ToString(LogicReplace) == Convert.ToString(item.Name))

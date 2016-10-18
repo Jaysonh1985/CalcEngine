@@ -42,19 +42,8 @@ namespace CalculationCSharp.Areas.Configuration.Models
             string Logic = Convert.ToString(parameters.Logic);
             string Input2 = Convert.ToString(InputB);
             string Bracket2 = Convert.ToString(parameters.Bracket2);
-            string Rounding = Convert.ToString(parameters.Rounding);
-            string RoundingType = Convert.ToString(parameters.RoundingType);
             string Logic2 = Convert.ToString(parameters.Logic2);
 
-            //TODO bug with the way the rounding calculation works in that if the dropdown is blank it populates with 0 when it should populate with nil, we want the rounding to default to 2
-            if (Rounding == "0")
-            {
-                Rounding = "2";
-            }
-            if (Rounding == "10")
-            {
-                Rounding = "0";
-            }
             if (Logic == "Pow")
             {
                 formula = Logic + '(' + Input1 + ',' + Input2 + ')';
@@ -85,7 +74,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public bool PowOpen(string jparameters,  bool PowOpen)
         {
             Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
-            string Logic = Convert.ToString(parameters.Logic);
+            string Logic2 = Convert.ToString(parameters.Logic2);
             if (Logic2 == "Pow")
             {
                 return true;
