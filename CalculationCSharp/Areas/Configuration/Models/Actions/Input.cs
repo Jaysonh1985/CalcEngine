@@ -3,6 +3,10 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 {
     public class Input
     {
+        /// <summary>Error handles the inputs that are used so that if the calculation has incorrect inputs the calculation can handle running and producing the relevant errors.
+        /// <para>Type = Data type of the input</para>
+        /// <para>Output = Value of the Output variable</para>
+        /// </summary>
         public string Output (string Type, string Output)
         {
             if (Type == "Date")

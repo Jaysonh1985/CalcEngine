@@ -58,6 +58,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
             return List;
         }
+        //Calcuation Controller Action
         public void CalculateAction(List<CategoryViewModel> jCategory)
         {
             foreach (var group in jCategory)
@@ -71,6 +72,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                     }
                     else
                     {
+                        //Logic check at Column Level
                         string colLogic = null;
                         bool colLogicParse = true;
                         if(group.Logic != null)
@@ -89,7 +91,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                             bool logicparse = true;
                             string MathString = null;
                             bool PowOpen = false;
-
+                            //Logic check at column level
                             if (colLogicParse == true)
                             {
                               foreach (var bit in item.Logic)
@@ -104,7 +106,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                             {
                                 logicparse = false;
                             }
-
+                            //Run code if logic if met at column and row level
                             if (logicparse == true)
                             {
                                 int paramCount = 1;
@@ -114,84 +116,30 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 
                                     if (item.Function == "Maths")
                                     {
-                                        string formula = null;
                                         Maths Maths = new Maths();
                                         Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
-                                        dynamic InputA = Config.VariableReplace(jCategory, parameters.Input1, group.ID, item.ID);
-                                        dynamic InputB = Config.VariableReplace(jCategory, parameters.Input2, group.ID, item.ID);
-                                        string Bracket1 = Convert.ToString(parameters.Bracket1);
-                                        string Input1 = Convert.ToString(InputA);
-                                        string Logic = Convert.ToString(parameters.Logic);
-                                        string Input2 = Convert.ToString(InputB);
-                                        string Bracket2 = Convert.ToString(parameters.Bracket2);
-                                        string Rounding = Convert.ToString(parameters.Rounding);
-                                        string RoundingType = Convert.ToString(parameters.RoundingType);
-                                        string Logic2 = Convert.ToString(parameters.Logic2);
-                                        if (Rounding == "0")
-                                        {
-                                            Rounding = "2";
-                                        }
-                                        if(Rounding == "10")
-                                        {
-                                            Rounding = "0";
-                                        }
-
-                                        if (Logic == "Pow")
-                                        {
-                                            formula = Logic + '(' + Input1 + ',' + Input2 + ')';
-                                        }
-                                        else
-                                        {
-                                            formula = Input1 + Logic + Input2;
-                                        }
-
-                                        string MathString1;
-
-                                        if (Logic2 == "Pow")
-                                        {
-                                            MathString1 = string.Concat(Logic2, "(", MathString, Bracket1, formula, Bracket2, ",");
-                                            PowOpen = true;
-                                        }
-                                        else
-                                        {
-                                            MathString1 = string.Concat(MathString, Bracket1, formula, Bracket2, Logic2);
-                                        }
-
-                                        if (Logic2 != "Pow" && PowOpen == true)
-                                        {
-                                            MathString1 = string.Concat(MathString1, ")");
-                                            PowOpen = false;
-                                        }
-
-                                        MathString = MathString1;
-
+                                        MathString = Maths.Output(jparameters,jCategory,group.ID,item.ID,MathString,PowOpen);
+                                        PowOpen = Maths.PowOpen(jparameters, PowOpen);
                                         if (paramCount == item.Parameter.Count)
                                         {
                                             Expression e = new Expression(MathString);
                                             var Calculation = e.Evaluate();
-
                                             bool DeciParse;
                                             decimal CalculationDeci;
-
                                             DeciParse = decimal.TryParse(Convert.ToString(Calculation), out CalculationDeci);
-
                                             if(DeciParse == true)
                                             {
                                                 decimal Output = CalculationDeci;
                                                 MathematicalFunctions MathematicalFunctions = new MathematicalFunctions();
-                                                Output = MathematicalFunctions.Rounding(RoundingType, Rounding, Output);
+                                                Output = MathematicalFunctions.Rounding(Convert.ToString(parameters.RoundingType), Convert.ToString(parameters.Rounding), Output);
                                                 item.Output = Convert.ToString(Output);
                                             }
                                             else
                                             {
                                                 item.Output = "0";
-                                            }    
-                                                    
-
+                                            }                                                      
                                         }
                                         paramCount = paramCount + 1;
-                                        InputA = null;
-                                        InputB = null;
                                     }
                                     else if (item.Function == "ErrorsWarnings")
                                     {
@@ -264,7 +212,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             item.Type = "String";
                                         }
                                     }
-
                                 }
 
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")
