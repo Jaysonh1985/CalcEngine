@@ -7,7 +7,8 @@ sulhome.kanbanBoardApp.directive('uibModalWindow', function () {
         }
     }  
 });
-sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeaheadFactory) {
+//Input previously set on the builder
+sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeaheadFactory, configValidationFactory) {
     return {
         replace: true,
         restrict: 'A',
@@ -16,247 +17,93 @@ sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeahead
         link: function (scope, element, attrs, form, scopectrl) {
             element.on('click', function () {
                 angular.forEach(scope.config, function (value, key, obj) {
-
                     angular.forEach(scope.config[key].Functions, function (valueF, keyF, obj) {
-
+                        var AttName = 'FunctionCog_' + key + '_' + keyF;
+                        form[AttName].$setValidity("input", true);
                         angular.forEach(scope.config[key].Functions[keyF].Parameter, function (valueP, keyP, obj) {
-
                             if (key != 0)
                             {
-                                if (scope.config[key].Functions[keyF].Function == 'Maths') {
-
-                                    var VariableNames = configTypeaheadFactory.variableArrayBuilder(scope.config, key, "Decimal", keyF);
-                                    var AttName = 'FunctionCog_' + key + '_' + keyF;
-                                    form[AttName].$setValidity("input", true);
-                                    if (VariableNames.length > 0) {
-                                        angular.forEach(obj, function (valueN, keyN, obj) {
-                                            var Input1Bool = isNaN(parseFloat(valueN.Input1));
-                                            var Input2Bool = isNaN(parseFloat(valueN.Input2));
-
-                                            if (Input1Bool == true) {
-                                                if (VariableNames.indexOf(valueN.Input1) == -1) {
-                                                    form[AttName].$setValidity("input", false);
-                                                }
-                                            }
-
-                                            if (Input2Bool == true) {
-                                                if (VariableNames.indexOf(valueN.Input2) == -1) {
-                                                    form[AttName].$setValidity("input", false);
-                                                }
-                                            }
+                                //Maths
+                                if (scope.config[key].Functions[keyF].Function == 'Maths') {                                  
+                                    angular.forEach(obj, function (valueN, keyN, obj) {
+                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Input1, form);
+                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Input2, form);
                                         });
-                                    }
                                 }
+                                //Period
                                 if (scope.config[key].Functions[keyF].Function == 'Period') {
-
-                                    var VariableNames = configTypeaheadFactory.variableArrayBuilder(scope.config, key, "Date", keyF);
-                                    var AttName = 'FunctionCog_' + key + '_' + keyF;
-                                    form[AttName].$setValidity("input", true);
-                                    if (VariableNames.length > 0) {
-                                        angular.forEach(obj, function (valueN, keyN, obj) {
-
-                                            var Date1array = valueN.Date1.split('~');
-                                            angular.forEach(Date1array, function (valueD1, keyD1, objD1) {
-                                                var Input1Bool = isNaN(Date.parse(valueD1));
-                                                if (Input1Bool == true) {
-                                                    if (VariableNames.indexOf(valueD1) == -1) {
-                                                        form[AttName].$setValidity("input", false);
-                                                    }
-                                                }
-                                            });
-                                            var Date2array = valueN.Date2.split('~');
-                                            angular.forEach(Date2array, function (valueD2, keyD2, objD2) {
-                                                var Input2Bool = isNaN(Date.parse(valueD2));
-
-                                                if (Input2Bool == true) {
-                                                    if (VariableNames.indexOf(valueD2) == -1) {
-                                                        form[AttName].$setValidity("input", false);
-                                                    }
-                                                }
-                                            });
+                                    angular.forEach(obj, function (valueN, keyN, obj) {
+                                        var Date1array = valueN.Date1.split('~');
+                                        angular.forEach(Date1array, function (valueD1, keyD1, objD1) {
+                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueD1, form);
                                         });
-                                    }
+                                        var Date2array = valueN.Date2.split('~');
+                                        angular.forEach(Date2array, function (valueD2, keyD2, objD2) {
+                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueD2, form);
+                                        });
+                                    });
                                 }
+                                //Factors
                                 if (scope.config[key].Functions[keyF].Function == 'Factors') {
-                                    if (obj[0].LookupType == 'Date') {
-                                        var VariableNames = configTypeaheadFactory.variableArrayBuilder(scope.config, key, "Date", keyF);
-                                        var AttName = 'FunctionCog_' + key + '_' + keyF;
-                                        form[AttName].$setValidity("input", true);
-                                        if (VariableNames.length > 0) {
-                                            angular.forEach(obj, function (valueN, keyN, obj) {
-                                                var Input1Bool = isNaN(Date.parse(valueN.LookupValue));
-                                                if (Input1Bool == true) {
-                                                    if (VariableNames.indexOf(valueN.LookupValue) == -1) {
-                                                        form[AttName].$setValidity("input", false);
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    }
-                                    else if (obj[0].LookupType == 'Decimal') {
-                                        var VariableNames = configTypeaheadFactory.variableArrayBuilder(scope.config, key, "Decimal", keyF);
-                                        var AttName = 'FunctionCog_' + key + '_' + keyF;
-                                        form[AttName].$setValidity("input", true);
-                                        if (VariableNames.length > 0) {
-                                            angular.forEach(obj, function (valueN, keyN, obj) {
-                                                var Input1Bool = isNaN(parseFloat(valueN.LookupValue));
-                                                if (Input1Bool == true) {
-                                                    if (VariableNames.indexOf(valueN.LookupValue) == -1) {
-                                                        form[AttName].$setValidity("input", false);
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    }
+                                    angular.forEach(obj, function (valueN, keyN, obj) {
+                                        var Date1array = valueN.LookupValue.split('~');
+                                        angular.forEach(Date1array, function (valueD1, keyD1, objD1) {
+                                            configValidationFactory.variablePreviouslySet(scope.config, key, obj[0].LookupType, keyF, valueD1, form);
+                                        });
+                                    });                                      
                                 }
+                                //Date Adjustment
                                 if (scope.config[key].Functions[keyF].Function == 'Dates') {
-                                    var VariableNames = configTypeaheadFactory.variableArrayBuilder(scope.config, key, "Date", keyF);
-                                    var AttName = 'FunctionCog_' + key + '_' + keyF;
-                                    form[AttName].$setValidity("input", true);
-
-                                    if (VariableNames.length > 0) {
-
                                         angular.forEach(obj, function (valueN, keyN, obj) {
                                             if (obj[0].Type == 'Add' || obj[0].Type == 'Adjust' || obj[0].Type == 'Subtract') {
                                                 var Date1array = valueN.Date1.split('~');
                                                 angular.forEach(Date1array, function (valueNA, keyNA, obj) {
-                                                    var Input1Bool = isNaN(Date.parse(valueNA));
-                                                    if (Input1Bool == true) {
-                                                        if (VariableNames.indexOf(valueNA) == -1) {
-                                                            form[AttName].$setValidity("input", false);
-                                                        }
-                                                    }
+                                                    configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueNA, form);
                                                 });
                                             }
-
                                             if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
                                                 var Date1array = valueN.Date1.split('~');
                                                 angular.forEach(Date1array, function (valueD1, keyD1, objD1) {
-                                                    var Input1Bool = isNaN(Date.parse(valueD1));
-                                                    if (Input1Bool == true) {
-                                                        if (VariableNames.indexOf(valueD1) == -1) {
-                                                            form[AttName].$setValidity("input", false);
-                                                        }
-                                                    }
+                                                    configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueD1, form);
                                                 });
                                                 var Date2array = valueN.Date2.split('~');
                                                 angular.forEach(Date2array, function (valueD2, keyD2, objD2) {
-                                                    var Input2Bool = isNaN(Date.parse(valueD2));
-                                                    if (Input2Bool == true) {
-                                                        if (VariableNames.indexOf(valueD2) == -1) {
-                                                            form[AttName].$setValidity("input", false);
-                                                        }
-                                                    }
+                                                    configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueD2, form);
                                                 });
                                             }
-                                        });
-                                    }
+                                        });                            
                                 }
-                                if (scope.config[key].Functions[keyF].Function == 'DatePart') {
-                                    var VariableNames = configTypeaheadFactory.variableArrayBuilder(scope.config, key, "Date", keyF);
-                                    var AttName = 'FunctionCog_' + key + '_' + keyF;
-                                    form[AttName].$setValidity("input", true);
-                                    if (VariableNames.length > 0) {
+                                //Date Part
+                                if (scope.config[key].Functions[keyF].Function == 'DatePart') {               
                                         angular.forEach(obj, function (valueN, keyN, obj) {
                                             var array = valueN.Date1.split('~');
                                             angular.forEach(array, function (valueNA, keyNA, obj) {
-                                                var Input1Bool = isNaN(Date.parse(valueNA));
-                                                if (Input1Bool == true) {
-                                                    if (VariableNames.indexOf(valueNA) == -1) {
-                                                        form[AttName].$setValidity("input", false);
-                                                    }
-                                                }
+                                                configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueNA, form);
                                             })
-                                        });
-                                    }
+                                        });                                 
                                 }
+                                //Maths Functions
                                 if (scope.config[key].Functions[keyF].Function == 'MathsFunctions') {
-                                    var VariableNames = configTypeaheadFactory.variableArrayBuilder(scope.config, key, "Decimal", keyF);
-                                    var AttName = 'FunctionCog_' + key + '_' + keyF;
-                                    form[AttName].$setValidity("input", true);
-
-                                    if (VariableNames.length > 0) {
-                                        angular.forEach(obj, function (valueN, keyN, obj) {
-                                            var Number1array = valueN.Number1.split('~');
-                                            angular.forEach(Number1array, function (valueD1, keyD1, objD1) {
-                                                var Input1Bool = isNaN(parseFloat(valueD1));
-                                                if (Input1Bool == true) {
-                                                    if (VariableNames.indexOf(valueD1) == -1) {
-                                                        form[AttName].$setValidity("input", false);
-                                                    }
-                                                }
-                                            });
-
-                                            if (valueN.Type == "Add" || valueN.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract") {
-                                                var Number2array = valueN.Number2.split('~');
-                                                angular.forEach(Number2array, function (valueD2, keyD2, objD2) {
-                                                    var Input2Bool = isNaN(parseFloat(valueD2));
-                                                    if (Input2Bool == true) {
-                                                        if (VariableNames.indexOf(valueD2) == -1) {
-                                                            form[AttName].$setValidity("input", false);
-                                                        }
-                                                    }
-                                                });
-                                            }
+                                    angular.forEach(obj, function (valueN, keyN, obj) {
+                                        var Number1array = valueN.Number1.split('~');
+                                        angular.forEach(Number1array, function (valueD1, keyD1, objD1) {
+                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueD1, form);
                                         });
-                                    }
+                                        if (valueN.Type == "Add" || valueN.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract") {
+                                            var Number2array = valueN.Number2.split('~');
+                                            angular.forEach(Number2array, function (valueD2, keyD2, objD2) {
+                                                configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueD2, form);
+                                            });
+                                        }
+                                    });
                                 }
-
+                                //Array Functions
                                 if (scope.config[key].Functions[keyF].Function == 'ArrayFunctions') {
-
-                                    if (obj[0].LookupType == 'Date') {
-                                        var VariableNames = configTypeaheadFactory.variableArrayBuilder(scope.config, key, "Date", keyF);
-                                        var AttName = 'FunctionCog_' + key + '_' + keyF;
-                                        form[AttName].$setValidity("input", true);
-                                        if (VariableNames.length > 0) {
-                                            angular.forEach(obj, function (valueN, keyN, obj) {
-                                                var Input1Bool = isNaN(Date.parse(valueN.LookupValue));
-                                                if (Input1Bool == true) {
-                                                    if (VariableNames.indexOf(valueN.LookupValue) == -1) {
-                                                        form[AttName].$setValidity("input", false);
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    }
-                                    else if (obj[0].LookupType == 'Decimal') {
-                                        var VariableNames = configTypeaheadFactory.variableArrayBuilder(scope.config, key, "Decimal", keyF);
-                                        var AttName = 'FunctionCog_' + key + '_' + keyF;
-                                        form[AttName].$setValidity("input", true);
-                                        if (VariableNames.length > 0) {
-                                            angular.forEach(obj, function (valueN, keyN, obj) {
-                                                var Input1Bool = isNaN(parseFloat(valueN.LookupValue));
-                                                if (Input1Bool == true) {
-                                                    if (VariableNames.indexOf(valueN.LookupValue) == -1) {
-                                                        form[AttName].$setValidity("input", false);
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    }
-
-                                }
-                                if (scope.config[key].Functions[keyF].Function == 'StringFunctions') {
-
-                                    if (obj[0].LookupType == 'Left' || obj[0].LookupType == 'Right') {
-                                        var VariableNames = configTypeaheadFactory.variableArrayBuilder(scope.config, key, "Decimal", keyF);
-                                        var AttName = 'FunctionCog_' + key + '_' + keyF;
-                                        form[AttName].$setValidity("input", true);
-                                        if (VariableNames.length > 0) {
-                                            angular.forEach(obj, function (valueN, keyN, obj) {
-                                                var Input1Bool = isNaN(parseFloat(valueN.Number1));
-                                                if (Input1Bool == true) {
-                                                    if (VariableNames.indexOf(valueN.Number) == -1) {
-                                                        form[AttName].$setValidity("input", false);
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    }
-
+                                    angular.forEach(obj, function (valueN, keyN, obj) {
+                                        configValidationFactory.variablePreviouslySet(scope.config, key, obj[0].LookupType, keyF, valueN, form);
+                                    });
                                 }
                             }
-
                         })
                     })
                 })
@@ -264,6 +111,7 @@ sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeahead
         }
     }
 });
+//Validate the input form
 sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeaheadFactory, $filter) {
     return {
         replace: true,
@@ -288,19 +136,16 @@ sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeah
                                                   parseInt(parts[1], 10) - 1,
                                                   parseInt(parts[0], 10));
                                 var Input1Bool = isNaN(Date.parse(dt));
-
                                 //Check year is 4 digits
                                 if (Input1Bool == false && (parts[2].length != 4 || parts[1].length > 2 || parts[0].length > 2)) {
                                     Input1Bool = true;
                                 }
-
                                 if (Input1Bool == true) {
                                     form[AttName].$setValidity("inputformat", false);
                                 }
                             })
                         }
                     }                  
-
                 }
                 if(dataType == 'Decimal')
                 {
