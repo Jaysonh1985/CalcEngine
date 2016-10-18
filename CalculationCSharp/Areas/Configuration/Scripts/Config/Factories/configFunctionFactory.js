@@ -34,6 +34,22 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
             return angular.fromJson(array);
         },
 
+        setFormValidation: function (value, AttName, form, VariableNames, type) {
+            if (VariableNames.length > 0) {
+                if (type == "Decimal") {
+                    var Input1Bool = isNaN(parseFloat(value));
+                }
+                else if (type == "Date") {
+                    var Input1Bool = isNaN(Date.parse(value));
+                }
+                if (Input1Bool == true) {
+                    if (VariableNames.indexOf(value) == -1) {
+                        form[AttName].$setValidity("input", false);
+                    }
+                }
+            }
+        },
+
     }
 
 

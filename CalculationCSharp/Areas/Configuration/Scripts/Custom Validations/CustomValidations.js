@@ -33,67 +33,37 @@ sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeahead
                                 //Period
                                 if (scope.config[key].Functions[keyF].Function == 'Period') {
                                     angular.forEach(obj, function (valueN, keyN, obj) {
-                                        var Date1array = valueN.Date1.split('~');
-                                        angular.forEach(Date1array, function (valueD1, keyD1, objD1) {
-                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueD1, form);
-                                        });
-                                        var Date2array = valueN.Date2.split('~');
-                                        angular.forEach(Date2array, function (valueD2, keyD2, objD2) {
-                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueD2, form);
-                                        });
+                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date1, form, true);
+                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date2, form, true);
                                     });
                                 }
                                 //Factors
                                 if (scope.config[key].Functions[keyF].Function == 'Factors') {
                                     angular.forEach(obj, function (valueN, keyN, obj) {
-                                        var Date1array = valueN.LookupValue.split('~');
-                                        angular.forEach(Date1array, function (valueD1, keyD1, objD1) {
-                                            configValidationFactory.variablePreviouslySet(scope.config, key, obj[0].LookupType, keyF, valueD1, form);
-                                        });
+                                        configValidationFactory.variablePreviouslySet(scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form, true);
                                     });                                      
                                 }
                                 //Date Adjustment
                                 if (scope.config[key].Functions[keyF].Function == 'Dates') {
                                         angular.forEach(obj, function (valueN, keyN, obj) {
-                                            if (obj[0].Type == 'Add' || obj[0].Type == 'Adjust' || obj[0].Type == 'Subtract') {
-                                                var Date1array = valueN.Date1.split('~');
-                                                angular.forEach(Date1array, function (valueNA, keyNA, obj) {
-                                                    configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueNA, form);
-                                                });
-                                            }
+                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date1, form, true);
                                             if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
-                                                var Date1array = valueN.Date1.split('~');
-                                                angular.forEach(Date1array, function (valueD1, keyD1, objD1) {
-                                                    configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueD1, form);
-                                                });
-                                                var Date2array = valueN.Date2.split('~');
-                                                angular.forEach(Date2array, function (valueD2, keyD2, objD2) {
-                                                    configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueD2, form);
-                                                });
+                                                configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date2, form, true);
                                             }
                                         });                            
                                 }
                                 //Date Part
                                 if (scope.config[key].Functions[keyF].Function == 'DatePart') {               
                                         angular.forEach(obj, function (valueN, keyN, obj) {
-                                            var array = valueN.Date1.split('~');
-                                            angular.forEach(array, function (valueNA, keyNA, obj) {
-                                                configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueNA, form);
-                                            })
+                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date1, form, true);
                                         });                                 
                                 }
                                 //Maths Functions
                                 if (scope.config[key].Functions[keyF].Function == 'MathsFunctions') {
                                     angular.forEach(obj, function (valueN, keyN, obj) {
-                                        var Number1array = valueN.Number1.split('~');
-                                        angular.forEach(Number1array, function (valueD1, keyD1, objD1) {
-                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueD1, form);
-                                        });
+                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Number1, form, true);
                                         if (valueN.Type == "Add" || valueN.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract") {
-                                            var Number2array = valueN.Number2.split('~');
-                                            angular.forEach(Number2array, function (valueD2, keyD2, objD2) {
-                                                configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueD2, form);
-                                            });
+                                           configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Number2, form, true);
                                         }
                                     });
                                 }
