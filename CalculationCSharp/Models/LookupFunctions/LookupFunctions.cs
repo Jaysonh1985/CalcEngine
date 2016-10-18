@@ -10,7 +10,17 @@ public class LookupFunctions
 {
 	public object server { get; set; }
 	public object Request { get; set; }
-	public double CSVLookup(string Tablename, string LookupValue, int DataType, int ColumnNo)
+
+    /// <summary>Lookup CSV on Server Map Path.
+    /// </summary>
+
+    /// <summary>CSV lookup queries a CSV on the Map Path of the server to find the correct factor table and returns a single value.
+    /// <para>Tablename = Tablename of CSV file</para>
+    /// <para>LookupValue = Value for the lookup</para>
+    /// <para>DataType = DataType for lookup value</para>
+    /// <para>ColumnNo = column number to return</para>
+    /// </summary>
+    public double CSVLookup(string Tablename, string LookupValue, int DataType, int ColumnNo)
 	{
 		string Name;
 		string path = HttpContext.Current.Server.MapPath("\\Factor Tables\\");
@@ -45,7 +55,11 @@ public class LookupFunctions
             return Convert.ToDouble(nameObj);
         }
    	}
-
+    /// <summary>CSV column number to match a value lookup horizontally to match the value in the CSV.
+    /// <para>Tablename = Tablename of CSV file</para>
+    /// <para>RowNo = row to l</para>
+    /// <para>LookupValue = Lookup value</para>
+    /// </summary>
     public int CSVColumnNumber(string Tablename, int RowNo, string LookupValue)
     {
         var lines = File.ReadAllLines(HttpContext.Current.Server.MapPath("\\Factor Tables\\" + Tablename + ".csv"));
