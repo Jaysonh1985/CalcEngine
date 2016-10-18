@@ -1,9 +1,11 @@
 ﻿// Copyright (c) 2016 Project AIM
+//Validates the Previous Set Variables to make sure they exist
 sulhome.kanbanBoardApp.factory('configValidationFactory', function ($filter, configFunctionFactory, configTypeaheadFactory) {
     return {
             variablePreviouslySet: function (config, colID, type, rowID, value, form, array) {
                 var VariableNames = configTypeaheadFactory.variableArrayBuilder(config, colID, type, rowID, value);
                 var AttName = 'FunctionCog_' + colID + '_' + rowID;
+                //Allows Arrays
                 if(array == true)
                 {
                     var arraySplit = value.split('~');

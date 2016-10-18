@@ -66,7 +66,7 @@
                             </table>
                         </div>
 
-                        <table class="table table-bordered">
+                        <table  ng-if="openIndex[$index]" class="table table-bordered">
 
                             <thead>
                                 <tr>
@@ -88,7 +88,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody ui-tree-nodes="" ng:model="Category.Functions">
+                            <tbody  ui-tree-nodes="" ng:model="Category.Functions">
                                 <tr id="Row_{{$parent.$index}}_{{$index}}" inputpreviously-Set config ='config' colIndex="{{$parent.$index}}" rowIndex ="{{$index}}" unselectable="on" 
                                     ng-repeat="rows in Category.Functions | filter:searchText" ng-click="selectRow($event, $index, $parent.$index)" 
                                     ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}" ui-tree-node>
