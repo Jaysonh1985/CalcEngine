@@ -19,9 +19,13 @@ sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRo
                     redirectTo: '/'
                 });
     });
-//Timeout
+//Timeout functions
 sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepalive, $uibModal, $window) {
     $scope.started = false;
+
+    function init() {
+        Idle.watch();
+    };
 
     function closeModals() {
         if ($scope.warning) {
@@ -35,12 +39,8 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
         }
     }
     
-    function init() {
-        Idle.watch();
-    };
     $scope.$on('IdleStart', function() {
         closeModals();
-
         $scope.warning = $uibModal.open({
             templateUrl: '/AppScript/Timeout/WarningModal.html',
             windowClass: 'modal-danger'
@@ -59,6 +59,7 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
     init();
 
 })
+//Timeout config
 sulhome.kanbanBoardApp.config(function(IdleProvider, KeepaliveProvider) {
      IdleProvider.idle(20*60-10);
      IdleProvider.timeout(10);
