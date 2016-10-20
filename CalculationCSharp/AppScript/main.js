@@ -42,7 +42,7 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
         closeModals();
 
         $scope.warning = $uibModal.open({
-            templateUrl: '/AppScript/WarningModal.html',
+            templateUrl: '/AppScript/Timeout/WarningModal.html',
             windowClass: 'modal-danger'
         });
     });

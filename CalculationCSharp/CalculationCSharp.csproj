@@ -299,7 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppScript\Directives\additionalControls.js" />
-    <Content Include="AppScript\WarningModal.html" />
+    <Content Include="AppScript\Timeout\WarningModal.html" />
     <Content Include="Areas\Calculation\Scripts\calculationMenuCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationService.js" />
     <Content Include="Areas\Configuration\Scripts\Array Functions\arrayFunctionsCtrl.js" />
