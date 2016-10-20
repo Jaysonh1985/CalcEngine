@@ -70,7 +70,7 @@ sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeahead
                                 //Array Functions
                                 if (scope.config[key].Functions[keyF].Function == 'ArrayFunctions') {
                                     angular.forEach(obj, function (valueN, keyN, obj) {
-                                        configValidationFactory.variablePreviouslySet(scope.config, key, obj[0].LookupType, keyF, valueN, form);
+                                        configValidationFactory.variablePreviouslySet(scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form);
                                     });
                                 }
                             }

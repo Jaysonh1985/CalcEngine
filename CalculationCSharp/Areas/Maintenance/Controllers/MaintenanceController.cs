@@ -35,7 +35,15 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
                 i += i;
             }
             ViewData["Dropdown"] = li;
-            return View();
+
+            if (Request.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
         }
 
         /// <summary>Downloads the relevant selected CSV File

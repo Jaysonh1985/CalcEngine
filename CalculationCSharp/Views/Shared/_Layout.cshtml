@@ -25,10 +25,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Project Management", "Index", new { Area = "Project", controller = "Board" })</li>
+
+                   @if (Context.User.Identity.IsAuthenticated)
+                   {
+                    @*<li>@Html.ActionLink("Project Management", "Index", new { Area = "Project", controller = "Board" })</li>*@
                     <li>@Html.ActionLink("Configuration", "Index", new { Area = "Configuration", controller = "Config" })</li>
                     <li>@Html.ActionLink("Calculation", "Index", new { Area = "Calculation", controller = "Calculation" })</li>
-                    <li>@Html.ActionLink("Maintenance", "Index", new { Area = "Maintenance", controller = "Maintenance" })</li>
+                    <li>@Html.ActionLink("Maintenance", "Index", new { Area = "Maintenance", controller = "Maintenance" })</li>}
                     @*<li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</li>*@
                 </ul>

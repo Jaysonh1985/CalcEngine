@@ -22,16 +22,40 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         // GET: Project/ProjectConfigs
         public ActionResult Index()
         {
-            return View();
+            if(Request.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+            
         }
 
         [HttpGet]
         public ActionResult Config(int? id)
         {
-            CalcConfiguration ProjectBoard = db.CalcConfiguration.Find(Convert.ToInt32(id));
-            ViewData["SchemeName"] = ProjectBoard.Scheme;
-            ViewData["CalcName"] = ProjectBoard.Name;
-            return View();
+
+            if (Request.IsAuthenticated)
+            {
+                CalcConfiguration ProjectBoard = db.CalcConfiguration.Find(Convert.ToInt32(id));
+                try
+                {
+                    ViewData["SchemeName"] = ProjectBoard.Scheme;
+                    ViewData["CalcName"] = ProjectBoard.Name;
+                }
+                catch
+                {
+
+                }
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+
         }
     }
 }

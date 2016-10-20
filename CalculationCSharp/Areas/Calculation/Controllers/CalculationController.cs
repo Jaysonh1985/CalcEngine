@@ -15,13 +15,27 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
         // GET: Calculation/CalcReleasePage
         public ActionResult Index()
         {
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
         }
 
         // GET: Calculation/CalcReleasePage
         public ActionResult Form()
         {
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
         }
 
     }
