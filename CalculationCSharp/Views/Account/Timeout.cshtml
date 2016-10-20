@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Timeout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Timeout</h2>
+
+<p>You have been timed out please click the below link to login</p>
+
+<p>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</p>
+

@@ -299,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppScript\Directives\additionalControls.js" />
+    <Content Include="AppScript\WarningModal.html" />
     <Content Include="Areas\Calculation\Scripts\calculationMenuCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationService.js" />
     <Content Include="Areas\Configuration\Scripts\Array Functions\arrayFunctionsCtrl.js" />
@@ -677,6 +678,7 @@
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
     <Content Include="Scripts\angular-gridster.min.js" />
+    <Content Include="Scripts\angular-idle.js" />
     <Content Include="Scripts\angular-long-press.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-object-diff.js" />

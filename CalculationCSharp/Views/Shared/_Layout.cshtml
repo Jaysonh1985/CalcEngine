@@ -40,7 +40,20 @@
         </div>
     </div>
 
-    @RenderBody()
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+            <div data-ng-controller="TimeoutCtrl">
+                @RenderBody()
+
+            </div>
+        }
+        else
+        {
+            @RenderBody()
+
+        }
+
+
 
     <hr />
     @Scripts.Render("~/bundles/jquery")
@@ -59,7 +72,8 @@
     <script src="~/Scripts/toastr.js"></script>
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="~/Scripts/angular-ui/sortable.js"></script>
-    
+
+
     <script src="~/AppScript/main.js"></script>
     <script src="~/Areas/Project/Scripts/kanbanBoardDragDrop.js"></script>
     <script src="~/Areas/Project/Scripts/boardService.js"></script>
@@ -109,6 +123,7 @@
     <script src="~/Scripts/angular-sanitize.js"></script>
     <script src="~/Scripts/ng-csv.js"></script>
     <script src="~/Scripts/angular-csv-import.js"></script>
+    <script src="~/Scripts/angular-idle.js"></script>
 
 </body>
 

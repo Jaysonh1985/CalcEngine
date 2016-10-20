@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CalculationCSharp.Models;
+using System.Web.Security;
 
 namespace CalculationCSharp.Controllers
 {
@@ -59,7 +60,25 @@ namespace CalculationCSharp.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            FormsAuthentication.SignOut();
+            Session["User"] = null;
+            Session.Clear();
+            Session.Abandon();
             return View();
+        }
+        //
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult Timeout(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            FormsAuthentication.SignOut();
+            Session["User"] = null;
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login");
         }
 
         //
@@ -69,6 +88,14 @@ namespace CalculationCSharp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+
+            ViewBag.ReturnUrl = returnUrl;
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            FormsAuthentication.SignOut();
+            Session["User"] = null;
+            Session.Clear();
+            Session.Abandon();
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -385,14 +412,16 @@ namespace CalculationCSharp.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
-
-        //
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session["User"] = null; //it's my session variable
+            Session.Clear();
+            Session.Abandon();
+            FormsAuthentication.SignOut(); //you write this when you use FormsAuthentication
             return RedirectToAction("Index", "Home");
         }
 
@@ -403,6 +432,8 @@ namespace CalculationCSharp.Controllers
         {
             return View();
         }
+
+
 
         protected override void Dispose(bool disposing)
         {
