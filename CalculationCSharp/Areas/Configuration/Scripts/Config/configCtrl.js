@@ -28,17 +28,37 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     function init() {
         var id = $location.absUrl();
-        configService.initialize().then(function (data) {
+        //Check if using local storage for saved sessions after timeout
+        if ($window.localStorage["Config"] != null) {
+            $scope.isLoading = false;
+            $scope.config = JSON.parse($window.localStorage.getItem("Config"));
+            $window.localStorage.removeItem("Config");
+            $window.localStorage.removeItem("WebAddress");
+        }
+        else {
+            configService.initialize().then(function(data) {
             $scope.isLoading = true;
             var id = configFunctionFactory.getConfigID();
              configService.getCalc(id)
-               .then(function (data) {
+               .then(function(data) {
                    $scope.isLoading = false;
-                   $scope.config = data;                                                        
+                   $scope.config = data;
                }, onError);
-        }, onError);
-        var id = configFunctionFactory.getConfigID();
-    };
+                    }, onError);
+            var id = configFunctionFactory.getConfigID();
+        }
+
+        };
+
+    $scope.$on('IdleTimeout', function() {
+
+        if($scope.config != null && $scope.config != undefined)
+            {
+            var id = configFunctionFactory.getConfigID();
+            $window.localStorage["Config"]= JSON.stringify($scope.config);
+            $window.localStorage["WebAddress"]= '/Configuration/Config/Config/' +id;
+        }
+    });
 
     //Functions
     $scope.AddFunction = function (colIndex, index) {      
@@ -193,6 +213,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.isLoading = true;
         $scope.OpenAllButton();
         var id = configFunctionFactory.getConfigID();
+
         $scope.rebuildCategoryIDs();
         if (form.$valid == true) {
             $scope.validationError = false;
@@ -201,6 +222,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 $scope.config = data;
                 $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
                 toastr.success("Calculated successfully", "Success");
+                $scope.form.$setDirty();
             }, onError);
         }
         else

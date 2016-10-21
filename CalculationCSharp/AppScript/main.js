@@ -20,11 +20,14 @@ sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRo
                 });
     });
 //Timeout functions
-sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepalive, $uibModal, $window) {
+sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepalive, $uibModal, $window, configFunctionFactory) {
     $scope.started = false;
 
     function init() {
         Idle.watch();
+
+        checkLocalStorage();
+
     };
 
     function closeModals() {
@@ -39,6 +42,22 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
         }
     }
     
+    function checkLocalStorage() {
+        if ($window.localStorage["WebAddress"] != null)
+        {
+            var cf = confirm("Do you wish to use continuing using the previous unsaved version?");
+            if (cf == true) {
+                var webAddress = $window.localStorage.getItem("WebAddress");
+                $window.localStorage.removeItem("WebAddress");
+                $window.location.assign(webAddress);
+            }
+            else {
+                $window.localStorage.removeItem("Config");
+                $window.localStorage.removeItem("WebAddress");
+            }
+        }
+    }
+
     $scope.$on('IdleStart', function() {
         closeModals();
         $scope.warning = $uibModal.open({
@@ -52,7 +71,7 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
     });
 
     $scope.$on('IdleTimeout', function() {
-        closeModals();
+        closeModals();    
         $window.location.assign('/Account/Timeout');
     });
     
