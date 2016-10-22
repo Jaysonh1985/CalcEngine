@@ -4,46 +4,60 @@
 }
 <br />
 <h4 class="text-center">Calculation Configurations</h4>
-<div class="container body-content" ng-controller="configMenuCtrl" ng-cloak>
-    <br />
-    <button class="btn btn-default" ng-click="addBoard()">Add</button>
-    <br />
-    <table class="table table-bordered table table-responsive">
-        <tr>
-            <th>
-                Scheme
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                User
-            </th>
-            <th>
-                Updated
-            </th>
-            <th>
-                Version
-            </th>
-            <th>
-            </th>
-        </tr>
-        <tr ng-repeat="board in Boards">
-            <td ng-hide="editingData[board.ID]" ng-click="openBoard()" ng-cloak>{{board.Scheme}}</td>
-            <td ng-show="editingData[board.ID]"><input class="form-control text-box single-line" type="text" ng-model="board.Scheme" /></td>
-            <td ng-hide="editingData[board.ID]" ng-click="openBoard()" ng-cloak>{{board.Name}}</td>
-            <td ng-show="editingData[board.ID]"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
-            <td width="15%" ng-click="openBoard()" ng-cloak>{{board.User}}</td>
-            <td width="10%" ng-click="openBoard()" ng-cloak>{{board.UpdateDate}}</td>
-            <td width="10%" ng-click="openBoard()" ng-cloak>{{board.Version}}</td>
-            <td width="25%">
-                <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="modify(board)">Modify</button>
-                <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="updateBoard($index, board)">Update</button>
-                <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Cancel</button>
-                <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard($index)" />
-                <button class="btn btn-group" ng-hide="editingData[board.ID]" ng-click="releaseBoard($index)">Release</button>
-            </td>
-        </tr>
-    </table>
 
+<div class="container body-content" ng-controller="configMenuCtrl" ng-cloak>
+    <button class="btn btn-default" ng-click="addBoard()">Add Calculation</button>
+    <div class="nav navbar-nav pull-right">
+        <div class="navbar-text">Search</div>
+        <div class="input-group">
+            <input type="text" class="form-control form-inline input" ng-model="test" placeholder="Filter">
+        </div>
+    </div>
+            <br />
+            <br />
+            <table class="table table-bordered table table-responsive">
+                <tr>
+                    <th>
+                        <a href="#" ng-click="orderByField='Scheme'; reverseSort = !reverseSort">
+                            Scheme <span ng-show="orderByField == 'Scheme'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                        </a>                     
+                    </th>
+                    <th>
+                        <a href="#" ng-click="orderByField='Name'; reverseSort = !reverseSort">
+                            Name <span ng-show="orderByField == 'Name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                        </a>  
+                    </th>
+                    <th>
+                        <a href="#" ng-click="orderByField='User'; reverseSort = !reverseSort">
+                            User <span ng-show="orderByField == 'User'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="orderByField='UpdateDate'; reverseSort = !reverseSort">
+                            Updated <span ng-show="orderByField == 'UpdateDate'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                        </a>
+                    </th>
+                    <th>
+                        Version
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                <tr ng-repeat="board in Boards | orderBy:orderByField:reverseSort | filter : test">
+                    <td ng-hide="editingData[board.ID]" ng-click="openBoard(board)" ng-cloak>{{board.Scheme}}</td>
+                    <td ng-show="editingData[board.ID]"><input class="form-control text-box single-line" type="text" ng-model="board.Scheme" /></td>     
+                    <td ng-hide="editingData[board.ID]" ng-click="openBoard(board)" ng-cloak>{{board.Name}}</td>
+                    <td ng-show="editingData[board.ID]"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
+                    <td width="15%" ng-click="openBoard(board)" ng-cloak>{{board.User}}</td>
+                    <td width="10%" ng-click="openBoard(board)" ng-cloak>{{board.UpdateDate}}</td>
+                    <td width="10%" ng-click="openBoard(board)" ng-cloak>{{board.Version}}</td>
+                    <td width="25%">
+                        <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="modify(board)">Modify</button>
+                        <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Update</button>
+                        <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Cancel</button>
+                        <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard(board)" />
+                        <button class="btn btn-group" ng-hide="editingData[board.ID]" ng-click="releaseBoard(board)">Release</button>
+                    </td>
+                </tr>
+            </table>
 </div>

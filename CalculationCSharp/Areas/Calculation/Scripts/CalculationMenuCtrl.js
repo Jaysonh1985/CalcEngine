@@ -4,6 +4,8 @@ sulhome.kanbanBoardApp.controller('calculationMenuCtrl', function ($scope,  $rou
     $scope.Boards = [];
     $scope.isLoading = false;
     $scope.selected = [];
+    $scope.orderByField = 'Scheme';
+    $scope.reverseSort = false;
     //Initialise
     function init() {
         $scope.isLoading = true;

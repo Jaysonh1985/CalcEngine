@@ -98,6 +98,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
             //    return BadRequest(ModelState);
             //}
             calcConfiguration.UpdateDate = DateTime.Now;
+            calcConfiguration.User = HttpContext.Current.User.Identity.Name.ToString();
             db.CalcConfiguration.Add(calcConfiguration);
             db.SaveChanges();
 

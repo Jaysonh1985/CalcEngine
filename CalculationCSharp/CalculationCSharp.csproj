@@ -304,6 +304,8 @@
     <Content Include="Areas\Calculation\Scripts\calculationService.js" />
     <Content Include="Areas\Configuration\Scripts\Array Functions\arrayFunctionsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Array Functions\ArrayFunctionsModal.html" />
+    <Content Include="Areas\Configuration\Scripts\CalculationMenu\configMenuAddCalcCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\CalculationMenu\ConfigMenuAddCalcModal.html" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configModalFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configValidationFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configTypeaheadFactory.js" />

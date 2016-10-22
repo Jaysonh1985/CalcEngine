@@ -4,7 +4,10 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     $scope.Boards = [];
     $scope.isLoading = false;
     $scope.selected = [];
-  
+    $scope.openIndex = [true];
+    $scope.orderByField = 'Scheme';
+    $scope.reverseSort = false;
+
     function init() {
         $scope.isLoading = true;
         configService.initialize().then(function (data) {
@@ -22,59 +25,91 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
             }, onError);
      };
 
-    $scope.openBoard = function () {
-        $scope.ID = this.board.ID;
+    $scope.openBoard = function (Board) {
+        $scope.ID = Board.ID;
         var earl = '/Config/' + $scope.ID;
         $window.location.assign('/Configuration/Config/Config/' + $scope.ID);
     };
 
+
     $scope.addBoard = function AddBoard() {
-         $scope.isLoading = true;
-         $scope.selected = {
-             ID: null,
-             Name: null,
-             User: null,
-             Group: null,
-             Configuration: null
+        //Creates TypeAhead Values
+        var SchemeList = [];
+        angular.forEach($scope.Boards, function (key, prop, value) {
+            
+            if (SchemeList.indexOf(key.Scheme) == -1) {
+                SchemeList[prop] = key.Scheme;
+            }
+
+        });
+
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/Areas/Configuration/Scripts/CalculationMenu/ConfigMenuAddCalcModal.html',
+            scope: $scope,
+            controller: 'configMenuAddCalcCtrl',
+            size: 'md',
+            resolve: {
+                Name: function () { return $scope.Name },
+                Scheme: function () { return $scope.Scheme },
+                SchemeList: function () { return SchemeList },
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = {
+                ID: null,
+                Name: selectedItem[0].Name,
+                Scheme: selectedItem[0].Scheme,
+                User: null,
+                Group: null,
+                Configuration: null
             };
 
-         configService.addConfig($scope.selected).then(function (data) {
-             $scope.Boards.push(data);
-             $scope.isLoading = false;
-         }, onError);
+            configService.addConfig($scope.selected).then(function (data) {
+                $scope.Boards.push(data);
+                $scope.isLoading = false;
+            }, onError);
+
+            toastr.success("Reverted successfully", "Success");
+        }, function () {        
+        });
+
+
      };
 
-    $scope.updateBoard = function (index) {
-         $scope.editingData[this.Boards[index].ID] = false;
-         configService.putConfig(this.Boards[index].ID, this.Boards[index]).then(function (data) {
+    $scope.updateBoard = function (Board) {
+        $scope.editingData[Board.ID] = false;
+        configService.putConfig(Board.ID, Board).then(function (data) {
              $scope.isLoading = false;
              configService.sendRequest();
          }, onError);
      };
 
-    $scope.releaseBoard = function (index) {
+    $scope.releaseBoard = function (Board) {
 
          $scope.calcrelease = [];
          $scope.calcreleaseID = null;
-         $scope.calcreleaseID = this.Boards[index].ID;
+         $scope.calcreleaseID = Board.ID;
          $scope.selected = [];
          $scope.selected = {
-             ID: this.Boards[index].ID,
-             Scheme: this.Boards[index].Scheme,
-             Name: this.Boards[index].Name,
-             User: this.Boards[index].User,
-             Configuration: this.Boards[index].Configuration,
-             Version: Math.ceil(this.Boards[index].Version)
+             ID: Board.ID,
+             Scheme: Board.Scheme,
+             Name: Board.Name,
+             User: Board.User,
+             Configuration: Board.Configuration,
+             Version: Math.ceil(Board.Version)
 
          };
 
-         this.Boards[index].Version = Math.ceil(this.Boards[index].Version);
+         Board.Version = Math.ceil(Board.Version);
 
-         configService.putConfig(this.Boards[index].ID, $scope.selected).then(function (data) {
+         configService.putConfig(Board.ID, $scope.selected).then(function (data) {
              $scope.isLoading = false;
          }, onError);
 
-         configService.getHistory(this.Boards[index].ID).then(function (data) {
+         configService.getHistory(Board.ID).then(function (data) {
              $scope.isLoading = false;
 
              $scope.historySelected = {
@@ -98,13 +133,13 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
 
          }, onError);
 
-         calculationService.getSingleConfig(this.Boards[index].ID)
+        calculationService.getSingleConfig(Board.ID)
            .then(function (data) {
                $scope.isLoading = false;
                $scope.calcrelease = data;
 
                if ($scope.calcrelease == null || $scope.calcrelease.length == 0) {
-                   $scope.relaseBoardAdd(index, $scope.selected);
+                   $scope.relaseBoardAdd($scope.selected);
                }
                else
                {
@@ -115,7 +150,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
            });
      };
 
-    $scope.relaseBoardAdd = function (index, data) {
+    $scope.relaseBoardAdd = function (data) {
          calculationService.addConfig(data).then(function (data) {
              $scope.isLoading = false;
          }, onError);
@@ -129,13 +164,15 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
 
      };
 
-    $scope.deleteBoard = function (index) {
+    $scope.deleteBoard = function (Board) {
+
+        var arrayID = configFunctionFactory.getIndexOf($scope.Boards, Board.ID,"ID");
         var cf = confirm("Delete this Calculation?");
         if (cf == true) {
-            configService.deleteConfig(this.Boards[index].ID)
+            configService.deleteConfig(Board.ID)
         .then(function (data) {
             $scope.isLoading = false;
-            $scope.Boards.splice(index, 1);
+            $scope.Boards.splice(arrayID, 1);
         }, onError);
         }
      };
@@ -147,7 +184,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
      }
 
     $scope.modify = function (Boards) {
-         $scope.editingData[Boards.ID] = true;
+          $scope.editingData[Boards.ID] = true;
      };
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
