@@ -72,7 +72,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                 $scope.isLoading = false;
             }, onError);
 
-            toastr.success("Reverted successfully", "Success");
+            toastr.success("Calculation created successfully", "Success");
         }, function () {        
         });
 
