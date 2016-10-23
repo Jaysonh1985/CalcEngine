@@ -48,6 +48,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             var id = configFunctionFactory.getConfigID();
         }
 
+        $window.localStorage.removeItem("Copy");
+
         };
 
     $scope.$on('IdleTimeout', function() {
@@ -105,12 +107,17 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     $scope.CopyFunction = function (colIndex, index) {
         var selectedRows = getSelectedRows(colIndex);
+        $window.localStorage["Copy"] = JSON.stringify(selectedRows);
+    }
+
+    $scope.PasteFunction = function (colIndex, index) {
+        var selectedRows = JSON.parse($window.localStorage.getItem("Copy"));
         angular.forEach(selectedRows, function (value, key, prop) {
             var Functions = selectedRows[key];
             var item = null;
             item = angular.copy(Functions);
             $scope.config[colIndex].Functions.splice(index + 1, 0, item);
-            index =  index + 1;
+            index = index + 1;
         });
     }
 

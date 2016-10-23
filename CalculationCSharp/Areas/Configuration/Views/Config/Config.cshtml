@@ -86,6 +86,7 @@
                                     </th>
                                     <th></th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody  ui-tree-nodes="" ng:model="Category.Functions">
@@ -183,6 +184,11 @@
                                     <td>
                                         <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="CopyFunction($parent.$index, $index)">
                                             <i class="center-block glyphicon glyphicon-duplicate"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="PasteFunction($parent.$index, $index)">
+                                            <i class="center-block glyphicon glyphicon-paste"></i>
                                         </a>
                                     </td>
                                     <td>
