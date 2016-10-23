@@ -6,14 +6,14 @@
         <div class="modal-body">
 
             <form class="form-horizontal" role="form" ng-submit="ok($index)">
-
-                <div class="form-group">
-                    <label for="Number2" class="control-label col-md-2">Message</label>
-                    <div class="col-sm-9">
-                        <input type="Text" id="String1" name="String1" class="form-control" ng-model="period.String1" />
+                <fieldset ng-disabled="$parent.viewOnly">
+                    <div class="form-group">
+                        <label for="Number2" class="control-label col-md-2">Message</label>
+                        <div class="col-sm-9">
+                            <input type="Text" id="String1" name="String1" class="form-control" ng-model="period.String1" />
+                        </div>
                     </div>
-                </div>
-
+                </fieldset>
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="submit">OK</button>
                     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>

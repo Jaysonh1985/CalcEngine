@@ -5,6 +5,7 @@
                 </div>
                 <div class="modal-body">
                     <form name="form" role="form" ng-submit="ok(form)">
+                        <fieldset ng-disabled="$parent.viewOnly">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -17,7 +18,7 @@
                                     <th></th>
                                     <th>
                                         <a data-nodrag ng-click="addItem($index)">
-                                            <span class="center-block glyphicon glyphicon-plus"></span>
+                                            <span ng-hide="$parent.viewOnly" class="center-block glyphicon glyphicon-plus"></span>
                                         </a>
                                     </th>
                                 </tr>
@@ -64,24 +65,22 @@
                                         <p ng-show="form['Operator_'+ $index].$error.clauseblank" class="help-block">No clause and a row below</p>
                                     </td>
                                     <td width="5%">
-                                        [<a ng:click="removeLogicItem($index)">X</a>]
+                                        [<a ng-hide="$parent.viewOnly" ng:click="removeLogicItem($index)">X</a>]
                                     </td>
                                     <td>
                                         <a data-nodrag ng-click="addItem($index)">
-                                            <i class="center-block glyphicon glyphicon-plus"></i>
+                                            <i ng-hide="$parent.viewOnly" class="center-block glyphicon glyphicon-plus"></i>
                                         </a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        
+                        </fieldset>
                         <div class="modal-footer">
                             <button class="btn btn-primary" type="submit">OK</button>
                             <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
                         </div>
                     </form>
                 </div>
-
 </div>
-   
 </body>

@@ -25,9 +25,15 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         encoding: 'ISO-8859-1',
         encodingVisible: true,
     };
+    $scope.viewOnly = false;
 
     function init() {
         var id = $location.absUrl();
+        var ViewOnly = $location.search().ViewOnly;
+        if (ViewOnly == 'true')
+        {
+            $scope.viewOnly = true;
+        }
         //Check if using local storage for saved sessions after timeout
         if ($window.localStorage["Config"] != null) {
             $scope.isLoading = false;
@@ -119,6 +125,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $scope.config[colIndex].Functions.splice(index + 1, 0, item);
             index = index + 1;
         });
+        $scope.form.$setDirty();
     }
 
     $scope.DeleteFunction = function (colIndex, $index) {
@@ -133,6 +140,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             });
             resetSelection();
         }
+        $scope.form.$setDirty();
     }
     //Categories
     $scope.AddCategory = function (colIndex) {
@@ -144,6 +152,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             Logic: []
         });
         $scope.GroupButtonClick('lg', this.config.length - 1);
+        $scope.form.$setDirty();
     }
 
     $scope.AddCategoryRows = function (colIndex) {
@@ -165,6 +174,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var item = null;
         item = angular.copy(Category);
         $scope.config.splice(index + 1, 0, item);
+        $scope.form.$setDirty();
     }
 
     $scope.MoveDownCategory = function (Index, e) {
@@ -178,6 +188,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.config.splice(Index, 1);
         $scope.config.splice(Index + 1, 0, item);
         $scope.colindex = Index;
+        $scope.form.$setDirty();
     }
 
     $scope.DeleteCategory = function (colIndex) {
@@ -186,6 +197,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $scope.config.splice(colIndex, 1);
             //$scope.rebuildCategoryIDs();
         }
+        $scope.form.$setDirty();
     }
 
     $scope.rebuildCategoryIDs = function rebuildCategoryIDs() {
@@ -389,7 +401,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             backdrop: false,
             size: size,
             resolve: {
-                Logic: function () { return $scope.Logic }
+                Logic: function () { return $scope.Logic },
+                viewOnly: function () { return $scope.viewOnly },
             }
         });
         modalInstance.result.then(function (selectedItem) {

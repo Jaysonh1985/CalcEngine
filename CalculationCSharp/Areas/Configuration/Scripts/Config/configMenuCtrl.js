@@ -31,6 +31,12 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
         $window.location.assign('/Configuration/Config/Config/' + $scope.ID);
     };
 
+    $scope.viewBoard = function (Board) {
+        $scope.ID = Board.ID;
+        var earl = '/Config/' + $scope.ID;
+        $window.location.assign('/Configuration/Config/Config/' + $scope.ID + '#?ViewOnly=true');
+    };
+
 
     $scope.addBoard = function AddBoard() {
         //Creates TypeAhead Values
@@ -42,8 +48,6 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
             }
 
         });
-
-
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/Areas/Configuration/Scripts/CalculationMenu/ConfigMenuAddCalcModal.html',
@@ -56,7 +60,6 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                 SchemeList: function () { return SchemeList },
             }
         });
-
         modalInstance.result.then(function (selectedItem) {
             $scope.selected = {
                 ID: null,

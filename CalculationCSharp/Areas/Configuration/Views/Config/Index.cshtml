@@ -55,7 +55,8 @@
                         <td width="15%" ng-click="openBoard(board)" ng-cloak>{{board.User}}</td>
                         <td width="10%" ng-click="openBoard(board)" ng-cloak>{{board.UpdateDate | date:'d MMMM yyyy h:mm a'}}</td>
                         <td width="10%" ng-click="openBoard(board)" ng-cloak>{{board.Version}}</td>
-                        <td width="25%">
+                        <td width="35%">
+                            <button class="btn btn-default" ng-hide="editingData[board.ID]" ng-click="viewBoard(board)">View Only</button>
                             <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="modify(board)">Modify</button>
                             <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Update</button>
                             <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Cancel</button>

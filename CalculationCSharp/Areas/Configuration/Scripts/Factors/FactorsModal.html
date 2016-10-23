@@ -6,7 +6,7 @@
             <div class="modal-body">
 
                 <form class="form-horizontal" role="form" ng-submit="ok($index)">
-                    <fieldset>
+                    <fieldset ng-disabled="$parent.viewOnly">
                         <legend>Factor Inputs</legend>
                         <div class="form-group">
                             <label for="TableName" class="control-label col-md-2">Table Name</label>
