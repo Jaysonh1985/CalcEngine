@@ -114,6 +114,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.CopyFunction = function (colIndex, index) {
         var selectedRows = getSelectedRows(colIndex);
         $window.localStorage["Copy"] = JSON.stringify(selectedRows);
+        toastr.success("Rows copied", "Success");
     }
 
     $scope.PasteFunction = function (colIndex, index) {
@@ -125,6 +126,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $scope.config[colIndex].Functions.splice(index + 1, 0, item);
             index = index + 1;
         });
+        toastr.success("Rows pasted", "Success");
         $scope.form.$setDirty();
     }
 
