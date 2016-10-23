@@ -105,12 +105,12 @@
                                             </a>
                                         </td>
 
-                                        <td>
+                                        <td ng-if="rows.Function == null">
                                             <select ng-show="Category.Name != 'Input'" name="Input_{{$parent.$index}}_{{$index}}" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" ng-required="true">
                                                 <option value=""></option>
                                                 <option value="ArrayFunctions">Array Functions</option>
                                                 <option value="Comments">Comment</option>
-                                                <option value="Dates">Date Adjustment</option>
+                                                <option value="DateAdjustment">Date Adjustment</option>
                                                 <option value="DatePart">Date Part</option>
                                                 <option value="ErrorsWarnings">Errors & Warnings</option>
                                                 <option value="Factors">Factors</option>
@@ -122,6 +122,7 @@
                                             <p ng-show="form['Input_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Function is required.</p>
                                             <p ng-show="Category.Name == 'Input'">{{rows.Function}}</p>
                                         </td>
+                                        <td ng-if="rows.Function != null" width="5%">{{rows.Function}}</td>
 
                                         <td>
                                             <span hidden><input type="text" name="FunctionCog_{{$parent.$index}}_{{$index}}" id="FunctionCog_{{$parent.$index}}_{{$index}}" class="table-borderless" ng:model="rows.ID" hidden></span>

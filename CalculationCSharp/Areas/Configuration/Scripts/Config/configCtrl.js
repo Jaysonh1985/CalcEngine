@@ -261,7 +261,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         else if (rows.Function == 'Period') {
             rows.Type = 'Decimal';
         }
-        else if (rows.Function == 'Dates') {
+        else if (rows.Function == 'DateAdjustment') {
             rows.Type = 'Date';
         }
         else if (rows.Function == 'DatePart') {

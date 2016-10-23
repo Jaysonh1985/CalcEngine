@@ -181,7 +181,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         item.Output = Factors.Output(jparameters, jCategory, group.ID, item.ID);
                                         item.Type = parameters.OutputType;
                                     }
-                                    else if (item.Function == "Dates")
+                                    else if (item.Function == "DateAdjustment")
                                     {
                                         Dates Dates = new Dates();
                                         item.Output = Dates.Output(jparameters, jCategory, group.ID, item.ID);

@@ -44,7 +44,7 @@ sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeahead
                                     });                                      
                                 }
                                 //Date Adjustment
-                                if (scope.config[key].Functions[keyF].Function == 'Dates') {
+                                if (scope.config[key].Functions[keyF].Function == 'DateAdjustment') {
                                         angular.forEach(obj, function (valueN, keyN, obj) {
                                             configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date1, form, true);
                                             if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
