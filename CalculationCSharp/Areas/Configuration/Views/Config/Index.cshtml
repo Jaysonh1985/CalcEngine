@@ -53,7 +53,7 @@
                         <td ng-hide="editingData[board.ID]" ng-click="openBoard(board)" ng-cloak>{{board.Name}}</td>
                         <td ng-show="editingData[board.ID]"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
                         <td width="15%" ng-click="openBoard(board)" ng-cloak>{{board.User}}</td>
-                        <td width="10%" ng-click="openBoard(board)" ng-cloak>{{board.UpdateDate | date: "short"}}</td>
+                        <td width="10%" ng-click="openBoard(board)" ng-cloak>{{board.UpdateDate | date:'d MMMM yyyy h:mm a'}}</td>
                         <td width="10%" ng-click="openBoard(board)" ng-cloak>{{board.Version}}</td>
                         <td width="25%">
                             <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="modify(board)">Modify</button>

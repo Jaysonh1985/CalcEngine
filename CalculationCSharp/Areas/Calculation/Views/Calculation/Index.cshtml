@@ -15,33 +15,35 @@
     </div>
 
     <table class="table table-bordered table table-responsive">
-        <tr>
-            <th>
-                <a href="#" ng-click="orderByField='Scheme'; reverseSort = !reverseSort">
-                    Scheme <span ng-show="orderByField == 'Scheme'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-                </a>    
-            </th>
-            <th>
-                <a href="#" ng-click="orderByField='Name'; reverseSort = !reverseSort">
-                    Name <span ng-show="orderByField == 'Name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-                </a>  
-            </th>
-            <th>
-                <a href="#" ng-click="orderByField='UpdateDate'; reverseSort = !reverseSort">
-                    Updated <span ng-show="orderByField == 'UpdateDate'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-                </a>
-            </th>
-            <th>
-                Version
-            </th>
-        </tr>
+        <thead>
+            <tr>
+                <th>
+                    <a href="#" ng-click="orderByField='Scheme'; reverseSort = !reverseSort">
+                        Scheme <span ng-show="orderByField == 'Scheme'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='Name'; reverseSort = !reverseSort">
+                        Name <span ng-show="orderByField == 'Name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='UpdateDate'; reverseSort = !reverseSort">
+                        Updated <span ng-show="orderByField == 'UpdateDate'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+                <th>
+                    Version
+                </th>
+            </tr>
+        </thead>        
+
         <tr ng-repeat="board in Boards  | orderBy:orderByField:reverseSort | filter : test">
             <td ng-hide="editingData[board.ID]" ng-click="openBoard()">{{board.Scheme}}</td>
             <td ng-hide="editingData[board.ID]" ng-click="openBoard()">{{board.Name}}</td>
             <td ng-show="editingData[board.ID]"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
-            <td width="10%" ng-click="openBoard()">{{board.UpdateDate}}</td>
+            <td width="10%" ng-click="openBoard()">{{board.UpdateDate | date:'d MMMM yyyy h:mm a'}}</td>
             <td width="10%" ng-click="openBoard()">{{board.Version}}</td>
         </tr>
     </table>
-
 </div>
