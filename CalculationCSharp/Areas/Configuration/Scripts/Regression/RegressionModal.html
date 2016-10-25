@@ -42,7 +42,7 @@
                 </td>
                 <td width="25%" ng-cloak> <span><input type="text" ng:model="Regress.Comment" class="form-control"></span></td>
                 <td><button ng-if="Regress.OutputOld != null" type="button" class="btn btn-default" ng-click="OutputButtonClick('lg', $index, 'O')" data-dismiss="modal">Old</button></td>
-                <td><button ng-if="Regress.OutputNew != null" type="button" class="btn btn-default" ng-click="OutputButtonClick('lg', $index, 'N')" data-dismiss="modal">New</button></td>
+                <td><button ng-if="Regress.OutputNew != null && Regress.OutputNew != 'null'" type="button" class="btn btn-default" ng-click="OutputButtonClick('lg', $index, 'N')" data-dismiss="modal">New</button></td>
                 <td ng-if="Regress.OutputOld == null"> </td> 
                 <td ng-if="Regress.OutputOld != null" width="10%" ng-class="{'green' : Regress.Difference == null, 'red': Regress.Difference != null}"><span></span></td>
                 <td><button ng-if="Regress.Difference != null" type="button" class="btn btn-default" ng-click="DifferencesButtonClick('lg', $index)" data-dismiss="modal">Differences</button></td>
