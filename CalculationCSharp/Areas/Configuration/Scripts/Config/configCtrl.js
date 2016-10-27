@@ -214,11 +214,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     }
     ///Form Submission
     $scope.SaveButtonClick = function SaveBoard() {
-        $scope.isLoading = true;
+        $scope.viewOnly = true;
         var id = configFunctionFactory.getConfigID();
         $scope.rebuildCategoryIDs();
         configService.putCalc(id, $scope.config).then(function (data) {
-            $scope.isLoading = false;
+            $scope.viewOnly = false;
             toastr.success("Saved successfully", "Success");
             $scope.form.$setPristine();
         }, onError);
@@ -229,14 +229,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         {
             $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
         }
-        $scope.isLoading = true;
+        $scope.viewOnly = true;
         var id = configFunctionFactory.getConfigID();
 
         $scope.rebuildCategoryIDs();
         if (form.$valid == true) {
             $scope.validationError = false;
             configService.postCalc(id, $scope.config).then(function (data) {
-                $scope.isLoading = false;
+                $scope.viewOnly = false;
                 $scope.config = data;
                 $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
                 toastr.success("Calculated successfully", "Success");
@@ -246,6 +246,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         else
         {
             $scope.validationError = true;
+            $scope.viewOnly = false;
             toastr.error("Failed Validations", "Error");
         }
     };
@@ -601,7 +602,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     var onError = function (errorMessage) {
-        $scope.isLoading = false;
+        $scope.viewOnly = false;
         toastr.error(errorMessage, "Error");
     };
 
