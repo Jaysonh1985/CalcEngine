@@ -118,7 +118,8 @@ public class MathematicalFunctions
     {
         if (RoundingType == "up")
         {
-            return  Math.Round(Math.Ceiling(Output * 100) / 100, Convert.ToInt16(Rounding));
+            //decimal value = RoundingRoundUp(Rounding, Output);
+            return RoundingRoundUp(Rounding, Output);
         }
         else if (RoundingType == "down")
         {
@@ -128,19 +129,118 @@ public class MathematicalFunctions
             }
             else
             {
-                return Math.Round(Math.Floor(Output * 100) / 100, Convert.ToInt16(Rounding));
+                return RoundingRoundDown(Rounding, Output); 
             }
         }
         else
         {
             if(Rounding != "")
             {
-                return Math.Round(Output, Convert.ToInt16(Rounding));
+                return Convert.ToDecimal(RoundingDecimalPlaces(Rounding, Math.Round(Output, Convert.ToInt16(Rounding))));
             }
             else
             {
-                return Math.Round(Output, 2);
+                return Convert.ToDecimal(RoundingDecimalPlaces(Rounding, Math.Round(Output, 2)));
             }
         }
+    }
+
+    public decimal RoundingRoundUp(string Rounding, decimal Value)
+    {
+        if (Rounding == "1")
+        {
+            return Math.Round(Math.Ceiling(Value * 100) / 100, Convert.ToInt16(Rounding));
+        }
+        else if (Rounding == "2")
+        {
+            return Math.Round(Math.Ceiling(Value * 100) / 100, Convert.ToInt16(Rounding));
+        }
+        else if (Rounding == "3")
+        {
+            return Math.Round(Math.Ceiling(Value * 1000) / 1000, Convert.ToInt16(Rounding));
+        }
+        else if (Rounding == "4")
+        {
+            return Math.Round(Math.Ceiling(Value * 10000) / 10000, Convert.ToInt16(Rounding));
+        }
+        else if (Rounding == "5")
+        {
+            return Math.Round(Math.Ceiling(Value * 100000) / 100000, Convert.ToInt16(Rounding));
+        }
+        else if (Rounding == "6")
+        {
+            return Math.Round(Math.Ceiling(Value * 1000000) / 1000000, Convert.ToInt16(Rounding));
+        }
+        else
+        {
+            return Math.Round(Math.Ceiling(Value * 100) / 100, Convert.ToInt16(Rounding));
+        }
+    }
+
+
+    public decimal RoundingRoundDown(string Rounding, decimal Value)
+    {
+        if (Rounding == "1")
+        {
+            return Math.Round(Math.Floor(Value * 100) / 100, Convert.ToInt16(Rounding));
+        }
+        else if (Rounding == "2")
+        {
+            return Math.Round(Math.Floor(Value * 100) / 100, Convert.ToInt16(Rounding));
+        }
+        else if (Rounding == "3")
+        {
+            return Math.Round(Math.Floor(Value * 1000) / 1000, Convert.ToInt16(Rounding));
+        }
+        else if (Rounding == "4")
+        {
+            return Math.Round(Math.Floor(Value * 10000) / 10000, Convert.ToInt16(Rounding));
+        }
+        else if (Rounding == "5")
+        {
+            return Math.Round(Math.Floor(Value * 100000) / 100000, Convert.ToInt16(Rounding));
+        }
+        else if (Rounding == "6")
+        {
+            return Math.Round(Math.Floor(Value * 1000000) / 1000000, Convert.ToInt16(Rounding));
+        }
+        else
+        {
+            return Math.Round(Math.Floor(Value * 100) / 100, Convert.ToInt16(Rounding));
+        }
+    }
+
+    public string RoundingDecimalPlaces(string Rounding, decimal Value)
+    {
+
+        if(Rounding == "1")
+        {
+            return Value.ToString("0.0");
+        }
+        else if (Rounding == "2")
+        {
+            return Value.ToString("0.00");
+        }
+        else if (Rounding == "3")
+        {
+            return Value.ToString("0.000");
+        }
+        else if (Rounding == "4")
+        {
+            return Value.ToString("0.0000");
+        }
+        else if (Rounding == "5")
+        {
+            return Value.ToString("0.00000");
+        }
+        else if (Rounding == "6")
+        {
+            return Value.ToString("0.000000");
+        }
+        else
+        {
+            return Convert.ToString(Value);
+        }
+
     }
 }

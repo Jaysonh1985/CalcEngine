@@ -63,6 +63,14 @@ namespace CalculationCSharp.Areas.Configuration.Models
         {
             MathematicalFunctions MathFunctions = new MathematicalFunctions();
             Decimal Output = 0;
+
+            Rounding = Convert.ToString(parameters.Rounding);
+
+            if (Rounding == null || Rounding == "")
+            {
+                Rounding = "2";
+            }
+
             //Absolute
             if (parameters.Type == "Abs")
             {
@@ -123,7 +131,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
             {
                 Output = MathFunctions.Truncate(InputADeci);
             }
-            return MathFunctions.Rounding(parameters.RoundingType, parameters.Rounding, Output);
+            return MathFunctions.Rounding(parameters.RoundingType, Rounding, Output);
         }
     }
 }

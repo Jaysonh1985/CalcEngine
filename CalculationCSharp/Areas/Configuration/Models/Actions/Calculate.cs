@@ -133,13 +133,9 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             //TODO bug with the way the rounding calculation works in that if the dropdown is blank it populates with 0 when it should populate with nil, we want the rounding to default to 2
                                             Rounding = Convert.ToString(parameters.Rounding);
 
-                                            if (Convert.ToString(parameters.Rounding) == "0")
+                                            if (Rounding == null || Rounding == "")
                                             {
                                                 Rounding = "2";
-                                            }
-                                            if (Convert.ToString(parameters.Rounding) == "10")
-                                            {
-                                                Rounding = "0";
                                             }
                                             if (DeciParse == true)
                                             {
