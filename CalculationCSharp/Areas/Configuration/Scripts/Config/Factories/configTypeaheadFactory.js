@@ -23,11 +23,17 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
                         DecimalValue = ($filter('filter')(config[scopeid].Functions, { Type: type }));
                     }
                     if (scopeid == colIndex) {
+
+                        var DecimalValue = ($filter('limitTo')(config[scopeid].Functions, rowIndex));
+                        if (type == null) {
+                            DecimalValue = ($filter('filter')(DecimalValue));
+                        }
+                        else {
+                            DecimalValue = ($filter('filter')(DecimalValue, { Type: type }));
+                        }
+                       
                         var spliceid = rowIndex;
                         var DecimalValueID = 0;
-                        angular.forEach(DecimalValue, function (Names) {
-                            DecimalValue.splice(spliceid, 1);
-                        });
                     };
                     functionID = 0;
                     angular.forEach(DecimalValue, function (NamesDecimalValue) {

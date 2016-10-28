@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, configModalFactory, $filter, $timeout) {
+sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, configModalFactory, configTypeaheadFactory, $filter, $timeout) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
@@ -277,51 +277,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             rows.Type = null;
         }      
     }
-    //TypeAhead Functions
-    $scope.variableArrayBuilder = function variableArrayBuilder(config, colIndex, type, rowIndex) {
-        var counter = 0;
-        var scopeid = 0;
-        var functionID = 0;
-        var arrayID = 0;
-        $scope.Decimal = [];
-        $scope.DecimalValue = [];
-        $scope.DecimalParameter = [];
-        $scope.Names = [];
-        var newArr = [];
-        angular.forEach(config, function (groups) {
-            if (scopeid <= colIndex) {
-                if(type == null)
-                {
-                    $scope.DecimalValue = ($filter('filter')(config[scopeid].Functions));
-                }
-                else
-                {
-                    $scope.DecimalValue = ($filter('filter')(config[scopeid].Functions, { Type: type }));
-                }
-                if (scopeid == colIndex) {
-                    var spliceid = rowIndex;
-                    var DecimalValueID = 0;
-
-                    angular.forEach($scope.DecimalValue, function (Names) {
-                        $scope.DecimalValue.splice(spliceid, 1);
-                    });
-
-                };
-                functionID = 0;
-                angular.forEach($scope.DecimalValue, function (Names) {
-                    $scope.DecimalParameter = ($filter('filter')($scope.DecimalValue[functionID].Name));
-                    if ($scope.Names.indexOf($scope.DecimalParameter) == -1) {
-                        $scope.Names[arrayID] = $scope.DecimalParameter;                       
-                        arrayID = arrayID + 1;
-                    }
-                    functionID = functionID + 1;
-                });
-                scopeid = scopeid + 1
-            }
-        });
-        scopeid = 0;
-        return $scope.Names;
-    }
+   
     //UI
     $scope.OpenAllButton = function () {
         angular.forEach($scope.config, function(value,key,obj){
@@ -339,9 +295,9 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.DecimalNames = [];
         $scope.DateNames = [];
         $scope.StringNames = [];
-        $scope.DecimalNames = $scope.variableArrayBuilder($scope.config, colIndex, 'Decimal', rowIndex);
-        $scope.DateNames = $scope.variableArrayBuilder($scope.config, colIndex, 'Date', rowIndex);
-        $scope.StringNames = $scope.variableArrayBuilder($scope.config, colIndex, 'String', rowIndex);
+        $scope.DecimalNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, 'Decimal', rowIndex);
+        $scope.DateNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, 'Date', rowIndex);
+        $scope.StringNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, 'String', rowIndex);
     }
 
     $scope.FunctionButtonClick = function (size, colIndex, index) {
