@@ -144,7 +144,10 @@ public class MathematicalFunctions
             }
         }
     }
-
+    /// <summary>RoundingRoundUp Function 
+    /// <para>RoundingType = Type of rounding to apply</para>
+    /// <para>Value = Value to apply rounding type too</para>
+    /// </summary>
     public decimal RoundingRoundUp(string Rounding, decimal Value)
     {
         if (Rounding == "1")
@@ -177,7 +180,10 @@ public class MathematicalFunctions
         }
     }
 
-
+    /// <summary>RoundingRoundDown Function 
+    /// <para>RoundingType = Type of rounding to apply</para>
+    /// <para>Value = Value to apply rounding type too</para>
+    /// </summary>
     public decimal RoundingRoundDown(string Rounding, decimal Value)
     {
         if (Rounding == "1")
@@ -209,7 +215,10 @@ public class MathematicalFunctions
             return Math.Round(Math.Floor(Value * 100) / 100, Convert.ToInt16(Rounding));
         }
     }
-
+    /// <summary>RoundingDecimalPlaces Function, this function displays the decimal strings on the builder to the relevant decimal places
+    /// <para>RoundingType = Type of rounding to apply</para>
+    /// <para>Value = Value to apply rounding type too</para>
+    /// </summary>
     public string RoundingDecimalPlaces(string Rounding, decimal Value)
     {
 

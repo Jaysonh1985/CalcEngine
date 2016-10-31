@@ -9,6 +9,7 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
     var vm = this;
     $scope.openIndex = [true];
     $scope.openIndexOuter = [true];
+    $scope.openIndexRegression = [true];
     $scope.csv = {
         content: null,
         header: true,
@@ -104,6 +105,19 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
        });
        return promise;
     };
+
+    //UI
+    $scope.OpenAllButton = function () {
+        angular.forEach($scope.output, function (value, key, obj) {
+            $scope.openIndex[key] = true;
+        })
+    }
+
+    $scope.CloseAllButton = function () {
+        angular.forEach($scope.openIndex, function (value, key, obj) {
+            $scope.openIndex[key] = false;
+        })
+    }
     //Creates the array of the output
     $scope.BulkOutputBuilder = function BulkOutputBuilder(Output) {
         var Test = [];

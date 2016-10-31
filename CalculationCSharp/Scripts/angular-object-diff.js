@@ -219,7 +219,7 @@
             var changed = diffItem.changed;
             var fieldsvalue = null
             if (fields != undefined) {
-                fieldsvalue = fields.value;
+                fieldsvalue = fields.value;         
             }
             var property;
             switch (changed) {

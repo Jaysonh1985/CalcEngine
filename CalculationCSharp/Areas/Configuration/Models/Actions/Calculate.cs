@@ -38,16 +38,17 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 
                 foreach (var list in group)
                 {
-                    int index = SubList.FindIndex(a => a.Field == list.Field);
-                    if (index == -1)
-                    {
-                        SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
-                    }
-                    else
-                    {
-                        SubList.RemoveAt(index);
-                        SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
-                    }
+                    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
+                    //int index = SubList.FindIndex(a => a.Field == list.Field);
+                    //if (index == -1)
+                    //{
+                    //    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
+                    //}
+                    //else
+                    //{
+                    //    SubList.RemoveAt(index);
+                    //    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
+                    //}
 
                 }              
 
@@ -252,6 +253,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     item.Output = Convert.ToString(LogicReplace);
                                 }                           
                                 item.Pass = "miss";
+
+                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
                             }
                         }
                     }
