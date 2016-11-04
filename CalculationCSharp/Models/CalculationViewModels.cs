@@ -144,6 +144,10 @@ namespace CalculationCSharp.Models
         public DbSet<Codes> Codes { get; set; }
         public DbSet<ProjectBoard> ProjectBoard { get; set; }
         public DbSet<CalcConfiguration> CalcConfiguration { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CalcConfiguration>().Property(x => x.Version).HasPrecision(16, 3);
+        }
         public DbSet<CalcRelease> CalcRelease { get; set; }
         public DbSet<CalcHistory> CalcHistory { get; set; }
         public DbSet<CalcRegressionInputs> CalcRegressionInputs { get; set; }
