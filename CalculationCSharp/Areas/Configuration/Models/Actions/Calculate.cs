@@ -38,16 +38,17 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 
                 foreach (var list in group)
                 {
-                    int index = SubList.FindIndex(a => a.Field == list.Field);
-                    if (index == -1)
-                    {
-                        SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
-                    }
-                    else
-                    {
-                        SubList.RemoveAt(index);
-                        SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
-                    }
+                    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
+                    //int index = SubList.FindIndex(a => a.Field == list.Field);
+                    //if (index == -1)
+                    //{
+                    //    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
+                    //}
+                    //else
+                    //{
+                    //    SubList.RemoveAt(index);
+                    //    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
+                    //}
 
                 }              
 
@@ -133,13 +134,9 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             //TODO bug with the way the rounding calculation works in that if the dropdown is blank it populates with 0 when it should populate with nil, we want the rounding to default to 2
                                             Rounding = Convert.ToString(parameters.Rounding);
 
-                                            if (Convert.ToString(parameters.Rounding) == "0")
+                                            if (Rounding == null || Rounding == "")
                                             {
                                                 Rounding = "2";
-                                            }
-                                            if (Convert.ToString(parameters.Rounding) == "10")
-                                            {
-                                                Rounding = "0";
                                             }
                                             if (DeciParse == true)
                                             {
@@ -256,6 +253,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     item.Output = Convert.ToString(LogicReplace);
                                 }                           
                                 item.Pass = "miss";
+
+                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
                             }
                         }
                     }

@@ -17,6 +17,7 @@ sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstan
         angular.forEach($scope.Logic, function (value, key, obj) {
             var AttName = 'Operator_' + key;
             form[AttName].$setValidity("clause", true);
+            form[AttName].$setValidity("clauseblank", true);
             if ($scope.Logic[key].Operator != "" && $scope.Logic[key].Operator != null) {
                 if ($scope.Logic[key + 1] == null) {
                     form[AttName].$setValidity("clause", false);

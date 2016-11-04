@@ -40,7 +40,7 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
                     var Input1Bool = isNaN(parseFloat(value));
                 }
                 else if (type == "Date") {
-                    var Input1Bool = isNaN(Date.parse(value));
+                    var Input1Bool = isNaN(new Date(value.split('/')[2], value.split('/')[1] - 1, value.split('/')[0]));
                 }
                 if (Input1Bool == true) {
                     if (VariableNames.indexOf(value) == -1) {
