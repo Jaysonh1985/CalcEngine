@@ -96,7 +96,7 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
 })
 //Timeout config
 sulhome.kanbanBoardApp.config(function(IdleProvider, KeepaliveProvider) {
-     IdleProvider.idle(20*1-10);
+     IdleProvider.idle(20*60-10);
      IdleProvider.timeout(10);
      KeepaliveProvider.interval(10);
  });
