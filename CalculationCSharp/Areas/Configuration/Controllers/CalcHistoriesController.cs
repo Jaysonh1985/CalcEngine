@@ -31,11 +31,22 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         
         // GET: api/CalcHistories/5
         [ResponseType(typeof(CalcHistory))]
-        public IHttpActionResult GetCalcHistory(int id)
+        public IHttpActionResult GetCalcHistory(int id, bool SelectList)
         {
-            var List = db.CalcHistory.Where(i => i.CalcID == id);
-
-            return Ok(List);
+            if(SelectList == true)
+            {
+                var List = db.CalcHistory.Where(i => i.CalcID == id);
+                return Ok(List);
+            }
+            else
+            {
+                CalcHistory calcHistory = db.CalcHistory.Find(id);
+                if (calcHistory == null)
+                {
+                    return NotFound();
+                }
+                return Ok(calcHistory);
+            }
         }
 
         /// <summary>Put calculation in CalcHistories Table.

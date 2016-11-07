@@ -42,21 +42,37 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $window.localStorage.removeItem("WebAddress");
         }
         else {
-            configService.initialize().then(function(data) {
-            $scope.isLoading = true;
-            var id = configFunctionFactory.getConfigID();
-             configService.getCalc(id)
-               .then(function(data) {
-                   $scope.isLoading = false;
-                   $scope.config = data;
-               }, onError);
-                    }, onError);
-            var id = configFunctionFactory.getConfigID();
+            var History = $location.search().History;
+            if(History == 'true')
+            {
+                var id = configFunctionFactory.getConfigID();
+                configService.initialize().then(function (data) {
+                    $scope.isLoading = true;
+                    configService.getHistorySingle(id)
+                       .then(function (data) {
+                           $scope.isLoading = false;
+                           $scope.config = JSON.parse(data.Configuration);
+                       }, onError);
+                }, onError);
+                var id = configFunctionFactory.getConfigID();
+            }
+            else
+            {
+                configService.initialize().then(function (data) {
+                    $scope.isLoading = true;
+                    var id = configFunctionFactory.getConfigID();
+                    configService.getCalc(id)
+                      .then(function (data) {
+                          $scope.isLoading = false;
+                          $scope.config = data;
+                      }, onError);
+                }, onError);
+                var id = configFunctionFactory.getConfigID();
+            }
         }
-
         $window.localStorage.removeItem("Copy");
 
-        };
+    };
 
     $scope.$on('IdleTimeout', function() {
 

@@ -1,4 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
+using CalculationCSharp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
     {
         /// <summary>Controller for displaying the calculation release pages
         /// </summary>
-
+        private CalculationDBContext db = new CalculationDBContext();
         // GET: Calculation/CalcReleasePage
         public ActionResult Index()
         {
@@ -26,10 +27,20 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
         }
 
         // GET: Calculation/CalcReleasePage
-        public ActionResult Form()
+        public ActionResult Form(int? id)
         {
             if (Request.IsAuthenticated)
             {
+                CalcRelease ProjectBoard = db.CalcRelease.Find(id);
+                try
+                {
+                    ViewData["SchemeName"] = ProjectBoard.Scheme;
+                    ViewData["CalcName"] = ProjectBoard.Name;
+                }
+                catch
+                {
+
+                }
                 return View();
             }
             else

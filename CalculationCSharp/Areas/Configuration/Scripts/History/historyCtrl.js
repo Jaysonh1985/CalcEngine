@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('historyCtrl', function ($scope, $uibModalInstance, $log, $http, $location, configService, ID) {
+sulhome.kanbanBoardApp.controller('historyCtrl', function ($scope, $uibModalInstance, $window, $log, $http, $location, configService, ID) {
     init();
     //Map back the calculation histories where available for the specified calculation
     function init() {
@@ -15,8 +15,12 @@ sulhome.kanbanBoardApp.controller('historyCtrl', function ($scope, $uibModalInst
         $scope.addItem();
         $uibModalInstance.close($scope.selected);
     };
+    //View Only
+    $scope.View = function (boardID) {      
+        $window.open('/Configuration/Config/Config/' + boardID + '#?ViewOnly=true&History=true')
+    };
     //Reverts the configuration back to the previously stated configuration
-    $scope.revert = function (Board) {      
+    $scope.revert = function (Board) {
         $uibModalInstance.close(Board.Configuration);
     };
     //Cancel Modal destroy modal values
