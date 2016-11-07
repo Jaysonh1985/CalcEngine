@@ -3,46 +3,11 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container body-content" ng-cloak>
+<div class="container">
+    <h3>Maintenance</h3>
 
-    <h2>Factor Maintenance</h2>
-    <div>
-        @using (Html.BeginForm("DownloadFile", "Maintenance", FormMethod.Post,
-                                             new { enctype = "multipart/form-data" }))
-        {
-            <h3>Download Table</h3>
-            @Html.DropDownList("Dropdown", ViewData["Dropdown"] as List<SelectListItem>, new { @class = "form-control  input-sm" })
-            <div class="editor-field">
-                <input type="submit" value="Download" />
-            </div>
-        }
-    </div>
-    <div>
-        <h3>Upload Table</h3>
-        @using (Html.BeginForm("Create", "Maintenance", FormMethod.Post,
-                            new { enctype = "multipart/form-data" }))
-        {
-            @Html.AntiForgeryToken()
+    <br />
 
-            <div class="editor-field">
-                @Html.TextBox("file", "", new { type = "file", accept = ".csv" })
-            </div>
-            <div class="editor-field">
-                <input type="submit" value="Upload" onclick="return confirm('You could be overwriting an existing factor table please check this is OK?')" />
-            </div>
-        }
-    </div>
-    <div>
-        <h3>Delete Table</h3>
-        @using (Html.BeginForm("DeleteFile", "Maintenance", FormMethod.Post,
-                                                     new { enctype = "multipart/form-data" }))
-        {
-            @Html.DropDownList("Dropdown", ViewData["Dropdown"] as List<SelectListItem>, new { @class = "form-control  input-sm" })
-            <div class="editor-field">
-                <input type="submit" value="Delete" onclick="return confirm('Are you sure you wish to delete this Factor Table?')" />
-            </div>
-        }
-    </div>
-
-
+    @Html.ActionLink(" Factor Maintenance", "Index", new { Area = "Maintenance", controller = "FactorMaintenance" })   
+     
 </div>
