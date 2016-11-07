@@ -137,6 +137,16 @@ namespace CalculationCSharp.Models
         public String Pass { get; set; }
     }
 
+    public class UserSession
+    {
+        [Key]
+        public int ID { get; set; }
+        public string Username { get; set; }
+        public string Section { get; set; }
+        public int Record { get; set; }
+        public DateTime StartTime { get; set; }
+    }
+
     public class CalculationDBContext : DbContext
     {
         public DbSet<CalculationResult> CalculationResult { get; set; }
@@ -151,5 +161,6 @@ namespace CalculationCSharp.Models
         public DbSet<CalcRelease> CalcRelease { get; set; }
         public DbSet<CalcHistory> CalcHistory { get; set; }
         public DbSet<CalcRegressionInputs> CalcRegressionInputs { get; set; }
+        public DbSet<UserSession> UserSession { get; set; }
     }
 }

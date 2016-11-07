@@ -34,22 +34,53 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        public ActionResult Config(int? id)
+        public ActionResult Config(int id)
         {
 
             if (Request.IsAuthenticated)
             {
                 CalcConfiguration ProjectBoard = db.CalcConfiguration.Find(Convert.ToInt32(id));
+                var List = db.UserSession.Where(i => i.Record == id);
+                if(List.Count() == 0)
+                {
+                    UserSession UsersessionAdd = new UserSession();
+                    UsersessionAdd.Section = "Calculation";
+                    UsersessionAdd.Record = id;
+                    UsersessionAdd.StartTime = DateTime.Now;
+                    UsersessionAdd.Username = HttpContext.User.Identity.Name.ToString();
+                    db.UserSession.Add(UsersessionAdd);
+                    db.SaveChanges();
+                }
+
                 try
                 {
                     ViewData["SchemeName"] = ProjectBoard.Scheme;
                     ViewData["CalcName"] = ProjectBoard.Name;
+
                 }
                 catch
                 {
-
+                    
                 }
                 return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+
+        }
+        [HttpGet]
+        public ActionResult Exit(int? id)
+        {
+
+            if (Request.IsAuthenticated)
+            {
+                var List = db.UserSession.Where(i => i.Record == id);
+                UserSession UsersessionList = List.First();
+                db.UserSession.Remove(UsersessionList);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             else
             {

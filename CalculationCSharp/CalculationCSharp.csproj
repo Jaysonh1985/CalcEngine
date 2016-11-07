@@ -245,6 +245,7 @@
     <Compile Include="Areas\Configuration\Controllers\CalcSpecificationController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\UserSessionsController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Comments.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Input.cs" />

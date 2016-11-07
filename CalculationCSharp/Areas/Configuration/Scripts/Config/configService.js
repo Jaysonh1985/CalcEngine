@@ -58,6 +58,14 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
+     var deleteCalc = function (id) {
+         return $http.delete("/api/ConfigWebApi/" + id)
+            .then(function (response) {
+                return response.status == 200;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+     };
     //Post values to Specification builder
      var specBuilder = function (index, data) {
          return $http.post("/api/CalcSpecification/" + index, { data: data })
@@ -121,6 +129,20 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
+     var getUserSession = function (id) {
+         return $http.get("/api/UserSessions", { params: { id: id } }).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
+     var deleteUserSession = function (id) {
+         return $http.delete("/api/UserSessions", { params: { id: id } }).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
      
     var initialize = function () {      
         connection = jQuery.hubConnection();
@@ -152,6 +174,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
         getCalc: getCalc,
         putCalc: putCalc,
         postCalc: postCalc,
+        deleteCalc: deleteCalc,
         getHistory: getHistory,
         putHistory: putHistory,
         postHistory: postHistory,
@@ -159,6 +182,8 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
         postRegression: postRegression,
         deleteRegression: deleteRegression,
         putRegression: putRegression,
+        getUserSession: getUserSession,
+        deleteUserSession: deleteUserSession,
         specBuilder: specBuilder
     };
 });

@@ -292,6 +292,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $scope.openIndex[key] = false;
         })
     }
+    $scope.ExitButton = function () {
+        var cf = confirm("Are you sure you wish to exit unsaved changes will be lost?");
+        if (cf == true)
+        {
+            var ID = configFunctionFactory.getConfigID();
+            $window.location.assign('/Configuration/Config/Exit/' + ID);
+        }
+    }
 
     $scope.getVariableTypes = function getVariableTypes(colIndex, rowIndex) {  //function that sets the parameters available under the different variable types
         $scope.DecimalNames = [];

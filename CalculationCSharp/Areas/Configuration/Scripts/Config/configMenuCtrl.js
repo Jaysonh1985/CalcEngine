@@ -26,9 +26,16 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
      };
 
     $scope.openBoard = function (Board) {
-        $scope.ID = Board.ID;
-        var earl = '/Config/' + $scope.ID;
-        $window.location.assign('/Configuration/Config/Config/' + $scope.ID);
+        configService.getUserSession(Board.ID).then(function (data) {         
+            if(data == "")
+            {
+                RecordEnabled(Board);
+            }
+            else
+            {
+                var cf = confirm("This record is locked by " + data.Username);
+            }
+        })
     };
 
     $scope.viewBoard = function (Board) {
@@ -199,6 +206,12 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     var onError = function (errorMessage) {
         $scope.isLoading = false;
         toastr.error(errorMessage, "Error");
+    };
+    
+    var RecordEnabled = function (Board) {
+        $scope.ID = Board.ID;
+        var earl = '/Config/' + $scope.ID;
+        $window.location.assign('/Configuration/Config/Config/' + $scope.ID);
     };
 
     init();

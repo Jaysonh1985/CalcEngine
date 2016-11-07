@@ -20,7 +20,7 @@ sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRo
                 });
     });
 //Timeout functions
-sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepalive, $uibModal, $window, configFunctionFactory) {
+sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepalive, $uibModal, $window, configFunctionFactory, configService) {
     $scope.started = false;
 
     function init() {
@@ -71,8 +71,24 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
     });
 
     $scope.$on('IdleTimeout', function() {
-        closeModals();    
-        $window.location.assign('/Account/Timeout');
+        closeModals();
+        var id = configFunctionFactory.getConfigID();
+        if (id > 0)
+        {
+            configService.getUserSession(id).then(function (data) {
+                if (data == "") {
+                    configService.deleteUserSession(id).then(function (data) {
+                    })
+                }
+            })
+
+            $window.location.assign('/Account/Timeout');
+        }
+        else
+        {
+            $window.location.assign('/Account/Timeout');
+        }
+        
     });
     
     init();
@@ -80,7 +96,7 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
 })
 //Timeout config
 sulhome.kanbanBoardApp.config(function(IdleProvider, KeepaliveProvider) {
-     IdleProvider.idle(20*60-10);
+     IdleProvider.idle(20*1-10);
      IdleProvider.timeout(10);
      KeepaliveProvider.interval(10);
  });
