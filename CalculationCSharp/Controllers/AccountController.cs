@@ -422,7 +422,7 @@ namespace CalculationCSharp.Controllers
             Session.Clear();
             Session.Abandon();
             FormsAuthentication.SignOut(); //you write this when you use FormsAuthentication
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //

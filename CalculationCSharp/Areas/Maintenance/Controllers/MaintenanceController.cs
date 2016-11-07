@@ -11,7 +11,15 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
         // GET: Maintenance/Maintenance
         public ActionResult Index()
         {
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+          
         }
     }
 }
