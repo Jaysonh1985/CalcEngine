@@ -248,6 +248,7 @@
     <Compile Include="Areas\Configuration\Controllers\CalcRegressionInputsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcSpecificationController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\SchemeWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\UserSessionsController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />

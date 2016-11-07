@@ -6,8 +6,8 @@
             </div>
             
             <div class="modal-body">
-                <h4>Scheme</h4>
-                <input uib-typeahead="state for state in SchemeList | filter:$viewValue | limitTo:8" style="overflow:auto;resize:none" type="text" id="Name" class="form-control" ng-model="Scheme" rows="1" required>
+                <h4>Scheme Name</h4>
+                <select class="form-control" ng-model='Scheme' ng-options='scheme for scheme in SchemeList' required></select>
                 <h4>Calculation Name</h4>
                 <input style="overflow:auto;resize:none" type="text" id="Name" class="form-control" ng-model="Name" rows="1" required>
             </div>

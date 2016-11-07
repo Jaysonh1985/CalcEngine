@@ -150,6 +150,14 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
              return $q.reject(error.data.Message);
          });
      };
+    //Configuration Builder JSON Services
+     var getSchemes = function () {
+         return $http.get("/api/SchemeWebApi/Get").then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
      
     var initialize = function () {      
         connection = jQuery.hubConnection();
@@ -192,6 +200,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
         putRegression: putRegression,
         getUserSession: getUserSession,
         deleteUserSession: deleteUserSession,
-        specBuilder: specBuilder
+        specBuilder: specBuilder,
+        getSchemes: getSchemes
     };
 });

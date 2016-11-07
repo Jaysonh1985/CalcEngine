@@ -48,46 +48,43 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     $scope.addBoard = function AddBoard() {
         //Creates TypeAhead Values
         var SchemeList = [];
-        angular.forEach($scope.Boards, function (key, prop, value) {
-            
-            if (SchemeList.indexOf(key.Scheme) == -1) {
-                SchemeList[prop] = key.Scheme;
-            }
+        configService.getSchemes().then(function (data) {
+            SchemeList = data;
 
-        });
-        var modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/CalculationMenu/ConfigMenuAddCalcModal.html',
-            scope: $scope,
-            controller: 'configMenuAddCalcCtrl',
-            size: 'md',
-            resolve: {
-                Name: function () { return $scope.Name },
-                Scheme: function () { return $scope.Scheme },
-                SchemeList: function () { return SchemeList },
-            }
-        });
-        modalInstance.result.then(function (selectedItem) {
-            $scope.selected = {
-                ID: null,
-                Name: selectedItem[0].Name,
-                Scheme: selectedItem[0].Scheme,
-                User: null,
-                Group: null,
-                Configuration: null
-            };
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: '/Areas/Configuration/Scripts/CalculationMenu/ConfigMenuAddCalcModal.html',
+                scope: $scope,
+                controller: 'configMenuAddCalcCtrl',
+                size: 'md',
+                resolve: {
+                    Name: function () { return $scope.Name },
+                    Scheme: function () { return $scope.Scheme },
+                    SchemeList: function () { return SchemeList },
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = {
+                    ID: null,
+                    Name: selectedItem[0].Name,
+                    Scheme: selectedItem[0].Scheme,
+                    User: null,
+                    Group: null,
+                    Configuration: null
+                };
 
-            configService.addConfig($scope.selected).then(function (data) {
-                $scope.Boards.push(data);
-                $scope.isLoading = false;
-            }, onError);
+                configService.addConfig($scope.selected).then(function (data) {
+                    $scope.Boards.push(data);
+                    $scope.isLoading = false;
+                }, onError);
 
-            toastr.success("Calculation created successfully", "Success");
-        }, function () {        
-        });
+                toastr.success("Calculation created successfully", "Success");
+            }, function () {
+            });
 
+        }, onError);
 
-     };
+    };
 
     $scope.updateBoard = function (Board) {
         $scope.editingData[Board.ID] = false;
@@ -194,8 +191,11 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
      }
 
     $scope.modify = function (Boards) {
-          $scope.editingData[Boards.ID] = true;
-     };
+        configService.getSchemes().then(function (data) {
+            $scope.SchemeList = data;
+            $scope.editingData[Boards.ID] = true;
+        }, onError);
+    };
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {
