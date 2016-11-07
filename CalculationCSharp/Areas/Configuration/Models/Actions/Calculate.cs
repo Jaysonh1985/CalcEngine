@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using NCalc;
 using CalculationCSharp.Models.Calculation;
 using System.Linq;
+using log4net;
+using System.Web;
+using CalculationCSharp.Models;
 
 namespace CalculationCSharp.Areas.Configuration.Models.Actions
 {
@@ -15,6 +18,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         public List<CategoryViewModel> jCategory = new List<CategoryViewModel>();
         CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
         public Input InputFunctions = new Input();
+        private CalculationDBContext db = new CalculationDBContext();
+        private static readonly ILog logger = LogManager.GetLogger(typeof(Calculate));
         public List<CategoryViewModel> DebugResults(List<CategoryViewModel> jCategory)
         {
             Calculate Calculate = new Calculate();
@@ -62,6 +67,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         //Calcuation Controller Action
         public void CalculateAction(List<CategoryViewModel> jCategory)
         {
+            logger.Debug("Start - " + HttpContext.Current.User.Identity.Name.ToString());
             foreach (var group in jCategory)
             {
                 foreach (var item in group.Functions)
@@ -114,7 +120,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 foreach (var param in item.Parameter)
                                 {
                                     string jparameters = Newtonsoft.Json.JsonConvert.SerializeObject(param);
-
+                                    logger.Debug("Column Name(" + group.ID + ") - " + group.Name + " || Row Name(" + item.ID +") - " + item.Name);
                                     if (item.Function == "Maths")
                                     {
                                         Maths Maths = new Maths();
@@ -260,6 +266,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                     }
                 }
             }
+            logger.Debug("End - " + HttpContext.Current.User.Identity.Name.ToString());
         }
     }
 }
