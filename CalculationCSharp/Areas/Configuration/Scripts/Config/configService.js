@@ -69,7 +69,14 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
      };
     //History services
      var getHistory = function (id) {
-         return $http.get("/api/CalcHistories", { params: { id: id } }).then(function (response) {
+         return $http.get("/api/CalcHistories", { params: { id: id, SelectList: true } }).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
+     var getHistorySingle = function (id) {
+         return $http.get("/api/CalcHistories", { params: { id: id, SelectList: false } }).then(function (response) {
              return response.data;
          }, function (error) {
              return $q.reject(error.data.Message);
@@ -153,6 +160,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
         putCalc: putCalc,
         postCalc: postCalc,
         getHistory: getHistory,
+        getHistorySingle: getHistorySingle,
         putHistory: putHistory,
         postHistory: postHistory,
         getRegression: getRegression,
