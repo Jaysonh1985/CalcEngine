@@ -28,7 +28,7 @@
                 @Html.TextBox("file", "", new { type = "file", accept = ".csv" })
             </div>
             <div class="editor-field">
-                <input type="submit" value="Upload" />
+                <input type="submit" value="Upload" onclick="return confirm('You could be overwriting an existing factor table please check this is OK?')" />
             </div>
         }
     </div>
@@ -39,7 +39,7 @@
         {
             @Html.DropDownList("Dropdown", ViewData["Dropdown"] as List<SelectListItem>, new { @class = "form-control  input-sm" })
             <div class="editor-field">
-                <input type="submit" value="Delete" />
+                <input type="submit" value="Delete" onclick="return confirm('Are you sure you wish to delete this Factor Table?')" />
             </div>
         }
     </div>
