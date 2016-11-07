@@ -269,6 +269,7 @@
     <Compile Include="Areas\Configuration\Models\Actions\Dates.cs" />
     <Compile Include="Areas\Maintenance\Controllers\FactorMaintenanceController.cs" />
     <Compile Include="Areas\Maintenance\Controllers\MaintenanceController.cs" />
+    <Compile Include="Areas\Maintenance\Controllers\SchemesMaintenanceController.cs" />
     <Compile Include="Areas\Maintenance\MaintenanceAreaRegistration.cs" />
     <Compile Include="Areas\Maintenance\Models\FactorMaintenance.cs" />
     <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
@@ -682,6 +683,11 @@
     <Content Include="Areas\Maintenance\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Maintenance\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Maintenance\Views\Maintenance\Index.cshtml" />
+    <Content Include="Areas\Maintenance\Views\SchemesMaintenance\Create.cshtml" />
+    <Content Include="Areas\Maintenance\Views\SchemesMaintenance\Delete.cshtml" />
+    <Content Include="Areas\Maintenance\Views\SchemesMaintenance\Details.cshtml" />
+    <Content Include="Areas\Maintenance\Views\SchemesMaintenance\Edit.cshtml" />
+    <Content Include="Areas\Maintenance\Views\SchemesMaintenance\Index.cshtml" />
     <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />

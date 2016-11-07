@@ -589,4 +589,36 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     init();
+
+    $window.onbeforeunload = function (event) {
+
+        //Check if there was any change, if no changes, then simply let the user leave
+        if (!$scope.form.$dirty) {
+            return;
+        }
+
+        var message = 'If you leave this page you are going to lose all unsaved changes, are you sure you want to leave?';
+        if (typeof event == 'undefined') {
+            event = window.event;
+        }
+        if (event) {
+            event.returnValue = message;
+        }
+
+        return message;
+    }
+
+    //This works only when user changes routes, not when user refreshes the browsers, goes to previous page or try to close the browser
+    $scope.$on('$locationChangeStart', function (event) {
+        if (!$scope.form.$dirty) return;
+        var answer = confirm('If you leave this page you are going to lose all unsaved changes, are you sure you want to leave?')
+        if (!answer) {
+            event.preventDefault();
+        }
+    });
+
+    $scope.$on('$destroy', function () {
+        delete window.onbeforeunload;
+    });
+
 });
