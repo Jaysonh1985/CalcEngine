@@ -69,17 +69,13 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 {
                     OutputValue = InputAString.Substring(InputAString.Length - InputBDeci);
                 }
-                else if (parameters.Type == "Mid")
-                {
-                    OutputValue = "0";
-                }
                 else if (parameters.Type == "Set")
                 {
                     OutputValue = InputCString;
                 }
                 else if (parameters.Type == "Find")
                 {
-                    int FindValue = InputAString.IndexOf(String2);
+                    int FindValue = InputAString.IndexOf(parameters.String2);
 
                     if( FindValue != -1)
                     {
