@@ -136,6 +136,23 @@ namespace CalculationCSharp.Models
         public String Difference { get; set; }
         public String Pass { get; set; }
     }
+    public class Scheme
+    {
+        [Key]
+        public int ID { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class UserSession
+    {
+        [Key]
+        public int ID { get; set; }
+        public string Username { get; set; }
+        public string Section { get; set; }
+        public int Record { get; set; }
+        public DateTime StartTime { get; set; }
+    }
 
     public class CalculationDBContext : DbContext
     {
@@ -144,12 +161,16 @@ namespace CalculationCSharp.Models
         public DbSet<Codes> Codes { get; set; }
         public DbSet<ProjectBoard> ProjectBoard { get; set; }
         public DbSet<CalcConfiguration> CalcConfiguration { get; set; }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<CalcConfiguration>().Property(x => x.Version).HasPrecision(16, 3);
-        }
         public DbSet<CalcRelease> CalcRelease { get; set; }
         public DbSet<CalcHistory> CalcHistory { get; set; }
         public DbSet<CalcRegressionInputs> CalcRegressionInputs { get; set; }
+        public DbSet<Scheme> Schemes { get; set; }
+        public DbSet<UserSession> UserSession { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CalcConfiguration>().Property(x => x.Version).HasPrecision(16, 3);
+            modelBuilder.Entity<CalcHistory>().Property(x => x.Version).HasPrecision(16, 3);
+        }
     }
 }

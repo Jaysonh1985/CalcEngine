@@ -10,7 +10,7 @@ namespace CalculationCSharp.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationDataLossAllowed = false;
             ContextKey = "CalculationCSharp.Models.CalculationDBContext";
             Database.SetInitializer(new DropCreateDatabaseAlways<CalculationCSharp.Models.CalculationDBContext>());
         }

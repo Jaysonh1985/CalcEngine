@@ -9,7 +9,7 @@
     <div class="container body-content"  ng-cloak>
         
         <br>
-        <form name="form" role="form" ng-submit="CalcButtonClick(form)" novalidate>
+        <form name="form" role="form" ng-submit="CalcButtonClick(form)" novalidate onbeforeunload>
             <fieldset ng-disabled="viewOnly">
                 <div class="navbar navbar-inverse navbar-fixed-top second-navbar">
                     <div class="container">
@@ -19,12 +19,13 @@
                                 <li>
                                     <br />
                                 </li>
-                                <li><button ng-disabled="form.$invalid" class="btn btn-default navbar-btn" type="submit">Calculate </button></li>
-                                <li><button class="btn btn-default navbar-btn" type="button" ng-click="HistoryButtonClick('lg')"> History </button></li>
+                                <li><button ng-disabled="form.$invalid" class="btn btn-default navbar-btn" type="submit">Calculate</button></li>
+                                <li><button class="btn btn-default navbar-btn" type="button" ng-click="HistoryButtonClick('lg')">History</button></li>
                                 <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" type="button" ng-click="RegressionButtonClick('lg', form)"> Regression </button></li>
-                                <li><button class="btn btn-default navbar-btn" type="button" ng-click="OpenAllButton()"> Open All </button></li>
-                                <li><button class="btn btn-default navbar-btn" type="button" ng-click="CloseAllButton()"> Close All </button></li>
-                                <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" ng-csv="SpecButtonClick(form)" csv-header="getHeader" filename="@ViewData["SchemeName"] - @ViewData["CalcName"] Specification.csv" type="button"> Specification </button></li>
+                                <li><button class="btn btn-default navbar-btn" type="button" ng-click="OpenAllButton()">Open All</button></li>
+                                <li><button class="btn btn-default navbar-btn" type="button" ng-click="CloseAllButton()">Close All</button></li>
+                                <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" ng-csv="SpecButtonClick(form)" csv-header="getHeader" filename="{{configName}} Specification.csv" type="button">Specification</button></li>
+                                <li><button class="btn btn-default navbar-btn" type="button" ng-click="ExitButton()">Exit</button></li>
                                 <li><a>@ViewData["SchemeName"] - @ViewData["CalcName"] </a></li>
                             </ul>
                             <div class="col-sm-3 col-md-3 pull-right">
@@ -32,6 +33,7 @@
                                 <div class="navbar-text">Search</div>
                                 <div class="input-group">
                                     <input ng-disabled="false" type="text" class="form-control form-inline input" ng-model="searchText" placeholder="Filter">
+
                                 </div>
                             </div>
 

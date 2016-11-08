@@ -6,6 +6,7 @@ sulhome.kanbanBoardApp.controller('configMenuAddCalcCtrl', function ($scope, $ui
     $scope.Scheme = Scheme;
     $scope.Group = [];
     $scope.SchemeList = SchemeList;
+
     
     //Click OK moves back to modal instantiation
     $scope.ok = function () {       
