@@ -271,6 +271,7 @@
     <Compile Include="Areas\Maintenance\Controllers\FactorMaintenanceController.cs" />
     <Compile Include="Areas\Maintenance\Controllers\MaintenanceController.cs" />
     <Compile Include="Areas\Maintenance\Controllers\SchemesMaintenanceController.cs" />
+    <Compile Include="Areas\Maintenance\Controllers\UserRoleMaintenanceController.cs" />
     <Compile Include="Areas\Maintenance\MaintenanceAreaRegistration.cs" />
     <Compile Include="Areas\Maintenance\Models\FactorMaintenance.cs" />
     <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
@@ -289,6 +290,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\ConfigurationApplication.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Areas\Project\Models\ColumnRepository.cs" />
@@ -302,6 +304,7 @@
     <Compile Include="Models\LookupFunctions\LookupFunctions.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MathsFunctions\MathmaticalFunctions.cs" />
+    <Compile Include="Models\RoleNameModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -689,6 +692,7 @@
     <Content Include="Areas\Maintenance\Views\SchemesMaintenance\Details.cshtml" />
     <Content Include="Areas\Maintenance\Views\SchemesMaintenance\Edit.cshtml" />
     <Content Include="Areas\Maintenance\Views\SchemesMaintenance\Index.cshtml" />
+    <Content Include="Areas\Maintenance\Views\UserRoleMaintenance\Index.cshtml" />
     <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />

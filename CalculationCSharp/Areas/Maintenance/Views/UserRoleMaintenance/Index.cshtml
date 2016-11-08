@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Manage User Roles</h2>
+
+    <hr />
+    <h3>Add User to Role</h3>
+
+    @using (Html.BeginForm("RoleAddToUser", "UserRoleMaintenance"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <p>
+            Username : @Html.TextBox("UserName", "", new { @class = "form-control  input-sm" })
+            Role Name: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, new { @class = "form-control  input-sm" })
+        </p>
+        <input type="submit" class="btn btn-default" value="Save" />
+        @ViewBag.ResultMessageAdd;
+    }
+    <hr />
+    <h3>Get Roles for a User</h3>
+    @using (Html.BeginForm("GetRoles", "UserRoleMaintenance"))
+    {
+        @Html.AntiForgeryToken()
+        <p>
+            Username : @Html.TextBox("UserName", "", new { @class = "form-control  input-sm" })
+            <br />
+            <input type="submit" class="btn btn-default" value="Get Roles for this User" />
+        </p>
+    }
+
+    @if (ViewBag.RolesForThisUser != null)
+    {
+        <div>
+            <h3>Roles for this user </h3>
+            <ol>
+                @foreach (string s in ViewBag.RolesForThisUser)
+                {
+                    <li>@s</li>
+                }
+            </ol>
+        </div>
+    }
+    <hr />
+    <h3>Delete A User from a Role</h3>
+    @using (Html.BeginForm("DeleteRoleForUser", "UserRoleMaintenance"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <p>
+            Username : @Html.TextBox("UserName", "", new { @class = "form-control  input-sm" })
+            Role Name: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, new { @class = "form-control  input-sm" })
+        </p>
+        <input type="submit" class="btn btn-default" value="Delete this user from Role" />
+        @ViewBag.ResultMessageDelete;
+    }
+
+</div>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CalculationCSharp.Helpers;
+using CalculationCSharp.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Migrations;
@@ -30,6 +32,9 @@ namespace CalculationCSharp
                 var configuration = new CalculationCSharp.Migrations.Configuration();
                 var migrator = new DbMigrator(configuration);
                 migrator.Update();
+                var configurationApplication = new CalculationCSharp.Migrations.configurationApplication();
+                var migratorApplication = new DbMigrator(configurationApplication);
+                migratorApplication.Update();
             }
 
         }
