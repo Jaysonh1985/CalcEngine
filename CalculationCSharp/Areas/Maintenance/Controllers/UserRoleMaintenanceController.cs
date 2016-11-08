@@ -16,12 +16,27 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
         // GET: Maintenance/UserRoleMaintenance
         public ActionResult Index()
         {
-            // prepopulat roles for the view dropdown
-            var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr =>
+            if (Request.IsAuthenticated)
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    // prepopulat roles for the view dropdown
+                    var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr =>
 
-            new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-            ViewBag.Roles = list;
-            return View();
+                    new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+                    ViewBag.Roles = list;
+                    return View();
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
         }
         //POST: Maintenance/UserRoleMaintenance
         [HttpPost]

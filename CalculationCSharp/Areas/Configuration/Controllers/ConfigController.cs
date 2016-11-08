@@ -11,6 +11,8 @@ using System.Web.Script.Serialization;
 using System.Reflection;
 using System.Web.UI.WebControls;
 using System.Text;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CalculationCSharp.Areas.Configuration.Controllers
 {
@@ -18,69 +20,90 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
     {
         /// <summary>Controller for calculation configuration to view the views pages.
         /// </summary>
+        CalculationCSharp.Models.ApplicationDbContext context = new CalculationCSharp.Models.ApplicationDbContext();
         private CalculationDBContext db = new CalculationDBContext();
         // GET: Project/ProjectConfigs
         public ActionResult Index()
         {
-            if(Request.IsAuthenticated)
-            {
-                return View();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            if (Request.IsAuthenticated)
+            {               
+                if(!userManager.IsInRole(User.Identity.GetUserId(),"Configuration") && !userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });                   
+                }
+                else
+                {
+                    return View();
+                }  
             }
             else
             {
                 return RedirectToAction("Login", "Account", new { area = "" });
-            }
-            
+            }          
         }
 
         [HttpGet]
         public ActionResult Config(int id)
         {
-
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             if (Request.IsAuthenticated)
             {
-                CalcConfiguration ProjectBoard = db.CalcConfiguration.Find(Convert.ToInt32(id));
-                var List = db.UserSession.Where(i => i.Record == id);
-                if(List.Count() == 0)
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "Configuration") && !userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
                 {
-                    UserSession UsersessionAdd = new UserSession();
-                    UsersessionAdd.Section = "Calculation";
-                    UsersessionAdd.Record = id;
-                    UsersessionAdd.StartTime = DateTime.Now;
-                    UsersessionAdd.Username = HttpContext.User.Identity.Name.ToString();
-                    db.UserSession.Add(UsersessionAdd);
-                    db.SaveChanges();
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
                 }
+                else
+                {
+                    CalcConfiguration ProjectBoard = db.CalcConfiguration.Find(Convert.ToInt32(id));
+                    var List = db.UserSession.Where(i => i.Record == id);
+                    if (List.Count() == 0)
+                    {
+                        UserSession UsersessionAdd = new UserSession();
+                        UsersessionAdd.Section = "Calculation";
+                        UsersessionAdd.Record = id;
+                        UsersessionAdd.StartTime = DateTime.Now;
+                        UsersessionAdd.Username = HttpContext.User.Identity.Name.ToString();
+                        db.UserSession.Add(UsersessionAdd);
+                        db.SaveChanges();
+                    }
 
-                try
-                {
-                    ViewData["SchemeName"] = ProjectBoard.Scheme;
-                    ViewData["CalcName"] = ProjectBoard.Name;
+                    try
+                    {
+                        ViewData["SchemeName"] = ProjectBoard.Scheme;
+                        ViewData["CalcName"] = ProjectBoard.Name;
 
+                    }
+                    catch
+                    {
+
+                    }
+                    return View();
                 }
-                catch
-                {
-                    
-                }
-                return View();
             }
             else
             {
                 return RedirectToAction("Login", "Account", new { area = "" });
             }
-
         }
         [HttpGet]
         public ActionResult Exit(int? id)
         {
-
             if (Request.IsAuthenticated)
             {
-                var List = db.UserSession.Where(i => i.Record == id);
-                UserSession UsersessionList = List.First();
-                db.UserSession.Remove(UsersessionList);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "Configuration") && !userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    var List = db.UserSession.Where(i => i.Record == id);
+                    UserSession UsersessionList = List.First();
+                    db.UserSession.Remove(UsersessionList);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             else
             {

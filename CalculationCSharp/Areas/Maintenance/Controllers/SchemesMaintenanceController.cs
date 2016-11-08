@@ -7,38 +7,86 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CalculationCSharp.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CalculationCSharp.Areas.Maintenance.Controllers
 {
     public class SchemesMaintenanceController : Controller
     {
+        CalculationCSharp.Models.ApplicationDbContext context = new CalculationCSharp.Models.ApplicationDbContext();
         private CalculationDBContext db = new CalculationDBContext();
 
         // GET: Maintenance/SchemesMaintenance
         public ActionResult Index()
         {
-            return View(db.Schemes.ToList());
+            if (Request.IsAuthenticated)
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    return View(db.Schemes.ToList());
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
         }
 
         // GET: Maintenance/SchemesMaintenance/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Request.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Scheme scheme = db.Schemes.Find(id);
+                    if (scheme == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(scheme);
+                }
             }
-            Scheme scheme = db.Schemes.Find(id);
-            if (scheme == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Login", "Account", new { area = "" });
             }
-            return View(scheme);
         }
 
         // GET: Maintenance/SchemesMaintenance/Create
         public ActionResult Create()
         {
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
         }
 
         // POST: Maintenance/SchemesMaintenance/Create
@@ -48,29 +96,59 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Code,Name")] Scheme scheme)
         {
-            if (ModelState.IsValid)
+            if (Request.IsAuthenticated)
             {
-                db.Schemes.Add(scheme);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Schemes.Add(scheme);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
 
-            return View(scheme);
+                    return View(scheme);
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
         }
 
         // GET: Maintenance/SchemesMaintenance/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Request.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Scheme scheme = db.Schemes.Find(id);
+                    if (scheme == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(scheme);
+                }
             }
-            Scheme scheme = db.Schemes.Find(id);
-            if (scheme == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Login", "Account", new { area = "" });
             }
-            return View(scheme);
         }
 
         // POST: Maintenance/SchemesMaintenance/Edit/5
@@ -80,28 +158,58 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Code,Name")] Scheme scheme)
         {
-            if (ModelState.IsValid)
+            if (Request.IsAuthenticated)
             {
-                db.Entry(scheme).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    if (ModelState.IsValid)
+                    {
+                        db.Entry(scheme).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    return View(scheme);
+                }
             }
-            return View(scheme);
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
         }
 
         // GET: Maintenance/SchemesMaintenance/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Request.IsAuthenticated)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Scheme scheme = db.Schemes.Find(id);
+                    if (scheme == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(scheme);
+                }
             }
-            Scheme scheme = db.Schemes.Find(id);
-            if (scheme == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Login", "Account", new { area = "" });
             }
-            return View(scheme);
         }
 
         // POST: Maintenance/SchemesMaintenance/Delete/5

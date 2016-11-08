@@ -433,6 +433,13 @@ namespace CalculationCSharp.Controllers
             return View();
         }
 
+        // GET: /Account/AccessBlock
+        [AllowAnonymous]
+        public ActionResult AccessBlock()
+        {
+            return View();
+        }
+
 
 
         protected override void Dispose(bool disposing)

@@ -810,6 +810,7 @@
     <Content Include="Areas\Project\Views\Board\Board.cshtml" />
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
+    <Content Include="Views\Account\AccessBlock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".bin\" />

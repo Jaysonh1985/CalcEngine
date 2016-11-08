@@ -7,6 +7,9 @@ using System.Web.Mvc;
 using System.Data.OleDb;
 using System.IO;
 using CalculationCSharp.Areas.Maintenance.Models;
+using CalculationCSharp.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CalculationCSharp.Areas.Maintenance.Controllers
 {
@@ -14,7 +17,7 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
     {
         /// <summary>Controller for getting the factor tables from the server and applying CRUD.
         /// </summary>
-
+        CalculationCSharp.Models.ApplicationDbContext context = new CalculationCSharp.Models.ApplicationDbContext();
         /// <summary>Gets a list of available CSV files in server map path and returns them to the presentation layer as a dropdown list.
         /// </summary>
         // GET: Maintenance/Maintenance
