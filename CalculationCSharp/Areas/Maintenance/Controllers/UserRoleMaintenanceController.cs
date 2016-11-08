@@ -13,6 +13,7 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
     public class UserRoleMaintenanceController : Controller
     {
         CalculationCSharp.Models.ApplicationDbContext context = new CalculationCSharp.Models.ApplicationDbContext();
+        private CalculationDBContext db = new CalculationDBContext();
         // GET: Maintenance/UserRoleMaintenance
         public ActionResult Index()
         {
@@ -27,10 +28,10 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
                 else
                 {
                     // prepopulat roles for the view dropdown
-                    var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr =>
-
-                    new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+                    var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+                    var schemeList = db.Schemes.Select(m => new  { Value = m.Name, Text = m.Name }).Distinct().ToList();
                     ViewBag.Roles = list;
+                    ViewBag.SchemeList = new MultiSelectList(schemeList, "Value", "Text");
                     return View();
                 }
             }
@@ -91,6 +92,23 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
             // prepopulat roles for the view dropdown
             var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             ViewBag.Roles = list;
+            return View("Index");
+        }
+
+        //POST: Maintenance/UserRoleMaintenance
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SchemeAddToUser(string UserName, string[] SchemeName)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            ApplicationUser user = userManager.FindByNameAsync(UserName).Result;
+            user.Scheme = string.Join(",", SchemeName);
+            userManager.Update(user);
+            // prepopulat roles for the view dropdown
+            var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            var schemeList = db.Schemes.Select(m => new { Value = m.Name, Text = m.Name }).Distinct().ToList();
+            ViewBag.Roles = list;
+            ViewBag.SchemeList = new MultiSelectList(schemeList, "Value", "Text");
             return View("Index");
         }
     }
