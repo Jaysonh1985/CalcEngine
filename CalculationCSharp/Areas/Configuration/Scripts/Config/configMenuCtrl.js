@@ -41,7 +41,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     $scope.viewBoard = function (Board) {
         $scope.ID = Board.ID;
         var earl = '/Config/' + $scope.ID;
-        $window.location.assign('/Configuration/Config/Config/' + $scope.ID + '#?ViewOnly=true');
+        $window.open('/Configuration/Config/Config/' + $scope.ID + '#?ViewOnly=true');
     };
 
 

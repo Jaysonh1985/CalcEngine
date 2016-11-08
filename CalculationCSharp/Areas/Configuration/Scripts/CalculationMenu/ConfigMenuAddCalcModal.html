@@ -7,7 +7,9 @@
             
             <div class="modal-body">
                 <h4>Scheme Name</h4>
-                <select class="form-control" ng-model='Scheme' ng-options='scheme for scheme in SchemeList' required></select>
+                <select class="form-control" ng-model='Scheme' ng-options='scheme for scheme in SchemeList' required>
+                    <option selected disabled hidden style='display: none' value=''></option>
+                </select>
                 <h4>Calculation Name</h4>
                 <input style="overflow:auto;resize:none" type="text" id="Name" class="form-control" ng-model="Name" rows="1" required>
             </div>
