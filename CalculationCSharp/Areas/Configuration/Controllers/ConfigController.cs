@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using System.Text;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Security;
 
 namespace CalculationCSharp.Areas.Configuration.Controllers
 {
@@ -27,8 +28,11 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             if (Request.IsAuthenticated)
-            {               
-                if(!userManager.IsInRole(User.Identity.GetUserId(),"Configuration") && !userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+            {
+
+                ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+
+                if (!userManager.IsInRole(User.Identity.GetUserId(),"Configuration") && !userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
                 {
                     return RedirectToAction("AccessBlock", "Account", new { area = "" });                   
                 }
