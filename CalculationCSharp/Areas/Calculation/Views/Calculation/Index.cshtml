@@ -42,7 +42,7 @@
             <td ng-hide="editingData[board.ID]" ng-click="openBoard()">{{board.Scheme}}</td>
             <td ng-hide="editingData[board.ID]" ng-click="openBoard()">{{board.Name}}</td>
             <td ng-show="editingData[board.ID]"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
-            <td width="10%" ng-click="openBoard()">{{board.UpdateDate | date:'d MMMM yyyy h:mm a'}}</td>
+            <td width="25%" ng-click="openBoard()">{{board.UpdateDate | date:'d MMMM yyyy h:mm a'}}</td>
             <td width="10%" ng-click="openBoard()">{{board.Version}}</td>
         </tr>
     </table>

@@ -11,6 +11,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using CalculationCSharp.Models;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CalculationCSharp.Areas.Calculation.Controllers
 {
@@ -18,13 +20,18 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
     {
         /// <summary>Controller for updating the calculation releases table and displays this on the Index page.
         /// </summary>
-
+        CalculationCSharp.Models.ApplicationDbContext context = new CalculationCSharp.Models.ApplicationDbContext();
         private CalculationDBContext db = new CalculationDBContext();
 
         // GET: api/CalcReleases
         public IQueryable<CalcRelease> GetCalcRelease()
         {
-            return db.CalcRelease;
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+
+            string[] myInClause = user.Scheme.Split(',');
+
+            return db.CalcRelease.Where(s => myInClause.Contains(s.Scheme)); ;
         }
         /// <summary>Get list of Calcs available in the Configuration System.
         /// <para>id = CalculationID on DB Table </para>

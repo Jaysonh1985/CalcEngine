@@ -11,6 +11,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using CalculationCSharp.Models;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CalculationCSharp.Areas.Configuration.Controllers
 {
@@ -21,13 +23,18 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
         CalcHistoriesController CalcHistories = new CalcHistoriesController();
         CalcHistory CalcHistory = new CalcHistory();
-
+        CalculationCSharp.Models.ApplicationDbContext context = new CalculationCSharp.Models.ApplicationDbContext();
         private CalculationDBContext db = new CalculationDBContext();
 
         // GET: api/CalcConfigurations
         public IQueryable<CalcConfiguration> GetCalcConfiguration()
         {
-            return db.CalcConfiguration;
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            
+            string [] myInClause = user.Scheme.Split(',');
+
+            return db.CalcConfiguration.Where(s => myInClause.Contains(s.Scheme));
         }
         /// <summary>Get list of Calcs available in the Calculation System.
         /// <para>id = ID on DB Table </para>
