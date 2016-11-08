@@ -22,6 +22,7 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
                 if (!userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
                 {
                     return RedirectToAction("AccessBlock", "Account", new { area = "" });
+
                 }
                 else
                 {

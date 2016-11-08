@@ -9,8 +9,15 @@
     @Html.ActionLink("Factor Maintenance", "Index", new { Area = "Maintenance", controller = "FactorMaintenance" })   
     <br />
     <br />
-    @Html.ActionLink("Scheme Maintenance", "Index", new { Area = "Maintenance", controller = "SchemesMaintenance" })
+    @if (ViewBag.Authenticated == true)
+    {
+        @Html.ActionLink("Scheme Maintenance", "Index", new { Area = "Maintenance", controller = "SchemesMaintenance" })
+    }
     <br />
     <br />
-    @Html.ActionLink("User Role Maintenance", "Index", new { Area = "Maintenance", controller = "UserRoleMaintenance" })
+    @if (ViewBag.Authenticated == true)
+    {
+        @Html.ActionLink("User Role Maintenance", "Index", new { Area = "Maintenance", controller = "UserRoleMaintenance" })
+    }
+
 </div>
