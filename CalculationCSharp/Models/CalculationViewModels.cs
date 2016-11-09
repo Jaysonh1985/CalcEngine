@@ -76,7 +76,9 @@ namespace CalculationCSharp.Models
     public class CalcConfiguration
     {
         public int ID { get; set; }
+        [Required]
         public string Scheme { get; set; }
+        [Required]
         public string Name { get; set; }
         public string User { get; set; }
         [Column(TypeName = "xml")]
@@ -102,8 +104,11 @@ namespace CalculationCSharp.Models
     {
         [Key]
         public int ID { get; set; }
+        [Required]
         public int CalcID { get; set; }
+        [Required]
         public string Scheme { get; set; }
+        [Required]
         public string Name { get; set; }
         public string User { get; set; }
         [Column(TypeName = "xml")]
@@ -140,7 +145,10 @@ namespace CalculationCSharp.Models
     {
         [Key]
         public int ID { get; set; }
+        [Required]
+        [MaxLength(4)]
         public string Code { get; set; }
+        [Required]
         public string Name { get; set; }
     }
 
