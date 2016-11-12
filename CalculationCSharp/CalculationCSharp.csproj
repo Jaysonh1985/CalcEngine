@@ -281,6 +281,8 @@
     <Compile Include="Areas\Project\Models\Comments.cs" />
     <Compile Include="Areas\Project\Models\Tasks.cs" />
     <Compile Include="Areas\Project\ProjectAreaRegistration.cs" />
+    <Compile Include="Areas\Workflow\Controllers\WorkflowController.cs" />
+    <Compile Include="Areas\Workflow\WorkflowAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Project\Controllers\BoardController.cs" />
     <Compile Include="Areas\Project\Controllers\BoardHub.cs" />
@@ -363,6 +365,21 @@
     <Content Include="Areas\Project\Scripts\boardFilter.html" />
     <Content Include="Areas\Project\Scripts\storyCtrl.js" />
     <Content Include="Areas\Project\Scripts\viewXML.html" />
+    <Content Include="Areas\Workflow\Scripts\app.css" />
+    <Content Include="Areas\Workflow\Scripts\app.js" />
+    <Content Include="Areas\Workflow\Scripts\debug.js" />
+    <Content Include="Areas\Workflow\Scripts\flowchart\dragging_service.js" />
+    <Content Include="Areas\Workflow\Scripts\flowchart\flowchart_directive.js" />
+    <Content Include="Areas\Workflow\Scripts\flowchart\flowchart_directive.spec.js" />
+    <Content Include="Areas\Workflow\Scripts\flowchart\flowchart_template.html" />
+    <Content Include="Areas\Workflow\Scripts\flowchart\flowchart_viewmodel.js" />
+    <Content Include="Areas\Workflow\Scripts\flowchart\flowchart_viewmodel.spec.js" />
+    <Content Include="Areas\Workflow\Scripts\flowchart\mouse_capture_service.js" />
+    <Content Include="Areas\Workflow\Scripts\flowchart\svg_class.js" />
+    <Content Include="Areas\Workflow\Scripts\flowchart\svg_class.spec.js" />
+    <Content Include="Areas\Workflow\Scripts\lib\angular-mocks.js" />
+    <Content Include="Areas\Workflow\Scripts\lib\angular.js" />
+    <Content Include="Areas\Workflow\Scripts\lib\jquery-2.0.2.js" />
     <Content Include="Content\angular-object-diff.css" />
     <Content Include="Content\angular-ui-tree.css" />
     <Content Include="Content\angular-ui-tree.min.css" />
@@ -693,6 +710,8 @@
     <Content Include="Areas\Maintenance\Views\SchemesMaintenance\Edit.cshtml" />
     <Content Include="Areas\Maintenance\Views\SchemesMaintenance\Index.cshtml" />
     <Content Include="Areas\Maintenance\Views\UserRoleMaintenance\Index.cshtml" />
+    <Content Include="Areas\Workflow\Views\web.config" />
+    <Content Include="Areas\Workflow\Views\Workflow\Index.cshtml" />
     <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
@@ -819,6 +838,9 @@
     <Folder Include="Areas\Calculation\Views\Shared\" />
     <Folder Include="Areas\Configuration\Views\Shared\" />
     <Folder Include="Areas\Project\Views\Shared\" />
+    <Folder Include="Areas\Workflow\Models\" />
+    <Folder Include="Areas\Workflow\Views\Shared\" />
+    <Folder Include="Areas\Workflow\Views\Workflow\flowchart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
