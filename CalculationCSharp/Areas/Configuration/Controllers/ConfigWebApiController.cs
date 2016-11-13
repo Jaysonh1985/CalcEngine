@@ -83,7 +83,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             CalcHistory.Name = calcConfiguration.Name;
             CalcHistory.Scheme = calcConfiguration.Scheme;
             CalcHistory.Configuration = calcConfiguration.Configuration;
-            CalcHistory.Comment = "Test";
+            CalcHistory.Comment = Convert.ToString(json.comment);
             CalcHistory.UpdateDate = DateTime.Now;
             CalcHistory.User = calcConfiguration.User;
             CalcHistory.Version = calcConfiguration.Version;

@@ -42,8 +42,9 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
              return $q.reject(error.data.Message);
          });
      };
-     var putCalc = function (index, data) {
-         return $http.put("/api/ConfigWebApi/" + index, { data: data })
+     var putCalc = function (index, data, comment) {
+
+         return $http.put("/api/ConfigWebApi/" + index, { data: data, comment: comment })
             .then(function (response) {
                 return response.status == 200;
             }, function (error) {

@@ -840,7 +840,6 @@
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Areas\Workflow\Models\" />
     <Folder Include="Areas\Workflow\Views\Shared\" />
-    <Folder Include="Areas\Workflow\Views\Workflow\flowchart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

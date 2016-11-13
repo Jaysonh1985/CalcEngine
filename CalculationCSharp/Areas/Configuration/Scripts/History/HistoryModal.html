@@ -9,11 +9,11 @@
                     User
                 </th>
                 <th>
+                    Comment                   
+                </th>
+                <th>
                     Updated
                 </th>
-                <!--<th>
-                    Comment
-                </th>-->
                 <th>
                     Version
                 </th>
@@ -21,11 +21,11 @@
                 </th>
             </tr>
             <tr ng-repeat="board in Boards">
-                <td width="45%" ng-cloak>{{board.User}}</td>
-                <td width="30%" ng-cloak>{{board.UpdateDate | date:'d MMMM yyyy h:mm a'}}</td>
-                <!--<td width="25%" ng-cloak>{{board.Comment}}</td>-->
+                <td width="25%" ng-cloak>{{board.User}}</td>
+                <td width="25%" ng-cloak>{{board.Comment}}</td>
+                <td width="25%" ng-cloak>{{board.UpdateDate | date:'d MMMM yyyy h:mm a'}}</td>
                 <td width="5%" ng-cloak>{{board.Version | number: 3}}</td>
-                <td width="35%">
+                <td width="45%">
                     <!--<button class="btn btn-default" ng-hide="editingData[board.ID]" ng-click="modify(board)">Compare</button>-->
                     <button class="btn btn-default" ng-hide="editingData[board.ID]" ng-click="View(board.ID)">View</button>
                     <button class="btn btn-default" ng-hide="editingData[board.ID]" ng-click="revert(board)">Revert</button>

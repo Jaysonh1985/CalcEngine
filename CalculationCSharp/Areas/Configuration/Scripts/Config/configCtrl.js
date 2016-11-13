@@ -234,8 +234,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.SaveButtonClick = function SaveBoard() {
         $scope.viewOnly = true;
         var id = configFunctionFactory.getConfigID();
+
+        var Comment = prompt("Enter a Comment");
+
+
         $scope.rebuildCategoryIDs();
-        configService.putCalc(id, $scope.config).then(function (data) {
+        configService.putCalc(id, $scope.config, Comment).then(function (data) {
             $scope.viewOnly = false;
             toastr.success("Saved successfully", "Success");
             $scope.form.$setPristine();
