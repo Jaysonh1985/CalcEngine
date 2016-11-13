@@ -25,13 +25,19 @@ namespace CalculationCSharp.Areas.Calculation.Controllers
 
         // GET: api/CalcReleases
         public IQueryable<CalcRelease> GetCalcRelease()
-        {
+        {          
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
-
-            string[] myInClause = user.Scheme.Split(',');
-
-            return db.CalcRelease.Where(s => myInClause.Contains(s.Scheme)); ;
+            string[] myInClause = null;
+            if (user.Scheme != null)
+            {
+                myInClause = user.Scheme.Split(',');
+                return db.CalcRelease.Where(s => myInClause.Contains(s.Scheme));
+            }
+            else
+            {
+                return null;
+            }
         }
         /// <summary>Get list of Calcs available in the Configuration System.
         /// <para>id = CalculationID on DB Table </para>

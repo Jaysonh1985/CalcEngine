@@ -31,10 +31,19 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            string[] myInClause = null;
+            if (user.Scheme != null)
+            {
+                myInClause = user.Scheme.Split(',');
+                return db.CalcConfiguration.Where(s => myInClause.Contains(s.Scheme));
+            }
+            else
+            {
+                return null;
+            }
             
-            string [] myInClause = user.Scheme.Split(',');
 
-            return db.CalcConfiguration.Where(s => myInClause.Contains(s.Scheme));
+
         }
         /// <summary>Get list of Calcs available in the Calculation System.
         /// <para>id = ID on DB Table </para>
