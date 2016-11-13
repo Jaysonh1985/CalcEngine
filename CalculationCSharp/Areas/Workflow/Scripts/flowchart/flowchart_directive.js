@@ -1,12 +1,12 @@
 //
 // Flowchart module.
 //
-angular.module('flowChart', ['dragging'] )
+angular.module('flowChart', ['dragging','ui.bootstrap'] )
 
 //
 // Directive that generates the rendered chart from the data model.
 //
-.directive('flowChart', function() {
+.directive('flowChart', function ($uibModal) {
   return {
   	restrict: 'E',
   	templateUrl: "/Areas/Workflow/Scripts/flowchart/flowchart_template.html",
@@ -78,9 +78,9 @@ angular.module('flowChart', ['dragging'] )
 // it is painful to unit test a directive without instantiating the DOM 
 // (which is possible, just not ideal).
 //
-.controller('FlowChartController', ['$scope', 'dragging', '$element', function FlowChartController ($scope, dragging, $element) {
+.controller('FlowChartController', ['$scope', 'dragging', '$element', '$uibModal', function FlowChartController($scope, dragging, $element, $uibModal) {
 
-	var controller = this;
+  	var controller = this;
 
 	//
 	// Reference to the document and jQuery, can be overridden for testting.
@@ -97,17 +97,15 @@ angular.module('flowChart', ['dragging'] )
 	//
 	// Init data-model variables.
 	//
-	$scope.draggingConnection = false;
-	$scope.connectorSize = 10;
-	$scope.dragSelecting = false;
-	/* Can use this to test the drag selection rect.
-	$scope.dragSelectionRect = {
+	$scope.draggingConnection = true;
+	$scope.connectorSize = 7.5;
+	$scope.dragSelecting = true;
+	$scope.dragselectionrect = {
 		x: 0,
 		y: 0,
 		width: 0,
 		height: 0,
 	};
-	*/
 
 	//
 	// Reference to the connection, connector or node that the mouse is currently over.
@@ -333,8 +331,7 @@ angular.module('flowChart', ['dragging'] )
 
 		});
 	};
-
-
+    
 	//
 	// Handle mousedown on a connection.
 	//
@@ -358,7 +355,28 @@ angular.module('flowChart', ['dragging'] )
 	    }
         connection.data.name = nodeName;
 	};
+    //Stage Modal
+    //
+	$scope.nodeDblClick = function (evt, node) {
 
+	    var modalInstance = $uibModal.open({
+	        animation: true,
+	        templateUrl: '/Areas/Workflow/Scripts/Stage/StageModal.html',
+	        scope: $scope,
+	        controller: 'stageCtrl',
+	        size: 'lg',
+	        resolve: {
+	            Name: function () { return node.data.name },
+	            Checklist: function () { return node.data.checklist },
+	        }
+	    });
+	    modalInstance.result.then(function (selectedItem) {
+	        node.data.name = selectedItem.Name;
+	        node.data.checklist = selectedItem.Checklist
+	    }, function () {
+	    });
+
+	}
 	//
 	// Handle mousedown on an input connector.
 	//

@@ -380,6 +380,7 @@
     <Content Include="Areas\Workflow\Scripts\lib\angular-mocks.js" />
     <Content Include="Areas\Workflow\Scripts\lib\angular.js" />
     <Content Include="Areas\Workflow\Scripts\lib\jquery-2.0.2.js" />
+    <Content Include="Areas\Workflow\Scripts\Stage\StageModal.html" />
     <Content Include="Content\angular-object-diff.css" />
     <Content Include="Content\angular-ui-tree.css" />
     <Content Include="Content\angular-ui-tree.min.css" />

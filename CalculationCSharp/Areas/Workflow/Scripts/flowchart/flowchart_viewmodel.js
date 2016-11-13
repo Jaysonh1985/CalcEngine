@@ -12,17 +12,17 @@ var flowchart = {
 	//
 	// Width of a node.
 	//
-	flowchart.defaultNodeWidth = 250;
+	flowchart.defaultNodeWidth = 200;
 
 	//
 	// Amount of space reserved for displaying the node's name.
 	//
-	flowchart.nodeNameHeight = 40;
+	flowchart.nodeNameHeight = 100;
 
 	//
 	// Height of a connector in a node.
 	//
-	flowchart.connectorHeight = 35;
+	flowchart.connectorHeight = 15;
 
 	//
 	// Compute the Y coordinate of a connector, given its index.

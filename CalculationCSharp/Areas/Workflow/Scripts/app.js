@@ -1,7 +1,7 @@
 //
 // Define the 'app' module.
 //
-angular.module('app', ['flowChart', ])
+angular.module('app', ['flowChart', 'ui.bootstrap'])
 
 //
 // Simple service to create a prompt.
@@ -21,7 +21,7 @@ angular.module('app', ['flowChart', ])
 //
 // Application controller.
 //
-.controller('AppCtrl', ['$scope', 'prompt', function AppCtrl ($scope, prompt) {
+.controller('AppCtrl', ['$scope', 'prompt', function AppCtrl ($scope, prompt, $uibModal) {
 
 	//
 	// Code for the delete key.
@@ -62,29 +62,17 @@ angular.module('app', ['flowChart', ])
 			{
 				name: "Example Node 1",
 				id: 0,
-				x: 0,
-				y: 0,
-				width: 350,
+				x: 1,
+				y: 1,
+				width: 200,
 				inputConnectors: [
 					{
 						name: "A",
-					},
-					{
-						name: "B",
-					},
-					{
-						name: "C",
 					},
 				],
 				outputConnectors: [
 					{
 						name: "A",
-					},
-					{
-						name: "B",
-					},
-					{
-						name: "C",
 					},
 				],
 			},
@@ -94,26 +82,15 @@ angular.module('app', ['flowChart', ])
 				id: 1,
 				x: 400,
 				y: 200,
+				width: 200,
 				inputConnectors: [
 					{
 						name: "A",
-					},
-					{
-						name: "B",
-					},
-					{
-						name: "C",
 					},
 				],
 				outputConnectors: [
 					{
 						name: "A",
-					},
-					{
-						name: "B",
-					},
-					{
-						name: "C",
 					},
 				],
 			},
@@ -121,30 +98,6 @@ angular.module('app', ['flowChart', ])
 		],
 
 		connections: [
-			{
-				name:'Connection 1',
-				source: {
-					nodeID: 0,
-					connectorIndex: 1,
-				},
-
-				dest: {
-					nodeID: 1,
-					connectorIndex: 2,
-				},
-			},
-			{
-				name:'Connection 2',
-				source: {
-					nodeID: 0,
-					connectorIndex: 0,
-				},
-
-				dest: {
-					nodeID: 1,
-					connectorIndex: 0,
-				},
-			},
 
 		]
 	};
@@ -212,26 +165,15 @@ angular.module('app', ['flowChart', ])
 			id: nextNodeID++,
 			x: 0,
 			y: 0,
+			width: 200,
 			inputConnectors: [
 				{
 					name: "X"
-				},
-				{
-					name: "Y"
-				},
-				{
-					name: "Z"
 				}
 			],
 			outputConnectors: [ 
 				{
 					name: "1"
-				},
-				{
-					name: "2"
-				},
-				{
-					name: "3"
 				}
 			],
 		};
@@ -287,5 +229,51 @@ angular.module('app', ['flowChart', ])
 	// Create the view-model for the chart and attach to the scope.
 	//
 	$scope.chartViewModel = new flowchart.ChartViewModel(chartDataModel);
+
+ 
+
 }])
+.controller('stageCtrl', function ($scope, $uibModalInstance, Name, Checklist ) {
+    $scope.Name = Name;
+    $scope.Comments = Checklist;
+    
+    $scope.removeItem = function (index) {
+        $scope.Tasks.splice(index, 1);
+    },
+
+    $scope.btn_add = function () {
+
+        if ($scope.Comments == null) {
+            $scope.Comments = [];
+        }
+
+        if ($scope.txtcomment != '') {
+            $scope.Comments.push({
+                CommentName: $scope.txtcomment
+            });
+            $scope.txtcomment = "";
+        }
+    }
+
+    $scope.remItem = function ($index) {
+        $scope.Comments.splice($index, 1);
+    }
+
+    //Click OK
+    $scope.ok = function () {
+
+        $scope.selected = {
+            Name: $scope.Name,
+            Checklist: $scope.Comments,
+        };
+
+        $uibModalInstance.close($scope.selected);
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+
+});
 ;

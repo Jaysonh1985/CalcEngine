@@ -10,7 +10,7 @@
       y2="0" 
       x2="0" 
       y1="1" 
-      x1="0" 
+      x1="1" 
       id="nodeBackgroundGradient"
       >
       <stop 
@@ -29,6 +29,7 @@
     ng-repeat="node in chart.nodes"
     ng-mousedown="nodeMouseDown($event, node)"
     ng-attr-transform="translate({{node.x()}}, {{node.y()}})"
+    ng-dblclick="nodeDblClick($event, node)"
     >
     <rect 
       ng-attr-class="{{node.selected() && 'selected-node-rect' || (node == mouseOverNode && 'mouseover-node-rect' || 'node-rect')}}"
@@ -47,7 +48,7 @@
       ng-attr-x="{{node.width()/2}}"
       y="25"
       text-anchor="middle"
-      alignment-baseline="middle"
+      alignment-baseline="baseline"
       font-family="sans-serif"
       >
       {{node.name()}}

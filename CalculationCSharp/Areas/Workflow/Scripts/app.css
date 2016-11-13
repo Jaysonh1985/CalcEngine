@@ -5,13 +5,14 @@ Generic reset.
 * {
 	padding: 0;
 	margin: 0;
+    font-size:x-small
 }
 
 .test {
 	border: 5px red solid;
 	padding: 10;
 	margin: 10;
-	font-family: "Times New Roman";
+	font-family: sans-serif;
 	font-style: italic;
 }
 
@@ -21,12 +22,12 @@ Styles for nodes and connectors.
 
 .node-rect {
 
-	stroke-width: 2;
+	stroke-width: 1;
 }
 
 .mouseover-node-rect {
 	stroke: black;
-	stroke-width: 4;
+	stroke-width: 2;
 }
 
 .selected-node-rect {
@@ -37,13 +38,13 @@ Styles for nodes and connectors.
 .connector-circle {
     fill: white;
     stroke: black;
-    stroke-width: 2;
+    stroke-width: 1;
 }
 
 .mouseover-connector-circle {
     fill: white;
     stroke: black;
-    stroke-width: 3;
+    stroke-width: 1;
 }
 
 /*
@@ -55,19 +56,19 @@ Style for connections.
 
 .connection-line {
 	stroke: gray;
-	stroke-width: 4;
+	stroke-width: 2;
 	fill: transparent;
 }	
 
 .mouseover-connection-line {
-	stroke: gray;
-	stroke-width: 6;
+	stroke: black;
+	stroke-width: 2;
 	fill: transparent;
 }	
 
 .selected-connection-line {
 	stroke: red;
-	stroke-width: 4;
+	stroke-width: 2;
 	fill: transparent;
 }	
 
