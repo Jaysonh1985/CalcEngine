@@ -128,7 +128,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
         $scope.isLoading = true;
         $scope.selected = {
             CalcID: ID,
-            Comment: "",
+            Comment: null,
         };
 
         configService.postRegression(ID, $scope.selected).then(function (data) {

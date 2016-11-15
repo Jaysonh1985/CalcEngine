@@ -85,6 +85,10 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
                 return BadRequest(ModelState);
             }
 
+            CalcConfiguration calcConfiguration = db.CalcConfiguration.Find(calcRegressionInputs.CalcID);
+            calcRegressionInputs.Scheme = calcConfiguration.Scheme;
+            calcRegressionInputs.Type = calcConfiguration.Name;
+
             db.CalcRegressionInputs.Add(calcRegressionInputs);
             db.SaveChanges();
 
