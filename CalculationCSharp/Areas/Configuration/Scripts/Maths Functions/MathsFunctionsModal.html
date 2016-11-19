@@ -10,10 +10,11 @@
                     <div class="form-group">
                         <label for="Type" class="control-label col-md-2">Type</label>
                         <div class="col-sm-9">
-                            <select id="inclusive" name="singleSelect" ng:model="period.Type" class="form-control">
+                            <select id="inclusive" name="singleSelect" ng:model="period.Type" class="form-control" required>
                                 <option value=""></option>
                                 <option value="Abs">Abs</option>
                                 <option value="Add">Add</option>
+                                <option value="AddPeriod">Add Period</option>
                                 <option value="Ceiling">Ceiling</option>
                                 <option value="DecimalPart">DecimalPart</option>
                                 <option value="Divide">Divide</option>
@@ -23,6 +24,7 @@
                                 <option value="Multiply">Multiply</option>
                                 <option value="Power">Power</option>
                                 <option value="Subtract">Subtract</option>
+                                <!--<option value="SubtractPeriod">Subtract Period</option>-->
                                 <option value="Truncate">Truncate</option>
                             </select>
                         </div>
@@ -35,10 +37,20 @@
                         </div>
                     </div>
 
-                    <div ng-if="period.Type == 'Add'|| period.Type == 'Divide'|| period.Type == 'Max' || period.Type == 'Min' || period.Type == 'Multiply'|| period.Type == 'Power'|| period.Type == 'Subtract'" class="form-group">
+                    <div ng-if="period.Type == 'Add'|| period.Type == 'AddPeriod'|| period.Type == 'Divide'|| period.Type == 'Max' || period.Type == 'Min' || period.Type == 'Multiply'|| period.Type == 'Power'|| period.Type == 'Subtract' || period.Type == 'SubtractPeriod'" class="form-group">
                         <label for="Number2" class="control-label col-md-2">Number 2</label>
                         <div class="col-sm-9">
                             <input type="Text" id="Number2" name="Number2" class="form-control" ng-model="period.Number2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required />
+                        </div>
+                    </div>
+                    <div ng-if="period.Type == 'AddPeriod'|| period.Type == 'SubtractPeriod'" ng class="form-group">
+                        <label for="Type" class="control-label col-md-2">Period Type</label>
+                        <div class="col-sm-9">
+                            <select id="inclusive" name="singleSelect" ng:model="period.PeriodType" class="form-control" required>
+                                <option value=""></option>
+                                <option value="YearsDays">Years Days</option>
+                                <option value="YearsMonths">Years Months</option>
+                            </select>
                         </div>
                     </div>
 
@@ -46,6 +58,7 @@
                         <label for="Type" class="control-label col-md-2">Rounding</label>
                         <div class="col-sm-9">
                             <select id="inclusive" name="singleSelect" ng:model="period.Rounding" class="form-control">
+                                <option value=""></option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>

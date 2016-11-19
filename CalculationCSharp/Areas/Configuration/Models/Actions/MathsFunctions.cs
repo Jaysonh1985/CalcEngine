@@ -11,6 +11,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Type { get; set; }
         public dynamic Number1 { get; set; }
         public dynamic Number2 { get; set; }
+        public dynamic PeriodType { get; set; }
         public string Rounding { get; set; }
         public string RoundingType { get; set; }
         /// <summary>Outputs where Maths Functions function is used, includes the array builder.
@@ -81,6 +82,16 @@ namespace CalculationCSharp.Areas.Configuration.Models
             {
                 Output = MathFunctions.Add(InputADeci, InputBDeci);
             }
+            //Add Period
+            else if (parameters.Type == "AddPeriod")
+            {
+                Output = MathFunctions.AddPeriod(InputADeci, InputBDeci, parameters.PeriodType);
+                Rounding = "2";
+                if (parameters.PeriodType == "YearsDays")
+                {
+                    Rounding = "3";
+                }
+            }
             //Ceiling
             else if (parameters.Type == "Ceiling")
             {
@@ -125,6 +136,16 @@ namespace CalculationCSharp.Areas.Configuration.Models
             else if (parameters.Type == "Subtract")
             {
                 Output = MathFunctions.Subtract(InputADeci, InputBDeci);
+            }
+            //Subtract two period value
+            else if (parameters.Type == "SubtractPeriod")
+            {
+                Output = MathFunctions.SubtractPeriod(InputADeci, InputBDeci, parameters.PeriodType);
+                Rounding = "2";
+                if (parameters.PeriodType == "YearsDays")
+                {
+                    Rounding = "3";
+                }
             }
             //Truncate
             else if (parameters.Type == "Truncate")

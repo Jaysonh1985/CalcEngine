@@ -7,6 +7,7 @@ sulhome.kanbanBoardApp.controller('arrayFunctionsCtrl', function ($scope, $uibMo
         $scope.array.LookupType = Functions[0].LookupType;
         $scope.array.LookupValue = Functions[0].LookupValue;
         $scope.array.Function = Functions[0].Function;
+        $scope.array.PeriodType = Functions[0].PeriodType;
     }
     else {
         $scope.array = Functions
@@ -19,6 +20,7 @@ sulhome.kanbanBoardApp.controller('arrayFunctionsCtrl', function ($scope, $uibMo
             LookupType: $scope.array.LookupType,
             LookupValue: $scope.array.LookupValue,
             Function: $scope.array.Function,
+            PeriodType: $scope.array.PeriodType,
         })
     };
     //Click OK moves back to modal instantiation

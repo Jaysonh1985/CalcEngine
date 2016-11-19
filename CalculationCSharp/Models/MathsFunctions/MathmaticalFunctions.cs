@@ -70,6 +70,40 @@ public class MathematicalFunctions
     {
         return Number1 + Number2;
     }
+    /// <summary>Add two Periods together
+    /// <para>Number1 = Number to user</para>
+    /// <para>Number2 = Number to user</para>
+    /// </summary>
+    public decimal AddPeriod(decimal Number1, decimal Number2, string PeriodType)
+    {
+        decimal Number1Decimal = Number1 - Math.Truncate(Number1);
+        decimal Number2Decimal = Number2 - Math.Truncate(Number2);
+
+        decimal Number1Int = Math.Floor(Number1);
+        decimal Number2Int = Math.Floor(Number2);
+
+        decimal OutputInt = Number1Int + Number2Int;
+        decimal OutputDecimal = Number1Decimal + Number2Decimal;
+
+        if(PeriodType == "YearsDays")
+        {
+            if (OutputDecimal >= Convert.ToDecimal(0.365))
+            {
+                OutputInt = OutputInt + 1;
+                OutputDecimal = Number1Decimal + Number2Decimal - Convert.ToDecimal(0.365);
+            }
+        }
+        else if(PeriodType == "YearsMonths")
+        {
+            if (OutputDecimal >= Convert.ToDecimal(0.12))
+            {
+                OutputInt = OutputInt + 1;
+                OutputDecimal = Number1Decimal + Number2Decimal - Convert.ToDecimal(0.12);
+            }
+        }
+
+        return OutputInt + OutputDecimal;
+    }
     /// <summary>Subtract two numbers
     /// <para>Number1 = Number to user</para>
     /// <para>Number2 = Number to user</para>
@@ -77,6 +111,40 @@ public class MathematicalFunctions
     public decimal Subtract(decimal Number1, decimal Number2)
     {
         return Number1 - Number2;
+    }
+    /// <summary>Subtract two Periods together
+    /// <para>Number1 = Number to user</para>
+    /// <para>Number2 = Number to user</para>
+    /// </summary>
+    public decimal SubtractPeriod(decimal Number1, decimal Number2, string PeriodType)
+    {
+        decimal Number1Decimal = Number1 - Math.Truncate(Number1);
+        decimal Number2Decimal = Number2 - Math.Truncate(Number2);
+
+        decimal Number1Int = Math.Floor(Number1);
+        decimal Number2Int = Math.Floor(Number2);
+
+        decimal OutputInt = Number1Int - Number2Int;
+        decimal OutputDecimal = Number1Decimal - Number2Decimal;
+
+        if (PeriodType == "YearsDays")
+        {
+            if (OutputDecimal >= Convert.ToDecimal(0.365))
+            {
+                OutputInt = OutputInt + 1;
+                OutputDecimal = Number1Decimal + Number2Decimal - Convert.ToDecimal(0.365);
+            }
+        }
+        else if (PeriodType == "YearsMonths")
+        {
+            if (OutputDecimal >= Convert.ToDecimal(0.12))
+            {
+                OutputInt = OutputInt + 1;
+                OutputDecimal = Number1Decimal + Number2Decimal - Convert.ToDecimal(0.12);
+            }
+        }
+
+        return OutputInt + OutputDecimal;
     }
     /// <summary>Divide two numbers
     /// <para>Number1 = Number to user</para>

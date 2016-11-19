@@ -7,6 +7,7 @@ sulhome.kanbanBoardApp.controller('mathsFunctionsCtrl', function ($scope, $uibMo
         $scope.period.Type = Functions[0].Type;
         $scope.period.Number1 = Functions[0].Number1;
         $scope.period.Number2 = Functions[0].Number2;
+        $scope.period.PeriodType = Functions[0].PeriodType;
         $scope.period.Rounding = Functions[0].Rounding;
         $scope.period.RoundingType = Functions[0].RoundingType;
     }
@@ -21,6 +22,7 @@ sulhome.kanbanBoardApp.controller('mathsFunctionsCtrl', function ($scope, $uibMo
             Type: $scope.period.Type,
             Number1: $scope.period.Number1,
             Number2: $scope.period.Number2,
+            PeriodType: $scope.period.PeriodType,
             Rounding: $scope.period.Rounding,
             RoundingType: $scope.period.RoundingType,
         })
