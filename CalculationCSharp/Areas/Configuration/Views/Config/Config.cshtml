@@ -42,7 +42,7 @@
                 <div ng-hide="isLoading" ui-tree data-clone-enabled="true">
                     <br />
                     <uib-accordion close-others=false ui-tree-nodes="" ng-model="config">
-                        <uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
+                        <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
 
                             <uib-accordion-heading>
                                 {{Category.Name}}
@@ -196,7 +196,7 @@
                                 </tbody>
                             </table>
 
-                        </uib-accordion-group>
+                        </div>
                     </uib-accordion>
                 </div>
             </fieldset>

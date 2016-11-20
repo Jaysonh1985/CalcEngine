@@ -5670,7 +5670,7 @@ button.list-group-item-danger.active:focus {
   margin-top: 5px;
 }
 .panel-group .panel-heading {
-  border-bottom: 0;
+  border-bottom: 1;
 }
 .panel-group .panel-heading + .panel-collapse > .panel-body,
 .panel-group .panel-heading + .panel-collapse > .list-group {
