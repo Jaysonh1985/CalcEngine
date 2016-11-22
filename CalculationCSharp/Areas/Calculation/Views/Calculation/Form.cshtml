@@ -11,7 +11,7 @@
         <h2 class="center-block text-center"><a>@ViewData["SchemeName"] - @ViewData["CalcName"] </a></h2>
         <br />
         <uib-accordion close-others=false>
-            <uib-accordion-group is-open=false>
+            <div uib-accordion-group is-open=false>
                 <uib-accordion-heading>
                     Calculation Bulk
                     <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexOuter[$index], 'glyphicon-chevron-right': !openIndexOuter[$index]}"></i>
@@ -38,11 +38,11 @@
                         <button type="button" ng-csv="BulkCalcButtonClick(csv.result)"  class="btn btn-default" filename="Calculation Output.csv">Download</button>
                     </div>
                 </form>
-            </uib-accordion-group>
+            </div>
         </uib-accordion>
 
         <uib-accordion close-others=false>
-            <uib-accordion-group is-open=false>
+            <div uib-accordion-group is-open=false>
                 <uib-accordion-heading>
                     Calculation Input
                     <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexOuter[$index], 'glyphicon-chevron-right': !openIndexOuter[$index]}"></i>
@@ -84,11 +84,11 @@
                     </table>
                     <button type="submit" class="btn btn-default submit-button">Submit</button>
                 </form>
-            </uib-accordion-group>
+            </div>
         </uib-accordion>
        
         <uib-accordion close-others=false>
-            <uib-accordion-group is-open=false>
+            <div uib-accordion-group is-open=false>
                 <uib-accordion-heading>
                     Calculation Output
                     <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexOuter[$index], 'glyphicon-chevron-right': !openIndexOuter[$index]}"></i>
@@ -112,7 +112,7 @@
                     <br />
                     <uib-accordion close-others=false ng-model="output">
 
-                        <uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index"  is-open="openIndex[$index]">
+                        <div uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index"  is-open="openIndex[$index]">
                             <uib-accordion-heading>
                                 {{group.Group}}
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
@@ -139,10 +139,10 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </uib-accordion-group>
+                        </div>
                     </uib-accordion>
                 </div>
-            </uib-accordion-group>
+            </div>
         </uib-accordion>
  
     </div>
