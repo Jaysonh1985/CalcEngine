@@ -15,7 +15,7 @@ namespace CalculationCSharp.Migrations
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
             ContextKey = "CalculationCSharp.Models.ApplicationDbContext";
-            Database.SetInitializer(new DropCreateDatabaseAlways<CalculationCSharp.Models.ApplicationDbContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<CalculationCSharp.Models.ApplicationDbContext>());
         }
 
         protected override void Seed(CalculationCSharp.Models.ApplicationDbContext context)
