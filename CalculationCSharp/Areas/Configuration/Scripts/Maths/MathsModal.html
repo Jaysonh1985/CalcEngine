@@ -35,7 +35,7 @@
                                     <p ng-show="form['BracketLeft_'+ $index].$error.bracketnotclosed" class="help-block">Not Closed</p>
                                 </td>
 
-                                <td width="20%"><span uib-popover="{{data || rows.Input1}}" popover-trigger="mouseenter" popover-popup-delay="1000"><input type="text" ng:model="rows.Input1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" class="form-control" required></span></td>
+                                <td width="20%"><span uib-popover="{{data || rows.Input1}}" popover-trigger="'mouseenter'" popover-popup-delay="1000"><input type="text" ng:model="rows.Input1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" class="form-control" required></span></td>
 
                                 <td width="10%">
                                     <select name="LogicSelect" ng:model="rows.Logic" class="form-control" required>
@@ -47,7 +47,7 @@
                                     </select>
                                 </td>
 
-                                <td width="20%"><span uib-popover="{{data || rows.Input2}}" popover-trigger="mouseenter" popover-popup-delay="1000"><input type="text" ng:model="rows.Input2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" class="form-control" required></span></td>
+                                <td width="20%"><span uib-popover="{{data || rows.Input2}}" popover-trigger="'mouseenter'" popover-popup-delay="1000"><input type="text" ng:model="rows.Input2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" class="form-control" required></span></td>
                                 <td width="10%">
                                     <select name="BracketRight_{{$index}}" ng:model="rows.Bracket2" class="form-control">
                                         <option value=""></option>

@@ -407,7 +407,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.Logic = this.config[index].Logic;
         $scope.AllNames = [];
         $scope.configReplace = configFunctionFactory.convertToFromJson($scope.config);
-        $scope.AllNames = $scope.variableArrayBuilder($scope.configReplace, index, null, 0);
+        $scope.AllNames = configTypeaheadFactory.variableArrayBuilder($scope.configReplace, index, null, 0);
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/Areas/Configuration/Scripts/Logic/LogicModal.html',
