@@ -633,3 +633,4 @@ ul#menu li {
     border-width: thin;
     padding-top: 10px;
 }
+select:focus::-ms-value {background: transparent; color: #555 }
