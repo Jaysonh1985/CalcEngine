@@ -85,7 +85,7 @@
                                     </tr>
                                 </thead>
                                 <tbody ui-tree-nodes="" ng:model="Category.Functions">
-                                    <tr id="Row_{{$parent.$index}}_{{$index}}" inputpreviously-Set config='config' colIndex="{{$parent.$index}}" rowIndex="{{$index}}" unselectable="on"
+                                    <tr id="Row_{{$parent.$index}}_{{$index}}"  unselectable="on"
                                         ng-repeat="rows in Category.Functions | filter:searchText" ng-click="selectRow($event, $index, $parent.$index)"
                                         ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}" ui-tree-node>
 
@@ -120,8 +120,8 @@
 
                                         <td>
                                             <span hidden><input type="text" name="FunctionCog_{{$parent.$index}}_{{$index}}" id="FunctionCog_{{$parent.$index}}_{{$index}}" class="table-borderless" ng:model="rows.ID" hidden></span>
-                                            <a ng-click="FunctionButtonClick('lg', $parent.$index, $index)">
-                                                <span uib-popover="{{data || rows.Parameter}}" popover-trigger="'mouseenter'" popover-popup-delay="1000" class="glyphicon glyphicon-cog"></span>
+                                            <a ng-click="FunctionButtonClick('lg', $parent.$index, $index, form)" >
+                                                <span uib-popover="{{data || rows.Parameter}}" popover-trigger="'mouseenter'" popover-popup-delay="1000" class="glyphicon glyphicon-cog" ></span>
                                                 <p ng-show="form['FunctionCog_'+ $parent.$index + '_' + $index].$error.input" class="help-block">Variable Mismatch</p>
                                             </a>
                                         </td>
@@ -129,7 +129,7 @@
                                         <td>
                                             <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Comments' " uib-popover="{{data || rows.Name}}"
                                                   popover-trigger="'mouseenter'" popover-popup-delay="1000">
-                                                <input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" ng-pattern="noSpacesPattern" class="form-control  input-sm" ng-required="true" ng-trim="false">
+                                                <input  type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" ng-pattern="noSpacesPattern" class="form-control  input-sm" ng-required="true" ng-blur="validateForm()" ng-trim="false">
                                             </span>
                                             <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$error.pattern" class="help-block">No Spaces or Special Characters</p>
                                             <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$error.required" class="help-block">Name is required.</p>

@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, configModalFactory, configTypeaheadFactory, $filter, $timeout) {
+sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, configModalFactory, configTypeaheadFactory, configValidationFactory, $filter, $timeout) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
@@ -244,6 +244,9 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.CalcButtonClick = function CalcBoard(form) {
+
+        $scope.validateForm();
+
         if ($scope.validationError == false)
         {
             $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
@@ -335,7 +338,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.StringNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, 'String', rowIndex);
     }
 
-    $scope.FunctionButtonClick = function (size, colIndex, index) {
+    $scope.FunctionButtonClick = function (size, colIndex, index, form) {
         $scope.Parameter = this.config[colIndex].Functions[index].Parameter;
         var Function = this.config[colIndex].Functions[index].Function;
         $scope.getVariableTypes(colIndex, index);
@@ -372,6 +375,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                     var el = document.getElementById($scope.AttName);
                     angular.element(el).triggerHandler('click');
                     $scope.form.$setDirty();
+                    $scope.validateForm();
                 });
 
             }, function () {
@@ -399,6 +403,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         modalInstance.result.then(function (selectedItem) {
             $scope.config[colIndex].Functions[index].Logic = selectedItem;
             $scope.form.$setDirty();
+            $scope.validateForm();
         }, function () {       
         });
     };
@@ -421,6 +426,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         modalInstance.result.then(function (selectedItem) {
             $scope.config[index].Logic = selectedItem;
             $scope.form.$setDirty();
+            $scope.validateForm();
         }, function () {
         });
     };
@@ -505,6 +511,72 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.deselectRow = function ()
     {
         resetSelection();
+    }
+
+    $scope.validateForm = function()
+    {
+        form = $scope.form;
+        angular.forEach($scope.config, function (value, key, obj) {
+            angular.forEach($scope.config[key].Functions, function (valueF, keyF, obj) {
+                var AttName = 'FunctionCog_' + key + '_' + keyF;
+                form[AttName].$setValidity("input", true);
+                angular.forEach($scope.config[key].Functions[keyF].Parameter, function (valueP, keyP, obj) {
+                    if (key != 0)
+                    {
+                        //Maths
+                        if ($scope.config[key].Functions[keyF].Function == 'Maths') {                                  
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Input1, form);
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Input2, form);
+                            });
+                        }
+                        //Period
+                        if ($scope.config[key].Functions[keyF].Function == 'Period') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true);
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true);
+                            });
+                        }
+                        //Factors
+                        if ($scope.config[key].Functions[keyF].Function == 'Factors') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form, true);
+                            });                                      
+                        }
+                        //Date Adjustment
+                        if ($scope.config[key].Functions[keyF].Function == 'DateAdjustment') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true);
+                                if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
+                                    configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true);
+                                }
+                            });                            
+                        }
+                        //Date Part
+                        if ($scope.config[key].Functions[keyF].Function == 'DatePart') {               
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true);
+                            });                                 
+                        }
+                        //Maths Functions
+                        if ($scope.config[key].Functions[keyF].Function == 'MathsFunctions') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Number1, form, true);
+                                if (valueN.Type == "Add" || valueN.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract") {
+                                    configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Number2, form, true);
+                                }
+                            });
+                        }
+                        //Array Functions
+                        if ($scope.config[key].Functions[keyF].Function == 'ArrayFunctions') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form);
+                            });
+                        }
+                    }
+                })
+            })
+        })
     }
 
     $scope.selectRow = function (event, rowIndex, colIndex) {

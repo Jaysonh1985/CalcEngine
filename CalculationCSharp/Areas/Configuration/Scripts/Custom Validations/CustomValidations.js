@@ -7,80 +7,80 @@ sulhome.kanbanBoardApp.directive('uibModalWindow', function () {
         }
     }  
 });
-//Input previously set on the builder
-sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeaheadFactory, configValidationFactory) {
-    return {
-        replace: true,
-        restrict: 'A',
-        require: '^form',
-        scope: { config: '=', colIndex: '=', rowIndex: '=' },
-        link: function (scope, element, attrs, form, scopectrl) {
-            element.on('click', function () {
-                angular.forEach(scope.config, function (value, key, obj) {
-                    angular.forEach(scope.config[key].Functions, function (valueF, keyF, obj) {
-                        var AttName = 'FunctionCog_' + key + '_' + keyF;
-                        form[AttName].$setValidity("input", true);
-                        angular.forEach(scope.config[key].Functions[keyF].Parameter, function (valueP, keyP, obj) {
-                            if (key != 0)
-                            {
-                                //Maths
-                                if (scope.config[key].Functions[keyF].Function == 'Maths') {                                  
-                                    angular.forEach(obj, function (valueN, keyN, obj) {
-                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Input1, form);
-                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Input2, form);
-                                        });
-                                }
-                                //Period
-                                if (scope.config[key].Functions[keyF].Function == 'Period') {
-                                    angular.forEach(obj, function (valueN, keyN, obj) {
-                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date1, form, true);
-                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date2, form, true);
-                                    });
-                                }
-                                //Factors
-                                if (scope.config[key].Functions[keyF].Function == 'Factors') {
-                                    angular.forEach(obj, function (valueN, keyN, obj) {
-                                        configValidationFactory.variablePreviouslySet(scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form, true);
-                                    });                                      
-                                }
-                                //Date Adjustment
-                                if (scope.config[key].Functions[keyF].Function == 'DateAdjustment') {
-                                        angular.forEach(obj, function (valueN, keyN, obj) {
-                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date1, form, true);
-                                            if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
-                                                configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date2, form, true);
-                                            }
-                                        });                            
-                                }
-                                //Date Part
-                                if (scope.config[key].Functions[keyF].Function == 'DatePart') {               
-                                        angular.forEach(obj, function (valueN, keyN, obj) {
-                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date1, form, true);
-                                        });                                 
-                                }
-                                //Maths Functions
-                                if (scope.config[key].Functions[keyF].Function == 'MathsFunctions') {
-                                    angular.forEach(obj, function (valueN, keyN, obj) {
-                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Number1, form, true);
-                                        if (valueN.Type == "Add" || valueN.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract") {
-                                           configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Number2, form, true);
-                                        }
-                                    });
-                                }
-                                //Array Functions
-                                if (scope.config[key].Functions[keyF].Function == 'ArrayFunctions') {
-                                    angular.forEach(obj, function (valueN, keyN, obj) {
-                                        configValidationFactory.variablePreviouslySet(scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form);
-                                    });
-                                }
-                            }
-                        })
-                    })
-                })
-            })
-        }
-    }
-});
+////Input previously set on the builder
+//sulhome.kanbanBoardApp.directive('inputpreviouslySet', function (configTypeaheadFactory, configValidationFactory) {
+//    return {
+//        replace: true,
+//        restrict: 'A',
+//        require: '^form',
+//        scope: { config: '=', colIndex: '=', rowIndex: '=' },
+//        link: function (scope, element, attrs, form, scopectrl) {
+//            element.on('blur', function () {
+//                angular.forEach(scope.config, function (value, key, obj) {
+//                    angular.forEach(scope.config[key].Functions, function (valueF, keyF, obj) {
+//                        var AttName = 'FunctionCog_' + key + '_' + keyF;
+//                        form[AttName].$setValidity("input", true);
+//                        angular.forEach(scope.config[key].Functions[keyF].Parameter, function (valueP, keyP, obj) {
+//                            if (key != 0)
+//                            {
+//                                //Maths
+//                                if (scope.config[key].Functions[keyF].Function == 'Maths') {                                  
+//                                    angular.forEach(obj, function (valueN, keyN, obj) {
+//                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Input1, form);
+//                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Input2, form);
+//                                        });
+//                                }
+//                                //Period
+//                                if (scope.config[key].Functions[keyF].Function == 'Period') {
+//                                    angular.forEach(obj, function (valueN, keyN, obj) {
+//                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date1, form, true);
+//                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date2, form, true);
+//                                    });
+//                                }
+//                                //Factors
+//                                if (scope.config[key].Functions[keyF].Function == 'Factors') {
+//                                    angular.forEach(obj, function (valueN, keyN, obj) {
+//                                        configValidationFactory.variablePreviouslySet(scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form, true);
+//                                    });                                      
+//                                }
+//                                //Date Adjustment
+//                                if (scope.config[key].Functions[keyF].Function == 'DateAdjustment') {
+//                                        angular.forEach(obj, function (valueN, keyN, obj) {
+//                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date1, form, true);
+//                                            if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
+//                                                configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date2, form, true);
+//                                            }
+//                                        });                            
+//                                }
+//                                //Date Part
+//                                if (scope.config[key].Functions[keyF].Function == 'DatePart') {               
+//                                        angular.forEach(obj, function (valueN, keyN, obj) {
+//                                            configValidationFactory.variablePreviouslySet(scope.config, key, "Date", keyF, valueN.Date1, form, true);
+//                                        });                                 
+//                                }
+//                                //Maths Functions
+//                                if (scope.config[key].Functions[keyF].Function == 'MathsFunctions') {
+//                                    angular.forEach(obj, function (valueN, keyN, obj) {
+//                                        configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Number1, form, true);
+//                                        if (valueN.Type == "Add" || valueN.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract") {
+//                                           configValidationFactory.variablePreviouslySet(scope.config, key, "Decimal", keyF, valueN.Number2, form, true);
+//                                        }
+//                                    });
+//                                }
+//                                //Array Functions
+//                                if (scope.config[key].Functions[keyF].Function == 'ArrayFunctions') {
+//                                    angular.forEach(obj, function (valueN, keyN, obj) {
+//                                        configValidationFactory.variablePreviouslySet(scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form);
+//                                    });
+//                                }
+//                            }
+//                        })
+//                    })
+//                })
+//            })
+//        }
+//    }
+//});
 //Validate the input form
 sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeaheadFactory, $filter) {
     return {
