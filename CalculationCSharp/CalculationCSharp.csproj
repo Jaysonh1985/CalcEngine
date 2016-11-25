@@ -268,6 +268,7 @@
     <Compile Include="Areas\Maintenance\Controllers\MaintenanceController.cs" />
     <Compile Include="Areas\Maintenance\Controllers\SchemesMaintenanceController.cs" />
     <Compile Include="Areas\Maintenance\Controllers\UserRoleMaintenanceController.cs" />
+    <Compile Include="Areas\Maintenance\Controllers\UserSessionsController.cs" />
     <Compile Include="Areas\Maintenance\MaintenanceAreaRegistration.cs" />
     <Compile Include="Areas\Maintenance\Models\FactorMaintenance.cs" />
     <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
@@ -709,6 +710,11 @@
     <Content Include="Areas\Maintenance\Views\UserRoleMaintenance\Index.cshtml" />
     <Content Include="Areas\Workflow\Views\web.config" />
     <Content Include="Areas\Workflow\Views\Workflow\Index.cshtml" />
+    <Content Include="Areas\Maintenance\Views\UserSessions\Create.cshtml" />
+    <Content Include="Areas\Maintenance\Views\UserSessions\Delete.cshtml" />
+    <Content Include="Areas\Maintenance\Views\UserSessions\Details.cshtml" />
+    <Content Include="Areas\Maintenance\Views\UserSessions\Edit.cshtml" />
+    <Content Include="Areas\Maintenance\Views\UserSessions\Index.cshtml" />
     <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
