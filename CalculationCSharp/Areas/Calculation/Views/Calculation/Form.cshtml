@@ -33,9 +33,9 @@
 
                         </ng-csv-import>
                         <h4>
-                            Download
+                            Bulk Calculate
                         </h4>
-                        <button type="button" ng-csv="BulkCalcButtonClick(csv.result)"  class="btn btn-default" filename="Calculation Output.csv">Download</button>
+                        <button type="button" ng-csv="BulkCalcButtonClick(csv.result)"  class="btn btn-default" filename="@ViewData["SchemeName"] - @ViewData["CalcName"] Calculation Output.csv">Calculate</button>
                     </div>
                 </form>
             </div>

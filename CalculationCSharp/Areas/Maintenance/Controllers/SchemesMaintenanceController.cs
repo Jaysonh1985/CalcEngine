@@ -29,7 +29,7 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
                 }
                 else
                 {
-                    return View(db.Schemes.ToList());
+                    return View(db.Schemes.OrderBy(scheme => scheme.Name).ToList());
                 }
             }
             else
