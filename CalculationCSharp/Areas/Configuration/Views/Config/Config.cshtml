@@ -26,6 +26,7 @@
                                 <li><button class="btn btn-default navbar-btn" type="button" ng-click="CloseAllButton()">Close All</button></li>
                                 <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" ng-csv="SpecButtonClick(form)" csv-header="getHeader" filename="@ViewData["SchemeName"] - @ViewData["CalcName"] Specification.csv" type="button">Specification</button></li>
                                 <li><button class="btn btn-default navbar-btn" type="button" ng-click="ExitButton()">Exit</button></li>
+                                <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" ng-csv="ExportButtonClick()" csv-header="JSON"  filename="@ViewData["SchemeName"] - @ViewData["CalcName"] CalculationExport.csv" type="button">Export</button></li>
                                 <li><a>@ViewData["SchemeName"] - @ViewData["CalcName"] </a></li>
                                 <li><input ng-disabled="false" type="text" class="form-control form-inline input" ng-model="searchText" placeholder="Search"></li>
                             </ul>

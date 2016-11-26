@@ -504,6 +504,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }, onError);
        return promise;
     };
+    $scope.ExportButtonClick = function (form) {
+
+        var string = JSON.stringify($scope.config)
+
+        return string;
+    };
 
     //Higlight rows functions
     var selectedRowsIndexes = [];
