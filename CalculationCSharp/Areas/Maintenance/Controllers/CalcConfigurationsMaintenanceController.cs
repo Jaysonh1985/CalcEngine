@@ -7,17 +7,37 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CalculationCSharp.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CalculationCSharp.Areas.Maintenance.Controllers
 {
     public class CalcConfigurationsMaintenanceController : Controller
     {
         private CalculationDBContext db = new CalculationDBContext();
-
+        CalculationCSharp.Models.ApplicationDbContext context = new CalculationCSharp.Models.ApplicationDbContext();
         // GET: Maintenance/CalcConfigurationsMaintenance
         public ActionResult Index()
         {
-            return View(db.CalcConfiguration.ToList());
+
+            if (Request.IsAuthenticated)
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    return View(db.CalcConfiguration.ToList());
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+
+           
         }
 
         // GET: Maintenance/CalcConfigurationsMaintenance/Details/5
