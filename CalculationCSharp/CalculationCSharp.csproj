@@ -264,6 +264,7 @@
     <Compile Include="Areas\Configuration\Models\Actions\Maths.cs" />
     <Compile Include="Areas\Configuration\Models\ConfigRepository.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Dates.cs" />
+    <Compile Include="Areas\Maintenance\Controllers\CalcConfigurationsMaintenanceController.cs" />
     <Compile Include="Areas\Maintenance\Controllers\FactorMaintenanceController.cs" />
     <Compile Include="Areas\Maintenance\Controllers\MaintenanceController.cs" />
     <Compile Include="Areas\Maintenance\Controllers\SchemesMaintenanceController.cs" />
@@ -715,6 +716,11 @@
     <Content Include="Areas\Maintenance\Views\UserSessions\Details.cshtml" />
     <Content Include="Areas\Maintenance\Views\UserSessions\Edit.cshtml" />
     <Content Include="Areas\Maintenance\Views\UserSessions\Index.cshtml" />
+    <Content Include="Areas\Maintenance\Views\CalcConfigurationsMaintenance\Create.cshtml" />
+    <Content Include="Areas\Maintenance\Views\CalcConfigurationsMaintenance\Delete.cshtml" />
+    <Content Include="Areas\Maintenance\Views\CalcConfigurationsMaintenance\Details.cshtml" />
+    <Content Include="Areas\Maintenance\Views\CalcConfigurationsMaintenance\Edit.cshtml" />
+    <Content Include="Areas\Maintenance\Views\CalcConfigurationsMaintenance\Index.cshtml" />
     <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />

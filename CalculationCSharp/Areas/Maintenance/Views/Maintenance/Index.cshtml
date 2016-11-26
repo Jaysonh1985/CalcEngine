@@ -25,5 +25,11 @@
     {
         @Html.ActionLink("User Sessions Maintenance", "Index", new { Area = "Maintenance", controller = "UserSessions" })
     }
+    <br />
+    <br />
+    @if (ViewBag.Authenticated == true)
+    {
+        @Html.ActionLink("Calculation Configuration Maintenance", "Index", new { Area = "Maintenance", controller = "CalcConfigurationsMaintenance" })
+    }
 
 </div>
