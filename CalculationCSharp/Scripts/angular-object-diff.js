@@ -228,17 +228,17 @@
                     break;
 
                 case 'removed':
-                    property = ('<tr> <td>' + inspect(diffItem.value.Field) + '</td>' + '<td>' + 'Removed' + '</td> <td>' + inspect(diffItem.value.Value) + '</td> <td>' + '</td></tr>');
+                    property = ('<tr> <td>' + inspect(diffItem.value.Field) + '</td>' + '<td>' + 'Removed' + '</td> <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">' + inspect(diffItem.value.Value) + '</td> <td>' + '</td></tr>');
                     break;
 
                 case 'added':
-                    property = ('<tr> <td>' + inspect(diffItem.value.Field) + '</td>' + '<td>' + 'Added' + '</td> <td>' + '</td> <td>' + inspect(diffItem.value.Value) + '</td></tr>');
+                    property = ('<tr> <td>' + inspect(diffItem.value.Field) + '</td>' + '<td>' + 'Added' + '</td> <td>' + '</td> <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">' + inspect(diffItem.value.Value) + '</td></tr>');
                     break;
 
                 case 'primitive change':
                     var prefix = stringifyObjectKey(escapeHTML(key));
                     property = (
-                    '<tr> <td>' + fieldsvalue + '</td> <td>' + prefix + '</td> <td>' + inspect(diffItem.removed) + '</td><td>' + inspect(diffItem.added) + '</td></tr>');
+                    '<tr> <td>' + fieldsvalue + '</td> <td>' + prefix + '</td> <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">' + inspect(diffItem.removed) + '</td><td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">' + inspect(diffItem.added) + '</td></tr>');
                     break;
 
                 case 'object change':
