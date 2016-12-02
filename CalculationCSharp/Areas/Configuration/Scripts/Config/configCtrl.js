@@ -86,10 +86,10 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     //Functions
     $scope.AddFunction = function (colIndex, index) {      
-        if (colIndex == 0)
+        if (index == 0)
         {
-            $scope.config[colIndex].Functions.push({
-                ID: this.config[colIndex].Functions.length,
+            $scope.config[index].Functions.push({
+                ID: this.config[index].Functions.length,
                 Function: 'Input',
                 Logic: [],
                 Parameter: []
@@ -97,8 +97,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }
         else
         {
-            $scope.config[colIndex].Functions.push({
-                ID: this.config[colIndex].Functions.length,
+            $scope.config[index].Functions.push({
+                ID: this.config[index].Functions.length,
                 Logic: [],
                 Parameter: []
             });
