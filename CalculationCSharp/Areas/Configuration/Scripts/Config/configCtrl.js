@@ -418,6 +418,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             templateUrl: '/Areas/Configuration/Scripts/Logic/LogicModal.html',
             scope: $scope,
             controller: 'logicCtrl',
+            backdrop: false,
             size: size,
             resolve: {
                 Logic: function () { return $scope.Logic }
@@ -440,6 +441,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             templateUrl: '/Areas/Configuration/Scripts/Group/GroupModal.html',
             scope: $scope,
             controller: 'groupCtrl',
+            backdrop: false,
             size: size,
             resolve: {
                 ID: function () { return $scope.ID },
