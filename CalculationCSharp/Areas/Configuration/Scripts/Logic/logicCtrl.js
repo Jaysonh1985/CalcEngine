@@ -14,21 +14,19 @@ sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstan
     },
 
     $scope.OperatorClauseValidations = function OperatorClauseValidations(form) {
-        angular.forEach($scope.Logic, function (value, key, obj) {
+
+        if ($scope.Logic.length > 1)
+        {
+            key = $scope.Logic.length - 1;
             var AttName = 'Operator_' + key;
-            form[AttName].$setValidity("clause", true);
             form[AttName].$setValidity("clauseblank", true);
-            if ($scope.Logic[key].Operator != "" && $scope.Logic[key].Operator != null) {
-                if ($scope.Logic[key + 1] == null) {
-                    form[AttName].$setValidity("clause", false);
-                }
-            }
-            else if ($scope.Logic[key].Operator == "" || $scope.Logic[key].Operator == null) {
-                if ($scope.Logic[key + 1] != null) {
+            if ($scope.Logic[key].Operator == "" || $scope.Logic[key].Operator == null) {
+                if ($scope.Logic[key - 1] != null) {
                     form[AttName].$setValidity("clauseblank", false);
                 }
             }
-        })
+        }
+
     }
 
     $scope.BracketsValidations = function BracketsValidations(form) {

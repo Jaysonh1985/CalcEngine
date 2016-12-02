@@ -55,14 +55,15 @@
                                         </select>
                                         <p ng-show="form['BracketRight_'+ $index].$error.bracketnotopen" class="help-block">Not Open</p>
                                     </td>
-                                    <td width="30%">
+                                    <td width="30%" ng-if="!$last || $first" ng-model="rows.Operator" ng-init="rows.Rounding = null"></td>
+                                    <td width="30%" ng-if="$last && !$first">
                                         <select name="Operator_{{$index}}" ng:model="rows.Operator" class="form-control">
                                             <option value=""></option>
                                             <option value="AND">AND</option>
                                             <option value="OR">OR</option>
                                         </select>
                                         <p ng-show="form['Operator_'+ $index].$error.clause" class="help-block">Clause and no row below</p>
-                                        <p ng-show="form['Operator_'+ $index].$error.clauseblank" class="help-block">No clause and a row below</p>
+                                        <p ng-show="form['Operator_'+ $index].$error.clauseblank" class="help-block">No clause</p>
                                     </td>
                                     <td width="5%">
                                         [<a ng-hide="$parent.viewOnly" ng:click="removeLogicItem($index)">X</a>]

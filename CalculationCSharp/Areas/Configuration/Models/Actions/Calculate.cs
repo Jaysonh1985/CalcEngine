@@ -86,6 +86,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                         {
                             foreach (var bit in group.Logic)
                             {
+                                var grouplastLogic = group.Logic.Last();
+                                string grouplastLogicOperator = grouplastLogic.Operator;
                                 Logic Logic = new Logic();
                                 colLogic = Logic.Output(jCategory, bit, group.ID, 0);
                                 Expression ex = new Expression(colLogic);
@@ -96,7 +98,18 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 catch (Exception exception)
                                 {
                                     logger.Error(exception);
-                                }                               
+                                }
+
+                                if (grouplastLogicOperator == "AND" && colLogicParse == false)
+                                {
+                                    break;
+                                }
+                                else if (grouplastLogicOperator == "OR" && colLogicParse == true)
+                                {
+                                    colLogicParse = true;
+                                    break;
+                                }
+
                             }
                         }
                         if (item.Parameter.Count > 0)
@@ -108,8 +121,10 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                             //Logic check at column level
                             if (colLogicParse == true)
                             {
-                              foreach (var bit in item.Logic)
+                                foreach (var bit in item.Logic)
                                 {
+                                    var lastLogic = item.Logic.Last();
+                                    string lastLogicOperator = lastLogic.Operator;
                                     Logic Logic = new Logic();
                                     logic = Logic.Output(jCategory, bit, group.ID, item.ID);
                                     Expression ex = new Expression(logic);
@@ -122,7 +137,17 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     {
                                         logger.Error(exception);
                                     }
-                                                       
+
+                                    if (lastLogicOperator == "AND" && logicparse == false)
+                                    {
+                                        break;
+                                    }
+                                    else if (lastLogicOperator == "OR" && logicparse == true)
+                                    {
+                                        logicparse = true;
+                                        break;
+                                    }
+          
                                 }
                             }
                             else
