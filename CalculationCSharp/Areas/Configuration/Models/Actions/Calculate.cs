@@ -67,7 +67,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         //Calcuation Controller Action
         public void CalculateAction(List<CategoryViewModel> jCategory)
         {
-            logger.Debug("Start - " + HttpContext.Current.User.Identity.Name.ToString());
+           
             foreach (var group in jCategory)
             {
                 foreach (var item in group.Functions)
@@ -89,7 +89,14 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 Logic Logic = new Logic();
                                 colLogic = Logic.Output(jCategory, bit, group.ID, 0);
                                 Expression ex = new Expression(colLogic);
-                                colLogicParse = Convert.ToBoolean(ex.Evaluate());
+                                try
+                                {
+                                    colLogicParse = Convert.ToBoolean(ex.Evaluate());
+                                }
+                                catch (Exception exception)
+                                {
+                                    logger.Error(exception);
+                                }                               
                             }
                         }
                         if (item.Parameter.Count > 0)
@@ -106,7 +113,16 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     Logic Logic = new Logic();
                                     logic = Logic.Output(jCategory, bit, group.ID, item.ID);
                                     Expression ex = new Expression(logic);
-                                    logicparse = Convert.ToBoolean(ex.Evaluate());
+
+                                    try
+                                    {
+                                        logicparse = Convert.ToBoolean(ex.Evaluate());
+                                    }
+                                    catch (Exception exception)
+                                    {
+                                        logger.Error(exception);
+                                    }
+                                                       
                                 }
                             }
                             else
@@ -134,10 +150,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             bool DeciParse;
                                             decimal CalculationDeci;
                                             string Rounding;
-
                                             DeciParse = decimal.TryParse(Convert.ToString(Calculation), out CalculationDeci);
-
-                                            //TODO bug with the way the rounding calculation works in that if the dropdown is blank it populates with 0 when it should populate with nil, we want the rounding to default to 2
                                             Rounding = Convert.ToString(parameters.Rounding);
 
                                             if (Rounding == null || Rounding == "")
@@ -148,7 +161,16 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             {
                                                 decimal Output = CalculationDeci;
                                                 MathematicalFunctions MathematicalFunctions = new MathematicalFunctions();
-                                                Output = MathematicalFunctions.Rounding(Convert.ToString(parameters.RoundingType), Rounding, Output);
+
+                                                try
+                                                {
+                                                    Output = MathematicalFunctions.Rounding(Convert.ToString(parameters.RoundingType), Rounding, Output);
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    logger.Error(ex);
+                                                }
+                                               
                                                 item.Output = Convert.ToString(Output);
                                             }
                                             else
@@ -175,36 +197,81 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     {
                                         DateFunctions DateFunctions = new DateFunctions();
                                         Period Periods = new Period();
-                                        item.Output = Periods.Output(jparameters, jCategory, group.ID, item.ID);
+                                        try
+                                        {
+                                            item.Output = Periods.Output(jparameters, jCategory, group.ID, item.ID);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);
+                                        }                                   
                                     }
                                     else if (item.Function == "Factors")
                                     {
                                         Factors Factors = new Factors();
                                         Factors parameters = (Factors)javaScriptSerializ­er.Deserialize(jparameters, typeof(Factors));
-                                        item.Output = Factors.Output(jparameters, jCategory, group.ID, item.ID);
+                                        try
+                                        {
+                                            item.Output = Factors.Output(jparameters, jCategory, group.ID, item.ID);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);                                           
+                                        }
+                                       
                                         item.Type = parameters.OutputType;
                                     }
                                     else if (item.Function == "DateAdjustment")
                                     {
                                         Dates Dates = new Dates();
-                                        item.Output = Dates.Output(jparameters, jCategory, group.ID, item.ID);
+                                        try
+                                        {
+                                            item.Output = Dates.Output(jparameters, jCategory, group.ID, item.ID);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);
+                                        }
                                     }
                                     else if (item.Function == "DatePart")
                                     {
                                         DatePart DateParts = new DatePart();
-                                        item.Output = DateParts.Output(jparameters, jCategory, group.ID, item.ID);
+                                        try
+                                        {
+                                            item.Output = DateParts.Output(jparameters, jCategory, group.ID, item.ID);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);
+                                        }                                       
                                     }
 
                                     else if (item.Function == "MathsFunctions")
                                     {
                                         MathsFunctions MathsFunctions = new MathsFunctions();
-                                        item.Output = MathsFunctions.Output(jparameters, jCategory, group.ID, item.ID);
+                                        try
+                                        {
+                                            item.Output = MathsFunctions.Output(jparameters, jCategory, group.ID, item.ID);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);
+                                        }                                       
                                     }
                                     else if (item.Function == "ArrayFunctions")
                                     {
                                         ArrayFunctions ArrayFunctions = new ArrayFunctions();
                                         ArrayFunctions parameters = (ArrayFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(ArrayFunctions));
-                                        item.Output = ArrayFunctions.Output(jparameters, jCategory, group.ID, item.ID);
+                                        try
+                                        {
+                                            item.Output = ArrayFunctions.Output(jparameters, jCategory, group.ID, item.ID);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);
+                                        }
+                                        
+
                                         if(parameters.Function == "Count")
                                         {
                                             item.Type = "Decimal";
@@ -219,7 +286,15 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     {
                                         StringFunctions StringFunctions = new StringFunctions();
                                         StringFunctions  parameters = (StringFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(StringFunctions));
-                                        item.Output = StringFunctions.Output(jparameters, jCategory, group.ID, item.ID);
+                                        try
+                                        {
+                                            item.Output = StringFunctions.Output(jparameters, jCategory, group.ID, item.ID);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);
+                                        }
+                                        
                                         if(parameters.Type == "Len")
                                         {
                                             item.Type = "Decimal";
@@ -266,7 +341,6 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                     }
                 }
             }
-            logger.Debug("End - " + HttpContext.Current.User.Identity.Name.ToString());
         }
     }
 }

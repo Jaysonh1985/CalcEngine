@@ -16,6 +16,7 @@ using System.Web;
 using CalculationCSharp.Models.Calculation;
 using CalculationCSharp.Areas.Configuration.Models.Actions;
 using CalculationCSharp.Areas.Configuration.Controllers;
+using log4net;
 
 namespace CalculationCSharp.Areas.Config.Controllers
 {
@@ -30,6 +31,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
         JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
         CalcHistoriesController CalcHistories = new CalcHistoriesController();
         CalcHistory CalcHistory = new CalcHistory();
+        private static readonly ILog logger = LogManager.GetLogger("Name");
 
         /// <summary>Gets the relevant configuration and returns this as JSON object, if no configuration is available creates the default template.
         /// <para>id = CalculationID on DB Table</para>
@@ -102,6 +104,10 @@ namespace CalculationCSharp.Areas.Config.Controllers
         public HttpResponseMessage UpdateConfig(int id,  JObject config)
         {
             dynamic json = config;
+
+            CalcConfiguration calcConfiguration = db.CalcConfiguration.Find(id);
+            logger.Debug("Start - " + HttpContext.Current.User.Identity.Name.ToString());
+            logger.Debug(calcConfiguration.Scheme.ToString() + " " + calcConfiguration.Name.ToString());         
             string jsonString = Convert.ToString(json.data);
             //Deserialize JSON to CategoryViewModel then calculate
             List<CategoryViewModel> jCategory = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<CategoryViewModel>));
@@ -109,6 +115,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             jCategory = Calculate.DebugResults(jCategory);
             //Update Cache
             repo.UpdateConfig(jCategory);
+            logger.Debug("End - " + HttpContext.Current.User.Identity.Name.ToString());
             //Return the response
             var response = Request.CreateResponse();
             response.Content = new StringContent(JsonConvert.SerializeObject(jCategory));
