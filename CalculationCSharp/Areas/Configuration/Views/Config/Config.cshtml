@@ -22,8 +22,18 @@
                                 <li><button ng-disabled="form.$invalid" class="btn btn-default navbar-btn" type="submit">Calculate</button></li>
                                 <li><button class="btn btn-default navbar-btn" type="button" ng-click="HistoryButtonClick('lg')">History</button></li>
                                 <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" type="button" ng-click="RegressionButtonClick('lg', form)">Regression</button></li>
-                                <li><button class="btn btn-default navbar-btn" type="button" ng-click="OpenAllButton()">Open All</button></li>
-                                <li><button class="btn btn-default navbar-btn" type="button" ng-click="CloseAllButton()">Close All</button></li>
+                                 <li>
+                                     <button class="btn btn-default navbar-btn" type="button" data-toggle="dropdown">
+                                         UI
+                                         <span class="caret"></span>
+                                     </button>
+                                     <ul class="dropdown-menu">
+                                         <li><a ng-click="OpenAllButton()">Open All</a></li>
+                                         <li><a ng-click="CloseAllButton()">Close All</a></li>
+                                         <li><a ng-click="RemoveExpectedResultsButton()">Reset Expected Results</a></li>
+                                         <li><a ng-click="RemoveInputsButton()">Reset Inputs</a></li>
+                                     </ul>
+                                </li>                                  
                                 <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" ng-csv="SpecButtonClick(form)" csv-header="getHeader" filename="@ViewData["SchemeName"] - @ViewData["CalcName"] Specification.csv" type="button">Specification</button></li>
                                 <li><button class="btn btn-default navbar-btn" type="button" ng-click="ExitButton()">Exit</button></li>
                                 <li><a>@ViewData["SchemeName"] - @ViewData["CalcName"] </a></li>

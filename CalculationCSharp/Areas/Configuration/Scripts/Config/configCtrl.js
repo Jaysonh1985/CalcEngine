@@ -312,6 +312,26 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $scope.openIndex[key] = false;
         })
     }
+    $scope.RemoveExpectedResultsButton = function () {
+        var cf = confirm("Are you sure you wish remove all Expected Results?");
+        if (cf == true) {
+            angular.forEach($scope.config, function (value, key, obj) {
+                angular.forEach(value.Functions, function (valueF, keyF, objF) {
+                    $scope.config[key].Functions[keyF].ExpectedResult = null;
+                })
+            })
+        }
+    }
+
+    $scope.RemoveInputsButton = function () {
+        var cf = confirm("Are you sure you wish remove all Input values?");
+        if (cf == true) {
+            angular.forEach($scope.config[0].Functions, function (value, key, obj) {
+                $scope.config[0].Functions[key].Output = null;
+            })
+        }
+    }
+
     $scope.ExitButton = function () {
 
         if (!$scope.form.$dirty)
