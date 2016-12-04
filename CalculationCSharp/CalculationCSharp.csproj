@@ -242,6 +242,7 @@
     <Compile Include="Areas\Configuration\Controllers\CalcConfigurationsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcHistoriesController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcRegressionInputsController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\CalcRegressionOutputController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcSpecificationController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\SchemeWebApiController.cs" />
@@ -298,6 +299,7 @@
     <Compile Include="Areas\Project\Models\Stories.cs" />
     <Compile Include="Models\ArrayFunctions\ArrayBuildingFunctions.cs" />
     <Compile Include="Models\CalculationViewModels.cs" />
+    <Compile Include="Models\Calculation\BulkOutputList.cs" />
     <Compile Include="Models\Calculation\OutputList.cs" />
     <Compile Include="Models\DateFunctions\DateFunctions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -854,6 +856,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Calculation\Models\" />
     <Folder Include="Areas\Calculation\Views\Shared\" />
+    <Folder Include="Areas\Configuration\Views\CalcRegressionOutput\" />
     <Folder Include="Areas\Configuration\Views\Shared\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Areas\Workflow\Models\" />

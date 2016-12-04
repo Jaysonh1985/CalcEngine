@@ -137,6 +137,14 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
+     var exportRegression = function (index, data) {
+         return $http.post("/api/CalcRegressionOutput/" + index, {data})
+            .then(function (response) {
+                return response.data;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+     };
      var getUserSession = function (id) {
          return $http.get("/api/UserSessions", { params: { id: id } }).then(function (response) {
              return response.data;
@@ -199,6 +207,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
         postRegression: postRegression,
         deleteRegression: deleteRegression,
         putRegression: putRegression,
+        exportRegression: exportRegression,
         getUserSession: getUserSession,
         deleteUserSession: deleteUserSession,
         specBuilder: specBuilder,

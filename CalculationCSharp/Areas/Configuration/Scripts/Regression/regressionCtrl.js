@@ -1,6 +1,17 @@
 ﻿// Copyright (c) 2016 Project AIM
 sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location, $filter, configService, ID, calculationService, configFunctionFactory, ObjectDiff) {
 
+    $scope.csv = {
+        content: null,
+        header: true,
+        headerVisible: true,
+        separator: ',',
+        separatorVisible: true,
+        result: null,
+        encoding: 'ISO-8859-1',
+        encodingVisible: true,
+    };
+
     function init() {
       $scope.isLoading = true;
         configService.getRegression(ID)
@@ -311,6 +322,21 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
         });
         $uibModalInstance.close('run');
     }
+    //Creates the array of the output
+    $scope.BulkOutputBuilder = function BulkOutputBuilder() {
+        $scope.isLoading = true;
+        $scope.BulkOutputArrayBuilder = [];
+        angular.forEach($scope.Regression, function (value, key, obj) {
+            $scope.BulkOutputArrayBuilder.push(angular.fromJson(value.OutputOld));
+        })
+        var promise = configService.exportRegression(1, $scope.BulkOutputArrayBuilder).then(function (data) {
+            $scope.isLoading = false;
+            toastr.success("Exported successfully", "Success");
+            return data;
+        });
+        return promise;
+
+    };
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');

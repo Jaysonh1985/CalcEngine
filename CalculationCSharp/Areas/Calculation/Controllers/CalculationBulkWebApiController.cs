@@ -20,6 +20,7 @@ using System.Reflection;
 using System.Linq;
 using System.IO;
 using System.Net.Http.Headers;
+using CalculationCSharp.Models.Calculation;
 
 namespace CalculationCSharp.Areas.Config.Controllers
 {
@@ -41,7 +42,6 @@ namespace CalculationCSharp.Areas.Config.Controllers
             //Associate the JSON string to an object
             dynamic json = moveTaskParams;
             //This logic displays for discovering which data is the label for the row not the value
-            bool isNameDone = false;
             //Create Lists for the calculation
             List<OutputListGroup> OutputList = new List<OutputListGroup>();
             List<List<OutputListGroup>> BulkOutputList = new List<List<OutputListGroup>>();
@@ -54,52 +54,11 @@ namespace CalculationCSharp.Areas.Config.Controllers
                 OutputList = Calculate.OutputResults(jCategory);
                 BulkOutputList.Add(OutputList);             
             }
-            //Iterate through data list collection
-            List <List <string>> propNames = new List<List<string>>();
-            List<string> propValues = new List<string>();
-            //Loop to output the values in the csv
-            int LoopCounter = 0;
-            //Create CSV of the output results
-            foreach (var item in BulkOutputList)
-            {
-                LoopCounter = 0;
-                foreach (var list in item)
-                {
-                    LoopCounter = LoopCounter + 1;
-                    //Sets the Group in the output
-                    if (isNameDone == false)
-                    {
-                        propValues.Add(list.Group);
-                        propNames.Add(propValues);
-                        propValues = new List<string>();
-                    }
-                    //Iterate through property collection
-                    foreach (var prop in list.Output)
-                    {
-                        //Sets the row label
-                        LoopCounter = LoopCounter + 1;
-                        if (isNameDone == false)
-                        {
-                            propValues.Add(prop.Field);
-                            propValues.Add(prop.Value);
-                            propNames.Add(propValues);
-                            propValues = new List<string>();
-                        }
-                        //sets the row value
-                        else
-                        {
-                            propValues.Add(prop.Value);
-                            propNames[LoopCounter-1].Add(prop.Value);
-                            propValues = new List<string>();
-                        }
+            BulkOutputListBuilder BulkBuilder = new BulkOutputListBuilder();
 
-                    }
-                }
-                isNameDone = true;
-            }
             //Create object response
             var response = Request.CreateResponse();
-            response.Content = new StringContent(JsonConvert.SerializeObject(propNames));
+            response.Content = new StringContent(JsonConvert.SerializeObject((BulkBuilder.BulkOutput(BulkOutputList))));
             response.StatusCode = HttpStatusCode.OK;
             return response;
         }
