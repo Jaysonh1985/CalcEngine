@@ -1,9 +1,10 @@
 ﻿<body ng-controller="groupCtrl">
     <div>
-        <form class="form-horizontal" role="form" ng-submit="ok($index)">
+        <form name="groupForm" class="form-horizontal" role="form" ng-submit="ok($index)">
             <div class="modal-header">
                 <h3>Name</h3>
-                <input style="overflow:auto;resize:none" type="text" id="Name" class="form-control" ng-model="Name" rows="1" required>
+                <input style="overflow:auto;resize:none" type="text" name="Name" id="Name" class="form-control" ng-model="Name" rows="1" required>
+                <p ng-show="groupForm['Name'].$error.columnNameUsed" class="help-block">Name used in different Category</p>
             </div>
             <div class="modal-body">
                 <h3>Description</h3>

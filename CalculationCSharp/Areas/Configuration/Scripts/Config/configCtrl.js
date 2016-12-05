@@ -466,7 +466,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             resolve: {
                 ID: function () { return $scope.ID },
                 Name: function () { return $scope.Name },
-                Description: function () { return $scope.Description }
+                Description: function () { return $scope.Description },
+                ColIndex: function () { return colIndex}
             }
         });
         modalInstance.result.then(function (selectedItem) {
