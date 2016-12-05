@@ -53,7 +53,9 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
 
             // prepopulat roles for the view dropdown
             var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            var schemeList = db.Schemes.Select(m => new { Value = m.Name, Text = m.Name }).Distinct().ToList();
             ViewBag.Roles = list;
+            ViewBag.SchemeList = new MultiSelectList(schemeList, "Value", "Text");
 
             return View("Index");
         }
@@ -69,7 +71,9 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
                 ViewBag.RolesForThisUser = userManager.GetRoles(user.Id);
                 // prepopulat roles for the view dropdown
                 var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+                var schemeList = db.Schemes.Select(m => new { Value = m.Name, Text = m.Name }).Distinct().ToList();
                 ViewBag.Roles = list;
+                ViewBag.SchemeList = new MultiSelectList(schemeList, "Value", "Text");
             }
             return View("Index");
         }
@@ -91,7 +95,9 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
             }
             // prepopulat roles for the view dropdown
             var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            var schemeList = db.Schemes.Select(m => new { Value = m.Name, Text = m.Name }).Distinct().ToList();
             ViewBag.Roles = list;
+            ViewBag.SchemeList = new MultiSelectList(schemeList, "Value", "Text");
             return View("Index");
         }
 
@@ -104,6 +110,7 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
             ApplicationUser user = userManager.FindByNameAsync(UserName).Result;
             user.Scheme = string.Join(",", SchemeName);
             userManager.Update(user);
+            ViewBag.ResultMessageAddScheme = "Scheme's added to User successfully";
             // prepopulat roles for the view dropdown
             var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             var schemeList = db.Schemes.Select(m => new { Value = m.Name, Text = m.Name }).Distinct().ToList();
