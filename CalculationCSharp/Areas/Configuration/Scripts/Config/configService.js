@@ -138,7 +138,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
             });
      };
      var exportRegression = function (index, data) {
-         return $http.post("/api/CalcRegressionOutput/" + index, {data})
+         return $http.post("/api/CalcRegressionOutput/" + index, {data: data})
             .then(function (response) {
                 return response.data;
             }, function (error) {

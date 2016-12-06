@@ -24,7 +24,7 @@ public class LookupFunctions
 	{
 		string Name;
 		string path = HttpContext.Current.Server.MapPath("\\Factor Tables\\");
-        System.Data.OleDb.OleDbConnection con = new System.Data.OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + path + "; Extended Properties='text; HDR=No; FMT=Delimited'");
+        System.Data.OleDb.OleDbConnection con = new System.Data.OleDb.OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + path + "; Extended Properties='text; HDR=No; FMT=Delimited'");
 		OleDbCommand command = con.CreateCommand();
         string Column = Convert.ToString("F" + ColumnNo);
      	if (DataType == 1) {
