@@ -61,6 +61,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                     Name: function () { return $scope.Name },
                     Scheme: function () { return $scope.Scheme },
                     SchemeList: function () { return SchemeList },
+                    Configuration: function () { return null }
                 }
             });
             modalInstance.result.then(function (selectedItem) {
@@ -71,6 +72,47 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                     User: null,
                     Group: null,
                     Configuration: null
+                };
+
+                configService.addConfig($scope.selected).then(function (data) {
+                    $scope.Boards.push(data);
+                    $scope.isLoading = false;
+                }, onError);
+
+                toastr.success("Calculation created successfully", "Success");
+            }, function () {
+            });
+
+        }, onError);
+    };
+
+    $scope.copyBoard = function AddBoard(Board) {
+        //Creates TypeAhead Values
+        var SchemeList = [];
+        configService.getSchemes().then(function (data) {
+            SchemeList = data;
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: '/Areas/Configuration/Scripts/CalculationMenu/ConfigMenuAddCalcModal.html',
+                scope: $scope,
+                controller: 'configMenuAddCalcCtrl',
+                size: 'md',
+                resolve: {
+                    Name: function () { return Board.Name },
+                    Scheme: function () { return Board.Scheme },
+                    SchemeList: function () { return SchemeList },
+                    Configuration: function () { return Board.Configuration }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = {
+                    ID: null,
+                    Name: selectedItem[0].Name,
+                    Scheme: selectedItem[0].Scheme,
+                    User: null,
+                    Group: null,
+                    Configuration: selectedItem[0].Configuration
                 };
 
                 configService.addConfig($scope.selected).then(function (data) {
@@ -96,65 +138,68 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
 
     $scope.releaseBoard = function (Board) {
 
-         $scope.calcrelease = [];
-         $scope.calcreleaseID = null;
-         $scope.calcreleaseID = Board.ID;
-         $scope.selected = [];
-         $scope.selected = {
-             ID: Board.ID,
-             Scheme: Board.Scheme,
-             Name: Board.Name,
-             User: Board.User,
-             Configuration: Board.Configuration,
-             Version: Math.ceil(Board.Version)
+        var cf = confirm("Release this Calculation?");
 
-         };
+        if (cf == true) {
 
-         Board.Version = Math.ceil(Board.Version);
+            $scope.calcrelease = [];
+            $scope.calcreleaseID = null;
+            $scope.calcreleaseID = Board.ID;
+            $scope.selected = [];
+            $scope.selected = {
+                ID: Board.ID,
+                Scheme: Board.Scheme,
+                Name: Board.Name,
+                User: Board.User,
+                Configuration: Board.Configuration,
+                Version: Math.ceil(Board.Version)
 
-         configService.putConfig(Board.ID, $scope.selected).then(function (data) {
-             $scope.isLoading = false;
-         }, onError);
+            };
 
-         configService.getHistory(Board.ID).then(function (data) {
-             $scope.isLoading = false;
+            Board.Version = Math.ceil(Board.Version);
 
-             $scope.historySelected = {
-                 CalcID: $scope.selected.ID,
-                 Scheme: $scope.selected.Scheme,
-                 Name: $scope.selected.Name,
-                 User: $scope.selected.User,
-                 Comment: 'Released',
-                 Configuration: $scope.selected.Configuration,
-                 Version: Math.ceil($scope.selected.Version)
-             };
+            configService.putConfig(Board.ID, $scope.selected).then(function (data) {
+                $scope.isLoading = false;
+            }, onError);
 
-             var index = configFunctionFactory.getIndexOf(data, $scope.historySelected.Version, 'Version');
+            configService.getHistory(Board.ID).then(function (data) {
+                $scope.isLoading = false;
 
-             if (index == false)
-             {
-                configService.postHistory($scope.selected.ID, $scope.historySelected).then(function (data) {
-                    $scope.isLoading = false;
-                }, onError);
-             }
+                $scope.historySelected = {
+                    CalcID: $scope.selected.ID,
+                    Scheme: $scope.selected.Scheme,
+                    Name: $scope.selected.Name,
+                    User: $scope.selected.User,
+                    Comment: 'Released',
+                    Configuration: $scope.selected.Configuration,
+                    Version: Math.ceil($scope.selected.Version)
+                };
 
-         }, onError);
+                var index = configFunctionFactory.getIndexOf(data, $scope.historySelected.Version, 'Version');
 
-        calculationService.getSingleConfig(Board.ID)
-           .then(function (data) {
-               $scope.isLoading = false;
-               $scope.calcrelease = data;
+                if (index == false) {
+                    configService.postHistory($scope.selected.ID, $scope.historySelected).then(function (data) {
+                        $scope.isLoading = false;
+                    }, onError);
+                }
 
-               if ($scope.calcrelease == null || $scope.calcrelease.length == 0) {
-                   $scope.relaseBoardAdd($scope.selected);
-               }
-               else
-               {
-                   $scope.relaseBoardUpdate($scope.calcreleaseID, $scope.selected);
-               }
-               toastr.success("Released successfully", "Success");
+            }, onError);
 
-           });
+            calculationService.getSingleConfig(Board.ID)
+               .then(function (data) {
+                   $scope.isLoading = false;
+                   $scope.calcrelease = data;
+
+                   if ($scope.calcrelease == null || $scope.calcrelease.length == 0) {
+                       $scope.relaseBoardAdd($scope.selected);
+                   }
+                   else {
+                       $scope.relaseBoardUpdate($scope.calcreleaseID, $scope.selected);
+                   }
+                   toastr.success("Released successfully", "Success");
+
+               });
+        }
      };
 
     $scope.relaseBoardAdd = function (data) {
