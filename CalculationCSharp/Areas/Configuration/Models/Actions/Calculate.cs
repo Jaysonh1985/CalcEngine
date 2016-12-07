@@ -98,6 +98,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 catch (Exception exception)
                                 {
                                     logger.Error(exception);
+                                    throw new HttpException(exception.ToString());
                                 }
 
                                 if (grouplastLogicOperator == "AND" && colLogicParse == false)
@@ -136,6 +137,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     catch (Exception exception)
                                     {
                                         logger.Error(exception);
+                                        throw new HttpException(exception.ToString());
                                     }
 
                                     if (lastLogicOperator == "AND" && logicparse == false)
@@ -194,6 +196,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                                 catch (Exception ex)
                                                 {
                                                     logger.Error(ex);
+                                                    throw new HttpException(ex.ToString());
                                                 }
                                                
                                                 item.Output = Convert.ToString(Output);
@@ -229,6 +232,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         catch (Exception ex)
                                         {
                                             logger.Error(ex);
+                                            throw new HttpException(ex.ToString());
                                         }                                   
                                     }
                                     else if (item.Function == "Factors")
@@ -241,7 +245,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         }
                                         catch (Exception ex)
                                         {
-                                            logger.Error(ex);                                           
+                                            logger.Error(ex);
+                                            throw new HttpException(ex.ToString());
                                         }
                                        
                                         item.Type = parameters.OutputType;
@@ -256,6 +261,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         catch (Exception ex)
                                         {
                                             logger.Error(ex);
+                                            throw new HttpException(ex.ToString());
                                         }
                                     }
                                     else if (item.Function == "DatePart")
@@ -268,6 +274,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         catch (Exception ex)
                                         {
                                             logger.Error(ex);
+                                            throw new HttpException(ex.ToString());
                                         }                                       
                                     }
 
@@ -281,6 +288,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         catch (Exception ex)
                                         {
                                             logger.Error(ex);
+                                            throw new HttpException(ex.ToString());
                                         }                                       
                                     }
                                     else if (item.Function == "ArrayFunctions")
@@ -294,6 +302,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         catch (Exception ex)
                                         {
                                             logger.Error(ex);
+                                            throw new HttpException(ex.ToString());
                                         }
                                         
 
@@ -318,6 +327,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         catch (Exception ex)
                                         {
                                             logger.Error(ex);
+                                            throw new HttpException(ex.ToString());
                                         }
                                         
                                         if(parameters.Type == "Len")
