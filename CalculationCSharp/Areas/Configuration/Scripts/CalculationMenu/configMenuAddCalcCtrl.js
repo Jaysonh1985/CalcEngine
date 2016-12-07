@@ -2,7 +2,14 @@
 sulhome.kanbanBoardApp.controller('configMenuAddCalcCtrl', function ($scope, $uibModalInstance, $log, Name, Scheme, SchemeList, Configuration) {
     // Model
     //Map Back the input values
-    $scope.Name = Name + " (Copy)";
+    if (Configuration != null)
+    {
+        $scope.Name = Name + " (Copy)";
+    }
+    else
+    {
+        $scope.Name = Name;
+    }  
     $scope.Scheme = Scheme;
     $scope.Group = [];
     $scope.SchemeList = SchemeList;
