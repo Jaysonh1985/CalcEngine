@@ -18,11 +18,12 @@
                                 <option value="Later">Later</option>
                                 <option value="Subtract">Subtract</option>
                                 <option value="DatesBetween">Dates Between Two Dates</option>
+                                <option value="Today">Today's Date</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div ng-if="period.Type != 'Today' " class="form-group">
                         <label for="Date1" class="control-label col-md-2">Start Date</label>
                         <div class="col-sm-9">
                             <input type="Text" id="Date1" name="Date1" class="form-control" ng-model="period.Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required />

@@ -136,6 +136,10 @@ public class DateFunctions
         {
             return DateAdjustmentDatesBetween(Date1, Date2, Day, Month);
         }
+        else if (Type == "Today")
+        {
+            return DateTime.Now.ToShortDateString();
+        }
         else
         {
             return Convert.ToDateTime("01/01/1900").ToShortDateString();

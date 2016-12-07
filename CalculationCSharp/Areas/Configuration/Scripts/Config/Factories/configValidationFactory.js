@@ -8,10 +8,13 @@ sulhome.kanbanBoardApp.factory('configValidationFactory', function ($filter, con
                 //Allows Arrays
                 if(array == true)
                 {
-                    var arraySplit = value.split('~');
-                    angular.forEach(arraySplit, function (value1, key1, obj1) {
-                        configFunctionFactory.setFormValidation(value1, AttName, form, VariableNames, type);
-                    });
+                    if (value != null && value != 'undefined')
+                    {
+                        var arraySplit = value.split('~');
+                        angular.forEach(arraySplit, function (value1, key1, obj1) {
+                            configFunctionFactory.setFormValidation(value1, AttName, form, VariableNames, type);
+                        });
+                    }
                 }
                 else
                 {
