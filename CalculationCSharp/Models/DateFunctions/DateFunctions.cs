@@ -206,6 +206,15 @@ public class DateFunctions
             }
             AdjDate = Date1.AddMonths(Total);
         }
+        else if (PeriodType == "Days")
+        {
+            int Total = Convert.ToInt32(Yrs);
+            if (Type == "Subtract")
+            {
+                Total = Total * -1;
+            }
+            AdjDate = Date1.AddDays(Total);
+        }
         else
         {
             AdjDate = Date1.AddMonths(0);
