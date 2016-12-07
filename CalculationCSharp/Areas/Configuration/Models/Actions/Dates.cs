@@ -29,6 +29,10 @@ namespace CalculationCSharp.Areas.Configuration.Models
             DateFunctions DatesFunctions = new DateFunctions();
             ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
             Dates parameters = (Dates)javaScriptSerializ­er.Deserialize(jparameters, typeof(Dates));
+            if(parameters.Type == "Today")
+            {
+                return DateTime.Now.ToShortDateString();
+            }
             string[] Date1parts = null;
             string[] Date2parts = null;
             //Returns array
