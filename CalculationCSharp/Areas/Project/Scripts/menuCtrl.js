@@ -21,12 +21,11 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
            }, onError);
      };
 
-        $scope.openBoard = function () {
-            $scope.ID = this.board.ID;
-            var earl = '/Board/' + $scope.ID;
-            $window.location.assign('/Project/Board/Board/' + $scope.ID);
-        };
-
+    $scope.openBoard = function () {
+        $scope.ID = this.board.ID;
+        var earl = '/Board/' + $scope.ID;
+        $window.location.assign('/Project/Board/Board/' + $scope.ID);
+    };
 
      $scope.deleteBoard = function (index) {
          var cf = confirm("Delete this Board?");
@@ -37,16 +36,12 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
             .then(function (data) {
                 $scope.isLoading = false;
                 $scope.Boards.splice(index, 1);
-            }, onError);
-          
-         }
-         
-
+            }, onError);          
+         }      
      };
 
      $scope.addBoard = function AddBoard() {
          $scope.isLoading = true;
-
          $scope.selected = {
              ID: '',
              Name: '',
@@ -54,7 +49,6 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
              Group: '',
              Configuration: ''
          };
-
          boardService.addConfig($scope.selected).then(function (data) {
              $scope.Boards.push(data);
              $scope.isLoading = false;
@@ -90,7 +84,6 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
      $scope.modify = function (Boards) {
          $scope.editingData[Boards.ID] = true;
      };
-
 
      $scope.update = function (Boards) {
          $scope.editingData[Boards.ID] = false;

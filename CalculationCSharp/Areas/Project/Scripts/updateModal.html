@@ -2,8 +2,37 @@
         <div >
                 <div class="modal-header">
                     <textarea overflow:auto;resize:none" type="text" id="Name" placeholder="Please enter name of item here" class="form-control" ng-model="Name" rows="1">{{ Name }}</textarea>
+                    <h2 id="stopwatch">{{ElapsedTime | stopwatchTime}}</h2>
+
+                    <button class="btn btn-success" ng-click="start()" id="start">Start</button>
+                    <button class="btn btn-danger" ng-click="stop()" id="stop">Stop</button>
                 </div>
                 <div class="modal-body">
+                    <h1>Status</h1>
+                    <br />
+                    <form editable-form name="tableform">
+                        <!-- table -->
+                        <table class="table table-bordered table-hover table-condensed">
+                            <tr style="font-weight: bold">
+                                <td style="width:50%;background-color:white; color:#000000"><H4>RAG</H4></td>
+                                <td style="width:50%;background-color:white; color:#000000"><H4>Due Date</H4></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="singleSelect" ng-model="RAG" placeholder="Enter R.A.G Status" class="form-control">
+                                        <option value=""></option>
+                                        <option value="Red">Red</option>
+                                        <option value="Amber">Amber</option>
+                                        <option value="Green">Green</option>
+                                        {{RAG}}
+                                    </select>
+                                </td>
+                                <td>
+                                    <span><input type="date" ng:model="DueDate"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                     <h1>Requirements</h1>
                     <br />
                     <form editable-form name="tableform">
@@ -34,6 +63,7 @@
 
                                 <td>
                                     <select name="singleSelect" ng-model="Moscow" placeholder="Enter M.o.S.C.o.W rating" class="form-control">
+                                        <option value=""></option>
                                         <option value="Must">Must</option>
                                         <option value="Should">Should</option>
                                         <option value="Could">Could</option>
@@ -43,6 +73,7 @@
                                 </td>
                                 <td>
                                     <select name="singleSelect" ng-model="Timebox" placeholder="Enter Timebox" class="form-control">
+                                        <option value=""></option>
                                         <option value="Timebox 1">Timebox 1</option>
                                         <option value="Timebox 2">Timebox 2</option>
                                         <option value="Timebox 3">Timebox 3</option>
@@ -79,7 +110,6 @@
 
 
                             <tr ng-repeat="Task in Tasks">
-
                                 <td><input type="text" ng:model="Task.TaskName" class="form-control"></td>
                                 <td>
                                     <select name="singleSelect" ng:model="Task.TaskUser" placeholder="Select User" class="form-control">
@@ -136,7 +166,6 @@
                 <div class="modal-footer">
                     <input class="btn btn-default" type="button" value="Delete" ng-click="DeleteButtonClick()" />
                     <button class="btn btn-primary" type="button" ng-click="ok($index)">OK</button>
-                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                 </div>
 </div>
    

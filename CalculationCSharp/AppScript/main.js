@@ -100,3 +100,19 @@ sulhome.kanbanBoardApp.config(function(IdleProvider, KeepaliveProvider) {
      IdleProvider.timeout(10);
      KeepaliveProvider.interval(10);
  });
+
+sulhome.kanbanBoardApp.filter('stopwatchTime', function () {
+    return function (input) {
+        if(input){
+            input = input * 1000;
+            var hours = parseInt(input / 3600000, 10);
+            input  %= 3600000;
+            var mins = parseInt(input / 60000, 10);
+            input %= 60000;
+            var secs = parseInt(input / 1000, 10);
+            var ms = input % 1000;
+            
+            return hours + ' Hours ' + mins + ' Minutes ' + secs + ' Seconds ';
+        }
+    };
+})

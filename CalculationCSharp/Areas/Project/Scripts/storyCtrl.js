@@ -1,15 +1,19 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, ID, Name, Description, AcceptanceCriteria, Moscow, Timebox, User, Tasks, Comments) {
+sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, $interval, ID, Name, Description, AcceptanceCriteria, RAG, DueDate, ElapsedTime, Moscow, Timebox, User, Tasks, Comments) {
     
     $scope.ID = ID;
     $scope.Name = Name;
     $scope.Description = Description;
+    $scope.RAG = RAG;
+    $scope.DueDate = new Date(DueDate);
+    $scope.ElapsedTime = ElapsedTime
     $scope.AcceptanceCriteria = AcceptanceCriteria;
     $scope.Moscow = Moscow;
     $scope.Timebox = Timebox;
     $scope.User = User;
     $scope.Tasks = Tasks;
     $scope.Comments = Comments;
+    
 
     $scope.addItem = function () {
         if ($scope.Tasks == null) {
@@ -36,7 +40,20 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
         $scope.Tasks.splice(index, 1);
     },
 
+    $scope.ElapsedTime = ElapsedTime;
+    var timerPromise;
+    $scope.start = function () {
+        timerPromise = $interval(function () {
+            $scope.ElapsedTime = $scope.ElapsedTime + 1;
+        }, 1000);
+    };
 
+    $scope.stop = function () {
+        if (timerPromise) {
+            $interval.cancel(timerPromise);
+            timerPromise = undefined;
+        }
+    };
 
     $scope.btn_add = function () {
 
@@ -63,6 +80,9 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
             ID: $scope.ID,
             Name: $scope.Name,
             Description: $scope.Description,
+            RAG: $scope.RAG,
+            DueDate: $scope.DueDate,
+            ElapsedTime: $scope.ElapsedTime,
             AcceptanceCriteria: $scope.AcceptanceCriteria,
             Moscow: $scope.Moscow,
             Timebox: $scope.Timebox,

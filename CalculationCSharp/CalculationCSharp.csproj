@@ -679,7 +679,6 @@
     <Content Include="Areas\Calculation\Views\Calculation\Form.cshtml" />
     <Content Include="Areas\Calculation\Views\web.config" />
     <Content Include="Areas\Calculation\Views\Calculation\Index.cshtml" />
-    <Content Include="Areas\Project\Views\Board\Board - Copy.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

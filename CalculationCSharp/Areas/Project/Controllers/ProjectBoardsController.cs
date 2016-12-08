@@ -77,14 +77,13 @@ namespace CalculationCSharp.Areas.Project.Controllers
         [ResponseType(typeof(ProjectBoard))]
         public IHttpActionResult PostProjectBoard(ProjectBoard projectBoard)
         {
+            projectBoard.UpdateDate = DateTime.Now;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-            projectBoard.UpdateDate = DateTime.Now;
+            }           
             db.ProjectBoard.Add(projectBoard);
             db.SaveChanges();
-
             return CreatedAtRoute("DefaultApi", new { id = projectBoard.ID }, projectBoard);
         }
 

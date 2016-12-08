@@ -110,6 +110,8 @@ namespace CalculationCSharp.Areas.Project.Models
             Story.Name = json.Name;
             Story.Description = json.Description;
             Story.AcceptanceCriteria = json.AcceptanceCriteria;
+            Story.DueDate = json.DueDate;
+            Story.RAG = json.RAG;
             Story.Moscow = json.Moscow;
             Story.Timebox = json.Timebox;
             Story.User = json.User;

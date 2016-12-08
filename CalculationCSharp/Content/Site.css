@@ -76,11 +76,6 @@ label {
     font-weight: normal;
 }
 
-.green {
-
-    background-color: green; 
-}
-
 .red {
     background-color: red;
 }
@@ -88,6 +83,26 @@ label {
     background-color: #c47d7d;
     color:white;  
 }
+.redCard{
+    background-color:#AE0000;
+    color:white;  
+    text-shadow: 0 0 3px black;
+}
+
+.greenCard{
+    background-color:  #009900;
+    color:white;  
+    text-shadow: 0 0 3px black;
+}
+.amberCard{
+    background-color: #e9bb06;
+    color:white; 
+    text-shadow: 0 0 3px black; 
+}
+.standardCard{
+    background-color: #d9d9d9;
+}
+
 .grey {
     background-color: gray;
 }
@@ -556,7 +571,7 @@ CSS class since the keyframe will take charge of the animation */
 * browsers we can use event.offsetY for this.
 */
     .simpleDemo ul[dnd-list] li {
-    background-color: rgba(238, 238, 238, 0.25);
+    /*background-color: rgba(238, 238, 238, 0.25);*/
     border: 1px solid #ddd;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
@@ -571,8 +586,7 @@ CSS class since the keyframe will take charge of the animation */
 * Show selected elements in green
 */
 .simpleDemo ul[dnd-list] li.selected {
-    background-color: #dff0d8;
-    color: #3c763d;
+
 }
 .typeahead-demo .custom-popup-wrapper {
 position: absolute;

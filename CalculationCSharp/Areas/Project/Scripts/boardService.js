@@ -65,14 +65,14 @@ sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) 
     };
 
 
-    //var updateBoard = function (boardIdVal, data, updateType) {
-    //    return $http.post("/api/BoardWebApi/UpdateBoard", { boardId: boardIdVal, data: data, updateType })
-    //        .then(function (response) {
-    //            return response.status == 200;
-    //        }, function (error) {
-    //            return $q.reject(error.data.Message);
-    //        });
-    //};
+    var updateBoard = function (boardIdVal, data, updateType) {
+        return $http.post("/api/BoardWebApi/UpdateBoard", { boardId: boardIdVal, data: data, updateType: updateType })
+            .then(function (response) {
+                return response.status == 200;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+    };
 
    
     var initialize = function () {      

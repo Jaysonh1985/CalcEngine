@@ -111,12 +111,8 @@ namespace CalculationCSharp.Areas.Project.Controllers
                         sb.Append(line);
                         sb.AppendLine("");
                     }
-
-
                 }
-
-                //Add line for the values
-                
+                //Add line for the values             
                 
             }
 

@@ -3,6 +3,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
     // Model
     $scope.columns = [];
     $scope.isLoading = true;
+    $scope.DueDateMinus2 = 0;
 
     $scope.columns = {
         selected: null,
@@ -16,6 +17,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
     function init() {
         var id = $location.absUrl();
         $scope.isLoading = true;
+        $scope.todayDate = new Date();
         boardService.initialize().then(function (data) {
             $scope.isLoading = true;
 
@@ -91,6 +93,9 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         $scope.index = index;
         $scope.Name = this.story.Name;
         $scope.Description = this.story.Description;
+        $scope.RAG = this.story.RAG;
+        $scope.DueDate = this.story.DueDate;
+        $scope.ElapsedTime = this.story.ElapsedTime;
         $scope.AcceptanceCriteria = this.story.AcceptanceCriteria;
         $scope.Moscow = this.story.Moscow;
         $scope.Timebox = this.story.Timebox;
@@ -109,6 +114,9 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             resolve: {
                 Name: function () { return $scope.Name },
                 Description: function () { return $scope.Description; },
+                RAG: function () { return $scope.RAG; },
+                DueDate: function () { return $scope.DueDate; },
+                ElapsedTime: function () { return $scope.ElapsedTime; },
                 AcceptanceCriteria: function () { return $scope.AcceptanceCriteria; },
                 Moscow: function () { return $scope.Moscow; },
                 Timebox: function () { return $scope.Timebox;},
@@ -126,6 +134,9 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             $scope.columns[$scope.colID].Stories[$scope.index].AcceptanceCriteria = selectedItem.AcceptanceCriteria;
             $scope.columns[$scope.colID].Stories[$scope.index].Comments = selectedItem.Comments;
             $scope.columns[$scope.colID].Stories[$scope.index].Description = selectedItem.Description;
+            $scope.columns[$scope.colID].Stories[$scope.index].RAG = selectedItem.RAG;
+            $scope.columns[$scope.colID].Stories[$scope.index].DueDate = selectedItem.DueDate;
+            $scope.columns[$scope.colID].Stories[$scope.index].ElapsedTime = selectedItem.ElapsedTime;
             $scope.columns[$scope.colID].Stories[$scope.index].Moscow = selectedItem.Moscow;
             $scope.columns[$scope.colID].Stories[$scope.index].Name = selectedItem.Name;
             $scope.columns[$scope.colID].Stories[$scope.index].Timebox = selectedItem.Timebox;
