@@ -46,9 +46,11 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
              id = null;
          }
          boardService.getCSV(id)
-             {
-
-                 };
+         .then(function (data)
+         {
+             var x = data;
+         })
+             
      };
 
      $scope.toggle = function (scope) {

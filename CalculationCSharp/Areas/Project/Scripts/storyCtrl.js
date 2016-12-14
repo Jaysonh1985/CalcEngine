@@ -48,7 +48,8 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
     var timerPromise;
     $scope.start = function () {
         $scope.timerStart = true;
-        if (isNaN(Date.parse($scope.StartDate)) == true)
+        $scope.StartDateString = $scope.StartDate.toDateString();
+        if (isNaN(Date.parse($scope.StartDate)) == true || $scope.StartDate.toDateString() == 'Mon Jan 01    1')
         {
             $scope.StartDate = new Date();
         }      
