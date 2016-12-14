@@ -60,9 +60,11 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
          storyID = $scope.columns[ID].Stories.length;
          $scope.columns[ID].Stories.push({
              Name: 'New',
-             Description: '',
-             AcceptanceCriteria: '',
+             Description: null,
+             AcceptanceCriteria: null,
              ID: storyID,
+             RAG: 'Green',
+             ElapsedTime: null
          });
      };
 
@@ -89,15 +91,18 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
      };
 
      $scope.UpdateButtonClick = function (size, colIndex, index) {
-
         $scope.index = index;
         $scope.Name = this.story.Name;
         $scope.Description = this.story.Description;
         $scope.RAG = this.story.RAG;
+        $scope.Requested = this.story.Requested;
+        $scope.StartDate = this.story.StartDate;
         $scope.DueDate = this.story.DueDate;
         $scope.ElapsedTime = this.story.ElapsedTime;
         $scope.AcceptanceCriteria = this.story.AcceptanceCriteria;
         $scope.Moscow = this.story.Moscow;
+        $scope.Complexity = this.story.Complexity;
+        $scope.Effort = this.story.Effort;
         $scope.Timebox = this.story.Timebox;
         $scope.User = this.story.User;
         $scope.ID = this.story.ID;
@@ -111,15 +116,20 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             scope:$scope,
             controller: 'storyCtrl',
             size: size,
+            backdrop: false,
             resolve: {
                 Name: function () { return $scope.Name },
                 Description: function () { return $scope.Description; },
+                Requested: function () { return $scope.Requested; },
                 RAG: function () { return $scope.RAG; },
+                StartDate: function () { return $scope.StartDate; },
                 DueDate: function () { return $scope.DueDate; },
                 ElapsedTime: function () { return $scope.ElapsedTime; },
                 AcceptanceCriteria: function () { return $scope.AcceptanceCriteria; },
                 Moscow: function () { return $scope.Moscow; },
-                Timebox: function () { return $scope.Timebox;},
+                Timebox: function () { return $scope.Timebox; },
+                Complexity: function () { return $scope.Complexity; },
+                Effort: function () { return $scope.Effort; },
                 User: function () { return $scope.User; },
                 ID: function () { return $scope.ID },
                 Tasks: function () { return $scope.Tasks },
@@ -135,17 +145,20 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             $scope.columns[$scope.colID].Stories[$scope.index].Comments = selectedItem.Comments;
             $scope.columns[$scope.colID].Stories[$scope.index].Description = selectedItem.Description;
             $scope.columns[$scope.colID].Stories[$scope.index].RAG = selectedItem.RAG;
+            $scope.columns[$scope.colID].Stories[$scope.index].Requested = selectedItem.Requested;
+            $scope.columns[$scope.colID].Stories[$scope.index].StartDate = selectedItem.StartDate;
             $scope.columns[$scope.colID].Stories[$scope.index].DueDate = selectedItem.DueDate;
             $scope.columns[$scope.colID].Stories[$scope.index].ElapsedTime = selectedItem.ElapsedTime;
             $scope.columns[$scope.colID].Stories[$scope.index].Moscow = selectedItem.Moscow;
+            $scope.columns[$scope.colID].Stories[$scope.index].Complexity = selectedItem.Complexity;
+            $scope.columns[$scope.colID].Stories[$scope.index].Effort = selectedItem.Effort;
             $scope.columns[$scope.colID].Stories[$scope.index].Name = selectedItem.Name;
             $scope.columns[$scope.colID].Stories[$scope.index].Timebox = selectedItem.Timebox;
             $scope.columns[$scope.colID].Stories[$scope.index].User = selectedItem.User;
             $scope.columns[$scope.colID].Stories[$scope.index].Tasks = selectedItem.Tasks;
             $scope.columns[$scope.colID].Stories[$scope.index].Comments = selectedItem.Comments;
-
         }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
+
         });      
 
     };

@@ -1,20 +1,24 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, $interval, ID, Name, Description, AcceptanceCriteria, RAG, DueDate, ElapsedTime, Moscow, Timebox, User, Tasks, Comments) {
+sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, $interval, ID, Name, Description, AcceptanceCriteria, RAG, Requested, StartDate, DueDate, ElapsedTime, Moscow, Complexity, Effort, Timebox, User, Tasks, Comments) {
     
     $scope.ID = ID;
     $scope.Name = Name;
     $scope.Description = Description;
     $scope.RAG = RAG;
+    $scope.Requested = Requested;
+    $scope.StartDate = new Date(StartDate);
     $scope.DueDate = new Date(DueDate);
     $scope.ElapsedTime = ElapsedTime
     $scope.AcceptanceCriteria = AcceptanceCriteria;
     $scope.Moscow = Moscow;
+    $scope.Complexity = Complexity;
+    $scope.Effort = Effort;
     $scope.Timebox = Timebox;
     $scope.User = User;
     $scope.Tasks = Tasks;
     $scope.Comments = Comments;
+    $scope.timerStart = false;
     
-
     $scope.addItem = function () {
         if ($scope.Tasks == null) {
             $scope.Tasks = [];
@@ -43,12 +47,25 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
     $scope.ElapsedTime = ElapsedTime;
     var timerPromise;
     $scope.start = function () {
+        $scope.timerStart = true;
+        if (isNaN(Date.parse($scope.StartDate)) == true)
+        {
+            $scope.StartDate = new Date();
+        }      
         timerPromise = $interval(function () {
-            $scope.ElapsedTime = $scope.ElapsedTime + 1;
+            if ($scope.ElapsedTime == null)
+            {
+                $scope.ElapsedTime = 1;
+            }
+            else
+            {
+                $scope.ElapsedTime = $scope.ElapsedTime + 1;
+            }
         }, 1000);
     };
 
     $scope.stop = function () {
+        $scope.timerStart = false;
         if (timerPromise) {
             $interval.cancel(timerPromise);
             timerPromise = undefined;
@@ -75,16 +92,20 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
 
     //Click OK
     $scope.ok = function () {
-
+        $scope.stop();
         $scope.selected = {
             ID: $scope.ID,
             Name: $scope.Name,
             Description: $scope.Description,
+            Requested: $scope.Requested,
             RAG: $scope.RAG,
+            StartDate: $scope.StartDate,
             DueDate: $scope.DueDate,
             ElapsedTime: $scope.ElapsedTime,
             AcceptanceCriteria: $scope.AcceptanceCriteria,
             Moscow: $scope.Moscow,
+            Complexity: $scope.Complexity,
+            Effort: $scope.Effort,
             Timebox: $scope.Timebox,
             User: $scope.User,
             Tasks: $scope.Tasks,
@@ -95,6 +116,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
     };
 
     $scope.cancel = function () {
+        $scope.stop();
         $uibModalInstance.dismiss('cancel');
     };
 
