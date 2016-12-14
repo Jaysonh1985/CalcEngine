@@ -112,7 +112,6 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
             Tasks: $scope.Tasks,
             Comments: $scope.Comments
         };
-
         $uibModalInstance.close($scope.selected);
     };
 

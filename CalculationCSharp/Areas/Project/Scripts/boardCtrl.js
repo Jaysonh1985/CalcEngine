@@ -4,7 +4,16 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
     $scope.columns = [];
     $scope.isLoading = true;
     $scope.DueDateMinus2 = 0;
-
+    $scope.csv = {
+        content: null,
+        header: true,
+        headerVisible: true,
+        separator: ',',
+        separatorVisible: true,
+        result: null,
+        encoding: 'ISO-8859-1',
+        encodingVisible: true,
+    };
     $scope.columns = {
         selected: null,
     };
@@ -45,12 +54,14 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
          if (angular.isNumber(id) == false) {
              id = null;
          }
-         boardService.getCSV(id)
-         .then(function (data)
-         {
-             var x = data;
-         })
-             
+
+         var promise = boardService.getCSV(id)
+            .then(function (data) {
+                $scope.isLoading = true;
+                $scope.CSV = data;
+                return data;
+            }, onError);
+         return promise;
      };
 
      $scope.toggle = function (scope) {

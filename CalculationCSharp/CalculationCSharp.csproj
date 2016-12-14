@@ -274,6 +274,7 @@
     <Compile Include="Areas\Maintenance\MaintenanceAreaRegistration.cs" />
     <Compile Include="Areas\Maintenance\Models\FactorMaintenance.cs" />
     <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
+    <Compile Include="Areas\Project\Controllers\CSVWebApiController.cs" />
     <Compile Include="Areas\Project\Controllers\ProjectBoardsController.cs" />
     <Compile Include="Areas\Project\Models\Board.cs" />
     <Compile Include="Areas\Project\Models\BoardRepository.cs" />

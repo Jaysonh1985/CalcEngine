@@ -39,12 +39,11 @@ sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) 
     };
         
     var getCSV = function (id) {
-        $http({
-            url: "/Project/Board/CSV",
-            method: "GET",
-            params: { id: id },
-            responseType : 'arraybuffer'
-        })
+        return $http.get("/api/CSVWebApi/CSV", { params: { id: id } }).then(function (response) {
+            return response.data;
+        }, function (error) {
+            return $q.reject(error.data.Message);
+        });
     };
 
 
