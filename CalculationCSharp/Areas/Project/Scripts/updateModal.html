@@ -9,45 +9,37 @@
                     <table class="table table-bordered table-hover table-condensed">
                         <tr>
                             <td style="width:50%">
-                                <form class="form-horizontal">
-                                    <div class="form-group row">
-                                        <label for="RAG" class="col-xs-4 col-form-label">RAG:</label>
-                                        <div class="col-xs-6">
-                                            <select name="singleSelect" ng-model="RAG" placeholder="Enter R.A.G Status" id="RAG" class="form-control input-sm">
-                                                <option value=""></option>
-                                                <option value="Red">Red</option>
-                                                <option value="Amber">Amber</option>
-                                                <option value="Green">Green</option>
-                                                {{RAG}}
-                                            </select>
-                                        </div>
+                                <form>
+                                    <div class="form-group">
+                                        <h4><label for="RAG">RAG:</label> </h4>
+                                        <select name="singleSelect" ng-model="RAG" placeholder="Enter R.A.G Status" id="RAG" class="form-control input-group-sm">
+                                            <option value=""></option>
+                                            <option value="Red">Red</option>
+                                            <option value="Amber">Amber</option>
+                                            <option value="Green">Green</option>
+                                            {{RAG}}
+                                        </select>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="StartDate" class="col-xs-4 col-form-label">Start Date:</label>
-                                        <div class="col-xs-6">
-                                            <h5 class="form-control-static">{{StartDate | date:'d MMMM yyyy h:mm a'}}</h5>
-                                        </div>
+
+                                    <div class="form-group">
+                                        <h4><label for="DueDate">Due Date:</label></h4>
+                                        <input class="form-control" type="date" id="DueDate" ng:model="DueDate">
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="DueDate" class="col-xs-4 col-form-label">Due Date:</label>
-                                        <div class="col-xs-6">
-                                            <input class="form-control" type="date" id="DueDate" ng:model="DueDate">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="Requested" class="col-xs-4 col-form-label">Requested By:</label>
-                                        <div class="col-xs-6">
-                                            <input class="form-control" type="text" id="Requested" ng:model="Requested">
-                                        </div>
+                                    <div class="form-group ">
+                                        <h4><label for="Requested">Requested By:</label></h4>
+                                        <input class="form-control" type="text" id="Requested" ng:model="Requested">
                                     </div>
                                 </form>
                             </td>
                             <td style="width:50%">
-                                <div>
-                                    <h3>Elapsed Time</h3>
-                                    <h3 id="stopwatch">{{ElapsedTime | stopwatchTime}}</h3>
-                                    <button ng-if="timerStart == false" class="btn btn-success" ng-click="start()" id="start">Start</button>
-                                    <button ng-if="timerStart == true" class="btn btn-danger" ng-click="stop()" id="stop">Stop</button>
+                                <h3>Elapsed Time:</h3>
+                                <h3 id="stopwatch">{{ElapsedTime | stopwatchTime}}</h3>
+                                <button ng-if="timerStart == false" class="btn btn-success" ng-click="start()" id="start">Start</button>
+                                <button ng-if="timerStart == true" class="btn btn-danger" ng-click="stop()" id="stop">Stop</button>
+                                <br />
+                                <div ng-if="StartDate != 'Invalid Date'" class="form-group">
+                                    <h3><label for="StartDate">Start Date:</label></h3>
+                                    <h5  class="form-control-static">{{StartDate | date:'d MMMM yyyy h:mm a'}}</h5>
                                 </div>
                             </td>                          
                         </tr>
@@ -75,11 +67,10 @@
                     <form editable-form name="tableform">
                         <table class="table table-bordered table-hover table-condensed">
                             <tr style="font-weight: bold">
-                                <td style="width:20%;background-color:white; color:#000000"><h4>MoSCoW</h4></td>
-                                <td style="width:20%;background-color:#ffffff; color:#000000"><H4>Timebox</H4></td>
-                                <td style="width:20%;background-color:#ffffff; color:#000000"><H4>Allocation</H4></td>
-                                <td style="width:20%;background-color:#ffffff; color:#000000"><H4>Complexity</H4></td>
-                                <td style="width:10%;background-color:#ffffff; color:#000000"><H4>Effort</H4></td>
+                                <td style="width:25%;background-color:white; color:#000000"><h4>MoSCoW</h4></td>
+                                <td style="width:25%;background-color:#ffffff; color:#000000"><H4>Timebox</H4></td>
+                                <td style="width:25%;background-color:#ffffff; color:#000000"><H4>Allocation</H4></td>
+                                <td style="width:25%;background-color:#ffffff; color:#000000"><H4>Complexity</H4></td>
                             </tr>
                             <tr>
                                 <td>
@@ -118,9 +109,6 @@
                                         <option value="Low">Low</option>
                                         {{Complexity}}
                                     </select>
-                                </td>
-                                <td>
-                                    <input class="form-control" type="number" id="DueDate" ng:model="Effort">
                                 </td>
                             </tr>
                         </table>
@@ -177,7 +165,7 @@
                             <tr style="font-weight: bold">
                                 <td style="width:20%;background-color:white; color:#000000"><H4>Type</H4></td>
                                 <td style="width:50%;background-color:white; color:#000000"><H4>Comment</H4></td>
-                                <td style="width:30%;background-color:white; color:#000000"><H4>Date Time</H4></td>
+                                <td style="width:30%;background-color:white; color:#000000"><H4>Updated</H4></td>
                                 <td style="width:10%;background-color:white; color:#000000"><H4></H4></td>
                             </tr>
                             <tr ng-repeat="comnt in Comments">
