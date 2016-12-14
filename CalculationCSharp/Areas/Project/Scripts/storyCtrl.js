@@ -81,7 +81,9 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
         
         if ($scope.txtcomment != '') {
             $scope.Comments.push({
-                CommentName: $scope.txtcomment
+                CommentName: $scope.txtcomment,
+                CommentDateTime: new Date(),
+                CommentType: $scope.txtCommentType,
             });
             $scope.txtcomment = "";
         }
