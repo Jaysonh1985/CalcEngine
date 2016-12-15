@@ -6,8 +6,7 @@
 <div ng-controller="boardCtrl">
     <br />
     
-    <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
-    <input class="btn btn-default" type="button" value="CSV"  ng-csv="CSVButtonClick(csv.result)" />
+    <input class="btn btn-default" type="button" value="Export"  ng-csv="CSVButtonClick(csv.result)" />
 
     <form editable-form name="tableform">
         <table class="table table-bordered col-sm-3">
@@ -74,10 +73,6 @@
                                 <h5 ng-if="story.Moscow == 'Should'">S</h5>
                                 <h5 ng-if="story.Moscow == 'Could'">C</h5>
                                 <h5 ng-if="story.Moscow == 'Wont'">W</h5>
-                            </p>
-                            <p>
-                                <a ng-if="story.DueDate < todayDate" class="glyphicon glyphicon-exclamation-sign" style="color:White"> </a>
-                                <a ng-if="(DueDateMinus2 == -2)" class="glyphicon glyphicon-time" style="color:White"> </a>
                             </p>
                         </li>
                     </ul>

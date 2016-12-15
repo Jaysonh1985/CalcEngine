@@ -1,14 +1,16 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, $interval, ID, Name, Description, AcceptanceCriteria, RAG, Requested, StartDate, DueDate, ElapsedTime, Moscow, Complexity, Effort, Timebox, User, Tasks, Comments) {
+sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, $interval, ID, Name, Description, AcceptanceCriteria, RAG, SLADays, Requested, StartDate, DueDate, RequestedDate, ElapsedTime, Moscow, Complexity, Effort, Timebox, User, Tasks, Comments) {
     
     $scope.ID = ID;
     $scope.Name = Name;
     $scope.Description = Description;
     $scope.RAG = RAG;
+    $scope.SLADays = parseInt(SLADays);
     $scope.Requested = Requested;
     $scope.StartDate = new Date(StartDate);
     $scope.DueDate = new Date(DueDate);
-    $scope.ElapsedTime = ElapsedTime
+    $scope.RequestedDate = new Date(RequestedDate);
+    $scope.ElapsedTime = ElapsedTime;
     $scope.AcceptanceCriteria = AcceptanceCriteria;
     $scope.Moscow = Moscow;
     $scope.Complexity = Complexity;
@@ -51,7 +53,11 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
         $scope.StartDateString = $scope.StartDate.toDateString();
         if (isNaN(Date.parse($scope.StartDate)) == true || $scope.StartDate.toDateString() == 'Mon Jan 01    1')
         {
-            $scope.StartDate = new Date();
+            var todayDate = new Date();
+            $scope.StartDate = todayDate;
+            var result = new Date();
+            result.setDate(result.getDate() + parseInt($scope.SLADays, 10));
+            $scope.DueDate = result;
         }      
         timerPromise = $interval(function () {
             if ($scope.ElapsedTime == null)
@@ -102,8 +108,10 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
             Description: $scope.Description,
             Requested: $scope.Requested,
             RAG: $scope.RAG,
+            SLADays: $scope.SLADays,
             StartDate: $scope.StartDate,
             DueDate: $scope.DueDate,
+            RequestedDate: $scope.RequestedDate,
             ElapsedTime: $scope.ElapsedTime,
             AcceptanceCriteria: $scope.AcceptanceCriteria,
             Moscow: $scope.Moscow,

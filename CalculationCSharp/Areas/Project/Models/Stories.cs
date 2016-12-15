@@ -18,6 +18,8 @@ namespace CalculationCSharp.Areas.Project.Models
         public string AcceptanceCriteria { get; set; }
         public string RAG { get; set; }
         public DateTime StartDate { get; set; }
+        public DateTime RequestedDate { get; set; }
+        public int SLADays { get; set; }
         public string DueDate { get; set; }
         public string ElapsedTime { get; set; }
         public string Complexity { get; set; }
