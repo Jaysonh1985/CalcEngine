@@ -7,6 +7,7 @@
     <br />
     
     <input class="btn btn-default" type="button" value="Export"  ng-csv="CSVButtonClick(csv.result)" />
+    <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
 
     <form editable-form name="tableform">
         <table class="table table-bordered col-sm-3">
@@ -53,7 +54,19 @@
             <div class="panel ">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{col.Name}}</h3>
-                    <a ng-click="AddButtonClick($index)"><i class="glyphicon glyphicon-plus"></i></a>
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>
+                                <a ng-click="AddButtonClick($index)"><i class="glyphicon glyphicon-plus"></i></a>
+                            </td>
+                            <td>
+                                <a ng-click="OrderColumnByClick($index)"><i class="glyphicon glyphicon-sort"></i></a>                               
+                            </td>
+                            
+                        </tr>
+                    </table>
+                    
+                   
                 </div>
                 <div class="panel-body">
                     <ul class="caption" dnd-list="col.Stories">

@@ -10,7 +10,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
     $scope.StartDate = new Date(StartDate);
     $scope.DueDate = new Date(DueDate);
     $scope.RequestedDate = new Date(RequestedDate);
-    $scope.ElapsedTime = ElapsedTime;
+    $scope.ElapsedTime = parseInt(ElapsedTime);
     $scope.AcceptanceCriteria = AcceptanceCriteria;
     $scope.Moscow = Moscow;
     $scope.Complexity = Complexity;
@@ -51,7 +51,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
     $scope.start = function () {
         $scope.timerStart = true;
         $scope.StartDateString = $scope.StartDate.toDateString();
-        if (isNaN(Date.parse($scope.StartDate)) == true || $scope.StartDate.toDateString() == 'Mon Jan 01    1')
+        if (isNaN(Date.parse($scope.StartDate)) == true || $scope.StartDate.toDateString() == 'Mon Jan 01 1900')
         {
             var todayDate = new Date();
             $scope.StartDate = todayDate;
@@ -66,7 +66,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
             }
             else
             {
-                $scope.ElapsedTime = $scope.ElapsedTime + 1;
+                $scope.ElapsedTime = parseInt($scope.ElapsedTime) + 1 ;
             }
         }, 1000);
     };

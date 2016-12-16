@@ -3,6 +3,7 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
     // Model
     $scope.Boards = [];
     $scope.isLoading = false;
+    $scope.orderByField = '';
   
     function init() {
         $scope.isLoading = true;

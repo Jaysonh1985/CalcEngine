@@ -1,9 +1,8 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log, $http, $location, $timeout, $window, $routeParams, boardService) {
+sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log, $http, $location, $timeout, $window, $routeParams, $filter, boardService) {
     // Model
     $scope.columns = [];
     $scope.isLoading = true;
-    $scope.DueDateMinus2 = 0;
     $scope.csv = {
         content: null,
         header: true,
@@ -49,6 +48,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         if (initializing) {
             $timeout(function () { initializing = false; });
         } else {
+
             $scope.isLoading = true;
             var url = location.pathname;
             var id = url.substring(url.lastIndexOf('/') + 1);
@@ -60,6 +60,8 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                 $scope.isLoading = false;
                 //toastr.success("Board Saved successfully", "Success");
             }, onError);
+            $scope.setRAG();
+           
         }
     }, true);
 
@@ -69,18 +71,23 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             angular.forEach(value.Stories, function (valueS, keyS, propS) {
                 var DueDate = new Date(valueS.DueDate);
                 var datediff = Date.daysBetween(new Date(), DueDate);
-                if (datediff <= 0)
-                {
-                    $scope.columns[columnIndex].Stories[keyS].RAG = "Red";
-                }
-                else if (datediff <= (valueS.SLADays/3))
-                {
-                    $scope.columns[columnIndex].Stories[keyS].RAG = "Amber";
+
+                if (isNaN(Date.parse(DueDate)) == true || DueDate.toDateString() == 'Mon Jan 01 1900') {
+                    $scope.columns[columnIndex].Stories[keyS].RAG = "Green";
                 }
                 else
                 {
-                    $scope.columns[columnIndex].Stories[keyS].RAG = "Green";
+                    if (datediff <= 0) {
+                        $scope.columns[columnIndex].Stories[keyS].RAG = "Red";
+                    }
+                    else if (datediff <= (valueS.SLADays / 3)) {
+                        $scope.columns[columnIndex].Stories[keyS].RAG = "Amber";
+                    }
+                    else {
+                        $scope.columns[columnIndex].Stories[keyS].RAG = "Green";
+                    }
                 }
+
             });
         });
     };
@@ -131,8 +138,9 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
              ID: storyID,
              RAG: 'Green',
              ElapsedTime: null,
-             DueDate: null,
-             StartDate: null,
+             StartDate: '01/01/1900',
+             DueDate: '01/01/1900',
+             RequestedDate: '01/01/1900',
          });
      };
 
@@ -146,8 +154,26 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
 
      $scope.SaveButtonClick = function SaveButtonClick() {
 
+         $scope.isLoading = true;
+         var url = location.pathname;
+         var id = url.substring(url.lastIndexOf('/') + 1);
+         id = parseInt(id, 10);
+         if (angular.isNumber(id) == false) {
+             id = null;
+         }
+         boardService.updateBoard(id, $scope.columns).then(function (data) {
+             $scope.isLoading = false;
+             //toastr.success("Board Saved successfully", "Success");
+         }, onError);
 
      };
+
+     $scope.OrderColumnByClick = function OrderColumnByClick(id) {
+         $scope.columns[id].Stories = $filter('orderBy')($scope.columns[id].Stories, 'Moscow');
+
+
+     };
+
 
      $scope.UpdateButtonClick = function (size, colIndex, index) {
         $scope.index = index;
