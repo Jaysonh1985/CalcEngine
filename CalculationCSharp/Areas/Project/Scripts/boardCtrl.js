@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log, $http, $location, $timeout, $window, $routeParams, $filter, boardService) {
+sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log, $http, $location, $timeout, $window, $routeParams, $filter, boardService, configFunctionFactory) {
     // Model
     $scope.columns = [];
     $scope.isLoading = true;
@@ -30,21 +30,8 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         $scope.todayDate = new Date();
         boardService.initialize().then(function (data) {
             $scope.isLoading = true;
-
-            var url = location.pathname;
-            var id = url.substring(url.lastIndexOf('/') + 1);
-            id = parseInt(id, 10);
-            if (angular.isNumber(id) == false) {
-                id = null;
-            }
-
-            boardService.getColumns(id)
-               .then(function (data) {
-                   $scope.isLoading = true;
-                   $scope.columns = data;
-                   $scope.setRAG();
-               }, onError);
-
+            id = configFunctionFactory.getConfigID();
+            $scope.refreshBoard(id);
             boardService.getUserList(id)
                .then(function (data) {
                    $scope.UserNames = data;
@@ -53,6 +40,16 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         }, onError);
         
     };
+
+    $scope.refreshBoard = function refreshBoard(id) {
+        boardService.getColumns(id)
+           .then(function (data) {
+               $scope.isLoading = true;
+               $scope.columns = data;
+               $scope.setRAG();
+           }, onError);
+    };
+    
     // Model to JSON for demo purpose
     $scope.$watch('columns', function (model) {
         if (initializing) {
@@ -69,6 +66,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             boardService.updateBoard(id, $scope.columns).then(function (data) {
                 $scope.isLoading = false;
                 //toastr.success("Board Saved successfully", "Success");
+                boardService.sendRequest();
             }, onError);
             $scope.setRAG();
            
@@ -162,21 +160,6 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
          }
      };
 
-     $scope.SaveButtonClick = function SaveButtonClick() {
-
-         $scope.isLoading = true;
-         var url = location.pathname;
-         var id = url.substring(url.lastIndexOf('/') + 1);
-         id = parseInt(id, 10);
-         if (angular.isNumber(id) == false) {
-             id = null;
-         }
-         boardService.updateBoard(id, $scope.columns).then(function (data) {
-             $scope.isLoading = false;
-             //toastr.success("Board Saved successfully", "Success");
-         }, onError);
-
-     };
 
      $scope.OrderColumnByClick = function OrderColumnByClick(id) {
          $scope.columns[id].Stories = $filter('orderBy')($scope.columns[id].Stories, 'Moscow');
@@ -273,11 +256,12 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
      };
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
-    $scope.$parent.$on("refreshBoard", function (e) {
-        toastr.success("Board updated successfully", "Success");
+     $scope.$parent.$on("refreshBoard", function (e) {
+         id = configFunctionFactory.getConfigID();
+         $scope.refreshBoard(id);
     });
 
-    var onError = function (errorMessage) {
+     var onError = function (errorMessage) {
         $scope.isLoading = false;
         toastr.error(errorMessage, "Error");
     };

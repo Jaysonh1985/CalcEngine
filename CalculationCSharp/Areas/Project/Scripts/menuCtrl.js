@@ -94,12 +94,6 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
          }, onError);
      };
 
-    // Listen to the 'refreshBoard' event and refresh the board as a result
-    $scope.$parent.$on("refreshBoard", function (e) {
-        $scope.refreshBoard();
-        toastr.success("Board updated successfully", "Success");
-    });
-
     var onError = function (errorMessage) {
         $scope.isLoading = false;
         toastr.error(errorMessage, "Error");

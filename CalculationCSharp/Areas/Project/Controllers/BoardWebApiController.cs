@@ -63,7 +63,9 @@ namespace CalculationCSharp.Areas.Project.Controllers
             {
                 repo.UpdateBoard(json);
             }
-
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            List<Column> columns = (List<Column>)javaScriptSerializ­er.Deserialize(data, typeof(List<Column>));
+            HttpContext.Current.Cache["columns"] = columns;
             response.StatusCode = HttpStatusCode.OK;
 
             return response;
