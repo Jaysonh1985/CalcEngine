@@ -31,6 +31,8 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
                     var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
                     var schemeList = db.Schemes.Select(m => new  { Value = m.Name, Text = m.Name }).Distinct().ToList();
                     ViewBag.Roles = list;
+                    var listUsers = context.Users.OrderBy(r => r.UserName).ToList().Select(rr => new SelectListItem { Value = rr.UserName.ToString(), Text = rr.UserName }).ToList();
+                    ViewBag.Users = listUsers;
                     ViewBag.SchemeList = new MultiSelectList(schemeList, "Value", "Text");
                     return View();
                 }
@@ -55,6 +57,8 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
             var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             var schemeList = db.Schemes.Select(m => new { Value = m.Name, Text = m.Name }).Distinct().ToList();
             ViewBag.Roles = list;
+            var listUsers = context.Users.OrderBy(r => r.UserName).ToList().Select(rr => new SelectListItem { Value = rr.UserName.ToString(), Text = rr.UserName }).ToList();
+            ViewBag.Users = listUsers;
             ViewBag.SchemeList = new MultiSelectList(schemeList, "Value", "Text");
 
             return View("Index");
@@ -73,6 +77,8 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
                 var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
                 var schemeList = db.Schemes.Select(m => new { Value = m.Name, Text = m.Name }).Distinct().ToList();
                 ViewBag.Roles = list;
+                var listUsers = context.Users.OrderBy(r => r.UserName).ToList().Select(rr => new SelectListItem { Value = rr.UserName.ToString(), Text = rr.UserName }).ToList();
+                ViewBag.Users = listUsers;
                 ViewBag.SchemeList = new MultiSelectList(schemeList, "Value", "Text");
             }
             return View("Index");
@@ -97,6 +103,8 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
             var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             var schemeList = db.Schemes.Select(m => new { Value = m.Name, Text = m.Name }).Distinct().ToList();
             ViewBag.Roles = list;
+            var listUsers = context.Users.OrderBy(r => r.UserName).ToList().Select(rr => new SelectListItem { Value = rr.UserName.ToString(), Text = rr.UserName }).ToList();
+            ViewBag.Users = listUsers;
             ViewBag.SchemeList = new MultiSelectList(schemeList, "Value", "Text");
             return View("Index");
         }
@@ -115,6 +123,8 @@ namespace CalculationCSharp.Areas.Maintenance.Controllers
             var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             var schemeList = db.Schemes.Select(m => new { Value = m.Name, Text = m.Name }).Distinct().ToList();
             ViewBag.Roles = list;
+            var listUsers = context.Users.OrderBy(r => r.UserName).ToList().Select(rr => new SelectListItem { Value = rr.UserName.ToString(), Text = rr.UserName }).ToList();
+            ViewBag.Users = listUsers;
             ViewBag.SchemeList = new MultiSelectList(schemeList, "Value", "Text");
             return View("Index");
         }
