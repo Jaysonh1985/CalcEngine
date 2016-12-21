@@ -23,7 +23,7 @@ namespace CalculationCSharp.Areas.Project.Models
                     var stories = new List<Stories>();
                     columns.Add(new Column { Description = "Backlog Column", Id = 1, Name = "Backlog", Stories = stories });
                     columns.Add(new Column { Description = "In Progress Column", Id = 2, Name = "In Progress", Stories = new List<Stories>() });
-                    columns.Add(new Column { Description = "Test Column", Id = 3, Name = "Test", Stories = new List<Stories>() });
+                    columns.Add(new Column { Description = "Pend Column", Id = 3, Name = "Pend", Stories = new List<Stories>() });
                     columns.Add(new Column { Description = "Release Column", Id = 4, Name = "Release", Stories = new List<Stories>() });
                     HttpContext.Current.Cache["columns"] = columns;
                 }
