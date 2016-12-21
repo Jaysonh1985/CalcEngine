@@ -42,7 +42,7 @@
 
         @if (Context.User.Identity.IsAuthenticated)
         {
-            <div data-ng-controller="TimeoutCtrl">
+            <div id="wrapper" class="active"  data-ng-controller="TimeoutCtrl">
                 @RenderBody()
 
             </div>
@@ -125,7 +125,12 @@
     <script src="~/Scripts/ng-csv.js"></script>
     <script src="~/Scripts/angular-csv-import.js"></script>
     <script src="~/Scripts/angular-idle.js"></script>
-
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("active");
+        });
+    </script>
 
 
 </body>
