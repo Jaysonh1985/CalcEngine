@@ -11,6 +11,15 @@ sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) 
         });
     };
 
+    var getUserList = function (id) {
+        return $http.get("/api/UserListWebApi/Get", { params: { id: id } }).then(function (response) {
+            return response.data;
+        }, function (error) {
+            return $q.reject(error.data.Message);
+        });
+    };
+
+
     var addConfig = function (data) {
         return $http.post("/api/ProjectBoards/PostProjectBoard", { data: data } )
             .then(function (response) {
@@ -108,6 +117,7 @@ sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) 
         getCSV: getCSV,
         openBoard: openBoard,
         getColumns: getColumns,
+        getUserList: getUserList,
         updateBoard: updateBoard
     };
 });

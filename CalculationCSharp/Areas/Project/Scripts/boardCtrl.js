@@ -45,6 +45,11 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                    $scope.setRAG();
                }, onError);
 
+            boardService.getUserList(id)
+               .then(function (data) {
+                   $scope.UserNames = data;
+               }, onError);
+
         }, onError);
         
     };
@@ -175,8 +180,10 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
 
      $scope.OrderColumnByClick = function OrderColumnByClick(id) {
          $scope.columns[id].Stories = $filter('orderBy')($scope.columns[id].Stories, 'Moscow');
-
-
+     };
+     $scope.ClearFilterClick = function ClearFilterClick() {
+         $scope.search.Moscow = null;
+         $scope.search.User = null;
      };
 
 
@@ -228,7 +235,9 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                 ID: function () { return $scope.ID },
                 Tasks: function () { return $scope.Tasks },
                 Comments: function () { return $scope.Comments},
-                colID: function () { return $scope.colID; }
+                colID: function () { return $scope.colID; },
+
+                UserList: function () {return $scope.UserList}
             }
         });
 

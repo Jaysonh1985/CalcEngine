@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, $interval, ID, Name, Description, AcceptanceCriteria, RAG, SLADays, Requested, StartDate, DueDate, RequestedDate, ElapsedTime, Moscow, Complexity, Effort, Timebox, User, Tasks, Comments) {
+sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, $interval, ID, Name, Description, AcceptanceCriteria, RAG, SLADays, Requested, StartDate, DueDate, RequestedDate, ElapsedTime, Moscow, Complexity, Effort, Timebox, User, Tasks, Comments, UserList) {
     
     $scope.ID = ID;
     $scope.Name = Name;
@@ -20,6 +20,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
     $scope.Tasks = Tasks;
     $scope.Comments = Comments;
     $scope.timerStart = false;
+    $scope.UserList = UserList;
     
     $scope.addItem = function () {
         if ($scope.Tasks == null) {

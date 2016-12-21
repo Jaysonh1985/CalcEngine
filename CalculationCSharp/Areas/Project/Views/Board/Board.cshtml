@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div ng-controller="boardCtrl">
+<div ng-controller="boardCtrl" ng-cloak>
     <!-- Sidebar -->
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
@@ -13,10 +13,10 @@
         <ul class="sidebar-nav" id="sidebar">
             <li><a ng-csv="CSVButtonClick(csv.result)">Export<span class="sub_icon glyphicon glyphicon-link"></span></a></li>
             <li><a ng-click="SaveButtonClick()">Save<span class="sub_icon glyphicon glyphicon-link"></span></a></li>
+            <li><a ng-click="ClearFilterClick()">Clear Filter<span class="sub_icon glyphicon glyphicon-link"></span></a></li>
             <li>
                 <select name="singleSelect" ng-model="search.Moscow" class="form-control" style="background-color:#222; border:none; color:#999">
                     <option value="" disabled selected>Priority</option>
-                    <option value=""></option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -28,9 +28,7 @@
             <li>
                 <select name="singleSelect" ng-model="search.User" class="form-control" style="background-color:#222; border:none; color:#999">
                     <option value="" disabled selected>User</option>
-                    <option value=""></option>
-                    <option value="Jayson Herbert">Jayson Herbert</option>
-                    <option value="John Smith">John Smith</option>
+                    <option ng-repeat="option in UserNames" value="{{option.Value}}">{{option.Value}}</option>
                     {{User}}
                 </select>
             </li>

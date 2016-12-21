@@ -94,8 +94,7 @@
                                 </td>
                                 <td>
                                     <select name="singleSelect" ng-model="User" placeholder="Select User" class="form-control">
-                                        <option value="Jayson Herbert">Jayson Herbert</option>
-                                        <option value="John Smith">John Smith</option>
+                                        <option ng-repeat="option in UserNames" value="{{option.Value}}">{{option.Value}}</option>
                                         {{User}}
                                     </select>
                                 </td>

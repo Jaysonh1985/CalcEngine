@@ -276,6 +276,7 @@
     <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
     <Compile Include="Areas\Project\Controllers\CSVWebApiController.cs" />
     <Compile Include="Areas\Project\Controllers\ProjectBoardsController.cs" />
+    <Compile Include="Areas\Project\Controllers\UserListWebApiController.cs" />
     <Compile Include="Areas\Project\Models\Board.cs" />
     <Compile Include="Areas\Project\Models\BoardRepository.cs" />
     <Compile Include="Areas\Project\Models\Comments.cs" />
