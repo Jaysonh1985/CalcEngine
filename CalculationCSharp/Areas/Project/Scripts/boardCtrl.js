@@ -18,6 +18,11 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
     };
     var initializing = true;
 
+    $scope.state = false;
+
+    $scope.toggleState = function () {
+        $scope.state = !$scope.state;
+    };
 
     function init() {
         var id = $location.absUrl();

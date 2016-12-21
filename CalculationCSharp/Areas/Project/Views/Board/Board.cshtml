@@ -4,52 +4,56 @@
 }
 
 <div ng-controller="boardCtrl">
+    <div class="sidebar" sidebar-directive="state">
+        <a href="#" id="navigation-toggle" ng-click="toggleState()">Navigation</a>
+        <ul class="navigation">
+            <li class="navigation-items">
+                <input class="btn btn-default" type="button" value="Export" ng-csv="CSVButtonClick(csv.result)" />
+            </li>
+            <li class="navigation-items">
+                <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
+            </li>
+            <li class="navigation-items">
+                <select name="singleSelect" ng-model="search.Moscow" class="form-control">
+                    <option value="" disabled selected>Enter M.o.S.C.o.W rating</option>
+                    <option value=""></option>
+                    <option value="Must">Must</option>
+                    <option value="Should">Should</option>
+                    <option value="Could">Could</option>
+                    <option value="Wont">Won't</option>
+                    {{Moscow}}
+                </select>
+            </li>
+            <li class="navigation-items">
+                <select name="singleSelect" ng-model="search.User" class="form-control">
+                    <option value="" disabled selected>Select User</option>
+                    <option value=""></option>
+                    <option value="Jayson Herbert">Jayson Herbert</option>
+                    <option value="John Smith">John Smith</option>
+                    {{User}}
+                </select>
+            </li>
+            <li class="navigation-items">
+                <select name="singleSelect" ng-model="search.Timebox" class="form-control">
+                    <option value="" disabled selected>Enter Timebox</option>
+                    <option value=""></option>
+                    <option value="Timebox 1">Timebox 1</option>
+                    <option value="Timebox 2">Timebox 2</option>
+                    <option value="Timebox 3">Timebox 3</option>
+                    <option value="Timebox 4">Timebox 4</option>
+                    <option value="Timebox 5">Timebox 5</option>
+                    <option value="Timebox 6">Timebox 6</option>
+                    {{Timebox}}
+                </select>
+            </li>
+        </ul>
+    </div>
     <br />
-    
-    <input class="btn btn-default" type="button" value="Export"  ng-csv="CSVButtonClick(csv.result)" />
-    <input class="btn btn-default" type="button" value="Save" ng-click="SaveButtonClick()" />
+    <br />
+    <br />
+    <br />
 
-    <form editable-form name="tableform">
-        <table class="table table-bordered col-sm-3">
-            <tr>
-                <td>
-                    <select name="singleSelect" ng-model="search.Moscow" class="form-control">
-                        <option value="" disabled selected>Enter M.o.S.C.o.W rating</option>
-                        <option value=""></option>
-                        <option value="Must">Must</option>
-                        <option value="Should">Should</option>
-                        <option value="Could">Could</option>
-                        <option value="Wont">Won't</option>
-                        {{Moscow}}
-                    </select>
-                </td>
-                <td>
-                    <select name="singleSelect" ng-model="search.Timebox" class="form-control">
-                        <option value="" disabled selected>Enter Timebox</option>
-                        <option value=""></option>
-                        <option value="Timebox 1">Timebox 1</option>
-                        <option value="Timebox 2">Timebox 2</option>
-                        <option value="Timebox 3">Timebox 3</option>
-                        <option value="Timebox 4">Timebox 4</option>
-                        <option value="Timebox 5">Timebox 5</option>
-                        <option value="Timebox 6">Timebox 6</option>
-                        {{Timebox}}
-                    </select>
-                </td>
-                <td>
-                    <select name="singleSelect" ng-model="search.User" class="form-control">
-                        <option value="" disabled selected>Select User</option>
-                        <option value=""></option>
-                        <option value="Jayson Herbert">Jayson Herbert</option>
-                        <option value="John Smith">John Smith</option>
-                        {{User}}
-                    </select>
-                </td>
-
-            </tr>
-        </table>
-    </form>
-    <div class="simpleDemo row">
+     <div class="simpleDemo row">
         <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle" ng-init="colIndex = $index" ng-cloak>
             <div class="panel ">
                 <div class="panel-heading">
