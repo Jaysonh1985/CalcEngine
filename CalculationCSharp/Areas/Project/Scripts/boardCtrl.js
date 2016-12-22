@@ -12,6 +12,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         result: null,
         encoding: 'ISO-8859-1',
         encodingVisible: true,
+        uploadButtonLabel: "Upload File"
     };
     $scope.columns = {
         selected: null,
@@ -142,33 +143,42 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
      };
 
      $scope.ImportButtonClick = function ImportButtonClick(CSV) {
-         $scope.columnstest = [];
-         $scope.Stories = [];
-         var index = 0;
-         angular.forEach(CSV, function (key, value, obj) {
 
-             $scope.selected = {
-                 ID: key.ActivityID,
-                 Name: key.ActivityName,
-                 Description: key.Description,
-                 Requested: key.RequestedBy,
-                 RAG: key.RAG,
-                 SLADays: key.SLA,
-                 StartDate: new Date(key.StartDate),
-                 DueDate: new Date(key.DueDate),
-                 RequestedDate: new Date (key.RequestedDate),
-                 ElapsedTime: key.ElapsedTime,
-                 AcceptanceCriteria: key.AcceptanceCriteria,
-                 Moscow: key.Moscow,
-                 Complexity: key.Complexity,
-                 Effort: key.Effort,
-                 Timebox: key.Timebox,
-                 User: key.CurrentUser,
-             };
+         if (CSV == null)
+         {
+             $window.alert("You have not imported a file");
+         }
+         else
+         {
+             var cf = confirm("This will remove all current cards permanently, do you wish to continue?");
+             if (cf == true) {
+                 angular.forEach($scope.columns, function (key, value, obj) {
+                     $scope.columns[value].Stories = [];
+                 });
 
-             $scope.columns[key.ColumnID].Stories.push($scope.selected);
-
-         });
+                 angular.forEach(CSV, function (key, value, obj) {
+                     $scope.selected = {
+                         ID: key.ActivityID,
+                         Name: key.ActivityName,
+                         Description: key.Description,
+                         Requested: key.RequestedBy,
+                         RAG: key.RAG,
+                         SLADays: key.SLA,
+                         StartDate: new Date(key.StartDate),
+                         DueDate: new Date(key.DueDate),
+                         RequestedDate: new Date(key.RequestedDate),
+                         ElapsedTime: key.ElapsedTime,
+                         AcceptanceCriteria: key.AcceptanceCriteria,
+                         Moscow: key.Moscow,
+                         Complexity: key.Complexity,
+                         Effort: key.Effort,
+                         Timebox: key.Timebox,
+                         User: key.CurrentUser,
+                     };
+                     $scope.columns[key.ColumnID].Stories.push($scope.selected);
+                 });
+             }            
+         }
      };
 
      $scope.toggle = function (scope) {

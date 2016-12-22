@@ -27,7 +27,10 @@
 .modal {
 display: block;
 }
-
+.CSVButton{
+    color:#222;
+    background-color:#222;
+}
 tr.group-header{
     cursor:pointer;
     background-color:#fff;
