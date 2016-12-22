@@ -49,6 +49,19 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                $scope.setRAG();
            }, onError);
     };
+
+    $scope.rebuildColumnIDs = function rebuildColumnIDs() {
+        colid = 0;
+        angular.forEach($scope.columns, function (groups) {
+            $scope.columns[colid].Id = colid;
+            rowid = 0;
+            angular.forEach($scope.columns[colid].Stories, function (rows) {
+                $scope.columns[colid].Stories[rowid].Id = rowid;
+                rowid = rowid + 1;
+            });
+            colid = colid + 1;
+        });
+    };
     
     // Model to JSON for demo purpose
     $scope.$watch('columns', function (model) {
@@ -57,12 +70,8 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         } else {
 
             $scope.isLoading = true;
-            var url = location.pathname;
-            var id = url.substring(url.lastIndexOf('/') + 1);
-            id = parseInt(id, 10);
-            if (angular.isNumber(id) == false) {
-                id = null;
-            }
+            id = configFunctionFactory.getConfigID();
+            $scope.rebuildColumnIDs();
             boardService.updateBoard(id, $scope.columns).then(function (data) {
                 $scope.isLoading = false;
                 //toastr.success("Board Saved successfully", "Success");
@@ -130,6 +139,36 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                 return data;
             }, onError);
          return promise;
+     };
+
+     $scope.ImportButtonClick = function ImportButtonClick(CSV) {
+         $scope.columnstest = [];
+         $scope.Stories = [];
+         var index = 0;
+         angular.forEach(CSV, function (key, value, obj) {
+
+             $scope.selected = {
+                 ID: key.ActivityID,
+                 Name: key.ActivityName,
+                 Description: key.Description,
+                 Requested: key.RequestedBy,
+                 RAG: key.RAG,
+                 SLADays: key.SLA,
+                 StartDate: new Date(key.StartDate),
+                 DueDate: new Date(key.DueDate),
+                 RequestedDate: new Date (key.RequestedDate),
+                 ElapsedTime: key.ElapsedTime,
+                 AcceptanceCriteria: key.AcceptanceCriteria,
+                 Moscow: key.Moscow,
+                 Complexity: key.Complexity,
+                 Effort: key.Effort,
+                 Timebox: key.Timebox,
+                 User: key.CurrentUser,
+             };
+
+             $scope.columns[key.ColumnID].Stories.push($scope.selected);
+
+         });
      };
 
      $scope.toggle = function (scope) {

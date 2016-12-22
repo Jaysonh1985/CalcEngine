@@ -29,20 +29,24 @@ namespace CalculationCSharp.Areas.Project.Controllers
             List<string> propValues = new List<string>();
             //Loop to output the values in the csv
             int LoopCounter = 0;
-            propValues.Add("Column Name");
-            propValues.Add("Activity Name");
-            propValues.Add("Complexity");
+            propValues.Add("ColumnID");
+            propValues.Add("ColumnName");
+            propValues.Add("ActivityID");
+            propValues.Add("ActivityName");
             propValues.Add("Description");
-            propValues.Add("Acceptance Criteria");
-            propValues.Add("Due Date");
+            propValues.Add("AcceptanceCriteria");
+            propValues.Add("Complexity");
+            propValues.Add("DueDate");
             propValues.Add("Effort");
-            propValues.Add("Elapsed Time");
+            propValues.Add("ElapsedTime");
             propValues.Add("Moscow");
             propValues.Add("RAG");
-            propValues.Add("Requested By");
-            propValues.Add("Start Date");
+            propValues.Add("RequestedBy");
+            propValues.Add("RequestedDate");
+            propValues.Add("StartDate");
+            propValues.Add("SLA");
             propValues.Add("Timebox");
-            propValues.Add("Current User");
+            propValues.Add("CurrentUser");
             propNames.Add(propValues);
             propValues = new List<string>();
             //Create CSV of the output results
@@ -53,18 +57,22 @@ namespace CalculationCSharp.Areas.Project.Controllers
                 {
                     //Sets the row label
                     LoopCounter = LoopCounter + 1;
+                    propValues.Add(Convert.ToString(item.Id));
                     propValues.Add(Convert.ToString(item.Name));
+                    propValues.Add(Convert.ToString(prop.Id));
                     propValues.Add(Convert.ToString(prop.Name));
-                    propValues.Add(Convert.ToString(prop.Complexity));
                     propValues.Add(Convert.ToString(prop.Description));
                     propValues.Add(Convert.ToString(prop.AcceptanceCriteria));
+                    propValues.Add(Convert.ToString(prop.Complexity));
                     propValues.Add(Convert.ToString(prop.DueDate));
                     propValues.Add(Convert.ToString(prop.Effort));
                     propValues.Add(Convert.ToString(prop.ElapsedTime));
                     propValues.Add(Convert.ToString(prop.Moscow));
                     propValues.Add(Convert.ToString(prop.RAG));
                     propValues.Add(Convert.ToString(prop.Requested));
+                    propValues.Add(Convert.ToString(prop.RequestedDate));
                     propValues.Add(Convert.ToString(prop.StartDate));
+                    propValues.Add(Convert.ToString(prop.SLADays));
                     propValues.Add(Convert.ToString(prop.Timebox));
                     propValues.Add(Convert.ToString(prop.User));
                     propNames.Add(propValues);
