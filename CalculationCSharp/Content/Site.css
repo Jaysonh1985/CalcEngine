@@ -662,13 +662,14 @@ select:focus::-ms-value {background: transparent; color: #555 }
 
 #wrapper {
     padding-left: 70px;
+    padding-right: 5px;
     transition: all .4s ease 0s;
     height: 100%
 }
 
 #sidebar-wrapper {
-    margin-left: -150px;
-    left: 70px;
+    margin-left: -157px;
+    left: 55px;
     width: 157px;
     background: #222;
     position: fixed;
@@ -763,7 +764,7 @@ select:focus::-ms-value {background: transparent; color: #555 }
 #main_icon
 {
     float:right;
-   padding-right: 25px;
+   padding-right: 23px;
    padding-top:20px;
 }
 .sub_icon

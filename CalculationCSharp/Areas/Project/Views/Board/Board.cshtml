@@ -13,7 +13,7 @@
         <ul class="sidebar-nav" id="sidebar">         
             <li>
                 <select name="singleSelect" ng-model="search.Moscow" class="form-control" style="background-color:#222; border:none; color:#999">
-                    <option value="" disabled selected>Priority Filter</option>
+                    <option value="" disabled selected>Priority</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -22,7 +22,7 @@
             </li>
             <li>
                 <select name="singleSelect" ng-model="search.User" class="form-control" style="background-color:#222; border:none; color:#999">
-                    <option value="" disabled selected>User Filter</option>
+                    <option value="" disabled selected>User</option>
                     <option ng-repeat="option in UserNames" value="{{option.Value}}">{{option.Value}}</option>
                     {{User}}
                 </select>
