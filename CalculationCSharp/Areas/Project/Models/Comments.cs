@@ -11,5 +11,6 @@ namespace CalculationCSharp.Areas.Project.Models
         public string CommentName { get; set; }
         public string CommentType { get; set; }
         public DateTime CommentDateTime { get; set; }
+        public string CommentUser { get; set; }
     }
 }

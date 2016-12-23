@@ -162,12 +162,14 @@
                                 <td style="width:20%;background-color:white; color:#000000"><H4>Type</H4></td>
                                 <td style="width:50%;background-color:white; color:#000000"><H4>Comment</H4></td>
                                 <td style="width:30%;background-color:white; color:#000000"><H4>Updated</H4></td>
+                                <td style="width:50%;background-color:white; color:#000000"><H4>User</H4></td>
                                 <td style="width:10%;background-color:white; color:#000000"><H4></H4></td>
                             </tr>
                             <tr ng-repeat="comnt in Comments">
                                 <td><span><a>{{comnt.CommentType}}</a></span></td>
                                 <td><span><a> {{comnt.CommentName}}</a></span></td>
                                 <td><span>{{comnt.CommentDateTime | date:'d MMMM yyyy h:mm a'}}</span></td>
+                                <td><span><a> {{comnt.CommentUser}}</a></span></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -180,6 +182,7 @@
                                 </td>
                                 <td><span><input class="form-control" type="text" ng-model="txtcomment" placeholder="Your Comment"></span></td>
                                 <td style="width:10%;background-color:white; color:#000000"><H4></H4></td>
+                                <td></td>
                                 <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
                             </tr>
 

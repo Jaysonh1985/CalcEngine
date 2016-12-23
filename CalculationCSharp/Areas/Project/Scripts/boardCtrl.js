@@ -37,6 +37,10 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                .then(function (data) {
                    $scope.UserNames = data;
                }, onError);
+            boardService.getCurrentUser(id)
+                .then(function (dataUser) {
+                    $scope.CurrentUser = dataUser;
+                }, onError);
 
         }, onError);
         
@@ -269,7 +273,8 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                 Comments: function () { return $scope.Comments},
                 colID: function () { return $scope.colID; },
 
-                UserList: function () {return $scope.UserList}
+                UserList: function () { return $scope.UserList },
+                CurrentUser: function () {return $scope.CurrentUser}
             }
         });
 
