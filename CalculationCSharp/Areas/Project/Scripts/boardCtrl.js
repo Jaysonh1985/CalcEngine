@@ -202,6 +202,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
              StartDate: '01/01/1900',
              DueDate: '01/01/1900',
              RequestedDate: '01/01/1900',
+             Moscow:""
          });
      };
 
@@ -303,6 +304,30 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         });      
 
     };
+
+     $scope.ReportButtonClick = function () {
+
+         var modalInstance = $uibModal.open({
+             animation: true,
+             templateUrl: '/Areas/Project/Scripts/reportModal.html',
+             scope: $scope,
+             controller: 'reportCtrl',
+             size: 'lg',
+             backdrop: false,
+             resolve: {
+                 Name: function () { return $scope.Name },
+
+             }
+         });
+
+         modalInstance.result.then(function () {
+
+           
+         }, function () {
+
+         });
+
+     };
 
      $scope.toggleAnimation = function () {
          $scope.animationsEnabled = !$scope.animationsEnabled;

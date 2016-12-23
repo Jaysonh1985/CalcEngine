@@ -17,8 +17,6 @@
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
                     {{Moscow}}
                 </select>
             </li>
@@ -29,9 +27,10 @@
                     {{User}}
                 </select>
             </li>
-            <li><a ng-click="ClearFilterClick()">Clear Filter<span class="sub_icon glyphicon glyphicon-link"></span></a></li>
-            <li><a ng-csv="CSVButtonClick()">Export<span class="sub_icon glyphicon glyphicon-link"></span></a></li>
-            <li><a ng-click="ImportButtonClick(csv.result)">Import<span class="sub_icon glyphicon glyphicon-link"></span></a></li>
+            <li><a ng-click="ClearFilterClick()">Clear Filter<span class="sub_icon glyphicon glyphicon-filter"></span></a></li>
+            <li><a ng-click="ReportButtonClick()">Reports<span class="sub_icon glyphicon glyphicon-file"></span></a></li>
+            <li><a ng-csv="CSVButtonClick()">Export<span class="sub_icon glyphicon glyphicon-export"></span></a></li>
+            <li><a ng-click="ImportButtonClick(csv.result)">Import<span class="sub_icon glyphicon glyphicon-import"></span></a></li>
             <li>
                 <ng-csv-import class="CSVButton" content="csv.content" header="csv.header" separator="csv.separator" result="csv.result"  upload-button-label="csv.uploadButtonLabel"></ng-csv-import>
             </li>
