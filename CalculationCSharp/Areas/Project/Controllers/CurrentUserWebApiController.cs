@@ -23,7 +23,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
             ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
             //Create object response
             var response = Request.CreateResponse();
-            response.Content = new StringContent(JsonConvert.SerializeObject(user.UserName));
+            response.Content = new StringContent(user.UserName);
             response.StatusCode = HttpStatusCode.OK;
             return response;
         }
