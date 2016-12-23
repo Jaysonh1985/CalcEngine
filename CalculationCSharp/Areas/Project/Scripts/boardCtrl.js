@@ -218,8 +218,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
          $scope.columns[id].Stories = $filter('orderBy')($scope.columns[id].Stories, 'Moscow');
      };
      $scope.ClearFilterClick = function ClearFilterClick() {
-         $scope.search.Moscow = null;
-         $scope.search.User = null;
+         $scope.search = null;
      };
 
 
