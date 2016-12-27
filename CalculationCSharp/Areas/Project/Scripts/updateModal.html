@@ -5,15 +5,15 @@
                 </div>
                 <div class="modal-body">
                     <h1>Status</h1>
-                    <br />  
-                    <table class="table table-bordered table-hover table-condensed">
-                        <tr>
-                            <td style="width:50%">
-                                <form>
+                    <br />
+                    <form  role="form" ng-submit="ok($index)">
+                        <table class="table table-bordered table-hover table-condensed">
+                            <tr>
+                                <td style="width:50%">
                                     <div class="form-group">
                                         <h4><label for="SLADays">SLA Days:</label></h4>
-                                        <input ng-show="ElapsedTime == null" class="form-control" type="number" id="SLADays" ng:model="SLADays">
-                                        <input ng-show="ElapsedTime != null" class="form-control" type="number" id="SLADays" ng:model="SLADays" readonly> 
+                                        <input ng-show="ElapsedTime == null" class="form-control" type="number" id="SLADays" ng:model="SLADays"  required>
+                                        <input ng-show="ElapsedTime != null" class="form-control" type="number" id="SLADays" ng:model="SLADays" readonly>
                                     </div>
                                     <div class="form-group ">
                                         <h4><label for="Requested">Requested By:</label></h4>
@@ -23,29 +23,27 @@
                                         <h4><label for="RequestedDate">Requested Date:</label></h4>
                                         <input class="form-control" type="date" id="RequestedDate" ng:model="RequestedDate">
                                     </div>
-                                </form>
-                            </td>
-                            <td style="width:50%">
-                                <h3>Elapsed Time:</h3>
-                                <h5 id="stopwatch">{{ElapsedTime | stopwatchTime}}</h5>
-                                <button ng-if="timerStart == false" class="btn btn-success" ng-click="start()" id="start">Start</button>
-                                <button ng-if="timerStart == true" class="btn btn-danger" ng-click="stop()" id="stop">Stop</button>
-                                <br />
-                                <div ng-if="StartDate != 'Invalid Date'" class="form-group">
-                                    <h3><label for="StartDate">Start Date:</label></h3>
-                                    <h5  class="form-control-static">{{StartDate | date:'d MMMM yyyy h:mm a'}}</h5>
-                                </div>
-                                <div ng-if="DueDate != 'Invalid Date'" class="form-group">
-                                    <h3><label for="DueDate">Due Date:</label></h3>
-                                    <h5 class="form-control-static">{{DueDate | date:'d MMMM yyyy h:mm a'}}</h5>
-                                </div>
-                            </td>                          
-                        </tr>
+                                </td>
+                                <td style="width:50%">
+                                    <h3>Elapsed Time:</h3>
+                                    <h5 id="stopwatch">{{ElapsedTime | stopwatchTime}}</h5>
+                                    <button ng-if="timerStart == false" class="btn btn-success" ng-click="start()" id="start">Start</button>
+                                    <button ng-if="timerStart == true" class="btn btn-danger" ng-click="stop()" id="stop">Stop</button>
+                                    <br />
+                                    <div ng-if="StartDate != 'Invalid Date'" class="form-group">
+                                        <h3><label for="StartDate">Start Date:</label></h3>
+                                        <h5 class="form-control-static">{{StartDate | date:'d MMMM yyyy h:mm a'}}</h5>
+                                    </div>
+                                    <div ng-if="DueDate != 'Invalid Date'" class="form-group">
+                                        <h3><label for="DueDate">Due Date:</label></h3>
+                                        <h5 class="form-control-static">{{DueDate | date:'d MMMM yyyy h:mm a'}}</h5>
+                                    </div>
+                                </td>
+                            </tr>
 
-                    </table>
-                    <h1>Requirements</h1>
-                    <br />
-                    <form editable-form name="tableform">
+                        </table>
+                        <h1>Requirements</h1>
+                        <br />
                         <!-- table -->
                         <table class="table table-bordered table-hover table-condensed">
                             <tr style="font-weight: bold">
@@ -61,8 +59,6 @@
                                 </td>
                             </tr>
                         </table>
-                    </form>
-                    <form editable-form name="tableform">
                         <table class="table table-bordered table-hover table-condensed">
                             <tr style="font-weight: bold">
                                 <td style="width:25%;background-color:white; color:#000000"><h4>Priority</h4></td>
@@ -108,12 +104,8 @@
                                 </td>
                             </tr>
                         </table>
-                    </form>
-
-                    <h1>Tasks</h1>
-                    <br />
-
-                    <form editable-form name="tableform">
+                        <h1>Tasks</h1>
+                        <br />
                         <!-- table -->
                         <table class="table table-bordered table-hover table-bordered">
                             <tr style="font-weight: bold">
@@ -152,10 +144,8 @@
                             </tr>
 
                         </table>
-                    </form>
-                    <h1>Comments</h1>
-                    <br />
-                    <form editable-form name="commentform">
+                        <h1>Comments</h1>
+                        <br />
                         <!-- table -->
                         <table class="table table-bordered table-hover table-condensed">
                             <tr style="font-weight: bold">
@@ -185,14 +175,9 @@
                                 <td></td>
                                 <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
                             </tr>
-
                         </table>
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <input class="btn btn-default" type="button" value="Delete" ng-click="DeleteButtonClick()" />
-                    <button class="btn btn-primary" type="button" ng-click="ok($index)">OK</button>
+                        <button class="btn btn-primary" type="submit"> OK</button>
+                    </form>  
                 </div>
 </div>
    
