@@ -670,7 +670,7 @@ select:focus::-ms-value {background: transparent; color: #555 }
 #sidebar-wrapper {
     margin-left: -157px;
     left: 55px;
-    width: 157px;
+    width: 147px;
     background: #222;
     position: fixed;
     height: 100%;
@@ -681,7 +681,7 @@ select:focus::-ms-value {background: transparent; color: #555 }
 .sidebar-nav {
     display: block;
     float: left;
-    width: 157px;
+    width: 147px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -708,7 +708,7 @@ select:focus::-ms-value {background: transparent; color: #555 }
     display: block;
     float: left;
     text-decoration: none;
-    width: 157px;
+    width: 147px;
     background: #252525;
     border-top: 1px solid #373737;
     border-bottom: 1px solid #1A1A1A;
@@ -764,13 +764,13 @@ select:focus::-ms-value {background: transparent; color: #555 }
 #main_icon
 {
     float:right;
-   padding-right: 23px;
+   padding-right: 10px;
    padding-top:20px;
 }
 .sub_icon
 {
     float:right;
-   padding-right: 25px;
+   padding-right: 10px;
    padding-top:10px;
 }
 .content-header {
