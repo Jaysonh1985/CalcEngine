@@ -1,62 +1,76 @@
 ﻿// Copyright (c) 2016 Project AIM
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Caching;
 using System.Web.Mvc;
 using CalculationCSharp.Models;
-using System.Net;
-using Newtonsoft.Json.Linq;
-using System.Net.Http;
-using Newtonsoft.Json;
-using CalculationCSharp.Areas.Project.Models;
-using System.Web.Script.Serialization;
-using System.Reflection;
-using System.Web.UI.WebControls;
-using System.IO;
-using System.Web.UI;
-using System.Xml;
-using System.Text;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CalculationCSharp.Areas.Project.Controllers
 {
     public class BoardController : Controller
     {
         private CalculationDBContext db = new CalculationDBContext();
-
+        /// <summary>Controller for calculation configuration to view the views pages.
+        /// </summary>
+        CalculationCSharp.Models.ApplicationDbContext context = new CalculationCSharp.Models.ApplicationDbContext();
         // GET: Project/ProjectBoards
         public ActionResult Index()
         {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            ViewData["H1"] = "Project Management";
-            ViewData["P1"] = "";
+            if (Request.IsAuthenticated)
+            {
 
-            return View();
+                ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "Project") && !userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    ViewData["H1"] = "Project Management";
+                    ViewData["P1"] = "";
+                    return View();
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
         }
 
         [HttpGet]
         public ActionResult Board(int? id)
         {
-
-            ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(id));
-
-            if(ProjectBoard == null)
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            if (Request.IsAuthenticated)
             {
-                ViewData["H1"] = "New Board";
+                ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+
+                if (!userManager.IsInRole(User.Identity.GetUserId(), "Project") && !userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
+                {
+                    return RedirectToAction("AccessBlock", "Account", new { area = "" });
+                }
+                else
+                {
+                    ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(id));
+
+                    if (ProjectBoard == null)
+                    {
+                        ViewData["H1"] = "New Board";
+                    }
+                    else
+                    {
+                        ViewData["H1"] = ProjectBoard.Name;
+                    }
+                    return View();
+                }
             }
             else
             {
-                ViewData["H1"] = ProjectBoard.Name;
-
+                return RedirectToAction("Login", "Account", new { area = "" });
             }
-
-            return View();
-
-        }
-
-
-        
-
+        }      
     }
 }

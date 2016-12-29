@@ -11,5 +11,6 @@ namespace CalculationCSharp.Models
         public const string ROLE_CONFIGURATION = "Configuration";
         public const string ROLE_VIEWONLY = "View Only";
         public const string ROLE_SYSADMIN = "System Admin";
+        public const string ROLE_PROJECT = "Project";
     }
 }

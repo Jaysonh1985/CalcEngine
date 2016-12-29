@@ -118,10 +118,9 @@
                             <tr ng-repeat="Task in Tasks">
                                 <td><input type="text" ng:model="Task.TaskName" class="form-control"></td>
                                 <td>
-                                    <select name="singleSelect" ng:model="Task.TaskUser" placeholder="Select User" class="form-control">
-                                        <option value="Jayson Herbert">Jayson Herbert</option>
-                                        <option value="John Smith">John Smith</option>
-                                        {{Task.TaskUser}}
+                                    <select name="singleSelect" ng-model="Task.TaskUser" placeholder="Select User" class="form-control">
+                                        <option ng-repeat="option in UserNames" value="{{option.Value}}">{{option.Value}}</option>
+                                        {{User}}
                                     </select>
                                 </td>
 

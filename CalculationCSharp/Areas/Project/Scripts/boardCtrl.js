@@ -14,6 +14,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         encodingVisible: true,
         uploadButtonLabel: "Upload File"
     };
+
     $scope.columns = {
         selected: null,
     };
@@ -66,8 +67,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             });
             colid = colid + 1;
         });
-    };
-    
+    };  
     // Model to JSON for demo purpose
     $scope.$watch('columns', function (model) {
         if (initializing) {
@@ -214,14 +214,12 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
          }
      };
 
-
      $scope.OrderColumnByClick = function OrderColumnByClick(id) {
          $scope.columns[id].Stories = $filter('orderBy')($scope.columns[id].Stories, 'Moscow');
      };
      $scope.ClearFilterClick = function ClearFilterClick() {
          $scope.search = null;
      };
-
 
      $scope.UpdateButtonClick = function (size, colIndex, index) {
         $scope.index = index;
@@ -320,13 +318,10 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
              }
          });
 
-         modalInstance.result.then(function () {
-
-           
+         modalInstance.result.then(function () {          
          }, function () {
 
          });
-
      };
 
      $scope.toggleAnimation = function () {

@@ -39,6 +39,10 @@ namespace CalculationCSharp.Migrations
             {
                 var roleresult = roleManager.Create(new IdentityRole(RoleNameModels.ROLE_SYSADMIN));
             }
+            if (!roleManager.RoleExists(RoleNameModels.ROLE_PROJECT))
+            {
+                var roleresult = roleManager.Create(new IdentityRole(RoleNameModels.ROLE_PROJECT));
+            }
 
             string userName = "system@projectAim.com";
             string password = "Password01*";
@@ -58,7 +62,6 @@ namespace CalculationCSharp.Migrations
                     var result = userManager.AddToRole(user.Id, RoleNameModels.ROLE_SYSADMIN);
                 }
             }
-
         }
     }
 }

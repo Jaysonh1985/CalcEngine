@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +16,11 @@ namespace CalculationCSharp.Areas.Project.Controllers
         CalculationCSharp.Models.ApplicationDbContext context = new CalculationCSharp.Models.ApplicationDbContext();
         // GET api/<controller>
         [System.Web.Http.HttpGet]
-        public HttpResponseMessage Get()
+        public async System.Threading.Tasks.Task<HttpResponseMessage> Get()
         {
-            var listUsers = context.Users.OrderBy(r => r.UserName).ToList().Select(rr => new SelectListItem { Value = rr.UserName.ToString(), Text = rr.UserName }).ToList();
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var role = await RoleManager.FindByNameAsync("Project");
+            var listUsers = context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(role.Id)).OrderBy(r => r.UserName).ToList().Select(rr => new SelectListItem { Value = rr.UserName.ToString(), Text = rr.UserName }).ToList();
             //Create object response
             var response = Request.CreateResponse();
             response.Content = new StringContent(JsonConvert.SerializeObject(listUsers));

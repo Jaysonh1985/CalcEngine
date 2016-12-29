@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2016 Project AIM
 sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) {
     var proxy = null;
-
     
     var getColumns = function (id) {
         return $http.get("/api/ColumnWebApi/Get",{ params: { id: id } }).then(function (response) {
@@ -62,7 +61,6 @@ sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) 
         });
     };
 
-
     var getBoards = function () {
         return $http.get("/api/BoardWebApi/Get").then(function (response) {
             return response.data;
@@ -79,7 +77,6 @@ sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) 
         });
     };
 
-
     var updateBoard = function (boardIdVal, data, updateType) {
         return $http.post("/api/BoardWebApi/UpdateBoard", { boardId: boardIdVal, data: data, updateType: updateType })
             .then(function (response) {
@@ -88,18 +85,15 @@ sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) 
                 return $q.reject(error.data.Message);
             });
     };
-
    
     var initialize = function () {      
 
         connection = jQuery.hubConnection();
         this.proxy = connection.createHubProxy('KanbanBoard');
-
         // Listen to the 'BoardUpdated' event that will be pushed from SignalR server
         this.proxy.on('BoardUpdated', function () {
             $rootScope.$$childHead.$emit("refreshBoard");
         });
-
         // Connecting to SignalR server        
         return connection.start()
         .then(function (connectionObj) {
