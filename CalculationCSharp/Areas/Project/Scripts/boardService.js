@@ -97,7 +97,7 @@ sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) 
 
         // Listen to the 'BoardUpdated' event that will be pushed from SignalR server
         this.proxy.on('BoardUpdated', function () {
-            $rootScope.$emit("refreshBoard");
+            $rootScope.$$childHead.$emit("refreshBoard");
         });
 
         // Connecting to SignalR server        
