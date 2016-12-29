@@ -12,6 +12,7 @@
                         <th style="width:10%"><H4>Red</H4></th>
                         <th style="width:10%"><H4>Amber</H4></th>
                         <th style="width:10%"><H4>Green</H4></th>
+                        <th style="width:10%"><H4>Total</H4></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,7 @@
                         <td><span><a> {{row.Red}}</a></span></td>
                         <td><span>{{row.Amber}}</span></td>
                         <td><span><a> {{row.Green}}</a></span></td>
+                        <td><span><a> {{row.Total}}</a></span></td>
                     </tr>
                 </tbody>
             </table>
@@ -32,6 +34,7 @@
                         <th style="width:10%"><H4>In Progress</H4></th>
                         <th style="width:10%"><H4>Pending</H4></th>
                         <th style="width:10%"><H4>Release</H4></th>
+                        <th style="width:10%"><H4>Total</H4></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,9 +43,86 @@
                         <td><span><a> {{rowCol.InProgressColumn}}</a></span></td>
                         <td><span>{{rowCol.PendingColumn}}</span></td>
                         <td><span><a> {{rowCol.ReleaseColumn}}</a></span></td>
+                        <td><span><a> {{rowCol.TotalColumn}}</a></span></td>
                     </tr>
                 </tbody>
             </table>
+
+            <h3>User List - RAG</h3>
+            <table class="table table-bordered table table-responsive">
+                <thead>
+                    <tr style="font-weight: bold">
+                        <th style="width:10%"><H4>User</H4></th>
+                        <th style="width:10%"><H4>Red</H4></th>
+                        <th style="width:10%"><H4>Amber</H4></th>
+                        <th style="width:10%"><H4>Green</H4></th>
+                        <th style="width:10%"><H4>Total</H4></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="rowUser in UserReportRAG">
+                        <td><span><a>{{rowUser.User}}</a></span></td>
+                        <td><span><a> {{rowUser.Red}}</a></span></td>
+                        <td><span>{{rowUser.Amber}}</span></td>
+                        <td><span><a> {{rowUser.Green}}</a></span></td>
+                        <td><span><a> {{rowUser.Total}}</a></span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>User List - Priority</h3>
+            <table class="table table-bordered table table-responsive">
+                <thead>
+                    <tr style="font-weight: bold">
+                        <th style="width:10%"><H4>User</H4></th>
+                        <th style="width:10%"><H4>1</H4></th>
+                        <th style="width:10%"><H4>2</H4></th>
+                        <th style="width:10%"><H4>3</H4></th>
+                        <th style="width:10%"><H4>Unassigned</H4></th>
+                        <th style="width:10%"><H4>Total</H4></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="rowUserPriority in UserReportPrioirty">
+                        <td><span><a>{{rowUserPriority.User}}</a></span></td>
+                        <td><span>{{rowUserPriority.High}}</span></td>
+                        <td><span><a> {{rowUserPriority.Medium}}</a></span></td>
+                        <td><span><a> {{rowUserPriority.Low}}</a></span></td>
+                        <td><span><a> {{rowUserPriority.Unassigned}}</a></span></td>
+                        <td><span><a> {{rowUserPriority.Total}}</a></span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <uib-accordion close-others=false>
+                <div class="container-fluid">
+                    <uib-accordion close-others=false ng-model="output">
+                        <div uib-accordion-group is-open="openIndexTimings[$index]">
+                            <uib-accordion-heading>
+                                Activity Timings
+                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexTimings[$index], 'glyphicon-chevron-right': !openIndexTimings[$index]}"></i>
+                            </uib-accordion-heading>
+                            <br />
+                            <table class="table table-bordered table table-responsive">
+                                <thead>
+                                    <tr style="font-weight: bold">
+                                        <th style="width:65%"><H4>Name</H4></th>
+                                        <th style="width:35%"><H4>Elapsed Time</H4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="rowActivityTimeReport in ActivityTimeReport">
+                                        <td><span><a>{{rowActivityTimeReport.Name}}</a></span></td>
+                                        <td><span>{{rowActivityTimeReport.Time | stopwatchTime}}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-accordion>
+                </div>
+            </uib-accordion>
+
+     
 
         </div>
         <div class="modal-footer">

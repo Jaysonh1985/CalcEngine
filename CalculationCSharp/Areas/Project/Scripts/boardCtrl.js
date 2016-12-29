@@ -53,6 +53,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                $scope.isLoading = true;
                $scope.columns = data;
                $scope.setRAG();
+               columnReport();
            }, onError);
     };
 
@@ -202,7 +203,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
              StartDate: '01/01/1900',
              DueDate: '01/01/1900',
              RequestedDate: '01/01/1900',
-             Moscow:""
+             Moscow:null
          });
      };
 
@@ -314,7 +315,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
              backdrop: false,
              resolve: {
                  Name: function () { return $scope.Name },
-
+                 UserList: function () { return $scope.UserList }
              }
          });
 
