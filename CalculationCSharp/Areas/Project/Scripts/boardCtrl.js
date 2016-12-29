@@ -47,13 +47,22 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         
     };
 
+    function ColumnReport() {
+
+        $scope.BacklogCount = $scope.columns[0].Stories.length;
+        $scope.InProgressCount = $scope.columns[1].Stories.length;
+        $scope.PendingCount = $scope.columns[2].Stories.length;
+        $scope.ReleaseCount = $scope.columns[3].Stories.length;
+        $scope.TotalCount = $scope.BacklogCount + $scope.InProgressCount + $scope.PendingCount + $scope.ReleaseCount;
+    }
+
     $scope.refreshBoard = function refreshBoard(id) {
         boardService.getColumns(id)
            .then(function (data) {
                $scope.isLoading = true;
                $scope.columns = data;
                $scope.setRAG();
-               columnReport();
+               ColumnReport();
            }, onError);
     };
 

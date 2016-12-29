@@ -56,6 +56,12 @@
                                         <a ng-click="AddButtonClick($index)"><i class="glyphicon glyphicon-plus"></i></a>
                                     </td>
                                     <td>
+                                        <h4 ng-if="col.Name == 'Backlog'">{{BacklogCount}} / {{TotalCount}}</h4>
+                                        <h4 ng-if="col.Name == 'In Progress'">{{InProgressCount}} / {{TotalCount}}</h4>
+                                        <h4 ng-if="col.Name == 'Pending'">{{PendingCount}} / {{TotalCount}}</h4>
+                                        <h4 ng-if="col.Name == 'Release'">{{ReleaseCount}} / {{TotalCount}}</h4>
+                                    </td>
+                                    <td>
                                         <a ng-click="OrderColumnByClick($index)"><i class="glyphicon glyphicon-sort"></i></a>
                                     </td>
 

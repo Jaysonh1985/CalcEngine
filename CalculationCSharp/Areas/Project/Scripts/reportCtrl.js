@@ -99,23 +99,6 @@ sulhome.kanbanBoardApp.controller('reportCtrl', function ($scope, $uibModalInsta
         })
 
     }
-    function ColumnReport() {
-
-        var BacklogCount = $scope.columns[0].Stories.length;
-        var InProgressCount = $scope.columns[1].Stories.length;
-        var PendingCount = $scope.columns[2].Stories.length;
-        var ReleaseCount = $scope.columns[3].Stories.length;
-        var TotalCount = BacklogCount + InProgressCount + PendingCount + ReleaseCount;
-        $scope.ColumnReport = [];
-        $scope.ColumnReport.push({
-            BacklogColumn: BacklogCount,
-            InProgressColumn: InProgressCount,
-            PendingColumn: PendingCount,
-            ReleaseColumn: ReleaseCount,
-            TotalColumn: TotalCount
-        })
-
-    }
 
     function UserReportRAG() {
 
@@ -289,7 +272,6 @@ sulhome.kanbanBoardApp.controller('reportCtrl', function ($scope, $uibModalInsta
     };
 
     RAGReport();
-    ColumnReport();
     UserReportRAG();
     UserReportPrioirty();
     ActivityTimeReport();
