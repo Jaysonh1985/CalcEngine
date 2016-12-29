@@ -19,19 +19,14 @@ namespace CalculationCSharp.Areas.Project.Controllers
     public class BoardWebApiController : ApiController
     {
         BoardRepository repo = new BoardRepository();
-
-
         // GET api/<controller>
         [System.Web.Http.HttpGet]
         public HttpResponseMessage Get()
         {
             var repo = new BoardRepository();
             var response = Request.CreateResponse();
-
             response.Content = new StringContent(JsonConvert.SerializeObject(repo.GetBoards()));
-
-            HttpContext.Current.Cache.Remove("columns");
-            
+            HttpContext.Current.Cache.Remove("columns");           
             return response;
         }
 
@@ -39,18 +34,13 @@ namespace CalculationCSharp.Areas.Project.Controllers
         public HttpResponseMessage UpdateBoard(JObject moveTaskParams)
         {
             dynamic json = moveTaskParams;
-
             string data = Convert.ToString(json.data);
-
             var response = Request.CreateResponse();
-
             if (json.boardId == null)
             {
                 response.StatusCode = HttpStatusCode.BadRequest;
             }
-
             ProjectBoard ProjectBoard = repo.GetBoard(json);
-
             if (ProjectBoard == null)
             {
                 repo.AddBoard(json);
@@ -65,12 +55,8 @@ namespace CalculationCSharp.Areas.Project.Controllers
             }
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             List<Column> columns = (List<Column>)javaScriptSerializ­er.Deserialize(data, typeof(List<Column>));
-            HttpContext.Current.Cache["columns"] = columns;
             response.StatusCode = HttpStatusCode.OK;
-
             return response;
-        }
-
-        
+        }       
     }
 }

@@ -17,12 +17,9 @@ namespace CalculationCSharp.Areas.Project.Controllers
         public ActionResult Index()
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
             if (Request.IsAuthenticated)
             {
-
                 ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
-
                 if (!userManager.IsInRole(User.Identity.GetUserId(), "Project") && !userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
                 {
                     return RedirectToAction("AccessBlock", "Account", new { area = "" });
@@ -47,7 +44,6 @@ namespace CalculationCSharp.Areas.Project.Controllers
             if (Request.IsAuthenticated)
             {
                 ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
-
                 if (!userManager.IsInRole(User.Identity.GetUserId(), "Project") && !userManager.IsInRole(User.Identity.GetUserId(), "System Admin"))
                 {
                     return RedirectToAction("AccessBlock", "Account", new { area = "" });
@@ -55,7 +51,6 @@ namespace CalculationCSharp.Areas.Project.Controllers
                 else
                 {
                     ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(id));
-
                     if (ProjectBoard == null)
                     {
                         ViewData["H1"] = "New Board";

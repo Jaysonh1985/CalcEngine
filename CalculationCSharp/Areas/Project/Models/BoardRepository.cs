@@ -19,7 +19,6 @@ namespace CalculationCSharp.Areas.Project.Models
         public List<ProjectBoard> GetBoards()
         {
             var ProjectBoard = db.ProjectBoard.ToList();
-
             return ProjectBoard;
         }
 
@@ -33,8 +32,7 @@ namespace CalculationCSharp.Areas.Project.Models
             {
                 ProjectBoard Board  = db.ProjectBoard.Find(Convert.ToInt32(json.boardId));
                 return Board;
-            }
-                        
+            }                      
         }
 
         public void AddBoard(dynamic json)
@@ -55,9 +53,7 @@ namespace CalculationCSharp.Areas.Project.Models
             ProjectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
             ProjectBoard.Group = "Project Group";
             ProjectBoard.UpdateDate = DateTime.Now;
-
             db.Entry(ProjectBoard).State = EntityState.Modified;
-
             db.SaveChanges();
         }
 
@@ -68,6 +64,5 @@ namespace CalculationCSharp.Areas.Project.Models
             db.ProjectBoard.Remove(ProjectBoard);
             db.SaveChanges();
         }
-
     }
 }

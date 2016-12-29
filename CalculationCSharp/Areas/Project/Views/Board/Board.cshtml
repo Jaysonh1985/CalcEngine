@@ -79,7 +79,7 @@
                                     dnd-selected="col.Stories.selected = story"
                                     ng-class="{'greenCard' :  story.RAG == 'Green', 'redCard': story.RAG == 'Red', 'amberCard': story.RAG == 'Amber',  'standardCard': story.RAG == ''}"
                                     ng-click="UpdateButtonClick('lg', colIndex, $index)"
-                                    prevent-click="true">
+                                    >
                                     <p>
                                         {{story.Name}}
                                     </p>
