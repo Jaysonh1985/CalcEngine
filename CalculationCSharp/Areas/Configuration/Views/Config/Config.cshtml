@@ -51,7 +51,7 @@
 
                 <div ng-hide="isLoading" ui-tree data-clone-enabled="true">
                     <br />
-                    <uib-accordion close-others=false ui-tree-nodes="" ng-model="config">
+                    <uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
                         <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
 
                             <uib-accordion-heading>
@@ -61,7 +61,7 @@
                             </uib-accordion-heading>
                             <div>
                                 <table class="table table-borderless" ng-hide="viewOnly">
-                                    <tr >
+                                    <tr>
                                         <td ng-if="Category.Name != 'Input'"><a ng-click="CategoryLogicButtonClick('lg', $index)"><i class="glyphicon glyphicon-wrench"></i></a> </td>
                                         <td ng-if="Category.Name != 'Input'"><a ng-click="DeleteCategory($index)"><i class="center-block glyphicon glyphicon-remove"></i></a> </td>
                                         <td><a ng-click="AddCategoryRows($index, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a></td>
@@ -94,13 +94,16 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody ui-tree-nodes="" ng:model="Category.Functions">
+                                <tbody ui-tree-nodes=""  ng:model="Category.Functions">
                                     <tr id="Row_{{$parent.$index}}_{{$index}}"  unselectable="on"
                                         ng-repeat="rows in Category.Functions | filter:searchText" ng-click="selectRow($event, $index, $parent.$index)"
-                                        ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}" ui-tree-node>
+                                        ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}"   ui-tree-node>
 
-                                        <td>
-                                            <i ng-hide="viewOnly" ng-show="Category.Name != 'Input'" class="glyphicon glyphicon-list" ui-tree-handle></i>
+                                        <td ng-show="Category.Name != 'Input'">
+                                            <i ng-hide="viewOnly" class="glyphicon glyphicon-list" ui-tree-handle></i>
+                                        </td>
+                                        <td ng-hide="Category.Name != 'Input'">
+                                           
                                         </td>
 
                                         <td>

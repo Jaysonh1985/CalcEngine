@@ -15,7 +15,7 @@ namespace CalculationCSharp.Areas.Project.Models
 
         public List<Column> GetColumns(ProjectBoard ProjectBoard)
         {
-            if (ProjectBoard.Configuration == "" || ProjectBoard.Configuration == null)
+            if (ProjectBoard.Configuration == "" || ProjectBoard.Configuration == null || ProjectBoard == null)
             {
                 var columns = new List<Column>();
                 var stories = new List<Stories>();
