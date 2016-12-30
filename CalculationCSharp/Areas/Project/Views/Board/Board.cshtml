@@ -48,9 +48,9 @@
             <!-- Keep all page content within the page-content inset div! -->
             <div class="page-content inset">
                 
-            <div class="row">
-               <div class="simpleDemo row">
-                <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle" ng-init="colIndex = $index" ng-cloak>
+            <div class="row" ui-tree data-clone-enabled="true">
+               <div class="simpleDemo row"  ui-tree-nodes="" ng-model="columns" data-nodrop-enabled="true">
+                <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle" ng-init="colIndex = $index" ng-cloak ui-tree-node>
                     <div class="panel ">
                         <div class="panel-heading">
                             <h3 class="panel-title">{{col.Name}}</h3>
@@ -73,7 +73,7 @@
                             </table>
                         </div>
 
-                        <div class="panel-body" ui-tree data-empty-placeholder-enabled="true" data-max-depth="1">
+                        <div class="panel-body" data-empty-placeholder-enabled="true" data-max-depth="1">
                             <ol ui-tree-nodes="" ng-model="col.Stories">
                                 <li ng-repeat="story in col.Stories | filter: search"
                                     ng-class="{'greenCard' :  story.RAG == 'Green', 'redCard': story.RAG == 'Red', 'amberCard': story.RAG == 'Amber',  'standardCard': story.RAG == ''}"
