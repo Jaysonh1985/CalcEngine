@@ -5,34 +5,48 @@
 <br />
 <h4 class="text-center">Project Boards</h4>
 <div class="container body-content" ng-controller="menuCtrl" ng-cloak>
-    <br />
     <button class="btn btn-default" ng-click="addBoard()">Add</button>
-    <br />
+    <div class="nav navbar-nav pull-right">
+        <div class="navbar-text">Search</div>
+        <div class="input-group">
+            <input type="text" class="form-control form-inline input" ng-model="test" placeholder="Filter">
+        </div>
+    </div>
     <table class="table table-bordered table table-responsive">
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                User
-            </th>
-            <th>
-                Updated
-            </th>
-            <th>
-            </th>
-        </tr>
-        <tr ng-repeat="board in Boards">
-            <td ng-hide="editingData[board.ID]" width="50%" ng-click="openBoard()">{{board.Name}}</td>
-            <td ng-show="editingData[board.ID]" width="50%" ><input class="form-control text-box single-line" type="text" ng-model="board.Name"/></td>
-            <td width="15%" ng-click="openBoard()">{{board.User}}</td>
-            <td width="10%" ng-click="openBoard()">{{board.UpdateDate}}</td>
-            <td>
-                <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="modify(board)">Modify</button>
-                <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="updateBoard($index, board)">Update</button>
-                <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Cancel</button>
-                <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard($index)" />
-            </td>            
-        </tr>
-    </table>
+        <thead>
+            <tr>
+                <th>
+                    <a href="#" ng-click="orderByField='Name'; reverseSort = !reverseSort">
+                        Name <span ng-show="orderByField == 'Name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='User'; reverseSort = !reverseSort">
+                        User <span ng-show="orderByField == 'User'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#" ng-click="orderByField='UpdateDate'; reverseSort = !reverseSort">
+                        Updated <span ng-show="orderByField == 'UpdateDate'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a>
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="board in Boards | orderBy:orderByField:reverseSort | filter : test">
+                <td ng-hide="editingData[board.ID]" width="50%" ng-click="openBoard()">{{board.Name}}</td>
+                <td ng-show="editingData[board.ID]" width="50%"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
+                <td width="15%" ng-click="openBoard()">{{board.User}}</td>
+                <td width="10%" ng-click="openBoard()">{{board.UpdateDate  | date:'d MMMM yyyy h:mm a'}}</td>
+                <td>
+                    <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="modify(board)">Modify</button>
+                    <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="updateBoard($index, board)">Update</button>
+                    <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Cancel</button>
+                    <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard($index)" />
+                </td>
+            </tr>
+        </tbody>
+</table>
 </div>

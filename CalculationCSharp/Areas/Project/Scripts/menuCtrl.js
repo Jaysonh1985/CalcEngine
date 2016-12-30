@@ -4,7 +4,7 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
     $scope.Boards = [];
     $scope.isLoading = false;
     $scope.orderByField = '';
-  
+    $scope.orderByField = 'Name';
     function init() {
         $scope.isLoading = true;
         boardService.initialize().then(function (data) {

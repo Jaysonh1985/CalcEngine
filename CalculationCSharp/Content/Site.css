@@ -817,10 +817,7 @@ select:focus::-ms-value {background: transparent; color: #555 }
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    min-height: 40px;
-    line-height: 40px;
-    padding: 10px 10px;
-    border: 1px solid #ffffff;
+
 }
 
 .angular-ui-tree-placeholder {
@@ -860,6 +857,10 @@ tr.angular-ui-tree-empty {
     background: #222222;
     color: #FFF;
     margin-right: 10px;
+    min-height: 40px;
+    line-height: 40px;
+    padding: 10px 10px;
+    border: 1px solid #ffffff;
 }
 
 /*.angular-ui-tree-handle:hover {
