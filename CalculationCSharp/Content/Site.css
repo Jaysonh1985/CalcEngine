@@ -819,6 +819,8 @@ select:focus::-ms-value {background: transparent; color: #555 }
     box-sizing: border-box;
     min-height: 40px;
     line-height: 40px;
+    padding: 10px 10px;
+    border: 1px solid #ffffff;
 }
 
 .angular-ui-tree-placeholder {
