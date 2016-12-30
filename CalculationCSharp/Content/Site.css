@@ -840,7 +840,7 @@ tr.angular-ui-tree-empty {
 
 /* --- Tree --- */
 .tree-node {
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff;
     /*background: #f8faff;
     color: #7c9eb2;*/
 }
