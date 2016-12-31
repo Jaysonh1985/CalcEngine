@@ -28,7 +28,6 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
 
     function init() {
         var id = $location.absUrl();
-        $scope.isLoading = true;
         $scope.todayDate = new Date();
         boardService.initialize().then(function (data) {
             $scope.isLoading = true;
@@ -42,13 +41,12 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                 .then(function (dataUser) {
                     $scope.CurrentUser = dataUser;
                 }, onError);
-
+            $scope.isLoading = false;
         }, onError);
         
     };
 
     function ColumnReport() {
-
         $scope.BacklogCount = $scope.columns[0].Stories.length;
         $scope.InProgressCount = $scope.columns[1].Stories.length;
         $scope.PendingCount = $scope.columns[2].Stories.length;
@@ -63,6 +61,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                $scope.columns = data;
                $scope.setRAG();
                ColumnReport();
+               $scope.isLoading = false;
            }, onError);
     };
 
@@ -77,20 +76,27 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             });
             colid = colid + 1;
         });
-    };  
+    };
+
+    var waitForRenderAndDoSomething = function () {
+        if ($http.pendingRequests.length > 0) {
+            $timeout(waitForRenderAndDoSomething); // Wait for all templates to be loaded
+        } else {
+            $scope.isLoading = false;
+        }
+    }
     // Model to JSON for demo purpose
     $scope.$watch('columns', function (model) {
         if (initializing) {
             $timeout(function () { initializing = false; });
         } else {
-
             $scope.isLoading = true;
             id = configFunctionFactory.getConfigID();
             $scope.rebuildColumnIDs();
-            boardService.updateBoard(id, $scope.columns).then(function (data) {
-                $scope.isLoading = false;
-                //toastr.success("Board Saved successfully", "Success");
+            boardService.updateBoard(id, $scope.columns).then(function (data) {             
                 boardService.sendRequest();
+                $timeout(waitForRenderAndDoSomething);
+                
             }, onError);
             $scope.setRAG();
            
@@ -103,7 +109,6 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             angular.forEach(value.Stories, function (valueS, keyS, propS) {
                 var DueDate = new Date(valueS.DueDate);
                 var datediff = Date.daysBetween(new Date(), DueDate);
-
                 if (isNaN(Date.parse(DueDate)) == true || DueDate.toDateString() == 'Mon Jan 01 1900') {
                     $scope.columns[columnIndex].Stories[keyS].RAG = "Green";
                 }
@@ -119,7 +124,6 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                         $scope.columns[columnIndex].Stories[keyS].RAG = "Green";
                     }
                 }
-
             });
         });
     };
@@ -144,7 +148,6 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
          if (angular.isNumber(id) == false) {
              id = null;
          }
-
          var promise = boardService.getCSV(id)
             .then(function (data) {
                 $scope.isLoading = true;
@@ -343,7 +346,6 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
     });
 
      var onError = function (errorMessage) {
-        $scope.isLoading = false;
         toastr.error(errorMessage, "Error");
     };
 

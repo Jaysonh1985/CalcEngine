@@ -73,52 +73,27 @@
                             </table>
                         </div>
 
-                        <div class="panel-body" data-empty-placeholder-enabled="true" data-max-depth="1">
+                        <div ng-hide="isLoading" class="panel-body" data-empty-placeholder-enabled="true" data-max-depth="1">
                             <ol ui-tree-nodes="" ng-model="col.Stories">
                                 <li ng-repeat="story in col.Stories | filter: search"
                                     ng-class="{'greenCard' :  story.RAG == 'Green', 'redCard': story.RAG == 'Red', 'amberCard': story.RAG == 'Amber',  'standardCard': story.RAG == ''}"
                                       ui-tree-node>
-                                    <div class="pull-left tree-handle" ui-tree-handle>
+                                    <div ng-if="isLoading == false" class="pull-left tree-handle" ui-tree-handle>
+                                        <span class="glyphicon glyphicon-list"></span>
+                                    </div>
+                                    <div ng-if="isLoading == true" class="pull-left tree-handle" ui-tree-handle>
                                         <span class="glyphicon glyphicon-list"></span>
                                     </div>
                                     <div  ng-click="UpdateButtonClick('lg', colIndex, $index)" ng-class="{'greenCard' :  story.RAG == 'Green', 'redCard': story.RAG == 'Red', 'amberCard': story.RAG == 'Amber',  'standardCard': story.RAG == ''}" class="tree-node">
 
                                         <div class="tree-node-content">
                                             <a data-nodrag ng-click="toggle(this)">
-                                                @*<span class="glyphicon" ng-class="{
-                                                    'glyphicon-chevron-right': collapsed,
-                                                    'glyphicon-chevron-down': !collapsed
-                                                    }">*@
-                                            @*</span>*@
                                             </a>
                                            {{story.Name}}
                                          </div>
                                     </div>
                             </ol>
                         </div>
-
-                        @*<div class="panel-body">
-                            <ul class="caption" dnd-list="col.Stories">
-                                <li ng-repeat="story in col.Stories | filter: search"
-                                    dnd-draggable="story"
-                                    dnd-moved="col.Stories.splice($index, 1)"
-                                    dnd-effect-allowed="move"
-                                    dnd-selected="col.Stories.selected = story"
-                                    
-                                    ng-click="UpdateButtonClick('lg', colIndex, $index)"
-                                    >
-                                    <p>
-                                        {{story.Name}}
-                                    </p>
-                                    <p>
-                                        <h5 ng-if="story.Moscow == 'Must'">M</h5>
-                                        <h5 ng-if="story.Moscow == 'Should'">S</h5>
-                                        <h5 ng-if="story.Moscow == 'Could'">C</h5>
-                                        <h5 ng-if="story.Moscow == 'Wont'">W</h5>
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>*@
                     </div>
                 </div>
             </div>
