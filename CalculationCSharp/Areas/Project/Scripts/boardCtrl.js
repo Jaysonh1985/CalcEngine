@@ -149,9 +149,10 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
              id = null;
          }
          var promise = boardService.getCSV(id)
-            .then(function (data) {
-                $scope.isLoading = false;
+            .then(function (data) {              
                 $scope.CSV = data;
+                $scope.isLoading = false;
+                $scope.setRAG();
                 toastr.success("Exported Successfully", "Success");
                 return data;
             }, onError);
@@ -180,10 +181,10 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                          Requested: key.RequestedBy,
                          RAG: key.RAG,
                          SLADays: key.SLA,
-                         StartDate: new Date(key.StartDate),
-                         DueDate: new Date(key.DueDate),
-                         RequestedDate: new Date(key.RequestedDate),
                          ElapsedTime: key.ElapsedTime,
+                         StartDate: '01/01/1900',
+                         DueDate: '01/01/1900',
+                         RequestedDate: '01/01/1900',
                          AcceptanceCriteria: key.AcceptanceCriteria,
                          Moscow: key.Moscow,
                          Complexity: key.Complexity,
