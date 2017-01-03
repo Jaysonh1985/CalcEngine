@@ -33,13 +33,12 @@
             <li><input ng-disabled="false" type="text" class="form-control form-inline input" ng-model="search" placeholder="Search" style="background-color:#222; border:none; color:#999"></li>
             <li><a ng-click="ClearFilterClick()">Clear Filter<span class="sub_icon glyphicon glyphicon-filter"></span></a></li>
             <li><a ng-click="ReportButtonClick()">Reports<span class="sub_icon glyphicon glyphicon-file"></span></a></li>
-            <li><a ng-csv="CSVButtonClick()">Export<span class="sub_icon glyphicon glyphicon-export"></span></a></li>
+            <li><a ng-csv="CSVButtonClick()" filename="@ViewData["H1"] - Project Board.csv">Export<span class="sub_icon glyphicon glyphicon-export"></span></a></li>
             <li><a ng-click="ImportButtonClick(csv.result)">Import<span class="sub_icon glyphicon glyphicon-import"></span></a></li>
             <li>
                 <ng-csv-import class="CSVButton" content="csv.content" header="csv.header" separator="csv.separator" result="csv.result"  upload-button-label="csv.uploadButtonLabel"></ng-csv-import>
             </li>
-            <li tyle="background-color:#222; border:none; color:#999" class="divider"></li>
-            <li class="sidebar-brand"><h5 style="background-color:#222; border:none; color:#999">@ViewData["H1"]</h5></li>  
+            <li style="background-color:#222; border:none; color:#999" class="divider"></li>
         </ul>
     </div>
 
@@ -47,9 +46,9 @@
         <div id="page-content-wrapper">
             <!-- Keep all page content within the page-content inset div! -->
             <div class="page-content inset">
-                
             <div class="row" ui-tree data-clone-enabled="true">
-               <div class="simpleDemo row"  ui-tree-nodes="" ng-model="columns" data-nodrop-enabled="true">
+                <h2 class="center-block text-center"><a>@ViewData["H1"]</a></h2>
+                <div class="simpleDemo row"  ui-tree-nodes="" ng-model="columns" data-nodrop-enabled="true">
                 <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle" ng-init="colIndex = $index" ng-cloak ui-tree-node>
                     <div class="panel ">
                         <div class="panel-heading">
@@ -78,11 +77,8 @@
                                 <li ng-repeat="story in col.Stories | filter: search"
                                     ng-class="{'greenCard' :  story.RAG == 'Green', 'redCard': story.RAG == 'Red', 'amberCard': story.RAG == 'Amber',  'standardCard': story.RAG == ''}"
                                       ui-tree-node>
-                                    <div ng-if="isLoading == false" class="pull-left tree-handle" ui-tree-handle>
-                                        <span class="glyphicon glyphicon-list"></span>
-                                    </div>
-                                    <div ng-if="isLoading == true" class="pull-left tree-handle" ui-tree-handle>
-                                        <span class="glyphicon glyphicon-list"></span>
+                                    <div class="pull-left tree-handle" ui-tree-handle>
+                                        <span style="font-size:100%" class="glyphicon glyphicon-list"></span>
                                     </div>
                                     <div  ng-click="UpdateButtonClick('lg', colIndex, $index)" ng-class="{'greenCard' :  story.RAG == 'Green', 'redCard': story.RAG == 'Red', 'amberCard': story.RAG == 'Amber',  'standardCard': story.RAG == ''}" class="tree-node">
 

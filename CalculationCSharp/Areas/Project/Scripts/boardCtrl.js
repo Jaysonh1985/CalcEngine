@@ -150,8 +150,9 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
          }
          var promise = boardService.getCSV(id)
             .then(function (data) {
-                $scope.isLoading = true;
+                $scope.isLoading = false;
                 $scope.CSV = data;
+                toastr.success("Exported Successfully", "Success");
                 return data;
             }, onError);
          return promise;
@@ -192,6 +193,8 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                      };
                      $scope.columns[key.ColumnID].Stories.push($scope.selected);
                  });
+
+                 toastr.success("Imported Successfully", "Success");
              }            
          }
      };
