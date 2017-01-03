@@ -71,24 +71,23 @@
                                 </tr>
                             </table>
                         </div>
-
-                        <div ng-hide="isLoading" class="panel-body" data-empty-placeholder-enabled="true" data-max-depth="1">
-                            <ol ui-tree-nodes="" ng-model="col.Stories">
-                                <li ng-repeat="story in col.Stories | filter: search"
-                                    ng-class="{'greenCard' :  story.RAG == 'Green', 'redCard': story.RAG == 'Red', 'amberCard': story.RAG == 'Amber',  'standardCard': story.RAG == ''}"
-                                      ui-tree-node>
-                                    <div class="pull-left tree-handle" ui-tree-handle>
-                                        <span style="font-size:100%" class="glyphicon glyphicon-list"></span>
-                                    </div>
-                                    <div  ng-click="UpdateButtonClick('lg', colIndex, $index)" ng-class="{'greenCard' :  story.RAG == 'Green', 'redCard': story.RAG == 'Red', 'amberCard': story.RAG == 'Amber',  'standardCard': story.RAG == ''}" class="tree-node">
-
-                                        <div class="tree-node-content">
-                                            <a data-nodrag ng-click="toggle(this)">
-                                            </a>
-                                           {{story.Name}}
-                                         </div>
-                                    </div>
-                            </ol>
+                        <div ng-hide="isLoading" class="panel-body" >
+                            <div ui-tree-nodes="" ng-model="col.Stories">
+                                    <table class="table table-borderlesscards" data-empty-placeholder-enabled="true">
+                                        <tbody>
+                                            <tr ng-repeat="story in col.Stories | filter: search"
+                                                
+                                                ui-tree-node>
+                                                <td style="background-color:#222222" ui-tree-handle>
+                                                    <a><i class="centre block tree-handle glyphicon glyphicon-list"></i></a>
+                                                </td>
+                                                <td ng-click="UpdateButtonClick('lg', colIndex, $index)" style="text-align:left;" width="90%" ng-class="{'greenCard' :  story.RAG == 'Green', 'redCard': story.RAG == 'Red', 'amberCard': story.RAG == 'Amber',  'standardCard': story.RAG == ''}">
+                                                    {{story.Name}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
                         </div>
                     </div>
                 </div>

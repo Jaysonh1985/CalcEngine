@@ -174,6 +174,16 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                  });
 
                  angular.forEach(CSV, function (key, value, obj) {
+
+                     if (key.Moscow == '')
+                     {
+                         key.Moscow = null;
+                     }
+                     if (key.CurrentUser == '')
+                     {
+                         key.CurrentUser = null;
+                     }
+
                      $scope.selected = {
                          ID: key.ActivityID,
                          Name: key.ActivityName,
@@ -181,7 +191,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                          Requested: key.RequestedBy,
                          RAG: key.RAG,
                          SLADays: key.SLA,
-                         ElapsedTime: key.ElapsedTime,
+                         ElapsedTime: null,
                          StartDate: '01/01/1900',
                          DueDate: '01/01/1900',
                          RequestedDate: '01/01/1900',

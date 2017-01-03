@@ -627,6 +627,13 @@ background-color: #f9f9f9;
     border: none;
     background-color: #fff;
 }
+.table-borderlesscards tbody tr td, .table-borderlesscards tbody tr th, .table-borderlesscards thead tr th {
+    color: white;
+    text-align: left;
+    border: white;
+    border-style: solid;
+    border-width: thin;
+}
 
 .glyphicon {
     font-size: 125%;
@@ -806,30 +813,41 @@ select:focus::-ms-value {background: transparent; color: #555 }
     position: relative;
     margin: 0;
     padding: 0;
-    min-height: 40px;
-    line-height: 40px;
+    min-height: 100%;
+    line-height: 100%;
 }
 
 .angular-ui-tree-handle {
     cursor: move;
     text-decoration: none;
-    font-weight: lighter;
+    font-weight: bolder;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 
 }
 
+/*.angular-ui-tree-handle:hover {
+    color: #AE0000;
+    background: #AE0000;
+    border-color: #dce2e8;
+}*/
+
 .angular-ui-tree-placeholder {
-    background: #f0f9ff;
-    border: 2px dashed #bed2db;
-    -webkit-box-sizing: border-box;
+    background: #ddd;
+    width:600px;
+    padding:0px;
+    -webkit-box-sizing: inherit;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
 tr.angular-ui-tree-empty {
-    height:100px
+    background: blue;
+    border: 2px solid black;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: border-box;
+    box-sizing: content-box;
 }
 
 .group-title {
@@ -852,6 +870,7 @@ tr.angular-ui-tree-empty {
 .tree-node-content {
     margin: 10px;
 }
+
 .tree-handle {
     padding: 10px;
     background: #222222;
@@ -860,26 +879,20 @@ tr.angular-ui-tree-empty {
     min-height: 40px;
     line-height: 40px;
     padding: 10px 10px;
-    border: 1px solid #ffffff;
     font-size:100%;
     font-size: medium;
+
 }
 
-/*.angular-ui-tree-handle:hover {
-}*/
+.angular-ui-tree-handle:hover {
+}
 
-.angular-ui-tree-placeholder {
+/*.angular-ui-tree-placeholder {
     background: #f0f9ff;
     border: 2px dashed #bed2db;
+
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
+}*/
 
-.custom-file-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-    color:white;
-}
