@@ -247,26 +247,33 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
      };
 
      $scope.UpdateButtonClick = function (size, colIndex, index) {
-        $scope.index = index;
-        $scope.Name = this.story.Name;
-        $scope.Description = this.story.Description;
-        $scope.RAG = this.story.RAG;
-        $scope.SLADays = this.story.SLADays;
-        $scope.Requested = this.story.Requested;
-        $scope.StartDate = this.story.StartDate;
-        $scope.DueDate = this.story.DueDate;
-        $scope.RequestedDate = this.story.RequestedDate;
-        $scope.ElapsedTime = this.story.ElapsedTime;
-        $scope.AcceptanceCriteria = this.story.AcceptanceCriteria;
-        $scope.Moscow = this.story.Moscow;
-        $scope.Complexity = this.story.Complexity;
-        $scope.Effort = this.story.Effort;
-        $scope.Timebox = this.story.Timebox;
-        $scope.User = this.story.User;
-        $scope.ID = this.story.ID;
-        $scope.Tasks = this.story.Tasks;
-        $scope.Comments = this.story.Comments;
-        $scope.colID = colIndex;
+        
+         $scope.index = index;
+         $scope.colID = colIndex;
+         $scope.story = [];
+
+         $scope.story = {
+             Name: this.story.Name,
+             Description: this.story.Description,
+             Requested: this.story.Requested,
+             RAG: this.story.RAG,
+             SLADays: this.story.SLADays,
+             StartDate: this.story.StartDate,
+             DueDate: this.story.DueDate,
+             RequestedDate: this.story.RequestedDate,
+             ElapsedTime: this.story.ElapsedTime,
+             AcceptanceCriteria: this.story.AcceptanceCriteria,
+             Moscow: this.story.Moscow,
+             Timebox: this.story.Timebox,
+             Complexity: this.story.Complexity,
+             Effort: this.story.Effort,
+             User: this.story.User,
+             ID: this.story.ID,
+             Tasks: this.story.Tasks,
+             Comments: this.story.Comments,
+             Updates: this.story.Updates,
+             colID: colIndex,
+         };
 
         var modalInstance = $uibModal.open({
             animation: true,
@@ -276,26 +283,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             size: size,
             backdrop: false,
             resolve: {
-                Name: function () { return $scope.Name },
-                Description: function () { return $scope.Description; },
-                Requested: function () { return $scope.Requested; },
-                RAG: function () { return $scope.RAG; },
-                SLADays: function () { return $scope.SLADays; },
-                StartDate: function () { return $scope.StartDate; },
-                DueDate: function () { return $scope.DueDate; },
-                RequestedDate: function () { return $scope.RequestedDate; },
-                ElapsedTime: function () { return $scope.ElapsedTime; },
-                AcceptanceCriteria: function () { return $scope.AcceptanceCriteria; },
-                Moscow: function () { return $scope.Moscow; },
-                Timebox: function () { return $scope.Timebox; },
-                Complexity: function () { return $scope.Complexity; },
-                Effort: function () { return $scope.Effort; },
-                User: function () { return $scope.User; },
-                ID: function () { return $scope.ID },
-                Tasks: function () { return $scope.Tasks },
-                Comments: function () { return $scope.Comments},
-                colID: function () { return $scope.colID; },
-
+                story: function () { return $scope.story },
                 UserList: function () { return $scope.UserList },
                 CurrentUser: function () {return $scope.CurrentUser}
             }
@@ -322,6 +310,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             $scope.columns[$scope.colID].Stories[$scope.index].User = selectedItem.User;
             $scope.columns[$scope.colID].Stories[$scope.index].Tasks = selectedItem.Tasks;
             $scope.columns[$scope.colID].Stories[$scope.index].Comments = selectedItem.Comments;
+            $scope.columns[$scope.colID].Stories[$scope.index].Updates = selectedItem.Updates;
         }, function () {
 
         });      

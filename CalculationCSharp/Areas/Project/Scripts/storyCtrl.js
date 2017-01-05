@@ -1,27 +1,30 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, $interval, ID, Name, Description, AcceptanceCriteria, RAG, SLADays, Requested, StartDate, DueDate, RequestedDate, ElapsedTime, Moscow, Complexity, Effort, Timebox, User, Tasks, Comments, UserList, CurrentUser) {
-    
-    $scope.ID = ID;
-    $scope.Name = Name;
-    $scope.Description = Description;
-    $scope.RAG = RAG;
-    $scope.SLADays = parseInt(SLADays);
-    $scope.Requested = Requested;
-    $scope.StartDate = new Date(StartDate);
-    $scope.DueDate = new Date(DueDate);
-    $scope.RequestedDate = new Date(RequestedDate);
-    $scope.ElapsedTime = parseInt(ElapsedTime);
-    $scope.AcceptanceCriteria = AcceptanceCriteria;
-    $scope.Moscow = Moscow;
-    $scope.Complexity = Complexity;
-    $scope.Effort = Effort;
-    $scope.Timebox = Timebox;
-    $scope.User = User;
-    $scope.Tasks = Tasks;
-    $scope.Comments = Comments;
+sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, $interval, story, UserList, CurrentUser) {
+
+    $scope.ID = story.ID;
+    $scope.Name = story.Name;
+    $scope.Description = story.Description;
+    $scope.RAG = story.RAG;
+    $scope.SLADays = parseInt(story.SLADays);
+    $scope.Requested = story.Requested;
+    $scope.StartDate = new Date(story.StartDate);
+    $scope.DueDate = new Date(story.DueDate);
+    $scope.RequestedDate = new Date(story.RequestedDate);
+    $scope.ElapsedTime = parseInt(story.ElapsedTime);
+    $scope.AcceptanceCriteria = story.AcceptanceCriteria;
+    $scope.Moscow = story.Moscow;
+    $scope.Complexity = story.Complexity;
+    $scope.Effort = story.Effort;
+    $scope.Timebox = story.Timebox;
+    $scope.User = story.User;
+    $scope.Tasks = story.Tasks;
+    $scope.Comments = story.Comments;
     $scope.timerStart = false;
     $scope.UserList = UserList;
     $scope.txtCommentUser = CurrentUser;
+    $scope.Updates = story.Updates;
+
+    $scope.openIndexUpdates = [true];
     
     $scope.addItem = function () {
         if ($scope.Tasks == null) {
@@ -48,7 +51,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
         $scope.Tasks.splice(index, 1);
     },
 
-    $scope.ElapsedTime = ElapsedTime;
+    $scope.ElapsedTime = story.ElapsedTime;
     var timerPromise;
     $scope.start = function () {
         $scope.timerStart = true;
@@ -79,6 +82,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
             $interval.cancel(timerPromise);
             timerPromise = undefined;
         }
+        $scope.logElapsedTime();
     };
 
     $scope.btn_add = function () {
@@ -102,9 +106,59 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
         $scope.Comments.splice($index, 1);
     }
 
+    $scope.logElapsedTime = function () {
+        if ($scope.Updates == null) {
+            $scope.Updates = [];
+        }
+
+        var UpdateValue = 0;
+        if ($scope.ElapsedTime > 0 && (story.ElapsedTime != null || $scope.OldElapsedTime > 0)) {
+            if ($scope.OldElapsedTime > 0) {
+                UpdateValue = parseInt($scope.ElapsedTime) - parseInt($scope.OldElapsedTime);
+            }
+            else {
+                UpdateValue = parseInt($scope.ElapsedTime) - parseInt(story.ElapsedTime);
+            }
+        }
+        else {
+            UpdateValue = $scope.ElapsedTime;
+        }
+        if (UpdateValue > 0)
+        {
+            $scope.Updates.push({
+                UpdateField: 'Elapsed Time',
+                UpdateValue: UpdateValue,
+                UpdateDateTime: new Date(),
+                UpdateUser: CurrentUser
+            })
+        }
+        $scope.OldElapsedTime = $scope.ElapsedTime;
+    }
+
+    $scope.formChanges = function () {
+        if ($scope.Updates == null) {
+            $scope.Updates = [];
+        }
+       
+        if ($scope.storyForm.$dirty) {
+            angular.forEach($scope.storyForm, function (value, key) {
+                if (key[0] == '$') return;
+                if (!value.$pristine) {
+                    $scope.Updates.push({
+                        UpdateField: key,
+                        UpdateValue: value.$modelValue,
+                        UpdateDateTime: new Date(),
+                        UpdateUser: CurrentUser
+                    })
+                }
+            });
+        }
+    }
+
     //Click OK
     $scope.ok = function () {
         $scope.stop();
+        $scope.formChanges();
         $scope.selected = {
             ID: $scope.ID,
             Name: $scope.Name,
@@ -123,8 +177,10 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
             Timebox: $scope.Timebox,
             User: $scope.User,
             Tasks: $scope.Tasks,
-            Comments: $scope.Comments
+            Comments: $scope.Comments,
+            Updates: $scope.Updates
         };
+        $scope.OldElapsedTime = 0;
         $uibModalInstance.close($scope.selected);
     };
 

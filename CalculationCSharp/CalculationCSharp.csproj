@@ -281,6 +281,7 @@
     <Compile Include="Areas\Project\Models\Board.cs" />
     <Compile Include="Areas\Project\Models\BoardRepository.cs" />
     <Compile Include="Areas\Project\Models\Comments.cs" />
+    <Compile Include="Areas\Project\Models\Updates.cs" />
     <Compile Include="Areas\Project\Models\Tasks.cs" />
     <Compile Include="Areas\Project\ProjectAreaRegistration.cs" />
     <Compile Include="Areas\Workflow\Controllers\WorkflowController.cs" />

@@ -1,11 +1,13 @@
 ﻿<body ng-controller="storyCtrl">
         <div >
                 <div class="modal-header">
-                    <h2><textarea overflow:auto;resize:none" type="text" id="Name" placeholder="Please enter name of item here" class="form-control" ng-model="Name" rows="1">{{ Name }}</textarea></h2>                   
+                    <h2><textarea name="Name" overflow:auto;resize:none" type="text" id="Name" placeholder="Please enter name of item here" class="form-control" ng-model="Name" rows="1">{{ Name }}</textarea></h2>                   
                 </div>
                 <div class="modal-body">
-                    <h1>Status</h1>
-                    <form role="form" ng-submit="ok($index)">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Status</h2>
+                    </div>    
+                    <form name="storyForm" role="form" ng-submit="ok($index)">
                         <table class="table table-borderless table-hover table-condensed">
                             <tr>
                                 <td style="width:33.3%;background-color:white; color:#000000"><h3>Elapsed Time:</h3></td>
@@ -14,49 +16,49 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <h4 id="stopwatch">{{ElapsedTime | stopwatchTime}}</h4>
+                                    <h6 id="stopwatch">{{ElapsedTime | stopwatchTime}}</h6>
                                 </td>
                                 <td>
-                                    <h4 ng-if="StartDate != 'Invalid Date'" class="form-control-static">{{StartDate | date:'d MMMM yyyy h:mm a'}}</h4>
+                                    <h6 name="StartDate" ng-if="StartDate != 'Invalid Date'" class="form-control-static">{{StartDate | date:'d MMMM yyyy h:mm a'}}</h6>
                                 </td>
                                 <td>
-                                    <h4 ng-if="DueDate != 'Invalid Date'" class="form-control-static">{{DueDate | date:'d MMMM yyyy h:mm a'}}</h4>
+                                    <h6 name="DueDate" ng-if="DueDate != 'Invalid Date'" class="form-control-static">{{DueDate | date:'d MMMM yyyy h:mm a'}}</h6>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <button ng-if="timerStart == false" class="btn btn-success" ng-click="start()" id="start">Start</button>
-                                    <button ng-if="timerStart == true" class="btn btn-danger" ng-click="stop()" id="stop">Stop</button>
+                                    <button name="StartButton" ng-if="timerStart == false" class="btn btn-success" ng-click="start()" id="start">Start</button>
+                                    <button name="StopButton" ng-if="timerStart == true" class="btn btn-danger" ng-click="stop()" id="stop">Stop</button>
                                 </td>
                             </tr>
                         </table>
                         <table class="table table-borderless table-hover table-condensed">
                             <tr>
-                                <td style="width:33.3%;background-color:white; color:#000000"><h4><label for="SLADays">SLA Days:</label></h4></td>
-                                <td style="width:33.3%;background-color:#ffffff; color:#000000"><h4><label for="Requested">Requested By:</label></h4></td>
-                                <td style="width:33.3%;background-color:#ffffff; color:#000000"><h4><label for="RequestedDate">Requested Date:</label></h4></td>
+                                <td style="width:33.3%;background-color:white; color:#000000"><h5><label for="SLADays">SLA Days:</label></h5></td>
+                                <td style="width:33.3%;background-color:#ffffff; color:#000000"><h5><label for="Requested">Requested By:</label></h5></td>
+                                <td style="width:33.3%;background-color:#ffffff; color:#000000"><h5><label for="RequestedDate">Requested Date:</label></h5></td>
                             </tr>
                             <tr>
-                                <td >
-                                    <input ng-show="ElapsedTime == null" class="form-control" type="number" id="SLADays" ng:model="SLADays" required>
-                                    <input ng-show="ElapsedTime != null" class="form-control" type="number" id="SLADays" ng:model="SLADays" readonly>
+                                <td>
+                                    <input name="SLADays" ng-show="ElapsedTime == null" class="form-control" type="number" id="SLADays" ng:model="SLADays" required>
+                                    <input name="SLADays" ng-show="ElapsedTime != null" class="form-control" type="number" id="SLADays" ng:model="SLADays" readonly>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="text" id="Requested" ng:model="Requested">
+                                    <input name="Requested" class="form-control" type="text" id="Requested" ng:model="Requested">
                                 </td>
                                 <td>
-                                    <input class="form-control" type="date" id="RequestedDate" ng:model="RequestedDate">
+                                    <input name="RequestedDate" class="form-control" type="date" id="RequestedDate" ng:model="RequestedDate">
                                 </td>
                             </tr>
                             <tr style="font-weight: bold">
-                                <td style="width:33.3%;background-color:white; color:#000000"><h4>Priority</h4></td>
+                                <td style="width:33.3%;background-color:white; color:#000000"><h5>Priority</h5></td>
                                 <!--<td style="width:25%;background-color:#ffffff; color:#000000"><H4>Timebox</H4></td>-->
-                                <td style="width:33.3%;background-color:#ffffff; color:#000000"><H4>Allocation</H4></td>
-                                <td style="width:33.3%;background-color:#ffffff; color:#000000"><H4>Complexity</H4></td>
+                                <td style="width:33.3%;background-color:#ffffff; color:#000000"><H5>Allocation</H5></td>
+                                <td style="width:33.3%;background-color:#ffffff; color:#000000"><H5>Complexity</H5></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="singleSelect" ng-model="Moscow" placeholder="Enter Priority Rating" class="form-control">
+                                    <select name="Moscow" ng-model="Moscow" placeholder="Enter Priority Rating" class="form-control">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -64,24 +66,24 @@
                                     </select>
                                 </td>
                                 <!--<td>
-                                    <select name="singleSelect" ng-model="Timebox" placeholder="Enter Timebox" class="form-control">
-                                        <option value="Timebox 1">Timebox 1</option>
-                                        <option value="Timebox 2">Timebox 2</option>
-                                        <option value="Timebox 3">Timebox 3</option>
-                                        <option value="Timebox 4">Timebox 4</option>
-                                        <option value="Timebox 5">Timebox 5</option>
-                                        <option value="Timebox 6">Timebox 6</option>
-                                        {{Timebox}}
-                                    </select>
-                                </td>-->
+                    <select name="singleSelect" ng-model="Timebox" placeholder="Enter Timebox" class="form-control">
+                        <option value="Timebox 1">Timebox 1</option>
+                        <option value="Timebox 2">Timebox 2</option>
+                        <option value="Timebox 3">Timebox 3</option>
+                        <option value="Timebox 4">Timebox 4</option>
+                        <option value="Timebox 5">Timebox 5</option>
+                        <option value="Timebox 6">Timebox 6</option>
+                        {{Timebox}}
+                    </select>
+                </td>-->
                                 <td>
-                                    <select name="singleSelect" ng-model="User" placeholder="Select User" class="form-control">
+                                    <select name="User" ng-model="User" placeholder="Select User" class="form-control">
                                         <option ng-repeat="option in UserNames" value="{{option.Value}}">{{option.Value}}</option>
                                         {{User}}
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="singleSelect" ng-model="Complexity" placeholder="Complexity" class="form-control">
+                                    <select name="Complexity" ng-model="Complexity" placeholder="Complexity" class="form-control">
                                         <option value="High">High</option>
                                         <option value="Medium">Medium</option>
                                         <option value="Low">Low</option>
@@ -90,44 +92,48 @@
                                 </td>
                             </tr>
                         </table>
-                        <h1>Requirements</h1>
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Requirements</h2>
+                        </div>      
                         <!-- table -->
                         <table class="table table-borderless table-hover table-condensed">
                             <tr style="font-weight: bold">
-                                <td style="width:50%;background-color:white; color:#000000"><H4>Description</H4></td>
-                                <td style="width:50%;background-color:white; color:#000000"><H4>Acceptance Criteria</H4></td>
+                                <td style="width:50%;background-color:white; color:#000000"><H5>Description</H5></td>
+                                <td style="width:50%;background-color:white; color:#000000"><H5>Acceptance Criteria</H5></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <textarea style="overflow:auto;resize:none; text-align:left; font-size:small" type="text" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="8"> {{ Description }}</textarea>
+                                    <textarea style="overflow:auto;resize:none; text-align:left; font-size:small" type="text" name="Description" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="8"> {{ Description }}</textarea>
                                 </td>
                                 <td>
-                                    <textarea style="overflow:auto;resize:none; text-align:left; font-size:small" type="text" id="AcceptanceCriteria" placeholder="Please enter Acceptance Criteria here" class="form-control" ng-model="AcceptanceCriteria" rows="8"> {{ AcceptanceCriteria }}</textarea>
+                                    <textarea style="overflow:auto;resize:none; text-align:left; font-size:small" type="text" name="AcceptanceCriteria" id="AcceptanceCriteria" placeholder="Please enter Acceptance Criteria here" class="form-control" ng-model="AcceptanceCriteria" rows="8"> {{ AcceptanceCriteria }}</textarea>
                                 </td>
                             </tr>
                         </table>
-                        <h1>Tasks</h1>
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Tasks</h2>
+                        </div>      
                         <!-- table -->
                         <table class="table table-borderless table-hover table-borderless">
                             <tr style="font-weight: bold">
-                                <td style="width:50%; background-color:white; color:#000000"><H4>Task</H4></td>
-                                <td style="width:30%;background-color:white; color:#000000"><H4>User</H4></td>
-                                <td style="width:8%;background-color:white; color:#000000"><H4>Remaining Time</H4></td>
-                                <td style="width:20%;background-color:white;  color:#000000"><H4>Status</H4></td>
+                                <td style="width:50%; background-color:white; color:#000000"><h5>Task</h5></td>
+                                <td style="width:30%;background-color:white; color:#000000"><H5>User</H5></td>
+                                <td style="width:8%;background-color:white; color:#000000"><H5>Remaining Time</H5></td>
+                                <td style="width:20%;background-color:white;  color:#000000"><H5>Status</H5></td>
                             </tr>
 
                             <tr ng-repeat="Task in Tasks">
-                                <td><input type="text" ng:model="Task.TaskName" class="form-control"></td>
+                                <td><input name="Task.TaskName" type="text" ng:model="Task.TaskName" class="form-control"></td>
                                 <td>
-                                    <select name="singleSelect" ng-model="Task.TaskUser" placeholder="Select User" class="form-control">
+                                    <select name="Task.TaskUser" ng-model="Task.TaskUser" placeholder="Select User" class="form-control">
                                         <option ng-repeat="option in UserNames" value="{{option.Value}}">{{option.Value}}</option>
                                         {{User}}
                                     </select>
                                 </td>
 
-                                <td><input type="number" ng:model="Task.RemainingTime" class="form-control"></td>
+                                <td><input name="Task.RemainingTime" type="number" ng:model="Task.RemainingTime" class="form-control"></td>
                                 <td>
-                                    <select style="font-size:xx-small" name="singleSelect" ng:model="Task.Status" placeholder="Enter Status" class="form-control">
+                                    <select style="font-size:xx-small" name="Task.Status" ng:model="Task.Status" placeholder="Enter Status" class="form-control">
                                         <option value="Timebox 1">To Do</option>
                                         <option value="Timebox 2">In Progress</option>
                                         <option value="Timebox 3">Done</option>
@@ -144,37 +150,69 @@
                             </tr>
 
                         </table>
-                        <h1>Comments</h1>
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Comments</h2>
+                        </div>                       
                         <!-- table -->
                         <table class="table table-borderless table-hover table-condensed">
                             <tr style="font-weight: bold">
-                                <td style="width:20%;background-color:white; color:#000000"><H4>Type</H4></td>
-                                <td style="width:50%;background-color:white; color:#000000"><H4>Comment</H4></td>
-                                <td style="width:30%;background-color:white; color:#000000"><H4>Updated</H4></td>
-                                <td style="width:50%;background-color:white; color:#000000"><H4>User</H4></td>
-                                <td style="width:10%;background-color:white; color:#000000"><H4></H4></td>
+                                <td style="width:20%;background-color:white; color:#000000"><H5>Type</H5></td>
+                                <td style="width:50%;background-color:white; color:#000000"><H5>Comment</H5></td>
+                                <td style="width:50%;background-color:white; color:#000000"><H5>User</H5></td>
+                                <td style="width:30%;background-color:white; color:#000000"><H5>Updated</H5></td>
+                                <td style="width:10%;background-color:white; color:#000000"><H5></H5></td>
                             </tr>
                             <tr ng-repeat="comnt in Comments">
                                 <td><span><a>{{comnt.CommentType}}</a></span></td>
                                 <td><span><a> {{comnt.CommentName}}</a></span></td>
-                                <td><span>{{comnt.CommentDateTime | date:'d MMMM yyyy h:mm a'}}</span></td>
                                 <td><span><a> {{comnt.CommentUser}}</a></span></td>
+                                <td><span>{{comnt.CommentDateTime | date:'d MMMM yyyy h:mm a'}}</span></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="singleSelect" ng:model="txtCommentType" placeholder="Select Type" class="form-control">
+                                    <select name="txtCommentType" ng:model="txtCommentType" placeholder="Select Type" class="form-control">
                                         <option value="Notes">Notes</option>
                                         <option value="Escalation">Escalation</option>
                                         {{txtCommentType}}
                                     </select>
                                 </td>
-                                <td><span><input class="form-control" type="text" ng-model="txtcomment" placeholder="Your Comment"></span></td>
+                                <td><span><input name="txtcomment" class="form-control" type="text" ng-model="txtcomment" placeholder="Your Comment"></span></td>
                                 <td style="width:10%;background-color:white; color:#000000"><H4></H4></td>
                                 <td></td>
                                 <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
                             </tr>
                         </table>
+
+                        <uib-accordion close-others=false>
+                            <div class="container-fluid">
+                                <uib-accordion close-others=false ng-model="Updates">
+                                    <div uib-accordion-group is-open="openIndexUpdates[$index]">
+                                        <uib-accordion-heading>
+                                            Updates
+                                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexUpdates[$index], 'glyphicon-chevron-right': !openIndexUpdates[$index]}"></i>
+                                        </uib-accordion-heading>
+                                        <br />
+                                        <!-- table -->
+                                        <table class="table table-borderless table-hover table-condensed">
+                                            <tr style="font-weight: bold">
+                                                <td style="width:20%;background-color:white; color:#000000"><H5>Field</H5></td>
+                                                <td style="width:50%;background-color:white; color:#000000"><H5>Value</H5></td>
+                                                <td style="width:20%;background-color:white; color:#000000"><H5>User</H5></td>
+                                                <td style="width:20%;background-color:white; color:#000000"><H5>Updated</H5></td>
+                                            </tr>
+                                            <tr ng-repeat="update in Updates">
+                                                <td><span><a>{{update.UpdateField}}</a></span></td>
+                                                <td ng-if="update.UpdateField != 'Elapsed Time'"><span><a> {{update.UpdateValue}}</a></span></td>
+                                                <td ng-if="update.UpdateField == 'Elapsed Time'"><span><a> {{update.UpdateValue  | stopwatchTime}}</a></span></td>
+                                                <td><span><a> {{update.UpdateUser}}</a></span></td>
+                                                <td><span>{{update.UpdateDateTime | date:'d MMMM yyyy h:mm a'}}</span></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </uib-accordion>
+                            </div>
+                        </uib-accordion>
                         <button class="btn btn-primary" type="submit"> OK</button>
                     </form>  
                 </div>

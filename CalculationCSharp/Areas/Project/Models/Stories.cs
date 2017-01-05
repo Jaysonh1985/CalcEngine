@@ -27,5 +27,6 @@ namespace CalculationCSharp.Areas.Project.Models
         public virtual List<Comments> Comments { get; set; }
         public int ColumnId { get; set; }
         public virtual List<Tasks> Tasks { get; set; }
+        public virtual List<Updates> Updates { get; set; }
     }
 }
