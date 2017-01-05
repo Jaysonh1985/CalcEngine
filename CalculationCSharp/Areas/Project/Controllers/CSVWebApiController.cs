@@ -47,6 +47,9 @@ namespace CalculationCSharp.Areas.Project.Controllers
             propValues.Add("SLA");
             propValues.Add("Timebox");
             propValues.Add("CurrentUser");
+            propValues.Add("Tasks");
+            propValues.Add("Comments");
+            propValues.Add("Updates");
             propNames.Add(propValues);
             propValues = new List<string>();
             //Create CSV of the output results
@@ -75,6 +78,30 @@ namespace CalculationCSharp.Areas.Project.Controllers
                     propValues.Add(Convert.ToString(prop.SLADays));
                     propValues.Add(Convert.ToString(prop.Timebox));
                     propValues.Add(Convert.ToString(prop.User));
+                    if(prop.Tasks != null)
+                    {
+                        propValues.Add(javaScriptSerializer.Serialize(prop.Tasks));
+                    }
+                    else
+                    {
+                        propValues.Add("");
+                    }
+                    if (prop.Comments != null)
+                    {
+                        propValues.Add(javaScriptSerializer.Serialize(prop.Comments));
+                    }
+                    else
+                    {
+                        propValues.Add("");
+                    }
+                    if (prop.Updates != null)
+                    {
+                        propValues.Add(javaScriptSerializer.Serialize(prop.Updates));
+                    }
+                    else
+                    {
+                        propValues.Add("");
+                    }
                     propNames.Add(propValues);
                     propValues = new List<string>();
                 }

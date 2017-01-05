@@ -159,6 +159,12 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
          return promise;
      };
 
+     ExcelCSVJSONReplace = function (str) {
+         var newString = str.replace(/""/g, '"');
+         newString = newString.substring(0, newString.length - 1);
+         return newString.substring(1);
+     }
+
      $scope.ImportButtonClick = function ImportButtonClick(CSV) {
 
          if (CSV == null)
@@ -183,7 +189,23 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                      {
                          key.CurrentUser = null;
                      }
+                     var TaskString = null;
+                     var CommentString = null;
+                     var UpdateString = null;
 
+                     if (key.Tasks != null && key.Task != "")
+                     {
+                         TaskString = angular.fromJson(ExcelCSVJSONReplace(key.Tasks));
+                     }
+                     if (key.Comments != null && key.Comments != "")
+                     {
+                         CommentString = angular.fromJson(ExcelCSVJSONReplace(key.Comments));
+                     }
+                     if (key.Updates != null && key.Updates != "")
+                     {
+                         UpdateString = angular.fromJson(ExcelCSVJSONReplace(key.Updates));
+                     }
+                     
                      $scope.selected = {
                          ID: key.ActivityID,
                          Name: key.ActivityName,
@@ -201,6 +223,9 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                          Effort: key.Effort,
                          Timebox: key.Timebox,
                          User: key.CurrentUser,
+                         Tasks: TaskString,
+                         Comments: CommentString,
+                         Updates: UpdateString
                      };
                      $scope.columns[key.ColumnID].Stories.push($scope.selected);
                  });

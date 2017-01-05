@@ -19,16 +19,16 @@
                                     <h6 id="stopwatch">{{ElapsedTime | stopwatchTime}}</h6>
                                 </td>
                                 <td>
-                                    <h6 name="StartDate" ng-if="StartDate != 'Invalid Date'" class="form-control-static">{{StartDate | date:'d MMMM yyyy h:mm a'}}</h6>
+                                    <h6 ng-if="StartDate != 'Invalid Date'" class="form-control-static">{{StartDate | date:'d MMMM yyyy h:mm a'}}</h6>
                                 </td>
                                 <td>
-                                    <h6 name="DueDate" ng-if="DueDate != 'Invalid Date'" class="form-control-static">{{DueDate | date:'d MMMM yyyy h:mm a'}}</h6>
+                                    <h6 ng-if="DueDate != 'Invalid Date'" class="form-control-static">{{DueDate | date:'d MMMM yyyy h:mm a'}}</h6>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <button name="StartButton" ng-if="timerStart == false" class="btn btn-success" ng-click="start()" id="start">Start</button>
-                                    <button name="StopButton" ng-if="timerStart == true" class="btn btn-danger" ng-click="stop()" id="stop">Stop</button>
+                                    <button ng-if="timerStart == false" class="btn btn-success" ng-click="start()" id="start">Start</button>
+                                    <button ng-if="timerStart == true" class="btn btn-danger" ng-click="stop()" id="stop">Stop</button>
                                 </td>
                             </tr>
                         </table>
@@ -40,14 +40,14 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input name="SLADays" ng-show="ElapsedTime == null" class="form-control" type="number" id="SLADays" ng:model="SLADays" required>
-                                    <input name="SLADays" ng-show="ElapsedTime != null" class="form-control" type="number" id="SLADays" ng:model="SLADays" readonly>
+                                    <input name="SLA" ng-show="ElapsedTime == null" class="form-control" type="number" id="SLADays" ng:model="SLADays" required>
+                                    <input name="SLA" ng-show="ElapsedTime != null" class="form-control" type="number" id="SLADays" ng:model="SLADays" readonly>
                                 </td>
                                 <td>
                                     <input name="Requested" class="form-control" type="text" id="Requested" ng:model="Requested">
                                 </td>
                                 <td>
-                                    <input name="RequestedDate" class="form-control" type="date" id="RequestedDate" ng:model="RequestedDate">
+                                    <input name="Requested Date" class="form-control" type="date" id="RequestedDate" ng:model="RequestedDate">
                                 </td>
                             </tr>
                             <tr style="font-weight: bold">
@@ -58,7 +58,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="Moscow" ng-model="Moscow" placeholder="Enter Priority Rating" class="form-control">
+                                    <select name="Priority" ng-model="Moscow" placeholder="Enter Priority Rating" class="form-control">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -77,7 +77,7 @@
                     </select>
                 </td>-->
                                 <td>
-                                    <select name="User" ng-model="User" placeholder="Select User" class="form-control">
+                                    <select name="Allocation" ng-model="User" placeholder="Select User" class="form-control">
                                         <option ng-repeat="option in UserNames" value="{{option.Value}}">{{option.Value}}</option>
                                         {{User}}
                                     </select>
@@ -123,17 +123,17 @@
                             </tr>
 
                             <tr ng-repeat="Task in Tasks">
-                                <td><input name="Task.TaskName" type="text" ng:model="Task.TaskName" class="form-control"></td>
+                                <td><input type="text" ng:model="Task.TaskName" class="form-control"></td>
                                 <td>
-                                    <select name="Task.TaskUser" ng-model="Task.TaskUser" placeholder="Select User" class="form-control">
+                                    <select ng-model="Task.TaskUser" placeholder="Select User" class="form-control">
                                         <option ng-repeat="option in UserNames" value="{{option.Value}}">{{option.Value}}</option>
                                         {{User}}
                                     </select>
                                 </td>
 
-                                <td><input name="Task.RemainingTime" type="number" ng:model="Task.RemainingTime" class="form-control"></td>
+                                <td><input type="number" ng:model="Task.RemainingTime" class="form-control"></td>
                                 <td>
-                                    <select style="font-size:xx-small" name="Task.Status" ng:model="Task.Status" placeholder="Enter Status" class="form-control">
+                                    <select style="font-size:xx-small" ng:model="Task.Status" placeholder="Enter Status" class="form-control">
                                         <option value="Timebox 1">To Do</option>
                                         <option value="Timebox 2">In Progress</option>
                                         <option value="Timebox 3">Done</option>
@@ -156,11 +156,10 @@
                         <!-- table -->
                         <table class="table table-borderless table-hover table-condensed">
                             <tr style="font-weight: bold">
-                                <td style="width:20%;background-color:white; color:#000000"><H5>Type</H5></td>
-                                <td style="width:50%;background-color:white; color:#000000"><H5>Comment</H5></td>
-                                <td style="width:50%;background-color:white; color:#000000"><H5>User</H5></td>
-                                <td style="width:30%;background-color:white; color:#000000"><H5>Updated</H5></td>
-                                <td style="width:10%;background-color:white; color:#000000"><H5></H5></td>
+                                <td style="width:10%;background-color:white; color:#000000"><H5>Type</H5></td>
+                                <td style="width:45%;background-color:white; color:#000000"><H5>Comment</H5></td>
+                                <td style="width:20%;background-color:white; color:#000000"><H5>User</H5></td>
+                                <td style="width:35%;background-color:white; color:#000000"><H5>Updated</H5></td>
                             </tr>
                             <tr ng-repeat="comnt in Comments">
                                 <td><span><a>{{comnt.CommentType}}</a></span></td>
@@ -171,15 +170,13 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="txtCommentType" ng:model="txtCommentType" placeholder="Select Type" class="form-control">
+                                    <select ng:model="txtCommentType" placeholder="Select Type" class="form-control">
                                         <option value="Notes">Notes</option>
                                         <option value="Escalation">Escalation</option>
                                         {{txtCommentType}}
                                     </select>
                                 </td>
-                                <td><span><input name="txtcomment" class="form-control" type="text" ng-model="txtcomment" placeholder="Your Comment"></span></td>
-                                <td style="width:10%;background-color:white; color:#000000"><H4></H4></td>
-                                <td></td>
+                                <td><span><input class="form-control" type="text" ng-model="txtcomment" placeholder="Your Comment"></span></td>
                                 <td><a ng:click="btn_add()" class="btn btn-default">Add</a></td>
                             </tr>
                         </table>
@@ -196,10 +193,10 @@
                                         <!-- table -->
                                         <table class="table table-borderless table-hover table-condensed">
                                             <tr style="font-weight: bold">
-                                                <td style="width:20%;background-color:white; color:#000000"><H5>Field</H5></td>
-                                                <td style="width:50%;background-color:white; color:#000000"><H5>Value</H5></td>
+                                                <td style="width:10%;background-color:white; color:#000000"><H5>Field</H5></td>
+                                                <td style="width:45%;background-color:white; color:#000000"><H5>Value</H5></td>
                                                 <td style="width:20%;background-color:white; color:#000000"><H5>User</H5></td>
-                                                <td style="width:20%;background-color:white; color:#000000"><H5>Updated</H5></td>
+                                                <td style="width:35%;background-color:white; color:#000000"><H5>Updated</H5></td>
                                             </tr>
                                             <tr ng-repeat="update in Updates">
                                                 <td><span><a>{{update.UpdateField}}</a></span></td>
