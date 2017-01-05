@@ -1,10 +1,16 @@
 ﻿<body ng-controller="reportCtrl">
     <div>
         <div class="modal-header">
-            <h2>Reporting</h2>
+            <h2>Reports</h2>
         </div>
         <div class="modal-body">
-            <h3>R.A.G</h3>
+            <div class="panel-heading">
+                <div class="panel-title">
+                    RAG 
+                    <i ng-csv="RagReport" filename="Rag Report.csv" csv-header="['RAG Report']" class="pull-left glyphicon glyphicon-download"></i>
+                </div>
+            </div>    
+            <br /> 
             <table class="table table-bordered table table-responsive">
                 <thead>
                     <tr style="font-weight: bold">
@@ -25,8 +31,13 @@
                     </tr>
                 </tbody>
             </table>
-
-            <h3>User List - RAG</h3>
+            <div class="panel-heading">
+                <div class="panel-title">
+                    User List - RAG
+                    <i ng-csv="UserReportRAG" filename="User List - RAG.csv"  csv-header="['User List - RAG Report']" class="pull-left glyphicon glyphicon-download"></i>
+                </div>
+            </div>   
+            <br /> 
             <table class="table table-bordered table table-responsive">
                 <thead>
                     <tr style="font-weight: bold">
@@ -47,8 +58,13 @@
                     </tr>
                 </tbody>
             </table>
-
-            <h3>User List - Priority</h3>
+            <div class="panel-heading">
+                <div class="panel-title">
+                    User List - Prioirty
+                    <i ng-csv="UserReportPrioirty" filename="User List - Priority.csv" csv-header="['User List - Priority Report']" class="pull-left glyphicon glyphicon-download"></i>
+                </div>
+            </div>  
+            <br /> 
             <table class="table table-bordered table table-responsive">
                 <thead>
                     <tr style="font-weight: bold">
@@ -81,6 +97,8 @@
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexTimings[$index], 'glyphicon-chevron-right': !openIndexTimings[$index]}"></i>
                             </uib-accordion-heading>
                             <br />
+                            <i ng-csv="ActivityTimeReport" filename="Activity Time Report.csv" csv-header="['Activity Time Report']" class="pull-left glyphicon glyphicon-download"></i>
+                            <br />
                             <table class="table table-bordered table table-responsive">
                                 <thead>
                                     <tr style="font-weight: bold">
@@ -108,6 +126,8 @@
                                 User Timings
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openUserIndexTimings[$index], 'glyphicon-chevron-right': !openUserIndexTimings[$index]}"></i>
                             </uib-accordion-heading>
+                            <br />
+                            <i ng-csv="UserTimeReport" filename="User Time Report.csv" csv-header="['User Time Report']" class="pull-left glyphicon glyphicon-download"></i>
                             <br />
                             <table class="table table-bordered table table-responsive">
                                 <thead>
