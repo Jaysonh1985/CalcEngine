@@ -283,11 +283,14 @@ sulhome.kanbanBoardApp.controller('reportCtrl', function ($scope, $uibModalInsta
                     });
                 });
             });
+            if (UserElapsedTime > 0)
+            {
+                $scope.UserTimeReport.push({
+                    Name: key.Value,
+                    Time: UserElapsedTime
+                })
+            }
 
-            $scope.UserTimeReport.push({
-                Name: key.Value,
-                Time: UserElapsedTime
-            })
             TotalTime = TotalTime + UserElapsedTime;
         })
 

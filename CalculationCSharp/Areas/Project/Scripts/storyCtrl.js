@@ -9,7 +9,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
     $scope.Requested = story.Requested;
     $scope.StartDate = new Date(story.StartDate);
     $scope.DueDate = new Date(story.DueDate);
-    $scope.RequestedDate = new Date(story.RequestedDate);
+    $scope.RequestedDate = story.RequestedDate;
     $scope.ElapsedTime = parseInt(story.ElapsedTime);
     $scope.AcceptanceCriteria = story.AcceptanceCriteria;
     $scope.Moscow = story.Moscow;
