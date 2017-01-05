@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2016 Project AIM
 sulhome.kanbanBoardApp.controller('reportCtrl', function ($scope, $uibModalInstance, $interval, $filter, UserList) {
     $scope.openIndexTimings = [true];
+    $scope.openUserIndexTimings = [true];
     function RAGReport() {
 
         var Red0 = 0;
@@ -263,6 +264,40 @@ sulhome.kanbanBoardApp.controller('reportCtrl', function ($scope, $uibModalInsta
         })
 
     }
+
+    function UserTimeReport() {
+        $scope.UserTimeReport = [];
+        var TotalTime = 0;
+        
+        angular.forEach($scope.UserNames, function (key, value, obj)
+        {
+            var UserElapsedTime = 0;
+            angular.forEach($scope.columns, function (keycol, valuecol, objcol) {
+                angular.forEach(keycol.Stories, function (keystory, valuestory, objstory) {
+                    angular.forEach(keystory.Updates, function (keyupdates, valueupdates, objupdates) {
+
+                        if (keyupdates.UpdateUser == key.Value)
+                        {
+                            UserElapsedTime = UserElapsedTime + parseInt(keyupdates.UpdateValue);
+                        }
+                    });
+                });
+            });
+
+            $scope.UserTimeReport.push({
+                Name: key.Value,
+                Time: UserElapsedTime
+            })
+            TotalTime = TotalTime + UserElapsedTime;
+        })
+
+
+        $scope.UserTimeReport.push({
+            Name: 'Total',
+            Time: TotalTime
+        })
+
+    }
     //Click OK
     $scope.ok = function () {
         $scope.selected = {
@@ -275,5 +310,5 @@ sulhome.kanbanBoardApp.controller('reportCtrl', function ($scope, $uibModalInsta
     UserReportRAG();
     UserReportPrioirty();
     ActivityTimeReport();
-
+    UserTimeReport();
 });

@@ -100,8 +100,33 @@
                 </div>
             </uib-accordion>
 
-     
-
+            <uib-accordion close-others=false>
+                <div class="container-fluid">
+                    <uib-accordion close-others=false ng-model="output">
+                        <div uib-accordion-group is-open="openUserIndexTimings[$index]">
+                            <uib-accordion-heading>
+                                User Timings
+                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openUserIndexTimings[$index], 'glyphicon-chevron-right': !openUserIndexTimings[$index]}"></i>
+                            </uib-accordion-heading>
+                            <br />
+                            <table class="table table-bordered table table-responsive">
+                                <thead>
+                                    <tr style="font-weight: bold">
+                                        <th style="width:65%"><H4>Name</H4></th>
+                                        <th style="width:35%"><H4>Elapsed Time</H4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="rowUserTimeReport in UserTimeReport">
+                                        <td><span><a>{{rowUserTimeReport.Name}}</a></span></td>
+                                        <td><span>{{rowUserTimeReport.Time | stopwatchTime}}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-accordion>
+                </div>
+            </uib-accordion>   
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="ok($index)">OK</button>
