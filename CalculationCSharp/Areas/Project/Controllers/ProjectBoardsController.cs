@@ -51,6 +51,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
                 return BadRequest();
             }
             projectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
+            projectBoard.UpdateDate = DateTime.Now;
 
             db.Entry(projectBoard).State = EntityState.Modified;
 
@@ -78,10 +79,11 @@ namespace CalculationCSharp.Areas.Project.Controllers
         public IHttpActionResult PostProjectBoard(ProjectBoard projectBoard)
         {
             projectBoard.UpdateDate = DateTime.Now;
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }           
+            projectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}           
             db.ProjectBoard.Add(projectBoard);
             db.SaveChanges();
             return CreatedAtRoute("DefaultApi", new { id = projectBoard.ID }, projectBoard);

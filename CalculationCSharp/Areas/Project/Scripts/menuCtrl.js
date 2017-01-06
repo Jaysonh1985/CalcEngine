@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log, $location, $window, boardService) {
+sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log, $location, $window, boardService, configFunctionFactory) {
     // Model
     $scope.Boards = [];
     $scope.isLoading = false;
@@ -28,49 +28,130 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
         $window.location.assign('/Project/Board/Board/' + $scope.ID);
     };
 
-     $scope.deleteBoard = function (index) {
-         var cf = confirm("Delete this Board?");
-         $scope.ID = this.board.ID;
-         
-         if (cf == true) {
-            boardService.updateBoard($scope.ID,"","","Delete")
-            .then(function (data) {
-                $scope.isLoading = false;
-                $scope.Boards.splice(index, 1);
-            }, onError);          
-         }      
+     $scope.addBoard = function AddBoard() {
+
+         var modalInstance = $uibModal.open({
+             animation: true,
+             templateUrl: '/Areas/Project/Scripts/ProjectMenuAddCalcModal.html',
+             scope: $scope,
+             controller: 'projectMenuAddCalcCtrl',
+             size: 'md',
+             resolve: {
+                 Name: function () { return $scope.Name },
+                 Configuration: function () { return null },
+                 Copy: function () { return false }
+             }
+         });
+         modalInstance.result.then(function (selectedItem) {
+             $scope.selected = {
+                 ID: null,
+                 Name: selectedItem[0].Name,
+                 User: null,
+                 Group: null,
+                 Configuration: null
+             };
+
+             boardService.addConfig($scope.selected).then(function (data) {
+                 $scope.Boards.push(data);
+                 $scope.isLoading = false;
+             }, onError);
+
+             toastr.success("Project Board created successfully", "Success");
+         }, function () {
+         });
+
      };
 
-     $scope.addBoard = function AddBoard() {
-         $scope.isLoading = true;
-         $scope.selected = {
-             ID: '',
-             Name: '',
-             User: '',
-             Group: '',
-             Configuration: ''
-         };
-         boardService.addConfig($scope.selected).then(function (data) {
-             $scope.Boards.push(data);
-             $scope.isLoading = false;
-         }, onError);
+     $scope.copyBoard = function CopyBoard(Board) {
+
+         var modalInstance = $uibModal.open({
+             animation: true,
+             templateUrl: '/Areas/Project/Scripts/ProjectMenuAddCalcModal.html',
+             scope: $scope,
+             controller: 'projectMenuAddCalcCtrl',
+             size: 'md',
+             resolve: {
+                 Name: function () { return Board.Name },
+                 Configuration: function () { return Board.Configuration },
+                 Copy: function () { return true }
+             }
+         });
+         modalInstance.result.then(function (selectedItem) {
+             $scope.selected = {
+                 ID: null,
+                 Name: selectedItem[0].Name,
+                 User: null,
+                 Group: null,
+                 Configuration: selectedItem[0].Configuration
+             };
+
+             boardService.addConfig($scope.selected).then(function (data) {
+                 $scope.Boards.push(data);
+                 $scope.isLoading = false;
+             }, onError);
+
+             toastr.success("Project Board created successfully", "Success");
+         }, function () {
+         });
+
      };
 
      $scope.updateBoard = function (index) {
-         $scope.editingData[this.Boards[index].ID] = false;
-         boardService.putConfig(this.Boards[index].ID, this.Boards[index]).then(function (data) {
-             $scope.isLoading = false;
-             boardService.sendRequest();
-         }, onError);
+
+         var ID = this.Boards[index].ID;
+         var Name = this.Boards[index].Name;
+         var Configuration = this.Boards[index].Configuration;
+         var User = this.Boards[index].User;
+
+         var modalInstance = $uibModal.open({
+             animation: true,
+             templateUrl: '/Areas/Project/Scripts/ProjectMenuAddCalcModal.html',
+             scope: $scope,
+             controller: 'projectMenuAddCalcCtrl',
+             size: 'md',
+             resolve: {
+                 Name: function () { return Name },
+                 Configuration: function () { return Configuration },
+                 Copy: function () { return false }
+             }
+         });
+         modalInstance.result.then(function (selectedItem) {
+             $scope.selected = {
+                 ID: ID,
+                 Name: selectedItem[0].Name,
+                 User: User,
+                 Group: null,
+                 Configuration: Configuration
+             };
+             
+             boardService.putConfig($scope.selected.ID, $scope.selected).then(function (data) {
+                 $scope.isLoading = false;
+                 boardService.sendRequest();
+                 $scope.Boards[index] = $scope.selected;
+             }, onError);
+
+             toastr.success("Project Board updated successfully", "Success");
+         }, function () {
+         });
+
      };
 
-     $scope.deleteBoard = function (index) {
+     $scope.deleteBoard = function (Board) {
+         //var cf = confirm("Delete this Board?");
+         //if (cf == true) {
+         // boardService.deleteConfig(this.Boards[index].ID)
+         //.then(function (data) {
+         //    $scope.isLoading = false;
+         //    $scope.Boards.splice(index, 1);
+         //}, onError);
+         //}
+         var arrayID = configFunctionFactory.getIndexOf($scope.Boards, Board.ID, "ID");
          var cf = confirm("Delete this Board?");
          if (cf == true) {
-          boardService.deleteConfig(this.Boards[index].ID)
+             boardService.deleteConfig(Board.ID)
          .then(function (data) {
              $scope.isLoading = false;
-             $scope.Boards.splice(index, 1);
+             $scope.Boards.splice(arrayID, 1);
          }, onError);
          }
      };
@@ -82,8 +163,8 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
      }
 
 
-     $scope.modify = function (Boards) {
-         $scope.editingData[Boards.ID] = true;
+     $scope.modify = function (index) {
+         $scope.editingData[index] = true;
      };
 
      $scope.update = function (Boards) {

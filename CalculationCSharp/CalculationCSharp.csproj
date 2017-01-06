@@ -367,6 +367,8 @@
     <Content Include="Areas\Configuration\Scripts\Logic\LogicModal.html" />
     <Content Include="Areas\Configuration\Scripts\Config\configMenuCtrl.js" />
     <Content Include="Areas\Project\Scripts\boardFilter.html" />
+    <Content Include="Areas\Project\Scripts\projectMenuAddCalcCtrl.js" />
+    <Content Include="Areas\Project\Scripts\ProjectMenuAddCalcModal.html" />
     <Content Include="Areas\Project\Scripts\reportCtrl.js" />
     <Content Include="Areas\Project\Scripts\storyCtrl.js" />
     <Content Include="Areas\Project\Scripts\reportModal.html" />

@@ -275,8 +275,7 @@ sulhome.kanbanBoardApp.controller('reportCtrl', function ($scope, $uibModalInsta
             angular.forEach($scope.columns, function (keycol, valuecol, objcol) {
                 angular.forEach(keycol.Stories, function (keystory, valuestory, objstory) {
                     angular.forEach(keystory.Updates, function (keyupdates, valueupdates, objupdates) {
-
-                        if (keyupdates.UpdateUser == key.Value)
+                        if (keyupdates.UpdateUser == key.Value && keyupdates.UpdateField == 'Elapsed Time')
                         {
                             UserElapsedTime = UserElapsedTime + parseInt(keyupdates.UpdateValue);
                         }

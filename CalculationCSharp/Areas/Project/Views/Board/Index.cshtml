@@ -41,10 +41,9 @@
                 <td width="15%" ng-click="openBoard()">{{board.User}}</td>
                 <td width="10%" ng-click="openBoard()">{{board.UpdateDate  | date:'d MMMM yyyy h:mm a'}}</td>
                 <td>
-                    <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="modify(board)">Modify</button>
-                    <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="updateBoard($index, board)">Update</button>
-                    <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Cancel</button>
-                    <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard($index)" />
+                    <button class="btn btn-info" ng-click="copyBoard(board)">Copy</button>
+                    <button class="btn btn-success" ng-click="updateBoard($index, board)">Modify</button>
+                    <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard(board)" />
                 </td>
             </tr>
         </tbody>
