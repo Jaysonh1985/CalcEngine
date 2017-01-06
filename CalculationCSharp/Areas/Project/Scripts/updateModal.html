@@ -1,7 +1,7 @@
 ﻿<body ng-controller="storyCtrl">
         <div >
                 <div class="modal-header">
-                    <h2><textarea name="Name" overflow:auto;resize:none" type="text" id="Name" placeholder="Please enter name of item here" class="form-control" ng-model="Name" rows="1">{{ Name }}</textarea></h2>                   
+                    <textarea name="Name" overflow:auto;resize:none" type="text" id="Name" placeholder="Please enter name of item here" class="form-control" ng-model="Name" rows="1" ng-attr-placeholder="{{Name}}"></textarea>
                 </div>
                 <div class="modal-body">
                     <div class="panel-heading">
@@ -103,10 +103,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <textarea style="overflow:auto;resize:none; text-align:left; font-size:small" type="text" name="Description" id="Description" placeholder="Please enter description here" class="form-control" ng-model="Description" rows="8"> {{ Description }}</textarea>
+                                    <textarea style="overflow:auto;resize:none; text-align:left; font-size:small" type="text" name="Description" id="Description" class="form-control" ng-model="Description" rows="8" ng-attr-placeholder="{{Description}}"></textarea>
                                 </td>
                                 <td>
-                                    <textarea style="overflow:auto;resize:none; text-align:left; font-size:small" type="text" name="AcceptanceCriteria" id="AcceptanceCriteria" placeholder="Please enter Acceptance Criteria here" class="form-control" ng-model="AcceptanceCriteria" rows="8"> {{ AcceptanceCriteria }}</textarea>
+                                    <textarea style="overflow:auto;resize:none; text-align:left; font-size:small" type="text" name="AcceptanceCriteria" id="AcceptanceCriteria" class="form-control" ng-model="AcceptanceCriteria" rows="8" ng-attr-placeholder="{{AcceptanceCriteria}}"></textarea>
                                 </td>
                             </tr>
                         </table>
