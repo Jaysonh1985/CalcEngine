@@ -56,13 +56,11 @@
                         <td width="20%" ng-click="openBoard(board)" ng-cloak>{{board.UpdateDate | date:'d MMMM yyyy h:mm a'}}</td>
                         <td width="5%" ng-click="openBoard(board)" ng-cloak>{{board.Version | number: 3}}</td>
                         <td width="35%">
-                            <button class="btn btn-default" ng-hide="editingData[board.ID]" ng-click="viewBoard(board)">View Only</button>                           
-                            <button class="btn btn-primary" ng-hide="editingData[board.ID]" ng-click="modify(board)">Modify</button>
-                            <button class="btn btn-success" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Update</button>
-                            <button class="btn btn-danger" ng-show="editingData[board.ID]" ng-click="updateBoard(board)">Cancel</button>
-                            <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard(board)" />
-                            <button class="btn btn-info" ng-hide="editingData[board.ID]" ng-click="copyBoard(board)">Copy</button>
-                            <button class="btn btn-group" ng-hide="editingData[board.ID]" ng-click="releaseBoard(board)">Release</button>
+                            <button class="btn btn-default" ng-click="viewBoard(board)">View Only</button>                           
+                            <button class="btn btn-success" ng-click="updateBoard(board)">Modify</button>
+                            <input type="button" class="btn btn-danger" value="Delete" ng-click="deleteBoard(board)" />
+                            <button class="btn btn-info" ng-click="copyBoard(board)">Copy</button>
+                            <button class="btn btn-group" ng-click="releaseBoard(board)">Release</button>
                         </td>
                     </tr>
                 </tbody>

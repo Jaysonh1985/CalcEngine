@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configMenuAddCalcCtrl', function ($scope, $uibModalInstance, $log, Name, Scheme, SchemeList, Configuration) {
+sulhome.kanbanBoardApp.controller('configMenuAddCalcCtrl', function ($scope, $uibModalInstance, $log, Name, Scheme, SchemeList, Configuration, Copy) {
     // Model
     //Map Back the input values
-    if (Configuration != null)
+    if (Copy == true)
     {
         $scope.Name = Name + " (Copy)";
     }

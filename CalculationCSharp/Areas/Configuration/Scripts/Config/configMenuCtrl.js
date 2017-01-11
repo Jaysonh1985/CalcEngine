@@ -102,7 +102,8 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                     Name: function () { return Board.Name },
                     Scheme: function () { return Board.Scheme },
                     SchemeList: function () { return SchemeList },
-                    Configuration: function () { return Board.Configuration }
+                    Configuration: function () { return Board.Configuration },
+                    Copy: function () { return true }
                 }
             });
             modalInstance.result.then(function (selectedItem) {
@@ -129,11 +130,57 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     };
 
     $scope.updateBoard = function (Board) {
-        $scope.editingData[Board.ID] = false;
-        configService.putConfig(Board.ID, Board).then(function (data) {
-             $scope.isLoading = false;
-             configService.sendRequest();
-         }, onError);
+
+        var arrayID = configFunctionFactory.getIndexOf($scope.Boards, Board.ID, "ID");
+        var ID = this.Boards[arrayID].ID;
+        var Name = this.Boards[arrayID].Name;
+        var Scheme = this.Boards[arrayID].Scheme;
+        var Configuration = this.Boards[arrayID].Configuration;
+        var User = this.Boards[arrayID].User;
+        var Version = this.Boards[arrayID].Version;
+        //Creates TypeAhead Values
+        var SchemeList = [];
+        configService.getSchemes().then(function (data) {
+            SchemeList = data;
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: '/Areas/Configuration/Scripts/CalculationMenu/ConfigMenuAddCalcModal.html',
+                scope: $scope,
+                controller: 'configMenuAddCalcCtrl',
+                size: 'md',
+                resolve: {
+                    Name: function () { return Name },
+                    Scheme: function () { return Scheme },
+                    SchemeList: function () { return SchemeList },
+                    Configuration: function () { return Configuration },
+                    Copy: function () { return false }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = {
+                    ID: ID,
+                    Name: selectedItem[0].Name,
+                    Scheme: selectedItem[0].Scheme,
+                    User: User,
+                    Group: null,
+                    Configuration: Configuration,
+                    UpdateDate: new Date(),
+                    Version: Version
+                };
+
+                configService.putConfig($scope.selected.ID, $scope.selected).then(function (data) {
+                    $scope.isLoading = false;
+                    $scope.Boards[arrayID] = $scope.selected;
+                    configService.sendRequest();                   
+                }, onError);
+
+                toastr.success("Calculation Updated successfully", "Success");
+            }, function () {
+            });
+
+        }, onError);
+
      };
 
     $scope.releaseBoard = function (Board) {
