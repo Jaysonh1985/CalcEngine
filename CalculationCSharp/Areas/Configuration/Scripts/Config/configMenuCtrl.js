@@ -61,7 +61,8 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                     Name: function () { return $scope.Name },
                     Scheme: function () { return $scope.Scheme },
                     SchemeList: function () { return SchemeList },
-                    Configuration: function () { return null }
+                    Configuration: function () { return null },
+                    Copy: function () { return false }
                 }
             });
             modalInstance.result.then(function (selectedItem) {

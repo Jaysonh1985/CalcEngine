@@ -736,6 +736,7 @@
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
+    <Content Include="Scripts\angular-filter.js" />
     <Content Include="Scripts\angular-gridster.min.js" />
     <Content Include="Scripts\angular-idle.js" />
     <Content Include="Scripts\angular-long-press.js" />

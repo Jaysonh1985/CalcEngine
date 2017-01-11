@@ -13,10 +13,17 @@
             <input type="text" class="form-control form-inline input" ng-model="test" placeholder="Filter">
         </div>
     </div>
+    <uib-accordion close-others=false ng-model="Boards">
+        <div uib-accordion-group ng-repeat="(key, value) in Boards | groupBy: 'Scheme'" ng-init="colIndex = $index" is-open="openIndex[$index]">
+
+            <uib-accordion-heading>
+                {{key}}
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
+            </uib-accordion-heading>
             <br />
             <br />
             <table class="table table-bordered table table-responsive">
-                
+
                 <thead>
                     <tr>
                         <th>
@@ -47,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="board in Boards | orderBy:orderByField:reverseSort | filter : test">
+                    <tr ng-repeat="board in value | orderBy:orderByField:reverseSort | filter : test">
                         <td ng-hide="editingData[board.ID]" ng-click="openBoard(board)" ng-cloak>{{board.Scheme}}</td>
                         <td ng-show="editingData[board.ID]"><select class="form-control  input-sm" ng-model='board.Scheme' ng-options='scheme for scheme in SchemeList' required></select></td>
                         <td ng-hide="editingData[board.ID]" ng-click="openBoard(board)" ng-cloak>{{board.Name}}</td>
@@ -56,7 +63,7 @@
                         <td width="20%" ng-click="openBoard(board)" ng-cloak>{{board.UpdateDate | date:'d MMMM yyyy h:mm a'}}</td>
                         <td width="5%" ng-click="openBoard(board)" ng-cloak>{{board.Version | number: 3}}</td>
                         <td width="35%">
-                            <button class="btn btn-default" ng-click="viewBoard(board)">View Only</button>                           
+                            <button class="btn btn-default" ng-click="viewBoard(board)">View Only</button>
                             <button class="btn btn-success" ng-click="updateBoard(board)">Modify</button>
                             <input type="button" class="btn btn-danger" value="Delete" ng-click="deleteBoard(board)" />
                             <button class="btn btn-info" ng-click="copyBoard(board)">Copy</button>
@@ -66,4 +73,6 @@
                 </tbody>
 
             </table>
+        </div>
+    </uib-accordion>
 </div>
