@@ -301,5 +301,18 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
         $window.location.assign('/Configuration/Config/Config/' + $scope.ID);
     };
 
+    //UI
+    $scope.OpenAllButton = function () {
+        angular.forEach($scope.Boards, function (value, key, obj) {
+            $scope.openIndex[key] = true;
+        })
+    }
+
+    $scope.CloseAllButton = function () {
+        angular.forEach($scope.Boards, function (value, key, obj) {
+            $scope.openIndex[key] = false;
+        })
+    }
+
     init();
 });

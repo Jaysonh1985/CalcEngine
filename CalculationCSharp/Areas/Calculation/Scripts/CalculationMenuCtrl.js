@@ -6,6 +6,7 @@ sulhome.kanbanBoardApp.controller('calculationMenuCtrl', function ($scope,  $rou
     $scope.selected = [];
     $scope.orderByField = 'Scheme';
     $scope.reverseSort = false;
+    $scope.openIndex = [true];
     //Initialise
     function init() {
         $scope.isLoading = true;
@@ -36,6 +37,18 @@ sulhome.kanbanBoardApp.controller('calculationMenuCtrl', function ($scope,  $rou
      $scope.modify = function (Boards) {
          $scope.editingData[Boards.ID] = true;
      };
+    //UI
+     $scope.OpenAllButton = function () {
+         angular.forEach($scope.Boards, function (value, key, obj) {
+             $scope.openIndex[key] = true;
+         })
+     }
+
+     $scope.CloseAllButton = function () {
+         angular.forEach($scope.Boards, function (value, key, obj) {
+             $scope.openIndex[key] = false;
+         })
+     }
 
      var onError = function (errorMessage) {
          $scope.isLoading = false;

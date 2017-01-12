@@ -7,6 +7,8 @@
 
 <div class="container body-content" ng-controller="configMenuCtrl" ng-cloak>
     <button class="btn btn-default" ng-click="addBoard()">Add Calculation</button>
+    <button class="btn btn-default" ng-click="OpenAllButton()">Open All</button>
+    <button class="btn btn-default" ng-click="CloseAllButton()">Close All</button>
     <div class="nav navbar-nav pull-right">
         <div class="navbar-text">Search</div>
         <div class="input-group">
@@ -15,7 +17,6 @@
     </div>
     <uib-accordion close-others=false ng-model="Boards">
         <div uib-accordion-group ng-repeat="(key, value) in Boards | groupBy: 'Scheme'" ng-init="colIndex = $index" is-open="openIndex[$index]">
-
             <uib-accordion-heading>
                 {{key}}
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>

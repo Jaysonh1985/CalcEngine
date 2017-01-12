@@ -35,7 +35,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
             if (user.Scheme != null)
             {
                 myInClause = user.Scheme.Split(',');
-                return db.CalcConfiguration.Where(s => myInClause.Contains(s.Scheme));
+                return db.CalcConfiguration.Where(s => myInClause.Contains(s.Scheme)).OrderBy(s => s.Scheme);
             }
             else
             {
