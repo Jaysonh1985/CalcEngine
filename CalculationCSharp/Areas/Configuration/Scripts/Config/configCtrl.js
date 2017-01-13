@@ -244,16 +244,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.CalcButtonClick = function CalcBoard(form) {
-
+        $scope.viewOnly = true;
         $scope.validateForm();
 
         if ($scope.validationError == false)
         {
             $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
         }
-        $scope.viewOnly = true;
         var id = configFunctionFactory.getConfigID();
-
         $scope.rebuildCategoryIDs();
         if (form.$valid == true) {
             $scope.validationError = false;

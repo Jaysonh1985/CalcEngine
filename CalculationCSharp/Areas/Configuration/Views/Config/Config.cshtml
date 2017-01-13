@@ -3,217 +3,196 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div ng-controller="configCtrl">
-    
+<div id="wrapper" class="active" ng-controller="configCtrl">
+    <form name="form" role="form"  ng-submit="CalcButtonClick(form)" novalidate onbeforeunload>
+        <fieldset ng-disabled="viewOnly">
+            <div id="sidebar-wrapper">
+                <ul id="sidebar_menu" class="sidebar-nav">
+                    <li class="sidebar-brand"><a id="menu-toggle" href="#">Menu<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
+                </ul>
+                <ul class="sidebar-nav" id="sidebar">
+                    <li><input ng-disabled="false" type="text" class="form-control form-inline input" ng-model="searchText" placeholder="Search" style="background-color:#222; border:none; color:#999"></li>
+                    <li><a ng-hide="form.$invalid" ng-click="CalcButtonClick(form)">Calculate<span class="sub_icon glyphicon glyphicon-cog"></span></a></li>
+                    <li><a ng-hide="form.$dirty || form.$invalid" ng-click="RegressionButtonClick('lg', form)">Regression<span class="sub_icon glyphicon glyphicon-ok"></span></a></li>
+                    <li><a ng-hide="form.$dirty || form.$invalid" ng-csv="SpecButtonClick(form)" csv-header="getHeader" filename="@ViewData["SchemeName"] - @ViewData["CalcName"] Specification.csv">Specification<span class="sub_icon glyphicon glyphicon-paperclip"></span></a></li>
+                    <li><a ng-hide="!form.$dirty || form.$invalid" ng-click="SaveButtonClick()">Save<span class="sub_icon glyphicon glyphicon-save"></span></a></li>
+                    <li><a ng-click="HistoryButtonClick('lg')">History<span class="sub_icon glyphicon glyphicon-transfer"></span></a></li>                  
+                    <li><a ng-click="OpenAllButton()">Open All <span class="sub_icon glyphicon glyphicon-option-vertical"></span></a></li>
+                    <li><a ng-click="CloseAllButton()">Close All <span class="sub_icon glyphicon glyphicon-option-horizontal"></span></a></li>
+                    <li><a ng-click="ExitButton()">Exit <span class="sub_icon glyphicon glyphicon-log-out"></span></a></li>
+                    <li><a ng-click="RemoveExpectedResultsButton()">Reset Expected</a></li>
+                    <li><a ng-click="RemoveInputsButton()">Reset Inputs</a></li>
+                </ul>
+            </div>
 
-    <div class="container body-content"  ng-cloak>
-        
-        <br>
-        <form name="form" role="form" ng-submit="CalcButtonClick(form)" novalidate onbeforeunload>
-            <fieldset ng-disabled="viewOnly">
-                <div class="navbar navbar-inverse navbar-fixed-top second-navbar">
-                    <div class="container">
-                        <div class="collapse navbar-collapse main-nav">
-                            <ul class="nav navbar-nav center-block">
-                                <li><button ng-disabled="!form.$dirty || form.$invalid" class="btn btn-default navbar-btn" type="button" ng-click="SaveButtonClick()">Save</button> </li>
-                                <li>
-                                    <br />
-                                </li>
-                                <li><button ng-disabled="form.$invalid" class="btn btn-default navbar-btn" type="submit">Calculate</button></li>
-                                <li><button class="btn btn-default navbar-btn" type="button" ng-click="HistoryButtonClick('lg')">History</button></li>
-                                <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" type="button" ng-click="RegressionButtonClick('lg', form)">Regression</button></li>
-                                 <li>
-                                     <button class="btn btn-default navbar-btn" type="button" data-toggle="dropdown">
-                                         UI
-                                         <span class="caret"></span>
-                                     </button>
-                                     <ul class="dropdown-menu">
-                                         <li><a ng-click="OpenAllButton()">Open All</a></li>
-                                         <li><a ng-click="CloseAllButton()">Close All</a></li>
-                                         <li><a ng-click="RemoveExpectedResultsButton()">Reset Expected Results</a></li>
-                                         <li><a ng-click="RemoveInputsButton()">Reset Inputs</a></li>
-                                     </ul>
-                                </li>                                  
-                                <li><button ng-disabled="form.$dirty || form.$invalid" class="btn btn-default navbar-btn" ng-csv="SpecButtonClick(form)" csv-header="getHeader" filename="@ViewData["SchemeName"] - @ViewData["CalcName"] Specification.csv" type="button">Specification</button></li>
-                                <li><button class="btn btn-default navbar-btn" type="button" ng-click="ExitButton()">Exit</button></li>
-                                <li><a>@ViewData["SchemeName"] - @ViewData["CalcName"] </a></li>
-                                <li><input ng-disabled="false" type="text" class="form-control form-inline input" ng-model="searchText" placeholder="Search"></li>
-                            </ul>
+            <div class="container body-content" ng-cloak>
+                <div id="page-content-wrapper">
+                    <!-- Keep all page content within the page-content inset div! -->
+                    <div class="page-content inset">
+
+                        <h2 class="center-block text-center"><a>@ViewData["SchemeName"] - @ViewData["CalcName"]</a></h2>
+                        <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
+                        <div ng-hide="isLoading" ui-tree data-clone-enabled="true">
+                            <uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
+                                <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
+                                    <uib-accordion-heading>
+                                        {{Category.Name}}
+                                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
+                                        <a ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory($index, $event)"><i ng-hide="viewOnly" class="pull-left glyphicon glyphicon-arrow-down"></i></a>
+                                    </uib-accordion-heading>
+                                    <div>
+                                        <table class="table table-borderless" ng-hide="viewOnly">
+                                            <tr>
+                                                <td ng-if="Category.Name != 'Input'"><a ng-click="CategoryLogicButtonClick('lg', $index)"><i class="glyphicon glyphicon-wrench"></i></a> </td>
+                                                <td ng-if="Category.Name != 'Input'"><a ng-click="DeleteCategory($index)"><i class="center-block glyphicon glyphicon-remove"></i></a> </td>
+                                                <td><a ng-click="AddCategoryRows($index, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a></td>
+                                                <td ng-if="Category.Name != 'Input'"><a ng-click="CopyCategory($index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a></td>
+                                                <td ng-if="Category.Name != 'Input'"><a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%">Sort</th>
+                                                <th width="5%">Logic</th>
+                                                <th width="15%">Function</th>
+                                                <th width="0%">Config</th>
+                                                <th width="25%">Variable</th>
+                                                <th width="5%">Type</th>
+                                                <th width="35%">Output</th>
+                                                <th width="20%">Expected</th>
+                                                <th width="5%">Pass</th>
+                                                <th>
+                                                    <a data-nodrag ng-click="AddFunction($parent.$index, $index)">
+                                                        <span ng-hide="viewOnly" class="center-block glyphicon glyphicon-plus"></span>
+                                                    </a>
+                                                </th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ui-tree-nodes="" ng:model="Category.Functions">
+                                            <tr id="Row_{{$parent.$index}}_{{$index}}" unselectable="on"
+                                                ng-repeat="rows in Category.Functions | filter:searchText" ng-click="selectRow($event, $index, $parent.$index)"
+                                                ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}" ui-tree-node>
+
+                                                <td ng-show="Category.Name != 'Input'">
+                                                    <i ng-hide="viewOnly" class="glyphicon glyphicon-list" ui-tree-handle></i>
+                                                </td>
+                                                <td ng-hide="Category.Name != 'Input'"></td>
+
+                                                <td>
+                                                    <a ng-show="Category.Name != 'Input' && rows.Function != 'Comments'" ng-click="LogicButtonClick('lg', $parent.$index, $index)">
+                                                        <span class="glyphicon glyphicon-wrench"></span>
+                                                    </a>
+                                                </td>
+
+                                                <td ng-if="rows.Function == null">
+                                                    <select ng-show="Category.Name != 'Input'" name="Input_{{$parent.$index}}_{{$index}}" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" ng-required="true">
+                                                        <option value=""></option>
+                                                        <option value="ArrayFunctions">Array Functions</option>
+                                                        <option value="Comments">Comment</option>
+                                                        <option value="DateAdjustment">Date Adjustment</option>
+                                                        <option value="DatePart">Date Part</option>
+                                                        <option value="ErrorsWarnings">Errors & Warnings</option>
+                                                        <option value="Factors">Factors</option>
+                                                        <option value="Maths">Maths</option>
+                                                        <option value="MathsFunctions">Maths Functions</option>
+                                                        <option value="Period">Period</option>
+                                                        <option value="StringFunctions">String Functions</option>
+                                                    </select>
+                                                    <p ng-show="form['Input_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Function is required.</p>
+                                                    <p ng-show="Category.Name == 'Input'">{{rows.Function}}</p>
+                                                </td>
+                                                <td ng-if="rows.Function != null" width="5%">{{rows.Function}}</td>
+
+                                                <td>
+                                                    <span hidden><input type="text" name="FunctionCog_{{$parent.$index}}_{{$index}}" id="FunctionCog_{{$parent.$index}}_{{$index}}" class="table-borderless" ng:model="rows.ID" hidden></span>
+                                                    <a ng-click="FunctionButtonClick('lg', $parent.$index, $index, form)">
+                                                        <span uib-popover="{{data || rows.Parameter}}" popover-trigger="'mouseenter'" popover-popup-delay="1000" class="glyphicon glyphicon-cog"></span>
+                                                        <p ng-show="form['FunctionCog_'+ $parent.$index + '_' + $index].$error.input" class="help-block">Variable Mismatch</p>
+                                                    </a>
+                                                </td>
+
+                                                <td>
+                                                    <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Comments' " uib-popover="{{data || rows.Name}}"
+                                                          popover-trigger="'mouseenter'" popover-popup-delay="1000">
+                                                        <input type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" ng-pattern="noSpacesPattern" class="form-control  input-sm" ng-required="true" ng-blur="validateForm()" ng-trim="false">
+                                                    </span>
+                                                    <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$error.pattern" class="help-block">No Spaces or Special Characters</p>
+                                                    <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$error.required" class="help-block">Name is required.</p>
+                                                    <span ng-show="Category.Name == 'Input' || rows.Function == 'ErrorsWarnings' || rows.Function == 'Comments'">{{rows.Name}}</span>
+                                                </td>
+
+                                                <td width="5%">{{rows.Type}}</td>
+
+                                                <td ng-if="Category.Name == 'Input'">
+                                                    <span ng-if="Category.Name == 'Input'" show-errors rows='Category.Functions'>
+                                                        <input ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) &&
+                                                   rows.Parameter[0].templateOptions.required == true"
+                                                               inputformat-Validation config='config' rowIndex="{{$index}}"
+                                                               name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control input-sm" ng-required="true">
+
+                                                        <input ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) &&
+                                                    (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)"
+                                                               inputformat-Validation rowIndex="{{$index}}" config='config' type="text" ng:model="rows.Output"
+                                                               name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" class="form-control input-sm">
+
+                                                        <select ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" class="form-control  input-sm"
+                                                                name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
+                                                            <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                                                        </select>
+
+                                                        <select ng-if="rows.Parameter[0].templateOptions.list == true  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" class="form-control  input-sm"
+                                                                name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
+                                                            <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                                                        </select>
+
+                                                    </span>
+                                                    <p ng-if="rows.Parameter[0].templateOptions.required == true" ng-show="form['Output_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Value is required.</p>
+                                                    <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
+
+                                                </td>
+                                                <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;" ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
+
+                                                <td width="10%">
+                                                    <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Comments'"><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span>
+                                                </td>
+
+                                                <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss'}"><span></span></td>
+                                                <td>
+                                                    <a data-nodrag ng-click="AddFunctionRows($parent.$index, $index)">
+                                                        <i ng-hide="viewOnly" class="center-block glyphicon glyphicon-plus"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="CopyFunction($parent.$index, $index)">
+                                                        <i ng-hide="viewOnly" class="center-block glyphicon glyphicon-duplicate"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="PasteFunction($parent.$index, $index)">
+                                                        <i ng-hide="viewOnly" class="center-block glyphicon glyphicon-paste"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
+                                                        <i ng-hide="viewOnly" class="center-block glyphicon glyphicon-remove"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </uib-accordion>
                         </div>
+
                     </div>
                 </div>
-                <br />
-                <br />
-                <br />
-                <h5></h5>
-
-                <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
-
-                <div ng-hide="isLoading" ui-tree data-clone-enabled="true">
-                    <br />
-                    <uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
-                        <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
-
-                            <uib-accordion-heading>
-                                {{Category.Name}}
-                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
-                                <a ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory($index, $event)"><i  ng-hide="viewOnly" class="pull-left glyphicon glyphicon-arrow-down"></i></a>
-                            </uib-accordion-heading>
-                            <div>
-                                <table class="table table-borderless" ng-hide="viewOnly">
-                                    <tr>
-                                        <td ng-if="Category.Name != 'Input'"><a ng-click="CategoryLogicButtonClick('lg', $index)"><i class="glyphicon glyphicon-wrench"></i></a> </td>
-                                        <td ng-if="Category.Name != 'Input'"><a ng-click="DeleteCategory($index)"><i class="center-block glyphicon glyphicon-remove"></i></a> </td>
-                                        <td><a ng-click="AddCategoryRows($index, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a></td>
-                                        <td ng-if="Category.Name != 'Input'"><a ng-click="CopyCategory($index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a></td>
-                                        <td ng-if="Category.Name != 'Input'"><a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a></td>
-                                    </tr>
-                                </table>
-                            </div>
-
-                            <table class="table table-bordered">
-
-                                <thead>
-                                    <tr>
-                                        <th width="5%">Sort</th>
-                                        <th width="5%">Logic</th>
-                                        <th width="15%">Function</th>
-                                        <th width="0%">Config</th>
-                                        <th width="25%">Variable</th>
-                                        <th width="5%">Type</th>
-                                        <th width="35%">Output</th>
-                                        <th width="20%">Expected</th>
-                                        <th width="5%">Pass</th>
-                                        <th>
-                                            <a data-nodrag ng-click="AddFunction($parent.$index, $index)">
-                                                <span  ng-hide="viewOnly" class="center-block glyphicon glyphicon-plus"></span>
-                                            </a>
-                                        </th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody ui-tree-nodes=""  ng:model="Category.Functions">
-                                    <tr id="Row_{{$parent.$index}}_{{$index}}"  unselectable="on"
-                                        ng-repeat="rows in Category.Functions | filter:searchText" ng-click="selectRow($event, $index, $parent.$index)"
-                                        ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}"   ui-tree-node>
-
-                                        <td ng-show="Category.Name != 'Input'">
-                                            <i ng-hide="viewOnly" class="glyphicon glyphicon-list" ui-tree-handle></i>
-                                        </td>
-                                        <td ng-hide="Category.Name != 'Input'">
-                                           
-                                        </td>
-
-                                        <td>
-                                            <a ng-show="Category.Name != 'Input' && rows.Function != 'Comments'" ng-click="LogicButtonClick('lg', $parent.$index, $index)">
-                                                <span class="glyphicon glyphicon-wrench"></span>
-                                            </a>
-                                        </td>
-
-                                        <td ng-if="rows.Function == null">
-                                            <select ng-show="Category.Name != 'Input'" name="Input_{{$parent.$index}}_{{$index}}" ng:model="rows.Function" class="form-control  input-sm" ng-change="setFunction(rows)" ng-required="true">
-                                                <option value=""></option>
-                                                <option value="ArrayFunctions">Array Functions</option>
-                                                <option value="Comments">Comment</option>
-                                                <option value="DateAdjustment">Date Adjustment</option>
-                                                <option value="DatePart">Date Part</option>
-                                                <option value="ErrorsWarnings">Errors & Warnings</option>
-                                                <option value="Factors">Factors</option>
-                                                <option value="Maths">Maths</option>
-                                                <option value="MathsFunctions">Maths Functions</option>
-                                                <option value="Period">Period</option>
-                                                <option value="StringFunctions">String Functions</option>
-                                            </select>
-                                            <p ng-show="form['Input_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Function is required.</p>
-                                            <p ng-show="Category.Name == 'Input'">{{rows.Function}}</p>
-                                        </td>
-                                        <td ng-if="rows.Function != null" width="5%">{{rows.Function}}</td>
-
-                                        <td>
-                                            <span hidden><input type="text" name="FunctionCog_{{$parent.$index}}_{{$index}}" id="FunctionCog_{{$parent.$index}}_{{$index}}" class="table-borderless" ng:model="rows.ID" hidden></span>
-                                            <a ng-click="FunctionButtonClick('lg', $parent.$index, $index, form)" >
-                                                <span uib-popover="{{data || rows.Parameter}}" popover-trigger="'mouseenter'" popover-popup-delay="1000" class="glyphicon glyphicon-cog" ></span>
-                                                <p ng-show="form['FunctionCog_'+ $parent.$index + '_' + $index].$error.input" class="help-block">Variable Mismatch</p>
-                                            </a>
-                                        </td>
-
-                                        <td>
-                                            <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Comments' " uib-popover="{{data || rows.Name}}"
-                                                  popover-trigger="'mouseenter'" popover-popup-delay="1000">
-                                                <input  type="text" name="Name_{{$parent.$index}}_{{$index}}" ng:model="rows.Name" ng-pattern="noSpacesPattern" class="form-control  input-sm" ng-required="true" ng-blur="validateForm()" ng-trim="false">
-                                            </span>
-                                            <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$error.pattern" class="help-block">No Spaces or Special Characters</p>
-                                            <p ng-show="form['Name_'+ $parent.$index + '_' + $index].$error.required" class="help-block">Name is required.</p>
-                                            <span ng-show="Category.Name == 'Input' || rows.Function == 'ErrorsWarnings' || rows.Function == 'Comments'">{{rows.Name}}</span>
-                                        </td>
-
-                                        <td width="5%">{{rows.Type}}</td>
-
-                                        <td ng-if="Category.Name == 'Input'">
-                                            <span ng-if="Category.Name == 'Input'" show-errors rows='Category.Functions'>
-                                                <input ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) &&
-                                                   rows.Parameter[0].templateOptions.required == true"
-                                                       inputformat-Validation config='config' rowIndex="{{$index}}"
-                                                       name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control input-sm" ng-required="true">
-
-                                                <input ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) &&
-                                                    (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)"
-                                                       inputformat-Validation rowIndex="{{$index}}" config='config' type="text" ng:model="rows.Output"
-                                                       name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" class="form-control input-sm">
-
-                                                <select ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" class="form-control  input-sm"
-                                                        name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
-                                                    <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
-                                                </select>
-
-                                                <select ng-if="rows.Parameter[0].templateOptions.list == true  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" class="form-control  input-sm"
-                                                        name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
-                                                    <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
-                                                </select>
-
-                                            </span>
-                                            <p ng-if="rows.Parameter[0].templateOptions.required == true" ng-show="form['Output_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Value is required.</p>
-                                            <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
-
-                                        </td>
-                                        <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;" ng-if="Category.Name != 'Input'" width="5%">{{rows.Output}}</td>
-
-                                        <td width="10%">
-                                            <span ng-show="Category.Name != 'Input' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Comments'"><input type="text" ng:model="rows.ExpectedResult" class="form-control  input-sm"></span>
-                                        </td>
-
-                                        <td ng-class="{'green' : rows.Pass == 'true', 'red': rows.Pass == 'false', 'grey': rows.Pass == 'miss'}"><span></span></td>
-                                        <td>
-                                            <a data-nodrag ng-click="AddFunctionRows($parent.$index, $index)">
-                                                <i  ng-hide="viewOnly" class="center-block glyphicon glyphicon-plus"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="CopyFunction($parent.$index, $index)">
-                                                <i ng-hide="viewOnly" class="center-block glyphicon glyphicon-duplicate"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="PasteFunction($parent.$index, $index)">
-                                                <i ng-hide="viewOnly" class="center-block glyphicon glyphicon-paste"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
-                                                <i ng-hide="viewOnly" class="center-block glyphicon glyphicon-remove"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </uib-accordion>
-                </div>
-            </fieldset>
-        </form>
-
-    </div>
+            </div>
+        </fieldset>
+    </form>
 </div>
