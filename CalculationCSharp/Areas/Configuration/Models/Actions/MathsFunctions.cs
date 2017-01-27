@@ -145,7 +145,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 Output = 0;
                 foreach (var row  in filterList)
                 {
-                    if(row.Type == "Decimal")
+                    if(row.Type == "Decimal" && row.Pass != "miss")
                     {
                         Output = Output + Convert.ToDecimal(row.Output);
                     }                  
