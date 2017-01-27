@@ -38,7 +38,7 @@
             <tr ng-hide="isLoading" ng-repeat="Regress in Regression" ng-class="{'selected':$index == selectedRow}" ng-click="setclickedrow($index)">
                 <td width="25%" ng-cloak> <span><input type="text" ng:model="Regress.Reference" class="form-control"></span></td>
                 <td ng-click="FunctionButtonClick('lg', $index)">
-                    <span  ng-if="Regress.Difference == null" class="glyphicon glyphicon-cog"></span>
+                    <span  ng-hide="showregressbuttons" class="glyphicon glyphicon-cog"></span>
                 </td>
                 <td width="25%" ng-cloak> <span><input type="text" ng:model="Regress.Comment" class="form-control"></span></td>
                 <td><button ng-if="Regress.OutputOld != null" type="button" class="btn btn-default" ng-click="OutputButtonClick('lg', $index, 'O')" data-dismiss="modal">Old</button></td>
