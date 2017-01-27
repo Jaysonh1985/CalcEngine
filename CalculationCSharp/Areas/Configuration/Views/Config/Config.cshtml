@@ -6,22 +6,22 @@
 <div id="wrapper" class="active" ng-controller="configCtrl">
     <form name="form" role="form"  ng-submit="CalcButtonClick(form)" novalidate onbeforeunload>
         <fieldset ng-disabled="viewOnly">
-            <div ng-hide="viewOnly" id="sidebar-wrapper">
+            <div id="sidebar-wrapper">
                 <ul id="sidebar_menu" class="sidebar-nav">
                     <li class="sidebar-brand"><a id="menu-toggle" href="#">Menu<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
                 </ul>
                 <ul class="sidebar-nav" id="sidebar">
                     <li><input ng-disabled="false" type="text" class="form-control form-inline input" ng-model="searchText" placeholder="Search" style="background-color:#222; border:none; color:#999"></li>
-                    <li><a ng-hide="form.$invalid" ng-click="CalcButtonClick(form)">Calculate<span class="sub_icon glyphicon glyphicon-cog"></span></a></li>
-                    <li><a ng-hide="form.$dirty || form.$invalid" ng-click="RegressionButtonClick('lg', form)">Regression<span class="sub_icon glyphicon glyphicon-ok"></span></a></li>
-                    <li><a ng-hide="form.$dirty || form.$invalid" ng-csv="SpecButtonClick(form)" csv-header="getHeader" filename="@ViewData["SchemeName"] - @ViewData["CalcName"] Specification.csv">Specification<span class="sub_icon glyphicon glyphicon-paperclip"></span></a></li>
-                    <li><a ng-hide="!form.$dirty || form.$invalid" ng-click="SaveButtonClick()">Save<span class="sub_icon glyphicon glyphicon-save"></span></a></li>
-                    <li><a ng-click="HistoryButtonClick('lg')">History<span class="sub_icon glyphicon glyphicon-transfer"></span></a></li>                  
+                    <li><a ng-hide="form.$invalid || viewOnly" ng-click="CalcButtonClick(form)">Calculate<span class="sub_icon glyphicon glyphicon-cog"></span></a></li>
+                    <li><a ng-hide="form.$dirty || form.$invalid || viewOnly" ng-click="RegressionButtonClick('lg', form)">Regression<span class="sub_icon glyphicon glyphicon-ok"></span></a></li>
+                    <li><a ng-hide="form.$dirty || form.$invalid || viewOnly" ng-csv="SpecButtonClick(form)" csv-header="getHeader" filename="@ViewData["SchemeName"] - @ViewData["CalcName"] Specification.csv">Specification<span class="sub_icon glyphicon glyphicon-paperclip"></span></a></li>
+                    <li><a ng-hide="!form.$dirty || form.$invalid || viewOnly" ng-click="SaveButtonClick()">Save<span class="sub_icon glyphicon glyphicon-save"></span></a></li>
+                    <li><a ng-hide="viewOnly" ng-click="HistoryButtonClick('lg')">History<span class="sub_icon glyphicon glyphicon-transfer"></span></a></li>                  
                     <li><a ng-click="OpenAllButton()">Open All <span class="sub_icon glyphicon glyphicon-option-vertical"></span></a></li>
                     <li><a ng-click="CloseAllButton()">Close All <span class="sub_icon glyphicon glyphicon-option-horizontal"></span></a></li>
-                    <li><a ng-click="ExitButton()">Exit <span class="sub_icon glyphicon glyphicon-log-out"></span></a></li>
-                    <li><a ng-click="RemoveExpectedResultsButton()">Reset Expected</a></li>
-                    <li><a ng-click="RemoveInputsButton()">Reset Inputs</a></li>
+                    <li><a ng-hide="viewOnly" ng-click="ExitButton()">Exit <span class="sub_icon glyphicon glyphicon-log-out"></span></a></li>
+                    <li><a ng-hide="viewOnly" ng-click="RemoveExpectedResultsButton()">Reset Expected</a></li>
+                    <li><a ng-hide="viewOnly" ng-click="RemoveInputsButton()">Reset Inputs</a></li>
                 </ul>
             </div>
 
