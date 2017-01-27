@@ -6,7 +6,7 @@
 <div id="wrapper" class="active" ng-controller="configCtrl">
     <form name="form" role="form"  ng-submit="CalcButtonClick(form)" novalidate onbeforeunload>
         <fieldset ng-disabled="viewOnly">
-            <div id="sidebar-wrapper">
+            <div ng-hide="viewOnly" id="sidebar-wrapper">
                 <ul id="sidebar_menu" class="sidebar-nav">
                     <li class="sidebar-brand"><a id="menu-toggle" href="#">Menu<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
                 </ul>
@@ -169,7 +169,7 @@
                                                 </td>
                                                 <td>
                                                     <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="CopyFunction($parent.$index, $index)">
-                                                        <i ng-hide="viewOnly" class="center-block glyphicon glyphicon-duplicate"></i>
+                                                        <i class="center-block glyphicon glyphicon-duplicate"></i>
                                                     </a>
                                                 </td>
                                                 <td>
