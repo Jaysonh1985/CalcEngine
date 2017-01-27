@@ -283,7 +283,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         MathsFunctions MathsFunctions = new MathsFunctions();
                                         try
                                         {
-                                            item.Output = MathsFunctions.Output(jparameters, jCategory, group.ID, item.ID);
+                                            item.Output = MathsFunctions.Output(jparameters, jCategory, group.ID, item.ID, group);
                                         }
                                         catch (Exception ex)
                                         {

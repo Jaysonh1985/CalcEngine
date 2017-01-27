@@ -2,6 +2,7 @@
 using CalculationCSharp.Models.ArrayFunctions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Script.Serialization;
 
 namespace CalculationCSharp.Areas.Configuration.Models
@@ -20,7 +21,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         /// <para>GroupID = current Group ID</para>
         /// <para>ItemID = current row ID</para>
         /// </summary>
-        public string Output (string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID)
+        public string Output (string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID, CategoryViewModel group)
         {
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
@@ -48,7 +49,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 decimal.TryParse(InputA, out InputADeci);
                 decimal.TryParse(InputB, out InputBDeci);
                 //Calculates the value required
-                OutputValue = Calculate(parameters, InputADeci, InputBDeci);
+                OutputValue = Calculate(parameters, InputADeci, InputBDeci, ItemID, group);
                 Output = Output + OutputValue + "~";
                 Counter = Counter + 1;
             }            
@@ -60,7 +61,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         /// <para>InputADeci = value to be passed into the calculation</para>
         /// <para>InputBDeci = value to be passed into the calculation</para>
         /// </summary>
-        public decimal Calculate(MathsFunctions parameters, dynamic InputADeci, dynamic InputBDeci)
+        public decimal Calculate(MathsFunctions parameters, dynamic InputADeci, dynamic InputBDeci, int ItemID, CategoryViewModel group)
         {
             MathematicalFunctions MathFunctions = new MathematicalFunctions();
             Decimal Output = 0;
@@ -136,6 +137,19 @@ namespace CalculationCSharp.Areas.Configuration.Models
             else if (parameters.Type == "Subtract")
             {
                 Output = MathFunctions.Subtract(InputADeci, InputBDeci);
+            }
+            //Subtract two value
+            else if (parameters.Type == "SumDecimalAbove")
+            {
+                var filterList = group.Functions.Where((l, index) => index >= (ItemID - InputADeci) && index < ItemID);
+                Output = 0;
+                foreach (var row  in filterList)
+                {
+                    if(row.Type == "Decimal")
+                    {
+                        Output = Output + Convert.ToDecimal(row.Output);
+                    }                  
+                }             
             }
             //Subtract two period value
             else if (parameters.Type == "SubtractPeriod")
