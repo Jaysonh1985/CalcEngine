@@ -75,7 +75,7 @@
                                         </thead>
                                         <tbody ui-tree-nodes="" ng:model="Category.Functions">
                                             <tr id="Row_{{$parent.$index}}_{{$index}}" unselectable="on"
-                                                ng-repeat="rows in Category.Functions | filter:searchText" ng-click="selectRow($event, $index, $parent.$index)"
+                                                ng-repeat="rows in Category.Functions " ng-show="([rows] | filter:searchText).length > 0" ng-click="selectRow($event, $index, $parent.$index)"
                                                 ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}" ui-tree-node>
 
                                                 <td ng-show="Category.Name != 'Input'">
