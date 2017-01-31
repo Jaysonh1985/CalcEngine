@@ -5,6 +5,9 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
     $scope.isLoading = false;
     $scope.orderByField = '';
     $scope.orderByField = 'Name';
+    $scope.openIndex = [true];
+    $scope.reverseSort = false;
+
     function init() {
         $scope.isLoading = true;
         boardService.initialize().then(function (data) {
@@ -29,7 +32,6 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
     };
 
      $scope.addBoard = function AddBoard() {
-
          var modalInstance = $uibModal.open({
              animation: true,
              templateUrl: '/Areas/Project/Scripts/ProjectMenuAddCalcModal.html',
@@ -37,6 +39,7 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
              controller: 'projectMenuAddCalcCtrl',
              size: 'md',
              resolve: {
+                 Group: function () { return $scope.Group },
                  Name: function () { return $scope.Name },
                  Configuration: function () { return null },
                  Copy: function () { return false }
@@ -47,7 +50,7 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
                  ID: null,
                  Name: selectedItem[0].Name,
                  User: null,
-                 Group: null,
+                 Group: selectedItem[0].Group,
                  Configuration: null
              };
 
@@ -63,7 +66,6 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
      };
 
      $scope.copyBoard = function CopyBoard(Board) {
-
          var modalInstance = $uibModal.open({
              animation: true,
              templateUrl: '/Areas/Project/Scripts/ProjectMenuAddCalcModal.html',
@@ -71,6 +73,7 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
              controller: 'projectMenuAddCalcCtrl',
              size: 'md',
              resolve: {
+                 Group: function () { return Board.Group },
                  Name: function () { return Board.Name },
                  Configuration: function () { return Board.Configuration },
                  Copy: function () { return true }
@@ -81,7 +84,7 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
                  ID: null,
                  Name: selectedItem[0].Name,
                  User: null,
-                 Group: null,
+                 Group: selectedItem[0].Group,
                  Configuration: selectedItem[0].Configuration
              };
 
@@ -100,6 +103,7 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
 
          var arrayID = configFunctionFactory.getIndexOf($scope.Boards, Board.ID, "ID");
          var ID = this.Boards[arrayID].ID;
+         var Group = this.Boards[arrayID].Group;
          var Name = this.Boards[arrayID].Name;
          var Configuration = this.Boards[arrayID].Configuration;
          var User = this.Boards[arrayID].User;
@@ -111,6 +115,7 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
              controller: 'projectMenuAddCalcCtrl',
              size: 'md',
              resolve: {
+                 Group: function () { return Group },
                  Name: function () { return Name },
                  Configuration: function () { return Configuration },
                  Copy: function () { return false }
@@ -121,7 +126,7 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
                  ID: ID,
                  Name: selectedItem[0].Name,
                  User: User,
-                 Group: null,
+                 Group: selectedItem[0].Group,
                  Configuration: Configuration,
                  UpdateDate: new Date()
              };
@@ -139,14 +144,6 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
      };
 
      $scope.deleteBoard = function (Board) {
-         //var cf = confirm("Delete this Board?");
-         //if (cf == true) {
-         // boardService.deleteConfig(this.Boards[index].ID)
-         //.then(function (data) {
-         //    $scope.isLoading = false;
-         //    $scope.Boards.splice(index, 1);
-         //}, onError);
-         //}
          var arrayID = configFunctionFactory.getIndexOf($scope.Boards, Board.ID, "ID");
          var cf = confirm("Delete this Board?");
          if (cf == true) {
@@ -176,6 +173,19 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
              boardService.sendRequest();
          }, onError);
      };
+
+    //UI
+     $scope.OpenAllButton = function () {
+         angular.forEach($scope.Boards, function (value, key, obj) {
+             $scope.openIndex[key] = true;
+         })
+     }
+
+     $scope.CloseAllButton = function () {
+         angular.forEach($scope.Boards, function (value, key, obj) {
+             $scope.openIndex[key] = false;
+         })
+     }
 
     var onError = function (errorMessage) {
         $scope.isLoading = false;
