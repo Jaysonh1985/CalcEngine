@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstance, $interval, story, UserList, CurrentUser) {
+sulhome.kanbanBoardApp.controller('storyCtrl', function ($http, $scope, $uibModalInstance, $interval, story, UserList, CurrentUser, FileUploadService) {
 
     $scope.ID = story.ID;
     $scope.Name = story.Name;
@@ -23,8 +23,10 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
     $scope.UserList = UserList;
     $scope.txtCommentUser = CurrentUser;
     $scope.Updates = story.Updates;
+    $scope.FileRepository = story.FileRepository;
 
     $scope.openIndexUpdates = [true];
+    $scope.openIndexUploads = [true];
     
     $scope.addItem = function () {
         if ($scope.Tasks == null) {
@@ -178,7 +180,8 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
             User: $scope.User,
             Tasks: $scope.Tasks,
             Comments: $scope.Comments,
-            Updates: $scope.Updates
+            Updates: $scope.Updates,
+            FileRepository: $scope.FileRepository
         };
         $scope.OldElapsedTime = 0;
         $uibModalInstance.close($scope.selected);
@@ -189,5 +192,126 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($scope, $uibModalInstan
         $uibModalInstance.dismiss('cancel');
     };
 
+
+    // Upload File Functions
+
+    // Variables
+    $scope.Message = "";
+    $scope.FileInvalidMessage = "";
+    $scope.SelectedFileForUpload = null;
+    $scope.FileDescription = "";
+    $scope.IsFormSubmitted = false;
+    $scope.IsFileValid = false;
+    $scope.IsFormValid = false;
+
+    // THIS IS REQUIRED AS File Control is not supported 2 way binding features of Angular
+    // ------------------------------------------------------------------------------------
+    //File Validation
+    $scope.ChechFileValid = function (file) {
+        var isValid = false;
+        if ($scope.SelectedFileForUpload != null) {
+            if ((file.type == 'image/png' || file.type == 'image/jpeg' || file.type == 'image/gif') && file.size <= (512 * 1024)) {
+                $scope.FileInvalidMessage = "";
+                isValid = true;
+            }
+            else {
+                $scope.FileInvalidMessage = "Selected file is Invalid. (only file type png, jpeg and gif and 512 kb size allowed)";
+            }
+        }
+        else {
+            $scope.FileInvalidMessage = "Image required!";
+        }
+        $scope.IsFileValid = isValid;
+    };
+
+    //File Select event 
+    $scope.selectFileforUpload = function (file) {
+        $scope.SelectedFileForUpload = file[0];
+    }
+    //----------------------------------------------------------------------------------------
+
+    //Save File
+    $scope.SaveFile = function () {
+        $scope.IsFormSubmitted = true;
+        $scope.Message = "";
+        FileUploadService.UploadFile($scope.SelectedFileForUpload, $scope.FileDescription).then(function (d) {
+            if ($scope.FileRepository == null) {
+                $scope.FileRepository = [];
+            }
+            $scope.FileRepository.push({
+                FieldID: parseInt( d.FileRepo.FileID, 10),
+                FileName: d.FileRepo.FileName,
+                FilePath: d.FileRepo.FilePath,
+                Description: d.FileRepo.Description,
+                FileSize: d.FileRepo.FileSize,
+            })
+            ClearForm();
+        }, function (e) {
+            alert(e);
+        });
+
+    };
+    //Clear form 
+    function ClearForm() {
+        $scope.FileDescription = "";
+        //as 2 way binding not support for File input Type so we have to clear in this way
+        //you can select based on your requirement
+        angular.forEach(angular.element("input[type='file']"), function (inputElem) {
+            angular.element(inputElem).val(null);
+        });
+
+        $scope.IsFormSubmitted = false;
+    }
+
+    //Delete File
+    $scope.DeleteFile = function (FileName, ID) {
+        var cf = confirm("Delete this File?");
+        if (cf == true) {
+            $scope.IsFormSubmitted = true;
+            $scope.Message = "";
+            FileUploadService.DeleteFile(FileName).then(function (d) {
+                $scope.FileRepository.splice(ID, 1);
+            }, function (e) {
+                alert(e);
+            });
+        }
+    };
+
+        //Save File
+    $scope.DownloadFile = function (FileName) {
+
+        $http({
+            method: 'GET',
+            url: '/DownloadFile/DownloadFile',
+            params: { FileName: FileName },
+            responseType: 'arraybuffer'
+        }).success(function (data, status, headers) {
+            headers = headers();
+
+            var filename = headers['x-filename'];
+            var contentType = headers['content-type'];
+
+            var linkElement = document.createElement('a');
+            try {
+                var blob = new Blob([data], { type: contentType });
+                var url = window.URL.createObjectURL(blob);
+
+                linkElement.setAttribute('href', url);
+                linkElement.setAttribute("download", filename);
+
+                var clickEvent = new MouseEvent("click", {
+                    "view": window,
+                    "bubbles": true,
+                    "cancelable": false
+                });
+                linkElement.dispatchEvent(clickEvent);
+            } catch (ex) {
+                console.log(ex);
+            }
+        }).error(function (data) {
+            console.log(data);
+        });
+
+    };
 
 });

@@ -297,6 +297,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
              Tasks: this.story.Tasks,
              Comments: this.story.Comments,
              Updates: this.story.Updates,
+             FileRepository: this.story.FileRepository,
              colID: colIndex,
          };
 
@@ -315,7 +316,6 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         });
 
         modalInstance.result.then(function (selectedItem) {
-
             $scope.columns[$scope.colID].Stories[$scope.index].ID = selectedItem.ID;
             $scope.columns[$scope.colID].Stories[$scope.index].AcceptanceCriteria = selectedItem.AcceptanceCriteria;
             $scope.columns[$scope.colID].Stories[$scope.index].Comments = selectedItem.Comments;
@@ -336,6 +336,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             $scope.columns[$scope.colID].Stories[$scope.index].Tasks = selectedItem.Tasks;
             $scope.columns[$scope.colID].Stories[$scope.index].Comments = selectedItem.Comments;
             $scope.columns[$scope.colID].Stories[$scope.index].Updates = selectedItem.Updates;
+            $scope.columns[$scope.colID].Stories[$scope.index].FileRepository = selectedItem.FileRepository;
         }, function () {
 
         });      

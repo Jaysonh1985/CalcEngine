@@ -275,8 +275,10 @@
     <Compile Include="Areas\Maintenance\Models\FactorMaintenance.cs" />
     <Compile Include="Areas\Project\Controllers\BoardWebApiController.cs" />
     <Compile Include="Areas\Project\Controllers\CSVWebApiController.cs" />
+    <Compile Include="Areas\Project\Controllers\DownloadFileWebApiController.cs" />
     <Compile Include="Areas\Project\Controllers\ProjectBoardsController.cs" />
     <Compile Include="Areas\Project\Controllers\CurrentUserWebApiController.cs" />
+    <Compile Include="Areas\Project\Controllers\UploadFileController.cs" />
     <Compile Include="Areas\Project\Controllers\UserListWebApiController.cs" />
     <Compile Include="Areas\Project\Models\Board.cs" />
     <Compile Include="Areas\Project\Models\BoardRepository.cs" />
@@ -367,6 +369,7 @@
     <Content Include="Areas\Configuration\Scripts\Logic\LogicModal.html" />
     <Content Include="Areas\Configuration\Scripts\Config\configMenuCtrl.js" />
     <Content Include="Areas\Project\Scripts\boardFilter.html" />
+    <Content Include="Areas\Project\Scripts\Factories\fileUploadService.js" />
     <Content Include="Areas\Project\Scripts\projectMenuAddCalcCtrl.js" />
     <Content Include="Areas\Project\Scripts\ProjectMenuAddCalcModal.html" />
     <Content Include="Areas\Project\Scripts\reportCtrl.js" />
@@ -866,7 +869,9 @@
     <Folder Include="Areas\Calculation\Views\Shared\" />
     <Folder Include="Areas\Configuration\Views\CalcRegressionOutput\" />
     <Folder Include="Areas\Configuration\Views\Shared\" />
+    <Folder Include="Areas\Project\UploadedFiles\" />
     <Folder Include="Areas\Project\Views\Shared\" />
+    <Folder Include="Areas\Project\Views\UploadFile\" />
     <Folder Include="Areas\Workflow\Models\" />
     <Folder Include="Areas\Workflow\Views\Shared\" />
   </ItemGroup>

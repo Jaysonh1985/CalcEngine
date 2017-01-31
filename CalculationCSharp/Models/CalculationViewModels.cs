@@ -141,6 +141,15 @@ namespace CalculationCSharp.Models
         public String Difference { get; set; }
         public String Pass { get; set; }
     }
+    public class FileRepository
+    {
+        [Key]
+        public int FileID { get; set; }
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
+        public string Description { get; set; }
+        public int FileSize { get; set; }
+    }
     public class Scheme
     {
         [Key]
@@ -172,8 +181,10 @@ namespace CalculationCSharp.Models
         public DbSet<CalcRelease> CalcRelease { get; set; }
         public DbSet<CalcHistory> CalcHistory { get; set; }
         public DbSet<CalcRegressionInputs> CalcRegressionInputs { get; set; }
+        public DbSet<FileRepository> FileRepository { get; set; }
         public DbSet<Scheme> Schemes { get; set; }
         public DbSet<UserSession> UserSession { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

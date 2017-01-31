@@ -1,4 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
+using CalculationCSharp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +29,6 @@ namespace CalculationCSharp.Areas.Project.Models
         public int ColumnId { get; set; }
         public virtual List<Tasks> Tasks { get; set; }
         public virtual List<Updates> Updates { get; set; }
+        public virtual List<FileRepository> FileRepository { get; set; }
     }
 }
