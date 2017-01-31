@@ -96,12 +96,13 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
 
      };
 
-     $scope.updateBoard = function (index) {
+     $scope.updateBoard = function (Board) {
 
-         var ID = this.Boards[index].ID;
-         var Name = this.Boards[index].Name;
-         var Configuration = this.Boards[index].Configuration;
-         var User = this.Boards[index].User;
+         var arrayID = configFunctionFactory.getIndexOf($scope.Boards, Board.ID, "ID");
+         var ID = this.Boards[arrayID].ID;
+         var Name = this.Boards[arrayID].Name;
+         var Configuration = this.Boards[arrayID].Configuration;
+         var User = this.Boards[arrayID].User;
 
          var modalInstance = $uibModal.open({
              animation: true,
@@ -121,13 +122,14 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
                  Name: selectedItem[0].Name,
                  User: User,
                  Group: null,
-                 Configuration: Configuration
+                 Configuration: Configuration,
+                 UpdateDate: new Date()
              };
              
              boardService.putConfig($scope.selected.ID, $scope.selected).then(function (data) {
                  $scope.isLoading = false;
                  boardService.sendRequest();
-                 $scope.Boards[index] = $scope.selected;
+                 $scope.Boards[arrayID] = $scope.selected;
              }, onError);
 
              toastr.success("Project Board updated successfully", "Success");
