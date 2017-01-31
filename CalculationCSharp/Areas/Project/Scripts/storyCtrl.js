@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('storyCtrl', function ($http, $scope, $uibModalInstance, $interval, story, UserList, CurrentUser, FileUploadService) {
+sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope, $uibModalInstance, $interval, story, UserList, CurrentUser, FileUploadService) {
 
     $scope.ID = story.ID;
     $scope.Name = story.Name;
@@ -279,7 +279,6 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($http, $scope, $uibModa
 
         //Save File
     $scope.DownloadFile = function (FileName) {
-
         $http({
             method: 'GET',
             url: '/DownloadFile/DownloadFile',
@@ -294,16 +293,20 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($http, $scope, $uibModa
             var linkElement = document.createElement('a');
             try {
                 var blob = new Blob([data], { type: contentType });
+
+                if (navigator.msSaveBlob)
+                    navigator.msSaveBlob(blob, filename);
+                else {
+                }
                 var url = window.URL.createObjectURL(blob);
 
                 linkElement.setAttribute('href', url);
                 linkElement.setAttribute("download", filename);
 
-                var clickEvent = new MouseEvent("click", {
-                    "view": window,
-                    "bubbles": true,
-                    "cancelable": false
-                });
+
+                // To create a mouse event , first we need to create an event and then initialize it.
+                clickEvent = document.createEvent("MouseEvent");
+                clickEvent.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
                 linkElement.dispatchEvent(clickEvent);
             } catch (ex) {
                 console.log(ex);

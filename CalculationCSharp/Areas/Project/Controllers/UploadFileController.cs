@@ -19,7 +19,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveFiles(string description)
+        public JsonResult SaveFiles(string description, string Name)
         {
             string Message, fileName, actualFileName;
             Message = fileName = actualFileName = string.Empty;
@@ -28,7 +28,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
             if (Request.Files != null)
             {
                 var file = Request.Files[0];
-                actualFileName = file.FileName;
+                actualFileName = Path.GetFileName(file.FileName);
                 fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
                 int size = file.ContentLength;
                 

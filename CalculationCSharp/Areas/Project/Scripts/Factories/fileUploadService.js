@@ -4,6 +4,7 @@
     fac.UploadFile = function (file, description) {
         var formData = new FormData();
         formData.append("file", file);
+        formData.append("Name", file.name);
         //We can send more data to server using append         
         formData.append("description", description);
  
