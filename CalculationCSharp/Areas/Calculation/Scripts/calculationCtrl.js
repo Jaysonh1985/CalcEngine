@@ -135,21 +135,18 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
     };
 
     $scope.ExportCalcButtonClick = function ExportCalcButtonClick(input) {
-        if (input.length > 0)
-        {
-            $scope.exportArray = [];
-            angular.forEach(input, function (value, key, obj) {
-                $scope.groupArray = [];
-                $scope.groupArray.push(value.Group, "", "", "", "");
-                $scope.exportArray.push($scope.groupArray);
-                angular.forEach(value.Output, function (value2, key2, obj2) {
-                    $scope.fieldsArray = [];
-                    $scope.fieldsArray.push(value2.ID, value2.Group, value2.Field, value2.Value);
-                    $scope.exportArray.push($scope.fieldsArray);
-                });
+        $scope.exportArray = [];
+        angular.forEach(input, function (value, key, obj) {
+            $scope.groupArray = [];
+            $scope.groupArray.push(value.Group, "", "", "", "");
+            $scope.exportArray.push($scope.groupArray);
+            angular.forEach(value.Output, function (value2, key2, obj2) {
+                $scope.fieldsArray = [];
+                $scope.fieldsArray.push(value2.ID, value2.Group, value2.Field, value2.Value);
+                $scope.exportArray.push($scope.fieldsArray);
             });
-            return $scope.exportArray;
-        }
+        });
+        return $scope.exportArray;
     };
 
     init();
