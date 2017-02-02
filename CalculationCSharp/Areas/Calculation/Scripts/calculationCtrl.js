@@ -118,11 +118,38 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
             $scope.openIndex[key] = false;
         })
     }
+    $scope.RemoveInputsButton = function () {
+        var cf = confirm("Are you sure you wish remove all Input values?");
+        if (cf == true) {
+            angular.forEach($scope.configreg.Functions, function (value, key, obj) {
+                $scope.configreg.Functions[key].Output = null;
+            })
+            $scope.output = [];
+        }
+    }
     //Creates the array of the output
     $scope.BulkOutputBuilder = function BulkOutputBuilder(Output) {
         var Test = [];
         Test = angular.toJson(Output);
         $scope.bulkArrayOutput.push(Test);
+    };
+
+    $scope.ExportCalcButtonClick = function ExportCalcButtonClick(input) {
+        if (input.length > 0)
+        {
+            $scope.exportArray = [];
+            angular.forEach(input, function (value, key, obj) {
+                $scope.groupArray = [];
+                $scope.groupArray.push(value.Group, "", "", "", "");
+                $scope.exportArray.push($scope.groupArray);
+                angular.forEach(value.Output, function (value2, key2, obj2) {
+                    $scope.fieldsArray = [];
+                    $scope.fieldsArray.push(value2.ID, value2.Group, value2.Field, value2.Value);
+                    $scope.exportArray.push($scope.fieldsArray);
+                });
+            });
+            return $scope.exportArray;
+        }
     };
 
     init();

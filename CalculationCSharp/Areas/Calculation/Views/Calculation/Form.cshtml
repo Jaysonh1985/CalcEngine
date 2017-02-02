@@ -81,9 +81,12 @@
                                 </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table>                 
                     <button type="submit" class="btn btn-default submit-button">Submit</button>
+                    <a class="btn btn-default" ng-click="RemoveInputsButton()">Clear</a>
+                    
                 </form>
+               
             </div>
         </uib-accordion>
        
@@ -100,6 +103,7 @@
                         <li></li>
                         <li><button class="btn btn-default navbar-btn" type="button" ng-click="OpenAllButton()"> Open All </button></li>
                         <li><button class="btn btn-default navbar-btn" type="button" ng-click="CloseAllButton()"> Close All </button></li>
+                        <li><button type="button" ng-csv="ExportCalcButtonClick(output)" class="btn btn-default navbar-btn" filename="@ViewData["SchemeName"] - @ViewData["CalcName"] Calculation Output.csv">Export</button></li>
                     </ul>
 
                     <div class="nav navbar-nav pull-right">
