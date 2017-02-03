@@ -193,7 +193,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                      var CommentString = null;
                      var UpdateString = null;
 
-                     if (key.Tasks != null && key.Task != "")
+                     if (key.Tasks != null && key.Tasks != "")
                      {
                          TaskString = angular.fromJson(ExcelCSVJSONReplace(key.Tasks));
                      }
