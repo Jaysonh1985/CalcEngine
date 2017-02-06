@@ -1,5 +1,9 @@
 ﻿// Copyright (c) 2016 Project AIM
 sulhome.kanbanBoardApp.controller('reportCtrl', function ($scope, $uibModalInstance, $interval, $filter, UserList) {
+    $scope.openRAG = [true];
+    $scope.openUserRAG = [true];
+    $scope.openUserPriority = [true];
+    $scope.openUserIndexTimings = [true];
     $scope.openIndexTimings = [true];
     $scope.openUserIndexTimings = [true];
     function RAGReport() {

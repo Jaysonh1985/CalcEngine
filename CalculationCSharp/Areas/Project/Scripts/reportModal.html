@@ -4,89 +4,113 @@
             <h2>Reports</h2>
         </div>
         <div class="modal-body">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    RAG 
-                    <i ng-csv="RagReport" filename="Rag Report.csv" csv-header="['RAG Report']" class="pull-left glyphicon glyphicon-download"></i>
+            <uib-accordion close-others=false>
+                <div class="container-fluid">
+                    <uib-accordion close-others=false ng-model="output">
+                        <div uib-accordion-group is-open="openRAG[$index]">
+                            <uib-accordion-heading>
+                                RAG
+                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openRAG[$index], 'glyphicon-chevron-right': !openRAG[$index]}"></i>
+                            </uib-accordion-heading>
+                            <br />
+                            <i ng-csv="RagReport" filename="Rag Report.csv" csv-header="['Priority','Red', 'Amber', 'Green', 'Total']" class="pull-left glyphicon glyphicon-download"></i>
+                            <table class="table table-bordered table table-responsive">
+                                <thead>
+                                    <tr style="font-weight: bold">
+                                        <th style="width:10%"><H4>Priority</H4></th>
+                                        <th style="width:10%"><H4>Red</H4></th>
+                                        <th style="width:10%"><H4>Amber</H4></th>
+                                        <th style="width:10%"><H4>Green</H4></th>
+                                        <th style="width:10%"><H4>Total</H4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="row in RagReport">
+                                        <td><span><a>{{row.Priority}}</a></span></td>
+                                        <td><span><a> {{row.Red}}</a></span></td>
+                                        <td><span>{{row.Amber}}</span></td>
+                                        <td><span><a> {{row.Green}}</a></span></td>
+                                        <td><span><a> {{row.Total}}</a></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-accordion>
                 </div>
-            </div>    
-            <br /> 
-            <table class="table table-bordered table table-responsive">
-                <thead>
-                    <tr style="font-weight: bold">
-                        <th style="width:10%"><H4>Priority</H4></th>
-                        <th style="width:10%"><H4>Red</H4></th>
-                        <th style="width:10%"><H4>Amber</H4></th>
-                        <th style="width:10%"><H4>Green</H4></th>
-                        <th style="width:10%"><H4>Total</H4></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="row in RagReport">
-                        <td><span><a>{{row.Priority}}</a></span></td>
-                        <td><span><a> {{row.Red}}</a></span></td>
-                        <td><span>{{row.Amber}}</span></td>
-                        <td><span><a> {{row.Green}}</a></span></td>
-                        <td><span><a> {{row.Total}}</a></span></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="panel-heading">
-                <div class="panel-title">
-                    User List - RAG
-                    <i ng-csv="UserReportRAG" filename="User List - RAG.csv"  csv-header="['User List - RAG Report']" class="pull-left glyphicon glyphicon-download"></i>
+            </uib-accordion>
+            <uib-accordion close-others=false>
+                <div class="container-fluid">
+                    <uib-accordion close-others=false ng-model="output">
+                        <div uib-accordion-group is-open="openUserRAG[$index]">
+                            <uib-accordion-heading>
+                                User List - RAG
+                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openUserRAG[$index], 'glyphicon-chevron-right': !openUserRAG[$index]}"></i>
+                            </uib-accordion-heading>
+                            <br />
+                            <i ng-csv="UserReportRAG" filename="User List - RAG.csv" csv-header="['User','Red', 'Amber', 'Green', 'Total']" class="pull-left glyphicon glyphicon-download"></i>
+                            <br />
+                            <table class="table table-bordered table table-responsive">
+                                <thead>
+                                    <tr style="font-weight: bold">
+                                        <th style="width:10%"><H4>User</H4></th>
+                                        <th style="width:10%"><H4>Red</H4></th>
+                                        <th style="width:10%"><H4>Amber</H4></th>
+                                        <th style="width:10%"><H4>Green</H4></th>
+                                        <th style="width:10%"><H4>Total</H4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="rowUser in UserReportRAG">
+                                        <td><span><a>{{rowUser.User}}</a></span></td>
+                                        <td><span><a> {{rowUser.Red}}</a></span></td>
+                                        <td><span>{{rowUser.Amber}}</span></td>
+                                        <td><span><a> {{rowUser.Green}}</a></span></td>
+                                        <td><span><a> {{rowUser.Total}}</a></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-accordion>
                 </div>
-            </div>   
-            <br /> 
-            <table class="table table-bordered table table-responsive">
-                <thead>
-                    <tr style="font-weight: bold">
-                        <th style="width:10%"><H4>User</H4></th>
-                        <th style="width:10%"><H4>Red</H4></th>
-                        <th style="width:10%"><H4>Amber</H4></th>
-                        <th style="width:10%"><H4>Green</H4></th>
-                        <th style="width:10%"><H4>Total</H4></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="rowUser in UserReportRAG">
-                        <td><span><a>{{rowUser.User}}</a></span></td>
-                        <td><span><a> {{rowUser.Red}}</a></span></td>
-                        <td><span>{{rowUser.Amber}}</span></td>
-                        <td><span><a> {{rowUser.Green}}</a></span></td>
-                        <td><span><a> {{rowUser.Total}}</a></span></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="panel-heading">
-                <div class="panel-title">
-                    User List - Prioirty
-                    <i ng-csv="UserReportPrioirty" filename="User List - Priority.csv" csv-header="['User List - Priority Report']" class="pull-left glyphicon glyphicon-download"></i>
+            </uib-accordion>
+            <uib-accordion close-others=false>
+                <div class="container-fluid">
+                    <uib-accordion close-others=false ng-model="output">
+                        <div uib-accordion-group is-open="openUserPriority[$index]">
+                            <uib-accordion-heading>
+                                User List - Prioirty
+                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openUserPriority[$index], 'glyphicon-chevron-right': !openUserPriority[$index]}"></i>
+                            </uib-accordion-heading>
+                            <br />
+                            <i ng-csv="UserReportPrioirty" filename="User List - Priority.csv" csv-header="['User','1', '2', '3',  'Unassigned', 'Total']" class="pull-left glyphicon glyphicon-download"></i>
+                            <br />
+
+                            <table class="table table-bordered table table-responsive">
+                                <thead>
+                                    <tr style="font-weight: bold">
+                                        <th style="width:10%"><H4>User</H4></th>
+                                        <th style="width:10%"><H4>1</H4></th>
+                                        <th style="width:10%"><H4>2</H4></th>
+                                        <th style="width:10%"><H4>3</H4></th>
+                                        <th style="width:10%"><H4>Unassigned</H4></th>
+                                        <th style="width:10%"><H4>Total</H4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="rowUserPriority in UserReportPrioirty">
+                                        <td><span><a>{{rowUserPriority.User}}</a></span></td>
+                                        <td><span>{{rowUserPriority.High}}</span></td>
+                                        <td><span><a> {{rowUserPriority.Medium}}</a></span></td>
+                                        <td><span><a> {{rowUserPriority.Low}}</a></span></td>
+                                        <td><span><a> {{rowUserPriority.Unassigned}}</a></span></td>
+                                        <td><span><a> {{rowUserPriority.Total}}</a></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </uib-accordion>
                 </div>
-            </div>  
-            <br /> 
-            <table class="table table-bordered table table-responsive">
-                <thead>
-                    <tr style="font-weight: bold">
-                        <th style="width:10%"><H4>User</H4></th>
-                        <th style="width:10%"><H4>1</H4></th>
-                        <th style="width:10%"><H4>2</H4></th>
-                        <th style="width:10%"><H4>3</H4></th>
-                        <th style="width:10%"><H4>Unassigned</H4></th>
-                        <th style="width:10%"><H4>Total</H4></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="rowUserPriority in UserReportPrioirty">
-                        <td><span><a>{{rowUserPriority.User}}</a></span></td>
-                        <td><span>{{rowUserPriority.High}}</span></td>
-                        <td><span><a> {{rowUserPriority.Medium}}</a></span></td>
-                        <td><span><a> {{rowUserPriority.Low}}</a></span></td>
-                        <td><span><a> {{rowUserPriority.Unassigned}}</a></span></td>
-                        <td><span><a> {{rowUserPriority.Total}}</a></span></td>
-                    </tr>
-                </tbody>
-            </table>
+            </uib-accordion>
 
             <uib-accordion close-others=false>
                 <div class="container-fluid">
@@ -97,7 +121,7 @@
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexTimings[$index], 'glyphicon-chevron-right': !openIndexTimings[$index]}"></i>
                             </uib-accordion-heading>
                             <br />
-                            <i ng-csv="ActivityTimeReport" filename="Activity Time Report.csv" csv-header="['Activity Time Report']" class="pull-left glyphicon glyphicon-download"></i>
+                            <i ng-csv="ActivityTimeReport" filename="Activity Time Report.csv" csv-header="['Name','Elapsed Time']" class="pull-left glyphicon glyphicon-download"></i>
                             <br />
                             <table class="table table-bordered table table-responsive">
                                 <thead>
@@ -127,7 +151,7 @@
                                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openUserIndexTimings[$index], 'glyphicon-chevron-right': !openUserIndexTimings[$index]}"></i>
                             </uib-accordion-heading>
                             <br />
-                            <i ng-csv="UserTimeReport" filename="User Time Report.csv" csv-header="['User Time Report']" class="pull-left glyphicon glyphicon-download"></i>
+                            <i ng-csv="UserTimeReport" filename="User Time Report.csv" csv-header="['Name','Elapsed Time']" class="pull-left glyphicon glyphicon-download"></i>
                             <br />
                             <table class="table table-bordered table table-responsive">
                                 <thead>
@@ -146,7 +170,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-            </uib-accordion>   
+            </uib-accordion>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="ok($index)">OK</button>
