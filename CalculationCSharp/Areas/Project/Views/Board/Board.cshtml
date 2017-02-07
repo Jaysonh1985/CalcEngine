@@ -47,7 +47,7 @@
             <!-- Keep all page content within the page-content inset div! -->
             <div class="page-content inset">
             <div class="row" ui-tree data-clone-enabled="true">
-                <h2 class="center-block text-center"><a>@ViewData["H1"]</a></h2>
+                <h2 class="center-block text-center"><a>@ViewData["H2"] - @ViewData["H1"]</a></h2>
                 <div class="simpleDemo row"  ui-tree-nodes="" ng-model="columns" data-nodrop-enabled="true">
                 <div ng-repeat="col in columns" class="col-sm-3 col-xs-12 panel panel-primary colStyle" ng-init="colIndex = $index" ng-cloak ui-tree-node>
                     <div class="panel ">

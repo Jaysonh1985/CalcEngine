@@ -57,6 +57,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
                     }
                     else
                     {
+                        ViewData["H2"] = ProjectBoard.Group;
                         ViewData["H1"] = ProjectBoard.Name;
                     }
                     return View();
