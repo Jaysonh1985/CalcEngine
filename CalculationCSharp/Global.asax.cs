@@ -1,4 +1,5 @@
 ﻿using CalculationCSharp.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,6 +26,7 @@ namespace CalculationCSharp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
 
             if (bool.Parse(ConfigurationManager.AppSettings["MigrateDatabaseToLatestVersion"]))
             {

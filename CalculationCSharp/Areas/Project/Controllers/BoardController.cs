@@ -50,7 +50,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
                 }
                 else
                 {
-                    ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(id));
+                    ProjectBoards ProjectBoard = db.ProjectBoards.Find(Convert.ToInt32(id));
                     if (ProjectBoard == null)
                     {
                         ViewData["H1"] = "New Board";

@@ -1,7 +1,7 @@
 ﻿// Copyright (c) 2016 Project AIM
 sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope, $uibModalInstance, $interval, story, UserList, CurrentUser, FileUploadService) {
 
-    $scope.ID = story.ID;
+    $scope.StoryId = story.StoryId;
     $scope.Name = story.Name;
     $scope.Description = story.Description;
     $scope.RAG = story.RAG;
@@ -17,21 +17,22 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
     $scope.Effort = story.Effort;
     $scope.Timebox = story.Timebox;
     $scope.User = story.User;
-    $scope.Tasks = story.Tasks;
-    $scope.Comments = story.Comments;
+    $scope.ProjectTasks = story.ProjectTasks;
+    $scope.ProjectComments = story.ProjectComments;
     $scope.timerStart = false;
     $scope.UserList = UserList;
     $scope.txtCommentUser = CurrentUser;
     $scope.Updates = story.Updates;
     $scope.FileRepository = story.FileRepository;
+    $scope.ProjectUpdates = story.ProjectUpdates;
 
     $scope.openIndexUpdates = [true];
     $scope.openIndexUploads = [true];
     
     $scope.addItem = function () {
-        if ($scope.Tasks == null) {
-            $scope.Tasks = [];
-            $scope.Tasks[0] = {
+        if ($scope.ProjectTasks == null) {
+            $scope.ProjectTasks = [];
+            $scope.ProjectTasks[0] = {
                 TaskName: null,
                 TaskUser: null,
                 RemainingTime: null,
@@ -40,7 +41,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
         }
         else
         {
-            $scope.Tasks.push({
+            $scope.ProjectTasks.push({
                 TaskName: "",
                 TaskUser: "",
                 RemainingTime: "",
@@ -50,7 +51,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
     },
 
     $scope.removeItem = function (index) {
-        $scope.Tasks.splice(index, 1);
+        $scope.ProjectTasks.splice(index, 1);
     },
 
     $scope.ElapsedTime = story.ElapsedTime;
@@ -89,12 +90,12 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
 
     $scope.btn_add = function () {
 
-        if ($scope.Comments == null) {
-            $scope.Comments = [];
+        if ($scope.ProjectComments == null) {
+            $scope.ProjectComments = [];
         }
         
         if ($scope.txtcomment != '') {
-            $scope.Comments.push({
+            $scope.ProjectComments.push({
                 CommentName: $scope.txtcomment,
                 CommentDateTime: new Date(),
                 CommentType: $scope.txtCommentType,
@@ -105,12 +106,12 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
     }
 
     $scope.remItem = function ($index) {
-        $scope.Comments.splice($index, 1);
+        $scope.ProjectComments.splice($index, 1);
     }
 
     $scope.logElapsedTime = function () {
-        if ($scope.Updates == null) {
-            $scope.Updates = [];
+        if ($scope.ProjectUpdates == null) {
+            $scope.ProjectUpdates = [];
         }
 
         var UpdateValue = 0;
@@ -127,7 +128,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
         }
         if (UpdateValue > 0)
         {
-            $scope.Updates.push({
+            $scope.ProjectUpdates.push({
                 UpdateField: 'Elapsed Time',
                 UpdateValue: UpdateValue,
                 UpdateDateTime: new Date(),
@@ -138,15 +139,15 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
     }
 
     $scope.formChanges = function () {
-        if ($scope.Updates == null) {
-            $scope.Updates = [];
+        if ($scope.ProjectUpdates == null) {
+            $scope.ProjectUpdates = [];
         }
        
         if ($scope.storyForm.$dirty) {
             angular.forEach($scope.storyForm, function (value, key) {
                 if (key[0] == '$') return;
                 if (!value.$pristine) {
-                    $scope.Updates.push({
+                    $scope.ProjectUpdates.push({
                         UpdateField: key,
                         UpdateValue: value.$modelValue,
                         UpdateDateTime: new Date(),
@@ -162,7 +163,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
         $scope.stop();
         $scope.formChanges();
         $scope.selected = {
-            ID: $scope.ID,
+            StoryId: $scope.StoryId,
             Name: $scope.Name,
             Description: $scope.Description,
             Requested: $scope.Requested,
@@ -182,6 +183,9 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
             Comments: $scope.Comments,
             Updates: $scope.Updates,
             FileRepository: $scope.FileRepository
+            ProjectTasks: $scope.ProjectTasks,
+            ProjectComments: $scope.ProjectComments,
+            ProjectUpdates: $scope.ProjectUpdates
         };
         $scope.OldElapsedTime = 0;
         $uibModalInstance.close($scope.selected);

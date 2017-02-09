@@ -19,10 +19,10 @@ namespace CalculationCSharp.Areas.Project.Controllers
         [System.Web.Http.HttpGet]
         public HttpResponseMessage CSV(int? id)
         {
-            ProjectBoard ProjectBoard = db.ProjectBoard.Find(Convert.ToInt32(id));
+            ProjectBoards ProjectBoard = db.ProjectBoards.Find(Convert.ToInt32(id));
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             string jsonString = Convert.ToString(ProjectBoard.Configuration);
-            List<Column> columns = (List<Column>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<Column>));
+            List<ProjectColumns> columns = (List<ProjectColumns>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<ProjectColumns>));
             StringBuilder sb = new StringBuilder();
             //Iterate through data list collection
             List<List<string>> propNames = new List<List<string>>();
@@ -56,55 +56,55 @@ namespace CalculationCSharp.Areas.Project.Controllers
             foreach (var item in columns)
             {
                 //Iterate through property collection
-                foreach (var prop in item.Stories)
-                {
-                    //Sets the row label
-                    LoopCounter = LoopCounter + 1;
-                    propValues.Add(Convert.ToString(item.Id));
-                    propValues.Add(Convert.ToString(item.Name));
-                    propValues.Add(Convert.ToString(prop.Id));
-                    propValues.Add(Convert.ToString(prop.Name));
-                    propValues.Add(Convert.ToString(prop.Description));
-                    propValues.Add(Convert.ToString(prop.AcceptanceCriteria));
-                    propValues.Add(Convert.ToString(prop.Complexity));
-                    propValues.Add(Convert.ToString(prop.DueDate));
-                    propValues.Add(Convert.ToString(prop.Effort));
-                    propValues.Add(Convert.ToString(prop.ElapsedTime));
-                    propValues.Add(Convert.ToString(prop.Moscow));
-                    propValues.Add(Convert.ToString(prop.RAG));
-                    propValues.Add(Convert.ToString(prop.Requested));
-                    propValues.Add(Convert.ToString(prop.RequestedDate));
-                    propValues.Add(Convert.ToString(prop.StartDate));
-                    propValues.Add(Convert.ToString(prop.SLADays));
-                    propValues.Add(Convert.ToString(prop.Timebox));
-                    propValues.Add(Convert.ToString(prop.User));
-                    if(prop.Tasks != null)
-                    {
-                        propValues.Add(javaScriptSerializer.Serialize(prop.Tasks));
-                    }
-                    else
-                    {
-                        propValues.Add("");
-                    }
-                    if (prop.Comments != null)
-                    {
-                        propValues.Add(javaScriptSerializer.Serialize(prop.Comments));
-                    }
-                    else
-                    {
-                        propValues.Add("");
-                    }
-                    if (prop.Updates != null)
-                    {
-                        propValues.Add(javaScriptSerializer.Serialize(prop.Updates));
-                    }
-                    else
-                    {
-                        propValues.Add("");
-                    }
-                    propNames.Add(propValues);
-                    propValues = new List<string>();
-                }
+                //foreach (var prop in item.Stories)
+                //{
+                //    //Sets the row label
+                //    LoopCounter = LoopCounter + 1;
+                //    propValues.Add(Convert.ToString(item.ColumnId));
+                //    propValues.Add(Convert.ToString(item.Name));
+                //    propValues.Add(Convert.ToString(prop.StoryId));
+                //    propValues.Add(Convert.ToString(prop.Name));
+                //    propValues.Add(Convert.ToString(prop.Description));
+                //    propValues.Add(Convert.ToString(prop.AcceptanceCriteria));
+                //    propValues.Add(Convert.ToString(prop.Complexity));
+                //    propValues.Add(Convert.ToString(prop.DueDate));
+                //    propValues.Add(Convert.ToString(prop.Effort));
+                //    propValues.Add(Convert.ToString(prop.ElapsedTime));
+                //    propValues.Add(Convert.ToString(prop.Moscow));
+                //    propValues.Add(Convert.ToString(prop.RAG));
+                //    propValues.Add(Convert.ToString(prop.Requested));
+                //    propValues.Add(Convert.ToString(prop.RequestedDate));
+                //    propValues.Add(Convert.ToString(prop.StartDate));
+                //    propValues.Add(Convert.ToString(prop.SLADays));
+                //    propValues.Add(Convert.ToString(prop.Timebox));
+                //    propValues.Add(Convert.ToString(prop.User));
+                //    //if(prop.Tasks != null)
+                //    //{
+                //    //    propValues.Add(javaScriptSerializer.Serialize(prop.Tasks));
+                //    //}
+                //    //else
+                //    //{
+                //    //    propValues.Add("");
+                //    //}
+                //    //if (prop.Comments != null)
+                //    //{
+                //    //    propValues.Add(javaScriptSerializer.Serialize(prop.Comments));
+                //    //}
+                //    //else
+                //    //{
+                //    //    propValues.Add("");
+                //    //}
+                //    //if (prop.Updates != null)
+                //    //{
+                //    //    propValues.Add(javaScriptSerializer.Serialize(prop.Updates));
+                //    //}
+                //    //else
+                //    //{
+                //    //    propValues.Add("");
+                //    //}
+                //    propNames.Add(propValues);
+                //    propValues = new List<string>();
+                //}
 
             }
 

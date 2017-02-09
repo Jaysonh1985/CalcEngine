@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using CalculationCSharp.Models;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace CalculationCSharp.Areas.Project.Controllers
 {
@@ -19,16 +20,16 @@ namespace CalculationCSharp.Areas.Project.Controllers
         private CalculationDBContext db = new CalculationDBContext();
 
         // GET: api/ProjectBoards
-        public IQueryable<ProjectBoard> GetProjectBoard()
+        public IQueryable<ProjectBoards> GetProjectBoard()
         {
-            return db.ProjectBoard;
+            return db.ProjectBoards;
         }
 
         // GET: api/ProjectBoards/5
-        [ResponseType(typeof(ProjectBoard))]
+        [ResponseType(typeof(ProjectBoards))]
         public IHttpActionResult GetProjectBoard(int id)
         {
-            ProjectBoard projectBoard = db.ProjectBoard.Find(id);
+            ProjectBoards projectBoard = db.ProjectBoards.Find(id);
             if (projectBoard == null)
             {
                 return NotFound();
@@ -39,14 +40,14 @@ namespace CalculationCSharp.Areas.Project.Controllers
 
         // PUT: api/ProjectBoards/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutProjectBoard(int id, ProjectBoard projectBoard)
+        public IHttpActionResult PutProjectBoard(int id, ProjectBoards projectBoard)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != projectBoard.ID)
+            if (id != projectBoard.BoardId)
             {
                 return BadRequest();
             }
@@ -75,31 +76,28 @@ namespace CalculationCSharp.Areas.Project.Controllers
         }
 
         // POST: api/ProjectBoards
-        [ResponseType(typeof(ProjectBoard))]
-        public IHttpActionResult PostProjectBoard(ProjectBoard projectBoard)
+        [ResponseType(typeof(ProjectBoards))]
+        public IHttpActionResult PostProjectBoard(ProjectBoards projectBoard)
         {
             projectBoard.UpdateDate = DateTime.Now;
             projectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}           
-            db.ProjectBoard.Add(projectBoard);
+            db.Configuration.ProxyCreationEnabled = false;
+            db.ProjectBoards.Add(projectBoard);
             db.SaveChanges();
-            return CreatedAtRoute("DefaultApi", new { id = projectBoard.ID }, projectBoard);
+            return CreatedAtRoute("DefaultApi", new { id = projectBoard.BoardId }, projectBoard);
         }
 
         // DELETE: api/ProjectBoards/5
-        [ResponseType(typeof(ProjectBoard))]
+        [ResponseType(typeof(ProjectBoards))]
         public IHttpActionResult DeleteProjectBoard(int id)
         {
-            ProjectBoard projectBoard = db.ProjectBoard.Find(id);
+            ProjectBoards projectBoard = db.ProjectBoards.Find(id);
             if (projectBoard == null)
             {
                 return NotFound();
             }
 
-            db.ProjectBoard.Remove(projectBoard);
+            db.ProjectBoards.Remove(projectBoard);
             db.SaveChanges();
 
             return Ok(projectBoard);
@@ -116,7 +114,7 @@ namespace CalculationCSharp.Areas.Project.Controllers
 
         private bool ProjectBoardExists(int id)
         {
-            return db.ProjectBoard.Count(e => e.ID == id) > 0;
+            return db.ProjectBoards.Count(e => e.BoardId == id) > 0;
         }
     }
 }
