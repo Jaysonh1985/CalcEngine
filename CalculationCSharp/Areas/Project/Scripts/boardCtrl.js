@@ -46,13 +46,13 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         
     };
 
-    function ColumnReport() {
-        $scope.BacklogCount = $scope.columns[0].Stories.length;
-        $scope.InProgressCount = $scope.columns[1].Stories.length;
-        $scope.PendingCount = $scope.columns[2].Stories.length;
-        $scope.ReleaseCount = $scope.columns[3].Stories.length;
-        $scope.TotalCount = $scope.BacklogCount + $scope.InProgressCount + $scope.PendingCount + $scope.ReleaseCount;
-    }
+    //function ColumnReport() {
+    //    $scope.BacklogCount = $scope.columns[0].Stories.length;
+    //    $scope.InProgressCount = $scope.columns[1].Stories.length;
+    //    $scope.PendingCount = $scope.columns[2].Stories.length;
+    //    $scope.ReleaseCount = $scope.columns[3].Stories.length;
+    //    $scope.TotalCount = $scope.BacklogCount + $scope.InProgressCount + $scope.PendingCount + $scope.ReleaseCount;
+    //}
 
     $scope.refreshBoard = function refreshBoard(id) {
         boardService.getColumns(id)
@@ -60,23 +60,22 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                $scope.isLoading = true;
                $scope.columns = data;
                $scope.setRAG();
-               ColumnReport();
+               //ColumnReport();
                $scope.isLoading = false;
            }, onError);
     };
 
-    $scope.rebuildColumnIDs = function rebuildColumnIDs() {
-        colid = 0;
-        angular.forEach($scope.columns, function (groups) {
-            $scope.columns[colid].Id = colid;
-            rowid = 0;
-            angular.forEach($scope.columns[colid].Stories, function (rows) {
-                $scope.columns[colid].Stories[rowid].Id = rowid;
-                rowid = rowid + 1;
-            });
-            colid = colid + 1;
-        });
-    };
+    //$scope.rebuildColumnIDs = function rebuildColumnIDs() {
+    //    colid = 0;
+    //    angular.forEach($scope.columns, function (groups) {
+    //        rowid = 0;
+    //        angular.forEach($scope.columns[colid].Stories, function (rows) {
+    //            $scope.columns[colid].Stories[rowid].StoryId = rowid;
+    //            rowid = rowid + 1;
+    //        });
+    //        colid = colid + 1;
+    //    });
+    //};
 
     var waitForRenderAndDoSomething = function () {
         if ($http.pendingRequests.length > 0) {
@@ -85,43 +84,49 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             $scope.isLoading = false;
         }
     }
-    // Model to JSON for demo purpose
-    $scope.$watch('columns', function (model) {
-        if (initializing) {
-            $timeout(function () { initializing = false; });
-        } else {
-            $scope.isLoading = true;
-            id = configFunctionFactory.getConfigID();
-            $scope.rebuildColumnIDs();
-            boardService.updateBoard(id, $scope.columns).then(function (data) {             
-                boardService.sendRequest();
-                $timeout(waitForRenderAndDoSomething);
-                
-            }, onError);
-            $scope.setRAG();
-           
-        }
-    }, true);
+
+    $scope.UpdateBoard = function () {
+        id = configFunctionFactory.getConfigID();
+        var promise = boardService.updateBoard(id, $scope.columns).then(function (data) {
+            boardService.sendRequest();
+            $timeout(waitForRenderAndDoSomething);
+            $scope.columns = data;
+            return data;
+        }, onError);
+        return promise;
+    };
+    //// Model to JSON for demo purpose
+    //$scope.$watch('columns', function (model) {
+    //    if (initializing) {
+    //        $timeout(function () { initializing = false; });
+    //    } else {
+    //        $scope.isLoading = true;
+    //        id = configFunctionFactory.getConfigID();
+    //        $scope.UpdateBoard();
+    //        $scope.setRAG();
+          
+    //    }
+    //}, true);
 
     $scope.setRAG = function setRAG() {
         angular.forEach($scope.columns, function (value, key, prop) {
             var columnIndex = key;
-            angular.forEach(value.Stories, function (valueS, keyS, propS) {
+            angular.forEach(value.ProjectStories, function (valueS, keyS, propS) {
                 var DueDate = new Date(valueS.DueDate);
                 var datediff = Date.daysBetween(new Date(), DueDate);
                 if (isNaN(Date.parse(DueDate)) == true || DueDate.toDateString() == 'Mon Jan 01 1900') {
-                    $scope.columns[columnIndex].Stories[keyS].RAG = "Green";
+                    $scope.columns[columnIndex].ProjectStories[keyS].RAG = "Green";
                 }
                 else
                 {
                     if (datediff <= 0) {
-                        $scope.columns[columnIndex].Stories[keyS].RAG = "Red";
+                        $scope.columns[columnIndex].ProjectStories[keyS].RAG = "Red";
                     }
                     else if (datediff <= (valueS.SLADays / 3)) {
-                        $scope.columns[columnIndex].Stories[keyS].RAG = "Amber";
+                        $scope.columns[columnIndex].ProjectStories[keyS].RAG = "Amber";
                     }
                     else {
-                        $scope.columns[columnIndex].Stories[keyS].RAG = "Green";
+                        $scope.columns[columnIndex].ProjectStories[keyS].RAG = "Green";
                     }
                 }
             });
@@ -176,7 +181,7 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
              var cf = confirm("This will remove all current cards permanently, do you wish to continue?");
              if (cf == true) {
                  angular.forEach($scope.columns, function (key, value, obj) {
-                     $scope.columns[value].Stories = [];
+                     $scope.columns[value].ProjectStories = [];
                  });
 
                  angular.forEach(CSV, function (key, value, obj) {
@@ -193,21 +198,21 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                      var CommentString = null;
                      var UpdateString = null;
 
-                     if (key.Tasks != null && key.Task != "")
+                     if (key.ProjectTasks != null && key.Task != "")
                      {
-                         TaskString = angular.fromJson(ExcelCSVJSONReplace(key.Tasks));
+                         TaskString = angular.fromJson(ExcelCSVJSONReplace(key.ProjectTasks));
                      }
-                     if (key.Comments != null && key.Comments != "")
+                     if (key.ProjectComments != null && key.ProjectComments != "")
                      {
-                         CommentString = angular.fromJson(ExcelCSVJSONReplace(key.Comments));
+                         CommentString = angular.fromJson(ExcelCSVJSONReplace(key.ProjectComments));
                      }
-                     if (key.Updates != null && key.Updates != "")
+                     if (key.ProjectUpdates != null && key.ProjectUpdates != "")
                      {
-                         UpdateString = angular.fromJson(ExcelCSVJSONReplace(key.Updates));
+                         UpdateString = angular.fromJson(ExcelCSVJSONReplace(key.ProjectUpdates));
                      }
                      
                      $scope.selected = {
-                         ID: key.ActivityID,
+                         StoryId: key.ActivityID,
                          Name: key.ActivityName,
                          Description: key.Description,
                          Requested: key.RequestedBy,
@@ -223,11 +228,11 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                          Effort: key.Effort,
                          Timebox: key.Timebox,
                          User: key.CurrentUser,
-                         Tasks: TaskString,
-                         Comments: CommentString,
-                         Updates: UpdateString
+                         ProjectTasks: TaskString,
+                         ProjectComments: CommentString,
+                         ProjectUpdates: UpdateString
                      };
-                     $scope.columns[key.ColumnID].Stories.push($scope.selected);
+                     $scope.columns[key.ColumnID].ProjectStories.push($scope.selected);
                  });
 
                  toastr.success("Imported Successfully", "Success");
@@ -241,31 +246,32 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
 
      $scope.AddButtonClick = function AddStory(ID) {
          $scope.isLoading = true;
-         storyID = $scope.columns[ID].Stories.length;
-         $scope.columns[ID].Stories.push({
+         storyID = $scope.columns[ID].ProjectStories.length;
+         $scope.columns[ID].ProjectStories.push({
              Name: 'New',
              Description: null,
              AcceptanceCriteria: null,
-             ID: storyID,
+             StoryId: storyID,
              RAG: 'Green',
              ElapsedTime: null,
-             StartDate: '01/01/1900',
-             DueDate: '01/01/1900',
-             RequestedDate: '01/01/1900',
+             StartDate: new Date('01/01/1900'),
+             DueDate: new Date('01/01/1900'),
+             RequestedDate: new Date('01/01/1900'),
              Moscow:null
          });
+         $scope.UpdateBoard();
      };
 
      $scope.DeleteButtonClick = function AddStory(colIndex, index) {
          var cf = confirm("Delete this Story?");
          if (cf == true) {
-             $scope.columns[colIndex].Stories.splice(index, 1);
+             $scope.columns[colIndex].ProjectStories.splice(index, 1);
              $uibModalInstance.dismiss('cancel')
          }
      };
 
      $scope.OrderColumnByClick = function OrderColumnByClick(id) {
-         $scope.columns[id].Stories = $filter('orderBy')($scope.columns[id].Stories, 'Moscow');
+         $scope.columns[id].ProjectStories = $filter('orderBy')($scope.columns[id].ProjectStories, 'Moscow');
      };
      $scope.ClearFilterClick = function ClearFilterClick() {
          $scope.search = null;
@@ -293,10 +299,10 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
              Complexity: this.story.Complexity,
              Effort: this.story.Effort,
              User: this.story.User,
-             ID: this.story.ID,
-             Tasks: this.story.Tasks,
-             Comments: this.story.Comments,
-             Updates: this.story.Updates,
+             StoryId: this.story.StoryId,
+             ProjectTasks: this.story.ProjectTasks,
+             ProjectComments: this.story.ProjectComments,
+             ProjectUpdates: this.story.ProjectUpdates,
              colID: colIndex,
          };
 
@@ -316,26 +322,27 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
 
         modalInstance.result.then(function (selectedItem) {
 
-            $scope.columns[$scope.colID].Stories[$scope.index].ID = selectedItem.ID;
-            $scope.columns[$scope.colID].Stories[$scope.index].AcceptanceCriteria = selectedItem.AcceptanceCriteria;
-            $scope.columns[$scope.colID].Stories[$scope.index].Comments = selectedItem.Comments;
-            $scope.columns[$scope.colID].Stories[$scope.index].Description = selectedItem.Description;
-            $scope.columns[$scope.colID].Stories[$scope.index].RAG = selectedItem.RAG;
-            $scope.columns[$scope.colID].Stories[$scope.index].SLADays = selectedItem.SLADays;
-            $scope.columns[$scope.colID].Stories[$scope.index].Requested = selectedItem.Requested;
-            $scope.columns[$scope.colID].Stories[$scope.index].StartDate = selectedItem.StartDate;
-            $scope.columns[$scope.colID].Stories[$scope.index].DueDate = selectedItem.DueDate;
-            $scope.columns[$scope.colID].Stories[$scope.index].RequestedDate = selectedItem.RequestedDate;
-            $scope.columns[$scope.colID].Stories[$scope.index].ElapsedTime = selectedItem.ElapsedTime;
-            $scope.columns[$scope.colID].Stories[$scope.index].Moscow = selectedItem.Moscow;
-            $scope.columns[$scope.colID].Stories[$scope.index].Complexity = selectedItem.Complexity;
-            $scope.columns[$scope.colID].Stories[$scope.index].Effort = selectedItem.Effort;
-            $scope.columns[$scope.colID].Stories[$scope.index].Name = selectedItem.Name;
-            $scope.columns[$scope.colID].Stories[$scope.index].Timebox = selectedItem.Timebox;
-            $scope.columns[$scope.colID].Stories[$scope.index].User = selectedItem.User;
-            $scope.columns[$scope.colID].Stories[$scope.index].Tasks = selectedItem.Tasks;
-            $scope.columns[$scope.colID].Stories[$scope.index].Comments = selectedItem.Comments;
-            $scope.columns[$scope.colID].Stories[$scope.index].Updates = selectedItem.Updates;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].StoryId = selectedItem.StoryId;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].AcceptanceCriteria = selectedItem.AcceptanceCriteria;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].Comments = selectedItem.Comments;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].Description = selectedItem.Description;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].RAG = selectedItem.RAG;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].SLADays = selectedItem.SLADays;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].Requested = selectedItem.Requested;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].StartDate = selectedItem.StartDate;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].DueDate = selectedItem.DueDate;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].RequestedDate = selectedItem.RequestedDate;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].ElapsedTime = selectedItem.ElapsedTime;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].Moscow = selectedItem.Moscow;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].Complexity = selectedItem.Complexity;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].Effort = selectedItem.Effort;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].Name = selectedItem.Name;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].Timebox = selectedItem.Timebox;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].User = selectedItem.User;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].ProjectTasks = selectedItem.ProjectTasks;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].ProjectComments = selectedItem.ProjectComments;
+            $scope.columns[$scope.colID].ProjectStories[$scope.index].ProjectUpdates = selectedItem.ProjectUpdates;
+            $scope.UpdateBoard();
         }, function () {
 
         });      
@@ -367,11 +374,11 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
          $scope.animationsEnabled = !$scope.animationsEnabled;
      };
 
-    // Listen to the 'refreshBoard' event and refresh the board as a result
-     $scope.$parent.$on("refreshBoard", function (e) {
-         id = configFunctionFactory.getConfigID();
-         $scope.refreshBoard(id);
-    });
+    //// Listen to the 'refreshBoard' event and refresh the board as a result
+    // $scope.$parent.$on("refreshBoard", function (e) {
+    //     id = configFunctionFactory.getConfigID();
+    //     $scope.refreshBoard(id);
+    //});
 
      var onError = function (errorMessage) {
         toastr.error(errorMessage, "Error");

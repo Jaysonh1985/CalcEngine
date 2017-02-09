@@ -36,14 +36,14 @@
         </thead>
         <tbody>
             <tr ng-repeat="board in Boards | orderBy:orderByField:reverseSort | filter : test">
-                <td ng-hide="editingData[board.ID]" width="50%" ng-click="openBoard()">{{board.Name}}</td>
-                <td ng-show="editingData[board.ID]" width="50%"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
+                <td ng-hide="editingData[board.BoardId]" width="50%" ng-click="openBoard()">{{board.Name}}</td>
+                <td ng-show="editingData[board.BoardId]" width="50%"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
                 <td width="15%" ng-click="openBoard()">{{board.User}}</td>
                 <td width="10%" ng-click="openBoard()">{{board.UpdateDate  | date:'d MMMM yyyy h:mm a'}}</td>
                 <td>
                     <button class="btn btn-info" ng-click="copyBoard(board)">Copy</button>
                     <button class="btn btn-success" ng-click="updateBoard($index, board)">Modify</button>
-                    <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard(board)" />
+                    <input type="button" ng-hide="editingData[board.BoardId]" class="btn btn-danger" value="Delete" ng-click="deleteBoard(board)" />
                 </td>
             </tr>
         </tbody>

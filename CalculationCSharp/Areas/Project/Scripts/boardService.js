@@ -38,7 +38,7 @@ sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) 
     var putConfig = function (index, data) {
         return $http.put("/api/ProjectBoards/" + index, data)
            .then(function (response) {
-               return response.status == 200;
+               return response.status === 200;
            }, function (error) {
                return $q.reject(error.data.Message);
            });
@@ -47,7 +47,7 @@ sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) 
     var deleteConfig = function (index) {
         return $http.delete("/api/ProjectBoards/" + index)
            .then(function (response) {
-               return response.status == 200;
+               return response.status === 200;
            }, function (error) {
                return $q.reject(error.data.Message);
            });
@@ -78,9 +78,9 @@ sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) 
     };
 
     var updateBoard = function (boardIdVal, data, updateType) {
-        return $http.post("/api/BoardWebApi/UpdateBoard", { boardId: boardIdVal, data: data, updateType: updateType })
+        return $http.put("/api/BoardWebApi/UpdateBoard", { boardId: boardIdVal, data: data, updateType: updateType })
             .then(function (response) {
-                return response.status == 200;
+                return response.data;
             }, function (error) {
                 return $q.reject(error.data.Message);
             });

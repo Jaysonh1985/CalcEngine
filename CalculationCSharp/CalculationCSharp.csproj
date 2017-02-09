@@ -278,11 +278,9 @@
     <Compile Include="Areas\Project\Controllers\ProjectBoardsController.cs" />
     <Compile Include="Areas\Project\Controllers\CurrentUserWebApiController.cs" />
     <Compile Include="Areas\Project\Controllers\UserListWebApiController.cs" />
-    <Compile Include="Areas\Project\Models\Board.cs" />
     <Compile Include="Areas\Project\Models\BoardRepository.cs" />
-    <Compile Include="Areas\Project\Models\Comments.cs" />
-    <Compile Include="Areas\Project\Models\Updates.cs" />
-    <Compile Include="Areas\Project\Models\Tasks.cs" />
+    <Compile Include="Areas\Project\Models\ViewModels\ProjectBoardViewModel.cs" />
+    <Compile Include="Areas\Project\Models\ViewModels\ProjectColumnViewModel.cs" />
     <Compile Include="Areas\Project\ProjectAreaRegistration.cs" />
     <Compile Include="Areas\Workflow\Controllers\WorkflowController.cs" />
     <Compile Include="Areas\Workflow\WorkflowAreaRegistration.cs" />
@@ -295,12 +293,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702082139144_Initial.cs" />
+    <Compile Include="Migrations\201702082139144_Initial.Designer.cs">
+      <DependentUpon>201702082139144_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ConfigurationApplication.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Areas\Project\Models\ColumnRepository.cs" />
-    <Compile Include="Areas\Project\Models\Column.cs" />
-    <Compile Include="Areas\Project\Models\Stories.cs" />
     <Compile Include="Models\ArrayFunctions\ArrayBuildingFunctions.cs" />
     <Compile Include="Models\CalculationViewModels.cs" />
     <Compile Include="Models\Calculation\BulkOutputList.cs" />
@@ -366,13 +365,11 @@
     <Content Include="Areas\Configuration\Scripts\Config\configCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Logic\LogicModal.html" />
     <Content Include="Areas\Configuration\Scripts\Config\configMenuCtrl.js" />
-    <Content Include="Areas\Project\Scripts\boardFilter.html" />
     <Content Include="Areas\Project\Scripts\projectMenuAddCalcCtrl.js" />
     <Content Include="Areas\Project\Scripts\ProjectMenuAddCalcModal.html" />
     <Content Include="Areas\Project\Scripts\reportCtrl.js" />
     <Content Include="Areas\Project\Scripts\storyCtrl.js" />
     <Content Include="Areas\Project\Scripts\reportModal.html" />
-    <Content Include="Areas\Project\Scripts\viewXML.html" />
     <Content Include="Areas\Workflow\Scripts\app.css" />
     <Content Include="Areas\Workflow\Scripts\app.js" />
     <Content Include="Areas\Workflow\Scripts\debug.js" />
@@ -757,6 +754,7 @@
     <Content Include="Scripts\angular-route.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\UTKFNVFZZE.jpg" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
@@ -873,6 +871,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702082139144_Initial.resx">
+      <DependentUpon>201702082139144_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -891,7 +894,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49366</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49368/</IISUrl>
+          <IISUrl>http://localhost:49369/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
