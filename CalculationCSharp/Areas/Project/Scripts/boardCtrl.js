@@ -46,13 +46,13 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         
     };
 
-    //function ColumnReport() {
-    //    $scope.BacklogCount = $scope.columns[0].Stories.length;
-    //    $scope.InProgressCount = $scope.columns[1].Stories.length;
-    //    $scope.PendingCount = $scope.columns[2].Stories.length;
-    //    $scope.ReleaseCount = $scope.columns[3].Stories.length;
-    //    $scope.TotalCount = $scope.BacklogCount + $scope.InProgressCount + $scope.PendingCount + $scope.ReleaseCount;
-    //}
+    function ColumnReport() {
+        $scope.BacklogCount = $scope.columns[0].ProjectStories.length;
+        $scope.InProgressCount = $scope.columns[1].ProjectStories.length;
+        $scope.PendingCount = $scope.columns[2].ProjectStories.length;
+        $scope.ReleaseCount = $scope.columns[3].ProjectStories.length;
+        $scope.TotalCount = $scope.BacklogCount + $scope.InProgressCount + $scope.PendingCount + $scope.ReleaseCount;
+    }
 
     $scope.refreshBoard = function refreshBoard(id) {
         boardService.getColumns(id)
@@ -60,22 +60,10 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                $scope.isLoading = true;
                $scope.columns = data;
                $scope.setRAG();
-               //ColumnReport();
+               ColumnReport();
                $scope.isLoading = false;
            }, onError);
     };
-
-    //$scope.rebuildColumnIDs = function rebuildColumnIDs() {
-    //    colid = 0;
-    //    angular.forEach($scope.columns, function (groups) {
-    //        rowid = 0;
-    //        angular.forEach($scope.columns[colid].Stories, function (rows) {
-    //            $scope.columns[colid].Stories[rowid].StoryId = rowid;
-    //            rowid = rowid + 1;
-    //        });
-    //        colid = colid + 1;
-    //    });
-    //};
 
     var waitForRenderAndDoSomething = function () {
         if ($http.pendingRequests.length > 0) {
@@ -85,28 +73,33 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
         }
     }
 
-    $scope.UpdateBoard = function () {
-        id = configFunctionFactory.getConfigID();
-        var promise = boardService.updateBoard(id, $scope.columns).then(function (data) {
-            boardService.sendRequest();
-            $timeout(waitForRenderAndDoSomething);
-            $scope.columns = data;
-            return data;
-        }, onError);
-        return promise;
-    };
-    //// Model to JSON for demo purpose
-    //$scope.$watch('columns', function (model) {
-    //    if (initializing) {
-    //        $timeout(function () { initializing = false; });
-    //    } else {
-    //        $scope.isLoading = true;
-    //        id = configFunctionFactory.getConfigID();
-    //        $scope.UpdateBoard();
-    //        $scope.setRAG();
-          
-    //    }
-    //}, true);
+    //$scope.UpdateBoard = function () {
+    //    id = configFunctionFactory.getConfigID();
+    //    var promise = boardService.updateBoard(id, $scope.columns).then(function (data) {         
+    //        $scope.columns = data;
+    //        $scope.isLoading = false;
+    //        boardService.sendRequest();
+    //        return data;
+    //    }, onError);
+    //    return promise;
+    //};
+
+    // Model to JSON for demo purpose
+    $scope.$watch('columns', function (model) {
+        if (initializing) {
+            $timeout(function () { initializing = false; });
+        } else {
+            $scope.isLoading = true;
+            id = configFunctionFactory.getConfigID();
+            boardService.updateBoard(id, $scope.columns).then(function (data) {
+                boardService.sendRequest();
+                $timeout(waitForRenderAndDoSomething);
+                $scope.isLoading = false;
+            }, onError);
+            $scope.setRAG();
+        }
+    }, true);
+    
 
     $scope.setRAG = function setRAG() {
         angular.forEach($scope.columns, function (value, key, prop) {
@@ -245,7 +238,6 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
      };
 
      $scope.AddButtonClick = function AddStory(ID) {
-         $scope.isLoading = true;
          storyID = $scope.columns[ID].ProjectStories.length;
          $scope.columns[ID].ProjectStories.push({
              Name: 'New',
@@ -259,7 +251,6 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
              RequestedDate: new Date('01/01/1900'),
              Moscow:null
          });
-         $scope.UpdateBoard();
      };
 
      $scope.DeleteButtonClick = function AddStory(colIndex, index) {
@@ -342,7 +333,6 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
             $scope.columns[$scope.colID].ProjectStories[$scope.index].ProjectTasks = selectedItem.ProjectTasks;
             $scope.columns[$scope.colID].ProjectStories[$scope.index].ProjectComments = selectedItem.ProjectComments;
             $scope.columns[$scope.colID].ProjectStories[$scope.index].ProjectUpdates = selectedItem.ProjectUpdates;
-            $scope.UpdateBoard();
         }, function () {
 
         });      
@@ -374,11 +364,11 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
          $scope.animationsEnabled = !$scope.animationsEnabled;
      };
 
-    //// Listen to the 'refreshBoard' event and refresh the board as a result
-    // $scope.$parent.$on("refreshBoard", function (e) {
-    //     id = configFunctionFactory.getConfigID();
-    //     $scope.refreshBoard(id);
-    //});
+    // Listen to the 'refreshBoard' event and refresh the board as a result
+     $scope.$parent.$on("refreshBoard", function (e) {
+         id = configFunctionFactory.getConfigID();
+         $scope.refreshBoard(id);
+    });
 
      var onError = function (errorMessage) {
         toastr.error(errorMessage, "Error");

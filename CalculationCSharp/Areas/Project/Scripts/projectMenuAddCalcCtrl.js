@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('projectMenuAddCalcCtrl', function ($scope, $uibModalInstance, $log, Name, Configuration, Group, Copy) {
+sulhome.kanbanBoardApp.controller('projectMenuAddCalcCtrl', function ($scope, $uibModalInstance, $log, BoardId, Name, Configuration, Client, Copy) {
     // Model
     //Map Back the input values
     if (Copy == true)
@@ -12,12 +12,14 @@ sulhome.kanbanBoardApp.controller('projectMenuAddCalcCtrl', function ($scope, $u
     }  
     $scope.Group = [];
     $scope.Configuration = Configuration;
-    $scope.Client = Group;
+    $scope.Client = Client;
+    $scope.BoardID = BoardId;
 
     //Click OK moves back to modal instantiation
     $scope.ok = function () {       
         $scope.Group.push({
-            Group: $scope.Client,
+            BoardId: BoardId,
+            Client: $scope.Client,
             Name: $scope.Name, 
             Configuration: $scope.Configuration 
         })

@@ -15,7 +15,7 @@
         </div>
     </div>
     <uib-accordion close-others=false ng-model="Boards">
-        <div uib-accordion-group ng-repeat="(key, value) in Boards | groupBy: 'Group'" ng-init="colIndex = $index" is-open="openIndex[$index]">
+        <div uib-accordion-group ng-repeat="(key, value) in Boards | groupBy: 'Client'" ng-init="colIndex = $index" is-open="openIndex[$index]">
             <uib-accordion-heading>
                 {{key}}
                 <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
@@ -27,8 +27,8 @@
                 <thead>
                     <tr>
                         <th>
-                            <a href="#" ng-click="orderByField='Group'; reverseSort = !reverseSort">
-                                Client <span ng-show="orderByField == 'Group'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                            <a href="#" ng-click="orderByField='Client'; reverseSort = !reverseSort">
+                                Client <span ng-show="orderByField == 'Client'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
                             </a>
                         </th>
                         <th>
@@ -52,13 +52,13 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="board in value | orderBy:orderByField:reverseSort | filter : test">
-                        <td ng-hide="editingData[board.ID]" width="10%" ng-click="openBoard()">{{board.Group}}</td>
+                        <td ng-hide="editingData[board.ID]" width="10%" ng-click="openBoard()">{{board.Client}}</td>
                         <td ng-hide="editingData[board.ID]" width="40%" ng-click="openBoard()">{{board.Name}}</td>
                         <td ng-show="editingData[board.ID]" width="40%"><input class="form-control text-box single-line" type="text" ng-model="board.Name" /></td>
                         <td width="15%" ng-click="openBoard()">{{board.User}}</td>
                         <td width="10%" ng-click="openBoard()">{{board.UpdateDate  | date:'d MMMM yyyy h:mm a'}}</td>
                         <td>
-                            <button class="btn btn-info" ng-click="copyBoard(board)">Copy</button>
+                            @*<button class="btn btn-info" ng-click="copyBoard(board)">Copy</button>*@
                             <button class="btn btn-success" ng-click="updateBoard(board)">Modify</button>
                             <input type="button" ng-hide="editingData[board.ID]" class="btn btn-danger" value="Delete" ng-click="deleteBoard(board)" />
                         </td>

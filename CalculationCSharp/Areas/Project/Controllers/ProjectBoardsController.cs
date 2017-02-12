@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using CalculationCSharp.Models;
 using System.Web;
 using System.Web.Script.Serialization;
+using CalculationCSharp.Areas.Project.Models;
 
 namespace CalculationCSharp.Areas.Project.Controllers
 {
@@ -79,11 +80,20 @@ namespace CalculationCSharp.Areas.Project.Controllers
         [ResponseType(typeof(ProjectBoards))]
         public IHttpActionResult PostProjectBoard(ProjectBoards projectBoard)
         {
+            
+            ProjectBoards copyProjectBoard = projectBoard;
+
             projectBoard.UpdateDate = DateTime.Now;
             projectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
             db.Configuration.ProxyCreationEnabled = false;
             db.ProjectBoards.Add(projectBoard);
             db.SaveChanges();
+
+            if (projectBoard.BoardId > 0)
+            {
+                BoardRepository repo = new BoardRepository();
+                repo.CopyBoard(copyProjectBoard, projectBoard.BoardId);
+            }
             return CreatedAtRoute("DefaultApi", new { id = projectBoard.BoardId }, projectBoard);
         }
 
@@ -91,7 +101,35 @@ namespace CalculationCSharp.Areas.Project.Controllers
         [ResponseType(typeof(ProjectBoards))]
         public IHttpActionResult DeleteProjectBoard(int id)
         {
+            var originalBoard = db.ProjectBoards
+            .Where(p => p.BoardId == id)
+            .Include(p => p.ProjectColumns)
+            .SingleOrDefault();
+
             ProjectBoards projectBoard = db.ProjectBoards.Find(id);
+
+            foreach (var Column in originalBoard.ProjectColumns.ToList())
+            {
+                foreach (var Story in Column.ProjectStories.ToList())
+                {
+                    foreach (var Comment in Story.ProjectComments.ToList())
+                    {
+                        db.ProjectComments.Remove(Comment);
+                    }
+                    foreach (var Task in Story.ProjectTasks.ToList())
+                    {
+                        db.ProjectTasks.Remove(Task);
+                    }
+                    foreach (var Update in Story.ProjectUpdates.ToList())
+                    {
+                        db.ProjectUpdates.Remove(Update);
+                    }
+                    db.ProjectStories.Remove(Story);
+                }
+                db.ProjectColumns.Remove(Column);
+            }
+            db.ProjectBoards.Remove(originalBoard);
+
             if (projectBoard == null)
             {
                 return NotFound();
@@ -102,6 +140,8 @@ namespace CalculationCSharp.Areas.Project.Controllers
 
             return Ok(projectBoard);
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

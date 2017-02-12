@@ -182,7 +182,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
             Tasks: $scope.Tasks,
             Comments: $scope.Comments,
             Updates: $scope.Updates,
-            FileRepository: $scope.FileRepository
+            FileRepository: $scope.FileRepository,
             ProjectTasks: $scope.ProjectTasks,
             ProjectComments: $scope.ProjectComments,
             ProjectUpdates: $scope.ProjectUpdates

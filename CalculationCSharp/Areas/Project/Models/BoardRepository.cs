@@ -88,6 +88,7 @@ namespace CalculationCSharp.Areas.Project.Models
                 .Where(p => p.BoardId == ProjectBoard.BoardId)
                 .Include(p => p.ProjectColumns)
                 .SingleOrDefault();
+
             if(originalBoard != null)
             {
                 //update parent
@@ -314,6 +315,52 @@ namespace CalculationCSharp.Areas.Project.Models
             ProjectBoards ProjectBoard = db.ProjectBoards.Find(Convert.ToInt32(json.boardId));
             db.ProjectBoards.Remove(ProjectBoard);
             db.SaveChanges();
+        }
+
+        public ProjectBoards CopyBoard(ProjectBoards projectBoard, int ID)
+        {
+
+            var originalBoard = db.ProjectBoards
+            .Where(p => p.BoardId == projectBoard.BoardId)
+            .Include(p => p.ProjectColumns)
+            .SingleOrDefault();
+
+
+            foreach (var Column in originalBoard.ProjectColumns)
+            {
+                Column.ColumnId = 0;
+                Column.ProjectBoard = projectBoard;
+                db.ProjectColumns.Add(Column);
+
+                foreach (var Story in Column.ProjectStories)
+                {
+                    Story.StoryId = 0;
+                    Story.ProjectColumns = Column;
+                    db.ProjectStories.Add(Story);
+                    foreach (var Comment in Story.ProjectComments)
+                    {
+                        Comment.CommentId = 0;
+                        Comment.ProjectStories = Story;
+                        db.ProjectComments.Add(Comment);
+                    }
+                    foreach (var Task in Story.ProjectTasks)
+                    {
+                        Task.TaskId = 0;
+                        Task.ProjectStories = Story;
+                        db.ProjectTasks.Add(Task);
+                    }
+                    foreach (var Update in Story.ProjectUpdates)
+                    {
+                        Update.UpdateId = 0;
+                        Update.ProjectStories = Story;
+                        db.ProjectUpdates.Add(Update);                      
+                    }
+                }
+
+            }
+
+
+            return originalBoard;
         }
     }
 }
