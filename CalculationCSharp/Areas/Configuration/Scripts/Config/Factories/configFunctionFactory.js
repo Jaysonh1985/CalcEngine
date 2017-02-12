@@ -67,7 +67,23 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
                 }
             }
         },
+        getDate: function (value) {
+            var parts = value.split("/");
+            var year = parseInt(parts[2], 10);
+            var month = parseInt(parts[1], 10) - 1;
+            var day = parseInt(parts[0], 10);
+            if (month != -1 && day != 0) {
+                var dt = new Date(year,
+                                    month,
+                                    day);
+                return dt;
+            }
+            else
+            {
+                return value;
+            }
 
+          },
     }
 
 

@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope, $uibModalInstance, $interval, story, UserList, CurrentUser, FileUploadService) {
+sulhome.kanbanBoardApp.controller('storyCtrl', function ($filter, $window, $http, $scope, $uibModalInstance, $interval, story, UserList, CurrentUser, FileUploadService, configFunctionFactory) {
 
     $scope.StoryId = story.StoryId;
     $scope.Name = story.Name;
@@ -9,7 +9,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
     $scope.Requested = story.Requested;
     $scope.StartDate = new Date(story.StartDate);
     $scope.DueDate = new Date(story.DueDate);
-    $scope.RequestedDate = story.RequestedDate;
+    $scope.RequestedDate = $filter('date')(story.RequestedDate, "dd/MM/yyyy");
     $scope.ElapsedTime = parseInt(story.ElapsedTime);
     $scope.AcceptanceCriteria = story.AcceptanceCriteria;
     $scope.Moscow = story.Moscow;
@@ -171,7 +171,7 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
             SLADays: $scope.SLADays,
             StartDate: $scope.StartDate,
             DueDate: $scope.DueDate,
-            RequestedDate: $scope.RequestedDate,
+            RequestedDate: configFunctionFactory.getDate($scope.RequestedDate),
             ElapsedTime: $scope.ElapsedTime,
             AcceptanceCriteria: $scope.AcceptanceCriteria,
             Moscow: $scope.Moscow,
@@ -196,7 +196,10 @@ sulhome.kanbanBoardApp.controller('storyCtrl', function ($window, $http, $scope,
         $uibModalInstance.dismiss('cancel');
     };
 
-
+    var toUTCDate = function (date) {
+        var _utc = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+        return _utc;
+    };
     // Upload File Functions
 
     // Variables

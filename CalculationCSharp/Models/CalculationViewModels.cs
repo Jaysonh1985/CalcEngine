@@ -128,10 +128,10 @@ namespace CalculationCSharp.Models
         public string Timebox { get; set; }
         public string AcceptanceCriteria { get; set; }
         public string RAG { get; set; }
-        public string StartDate { get; set; }
-        public string RequestedDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime RequestedDate { get; set; }
         public int SLADays { get; set; }
-        public string DueDate { get; set; }
+        public DateTime DueDate { get; set; }
         public string ElapsedTime { get; set; }
         public string Complexity { get; set; }
         public string Effort { get; set; }
@@ -170,7 +170,7 @@ namespace CalculationCSharp.Models
         public int UpdateId { get; set; }
         public string UpdateField { get; set; }
         public string UpdateValue { get; set; }
-        public string UpdateDateTime { get; set; }
+        public DateTime UpdateDateTime { get; set; }
         public string UpdateUser { get; set; }
         public DateTime UpdateDate { get; set; }
 
@@ -182,7 +182,7 @@ namespace CalculationCSharp.Models
         public int CommentId { get; set; }
         public string CommentName { get; set; }
         public string CommentType { get; set; }
-        public string CommentDateTime { get; set; }
+        public DateTime CommentDateTime { get; set; }
         public string CommentUser { get; set; }
         public DateTime UpdateDate { get; set; }
 
