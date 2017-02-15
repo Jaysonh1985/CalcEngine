@@ -227,18 +227,18 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                      };
                      var columnKey = 0;
                      if (key.ColumnName == "Backlog") {
-                         columnKey = 1;
+                         columnKey = 0;
                      }
                      else if (key.ColumnName == "In Progress") {
-                         columnKey = 2;
+                         columnKey = 1;
                      }
                      else if (key.ColumnName == "Pending") {
-                         columnKey = 3;
+                         columnKey = 2;
                      }
                      else if (key.ColumnName == "Release") {
-                         columnKey = 4;
+                         columnKey = 3;
                      };
-                     $scope.columns[value].ProjectStories.push($scope.selected);
+                     $scope.columns[columnKey].ProjectStories.push($scope.selected);
                  });
 
                  toastr.success("Imported Successfully", "Success");

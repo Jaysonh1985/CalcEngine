@@ -139,8 +139,15 @@ namespace CalculationCSharp.Areas.Project.Models
                         foreach (var storyItem in columnItem.ProjectStories)
                         {
                             var originalStoryItem = originalColumnItem.ProjectStories
-                            .Where(c => c.StoryId == storyItem.StoryId)
+                            .Where(c => c.StoryId == null)
                             .SingleOrDefault();
+
+                            if (storyItem.StoryId > 0)
+                            {
+                                originalStoryItem = originalColumnItem.ProjectStories
+                                .Where(c => c.StoryId == storyItem.StoryId)
+                                .SingleOrDefault();
+                            }
 
                             // Is original child item with same ID in DB?
                             if (originalStoryItem != null)
