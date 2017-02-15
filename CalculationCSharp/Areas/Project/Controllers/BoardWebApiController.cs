@@ -63,18 +63,27 @@ namespace CalculationCSharp.Areas.Project.Controllers
                foreach(var Story in Column.ProjectStories)
                 {
                     Story.ProjectColumns = null;
+                    if(Story.ProjectComments != null)
+                    {
+                        foreach (var Comment in Story.ProjectComments)
+                        {
+                            Comment.ProjectStories = null;
+                        }
+                    }
 
-                    foreach(var Comment in Story.ProjectComments)
+                    if(Story.ProjectTasks != null)
                     {
-                        Comment.ProjectStories = null;
+                        foreach (var Task in Story.ProjectTasks)
+                        {
+                            Task.ProjectStories = null;
+                        }
                     }
-                    foreach (var Task in Story.ProjectTasks)
+                    if(Story.ProjectUpdates != null)
                     {
-                        Task.ProjectStories = null;
-                    }
-                    foreach (var Update in Story.ProjectUpdates)
-                    {
-                        Update.ProjectStories = null;
+                        foreach (var Update in Story.ProjectUpdates)
+                        {
+                            Update.ProjectStories = null;
+                        }
                     }
                 }
 

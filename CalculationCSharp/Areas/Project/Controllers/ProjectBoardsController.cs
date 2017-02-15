@@ -79,24 +79,24 @@ namespace CalculationCSharp.Areas.Project.Controllers
         // POST: api/ProjectBoards
         [ResponseType(typeof(ProjectBoards))]
         public IHttpActionResult PostProjectBoard(ProjectBoards projectBoard)
-        {
-            
-            ProjectBoards copyProjectBoard = projectBoard;
-
-            projectBoard.UpdateDate = DateTime.Now;
-            projectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
-            db.Configuration.ProxyCreationEnabled = false;
-            db.ProjectBoards.Add(projectBoard);
-            db.SaveChanges();
-
+        {           
             if (projectBoard.BoardId > 0)
             {
                 BoardRepository repo = new BoardRepository();
-                repo.CopyBoard(copyProjectBoard, projectBoard.BoardId);
+                projectBoard = repo.CopyBoard(projectBoard, projectBoard.BoardId);
             }
+            else
+            {
+                projectBoard.UpdateDate = DateTime.Now;
+                projectBoard.User = HttpContext.Current.User.Identity.Name.ToString();
+                db.Configuration.ProxyCreationEnabled = false;
+            }
+            db.ProjectBoards.Add(projectBoard);
+            db.SaveChanges();
+
+            projectBoard.ProjectColumns = null;
             return CreatedAtRoute("DefaultApi", new { id = projectBoard.BoardId }, projectBoard);
         }
-
         // DELETE: api/ProjectBoards/5
         [ResponseType(typeof(ProjectBoards))]
         public IHttpActionResult DeleteProjectBoard(int id)

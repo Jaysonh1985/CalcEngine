@@ -225,7 +225,20 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
                          ProjectComments: CommentString,
                          ProjectUpdates: UpdateString
                      };
-                     $scope.columns[key.ColumnID].ProjectStories.push($scope.selected);
+                     var columnKey = 0;
+                     if (key.ColumnName == "Backlog") {
+                         columnKey = 1;
+                     }
+                     else if (key.ColumnName == "In Progress") {
+                         columnKey = 2;
+                     }
+                     else if (key.ColumnName == "Pending") {
+                         columnKey = 3;
+                     }
+                     else if (key.ColumnName == "Release") {
+                         columnKey = 4;
+                     };
+                     $scope.columns[value].ProjectStories.push($scope.selected);
                  });
 
                  toastr.success("Imported Successfully", "Success");

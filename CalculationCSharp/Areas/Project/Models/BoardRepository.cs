@@ -325,42 +325,62 @@ namespace CalculationCSharp.Areas.Project.Models
             .Include(p => p.ProjectColumns)
             .SingleOrDefault();
 
+            ProjectBoards newBoard = new ProjectBoards();
 
-            foreach (var Column in originalBoard.ProjectColumns)
+            newBoard.BoardId = 0;
+            newBoard.Client = projectBoard.Client;
+            newBoard.Configuration = originalBoard.Configuration;
+            newBoard.Name = projectBoard.Name;
+            newBoard.UpdateDate = DateTime.Now;
+            newBoard.User = HttpContext.Current.User.Identity.Name.ToString();
+            newBoard.ProjectColumns = new List<ProjectColumns>();
+
+            foreach (var Column in originalBoard.ProjectColumns.ToList())
             {
-                Column.ColumnId = 0;
-                Column.ProjectBoard = projectBoard;
-                db.ProjectColumns.Add(Column);
+                ProjectColumns newColumn = new ProjectColumns();
+                newColumn.Description = Column.Description;
+                newColumn.Name = Column.Name;
+                newColumn.UpdateDate = Column.UpdateDate;
+                newColumn.ProjectBoard = newBoard;    
 
-                foreach (var Story in Column.ProjectStories)
+                foreach (var Story in Column.ProjectStories.ToList())
                 {
-                    Story.StoryId = 0;
-                    Story.ProjectColumns = Column;
-                    db.ProjectStories.Add(Story);
-                    foreach (var Comment in Story.ProjectComments)
+                    ProjectStories newStory = new ProjectStories();
+                    newStory.AcceptanceCriteria = Story.AcceptanceCriteria;
+                    newStory.Complexity = Story.Complexity;
+                    newStory.Description = Story.Description;
+                    newStory.DueDate = Story.DueDate;
+                    newStory.Effort = Story.Effort;
+                    newStory.ElapsedTime = Story.ElapsedTime;
+                    newStory.Moscow = Story.Moscow;
+                    newStory.Name = Story.Name;
+                    newStory.RAG = Story.RAG;
+                    newStory.Requested = Story.Requested;
+                    newStory.RequestedDate = Story.RequestedDate;
+                    newStory.SLADays = Story.SLADays;
+                    newStory.StartDate = Story.StartDate;
+                    newStory.Timebox = Story.Timebox;
+                    newStory.UpdateDate = Story.UpdateDate;
+                    newStory.User = Story.User;
+                    newStory.ProjectColumns = newColumn;
+                    
+                    foreach (var Task in Story.ProjectTasks.ToList())
                     {
-                        Comment.CommentId = 0;
-                        Comment.ProjectStories = Story;
-                        db.ProjectComments.Add(Comment);
+                        ProjectTasks newTasks = new ProjectTasks();
+                        newTasks.RemainingTime = Task.RemainingTime;
+                        newTasks.Status = Task.Status;
+                        newTasks.TaskName = Task.TaskName;
+                        newTasks.TaskUser = Task.TaskUser;
+                        newTasks.UpdateDate = Task.UpdateDate;
+                        newTasks.ProjectStories = newStory;
+                            
                     }
-                    foreach (var Task in Story.ProjectTasks)
-                    {
-                        Task.TaskId = 0;
-                        Task.ProjectStories = Story;
-                        db.ProjectTasks.Add(Task);
-                    }
-                    foreach (var Update in Story.ProjectUpdates)
-                    {
-                        Update.UpdateId = 0;
-                        Update.ProjectStories = Story;
-                        db.ProjectUpdates.Add(Update);                      
-                    }
+                    newColumn.ProjectStories.Add(newStory);
+
                 }
-
-            }
-
-
-            return originalBoard;
+                newBoard.ProjectColumns.Add(newColumn);
+            };
+            return newBoard;
         }
     }
 }
