@@ -179,14 +179,36 @@ sulhome.kanbanBoardApp.controller('boardCtrl', function ($scope, $uibModal, $log
 
                  angular.forEach(CSV, function (key, value, obj) {
 
-                     if (key.Moscow == '')
-                     {
+                     if (key.Moscow == '') {
                          key.Moscow = null;
-                     }
-                     if (key.CurrentUser == '')
-                     {
+                     };
+                     if (key.CurrentUser == '') {
                          key.CurrentUser = null;
-                     }
+                     };
+                     if (key.ActivityName == '') {
+                         key.ActivityName = null;
+                     };
+                     if (key.Description == '') {
+                         key.Description = null;
+                     };
+                     if (key.RequestedBy == '') {
+                         key.RequestedBy = null;
+                     };
+                     if (key.RAG == '') {
+                         key.RAG = null;
+                     };
+                     if (key.Timebox == '') {
+                         key.Timebox = null;
+                     };
+                     if (key.AcceptanceCriteria == '') {
+                         key.AcceptanceCriteria = null;
+                     };
+                     if (key.Complexity == '') {
+                         key.Complexity = null;
+                     };
+                     if (key.Effort == '') {
+                         key.Effort = null;
+                     };
                      var TaskString = null;
                      var CommentString = null;
                      var UpdateString = null;
