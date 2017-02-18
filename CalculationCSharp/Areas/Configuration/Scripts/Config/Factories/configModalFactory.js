@@ -37,6 +37,9 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             else if (Function == 'StringFunctions') {
                 return 'stringFunctionsCtrl'
             }
+            else if (Function == 'Return') {
+                return 'ReturnCtrl'
+            }
         },
         //get URL for modal file path
         getFunctionTempURL: function (Function) {
@@ -72,6 +75,9 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             }
             else if (Function == 'StringFunctions') {
                 return '/Areas/Configuration/Scripts/String Functions/StringFunctionsModal.html'
+            }
+            else if (Function == 'Return') {
+                return '/Areas/Configuration/Scripts/Return/ReturnModal.html'
             }
         },     
     }

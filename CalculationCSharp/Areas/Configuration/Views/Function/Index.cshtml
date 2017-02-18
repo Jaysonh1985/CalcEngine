@@ -1,12 +1,12 @@
-﻿;@{ 
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
-<h4 class="text-center">Calculation Configurations</h4>
+<h4 class="text-center">Calculation Functions</h4>
 
-<div class="container body-content" ng-controller="configMenuCtrl" ng-cloak>
-    <button class="btn btn-default" ng-click="addBoard()">Add Calculation</button>
+<div class="container body-content" ng-controller="functionMenuCtrl" ng-cloak>
+    <button class="btn btn-default" ng-click="addBoard()">Add Function</button>
     <button class="btn btn-default" ng-click="OpenAllButton()">Open All</button>
     <button class="btn btn-default" ng-click="CloseAllButton()">Close All</button>
     @Html.Partial("_Menu")

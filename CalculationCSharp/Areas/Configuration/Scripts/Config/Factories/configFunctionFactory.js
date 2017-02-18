@@ -83,7 +83,18 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
                 return value;
             }
 
-          },
+        },
+        isFunction: function (URL) {
+            var Function = URL.search("Function");
+            if (Function > 0) {
+                return true
+
+            }
+            else {
+                return false;
+            }
+
+        },
     }
 
 

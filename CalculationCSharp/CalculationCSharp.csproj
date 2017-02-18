@@ -240,11 +240,14 @@
     <Compile Include="Areas\Calculation\Controllers\CalculationWebApiController.cs" />
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcConfigurationsController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\CalcFunctionsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcHistoriesController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcRegressionInputsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcRegressionOutputController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcSpecificationController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\FunctionWebApiController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\FunctionController.cs" />
     <Compile Include="Areas\Configuration\Controllers\SchemeWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\UserSessionsController.cs" />
@@ -253,6 +256,7 @@
     <Compile Include="Areas\Configuration\Models\Actions\Input.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\ArrayFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\ErrorsWarnings.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Return.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\StringFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\MathsFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\DatePart.cs" />
@@ -324,6 +328,7 @@
     <Content Include="Areas\Configuration\Scripts\Array Functions\ArrayFunctionsModal.html" />
     <Content Include="Areas\Configuration\Scripts\CalculationMenu\configMenuAddCalcCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\CalculationMenu\ConfigMenuAddCalcModal.html" />
+    <Content Include="Areas\Configuration\Scripts\Config\functionMenuCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configModalFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configValidationFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configTypeaheadFactory.js" />
@@ -339,6 +344,8 @@
     <Content Include="Areas\Configuration\Scripts\Factors\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Factors\factorsCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Return\returnCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Return\ReturnModal.html" />
     <Content Include="Areas\Configuration\Scripts\String Functions\stringFunctionsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\String Functions\StringFunctionsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Maths Functions\mathsFunctionsCtrl.js" />
@@ -730,6 +737,10 @@
     <Content Include="Areas\Maintenance\Views\CalcConfigurationsMaintenance\Details.cshtml" />
     <Content Include="Areas\Maintenance\Views\CalcConfigurationsMaintenance\Edit.cshtml" />
     <Content Include="Areas\Maintenance\Views\CalcConfigurationsMaintenance\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Function\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Function\Function.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_Menu.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_Builder.cshtml" />
     <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
@@ -866,7 +877,6 @@
     <Folder Include="Areas\Calculation\Models\" />
     <Folder Include="Areas\Calculation\Views\Shared\" />
     <Folder Include="Areas\Configuration\Views\CalcRegressionOutput\" />
-    <Folder Include="Areas\Configuration\Views\Shared\" />
     <Folder Include="Areas\Project\UploadedFiles\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Areas\Project\Views\UploadFile\" />

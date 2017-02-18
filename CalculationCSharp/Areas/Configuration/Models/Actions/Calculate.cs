@@ -277,7 +277,19 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             throw new HttpException(ex.ToString());
                                         }                                       
                                     }
-
+                                    else if (item.Function == "Return")
+                                    {
+                                        Return Return = new Return();
+                                        try
+                                        {
+                                            item.Output = Return.Output(jparameters, jCategory, group.ID, item.ID);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);
+                                            throw new HttpException(ex.ToString());
+                                        }
+                                    }
                                     else if (item.Function == "MathsFunctions")
                                     {
                                         MathsFunctions MathsFunctions = new MathsFunctions();

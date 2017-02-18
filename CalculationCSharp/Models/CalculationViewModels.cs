@@ -28,6 +28,19 @@ namespace CalculationCSharp.Models
         public DateTime UpdateDate { get; set; }
         public decimal Version { get; set; }
     }
+    public class CalcFunctions
+    {
+        public int ID { get; set; }
+        [Required]
+        public string Scheme { get; set; }
+        [Required]
+        public string Name { get; set; }
+        public string User { get; set; }
+        [Column(TypeName = "xml")]
+        public string Configuration { get; set; }
+        public DateTime UpdateDate { get; set; }
+        public decimal Version { get; set; }
+    }
 
     public class CalcRelease
     {
@@ -228,6 +241,7 @@ namespace CalculationCSharp.Models
         public DbSet<ProjectComments> ProjectComments { get; set; }
         public DbSet<ProjectUpdates> ProjectUpdates { get; set; }
         public DbSet<CalcConfiguration> CalcConfiguration { get; set; }
+        public DbSet<CalcFunctions> CalcFunctions { get; set; }
         public DbSet<CalcRelease> CalcRelease { get; set; }
         public DbSet<CalcHistory> CalcHistory { get; set; }
         public DbSet<CalcRegressionInputs> CalcRegressionInputs { get; set; }
@@ -238,6 +252,7 @@ namespace CalculationCSharp.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CalcConfiguration>().Property(x => x.Version).HasPrecision(16, 3);
+            modelBuilder.Entity<CalcFunctions>().Property(x => x.Version).HasPrecision(16, 3);
             modelBuilder.Entity<CalcHistory>().Property(x => x.Version).HasPrecision(16, 3);
             Configuration.ProxyCreationEnabled = false;
 
