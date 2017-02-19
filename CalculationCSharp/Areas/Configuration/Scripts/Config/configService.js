@@ -232,6 +232,13 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
              return $q.reject(error.data.Message);
          });
      };
+     var getFunctionDetails = function (Scheme, ID, Type) {
+         return $http.get("/api/FunctionNameWebApi/GetName", { params: { Scheme: Scheme, ID: ID, Type: Type } }).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
      
     var initialize = function () {      
         connection = jQuery.hubConnection();
@@ -284,6 +291,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
         getUserSession: getUserSession,
         deleteUserSession: deleteUserSession,
         specBuilder: specBuilder,
-        getSchemes: getSchemes
+        getSchemes: getSchemes,
+        getFunctionDetails: getFunctionDetails
     };
 });

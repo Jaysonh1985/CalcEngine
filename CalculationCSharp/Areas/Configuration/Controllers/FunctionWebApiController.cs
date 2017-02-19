@@ -17,6 +17,7 @@ using CalculationCSharp.Models.Calculation;
 using CalculationCSharp.Areas.Configuration.Models.Actions;
 using CalculationCSharp.Areas.Configuration.Controllers;
 using log4net;
+using System.Linq;
 
 namespace CalculationCSharp.Areas.Config.Controllers
 {
@@ -103,10 +104,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
         [System.Web.Http.HttpPost]
         public HttpResponseMessage UpdateConfig(int id,  JObject config)
         {
-            dynamic json = config;
-            CalcConfiguration calcConfiguration = db.CalcConfiguration.Find(id);
-            logger.Debug("Start - " + HttpContext.Current.User.Identity.Name.ToString());
-            logger.Debug(calcConfiguration.Scheme.ToString() + " " + calcConfiguration.Name.ToString());         
+            dynamic json = config; 
             string jsonString = Convert.ToString(json.data);
             //Deserialize JSON to CategoryViewModel then calculate
             List<CategoryViewModel> jCategory = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(jsonString, typeof(List<CategoryViewModel>));

@@ -652,29 +652,30 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                                 configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form);
                             });
                         };
-                        //Return
-                        if ($scope.config[key].Functions[keyF].Function == 'Return') {
-                            returnCount = returnCount + 1;
-                            if (returnCount > 1)
-                            {
-                                var AttName3 = 'FunctionCog_' + key + '_' + keyF;
-                                form[AttName3].$setValidity("return", false);
-                            }
-                            angular.forEach(obj, function (valueN, keyN, obj) {
-                                configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].Datatype, keyF, valueN.Variable, form, true);
-                            });
+                        if ($scope.Function == true) {
+                            //Return
+                            if ($scope.config[key].Functions[keyF].Function == 'Return') {
+                                returnCount = returnCount + 1;
+                                if (returnCount > 1) {
+                                    var AttName3 = 'FunctionCog_' + key + '_' + keyF;
+                                    form[AttName3].$setValidity("return", false);
+                                }
+                                angular.forEach(obj, function (valueN, keyN, obj) {
+                                    configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].Datatype, keyF, valueN.Variable, form, true);
+                                });
+                            };
                         };
                     }
                 })
             })
 
         })
-        if (returnCount == 0) {
-
-            var AttName4 = 'FunctionCog_' + 0 + '_' + 0;
-            form[AttName4].$setValidity("returnMissing", false);
-
-        }
+        if ($scope.Function == true) {
+            if (returnCount == 0) {
+                var AttName4 = 'FunctionCog_' + 0 + '_' + 0;
+                form[AttName4].$setValidity("returnMissing", false);
+            }
+        };
     }
 
     $scope.selectRow = function (event, rowIndex, colIndex) {

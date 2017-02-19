@@ -22,6 +22,9 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             else if (Function == 'Factors') {
                 return 'factorsCtrl'
             }
+            else if (Function == 'Function') {
+                return 'functionCtrl'
+            }
             else if (Function == 'DateAdjustment') {
                 return 'dateAdjustmentCtrl'
             }
@@ -60,6 +63,9 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             }
             else if (Function == 'Factors') {
                 return '/Areas/Configuration/Scripts/Factors/FactorsModal.html'
+            }
+            else if (Function == 'Function') {
+                return '/Areas/Configuration/Scripts/Function/FunctionModal.html'
             }
             else if (Function == 'DateAdjustment') {
                 return '/Areas/Configuration/Scripts/Date Adjustment/DateAdjustmentModal.html'

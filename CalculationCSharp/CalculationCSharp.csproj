@@ -248,11 +248,13 @@
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
     <Compile Include="Areas\Configuration\Controllers\FunctionWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\FunctionController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\FunctionNameWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\SchemeWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\UserSessionsController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Comments.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Function.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Input.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\ArrayFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\ErrorsWarnings.cs" />
@@ -344,6 +346,8 @@
     <Content Include="Areas\Configuration\Scripts\Factors\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Factors\factorsCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Function\functionCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Function\FunctionModal.html" />
     <Content Include="Areas\Configuration\Scripts\Return\returnCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Return\ReturnModal.html" />
     <Content Include="Areas\Configuration\Scripts\String Functions\stringFunctionsCtrl.js" />
@@ -741,6 +745,7 @@
     <Content Include="Areas\Configuration\Views\Function\Function.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_Menu.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_Builder.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_InputForm.cshtml" />
     <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
