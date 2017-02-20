@@ -30,8 +30,8 @@ namespace CalculationCSharp.Areas.Config.Controllers
         ConfigRepository repo = new ConfigRepository();
         CalculationDBContext db = new CalculationDBContext();
         JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-        CalcHistoriesController CalcHistories = new CalcHistoriesController();
-        CalcHistory CalcHistory = new CalcHistory();
+        FunctionHistoriesController FunctionHistories = new FunctionHistoriesController();
+        FunctionHistory FunctionHistory = new FunctionHistory();
         private static readonly ILog logger = LogManager.GetLogger("Name");
 
         /// <summary>Gets the relevant configuration and returns this as JSON object, if no configuration is available creates the default template.
@@ -42,7 +42,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
         public HttpResponseMessage Get(int? id)
         {
             var response = Request.CreateResponse();
-            CalcFunctions calcFunction = db.CalcFunctions.Find(id);
+            FunctionConfiguration calcFunction = db.FunctionConfiguration.Find(id);
             if (calcFunction == null)
             {            
                 List<CategoryViewModel> json = repo.GetConfig(null);
@@ -74,7 +74,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             //Deserialise the JSON to C# object
             dynamic json = config;
             //Save configuration to calcConfigurations
-            CalcFunctions calcFunction = db.CalcFunctions.Find(id);
+            FunctionConfiguration calcFunction = db.FunctionConfiguration.Find(id);
             calcFunction.Configuration = Convert.ToString(json.data);
             calcFunction.User = HttpContext.Current.User.Identity.Name.ToString();
             calcFunction.UpdateDate = DateTime.Now;
@@ -82,16 +82,16 @@ namespace CalculationCSharp.Areas.Config.Controllers
             db.Entry(calcFunction).State = EntityState.Modified;
             db.SaveChanges();
             ////Build CalcHistory object
-            //CalcHistory.CalcID = calcFunction.ID;
-            //CalcHistory.Name = calcFunction.Name;
-            //CalcHistory.Scheme = calcFunction.Scheme;
-            //CalcHistory.Configuration = calcFunction.Configuration;
-            //CalcHistory.Comment = Convert.ToString(json.comment);
-            //CalcHistory.UpdateDate = DateTime.Now;
-            //CalcHistory.User = calcFunction.User;
-            //CalcHistory.Version = calcFunction.Version;
+            FunctionHistory.CalcID = calcFunction.ID;
+            FunctionHistory.Name = calcFunction.Name;
+            FunctionHistory.Scheme = calcFunction.Scheme;
+            FunctionHistory.Configuration = calcFunction.Configuration;
+            FunctionHistory.Comment = Convert.ToString(json.comment);
+            FunctionHistory.UpdateDate = DateTime.Now;
+            FunctionHistory.User = calcFunction.User;
+            FunctionHistory.Version = calcFunction.Version;
             ////Save calcHistory object
-            //CalcHistories.PostCalcHistory(CalcHistory);
+            FunctionHistories.PostFunctionHistory(FunctionHistory);
             //Return the response
             var response = Request.CreateResponse();
             response.Content = new StringContent(JsonConvert.SerializeObject(json.data));            

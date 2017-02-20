@@ -356,7 +356,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     {
                                         Function Functions = new Function();
                                         Function parameters = (Function)javaScriptSerializ­er.Deserialize(jparameters, typeof(Function));                                       
-                                        CalcFunctions calcFunction = db.CalcFunctions.Find(Convert.ToInt32(parameters.ID));
+                                        FunctionConfiguration calcFunction = db.FunctionConfiguration.Find(Convert.ToInt32(parameters.ID));
                                         List<CategoryViewModel> calcFunctionConfig = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(calcFunction.Configuration, typeof(List<CategoryViewModel>));
                                         //replace inputs from main configuration to function
                                         foreach (var row in calcFunctionConfig[0].Functions)

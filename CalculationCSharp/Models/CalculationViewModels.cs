@@ -28,19 +28,7 @@ namespace CalculationCSharp.Models
         public DateTime UpdateDate { get; set; }
         public decimal Version { get; set; }
     }
-    public class CalcFunctions
-    {
-        public int ID { get; set; }
-        [Required]
-        public string Scheme { get; set; }
-        [Required]
-        public string Name { get; set; }
-        public string User { get; set; }
-        [Column(TypeName = "xml")]
-        public string Configuration { get; set; }
-        public DateTime UpdateDate { get; set; }
-        public decimal Version { get; set; }
-    }
+
 
     public class CalcRelease
     {
@@ -75,6 +63,8 @@ namespace CalculationCSharp.Models
         public decimal Version { get; set; }
     }
 
+
+
     public class CalcRegressionInputs
     {
         [Key]
@@ -97,7 +87,60 @@ namespace CalculationCSharp.Models
         public String Difference { get; set; }
         public String Pass { get; set; }
     }
+    public class FunctionConfiguration
+    {
+        public int ID { get; set; }
+        [Required]
+        public string Scheme { get; set; }
+        [Required]
+        public string Name { get; set; }
+        public string User { get; set; }
+        [Column(TypeName = "xml")]
+        public string Configuration { get; set; }
+        public DateTime UpdateDate { get; set; }
+        public decimal Version { get; set; }
+    }
 
+    public class FunctionRegressionInputs
+    {
+        [Key]
+        public int ID { get; set; }
+        [Required]
+        public int CalcID { get; set; }
+        public string Scheme { get; set; }
+        public string Type { get; set; }
+        public string Reference { get; set; }
+        [Column(TypeName = "xml")]
+        public String Input { get; set; }
+        public String Comment { get; set; }
+        public Nullable<DateTime> OriginalRunDate { get; set; }
+        public Nullable<DateTime> LatestRunDate { get; set; }
+        [Column(TypeName = "xml")]
+        public String OutputOld { get; set; }
+        [Column(TypeName = "xml")]
+        public String OutputNew { get; set; }
+        [Column(TypeName = "xml")]
+        public String Difference { get; set; }
+        public String Pass { get; set; }
+    }
+    public class FunctionHistory
+    {
+        [Key]
+        public int ID { get; set; }
+        [Required]
+        public int CalcID { get; set; }
+        [Required]
+        public string Scheme { get; set; }
+        [Required]
+        public string Name { get; set; }
+        public string User { get; set; }
+        [Column(TypeName = "xml")]
+        public string Configuration { get; set; }
+        public DateTime UpdateDate { get; set; }
+        public string Comment { get; set; }
+        [Required]
+        public decimal Version { get; set; }
+    }
     public class ProjectBoards
     {
         [Key]
@@ -239,9 +282,11 @@ namespace CalculationCSharp.Models
         public DbSet<ProjectStories> ProjectStories { get; set; }
         public DbSet<ProjectTasks> ProjectTasks { get; set; }
         public DbSet<ProjectComments> ProjectComments { get; set; }
-        public DbSet<ProjectUpdates> ProjectUpdates { get; set; }
+        public DbSet<ProjectUpdates> ProjectUpdates { get; set; }      
+        public DbSet<FunctionConfiguration> FunctionConfiguration { get; set; }
+        public DbSet<FunctionHistory> FunctionHistory { get; set; }
+        public DbSet<FunctionRegressionInputs> FunctionRegressionInputs { get; set; }
         public DbSet<CalcConfiguration> CalcConfiguration { get; set; }
-        public DbSet<CalcFunctions> CalcFunctions { get; set; }
         public DbSet<CalcRelease> CalcRelease { get; set; }
         public DbSet<CalcHistory> CalcHistory { get; set; }
         public DbSet<CalcRegressionInputs> CalcRegressionInputs { get; set; }
@@ -252,28 +297,15 @@ namespace CalculationCSharp.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CalcConfiguration>().Property(x => x.Version).HasPrecision(16, 3);
-            modelBuilder.Entity<CalcFunctions>().Property(x => x.Version).HasPrecision(16, 3);
             modelBuilder.Entity<CalcHistory>().Property(x => x.Version).HasPrecision(16, 3);
+            modelBuilder.Entity<FunctionConfiguration>().Property(x => x.Version).HasPrecision(16, 3);
+            modelBuilder.Entity<FunctionHistory>().Property(x => x.Version).HasPrecision(16, 3);
             Configuration.ProxyCreationEnabled = false;
 
             //one-to-many 
             modelBuilder.Entity<ProjectStories>()
             .HasOptional<ProjectColumns>(s => s.ProjectColumns)
             .WithMany(s => s.ProjectStories);
-
-            //modelBuilder.Entity<ProjectTasks>()
-            //.HasOptional<ProjectStories>(s => s.ProjectStories)
-            //.WithMany(s => s.ProjectTasks);
-
-            //modelBuilder.Entity<ProjectComments>()
-            //.HasOptional<ProjectStories>(s => s.ProjectStories)
-            //.WithMany(s => s.ProjectComments);
-
-            //modelBuilder.Entity<ProjectUpdates>()
-            //.HasOptional<ProjectStories>(s => s.ProjectStories)
-            //.WithMany(s => s.ProjectUpdates);
-
-
         }
 
     }

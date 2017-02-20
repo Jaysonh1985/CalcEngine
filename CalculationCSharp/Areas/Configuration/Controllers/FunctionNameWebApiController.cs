@@ -32,13 +32,13 @@ namespace CalculationCSharp.Areas.Config.Controllers
         /// </summary>
         // GET api/<controller>
         [System.Web.Http.HttpGet]
-        public IQueryable<CalcFunctions> Get(string Scheme, int ID, string Type)
+        public IQueryable<FunctionConfiguration> Get(string Scheme, int ID, string Type)
         {
             if(Type == "Scheme")
             {
                 if (Scheme != null)
                 {
-                    return db.CalcFunctions.Where(i => i.Scheme == Scheme);
+                    return db.FunctionConfiguration.Where(i => i.Scheme == Scheme);
                 }
                 else
                 {
@@ -49,7 +49,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             {
                 if (ID != 0)
                 {
-                    return db.CalcFunctions.Where(i => i.ID == ID);
+                    return db.FunctionConfiguration.Where(i => i.ID == ID);
                 }
                 else
                 {

@@ -15,7 +15,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CalculationCSharp.Areas.Configuration.Controllers
 {
-    public class CalcFunctionsController : ApiController
+    public class FunctionsConfigurationController : ApiController
     {
         /// <summary>Controller for updating the calcConfigurations table on the db.
         /// </summary>
@@ -23,7 +23,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         private CalculationDBContext db = new CalculationDBContext();
 
         // GET: api/CalcConfigurations
-        public IQueryable<CalcFunctions> GetCalcFunction()
+        public IQueryable<FunctionConfiguration> GetCalcFunction()
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
@@ -31,7 +31,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
             if (user.Scheme != null)
             {
                 myInClause = user.Scheme.Split(',');
-                return db.CalcFunctions.Where(s => myInClause.Contains(s.Scheme)).OrderBy(s => s.Scheme);
+                return db.FunctionConfiguration.Where(s => myInClause.Contains(s.Scheme)).OrderBy(s => s.Scheme);
             }
             else
             {
@@ -42,10 +42,10 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         /// <para>id = ID on DB Table </para>
         /// </summary>
         // GET: api/CalcConfigurations/5
-        [ResponseType(typeof(CalcFunctions))]
+        [ResponseType(typeof(FunctionConfiguration))]
         public IHttpActionResult GetCalcFunction(int id)
         {
-            CalcFunctions calcFunction = db.CalcFunctions.Find(id);
+            FunctionConfiguration calcFunction = db.FunctionConfiguration.Find(id);
             if (calcFunction == null)
             {
                 return NotFound();
@@ -59,7 +59,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         /// </summary>
         // PUT: api/CalcConfigurations/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCalcFunction(int id, CalcFunctions calcFunction)
+        public IHttpActionResult PutCalcFunction(int id, FunctionConfiguration calcFunction)
         {
             if (!ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         /// </summary>
         // POST: api/CalcConfigurations
         [ResponseType(typeof(CalcConfiguration))]
-        public IHttpActionResult PostCalcFunctions(CalcFunctions calcFunction)
+        public IHttpActionResult PostCalcFunctions(FunctionConfiguration calcFunction)
         {
             //if (!ModelState.IsValid)
             //{
@@ -103,7 +103,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
             //}
             calcFunction.UpdateDate = DateTime.Now;
             calcFunction.User = HttpContext.Current.User.Identity.Name.ToString();
-            db.CalcFunctions.Add(calcFunction);
+            db.FunctionConfiguration.Add(calcFunction);
             db.SaveChanges();
             return CreatedAtRoute("DefaultApi", new { id = calcFunction.ID }, calcFunction);
         }
@@ -114,12 +114,12 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         [ResponseType(typeof(CalcConfiguration))]
         public IHttpActionResult DeleteCalcFunction(int id)
         {
-            CalcFunctions calcFunction = db.CalcFunctions.Find(id);
+            FunctionConfiguration calcFunction = db.FunctionConfiguration.Find(id);
             if (calcFunction == null)
             {
                 return NotFound();
             }
-            db.CalcFunctions.Remove(calcFunction);
+            db.FunctionConfiguration.Remove(calcFunction);
             db.SaveChanges();
             return Ok(calcFunction);
         }
@@ -136,7 +136,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
         private bool CalcFunctionExists(int id)
         {
-            return db.CalcFunctions.Count(e => e.ID == id) > 0;
+            return db.FunctionConfiguration.Count(e => e.ID == id) > 0;
         }
     }
 }
