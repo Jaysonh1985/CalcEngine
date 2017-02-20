@@ -705,11 +705,33 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             })
 
         })
-        if ($scope.Function == true) {
+        if ($scope.Function == true) {          
+            //Check if no return values
             if (returnCount == 0) {
-                var AttName4 = 'FunctionCog_' + 0 + '_' + 0;
-                form[AttName4].$setValidity("returnMissing", false);
-            }
+
+                if ($scope.config[0].Functions.length == parseInt(0)) {
+                    $scope.form.$invalid = true;
+                    toastr.error("Failed Validation - No Return variable set", "Error");
+                }
+                else {
+                    var AttName4 = 'FunctionCog_' + 0 + '_' + 0;
+                    form[AttName4].$setValidity("returnMissing", false);
+                }
+            };
+            //Check if No Inputs
+            if ($scope.config[0].Functions.length == parseInt(0)) {
+                $scope.form.$invalid = true;
+                toastr.error("Failed Validation - No Inputs Set", "Error");
+            };
+
+            var columnLength = $scope.config.length - 1;
+            var functionLength = $scope.config[columnLength].Functions.length - 1;
+            if($scope.config[columnLength].Functions[functionLength].Function != "Return")
+            {
+                $scope.form.$invalid = true;
+                toastr.error("Failed Validation - Return variable not on last row", "Error");
+            };
+
         };
     }
 
