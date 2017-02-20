@@ -7,6 +7,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     $scope.openIndex = [true];
     $scope.orderByField = 'Scheme';
     $scope.reverseSort = false;
+   
 
     function init() {
         $scope.isLoading = true;

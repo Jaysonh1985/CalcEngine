@@ -57,7 +57,7 @@
                         <button class="btn btn-success" ng-click="updateBoard(board)">Modify</button>
                         <input type="button" class="btn btn-danger" value="Delete" ng-click="deleteBoard(board)" />
                         <button class="btn btn-info" ng-click="copyBoard(board)">Copy</button>
-                        <button class="btn btn-group" ng-click="releaseBoard(board)">Release</button>
+                        <button ng-if="Function != true" class="btn btn-group" ng-click="releaseBoard(board)">Release</button>
                     </td>
                 </tr>
             </tbody>

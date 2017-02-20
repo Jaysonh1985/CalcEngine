@@ -7,6 +7,7 @@ sulhome.kanbanBoardApp.controller('functionMenuCtrl', function ($scope,  $routeP
     $scope.openIndex = [true];
     $scope.orderByField = 'Scheme';
     $scope.reverseSort = false;
+    $scope.Function = configFunctionFactory.isFunction($location.absUrl());
 
     function init() {
         $scope.isLoading = true;
