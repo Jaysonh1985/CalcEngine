@@ -47,7 +47,7 @@
                                     <input name="Requested" class="form-control" type="text" id="Requested" ng:model="Requested">
                                 </td>
                                 <td>
-                                    <input name="Requested Date" class="form-control" type="text" id="RequestedDate" ng:model="RequestedDate">
+                                    <input name="Requested Date" class="form-control" type="text" id="RequestedDate" ng:model="RequestedDate" >
                                 </td>
                             </tr>
                             <tr style="font-weight: bold">
@@ -122,7 +122,7 @@
                                 <td style="width:20%;background-color:white;  color:#000000"><H5>Status</H5></td>
                             </tr>
 
-                            <tr ng-repeat="Task in Tasks">
+                            <tr ng-repeat="Task in ProjectTasks">
                                 <td><input type="text" ng:model="Task.TaskName" class="form-control"></td>
                                 <td>
                                     <select ng-model="Task.TaskUser" placeholder="Select User" class="form-control">
@@ -161,7 +161,7 @@
                                 <td style="width:20%;background-color:white; color:#000000"><H5>User</H5></td>
                                 <td style="width:35%;background-color:white; color:#000000"><H5>Updated</H5></td>
                             </tr>
-                            <tr ng-repeat="comnt in Comments">
+                            <tr ng-repeat="comnt in ProjectComments">
                                 <td><span><a>{{comnt.CommentType}}</a></span></td>
                                 <td><span><a> {{comnt.CommentName}}</a></span></td>
                                 <td><span><a> {{comnt.CommentUser}}</a></span></td>
@@ -183,7 +183,7 @@
 
                         <uib-accordion close-others=false>
                             <div class="container-fluid">
-                                <uib-accordion close-others=false ng-model="Updates">
+                                <uib-accordion close-others=false ng-model="ProjectUpdates">
                                     <div uib-accordion-group is-open="openIndexUpdates[$index]">
                                         <uib-accordion-heading>
                                             Updates
@@ -198,7 +198,7 @@
                                                 <td style="width:20%;background-color:white; color:#000000"><H5>User</H5></td>
                                                 <td style="width:35%;background-color:white; color:#000000"><H5>Updated</H5></td>
                                             </tr>
-                                            <tr ng-repeat="update in Updates">
+                                            <tr ng-repeat="update in ProjectUpdates">
                                                 <td><span><a>{{update.UpdateField}}</a></span></td>
                                                 <td ng-if="update.UpdateField != 'Elapsed Time'"><span><a> {{update.UpdateValue}}</a></span></td>
                                                 <td ng-if="update.UpdateField == 'Elapsed Time'"><span><a> {{update.UpdateValue  | stopwatchTime}}</a></span></td>

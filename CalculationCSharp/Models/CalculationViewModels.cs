@@ -1,4 +1,6 @@
 ﻿// Copyright (c) 2016 Project AIM
+using CalculationCSharp.Areas.Configuration.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,67 +15,20 @@ using System.Xml.Linq;
 
 namespace CalculationCSharp.Models
 {
-    public class CalculationResult
-    {
-        public int Id { get; set; }
-        [Required()]
-        [StringLength(100,MinimumLength =2)]
-        public string User { get; set; }
-        [Required()]
-        [StringLength(100, MinimumLength = 2)]
-        public string Scheme { get; set; }
-        [Required()]
-        [StringLength(100, MinimumLength = 2)]
-        public string Type { get; set; }
-        public DateTime RunDate { get; set; }
-        public string Reference { get; set; }
-        [Column(TypeName = "xml")]
-        public String Input { get; set; }
-        [Column(TypeName = "xml")]
-        public String Output { get; set; }
-
-    }
-
-    public class CalculationRegression
-    {
-        public int Id { get; set; }
-        public string Scheme { get; set; }
-        public string Type { get; set; }
-        public DateTime OriginalRunDate { get; set; }
-        public DateTime LatestRunDate { get; set; }
-        public string Reference { get; set; }
-        [Column(TypeName = "xml")]
-        public String Input { get; set; }
-        [Column(TypeName = "xml")]
-        public String OutputOld { get; set; }
-        [Column(TypeName = "xml")]
-        public String OutputNew { get; set; }
-        [Column(TypeName = "xml")]
-        public String Difference { get; set; }
-        public String Pass { get; set; }
-
-    }
-
-    public class Codes
-    {
-        public int Id { get; set; }
-        public string Group { get; set; }
-        public string Code { get; set; }
-        public string Value { get; set; }
-    }
-
-    public class ProjectBoard
+    public class CalcConfiguration
     {
         public int ID { get; set; }
-        public string Group { get; set; }
+        [Required]
+        public string Scheme { get; set; }
+        [Required]
         public string Name { get; set; }
         public string User { get; set; }
         [Column(TypeName = "xml")]
         public string Configuration { get; set; }
         public DateTime UpdateDate { get; set; }
+        public decimal Version { get; set; }
     }
-
-    public class CalcConfiguration
+    public class CalcFunctions
     {
         public int ID { get; set; }
         [Required]
@@ -88,7 +43,8 @@ namespace CalculationCSharp.Models
     }
 
     public class CalcRelease
-    {   [Key]
+    {
+        [Key]
         public int ID { get; set; }
         public int CalcID { get; set; }
         public string Scheme { get; set; }
@@ -130,9 +86,9 @@ namespace CalculationCSharp.Models
         public string Reference { get; set; }
         [Column(TypeName = "xml")]
         public String Input { get; set; }
-        public String Comment { get; set;}
+        public String Comment { get; set; }
         public Nullable<DateTime> OriginalRunDate { get; set; }
-        public Nullable<DateTime> LatestRunDate { get; set; }  
+        public Nullable<DateTime> LatestRunDate { get; set; }
         [Column(TypeName = "xml")]
         public String OutputOld { get; set; }
         [Column(TypeName = "xml")]
@@ -141,6 +97,111 @@ namespace CalculationCSharp.Models
         public String Difference { get; set; }
         public String Pass { get; set; }
     }
+
+    public class ProjectBoards
+    {
+        [Key]
+        public int BoardId { get; set; }
+        public string Client { get; set; }
+        public string Name { get; set; }
+        public string User { get; set; }
+        [Column(TypeName = "xml")]
+        public string Configuration { get; set; }
+        public DateTime UpdateDate { get; set; }
+
+        public virtual ICollection<ProjectColumns> ProjectColumns { get; set; }
+    }
+
+    public class ProjectColumns
+    {
+
+        public ProjectColumns()
+        {
+            ProjectStories = new List<ProjectStories>();
+        }
+        [Key]
+        public int ColumnId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime UpdateDate { get; set; }
+        [Column(TypeName = "xml")]
+        public virtual ProjectBoards ProjectBoard { get; set; }
+        public virtual ICollection<ProjectStories> ProjectStories { get; set; }
+    }
+
+    public class ProjectStories
+    {
+        [Key]
+        public int StoryId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Requested { get; set; }
+        public string Moscow { get; set; }
+        public string User { get; set; }
+        public string Timebox { get; set; }
+        public string AcceptanceCriteria { get; set; }
+        public string RAG { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime RequestedDate { get; set; }
+        public int SLADays { get; set; }
+        public DateTime DueDate { get; set; }
+        public string ElapsedTime { get; set; }
+        public string Complexity { get; set; }
+        public string Effort { get; set; }
+        public DateTime UpdateDate { get; set; }
+
+        public virtual ProjectColumns ProjectColumns { get; set; }
+
+        public ProjectStories()
+        {
+            ProjectComments = new List<ProjectComments>();
+            ProjectTasks = new List<ProjectTasks>();
+            ProjectUpdates = new List<ProjectUpdates>();
+        }
+
+        public virtual ICollection<ProjectComments> ProjectComments { get; set; }
+        public virtual ICollection<ProjectTasks> ProjectTasks { get; set; }
+        public virtual ICollection<ProjectUpdates> ProjectUpdates { get; set; }
+
+    }
+    public class ProjectTasks
+    {
+
+        [Key]
+        public int TaskId { get; set; }
+        public string TaskName { get; set; }
+        public string TaskUser { get; set; }
+        public string RemainingTime { get; set; }
+        public string Status { get; set; }
+        public DateTime UpdateDate { get; set; }
+
+        public virtual ProjectStories ProjectStories { get; set; }
+    }
+    public class ProjectUpdates
+    {
+        [Key]
+        public int UpdateId { get; set; }
+        public string UpdateField { get; set; }
+        public string UpdateValue { get; set; }
+        public DateTime UpdateDateTime { get; set; }
+        public string UpdateUser { get; set; }
+        public DateTime UpdateDate { get; set; }
+
+        public virtual ProjectStories ProjectStories { get; set; }
+    }
+    public class ProjectComments
+    {
+        [Key]
+        public int CommentId { get; set; }
+        public string CommentName { get; set; }
+        public string CommentType { get; set; }
+        public DateTime CommentDateTime { get; set; }
+        public string CommentUser { get; set; }
+        public DateTime UpdateDate { get; set; }
+
+        public virtual ProjectStories ProjectStories { get; set; }
+    }
+
     public class FileRepository
     {
         [Key]
@@ -173,23 +234,47 @@ namespace CalculationCSharp.Models
 
     public class CalculationDBContext : DbContext
     {
-        public DbSet<CalculationResult> CalculationResult { get; set; }
-        public DbSet<CalculationRegression> CalculationRegression { get; set; }
-        public DbSet<Codes> Codes { get; set; }
-        public DbSet<ProjectBoard> ProjectBoard { get; set; }
+        public DbSet<ProjectBoards> ProjectBoards { get; set; }
+        public DbSet<ProjectColumns> ProjectColumns { get; set; }
+        public DbSet<ProjectStories> ProjectStories { get; set; }
+        public DbSet<ProjectTasks> ProjectTasks { get; set; }
+        public DbSet<ProjectComments> ProjectComments { get; set; }
+        public DbSet<ProjectUpdates> ProjectUpdates { get; set; }
         public DbSet<CalcConfiguration> CalcConfiguration { get; set; }
+        public DbSet<CalcFunctions> CalcFunctions { get; set; }
         public DbSet<CalcRelease> CalcRelease { get; set; }
         public DbSet<CalcHistory> CalcHistory { get; set; }
         public DbSet<CalcRegressionInputs> CalcRegressionInputs { get; set; }
         public DbSet<FileRepository> FileRepository { get; set; }
         public DbSet<Scheme> Schemes { get; set; }
         public DbSet<UserSession> UserSession { get; set; }
-
-
+       
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CalcConfiguration>().Property(x => x.Version).HasPrecision(16, 3);
+            modelBuilder.Entity<CalcFunctions>().Property(x => x.Version).HasPrecision(16, 3);
             modelBuilder.Entity<CalcHistory>().Property(x => x.Version).HasPrecision(16, 3);
+            Configuration.ProxyCreationEnabled = false;
+
+            //one-to-many 
+            modelBuilder.Entity<ProjectStories>()
+            .HasOptional<ProjectColumns>(s => s.ProjectColumns)
+            .WithMany(s => s.ProjectStories);
+
+            //modelBuilder.Entity<ProjectTasks>()
+            //.HasOptional<ProjectStories>(s => s.ProjectStories)
+            //.WithMany(s => s.ProjectTasks);
+
+            //modelBuilder.Entity<ProjectComments>()
+            //.HasOptional<ProjectStories>(s => s.ProjectStories)
+            //.WithMany(s => s.ProjectComments);
+
+            //modelBuilder.Entity<ProjectUpdates>()
+            //.HasOptional<ProjectStories>(s => s.ProjectStories)
+            //.WithMany(s => s.ProjectUpdates);
+
+
         }
+
     }
 }

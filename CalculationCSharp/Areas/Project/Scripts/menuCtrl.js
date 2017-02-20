@@ -26,7 +26,7 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
      };
 
     $scope.openBoard = function () {
-        $scope.ID = this.board.ID;
+        $scope.ID = this.board.BoardId;
         var earl = '/Board/' + $scope.ID;
         $window.location.assign('/Project/Board/Board/' + $scope.ID);
     };
@@ -39,7 +39,8 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
              controller: 'projectMenuAddCalcCtrl',
              size: 'md',
              resolve: {
-                 Group: function () { return $scope.Group },
+                 BoardId: function () { return 0 },
+                 Client: function () { return $scope.Client },
                  Name: function () { return $scope.Name },
                  Configuration: function () { return null },
                  Copy: function () { return false }
@@ -47,10 +48,10 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
          });
          modalInstance.result.then(function (selectedItem) {
              $scope.selected = {
-                 ID: null,
+                 BoardId: 0,
                  Name: selectedItem[0].Name,
                  User: null,
-                 Group: selectedItem[0].Group,
+                 Client: selectedItem[0].Client,
                  Configuration: null
              };
 
@@ -73,7 +74,8 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
              controller: 'projectMenuAddCalcCtrl',
              size: 'md',
              resolve: {
-                 Group: function () { return Board.Group },
+                 BoardId: function () { return Board.BoardId },
+                 Client: function () { return Board.Client },
                  Name: function () { return Board.Name },
                  Configuration: function () { return Board.Configuration },
                  Copy: function () { return true }
@@ -81,10 +83,10 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
          });
          modalInstance.result.then(function (selectedItem) {
              $scope.selected = {
-                 ID: null,
+                 BoardId: selectedItem[0].BoardId,
                  Name: selectedItem[0].Name,
                  User: null,
-                 Group: selectedItem[0].Group,
+                 Client: selectedItem[0].Client,
                  Configuration: selectedItem[0].Configuration
              };
 
@@ -102,11 +104,11 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
      $scope.updateBoard = function (Board) {
 
          var arrayID = configFunctionFactory.getIndexOf($scope.Boards, Board.ID, "ID");
-         var ID = this.Boards[arrayID].ID;
-         var Group = this.Boards[arrayID].Group;
-         var Name = this.Boards[arrayID].Name;
-         var Configuration = this.Boards[arrayID].Configuration;
-         var User = this.Boards[arrayID].User;
+         var BoardId = Board.BoardId;
+         var Client = Board.Client;
+         var Name = Board.Name;
+         var Configuration = Board.Configuration;
+         var User = Board.User;
 
          var modalInstance = $uibModal.open({
              animation: true,
@@ -115,7 +117,8 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
              controller: 'projectMenuAddCalcCtrl',
              size: 'md',
              resolve: {
-                 Group: function () { return Group },
+                 BoardId: function () { return BoardId },
+                 Client: function () { return Client },
                  Name: function () { return Name },
                  Configuration: function () { return Configuration },
                  Copy: function () { return false }
@@ -123,15 +126,15 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
          });
          modalInstance.result.then(function (selectedItem) {
              $scope.selected = {
-                 ID: ID,
+                 BoardId: selectedItem[0].BoardId,
                  Name: selectedItem[0].Name,
                  User: User,
-                 Group: selectedItem[0].Group,
+                 Client: selectedItem[0].Client,
                  Configuration: Configuration,
                  UpdateDate: new Date()
              };
              
-             boardService.putConfig($scope.selected.ID, $scope.selected).then(function (data) {
+             boardService.putConfig($scope.selected.BoardId, $scope.selected).then(function (data) {
                  $scope.isLoading = false;
                  boardService.sendRequest();
                  $scope.Boards[arrayID] = $scope.selected;
@@ -144,10 +147,10 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
      };
 
      $scope.deleteBoard = function (Board) {
-         var arrayID = configFunctionFactory.getIndexOf($scope.Boards, Board.ID, "ID");
+         var arrayID = configFunctionFactory.getIndexOf($scope.Boards, Board.BoardId, "BoardId");
          var cf = confirm("Delete this Board?");
          if (cf == true) {
-             boardService.deleteConfig(Board.ID)
+             boardService.deleteConfig(Board.BoardId)
          .then(function (data) {
              $scope.isLoading = false;
              $scope.Boards.splice(arrayID, 1);
@@ -158,7 +161,7 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
      $scope.editingData = {};
      
      for (var i = 0, length = $scope.Boards.length; i < length; i++) {
-         $scope.editingData[$scope.Boards[i].ID] = false;
+         $scope.editingData[$scope.Boards[i].BoardId] = false;
      }
 
 
@@ -167,8 +170,8 @@ sulhome.kanbanBoardApp.controller('menuCtrl', function ($scope, $uibModal, $log,
      };
 
      $scope.update = function (Boards) {
-         $scope.editingData[Boards.ID] = false;
-         boardService.updateBoard(Boards.ID, Boards.Name, Boards.Configuration).then(function (data) {
+         $scope.editingData[Boards.BoardId] = false;
+         boardService.updateBoard(Boards.BoardId, Boards.Name, Boards.Configuration).then(function (data) {
              $scope.isLoading = false;
              boardService.sendRequest();
          }, onError);

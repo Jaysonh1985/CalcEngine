@@ -71,10 +71,10 @@
                             </table>
                         </div>
                         <div ng-hide="isLoading" class="panel-body" >
-                            <div ui-tree-nodes="" ng-model="col.Stories">
-                                <table class="table table-borderlesscards" data-empty-placeholder-enabled="true">
-                                    <tbody>
-                                        <tr ng-repeat="story in col.Stories | filter: search"
+                            <div ui-tree-nodes="" ng-model="col.ProjectStories">
+                                    <table class="table table-borderlesscards" data-empty-placeholder-enabled="true">
+                                        <tbody>
+                                            <tr ng-repeat="story in col.ProjectStories | filter: search"
                                                 
                                             ui-tree-node>
                                             <td style="background-color:#222222" ui-tree-handle>

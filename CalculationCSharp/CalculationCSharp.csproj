@@ -240,19 +240,25 @@
     <Compile Include="Areas\Calculation\Controllers\CalculationWebApiController.cs" />
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcConfigurationsController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\CalcFunctionsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcHistoriesController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcRegressionInputsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcRegressionOutputController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcSpecificationController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\FunctionWebApiController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\FunctionController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\FunctionNameWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\SchemeWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\UserSessionsController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Comments.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Function.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Input.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\ArrayFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\ErrorsWarnings.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Return.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\StringFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\MathsFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\DatePart.cs" />
@@ -280,11 +286,9 @@
     <Compile Include="Areas\Project\Controllers\CurrentUserWebApiController.cs" />
     <Compile Include="Areas\Project\Controllers\UploadFileController.cs" />
     <Compile Include="Areas\Project\Controllers\UserListWebApiController.cs" />
-    <Compile Include="Areas\Project\Models\Board.cs" />
     <Compile Include="Areas\Project\Models\BoardRepository.cs" />
-    <Compile Include="Areas\Project\Models\Comments.cs" />
-    <Compile Include="Areas\Project\Models\Updates.cs" />
-    <Compile Include="Areas\Project\Models\Tasks.cs" />
+    <Compile Include="Areas\Project\Models\ViewModels\ProjectBoardViewModel.cs" />
+    <Compile Include="Areas\Project\Models\ViewModels\ProjectColumnViewModel.cs" />
     <Compile Include="Areas\Project\ProjectAreaRegistration.cs" />
     <Compile Include="Areas\Workflow\Controllers\WorkflowController.cs" />
     <Compile Include="Areas\Workflow\WorkflowAreaRegistration.cs" />
@@ -297,12 +301,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702082139144_Initial.cs" />
+    <Compile Include="Migrations\201702082139144_Initial.Designer.cs">
+      <DependentUpon>201702082139144_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ConfigurationApplication.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Areas\Project\Models\ColumnRepository.cs" />
-    <Compile Include="Areas\Project\Models\Column.cs" />
-    <Compile Include="Areas\Project\Models\Stories.cs" />
     <Compile Include="Models\ArrayFunctions\ArrayBuildingFunctions.cs" />
     <Compile Include="Models\CalculationViewModels.cs" />
     <Compile Include="Models\Calculation\BulkOutputList.cs" />
@@ -325,6 +330,7 @@
     <Content Include="Areas\Configuration\Scripts\Array Functions\ArrayFunctionsModal.html" />
     <Content Include="Areas\Configuration\Scripts\CalculationMenu\configMenuAddCalcCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\CalculationMenu\ConfigMenuAddCalcModal.html" />
+    <Content Include="Areas\Configuration\Scripts\Config\functionMenuCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configModalFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configValidationFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Config\Factories\configTypeaheadFactory.js" />
@@ -340,6 +346,10 @@
     <Content Include="Areas\Configuration\Scripts\Factors\FactorsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Factors\factorsCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Function\functionCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Function\FunctionModal.html" />
+    <Content Include="Areas\Configuration\Scripts\Return\returnCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Return\ReturnModal.html" />
     <Content Include="Areas\Configuration\Scripts\String Functions\stringFunctionsCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\String Functions\StringFunctionsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Maths Functions\mathsFunctionsCtrl.js" />
@@ -368,14 +378,12 @@
     <Content Include="Areas\Configuration\Scripts\Config\configCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Logic\LogicModal.html" />
     <Content Include="Areas\Configuration\Scripts\Config\configMenuCtrl.js" />
-    <Content Include="Areas\Project\Scripts\boardFilter.html" />
     <Content Include="Areas\Project\Scripts\Factories\fileUploadService.js" />
     <Content Include="Areas\Project\Scripts\projectMenuAddCalcCtrl.js" />
     <Content Include="Areas\Project\Scripts\ProjectMenuAddCalcModal.html" />
     <Content Include="Areas\Project\Scripts\reportCtrl.js" />
     <Content Include="Areas\Project\Scripts\storyCtrl.js" />
     <Content Include="Areas\Project\Scripts\reportModal.html" />
-    <Content Include="Areas\Project\Scripts\viewXML.html" />
     <Content Include="Areas\Workflow\Scripts\app.css" />
     <Content Include="Areas\Workflow\Scripts\app.js" />
     <Content Include="Areas\Workflow\Scripts\debug.js" />
@@ -733,6 +741,11 @@
     <Content Include="Areas\Maintenance\Views\CalcConfigurationsMaintenance\Details.cshtml" />
     <Content Include="Areas\Maintenance\Views\CalcConfigurationsMaintenance\Edit.cshtml" />
     <Content Include="Areas\Maintenance\Views\CalcConfigurationsMaintenance\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Function\Index.cshtml" />
+    <Content Include="Areas\Configuration\Views\Function\Function.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_Menu.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_Builder.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_InputForm.cshtml" />
     <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
@@ -761,6 +774,7 @@
     <Content Include="Scripts\angular-route.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Images\UTKFNVFZZE.jpg" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
@@ -868,7 +882,6 @@
     <Folder Include="Areas\Calculation\Models\" />
     <Folder Include="Areas\Calculation\Views\Shared\" />
     <Folder Include="Areas\Configuration\Views\CalcRegressionOutput\" />
-    <Folder Include="Areas\Configuration\Views\Shared\" />
     <Folder Include="Areas\Project\UploadedFiles\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Areas\Project\Views\UploadFile\" />
@@ -878,6 +891,11 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702082139144_Initial.resx">
+      <DependentUpon>201702082139144_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -897,7 +915,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49366</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49368/</IISUrl>
+          <IISUrl>http://localhost:49369/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

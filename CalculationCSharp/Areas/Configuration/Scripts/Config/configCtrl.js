@@ -5,6 +5,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.DecimalNames = [];
     $scope.isLoading = true;
     $scope.oneAtATime = false;
+    $scope.Function = configFunctionFactory.isFunction($location.absUrl());
     $scope.status = {
         isFirstOpen: true,
         isFirstDisabled: false
@@ -29,6 +30,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     function init() {
         var id = $location.absUrl();
+        var Function = configFunctionFactory.isFunction($location.absUrl())
         var ViewOnly = $location.search().ViewOnly;
         if (ViewOnly == 'true')
         {
@@ -61,11 +63,23 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 configService.initialize().then(function (data) {
                     $scope.isLoading = true;
                     var id = configFunctionFactory.getConfigID();
-                    configService.getCalc(id)
+                    if (Function == true)
+                    {
+                        configService.getCalcFunction(id)
+                        .then(function (data) {
+                            $scope.isLoading = false;
+                            $scope.config = data;
+                        }, onError);
+                    }
+                    else
+                    {
+                      configService.getCalc(id)
                       .then(function (data) {
                           $scope.isLoading = false;
                           $scope.config = data;
                       }, onError);
+                    }
+
                 }, onError);
                 var id = configFunctionFactory.getConfigID();
             }
@@ -79,8 +93,17 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         if($scope.config != null && $scope.config != undefined)
             {
             var id = configFunctionFactory.getConfigID();
-            $window.localStorage["Config"]= JSON.stringify($scope.config);
-            $window.localStorage["WebAddress"]= '/Configuration/Config/Config/' +id;
+            $window.localStorage["Config"] = JSON.stringify($scope.config);
+            var Function = configFunctionFactory.isFunction($location.absUrl())
+            if (Function == true)
+            {
+                $window.localStorage["WebAddress"] = '/Configuration/Function/Function/' + id;
+            }
+            else
+            {
+                $window.localStorage["WebAddress"]= '/Configuration/Config/Config/' +id;
+            }
+            
         }
     });
 
@@ -236,11 +259,21 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var id = configFunctionFactory.getConfigID();
         var Comment = prompt("Enter a Comment");
         $scope.rebuildCategoryIDs();
-        configService.putCalc(id, $scope.config, Comment).then(function (data) {
-            $scope.viewOnly = false;
-            toastr.success("Saved successfully", "Success");
-            $scope.form.$setPristine();
-        }, onError);
+        var Function = configFunctionFactory.isFunction($location.absUrl())
+        if (Function == true) {
+            configService.putCalcFunction(id, $scope.config, Comment).then(function (data) {
+                $scope.viewOnly = false;
+                toastr.success("Saved successfully", "Success");
+                $scope.form.$setPristine();
+            }, onError);
+        }
+        else {
+            configService.putCalc(id, $scope.config, Comment).then(function (data) {
+                $scope.viewOnly = false;
+                toastr.success("Saved successfully", "Success");
+                $scope.form.$setPristine();
+            }, onError);
+        }
     };
 
     $scope.CalcButtonClick = function CalcBoard(form) {
@@ -255,13 +288,26 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.rebuildCategoryIDs();
         if (form.$valid == true) {
             $scope.validationError = false;
-            configService.postCalc(id, $scope.config).then(function (data) {
-                $scope.viewOnly = false;
-                $scope.config = data;
-                $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
-                toastr.success("Calculated successfully", "Success");
-                $scope.form.$setDirty();
-            }, onError);
+            var Function = configFunctionFactory.isFunction($location.absUrl())
+            if (Function == true) {
+                configService.postCalcFunction(id, $scope.config).then(function (data) {
+                    $scope.viewOnly = false;
+                    $scope.config = data;
+                    $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
+                    toastr.success("Calculated successfully", "Success");
+                    $scope.form.$setDirty();
+                }, onError);
+            }
+            else {
+                configService.postCalc(id, $scope.config).then(function (data) {
+                    $scope.viewOnly = false;
+                    $scope.config = data;
+                    $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
+                    toastr.success("Calculated successfully", "Success");
+                    $scope.form.$setDirty();
+                }, onError);
+            }
+
         }
         else
         {
@@ -351,9 +397,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.DecimalNames = [];
         $scope.DateNames = [];
         $scope.StringNames = [];
+        $scope.AllNames = [];
         $scope.DecimalNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, 'Decimal', rowIndex);
         $scope.DateNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, 'Date', rowIndex);
         $scope.StringNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, 'String', rowIndex);
+        $scope.AllNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, null, rowIndex);
     }
 
     $scope.FunctionButtonClick = function (size, colIndex, index, form) {
@@ -385,9 +433,15 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 }
                 if ($scope.config[colIndex].Functions[index].Function == 'ErrorsWarnings') {
                     $scope.config[colIndex].Functions[index].Name = selectedItem[0].Type + '_' + colIndex + '_' + index;
-                } if ($scope.config[colIndex].Functions[index].Function == 'Comments') {
+                }
+
+                if ($scope.config[colIndex].Functions[index].Function == 'Comments') {
                     $scope.config[colIndex].Functions[index].Name = 'Comments_' + colIndex + '_' + index;
                     $scope.config[colIndex].Functions[index].Output = selectedItem[0].String1;
+                }
+
+                if ($scope.config[colIndex].Functions[index].Function == 'Return') {
+                    $scope.config[colIndex].Functions[index].Name = 'Return' + colIndex + '_' + index;
                 }
                 $timeout(function () {
                     var el = document.getElementById($scope.AttName);
@@ -537,33 +591,37 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.validateForm = function()
     {
         form = $scope.form;
+        returnCount = 0;
         angular.forEach($scope.config, function (value, key, obj) {
             angular.forEach($scope.config[key].Functions, function (valueF, keyF, obj) {
                 var AttName = 'FunctionCog_' + key + '_' + keyF;
                 form[AttName].$setValidity("input", true);
+                form[AttName].$setValidity("return", true);
+                form[AttName].$setValidity("returnMissing", true);
+                
                 angular.forEach($scope.config[key].Functions[keyF].Parameter, function (valueP, keyP, obj) {
                     if (key != 0)
                     {
                         //Maths
-                        if ($scope.config[key].Functions[keyF].Function == 'Maths') {                                  
+                        if ($scope.config[key].Functions[keyF].Function == 'Maths') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Input1, form);
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Input2, form);
                             });
-                        }
+                        };
                         //Period
                         if ($scope.config[key].Functions[keyF].Function == 'Period') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true);
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true);
                             });
-                        }
+                        };
                         //Factors
                         if ($scope.config[key].Functions[keyF].Function == 'Factors') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form, true);
-                            });                                      
-                        }
+                            });
+                        };
                         //Date Adjustment
                         if ($scope.config[key].Functions[keyF].Function == 'DateAdjustment') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
@@ -571,14 +629,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                                 if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
                                     configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true);
                                 }
-                            });                            
-                        }
+                            });
+                        };
                         //Date Part
-                        if ($scope.config[key].Functions[keyF].Function == 'DatePart') {               
+                        if ($scope.config[key].Functions[keyF].Function == 'DatePart') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true);
-                            });                                 
-                        }
+                            });
+                        };
                         //Maths Functions
                         if ($scope.config[key].Functions[keyF].Function == 'MathsFunctions') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
@@ -587,17 +645,37 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                                     configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Number2, form, true);
                                 }
                             });
-                        }
+                        };
                         //Array Functions
                         if ($scope.config[key].Functions[keyF].Function == 'ArrayFunctions') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form);
                             });
-                        }
+                        };
+                        if ($scope.Function == true) {
+                            //Return
+                            if ($scope.config[key].Functions[keyF].Function == 'Return') {
+                                returnCount = returnCount + 1;
+                                if (returnCount > 1) {
+                                    var AttName3 = 'FunctionCog_' + key + '_' + keyF;
+                                    form[AttName3].$setValidity("return", false);
+                                }
+                                angular.forEach(obj, function (valueN, keyN, obj) {
+                                    configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].Datatype, keyF, valueN.Variable, form, true);
+                                });
+                            };
+                        };
                     }
                 })
             })
+
         })
+        if ($scope.Function == true) {
+            if (returnCount == 0) {
+                var AttName4 = 'FunctionCog_' + 0 + '_' + 0;
+                form[AttName4].$setValidity("returnMissing", false);
+            }
+        };
     }
 
     $scope.selectRow = function (event, rowIndex, colIndex) {

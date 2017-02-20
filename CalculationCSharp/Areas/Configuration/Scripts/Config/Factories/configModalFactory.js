@@ -22,6 +22,9 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             else if (Function == 'Factors') {
                 return 'factorsCtrl'
             }
+            else if (Function == 'Function') {
+                return 'functionCtrl'
+            }
             else if (Function == 'DateAdjustment') {
                 return 'dateAdjustmentCtrl'
             }
@@ -36,6 +39,9 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             }
             else if (Function == 'StringFunctions') {
                 return 'stringFunctionsCtrl'
+            }
+            else if (Function == 'Return') {
+                return 'ReturnCtrl'
             }
         },
         //get URL for modal file path
@@ -58,6 +64,9 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             else if (Function == 'Factors') {
                 return '/Areas/Configuration/Scripts/Factors/FactorsModal.html'
             }
+            else if (Function == 'Function') {
+                return '/Areas/Configuration/Scripts/Function/FunctionModal.html'
+            }
             else if (Function == 'DateAdjustment') {
                 return '/Areas/Configuration/Scripts/Date Adjustment/DateAdjustmentModal.html'
             }
@@ -72,6 +81,9 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             }
             else if (Function == 'StringFunctions') {
                 return '/Areas/Configuration/Scripts/String Functions/StringFunctionsModal.html'
+            }
+            else if (Function == 'Return') {
+                return '/Areas/Configuration/Scripts/Return/ReturnModal.html'
             }
         },     
     }

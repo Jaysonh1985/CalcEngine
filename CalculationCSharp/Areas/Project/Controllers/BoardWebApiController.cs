@@ -13,6 +13,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Text;
 using System.Collections.Generic;
+using CalculationCSharp.Areas.Project.Models.ViewModels;
 
 namespace CalculationCSharp.Areas.Project.Controllers
 {
@@ -25,13 +26,21 @@ namespace CalculationCSharp.Areas.Project.Controllers
         {
             var repo = new BoardRepository();
             var response = Request.CreateResponse();
-            response.Content = new StringContent(JsonConvert.SerializeObject(repo.GetBoards()));
+            var ProjectBoardRepo = repo.GetBoards();
+
+            List<ProjectBoardViewModel> ProjectBoards = new List<ProjectBoardViewModel>();
+
+            foreach (var Board in ProjectBoardRepo)
+            {
+                ProjectBoards.Add(new ProjectBoardViewModel { BoardId = Board.BoardId, Client = Board.Client, Name = Board.Name, UpdateDate = Board.UpdateDate, User = Board.User });
+            }
+
+            response.Content = new StringContent(JsonConvert.SerializeObject(ProjectBoards));
             HttpContext.Current.Cache.Remove("columns");           
             return response;
         }
-
-        [System.Web.Http.HttpPost]        
-        public HttpResponseMessage UpdateBoard(JObject moveTaskParams)
+        [System.Web.Http.HttpPut]
+        public HttpResponseMessage Update(JObject moveTaskParams)
         {
             dynamic json = moveTaskParams;
             string data = Convert.ToString(json.data);
@@ -40,21 +49,66 @@ namespace CalculationCSharp.Areas.Project.Controllers
             {
                 response.StatusCode = HttpStatusCode.BadRequest;
             }
-            ProjectBoard ProjectBoard = repo.GetBoard(json);
+            ProjectBoards ProjectBoard = repo.GetBoard(json);
+            ProjectBoard = repo.UpdateBoard(json);
+
+            List<ProjectColumnViewModel> ProjectColumns = new List<ProjectColumnViewModel>();
+
+            foreach(var Column in ProjectBoard.ProjectColumns)
+            {
+                ProjectColumns.Add(new ProjectColumnViewModel { ColumnId = Column.ColumnId, Description = Column.Description, Name = Column.Name, UpdateDate = DateTime.Now, ProjectStories = Column.ProjectStories }); 
+            }
+            foreach (var Column in ProjectColumns)
+            {
+               foreach(var Story in Column.ProjectStories)
+                {
+                    Story.ProjectColumns = null;
+                    if(Story.ProjectComments != null)
+                    {
+                        foreach (var Comment in Story.ProjectComments)
+                        {
+                            Comment.ProjectStories = null;
+                        }
+                    }
+
+                    if(Story.ProjectTasks != null)
+                    {
+                        foreach (var Task in Story.ProjectTasks)
+                        {
+                            Task.ProjectStories = null;
+                        }
+                    }
+                    if(Story.ProjectUpdates != null)
+                    {
+                        foreach (var Update in Story.ProjectUpdates)
+                        {
+                            Update.ProjectStories = null;
+                        }
+                    }
+                }
+
+            }
+            response.StatusCode = HttpStatusCode.OK;
+            response.Content = new StringContent(JsonConvert.SerializeObject(ProjectColumns));
+            return response;
+        }
+
+        [System.Web.Http.HttpPost]        
+        public HttpResponseMessage Create(JObject moveTaskParams)
+        {
+            dynamic json = moveTaskParams;
+            string data = Convert.ToString(json.data);
+            var response = Request.CreateResponse();
+            if (json.boardId == null)
+            {
+                response.StatusCode = HttpStatusCode.BadRequest;
+            }
+            ProjectBoards ProjectBoard = repo.GetBoard(json);
             if (ProjectBoard == null)
             {
                 repo.AddBoard(json);
             }
-            else if(json.updateType == "Delete")
-            {
-                repo.DeleteBoard(json);
-            }
-            else
-            {
-                repo.UpdateBoard(json);
-            }
-            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
-            List<Column> columns = (List<Column>)javaScriptSerializ­er.Deserialize(data, typeof(List<Column>));
+
             response.StatusCode = HttpStatusCode.OK;
             return response;
         }       

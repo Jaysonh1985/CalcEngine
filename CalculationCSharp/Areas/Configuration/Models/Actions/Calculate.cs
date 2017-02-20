@@ -277,7 +277,20 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             throw new HttpException(ex.ToString());
                                         }                                       
                                     }
-
+                                    else if (item.Function == "Return")
+                                    {
+                                        Return Return = new Return();
+                                        try
+                                        {
+                                            item.Output = Return.Output(jparameters, jCategory, group.ID, item.ID);
+                                            return;
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);
+                                            throw new HttpException(ex.ToString());
+                                        }
+                                    }
                                     else if (item.Function == "MathsFunctions")
                                     {
                                         MathsFunctions MathsFunctions = new MathsFunctions();
@@ -337,6 +350,47 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         else
                                         {
                                             item.Type = "String";
+                                        }
+                                    }
+                                    else if (item.Function == "Function")
+                                    {
+                                        Function parameters = (Function)javaScriptSerializ­er.Deserialize(jparameters, typeof(Function));                                       
+                                        CalcFunctions calcFunction = db.CalcFunctions.Find(Convert.ToInt32(parameters.ID));
+                                        List<CategoryViewModel> calcFunctionConfig = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(calcFunction.Configuration, typeof(List<CategoryViewModel>));
+                                        //replace inputs from main configuration to function
+                                        foreach (var row in calcFunctionConfig[0].Functions)
+                                        {
+                                            int index = parameters.Input.FindIndex(a => a.Name == row.Name);
+                                            if(index >= 0)
+                                            {
+                                                row.Output = parameters.Input[index].Output;
+                                            }
+                                            else
+                                            {
+                                                row.Output = null;
+                                            }
+                                        }
+                                        //run the function with the new inputs
+                                        Calculate Calculate = new Calculate();
+                                        calcFunctionConfig = Calculate.DebugResults(calcFunctionConfig);
+
+                                        foreach(var col in calcFunctionConfig)
+                                        {
+                                            int index = col.Functions.FindIndex(a => a.Function == "Return");
+                                            if(index >=0)
+                                            {
+                                                item.Output = col.Functions[index].Output;
+                                                foreach(var thing in col.Functions[index].Parameter)
+                                                {
+                                                    foreach(var test in thing)
+                                                    {
+                                                        if(test.Key == "Datatype")
+                                                        {
+                                                            item.Type = test.Value;
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
