@@ -9,5 +9,6 @@
     <button class="btn btn-default" ng-click="addBoard()">Add Calculation</button>
     <button class="btn btn-default" ng-click="OpenAllButton()">Open All</button>
     <button class="btn btn-default" ng-click="CloseAllButton()">Close All</button>
+    @Html.ActionLink("Functions", "Index", new { Area = "Configuration", controller = "Function" }, new { @class = "btn btn-default"})
     @Html.Partial("_Menu")
 </div>

@@ -354,6 +354,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     }
                                     else if (item.Function == "Function")
                                     {
+                                        Function Functions = new Function();
                                         Function parameters = (Function)javaScriptSerializ­er.Deserialize(jparameters, typeof(Function));                                       
                                         FunctionConfiguration calcFunction = db.FunctionConfiguration.Find(Convert.ToInt32(parameters.ID));
                                         List<CategoryViewModel> calcFunctionConfig = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(calcFunction.Configuration, typeof(List<CategoryViewModel>));
@@ -368,6 +369,14 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             else
                                             {
                                                 row.Output = null;
+                                            }
+                                        }
+
+                                        foreach(var input in calcFunctionConfig[0].Functions)
+                                        {
+                                            if (input.Output != null)
+                                            {
+                                                input.Output = Convert.ToString(Functions.Output(jparameters, jCategory, group.ID, item.ID, input.Output, input.Type));
                                             }
                                         }
                                         //run the function with the new inputs

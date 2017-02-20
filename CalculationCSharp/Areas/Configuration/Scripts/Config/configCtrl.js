@@ -679,6 +679,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                                 configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form);
                             });
                         };
+                        //Function Functions
+                        if ($scope.config[key].Functions[keyF].Function == 'Function') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {                              
+                                angular.forEach(obj[0].Input, function (valueNI, keyNI, objI) {
+                                    configValidationFactory.variablePreviouslySet($scope.config, key, valueNI.Type, keyF, valueNI.Output, form, true);
+                                });
+                            });
+                        };
                         if ($scope.Function == true) {
                             //Return
                             if ($scope.config[key].Functions[keyF].Function == 'Return') {

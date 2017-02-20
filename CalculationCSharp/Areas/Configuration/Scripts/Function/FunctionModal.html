@@ -25,10 +25,13 @@
                             <input ng-if="function.ID != null" ng:model="function.FunctionName" class="form-control  input-sm" readonly>
                         </div>
                     </div>
-                    <h5 ng-if="function.FunctionName != null">Input Form</h5>
                     <div ng-if="function.FunctionName != null" class="form-group">
                         
-                        <div class="col-lg-9">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Input Form</h2>
+                        </div>      
+                        <br />
+                        <div>
                             <table class="table table-bordered ">
                                 <thead>
                                     <tr>
@@ -40,12 +43,20 @@
                                     <tr unselectable="on" ng-repeat="rows in configreg.Functions | filter:searchText">
                                         <td width="5%">{{rows.Parameter[0].templateOptions.label}}</td>
                                         <td ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined)  && rows.Parameter[0].templateOptions.required == true" width="25%">
-                                            <span show-errors rows='Category.Functions'><input inputformat-Validation config='[configreg]' rowIndex="{{$index}}" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control  input-sm" ng-required="true"></span>
+                                            <span show-errors rows='Category.Functions'>
+                                                <input ng-if="rows.Parameter[0].templateOptions.type == 'Date'"  uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" config='[configreg]' rowIndex="{{$index}}" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control  input-sm" ng-required="true">
+                                                <input ng-if="rows.Parameter[0].templateOptions.type == 'String'" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" config='[configreg]' rowIndex="{{$index}}" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control  input-sm" ng-required="true">
+                                                <input ng-if="rows.Parameter[0].templateOptions.type == 'Decimal'" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" config='[configreg]' rowIndex="{{$index}}" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control  input-sm" ng-required="true">
+                                            </span>
                                             <p ng-show="formregress['Output_'+ $index + '_' + $index].$invalid" class="help-block">Value is required.</p>
                                             <p ng-show="formregress['Output_'+ $index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
                                         </td>
                                         <td ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined)  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
-                                            <span><input inputformat-Validation rowIndex="{{$index}}" config='[configreg]' type="text" ng:model="rows.Output" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" class="form-control   input-sm"></span>
+                                            <span>
+                                                <input ng-if="rows.Parameter[0].templateOptions.type == 'Date'"  uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" rowIndex="{{$index}}" config='[configreg]' type="text" ng:model="rows.Output" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" class="form-control   input-sm">
+                                                <input ng-if="rows.Parameter[0].templateOptions.type == 'String'" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" rowIndex="{{$index}}" config='[configreg]' type="text" ng:model="rows.Output" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" class="form-control   input-sm">
+                                                <input ng-if="rows.Parameter[0].templateOptions.type == 'Decimal'" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" rowIndex="{{$index}}" config='[configreg]' type="text" ng:model="rows.Output" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" class="form-control   input-sm">
+                                            </span>
                                             <p ng-show="formregress['Output_'+ $index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
                                         </td>
                                         <td ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" width="25%">
