@@ -255,15 +255,15 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
-     var getUserSession = function (id) {
-         return $http.get("/api/UserSessions", { params: { id: id } }).then(function (response) {
+     var getUserSession = function (id, Section) {
+         return $http.get("/api/UserSessions", { params: { id: id, Section: Section } }).then(function (response) {
              return response.data;
          }, function (error) {
              return $q.reject(error.data.Message);
          });
      };
      var deleteUserSession = function (id) {
-         return $http.delete("/api/UserSessions", { params: { id: id } }).then(function (response) {
+         return $http.delete("/api/UserSessions", { params: { id: id, Section: Section } }).then(function (response) {
              return response.data;
          }, function (error) {
              return $q.reject(error.data.Message);

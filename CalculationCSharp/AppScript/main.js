@@ -73,11 +73,17 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
     $scope.$on('IdleTimeout', function() {
         closeModals();
         var id = configFunctionFactory.getConfigID();
+        var Function = configFunctionFactory.isFunction($location.absUrl());
+        var Section = "Calculation";
+        if(Function = true){
+            Section = "Function";
+        }
+
         if (id > 0)
         {
-            configService.getUserSession(id).then(function (data) {
+            configService.getUserSession(id, Section).then(function (data) {
                 if (data == "") {
-                    configService.deleteUserSession(id).then(function (data) {
+                    configService.deleteUserSession(id, Section).then(function (data) {
                     })
                 }
             })

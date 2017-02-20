@@ -24,7 +24,11 @@ sulhome.kanbanBoardApp.controller('functionMenuCtrl', function ($scope,  $routeP
             }, onError);
      };
     $scope.openBoard = function (Board) {
-        configService.getUserSession(Board.ID).then(function (data) {         
+        var Section = "Calculation";
+        if ($scope.Function = true) {
+            Section = "Function";
+        }
+        configService.getUserSession(Board.ID, Section).then(function (data) {         
             if(data == "")
             {
                 RecordEnabled(Board);

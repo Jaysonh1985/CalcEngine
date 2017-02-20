@@ -25,11 +25,11 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
         // GET: api/UserSessions/5
         [ResponseType(typeof(UserSession))]
-        public IHttpActionResult GetUserSession(int id)
+        public IHttpActionResult GetUserSession(int id, string Section)
         {
             string user = HttpContext.Current.User.Identity.Name.ToString();
 
-            var List = db.UserSession.Where(i => i.Record == id && i.Username != user);
+            var List = db.UserSession.Where(i => i.Record == id && i.Username != user && i.Section == Section);
             if (List.Count() == 0)
             {
                 return StatusCode(HttpStatusCode.NoContent);
@@ -93,9 +93,9 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
 
         // DELETE: api/UserSessions/5
         [ResponseType(typeof(UserSession))]
-        public IHttpActionResult DeleteUserSession(int id)
+        public IHttpActionResult DeleteUserSession(int id, string Section)
         {
-            var List = db.UserSession.Where(i => i.Record == id);
+            var List = db.UserSession.Where(i => i.Record == id && i.Section == Section);
             UserSession UsersessionList = List.First();
             db.UserSession.Remove(UsersessionList);
             db.SaveChanges();
