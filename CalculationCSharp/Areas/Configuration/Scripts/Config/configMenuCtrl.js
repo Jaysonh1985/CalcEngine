@@ -210,7 +210,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                 $scope.isLoading = false;
             }, onError);
 
-            configService.getHistory(Board.ID).then(function (data) {
+            configService.getCalcHistory(Board.ID).then(function (data) {
                 $scope.isLoading = false;
 
                 $scope.historySelected = {
@@ -226,7 +226,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                 var index = configFunctionFactory.getIndexOf(data, $scope.historySelected.Version, 'Version');
 
                 if (index == false) {
-                    configService.postHistory($scope.selected.ID, $scope.historySelected).then(function (data) {
+                    configService.postCalcHistory($scope.selected.ID, $scope.historySelected).then(function (data) {
                         $scope.isLoading = false;
                     }, onError);
                 }

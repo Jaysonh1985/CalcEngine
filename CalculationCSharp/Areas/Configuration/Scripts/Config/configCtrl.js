@@ -30,7 +30,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     function init() {
         var id = $location.absUrl();
-        var Function = configFunctionFactory.isFunction($location.absUrl())
+        var Function = configFunctionFactory.isFunction($location.absUrl());
         var ViewOnly = $location.search().ViewOnly;
         if (ViewOnly == 'true')
         {
@@ -50,11 +50,23 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 var id = configFunctionFactory.getConfigID();
                 configService.initialize().then(function (data) {
                     $scope.isLoading = true;
-                    configService.getHistorySingle(id)
+                    if (Function == true)
+                    {
+                        configService.getFunctionHistorySingle(id)
                        .then(function (data) {
                            $scope.isLoading = false;
                            $scope.config = JSON.parse(data.Configuration);
                        }, onError);
+                    }
+                    else
+                    {
+                        configService.getCalcHistorySingle(id)
+                       .then(function (data) {
+                           $scope.isLoading = false;
+                           $scope.config = JSON.parse(data.Configuration);
+                       }, onError);
+                    }
+
                 }, onError);
                 var id = configFunctionFactory.getConfigID();
             }
@@ -533,6 +545,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     $scope.HistoryButtonClick = function (size) {
         $scope.ID = configFunctionFactory.getConfigID();
+        var Function = configFunctionFactory.isFunction($location.absUrl());
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/Areas/Configuration/Scripts/History/HistoryModal.html',
@@ -541,6 +554,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             size: size,
             resolve: {
                 ID: function () { return $scope.ID },
+                isFunction: function () {return $scope.Function}
             }
         });
         modalInstance.result.then(function (selectedItem) {

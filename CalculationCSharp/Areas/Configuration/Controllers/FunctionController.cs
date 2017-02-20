@@ -52,7 +52,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
                 }
                 else
                 {
-                    CalcFunctions CalcFunction = db.CalcFunctions.Find(Convert.ToInt32(id));
+                    FunctionConfiguration CalcFunction = db.FunctionConfiguration.Find(Convert.ToInt32(id));
                     var List = db.UserSession.Where(i => i.Record == id);
                     if (List.Count() == 0)
                     {

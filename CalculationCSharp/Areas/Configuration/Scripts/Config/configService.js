@@ -36,14 +36,14 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
      };
     //Configuration Function Menu Services
      var getFunction = function () {
-         return $http.get("/api/CalcFunctions").then(function (response) {
+         return $http.get("/api/FunctionsConfiguration").then(function (response) {
              return response.data;
          }, function (error) {
              return $q.reject(error.data.Message);
          });
      };
      var addFunction = function (data) {
-         return $http.post("/api/CalcFunctions/PostCalcFunctions", data)
+         return $http.post("/api/FunctionsConfiguration/PostCalcFunctions", data)
              .then(function (response) {
                  return response.data;
              }, function (error) {
@@ -51,7 +51,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
              });
      };
      var putFunction = function (index, data) {
-         return $http.put("/api/CalcFunctions/" + index, data)
+         return $http.put("/api/FunctionsConfiguration/" + index, data)
             .then(function (response) {
                 return response.status == 200;
             }, function (error) {
@@ -59,7 +59,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
             });
      };
      var deleteFunction = function (index) {
-         return $http.delete("/api/CalcFunctions/" + index)
+         return $http.delete("/api/FunctionsConfiguration/" + index)
             .then(function (response) {
                 return response.status == 200;
             }, function (error) {
@@ -142,29 +142,43 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
             });
      };
     //History services
-     var getHistory = function (id) {
+     var getCalcHistory = function (id) {
          return $http.get("/api/CalcHistories", { params: { id: id, SelectList: true } }).then(function (response) {
              return response.data;
          }, function (error) {
              return $q.reject(error.data.Message);
          });
      };
-     var getHistorySingle = function (id) {
+     var getCalcHistorySingle = function (id) {
          return $http.get("/api/CalcHistories", { params: { id: id, SelectList: false } }).then(function (response) {
              return response.data;
          }, function (error) {
              return $q.reject(error.data.Message);
          });
      };
-     var putHistory = function (id, data) {
-         return $http.put("/api/CalcHistories/" + id, data).then(function (response) {
+     var postCalcHistory = function (id, data) {
+         return $http.post("/api/CalcHistories/" + id, data).then(function (response) {
              return response.data;
          }, function (error) {
              return $q.reject(error.data.Message);
          });
      };
-     var postHistory = function (id, data) {
-         return $http.post("/api/CalcHistories/" + id, data).then(function (response) {
+     var getFunctionHistory = function (id) {
+         return $http.get("/api/FunctionHistories", { params: { id: id, SelectList: true } }).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
+     var getFunctionHistorySingle = function (id) {
+         return $http.get("/api/FunctionHistories", { params: { id: id, SelectList: false } }).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
+     var postFunctionHistory = function (id, data) {
+         return $http.post("/api/FunctionHistories/" + id, data).then(function (response) {
              return response.data;
          }, function (error) {
              return $q.reject(error.data.Message);
@@ -279,10 +293,12 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
         putCalc: putCalc,
         postCalc: postCalc,
         deleteCalc: deleteCalc,
-        getHistory: getHistory,
-        getHistorySingle: getHistorySingle,
-        putHistory: putHistory,
-        postHistory: postHistory,
+        getCalcHistory: getCalcHistory,
+        getCalcHistorySingle: getCalcHistorySingle,
+        postCalcHistory: postCalcHistory,
+        getFunctionHistory: getFunctionHistory,
+        getFunctionHistorySingle: getFunctionHistorySingle,
+        postFunctionHistory: postFunctionHistory,
         getRegression: getRegression,
         postRegression: postRegression,
         deleteRegression: deleteRegression,

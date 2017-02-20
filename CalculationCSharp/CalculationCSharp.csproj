@@ -240,7 +240,8 @@
     <Compile Include="Areas\Calculation\Controllers\CalculationWebApiController.cs" />
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcConfigurationsController.cs" />
-    <Compile Include="Areas\Configuration\Controllers\CalcFunctionsController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\FunctionHistoriesController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\FunctionsConfigurationController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcHistoriesController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcRegressionInputsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\CalcRegressionOutputController.cs" />
