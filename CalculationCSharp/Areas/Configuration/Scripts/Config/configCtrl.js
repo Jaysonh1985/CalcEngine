@@ -393,14 +393,27 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         if (!$scope.form.$dirty)
         {
             var ID = configFunctionFactory.getConfigID();
-            $window.location.assign('/Configuration/Config/Exit/' + ID);
+            if (Function == true)
+            {
+                $window.location.assign('/Configuration/Function/Exit/' + ID);
+            }
+            else
+            {
+                $window.location.assign('/Configuration/Config/Exit/' + ID);
+            }
+            
         }
         else
         {
             var cf = confirm("Are you sure you wish to exit unsaved changes will be lost?");
             if (cf == true) {
                 var ID = configFunctionFactory.getConfigID();
-                $window.location.assign('/Configuration/Config/Exit/' + ID);
+                if (Function == true) {
+                    $window.location.assign('/Configuration/Function/Exit/' + ID);
+                }
+                else {
+                    $window.location.assign('/Configuration/Config/Exit/' + ID);
+                }
             }
         }
     }
