@@ -185,14 +185,14 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
          });
      };
     //Regression Services
-     var getRegression = function (id) {
+     var getCalcRegression = function (id) {
          return $http.get("/api/CalcRegressionInputs", { params: { id: id } }).then(function (response) {
              return response.data;
          }, function (error) {
              return $q.reject(error.data.Message);
          });
      };
-     var postRegression = function (index, data) {
+     var postCalcRegression = function (index, data) {
          return $http.post("/api/CalcRegressionInputs/" + index,  data )
             .then(function (response) {
                 return response.data;
@@ -200,7 +200,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      }; 
-     var deleteRegression = function (index) {
+     var deleteCalcRegression = function (index) {
          return $http.delete("/api/CalcRegressionInputs/" + index)
             .then(function (response) {
                 return response.status == 200;
@@ -208,8 +208,39 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
-     var putRegression = function (index, data) {
+     var putCalcRegression = function (index, data) {
          return $http.put("/api/CalcRegressionInputs/" + index,  data )
+            .then(function (response) {
+                return response.status == 200;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+     };
+     var getFunctionRegression = function (id) {
+         return $http.get("/api/FunctionRegressionInputs", { params: { id: id } }).then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
+     var postFunctionRegression = function (index, data) {
+         return $http.post("/api/FunctionRegressionInputs/" + index, data)
+            .then(function (response) {
+                return response.data;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+     };
+     var deleteFunctionRegression = function (index) {
+         return $http.delete("/api/FunctionRegressionInputs/" + index)
+            .then(function (response) {
+                return response.status == 200;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+     };
+     var putFunctionRegression = function (index, data) {
+         return $http.put("/api/FunctionRegressionInputs/" + index, data)
             .then(function (response) {
                 return response.status == 200;
             }, function (error) {
@@ -299,10 +330,14 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
         getFunctionHistory: getFunctionHistory,
         getFunctionHistorySingle: getFunctionHistorySingle,
         postFunctionHistory: postFunctionHistory,
-        getRegression: getRegression,
-        postRegression: postRegression,
-        deleteRegression: deleteRegression,
-        putRegression: putRegression,
+        getCalcRegression: getCalcRegression,
+        postCalcRegression: postCalcRegression,
+        deleteCalcRegression: deleteCalcRegression,
+        putCalcRegression: putCalcRegression,
+        getFunctionRegression: getFunctionRegression,
+        postFunctionRegression: postFunctionRegression,
+        deleteFunctionRegression: deleteFunctionRegression,
+        putFunctionRegression: putFunctionRegression,
         exportRegression: exportRegression,
         getUserSession: getUserSession,
         deleteUserSession: deleteUserSession,

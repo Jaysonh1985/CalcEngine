@@ -283,6 +283,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         try
                                         {
                                             item.Output = Return.Output(jparameters, jCategory, group.ID, item.ID);
+                                            OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
                                             return;
                                         }
                                         catch (Exception ex)
