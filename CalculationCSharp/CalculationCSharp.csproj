@@ -885,7 +885,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Calculation\Models\" />
     <Folder Include="Areas\Calculation\Views\Shared\" />
-    <Folder Include="Areas\Configuration\Views\CalcRegressionOutput\" />
     <Folder Include="Areas\Project\UploadedFiles\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Areas\Project\Views\UploadFile\" />
