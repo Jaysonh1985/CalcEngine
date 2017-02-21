@@ -27,7 +27,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         encodingVisible: true,
     };
     $scope.viewOnly = false;
-
+    
+   
     function init() {
         var id = $location.absUrl();
         var Function = configFunctionFactory.isFunction($location.absUrl());
@@ -36,6 +37,15 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         {
             $scope.viewOnly = true;
         }
+        if (Function == true)
+        {
+            $scope.MenuHeader = 'Function';
+        }
+        else
+        {
+            $scope.MenuHeader = 'Config';
+        }
+
         //Check if using local storage for saved sessions after timeout
         if ($window.localStorage["Config"] != null) {
             $scope.isLoading = false;

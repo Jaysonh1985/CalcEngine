@@ -3,7 +3,7 @@
         <fieldset ng-disabled="viewOnly">
             <div id="sidebar-wrapper">
                 <ul id="sidebar_menu" class="sidebar-nav">
-                    <li class="sidebar-brand"><a id="menu-toggle" href="#">Menu<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
+                    <li class="sidebar-brand"><a id="menu-toggle" href="#" ng-cloak>{{MenuHeader}} <span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
                 </ul>
                 <ul class="sidebar-nav" id="sidebar">
                     <li><input ng-disabled="false" type="text" class="form-control form-inline input" ng-model="searchText" placeholder="Search" style="background-color:#222; border:none; color:#999"></li>
@@ -184,8 +184,8 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a ng-if="rows.SubOutput != null" ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
-                                                        <span class="glyphicon glyphicon-search"></span>
+                                                    <a  ng-show="isRowSelected($index, $parent.$index) && rows.SubOutput != null "data-nodrag ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
+                                                        <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
                                                     </a>
                                                 </td>
                                             </tr>
