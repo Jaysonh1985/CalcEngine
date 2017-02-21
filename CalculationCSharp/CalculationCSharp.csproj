@@ -350,6 +350,8 @@
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Function\functionCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Function\FunctionModal.html" />
+    <Content Include="Areas\Configuration\Scripts\Impact Assessment\impactAssessmentCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Impact Assessment\ImpactAssessmentModal.html" />
     <Content Include="Areas\Configuration\Scripts\Return\returnCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Return\ReturnModal.html" />
     <Content Include="Areas\Configuration\Scripts\String Functions\stringFunctionsCtrl.js" />

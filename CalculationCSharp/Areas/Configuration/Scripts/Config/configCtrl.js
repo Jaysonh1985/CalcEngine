@@ -120,9 +120,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     });
 
     //Functions
-    $scope.AddFunction = function (colIndex, index) {      
-        if (index == 0)
-        {
+    $scope.AddFunction = function (colIndex, index) {
+        if (index == 0) {
             $scope.config[index].Functions.push({
                 ID: this.config[index].Functions.length,
                 Function: 'Input',
@@ -130,20 +129,18 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 Parameter: []
             });
         }
-        else
-        {
+        else {
             $scope.config[index].Functions.push({
                 ID: this.config[index].Functions.length,
                 Logic: [],
                 Parameter: []
             });
         }
-     }
+    };
 
     $scope.AddFunctionRows = function (colIndex, index, rows, parentIndex) {
         var item = null;
-        if (colIndex == 0)
-        {
+        if (colIndex == 0) {
             item = {
                 ID: this.config[colIndex].Functions.length,
                 Function: 'Input',
@@ -151,8 +148,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 Parameter: []
             };
         }
-        else
-        {
+        else {
             item = {
                 ID: this.config[colIndex].Functions.length,
                 Logic: [],
@@ -160,13 +156,13 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             };
         }
         $scope.config[colIndex].Functions.splice(index + 1, 0, item);
-    }
+    };
 
     $scope.CopyFunction = function (colIndex, index) {
         var selectedRows = getSelectedRows(colIndex);
         $window.localStorage["Copy"] = JSON.stringify(selectedRows);
         toastr.success("Rows copied", "Success");
-    }
+    };
 
     $scope.PasteFunction = function (colIndex, index) {
         var selectedRows = JSON.parse($window.localStorage.getItem("Copy"));
@@ -179,7 +175,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         });
         toastr.success("Rows pasted", "Success");
         $scope.form.$setDirty();
-    }
+    };
 
     $scope.DeleteFunction = function (colIndex, $index) {
         var cf = confirm("Delete these lines?");
@@ -194,7 +190,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             resetSelection();
         }
         $scope.form.$setDirty();
-    }
+    };
     //Categories
     $scope.AddCategory = function (colIndex) {
         $scope.config.push({
@@ -206,7 +202,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         });
         $scope.GroupButtonClick('lg', this.config.length - 1);
         $scope.form.$setDirty();
-    }
+    };
 
     $scope.AddCategoryRows = function (colIndex) {
         var item = null;
@@ -220,7 +216,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.config.splice(colIndex + 1, 0, item);
         $scope.GroupButtonClick('lg', colIndex + 1);
         $scope.rebuildCategoryIDs();
-    }
+    };
 
     $scope.CopyCategory = function (index, e) {
         var Category = $scope.config[index];
@@ -228,7 +224,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         item = angular.copy(Category);
         $scope.config.splice(index + 1, 0, item);
         $scope.form.$setDirty();
-    }
+    };
 
     $scope.MoveDownCategory = function (Index, e) {
         if (e) {
@@ -242,7 +238,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.config.splice(Index + 1, 0, item);
         $scope.colindex = Index;
         $scope.form.$setDirty();
-    }
+    };
 
     $scope.DeleteCategory = function (colIndex) {
         var cf = confirm("Delete this line?");
@@ -251,20 +247,20 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             //$scope.rebuildCategoryIDs();
         }
         $scope.form.$setDirty();
-    }
+    };
 
     $scope.rebuildCategoryIDs = function rebuildCategoryIDs() {
         colid = 0;
         angular.forEach($scope.config, function (groups) {
             $scope.config[colid].ID = colid;
             rowid = 0;
-            angular.forEach($scope.config[colid].Functions, function(rows){
+            angular.forEach($scope.config[colid].Functions, function (rows) {
                 $scope.config[colid].Functions[rowid].ID = rowid;
-                rowid = rowid +1;
+                rowid = rowid + 1;
             });
             colid = colid + 1;
         });
-    }
+    };
     ///Form Submission
     $scope.SaveButtonClick = function SaveBoard() {
         $scope.viewOnly = true;
@@ -330,7 +326,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.setFunction = function (rows) {  //function that sets the type of the row
-        if(rows.Function == 'Maths'){
+        if (rows.Function == 'Maths') {
             rows.Type = 'Decimal';
         }
         else if (rows.Function == 'MathsFunctions') {
@@ -349,25 +345,25 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             rows.Type = null;
         }
         else if (rows.Function == 'StringFunctions') {
-            
+
         }
         else {
             rows.Type = null;
-        }      
-    }
+        }
+    };
    
     //UI
     $scope.OpenAllButton = function () {
-        angular.forEach($scope.config, function(value,key,obj){
+        angular.forEach($scope.config, function (value, key, obj) {
             $scope.openIndex[key] = true;
         })
-    }
+    };
 
     $scope.CloseAllButton = function () {
         angular.forEach($scope.openIndex, function (value, key, obj) {
             $scope.openIndex[key] = false;
         })
-    }
+    };
     $scope.RemoveExpectedResultsButton = function () {
         var cf = confirm("Are you sure you wish remove all Expected Results?");
         if (cf == true) {
@@ -377,7 +373,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 })
             })
         }
-    }
+    };
 
     $scope.RemoveInputsButton = function () {
         var cf = confirm("Are you sure you wish remove all Input values?");
@@ -386,25 +382,21 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 $scope.config[0].Functions[key].Output = null;
             })
         }
-    }
+    };
 
     $scope.ExitButton = function () {
 
-        if (!$scope.form.$dirty)
-        {
+        if (!$scope.form.$dirty) {
             var ID = configFunctionFactory.getConfigID();
-            if ($scope.Function == true)
-            {
+            if ($scope.Function == true) {
                 $window.location.assign('/Configuration/Function/Exit/' + ID);
             }
-            else
-            {
+            else {
                 $window.location.assign('/Configuration/Config/Exit/' + ID);
             }
-            
+
         }
-        else
-        {
+        else {
             var cf = confirm("Are you sure you wish to exit unsaved changes will be lost?");
             if (cf == true) {
                 var ID = configFunctionFactory.getConfigID();
@@ -416,7 +408,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 }
             }
         }
-    }
+    };
 
     $scope.getVariableTypes = function getVariableTypes(colIndex, rowIndex) {  //function that sets the parameters available under the different variable types
         $scope.DecimalNames = [];
@@ -427,7 +419,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.DateNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, 'Date', rowIndex);
         $scope.StringNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, 'String', rowIndex);
         $scope.AllNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, null, rowIndex);
-    }
+    };
 
     $scope.FunctionButtonClick = function (size, colIndex, index, form) {
         $scope.Parameter = this.config[colIndex].Functions[index].Parameter;
@@ -594,6 +586,24 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }, function () {           
         });
     };
+    $scope.ImpactAssessmentButtonClick = function () {
+        $scope.ID = configFunctionFactory.getConfigID();
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/Areas/Configuration/Scripts/Impact Assessment/ImpactAssessmentModal.html',
+            scope: $scope,
+            controller: 'impactAssessmentCtrl',
+            size: 'lg',
+            resolve: {
+                ID: function () { return $scope.ID },
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+            
+        }, function () {
+        });
+    };
+
 
     $scope.SpecButtonClick = function (form) {
         var id = configFunctionFactory.getConfigID();
@@ -610,13 +620,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     //Higlight rows functions
     var selectedRowsIndexes = [];
 
-    $scope.deselectRow = function ()
-    {
+    $scope.deselectRow = function () {
         resetSelection();
-    }
+    };
 
-    $scope.validateForm = function()
-    {
+    $scope.validateForm = function () {
         form = $scope.form;
         returnCount = 0;
         angular.forEach($scope.config, function (value, key, obj) {
@@ -625,10 +633,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 form[AttName].$setValidity("input", true);
                 form[AttName].$setValidity("return", true);
                 form[AttName].$setValidity("returnMissing", true);
-                
                 angular.forEach($scope.config[key].Functions[keyF].Parameter, function (valueP, keyP, obj) {
-                    if (key != 0)
-                    {
+                    if (key != 0) {
                         //Maths
                         if ($scope.config[key].Functions[keyF].Function == 'Maths') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
@@ -681,7 +687,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                         };
                         //Function Functions
                         if ($scope.config[key].Functions[keyF].Function == 'Function') {
-                            angular.forEach(obj, function (valueN, keyN, obj) {                              
+                            angular.forEach(obj, function (valueN, keyN, obj) {
                                 angular.forEach(obj[0].Input, function (valueNI, keyNI, objI) {
                                     configValidationFactory.variablePreviouslySet($scope.config, key, valueNI.Type, keyF, valueNI.Output, form, true);
                                 });
@@ -703,9 +709,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                     }
                 })
             })
-
         })
-        if ($scope.Function == true) {          
+        if ($scope.Function == true) {
             //Check if no return values
             if (returnCount == 0) {
 
@@ -723,17 +728,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 $scope.form.$invalid = true;
                 toastr.error("Failed Validation - No Inputs Set", "Error");
             };
-
             var columnLength = $scope.config.length - 1;
             var functionLength = $scope.config[columnLength].Functions.length - 1;
-            if($scope.config[columnLength].Functions[functionLength].Function != "Return")
-            {
+            if ($scope.config[columnLength].Functions[functionLength].Function != "Return") {
                 $scope.form.$invalid = true;
                 toastr.error("Failed Validation - Return variable not on last row", "Error");
             };
-
         };
-    }
+    };
 
     $scope.selectRow = function (event, rowIndex, colIndex) {
         if (event.ctrlKey) {
@@ -771,7 +773,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var selectFromIndex = Math.min(rowIndex, lastSelectedRowIndex);
         var selectToIndex = Math.max(rowIndex, lastSelectedRowIndex);
         selectRows(selectFromIndex, selectToIndex, colIndex);
-    }
+    };
 
     function getSelectedRows(colIndex) {
         var selectedRows = [];
@@ -780,13 +782,13 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             selectedRows.push($scope.config[colIndex].Functions[value]);
         });
         return selectedRows;
-    }
+    };
 
     function selectRows(selectFromIndex, selectToIndex, colIndex) {
         for (var rowToSelect = selectFromIndex; rowToSelect <= selectToIndex; rowToSelect++) {
             select(rowToSelect, colIndex);
         }
-    }
+    };
 
     function changeSelectionStatus(rowIndex, colIndex) {
         if ($scope.isRowSelected(rowIndex, colIndex)) {
@@ -794,23 +796,23 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         } else {
             select(rowIndex, colIndex);
         }
-    }
+    };
 
     function select(rowIndex, colIndex) {
         if (!$scope.isRowSelected(rowIndex, colIndex)) {
             selectedRowsIndexes[colIndex].push(rowIndex)
         }
-    }
+    };
 
     function unselect(rowIndex, colIndex) {
         var rowIndexInSelectedRowsList = selectedRowsIndexes[colIndex].indexOf(rowIndex);
         var unselectOnlyOneRow = 1;
         selectedRowsIndexes[colIndex].splice(rowIndexInSelectedRowsList, unselectOnlyOneRow);
-    }
+    };
 
     function resetSelection() {
         selectedRowsIndexes = [];
-    }
+    };
 
     $scope.isRowSelected = function (rowIndex, colIndex) {
         if (selectedRowsIndexes[colIndex] != null)
@@ -828,12 +830,10 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     init();
 
     $window.onbeforeunload = function (event) {
-
         //Check if there was any change, if no changes, then simply let the user leave
         if (!$scope.form.$dirty) {
             return;
         }
-
         var message = 'If you leave this page you are going to lose all unsaved changes, are you sure you want to leave?';
         if (typeof event == 'undefined') {
             event = window.event;
@@ -841,9 +841,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         if (event) {
             event.returnValue = message;
         }
-
         return message;
-    }
+    };
 
     //This works only when user changes routes, not when user refreshes the browsers, goes to previous page or try to close the browser
     $scope.$on('$locationChangeStart', function (event) {
