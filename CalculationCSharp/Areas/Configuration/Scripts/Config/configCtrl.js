@@ -617,6 +617,25 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
        return promise;
     };
 
+    $scope.SubOutputButtonClick = function (size, colIndex, type, SubOutput) {
+        $scope.Output = angular.toJson(SubOutput);
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionOutputModal.html',
+            scope: $scope,
+            controller: 'regressionOutputCtrl',
+            size: size,
+            resolve: {
+                Output: function () { return $scope.Output },
+                Header: function () { return "Output" }
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+        }, function () {
+
+        });
+    };
+
     //Higlight rows functions
     var selectedRowsIndexes = [];
 

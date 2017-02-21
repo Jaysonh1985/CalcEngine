@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2016 Project AIM
 using CalculationCSharp.Areas.Configuration.Models.Actions;
+using CalculationCSharp.Models.Calculation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Output { get; set; }
         public dynamic ExpectedResult { get; set; }
         public string Pass { get; set; }
+        public virtual List<OutputListGroup> SubOutput { get; set; }
 
     }
 }

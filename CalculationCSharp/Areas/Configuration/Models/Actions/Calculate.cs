@@ -43,7 +43,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 
                 foreach (var list in group)
                 {
-                    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value });
+                    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value, SubOutput = list.SubOutput });
                     //int index = SubList.FindIndex(a => a.Field == list.Field);
                     //if (index == -1)
                     //{
@@ -383,7 +383,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         //run the function with the new inputs
                                         Calculate Calculate = new Calculate();
                                         calcFunctionConfig = Calculate.DebugResults(calcFunctionConfig);
-
+                                        item.SubOutput = Calculate.OutputResults(calcFunctionConfig);
                                         foreach(var col in calcFunctionConfig)
                                         {
                                             int index = col.Functions.FindIndex(a => a.Function == "Return");
@@ -417,7 +417,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 {
                                     item.Pass = "false";
                                 }
-                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
+                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, SubOutput = item.SubOutput });
                             }
                             else
                             {
@@ -434,7 +434,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 }                           
                                 item.Pass = "miss";
 
-                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
+                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, SubOutput = item.SubOutput });
                             }
                         }
                     }

@@ -147,7 +147,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
             size: size,
             resolve: {
                 Output: function () { return $scope.Output },
-                Input: function () { return $scope.Input }
+                Header: function () { return "Regression Output"}
             }
         });
         modalInstance.result.then(function (selectedItem) {

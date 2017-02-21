@@ -232,7 +232,10 @@
                     break;
 
                 case 'added':
-                    property = ('<tr> <td>' + inspect(diffItem.value.Field) + '</td>' + '<td>' + 'Added' + '</td> <td>' + '</td> <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">' + inspect(diffItem.value.Value) + '</td></tr>');
+                    if (diffItem.value != null)
+                    {
+                        property = ('<tr> <td>' + inspect(diffItem.value.Field) + '</td>' + '<td>' + 'Added' + '</td> <td>' + '</td> <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">' + inspect(diffItem.value.Value) + '</td></tr>');
+                    }                   
                     break;
 
                 case 'primitive change':

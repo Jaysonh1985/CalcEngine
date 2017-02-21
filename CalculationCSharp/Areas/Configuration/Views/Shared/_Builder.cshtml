@@ -67,6 +67,7 @@
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody ui-tree-nodes="" ng:model="Category.Functions">
@@ -180,6 +181,11 @@
                                                 <td>
                                                     <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
                                                         <i ng-hide="viewOnly" class="center-block glyphicon glyphicon-remove"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a ng-if="rows.SubOutput != null" ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
+                                                        <span class="glyphicon glyphicon-search"></span>
                                                     </a>
                                                 </td>
                                             </tr>

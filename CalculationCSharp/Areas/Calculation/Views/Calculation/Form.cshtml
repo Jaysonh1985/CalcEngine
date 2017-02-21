@@ -105,11 +105,14 @@
                             <table id="table" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th width="50%">
+                                        <th width="45%">
                                             Field
                                         </th>
-                                        <th width="50%">
+                                        <th width="45%">
                                             Value
+                                        </th>
+                                        <th width="10%">
+                                            Sub Output
                                         </th>
                                 </thead>
                                 <tbody>
@@ -119,6 +122,11 @@
                                         </td>
                                         <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">
                                             {{row.Value}}
+                                        </td>
+                                        <td >
+                                            <a ng-if="row.SubOutput != null" ng-click="OutputButtonClick('lg', $parent.$index, $index, row.SubOutput)">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </a>
                                         </td>
                                     </tr>
                                 </tbody>

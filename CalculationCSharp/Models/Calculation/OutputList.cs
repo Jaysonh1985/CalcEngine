@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Collections.Generic;
 using CalculationCSharp.Models.Calculation;
 using System.ComponentModel.DataAnnotations;
+using CalculationCSharp.Areas.Configuration.Models;
 
 namespace CalculationCSharp.Models.Calculation
 {
@@ -14,6 +15,7 @@ namespace CalculationCSharp.Models.Calculation
         public string Field { get; set; }
         public string Value { get; set; }
         public string Group { get; set; }
+        public virtual List<OutputListGroup> SubOutput { get; set; }
 
     }
 

@@ -1,6 +1,6 @@
 ﻿<body ng-controller="regressionOutputCtrl">
     <div class="modal-header">
-        <h3 class="modal-title">Regression Output</h3>
+        <h3 class="modal-title">{{Header}}</h3>
         <ul class="nav navbar-nav center-block">
             <li></li>
             <li><button class="btn btn-default navbar-btn" type="button" ng-click="OpenAllButton()"> Open All </button></li>
@@ -28,11 +28,14 @@
                             <table id="table" class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th width="50%">
+                                        <th width="45%">
                                             Field
                                         </th>
-                                        <th width="50%">
+                                        <th width="45%">
                                             Value
+                                        </th>
+                                        <th ng-if="Header != 'Output'" width="10%">
+                                            Sub Output
                                         </th>
                                 </thead>
                                 <tbody>
@@ -40,8 +43,13 @@
                                         <td>
                                             {{row.Field}}
                                         </td>
-                                        <td>
+                                        <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">
                                             {{row.Value}}
+                                        </td>
+                                        <td ng-if="Header != 'Output'">
+                                            <a ng-if="row.SubOutput != null " ng-click="OutputButtonClick('lg', $parent.$index, $index, row.SubOutput)">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </a>
                                         </td>
                                     </tr>
                                 </tbody>
