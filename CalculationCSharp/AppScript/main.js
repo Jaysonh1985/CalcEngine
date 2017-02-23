@@ -117,7 +117,6 @@ sulhome.kanbanBoardApp.filter('stopwatchTime', function () {
             input %= 60000;
             var secs = parseInt(input / 1000, 10);
             var ms = input % 1000;
-            
             return hours + ' Hours ' + mins + ' Minutes ' + secs + ' Seconds ';
         }
     };

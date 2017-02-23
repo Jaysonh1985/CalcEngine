@@ -37,7 +37,58 @@ namespace CalculationCSharp
             //css  
             bundles.Add(new StyleBundle("~/Content/cssjqryUi").Include(
                    "~/Content/jquery-ui.css"));
-            
+            //Calculation Configuration
+            bundles.Add(new ScriptBundle("~/bundles/calculationConfiguration").Include(
+                        "~/Areas/Configuration/Scripts/Group/groupCtrl.js",
+                        "~/Areas/Configuration/Scripts/Logic/logicCtrl.js",
+                        "~/Areas/Configuration/Scripts/Config/configCtrl.js",
+                        "~/Areas/Configuration/Scripts/Config/configService.js",
+                        "~/Areas/Configuration/Scripts/Config/configMenuCtrl.js",
+                        "~/Areas/Configuration/Scripts/Comments/commentsCtrl.js",
+                        "~/Areas/Configuration/Scripts/Errors Warnings/errorswarningsCtrl.js",
+                        "~/Areas/Configuration/Scripts/Array Functions/arrayFunctionsCtrl.js",
+                        "~/Areas/Configuration/Scripts/Date Part/datePartCtrl.js",
+                        "~/Areas/Configuration/Scripts/CalculationMenu/configMenuAddCalcCtrl.js",
+                        "~/Areas/Configuration/Scripts/Date Adjustment/dateAdjustmentCtrl.js",
+                        "~/Areas/Configuration/Scripts/Period/periodCtrl.js",
+                        "~/Areas/Configuration/Scripts/Factors/factorsCtrl.js",
+                        "~/Areas/Configuration/Scripts/String Functions/stringFunctionsCtrl.js",
+                        "~/Areas/Configuration/Scripts/History/historyCtrl.js",
+                        "~/Areas/Configuration/Scripts/Regression/regressionCtrl.js",
+                        "~/Areas/Configuration/Scripts/Regression/regressionInputCtrl.js",
+                        "~/Areas/Configuration/Scripts/Regression/regressionDifferenceCtrl.js",
+                        "~/Areas/Configuration/Scripts/Regression/regressionOutputCtrl.js",
+                        "~/Areas/Configuration/Scripts/Custom Validations/CustomValidations.js",
+                        "~/Areas/Configuration/Scripts/Maths/mathsCtrl.js",
+                        "~/Areas/Configuration/Scripts/Maths Functions/mathsFunctionsCtrl.js",
+                        "~/Areas/Configuration/Scripts/Input/inputCtrl.js",
+                        "~/Areas/Configuration/Scripts/Return/returnCtrl.js",
+                        "~/Areas/Configuration/Scripts/Function/functionCtrl.js",
+                        "~/Areas/Configuration/Scripts/Impact Assessment/impactAssessmentCtrl.js",
+                        "~/Areas/Configuration/Scripts/Config/Factories/configFunctionFactory.js",
+                        "~/Areas/Configuration/Scripts/Config/Factories/configModalFactory.js",
+                        "~/Areas/Configuration/Scripts/Config/Factories/configValidationFactory.js",
+                        "~/Areas/Configuration/Scripts/Config/Factories/configTypeaheadFactory.js"
+                        ));
+
+            //Calculation Configuration
+            bundles.Add(new ScriptBundle("~/bundles/projectBoard").Include(
+                        "~/Areas/Project/Scripts/kanbanBoardDragDrop.js",
+                        "~/Areas/Project/Scripts/boardService.js",
+                        "~/Areas/Project/Scripts/boardCtrl.js",
+                        "~/Areas/Project/Scripts/menuCtrl.js" ,
+                        "~/Areas/Project/Scripts/storyCtrl.js",
+                        "~/Areas/Project/Scripts/reportCtrl.js",
+                        "~/Areas/Project/Scripts/projectMenuAddCalcCtrl.js",
+                        "~/Areas/Project/Scripts/Factories/fileUploadService.js"
+                        ));
+            //Calculation Configuration
+            bundles.Add(new ScriptBundle("~/bundles/Calculation").Include(
+                        "~/Areas/Calculation/Scripts/calculationCtrl.js",
+                        "~/Areas/Calculation/Scripts/calculationService.js",
+                        "~/Areas/Calculation/Scripts/calculationMenuCtrl.js"
+                        ));
+
             //Turns off bootstrap.min
             BundleTable.EnableOptimizations = false;
             

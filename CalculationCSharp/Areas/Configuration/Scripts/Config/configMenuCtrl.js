@@ -7,7 +7,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     $scope.openIndex = [true];
     $scope.orderByField = 'Scheme';
     $scope.reverseSort = false;
-   
+    $scope.Function = configFunctionFactory.isFunction($location.absUrl());
 
     function init() {
         $scope.isLoading = true;
@@ -19,16 +19,28 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
 
     $scope.refreshBoard = function refreshBoard() {        
         $scope.isLoading = true;
-        configService.getConfig()
-            .then(function (data) {               
-                $scope.isLoading = false;
-                $scope.Boards = data;
-            }, onError);
+	    if ($scope.Function == true) {
+	    configService.getFunction()
+                .then(function (data) {               
+                    $scope.isLoading = false;
+                    $scope.Boards = data;
+                }, onError);
+	    }
+	    else {
+	    configService.getConfig()
+                .then(function (data) {               
+                    $scope.isLoading = false;
+                    $scope.Boards = data;
+                }, onError);
+	    }
      };
 
     $scope.openBoard = function (Board) {
         var Section = "Calculation";
-        configService.getUserSession(Board.ID, Section).then(function (data) {
+        if ($scope.Function == true) {
+            Section = "Function";
+        }
+        configService.getUserSession(Board.ID, Section).then(function (data) {         
             if(data == "")
             {
                 RecordEnabled(Board);
@@ -43,7 +55,13 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     $scope.viewBoard = function (Board) {
         $scope.ID = Board.ID;
         var earl = '/Config/' + $scope.ID;
-        $window.open('/Configuration/Config/Config/' + $scope.ID + '#?ViewOnly=true');
+	    if ($scope.Function == true) {
+	        $window.open('/Configuration/Function/Function/' + $scope.ID + '#?ViewOnly=true');
+	    }
+	    else
+	    {
+	        $window.open('/Configuration/Config/Config/' + $scope.ID + '#?ViewOnly=true');
+	    }   
     };
 
 
@@ -52,7 +70,6 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
         var SchemeList = [];
         configService.getSchemes().then(function (data) {
             SchemeList = data;
-
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: '/Areas/Configuration/Scripts/CalculationMenu/ConfigMenuAddCalcModal.html',
@@ -77,14 +94,22 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                     Configuration: null
                 };
 
-                configService.addConfig($scope.selected).then(function (data) {
+	        if($scope.Function == true){
+		        configService.addFunction($scope.selected).then(function (data) {
                     $scope.Boards.push(data);
                     $scope.isLoading = false;
                 }, onError);
-
-                toastr.success("Calculation created successfully", "Success");
+                toastr.success("Function created successfully", "Success");
+	        }
+	        else{
+		        configService.addConfig($scope.selected).then(function (data) {
+	                $scope.Boards.push(data);
+	                $scope.isLoading = false;
+	            }, onError);
+	            toastr.success("Calculation created successfully", "Success");
+	        }	
             }, function () {
-            });
+        });
 
         }, onError);
     };
@@ -118,18 +143,25 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                     Group: null,
                     Configuration: selectedItem[0].Configuration
                 };
+		        if($scope.Function == true){
+		            configService.addFunction($scope.selected).then(function (data) {
+                        $scope.Boards.push(data);
+                        $scope.isLoading = false;
+                    }, onError);
+                    toastr.success("Function created successfully", "Success");
+		        }
+		        else{
+		            configService.addConfig($scope.selected).then(function (data) {
+                        $scope.Boards.push(data);
+                        $scope.isLoading = false;
+                    }, onError);
 
-                configService.addConfig($scope.selected).then(function (data) {
-                    $scope.Boards.push(data);
-                    $scope.isLoading = false;
-                }, onError);
-
-                toastr.success("Calculation created successfully", "Success");
+                    toastr.success("Calculation created successfully", "Success");
+		        }
             }, function () {
-            });
+                        });
 
         }, onError);
-
     };
 
     $scope.updateBoard = function (Board) {
@@ -171,27 +203,32 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                     UpdateDate: new Date(),
                     Version: Version
                 };
-
-                configService.putConfig($scope.selected.ID, $scope.selected).then(function (data) {
-                    $scope.isLoading = false;
-                    $scope.Boards[arrayID] = $scope.selected;
-                    configService.sendRequest();                   
-                }, onError);
-
-                toastr.success("Calculation Updated successfully", "Success");
+		        if($scope.Function == true)
+		        {
+		            configService.putFunction($scope.selected.ID, $scope.selected).then(function (data) {
+                        $scope.isLoading = false;
+                        $scope.Boards[arrayID] = $scope.selected;
+                        configService.sendRequest();                   
+                    }, onError);
+                    toastr.success("Function Updated successfully", "Success");
+		        }
+		        else
+		        {
+		            configService.putConfig($scope.selected.ID, $scope.selected).then(function (data) {
+                        $scope.isLoading = false;
+                        $scope.Boards[arrayID] = $scope.selected;
+                        configService.sendRequest();                   
+                    }, onError);
+                    toastr.success("Calculation Updated successfully", "Success");
+		        }
             }, function () {
-            });
-
+                    });
         }, onError);
-
      };
 
     $scope.releaseBoard = function (Board) {
-
         var cf = confirm("Release this Calculation?");
-
         if (cf == true) {
-
             $scope.calcrelease = [];
             $scope.calcreleaseID = null;
             $scope.calcreleaseID = Board.ID;
@@ -271,11 +308,20 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
         var arrayID = configFunctionFactory.getIndexOf($scope.Boards, Board.ID,"ID");
         var cf = confirm("Delete this Calculation?");
         if (cf == true) {
-            configService.deleteConfig(Board.ID)
-        .then(function (data) {
-            $scope.isLoading = false;
-            $scope.Boards.splice(arrayID, 1);
-        }, onError);
+            if ($scope.Function == true) {
+                configService.deleteFunction(Board.ID)
+                .then(function (data) {
+                    $scope.isLoading = false;
+                    $scope.Boards.splice(arrayID, 1);
+                }, onError);
+            }
+            else {
+                configService.deleteConfig(Board.ID)
+                .then(function (data) {
+                    $scope.isLoading = false;
+                    $scope.Boards.splice(arrayID, 1);
+                }, onError);
+            }
         }
      };
 
@@ -299,8 +345,14 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     
     var RecordEnabled = function (Board) {
         $scope.ID = Board.ID;
-        var earl = '/Config/' + $scope.ID;
-        $window.location.assign('/Configuration/Config/Config/' + $scope.ID);
+        if ($scope.Function == true){
+            var earl = '/Function/' +$scope.ID;
+            $window.location.assign('/Configuration/Function/Function/' +$scope.ID);
+        }
+        else {
+            var earl = '/Config/' + $scope.ID;
+            $window.location.assign('/Configuration/Config/Config/' + $scope.ID);
+        }
     };
 
     //UI

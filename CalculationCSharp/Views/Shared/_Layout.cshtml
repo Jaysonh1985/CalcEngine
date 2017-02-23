@@ -28,15 +28,11 @@
 
                    @if (Context.User.Identity.IsAuthenticated)
                    {
-                    @*<li>@Html.ActionLink("Project Management", "Index", new { Area = "Project", controller = "Board" })</li>*@
                     <li>@Html.ActionLink("Configuration", "Index", new { Area = "Configuration", controller = "Config" })</li>
                     <li>@Html.ActionLink("Calculation", "Index", new { Area = "Calculation", controller = "Calculation" })</li>
                     <li>@Html.ActionLink("Project", "Index", new { Area = "Project", controller = "Board" })</li>
                     <li>@Html.ActionLink("Maintenance", "Index", new { Area = "Maintenance", controller = "Maintenance" })</li>
                     }
-
-                    @*<li>@Html.ActionLink("About", "About", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -55,9 +51,6 @@
             @RenderBody()
 
         }
-
-
-
     <hr />
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -65,7 +58,6 @@
     @Styles.Render("~/Content/cssjqryUi")
     @RenderSection("scripts", required: false)
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-
     <script src="//unpkg.com/api-check@latest/dist/api-check.js"></script>
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/angular-animate.js"></script>
@@ -75,55 +67,10 @@
     <script src="~/Scripts/toastr.js"></script>
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="~/Scripts/angular-ui/sortable.js"></script>
-
-
     <script src="~/AppScript/main.js"></script>
-    <script src="~/Areas/Project/Scripts/kanbanBoardDragDrop.js"></script>
-    <script src="~/Areas/Project/Scripts/boardService.js"></script>
-    <script src="~/Areas/Project/Scripts/boardCtrl.js"></script>
-    <script src="~/Areas/Project/Scripts/menuCtrl.js"></script>
-    <script src="~/Areas/Project/Scripts/storyCtrl.js"></script>
-    <script src="~/Areas/Project/Scripts/reportCtrl.js"></script>
-    <script src="~/Areas/Project/Scripts/projectMenuAddCalcCtrl.js"></script>
-    <script src="~/Areas/Project/Scripts/Factories/fileUploadService.js"></script>
-
-    <script src="~/Areas/Configuration/Scripts/Group/groupCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Logic/logicCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Config/configCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Config/configService.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Config/configMenuCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Config/functionMenuCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Comments/commentsCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Errors Warnings/errorswarningsCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Array Functions/arrayFunctionsCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Date Part/datePartCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/CalculationMenu/configMenuAddCalcCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Date Adjustment/dateAdjustmentCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Period/periodCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Factors/factorsCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/String Functions/stringFunctionsCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/History/historyCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Regression/regressionCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Regression/regressionInputCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Regression/regressionDifferenceCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Regression/regressionOutputCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Custom Validations/CustomValidations.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Maths/mathsCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Maths Functions/mathsFunctionsCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Input/inputCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Return/returnCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Function/functionCtrl.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Impact Assessment/impactAssessmentCtrl.js"></script>
-
-    <script src="~/Areas/Configuration/Scripts/Config/Factories/configFunctionFactory.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Config/Factories/configModalFactory.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Config/Factories/configValidationFactory.js"></script>
-    <script src="~/Areas/Configuration/Scripts/Config/Factories/configTypeaheadFactory.js"></script>
-
-    <script src="~/Areas/Calculation/Scripts/calculationCtrl.js"></script>
-    <script src="~/Areas/Calculation/Scripts/calculationService.js"></script>
-    <script src="~/Areas/Calculation/Scripts/calculationMenuCtrl.js"></script>
-
+    @Scripts.Render("~/bundles/projectBoard")
+    @Scripts.Render("~/bundles/calculationConfiguration")
+    @Scripts.Render("~/bundles/Calculation")
     <script src="~/Scripts/angular-filter.js"></script>
     <script src="~/Scripts/angular-gridster.min.js"></script> 
     <script src="~/Scripts/angular-drag-and-drop-lists.js"></script>
@@ -137,14 +84,6 @@
     <script src="~/Scripts/ng-csv.js"></script>
     <script src="~/Scripts/angular-csv-import.js"></script>
     <script src="~/Scripts/angular-idle.js"></script>
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("active");
-        });
-    </script>
-
-
 </body>
 
 </html>
