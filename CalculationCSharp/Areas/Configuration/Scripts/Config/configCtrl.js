@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, configService, configFunctionFactory, configModalFactory, configTypeaheadFactory, configValidationFactory, $filter, $timeout) {
+sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, $mdSidenav, configService, configFunctionFactory, configModalFactory, configTypeaheadFactory, configValidationFactory, $filter, $timeout) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
@@ -27,7 +27,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         encodingVisible: true,
     };
     $scope.viewOnly = false;
-    
+    $scope.toggleLeft = buildToggler('left');
+    $scope.toggleRight = buildToggler('right');
+
+    function buildToggler(componentId) {
+        return function () {
+            $mdSidenav(componentId).toggle();
+        };
+    }
    
     function init() {
         var id = $location.absUrl();
@@ -767,6 +774,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.selectRow = function (event, rowIndex, colIndex) {
+        $mdSidenav('right').open();
+        $scope.Parameter = this.config[colIndex].Functions[rowIndex].Parameter;
+        $scope.Method = this.config[colIndex].Functions[rowIndex].Function;
+        $scope.rowIndex = rowIndex;
+        $scope.colIndex = colIndex;
+
         if (event.ctrlKey) {
             if (selectedRowsIndexes[colIndex] != null) {
                 changeSelectionStatus(rowIndex, colIndex);

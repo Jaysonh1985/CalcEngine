@@ -1,0 +1,39 @@
+﻿<md-sidenav class="md-sidenav-right" md-component-id="right" md-disable-backdrop="" md-whiteframe="4" ng-cloak>
+    <form name="userForm" role="form">
+        <md-toolbar class="md-theme-black">
+
+            <div>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <md-select ng-model="Method">
+                        <md-option value="ArrayFunctions">Array Functions</md-option>
+                        <md-option value="Comments">Comment</md-option>
+                        <md-option value="DateAdjustment">Date Adjustment</md-option>
+                        <md-option value="DatePart">Date Part</md-option>
+                        <md-option value="ErrorsWarnings">Errors & Warnings</md-option>
+                        <md-option value="Factors">Factors</md-option>
+                        <md-option ng-if="Function == false" value="Function">Function</md-option>
+                        <md-option value="Maths">Maths</md-option>
+                        <md-option value="MathsFunctions">Maths Functions</md-option>
+                        <md-option value="Period">Period</md-option>
+                        <md-option ng-if="Function == true" value="Return">Return</md-option>
+                        <md-option value="StringFunctions">String Functions</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+        </md-toolbar>
+
+        <md-content class="md-no-momentum" layout-margin="">
+
+            <div ng-if="Method=='ErrorsWarnings'" ng-include="'/Areas/Configuration/Scripts/Errors Warnings/ErrorsWarningsModal.html'"></div>
+
+        </md-content>
+
+
+        <md-content class="md-no-momentum" layout-margin="">
+            <md-button ng-click="toggleRight()" class="md-accent">
+                Close this Sidenav
+            </md-button>
+        </md-content>
+    </form>
+</md-sidenav>

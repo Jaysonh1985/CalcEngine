@@ -896,3 +896,7 @@ tr.angular-ui-tree-empty {
     box-sizing: border-box;
 }*/
 
+
+.md-sidenav-right {
+    top: 50px;
+}
