@@ -680,10 +680,12 @@
     <Content Include="Images\checklist.png" />
     <Content Include="Images\copy.png" />
     <Content Include="Images\crossinsideasquare.png" />
+    <Content Include="Images\more.png" />
     <Content Include="Images\multiply2.png" />
     <Content Include="Images\multiply.png" />
     <Content Include="Images\paste-clipboard.png" />
     <Content Include="Images\plus.png" />
+    <Content Include="Images\settings.png" />
     <Content Include="Scripts\anguladynamicform.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />

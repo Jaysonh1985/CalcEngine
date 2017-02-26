@@ -30,12 +30,26 @@
 
                                     <md-expansion-panel-footer >
                                         <div class="md-title pull-left">{{ Category.Name }}</div>
+
+                                        <div class="slide-container " style="width:20%">
+                                            <a class="pull-left btn" data-nodrag ng-click="AddCategoryRows($index, $event)">
+                                                <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></span>
+                                            </a>
+                                            <a class="pull-left btn " data-nodrag ng-click="DeleteCategory($index)">
+                                                <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/multiply2.png"></span>
+                                            </a>
+                                            <a class="pull-left btn " data-nodrag ng-click="CopyCategory($index, $event)">
+                                                <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/copy.png"></span>
+                                            </a>
+                                            <a class="pull-left btn " data-nodrag ng-click="CategoryLogicButtonClick($index, $event)">
+                                                <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/settings.png"></span>
+                                            </a>
+                                            <a class="pull-left btn " data-nodrag ng-click="GroupButtonClick($index, $event)">
+                                                <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/more.png"></span>
+                                            </a>
+                                        </div>
+
                                         <div flex></div>
-                                        <a ng-click="AddCategoryRows($index, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a>
-                                        <a ng-click="CategoryLogicButtonClick('lg', $index)"><i class="glyphicon glyphicon-wrench"></i></a>
-                                        <a ng-click="DeleteCategory($index)"><i class="center-block glyphicon glyphicon-remove"></i></a>
-                                        <a ng-click="CopyCategory($index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a>
-                                        <a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a>
                                         <md-button class="md-warn" ng-click="$panel.collapse()">Collapse</md-button>
                                     </md-expansion-panel-footer>
 
