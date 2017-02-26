@@ -669,15 +669,19 @@ select:focus::-ms-value {background: transparent; color: #555 }
 
 #wrapper {
     padding-left: 70px;
-    padding-right: 5px;
+    transition: all .4s ease 0s;
+    height: 100%
+}
+#rightwrapper {
+    padding-right: 70px;
     transition: all .4s ease 0s;
     height: 100%
 }
 
 #sidebar-wrapper {
-    margin-left: -157px;
+    margin-left: -320px;
     left: 55px;
-    width: 147px;
+    width: 320px;
     background: #222;
     position: fixed;
     height: 100%;
@@ -685,10 +689,20 @@ select:focus::-ms-value {background: transparent; color: #555 }
     transition: all .4s ease 0s;
 }
 
+#sidebar-rightwrapper {
+    margin-right: -320px;
+    right: 320px;
+    width: 320px;
+    background: #fafafa;
+    height: 100%;
+    z-index: 0;
+}
+
+
 .sidebar-nav {
     display: block;
     float: left;
-    width: 147px;
+    width: 320px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -700,10 +714,10 @@ select:focus::-ms-value {background: transparent; color: #555 }
     height: auto;
 }
 #wrapper.active {
-    padding-left: 150px;
+    padding-left: 320px;
 }
 #wrapper.active #sidebar-wrapper {
-    left: 150px;
+    left: 320px;
 }
 
 #page-content-wrapper {
@@ -715,7 +729,7 @@ select:focus::-ms-value {background: transparent; color: #555 }
     display: block;
     float: left;
     text-decoration: none;
-    width: 147px;
+    width: 320px;
     background: #252525;
     border-top: 1px solid #373737;
     border-bottom: 1px solid #1A1A1A;
@@ -804,8 +818,8 @@ select:focus::-ms-value {background: transparent; color: #555 }
     padding-left: 150px;
 }
 #wrapper.active #sidebar-wrapper {
-    left: 150px;
-    width: 150px;
+    left: 320px;
+    width: 320px;
     transition: all .4s ease 0s;
 }
 }
@@ -899,4 +913,43 @@ tr.angular-ui-tree-empty {
 
 .md-sidenav-right {
     top: 50px;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: rgb(174, 0, 0);
+    color: rgba(255,255,255,0.87);
+}
+
+#functionrowWrapper
+{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.slide-container
+{
+    text-align: center;
+    display: inline-block;
+    margin: 0px -4px;
+}
+
+.v-separator
+{
+    content: "";
+    display: inline-block;
+    width: 0px;
+    height: 100%;
+    border-right: 1px solid #fafafa;
+    border-left: 1px solid #b4b4b4;
+    padding: 0;
+}
+
+md-content.md-default-theme, md-content {
+    color: rgba(0,0,0,0.87);
+    background-color: rgb(255,255,255);
+}
+
+body.md-default-theme, body, html.md-default-theme, html {
+    color: rgba(0,0,0,0.87);
+    background-color: rgb(255,255,255);
 }

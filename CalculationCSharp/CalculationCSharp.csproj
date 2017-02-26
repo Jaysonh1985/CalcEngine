@@ -631,6 +631,7 @@
     <Content Include="Content\jquery.mobile.structure-1.4.5.min.css" />
     <Content Include="Content\jquery.mobile.theme-1.4.5.css" />
     <Content Include="Content\jquery.mobile.theme-1.4.5.min.css" />
+    <Content Include="Content\md-expansion-panel.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -673,7 +674,16 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="Content\v-accordion.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\checked.png" />
+    <Content Include="Images\checklist.png" />
+    <Content Include="Images\copy.png" />
+    <Content Include="Images\crossinsideasquare.png" />
+    <Content Include="Images\multiply2.png" />
+    <Content Include="Images\multiply.png" />
+    <Content Include="Images\paste-clipboard.png" />
+    <Content Include="Images\plus.png" />
     <Content Include="Scripts\anguladynamicform.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -760,6 +770,8 @@
     <Content Include="Areas\Configuration\Views\Shared\_InputForm.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_SideBar.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_SideBarRight.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_BuilderRows.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_BuilderRowsNew.cshtml" />
     <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
@@ -840,6 +852,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\md-expansion-panel.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -852,6 +865,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\v-accordion\v-accordion.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Web.config">
@@ -909,7 +923,6 @@
     <Folder Include="Areas\Project\Views\UploadFile\" />
     <Folder Include="Areas\Workflow\Models\" />
     <Folder Include="Areas\Workflow\Views\Shared\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

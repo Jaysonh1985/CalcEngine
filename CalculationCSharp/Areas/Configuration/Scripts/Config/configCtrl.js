@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, $mdSidenav, configService, configFunctionFactory, configModalFactory, configTypeaheadFactory, configValidationFactory, $filter, $timeout) {
+sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, $mdSidenav, $mdExpansionPanel, configService, configFunctionFactory, configModalFactory, configTypeaheadFactory, configValidationFactory, $filter, $timeout) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
@@ -35,6 +35,17 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $mdSidenav(componentId).toggle();
         };
     }
+
+    $mdExpansionPanel().waitFor('expansionPanelOne').then(function (instance) {
+        instance.expand();
+    });
+
+
+    $scope.collapseOne = function () {
+        $mdExpansionPanel('expansionPanelOne').collapse();
+    };
+
+    $scope.isDisabled = false;
    
     function init() {
         var id = $location.absUrl();
@@ -774,9 +785,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.selectRow = function (event, rowIndex, colIndex) {
+        $scope.getVariableTypes(colIndex, rowIndex);
+        $mdSidenav('right').close();
         $mdSidenav('right').open();
         $scope.Parameter = this.config[colIndex].Functions[rowIndex].Parameter;
-        $scope.Method = this.config[colIndex].Functions[rowIndex].Function;
+        $scope.Function = this.config[colIndex].Functions[rowIndex].Function;
         $scope.rowIndex = rowIndex;
         $scope.colIndex = colIndex;
 
