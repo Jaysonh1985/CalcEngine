@@ -3,63 +3,13 @@
         <fieldset ng-disabled="viewOnly">
 
 
-            <section layout="row" flex="">
+            <section layout="column" flex="">
 
                 @Html.Partial("_SideBar")
-                                
-                <md-content flex="" layout-padding="">
                     <h2 class="center-block text-center"><a>@ViewData["SchemeName"] - @ViewData["CalcName"]</a></h2>
                     <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
-                    <div ng-hide="isLoading">
-                        @*<uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
-                            <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
-                                <uib-accordion-heading>
-                                    {{Category.Name}}
-                                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
-                                    <a ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory($index, $event)"><i ng-hide="viewOnly" class="pull-left glyphicon glyphicon-arrow-down"></i></a>
-                                </uib-accordion-heading>
-                                <div>
-                                    <table class="table table-borderless" ng-hide="viewOnly">
-                                        <tr>
-                                            <td ng-if="Category.Name != 'Input'"><a ng-click="CategoryLogicButtonClick('lg', $index)"><i class="glyphicon glyphicon-wrench"></i></a> </td>
-                                            <td ng-if="Category.Name != 'Input'"><a ng-click="DeleteCategory($index)"><i class="center-block glyphicon glyphicon-remove"></i></a> </td>
-                                            <td><a ng-click="AddCategoryRows($index, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a></td>
-                                            <td ng-if="Category.Name != 'Input'"><a ng-click="CopyCategory($index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a></td>
-                                            <td ng-if="Category.Name != 'Input'"><a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                @Html.Partial("_BuilderRows")
-
-                            </div>
-                        </uib-accordion>*@
-
-                        @*<v-accordion id="my-accordion" class="vAccordion--default" multiple control="accordion">
-
-                            <v-pane ng-repeat="Category in config" expanded="pane.isExpanded">
-                                <v-pane-header>
-                                    {{ Category.Name }}
-                                </v-pane-header>
-
-                                <v-pane-content>
-                                    @*<table class="table table-borderless" ng-hide="viewOnly">
-                                        <tr>
-                                            <td ng-if="Category.Name != 'Input'"><a ng-click="CategoryLogicButtonClick('lg', $index)"><i class="glyphicon glyphicon-wrench"></i></a> </td>
-                                            <td ng-if="Category.Name != 'Input'"><a ng-click="DeleteCategory($index)"><i class="center-block glyphicon glyphicon-remove"></i></a> </td>
-                                            <td><a ng-click="AddCategoryRows($index, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a></td>
-                                            <td ng-if="Category.Name != 'Input'"><a ng-click="CopyCategory($index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a></td>
-                                            <td ng-if="Category.Name != 'Input'"><a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a></td>
-                                        </tr>
-                                    </table>*@
-                                    @*@Html.Partial("_BuilderRows")*@
-                                    
-                                    
-                                @*</v-pane-content>
-                            </v-pane>
-
-                        </v-accordion>*@
-                        <md-expansion-panel-group md-component-id="panelGroup">
-                            <md-expansion-panel ng-repeat="Category in config" >
+                          <md-expansion-panel-group md-component-id="panelGroup" multiple>
+                            <md-expansion-panel ng-repeat="Category in config"  md-component-id="panel_{{$index}}">
 
                                 <md-expansion-panel-collapsed>
                                     <md-expansion-panel-icon></md-expansion-panel-icon>
@@ -68,7 +18,6 @@
                                 </md-expansion-panel-collapsed>
 
                                 <md-expansion-panel-expanded>
-
                                     <md-expansion-panel-header>
                                         <md-expansion-panel-icon></md-expansion-panel-icon>
                                         <div class="md-title">{{ Category.Name }}</div>
@@ -79,8 +28,14 @@
                                         @Html.Partial("_BuilderRowsNew")
                                     </md-expansion-panel-content>
 
-                                    <md-expansion-panel-footer>
+                                    <md-expansion-panel-footer >
+                                        <div class="md-title pull-left">{{ Category.Name }}</div>
                                         <div flex></div>
+                                        <a ng-click="AddCategoryRows($index, $event)"><i class="center-block glyphicon glyphicon-plus"></i></a>
+                                        <a ng-click="CategoryLogicButtonClick('lg', $index)"><i class="glyphicon glyphicon-wrench"></i></a>
+                                        <a ng-click="DeleteCategory($index)"><i class="center-block glyphicon glyphicon-remove"></i></a>
+                                        <a ng-click="CopyCategory($index, $event)"><i class="center-block glyphicon glyphicon-duplicate"></i></a>
+                                        <a ng-click="GroupButtonClick('lg', $index)"><i class="center-block glyphicon glyphicon-option-horizontal"></i></a>
                                         <md-button class="md-warn" ng-click="$panel.collapse()">Collapse</md-button>
                                     </md-expansion-panel-footer>
 
@@ -89,11 +44,9 @@
                             </md-expansion-panel>
                         </md-expansion-panel-group>
 
-                    </div>
-
-                </md-content>
                 @Html.Partial("_SideBarRight")
             </section> 
-        </fieldset>
+
+          </fieldset>
     </form>
 </div>

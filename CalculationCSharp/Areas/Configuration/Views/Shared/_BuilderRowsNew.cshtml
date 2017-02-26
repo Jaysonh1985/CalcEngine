@@ -16,20 +16,6 @@
                 <a ng-show="isRowSelected($index, $parent.$index)" class="pull-left btn " data-nodrag ng-click="PasteFunction($parent.$index, $index)">
                     <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/paste-clipboard.png"></span>
                 </a>
-            
-                @*
-                    <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="CopyFunction($parent.$index, $index)">
-                        <i class="center-block glyphicon glyphicon-duplicate"></i>
-                    </a>
-                    <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="PasteFunction($parent.$index, $index)">
-                        <i ng-hide="viewOnly" class="center-block glyphicon glyphicon-paste"></i>
-                    </a>
-                    <a ng-show="isRowSelected($index, $parent.$index)" data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
-                        <i ng-hide="viewOnly" class="center-block glyphicon glyphicon-remove"></i>
-                    </a>
-                    <a ng-show="isRowSelected($index, $parent.$index) && rows.SubOutput != null " data-nodrag ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
-                        <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
-                    </a>*@
             </div>
             <div class="v-separator"></div>
             <div class="slide-container" style="width:15%">
@@ -48,6 +34,9 @@
             </div>
             <img ng-if="rows.Pass == 'true'" src="~/Images/checked.png">
             <img ng-if="rows.Pass == 'false'" src="~/Images/multiply.png">
+            <a ng-show="isRowSelected($index, $parent.$index) && rows.SubOutput != null " data-nodrag ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
+                <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
+            </a>
         </div>
         <md-divider></md-divider>
     </md-list-item>

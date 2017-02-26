@@ -45,8 +45,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $mdExpansionPanel('expansionPanelOne').collapse();
     };
 
-    $scope.isDisabled = false;
-   
     function init() {
         var id = $location.absUrl();
         var Function = configFunctionFactory.isFunction($location.absUrl());
