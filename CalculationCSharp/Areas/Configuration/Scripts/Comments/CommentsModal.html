@@ -1,26 +1,6 @@
-﻿<body ng-controller="CommentsCtrl">
-    <div>
-        <div class="modal-header">
-            <h4>Comments</h4>
-        </div>
-        <div class="modal-body">
-
-            <form class="form-horizontal" role="form" ng-submit="ok($index)">
-                <fieldset ng-disabled="$parent.viewOnly">
-                    <div class="form-group">
-                        <label for="Number2" class="control-label col-md-2">Message</label>
-                        <div class="col-sm-9">
-                            <input type="Text" id="String1" name="String1" class="form-control" ng-model="period.String1" />
-                        </div>
-                    </div>
-                </fieldset>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit">OK</button>
-                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                </div>
-            </form>
-        </div>
-
-    </div>
-
-</body>
+﻿<div class="form-group">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Message</label>
+        <input ng-model="Parameter[0].String1" required>
+    </md-input-container>
+</div>

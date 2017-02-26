@@ -1,101 +1,83 @@
-﻿<body ng-controller="dateAdjustmentCtrl">
-    <div>
-        <div class="modal-header">
-            <h4>Date Adjustments</h4>
+﻿<div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Adjustment Type</label>
+        <md-select required ng:model="Parameter[0].Type" name="DateAdjustment_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}">
+            <md-option value=""></md-option>
+            <md-option value="Add">Add</md-option>
+            <md-option value="Adjust">Adjust</md-option>
+            <md-option value="Earlier">Earlier</md-option>
+            <md-option value="Later">Later</md-option>
+            <md-option value="Subtract">Subtract</md-option>
+            <md-option value="DatesBetween">Dates Between Two Dates</md-option>
+            <md-option value="Today">Today</md-option>
+        </md-select>
+        <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+            <div ng-message="required">Type is required.</div>
         </div>
-        <div class="modal-body">
-
-            <form class="form-horizontal" role="form" ng-submit="ok($index)">
-                <fieldset ng-disabled="$parent.viewOnly">
-                    <div class="form-group">
-                        <label for="Type" class="control-label col-md-2">Adjustment Type</label>
-                        <div class="col-sm-9">
-                            <select id="inclusive" name="singleSelect" ng:model="period.Type" class="form-control">
-                                <option value=""></option>
-                                <option value="Add">Add</option>
-                                <option value="Adjust">Adjust</option>
-                                <option value="Earlier">Earlier</option>
-                                <option value="Later">Later</option>
-                                <option value="Subtract">Subtract</option>
-                                <option value="DatesBetween">Dates Between Two Dates</option>
-                                <option value="Today">Today</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div ng-if="period.Type != 'Today' " class="form-group">
-                        <label for="Date1" class="control-label col-md-2">Start Date</label>
-                        <div class="col-sm-9">
-                            <input type="Text" id="Date1" name="Date1" class="form-control" ng-model="period.Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required />
-                        </div>
-                    </div>
-                    <div ng-if="period.Type == 'Earlier' || period.Type == 'Later' || period.Type == 'DatesBetween'" class="form-group">
-                        <label for="Date2" class="control-label col-md-2">End Date</label>
-                        <div class="col-sm-9">
-                            <input type="Text" id="Date2" name="Date2" class="form-control" ng-model="period.Date2" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required />
-                        </div>
-                    </div>
-                    <fieldset ng-if="period.Type == 'Add'|| period.Type =='Subtract' ">
-                        <legend>Period Adjustment</legend>
-                        <div class="form-group">
-                            <label for="PeriodType" class="control-label col-md-2">Period Type</label>
-                            <div class="col-sm-9">
-                                <select id="Adjustment" name="singleSelect" ng:model="period.PeriodType" class="form-control" required>
-                                    <option value=""></option>
-                                    <option value="YearsDays">Years Days</option>
-                                    <option value="YearsMonths">Year Months</option>
-                                    <option value="Years">Years</option>
-                                    <option value="Months">Months</option>
-                                    <option value="Days">Days</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Period" class="control-label col-md-2">Period</label>
-                            <div class="col-sm-9">
-                                <input type="Text" id="Period" name="Period" class="form-control" ng-model="period.Period" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required />
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <fieldset ng-if="period.Type == 'Adjust' || period.Type == 'DatesBetween'">
-                        <legend>Adjustment to be Made</legend>
-                        <div ng-if="period.Type == 'Adjust'" class="form-group">
-
-                            <label for="inclusive" class="control-label col-md-2">Adjustment</label>
-                            <div class="col-sm-9">
-                                <select id="Adjustment" name="singleSelect" ng:model="period.Adjustment" class="form-control" required>
-                                    <option value="Less">Before</option>
-                                    <option value="LessEqual">On or Before</option>
-                                    <option value="Greater">After</option>
-                                    <option value="GreaterEqual">On or After</option>
-                                    <option value="Equal">Same Year</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="Day" class="control-label col-md-2">Select Day</label>
-                            <div class="col-sm-9">
-                                <input type="Text" id="Day" name="Day" class="form-control" ng-model="period.Day" required />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Day" class="control-label col-md-2">Select Month</label>
-                            <div class="col-sm-9">
-                                <input type="Text" id="Day" name="Day" class="form-control" ng-model="period.Month" required />
-                            </div>
-                        </div>
-
-                    </fieldset>
-                </fieldset>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit">OK</button>
-                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                </div>
-            </form>
+    </md-input-container>
+</div>
+<div ng-if="Parameter[0].Type != 'Today' ">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Start Date</label>
+        <input ng-model="Parameter[0].Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+    </md-input-container>
+</div>
+<div ng-if="Parameter[0].Type == 'Earlier' || Parameter[0].Type == 'Later' || Parameter[0].Type == 'DatesBetween'" class="form-group">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>End Date</label>
+        <input ng-model="Parameter[0].Date2" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+    </md-input-container>
+</div>
+<fieldset ng-if="Parameter[0].Type == 'Add'|| Parameter[0].Type =='Subtract' ">
+    <legend>Period Adjustment</legend>
+    <div>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Data Type</label>
+            <md-select required ng:model="Parameter[0].PeriodType" name="DateAdjustment_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}">
+                <md-option value=""></md-option>
+                <md-option value="YearsDays">Years Days</md-option>
+                <md-option value="YearsMonths">Years Months</md-option>
+                <md-option value="Years">Years</md-option>
+                <md-option value="Months">Months</md-option>
+                <md-option value="Days">Days</md-option>
+            </md-select>
+            <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+                <div ng-message="required">Type is required.</div>
+            </div>
+        </md-input-container>
     </div>
-
+    <div class="form-group">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Period</label>
+            <input ng-model="Parameter[0].Period" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+        </md-input-container>
     </div>
+</fieldset>
+<fieldset ng-if="Parameter[0].Type == 'Adjust' || Parameter[0].Type == 'DatesBetween'">
+    <legend>Adjustment to be Made</legend>
+    <div ng-if="Parameter[0].Type == 'Adjust'" class="form-group">
 
-</body>
+        <label for="inclusive" class="control-label col-md-2">Adjustment</label>
+        <div class="col-sm-9">
+            <select id="Adjustment" name="singleSelect" ng:model="period.Adjustment" class="form-control" required>
+                <option value="Less">Before</option>
+                <option value="LessEqual">On or Before</option>
+                <option value="Greater">After</option>
+                <option value="GreaterEqual">On or After</option>
+                <option value="Equal">Same Year</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Select Day</label>
+            <input ng-model="Parameter[0].Day" required>
+        </md-input-container>
+    </div>
+    <div>
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Select Month</label>
+            <input ng-model="Parameter[0].Month" required>
+        </md-input-container>
+    </div>
+</fieldset>

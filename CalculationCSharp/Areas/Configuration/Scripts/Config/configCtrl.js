@@ -125,9 +125,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $window.localStorage.removeItem("Copy");
 
     };
-
     $scope.$on('IdleTimeout', function() {
-
         if($scope.config != null && $scope.config != undefined)
             {
             var id = configFunctionFactory.getConfigID();
@@ -140,35 +138,17 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             else
             {
                 $window.localStorage["WebAddress"]= '/Configuration/Config/Config/' +id;
-            }
-            
+            }           
         }
     });
 
     //Functions
-    $scope.AddFunction = function (colIndex, index) {
-        if (index == 0) {
-            $scope.config[index].Functions.push({
-                ID: this.config[index].Functions.length,
-                Function: 'Input',
-                Logic: [],
-                Parameter: []
-            });
-        }
-        else {
-            $scope.config[index].Functions.push({
-                ID: this.config[index].Functions.length,
-                Logic: [],
-                Parameter: []
-            });
-        }
-    };
-
-    $scope.AddFunctionRows = function (colIndex, index, rows, parentIndex) {
+    function buildFunction(colIndex, config)
+    {
         var item = null;
         if (colIndex == 0) {
             item = {
-                ID: this.config[colIndex].Functions.length,
+                ID: config[colIndex].Functions.length,
                 Function: 'Input',
                 Logic: [],
                 Parameter: []
@@ -176,11 +156,17 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }
         else {
             item = {
-                ID: this.config[colIndex].Functions.length,
+                ID: config[colIndex].Functions.length,
                 Logic: [],
                 Parameter: []
             };
         }
+        return item;
+    };
+
+    $scope.AddFunctionRows = function (colIndex, index, rows, parentIndex) {
+        var item;
+        item = buildFunction(colIndex, $scope.config);
         $scope.config[colIndex].Functions.splice(index + 1, 0, item);
     };
 
@@ -218,25 +204,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.form.$setDirty();
     };
     //Categories
-    $scope.AddCategory = function (colIndex) {
-        $scope.config.push({
-            ID: this.config.length,
-            Name: null,
-            Description: null,
-            Functions: [],
-            Logic: []
-        });
-        $scope.GroupButtonClick('lg', this.config.length - 1);
-        $scope.form.$setDirty();
-    };
-
     $scope.AddCategoryRows = function (colIndex) {
         var item = null;
+        var FunctionsValue = [buildFunction(colIndex, $scope.config)];
         item = {
             ID: colIndex + 1,
             Name: null,
             Description: null,
-            Functions: [],
+            Functions: FunctionsValue,
             Logic: []
         };
         $scope.config.splice(colIndex + 1, 0, item);
@@ -312,7 +287,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     $scope.CalcButtonClick = function CalcBoard(form) {
         $scope.viewOnly = true;
-        $scope.validateForm();
+        //$scope.validateForm();
 
         if ($scope.validationError == false)
         {

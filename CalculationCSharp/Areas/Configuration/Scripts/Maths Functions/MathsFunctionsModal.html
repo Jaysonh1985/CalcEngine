@@ -1,91 +1,73 @@
-﻿<body ng-controller="datePartCtrl">
-    <div>
-        <div class="modal-header">
-            <h4>Maths Functions</h4>
+﻿<div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Type</label>
+        <md-select required ng:model="Parameter[0].Type" name="MathsFunctions_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}">
+            <md-option value=""></md-option>
+            <md-option value="Abs">Abs</md-option>
+            <md-option value="Add">Add</md-option>
+            <md-option value="AddPeriod">Add Period</md-option>
+            <md-option value="Ceiling">Ceiling</md-option>
+            <md-option value="DecimalPart">DecimalPart</md-option>
+            <md-option value="Divide">Divide</md-option>
+            <md-option value="Floor">Floor</md-option>
+            <md-option value="Max">Max</md-option>
+            <md-option value="Min">Min</md-option>
+            <md-option value="Multiply">Multiply</md-option>
+            <md-option value="Power">Power</md-option>
+            <md-option value="Subtract">Subtract</md-option>
+            <md-option value="SumDecimalAbove">Sum Decimal Rows Above Current Row in Group</md-option>
+            <!--<md-option value="SubtractPeriod">Subtract Period</option>-->
+            <md-option value="Truncate">Truncate</md-option>
+        </md-select>
+        <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+            <div ng-message="required">Type is required.</div>
         </div>
-        <div class="modal-body">
-
-            <form class="form-horizontal" role="form" ng-submit="ok($index)">
-                <fieldset ng-disabled="$parent.viewOnly">
-                    <div class="form-group">
-                        <label for="Type" class="control-label col-md-2">Type</label>
-                        <div class="col-sm-9">
-                            <select id="inclusive" name="singleSelect" ng:model="period.Type" class="form-control" required>
-                                <option value=""></option>
-                                <option value="Abs">Abs</option>
-                                <option value="Add">Add</option>
-                                <option value="AddPeriod">Add Period</option>
-                                <option value="Ceiling">Ceiling</option>
-                                <option value="DecimalPart">DecimalPart</option>
-                                <option value="Divide">Divide</option>
-                                <option value="Floor">Floor</option>
-                                <option value="Max">Max</option>
-                                <option value="Min">Min</option>
-                                <option value="Multiply">Multiply</option>
-                                <option value="Power">Power</option>
-                                <option value="Subtract">Subtract</option>
-                                <option value="SumDecimalAbove">Sum Decimal Rows Above Current Row in Group</option>
-                                <!--<option value="SubtractPeriod">Subtract Period</option>-->
-                                <option value="Truncate">Truncate</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Number1" class="control-label col-md-2">Number 1</label>
-                        <div class="col-sm-9">
-                            <input type="Text" id="Number1" name="Number1" class="form-control" ng-model="period.Number1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required />
-                        </div>
-                    </div>
-
-                    <div ng-if="period.Type == 'Add'|| period.Type == 'AddPeriod'|| period.Type == 'Divide'|| period.Type == 'Max' || period.Type == 'Min' || period.Type == 'Multiply'|| period.Type == 'Power'|| period.Type == 'Subtract' || period.Type == 'SubtractPeriod'" class="form-group">
-                        <label for="Number2" class="control-label col-md-2">Number 2</label>
-                        <div class="col-sm-9">
-                            <input type="Text" id="Number2" name="Number2" class="form-control" ng-model="period.Number2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required />
-                        </div>
-                    </div>
-                    <div ng-if="period.Type == 'AddPeriod'|| period.Type == 'SubtractPeriod'" ng class="form-group">
-                        <label for="Type" class="control-label col-md-2">Period Type</label>
-                        <div class="col-sm-9">
-                            <select id="inclusive" name="singleSelect" ng:model="period.PeriodType" class="form-control" required>
-                                <option value=""></option>
-                                <option value="YearsDays">Years Days</option>
-                                <option value="YearsMonths">Years Months</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="Type" class="control-label col-md-2">Rounding</label>
-                        <div class="col-sm-9">
-                            <select id="inclusive" name="singleSelect" ng:model="period.Rounding" class="form-control">
-                                <option value=""></option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Type" class="control-label col-md-2">Rounding Type</label>
-                        <div class="col-sm-9">
-                            <select id="inclusive" name="singleSelect" ng:model="period.RoundingType" class="form-control">
-                                <option value=""></option>
-                                <option value="up">Up</option>
-                                <option value="down">Down</option>
-                            </select>
-                        </div>
-                    </div>
-                    </fieldset>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">OK</button>
-                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                    </div>
-            </form>
-    </div>
-    </div>
-</body>
+    </md-input-container>
+</div>
+<div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Number 1</label>
+        <input ng-model="Parameter[0].Number1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+    </md-input-container>
+</div>
+<div ng-if="Parameter[0].Type == 'Add'|| Parameter[0].Type == 'AddPeriod'|| Parameter[0].Type == 'Divide'|| Parameter[0].Type == 'Max' || Parameter[0].Type == 'Min' || Parameter[0].Type == 'Multiply'|| Parameter[0].Type == 'Power'|| Parameter[0].Type == 'Subtract' || Parameter[0].Type == 'SubtractPeriod'">     
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Number 2</label>
+        <input ng-model="Parameter[0].Number2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+    </md-input-container>
+</div>
+<div ng-if="Parameter[0].Type == 'AddPeriod'|| Parameter[0].Type == 'SubtractPeriod'">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Period Type</label>
+        <md-select required ng:model="Parameter[0].PeriodType" name="DateAdjustment_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}">
+            <md-option value=""></md-option>
+            <md-option value="YearsDays">Years Days</md-option>
+            <md-option value="YearsMonths">Years Months</md-option>
+        </md-select>
+    </md-input-container>
+</div>
+<div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Rounding</label>
+        <md-select ng:model="Parameter[0].Rounding">
+            <md-option value=""></md-option>
+            <md-option value="0">0</md-option>
+            <md-option value="1">1</md-option>
+            <md-option value="2">2</md-option>
+            <md-option value="3">3</md-option>
+            <md-option value="4">4</md-option>
+            <md-option value="5">5</md-option>
+            <md-option value="6">6</md-option>
+        </md-select>
+    </md-input-container>
+</div>
+<div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Rounding Type</label>
+        <md-select ng:model="Parameter[0].RoundingType">
+            <md-option value=""></md-option>
+            <md-option value="up">Up</md-option>
+            <md-option value="down">Down</md-option>
+        </md-select>
+    </md-input-container>
+</div>

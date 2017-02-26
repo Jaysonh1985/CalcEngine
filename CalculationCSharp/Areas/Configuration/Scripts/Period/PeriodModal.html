@@ -1,76 +1,56 @@
-﻿<body ng-controller="periodCtrl">
-    <div>
-            <div class="modal-header">
-                <h4>Period Calculations</h4>
-            </div>
-            <div class="modal-body">
-
-                <form class="form-horizontal" role="form" ng-submit="ok($index)">
-                    <fieldset ng-disabled="$parent.viewOnly">
-                        <fieldset >
-                            <legend>Period to Apply</legend>
-                            <div class="form-group">
-                                <label for="DateAdjType" class="control-label col-md-2">Adjustment Type</label>
-                                <div class="col-sm-9">
-                                    <select id="DateAdjType" name="singleSelect" ng:model="period.DateAdjustmentType" class="form-control" required>
-                                        <option value=""></option>
-                                        <option value="YearsDays">Years Days</option>
-                                        <option value="YearsMonths">Years Months</option>
-                                        <option value="Years">Years</option>
-                                        <option value="Months">Months</option>
-                                        <option value="Days">Days</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <div class="form-group">
-                            <label for="Date1" class="control-label col-md-2">Start Date</label>
-                            <div class="col-sm-9">
-                                <input type="Text" id="Date1" name="Date1" class="form-control" ng-model="period.Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Date2" class="control-label col-md-2">End Date</label>
-                            <div class="col-sm-9">
-                                <input type="Text" id="Date2" name="Date2" class="form-control" ng-model="period.Date2" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required />
-                            </div>
-                        </div>
-                        <fieldset>
-                            <legend>Rounding and Adjustment</legend>
-                            <div class="form-group">
-                                <label for="inclusive" class="control-label col-md-2">Inclusive</label>
-                                <div class="col-sm-9">
-                                    <select id="inclusive" name="singleSelect" ng:model="period.Inclusive" class="form-control" required>
-                                        <option value=""></option>
-                                        <option value="True">True</option>
-                                        <option value="False">False</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="daysinyr" class="control-label col-md-2">Days in Year</label>
-                                <div class="col-sm-9">
-                                    <select id="daysinyr" name="singleSelect" ng:model="period.DaysinYear" class="form-control" required>
-                                        <option value=""></option>
-                                        <option value="365">365</option>
-                                        <option value="365.25">365.25</option>
-                                        <option value="366">366</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                        </fieldset>
-
-                    </fieldset>
-                    
-
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">OK</button>
-                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                    </div>
-                </form>
-            </div>
-
-    </div>
-
-</body>
+﻿<div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Data Type</label>
+        <md-select required ng:model="Parameter[0].DateAdjustmentType" name="Period_{{colIndex}}_{{rowIndex}}" id="Period_{{colIndex}}_{{rowIndex}}">
+            <md-option value=""></md-option>
+            <md-option value="YearsDays">Years Days</md-option>
+            <md-option value="YearsMonths">Years Months</md-option>
+            <md-option value="Years">Years</md-option>
+            <md-option value="Months">Months</md-option>
+            <md-option value="Days">Days</md-option>
+        </md-select>
+        <div ng-messages="form['Period_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+            <div ng-message="required">Type is required.</div>
+        </div>
+    </md-input-container>
+</div>
+<div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Start Date</label>
+        <input ng-model="Parameter[0].Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+    </md-input-container>
+</div>
+<div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>End Date</label>
+        <input ng-model="Parameter[0].Date2" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+    </md-input-container>
+</div>
+<legend>Rounding and Adjustment</legend>
+<div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Inclusive</label>
+        <md-select required ng:model="Parameter[0].Inclusive" name="Period_{{colIndex}}_{{rowIndex}}" id="Period_{{colIndex}}_{{rowIndex}}">
+            <md-option value=""></md-option>
+            <md-option value="True">True</md-option>
+            <md-option value="False">False</md-option>
+        </md-select>
+        <div ng-messages="form['Period_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+            <div ng-message="required">Type is required.</div>
+        </div>
+    </md-input-container>
+</div>
+<div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Days in Year</label>
+        <md-select required ng:model="Parameter[0].DaysinYear" name="Period_{{colIndex}}_{{rowIndex}}" id="Period_{{colIndex}}_{{rowIndex}}" >
+            <md-option value=""></md-option>
+            <md-option value="365">365</md-option>
+            <md-option value="365.25">365.25</md-option>
+            <md-option value="366">366</md-option>
+        </md-select>
+        <div ng-messages="form['Period_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+            <div ng-message="required">Type is required.</div>
+        </div>
+    </md-input-container>
+</div>

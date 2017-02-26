@@ -1,13 +1,13 @@
 ﻿<md-list flex="" ng-model="Category.Functions">
     <md-list-item class="md-dense" ng-repeat="rows in Category.Functions" ng-click="selectRow($event, $index, $parent.$index)" 
                   ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}"
-                  >
+                  style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px">
         <div id="functionrowWrapper" >
             <div class="slide-container" style="width:20%">
                 <a class="pull-left btn " data-nodrag ng-click="AddFunctionRows($parent.$index, $index)">
                     <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></span>
                 </a>
-                <a ng-show="isRowSelected($index, $parent.$index)" class="pull-left btn " data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
+                <a ng-show="isRowSelected($index, $parent.$index) && $index > 0" class="pull-left btn " data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
                     <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/multiply2.png"></span>
                 </a>
                 <a ng-show="isRowSelected($index, $parent.$index)" class="pull-left btn " data-nodrag ng-click="CopyFunction($parent.$index, $index)">
@@ -38,7 +38,6 @@
                 <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
             </a>
         </div>
-        <md-divider></md-divider>
     </md-list-item>
 
 </md-list>

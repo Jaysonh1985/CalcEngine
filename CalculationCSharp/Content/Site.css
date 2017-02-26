@@ -679,9 +679,9 @@ select:focus::-ms-value {background: transparent; color: #555 }
 }
 
 #sidebar-wrapper {
-    margin-left: -320px;
+    margin-left: -157px;
     left: 55px;
-    width: 320px;
+    width: 157px;
     background: #222;
     position: fixed;
     height: 100%;
@@ -691,7 +691,7 @@ select:focus::-ms-value {background: transparent; color: #555 }
 
 #sidebar-rightwrapper {
     margin-right: -320px;
-    right: 320px;
+    right: 55px;
     width: 320px;
     background: #fafafa;
     height: 100%;
@@ -702,7 +702,7 @@ select:focus::-ms-value {background: transparent; color: #555 }
 .sidebar-nav {
     display: block;
     float: left;
-    width: 320px;
+    width: 157px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -714,10 +714,10 @@ select:focus::-ms-value {background: transparent; color: #555 }
     height: auto;
 }
 #wrapper.active {
-    padding-left: 320px;
+    padding-left: 157px;
 }
 #wrapper.active #sidebar-wrapper {
-    left: 320px;
+    left: 157px;
 }
 
 #page-content-wrapper {
@@ -729,7 +729,7 @@ select:focus::-ms-value {background: transparent; color: #555 }
     display: block;
     float: left;
     text-decoration: none;
-    width: 320px;
+    width: 157px;
     background: #252525;
     border-top: 1px solid #373737;
     border-bottom: 1px solid #1A1A1A;
@@ -818,8 +818,8 @@ select:focus::-ms-value {background: transparent; color: #555 }
     padding-left: 150px;
 }
 #wrapper.active #sidebar-wrapper {
-    left: 320px;
-    width: 320px;
+    left: 157px;
+    width: 157px;
     transition: all .4s ease 0s;
 }
 }

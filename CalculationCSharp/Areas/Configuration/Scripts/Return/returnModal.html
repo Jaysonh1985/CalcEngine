@@ -1,52 +1,32 @@
-﻿<body ng-controller="ReturnCtrl">
-    <div>
-        <div class="modal-header">
-            <h4>Return</h4>
+﻿<div>
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Data Type</label>
+        <md-select required ng:model="Parameter[0].Datatype" name="Return_{{colIndex}}_{{rowIndex}}" id="Return_{{colIndex}}_{{rowIndex}}">
+            <md-option value=""></md-option>
+            <md-option value="String">String</md-option>
+            <md-option value="Date">Date</md-option>
+            <md-option value="Decimal">Decimal</md-option>
+        </md-select>
+        <div ng-messages="form['Return_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+            <div ng-message="required">Type is required.</div>
         </div>
-        <div class="modal-body">
-
-            <form class="form-horizontal" role="form" ng-submit="ok($index)">
-                <fieldset ng-disabled="$parent.viewOnly">
-                    
-                    <div class="form-group">
-                        <label for="Number2" class="control-label col-md-2">Data Type</label>
-                        <div class="col-sm-9">
-                            <select ng:model="return.Datatype" class="form-control  input-sm" ng-required="true">
-                                <option value=""></option>
-                                <option value="String">String</option>
-                                <option value="Date">Date</option>
-                                <option value="Decimal">Decimal</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group" ng-if="return.Datatype == 'Date'">
-                        <label for="LookupValue" class="control-label col-md-2">Variable to Return</label>
-                        <div class="col-sm-9">
-                            <input type="Text" id="LookupValue" name="LookupValue" class="form-control" ng-model="return.Variable" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required />
-                        </div>
-                    </div>
-                    <div class="form-group" ng-if="return.Datatype == 'Decimal'">
-                        <label for="LookupValue" class="control-label col-md-2">Lookup Value</label>
-                        <div class="col-sm-9">
-                            <input type="Text" id="LookupValue" name="LookupValue" class="form-control" ng-model="return.Variable" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required />
-                        </div>
-                    </div>
-                    <div class="form-group" ng-if="return.Datatype == 'String'">
-                        <label for="LookupValue" class="control-label col-md-2">Lookup Value</label>
-                        <div class="col-sm-9">
-                            <input type="Text" id="LookupValue" name="LookupValue" class="form-control" ng-model="return.Variable" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required />
-                        </div>
-                    </div>
-
-                </fieldset>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit">OK</button>
-                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                </div>
-            </form>
-        </div>
-
-    </div>
-
-</body>
+    </md-input-container>
+</div>
+<div ng-if="Parameter[0].Datatype == 'Date'">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Variable to Return</label>
+        <input ng-model="Parameter[0].Variable" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8">
+    </md-input-container>
+</div>
+<div ng-if="Parameter[0].Datatype == 'Decimal'">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Variable to Return</label>
+        <input ng-model="Parameter[0].Variable" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8">
+    </md-input-container>
+</div>
+<div ng-if="Parameter[0].Datatype == 'String'">
+    <md-input-container class="md-block" flex-gt-sm>
+        <label>Variable to Return</label>
+        <input ng-model="Parameter[0].Variable" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8">
+    </md-input-container>
+</div>
