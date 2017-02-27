@@ -164,7 +164,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         return item;
     };
 
-    $scope.AddFunctionRows = function (colIndex, index, rows, parentIndex) {
+    $scope.AddFunctionRows = function (colIndex, index) {
         var item;
         item = buildFunction(colIndex, $scope.config);
         $scope.config[colIndex].Functions.splice(index + 1, 0, item);

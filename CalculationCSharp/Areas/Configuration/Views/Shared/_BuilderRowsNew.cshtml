@@ -2,7 +2,7 @@
     <md-list-item class="md-dense" ng-repeat="rows in Category.Functions" ng-click="selectRow($event, $index, $parent.$index)" 
                   ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}"
                   style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px">
-        <div id="functionrowWrapper" >
+        <div id="functionrowWrapper">
             <div class="slide-container" style="width:20%">
                 <a class="pull-left btn " data-nodrag ng-click="AddFunctionRows($parent.$index, $index)">
                     <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></span>
@@ -39,5 +39,4 @@
             </a>
         </div>
     </md-list-item>
-
 </md-list>

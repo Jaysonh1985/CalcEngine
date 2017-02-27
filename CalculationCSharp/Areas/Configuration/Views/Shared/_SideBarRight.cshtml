@@ -2,8 +2,8 @@
     <md-sidenav class="md-sidenav-right" md-component-id="right" md-disable-backdrop="" md-whiteframe="4" ng-cloak>
         <form name="userForm" role="form">
             <md-toolbar class="md-theme-black">
-                <div  ng-if="config[colIndex].Name != 'Input'">
-                    <md-input-container  class="md-block"  flex-gt-sm>
+                <div  ng-if="config[colIndex].Name != 'Input' && config[colIndex].Functions[rowIndex].Function == null">
+                    <md-input-container  class="md-block"  flex-gt-sm >
                         <md-select ng-model="config[colIndex].Functions[rowIndex].Function">
                             <md-option value="ArrayFunctions">Array Functions</md-option>
                             <md-option value="Comments">Comment</md-option>
@@ -20,11 +20,16 @@
                         </md-select>
                     </md-input-container>
                 </div>
-                <div  ng-if="config[colIndex].Name == 'Input'">
+                <div ng-if="config[colIndex].Name == 'Input' && config[colIndex].Functions[rowIndex].Function == null">
                     <md-input-container class="md-block" flex-gt-sm>
-                        <md-select ng-if="config[colIndex].Name == 'Input'" ng-model="config[colIndex].Functions[rowIndex].Function">
+                        <md-select ng-model="config[colIndex].Functions[rowIndex].Function" >
                             <md-option value="Input">Input</md-option>
                         </md-select>
+                    </md-input-container>
+                </div>
+                <div ng-if="config[colIndex].Functions[rowIndex].Function != null && config[colIndex].Functions[rowIndex].Function != ''">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        {{config[colIndex].Functions[rowIndex].Function}}
                     </md-input-container>
                 </div>
 

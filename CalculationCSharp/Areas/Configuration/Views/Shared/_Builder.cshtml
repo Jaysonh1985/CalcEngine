@@ -27,20 +27,21 @@
                                             <a class="pull-left btn" data-nodrag ng-click="AddCategoryRows($index, $event)">
                                                 <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></span>
                                             </a>
-                                            <a class="pull-left btn " data-nodrag ng-click="DeleteCategory($index)">
+                                            <a ng-if="Category.Name != 'Input'" class="pull-left btn " data-nodrag ng-click="DeleteCategory($index)">
                                                 <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/multiply2.png"></span>
                                             </a>
-                                            <a class="pull-left btn " data-nodrag ng-click="CopyCategory($index, $event)">
+                                            <a ng-if="Category.Name != 'Input'" class="pull-left btn " data-nodrag ng-click="CopyCategory($index, $event)">
                                                 <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/copy.png"></span>
                                             </a>
-                                            <a class="pull-left btn " data-nodrag ng-click="CategoryLogicButtonClick('lg',$index)">
+                                            <a ng-if="Category.Name != 'Input'" class="pull-left btn " data-nodrag ng-click="CategoryLogicButtonClick('lg',$index)">
                                                 <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/settings.png"></span>
                                             </a>
-                                            <a class="pull-left btn " data-nodrag ng-click="GroupButtonClick('lg',$index)">
+                                            <a ng-if="Category.Name != 'Input'" class="pull-left btn " data-nodrag ng-click="GroupButtonClick('lg',$index)">
                                                 <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/more.png"></span>
                                             </a>
                                         </div>
                                         <div flex></div>
+                                        <md-button class="md-warn" ng-click="AddFunctionRows($index, 0)">Add Function</md-button>
                                         <md-button class="md-warn" ng-click="$panel.collapse()">Collapse</md-button>
                                     </md-expansion-panel-footer>
                                 </md-expansion-panel-expanded>
