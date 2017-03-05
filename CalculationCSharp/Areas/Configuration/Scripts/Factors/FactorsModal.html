@@ -7,7 +7,7 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Lookup Type</label>
-        <md-select required ng:model="Parameter[0].LookupType">
+        <md-select required ng:model="Parameter[0].LookupType" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
@@ -39,7 +39,7 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Output Type</label>
-        <md-select required ng:model="Parameter[0].OutputType">
+        <md-select required ng:model="Parameter[0].OutputType" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
@@ -53,7 +53,7 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Required?</label>
-        <md-select required ng:model="Parameter[0].RowMatch">
+        <md-select required ng:model="Parameter[0].RowMatch" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="True">True</md-option>
             <md-option value="False">False</md-option>
@@ -72,7 +72,7 @@
 <div ng-if="Parameter[0].RowMatch == 'True'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Lookup Type</label>
-        <md-select required ng:model="Parameter[0].RowMatchLookupType">
+        <md-select required ng:model="Parameter[0].RowMatchLookupType" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>

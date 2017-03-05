@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Data Type</label>
-        <md-select required ng:model="Parameter[0].DateAdjustmentType" name="Period_{{colIndex}}_{{rowIndex}}" id="Period_{{colIndex}}_{{rowIndex}}">
+        <md-select required ng:model="Parameter[0].DateAdjustmentType" name="Period_{{colIndex}}_{{rowIndex}}" id="Period_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="YearsDays">Years Days</md-option>
             <md-option value="YearsMonths">Years Months</md-option>
@@ -30,7 +30,7 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Inclusive</label>
-        <md-select required ng:model="Parameter[0].Inclusive" name="Period_{{colIndex}}_{{rowIndex}}" id="Period_{{colIndex}}_{{rowIndex}}">
+        <md-select required ng:model="Parameter[0].Inclusive" name="Period_{{colIndex}}_{{rowIndex}}" id="Period_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="True">True</md-option>
             <md-option value="False">False</md-option>
@@ -43,7 +43,7 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Days in Year</label>
-        <md-select required ng:model="Parameter[0].DaysinYear" name="Period_{{colIndex}}_{{rowIndex}}" id="Period_{{colIndex}}_{{rowIndex}}" >
+        <md-select required ng:model="Parameter[0].DaysinYear" name="Period_{{colIndex}}_{{rowIndex}}" id="Period_{{colIndex}}_{{rowIndex}}"ng-disabled="viewOnly" >
             <md-option value=""></md-option>
             <md-option value="365">365</md-option>
             <md-option value="365.25">365.25</md-option>

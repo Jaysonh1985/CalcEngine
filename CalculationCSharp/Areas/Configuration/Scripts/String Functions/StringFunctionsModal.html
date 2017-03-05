@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Type</label>
-        <md-select required ng:model="Parameter[0].Type" name="ErrorWarning_{{colIndex}}_{{rowIndex}}" id="ErrorWarning_{{colIndex}}_{{rowIndex}}">
+        <md-select required ng:model="Parameter[0].Type" name="ErrorWarning_{{colIndex}}_{{rowIndex}}" id="ErrorWarning_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Left">Left</md-option>
             <md-option value="Right">Right</md-option>
@@ -33,12 +33,10 @@
         <input ng-model="Parameter[0].String2" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" >
     </md-input-container>
 </div>
-
 <div class="form-group" ng-if="Parameter[0].Type == 'Set'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>String</label>
         <input ng-model="Parameter[0].String3">
     </md-input-container>
-
 </div>
                

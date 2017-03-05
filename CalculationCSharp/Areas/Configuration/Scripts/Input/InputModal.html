@@ -19,7 +19,7 @@
 </div>
 <div>
     <label>Type</label>
-    <md-select required ng:model="Parameter[0].templateOptions.type" name="ErrorWarning_{{colIndex}}_{{rowIndex}}" id="ErrorWarning_{{colIndex}}_{{rowIndex}}">
+    <md-select required ng:model="Parameter[0].templateOptions.type" name="ErrorWarning_{{colIndex}}_{{rowIndex}}" id="ErrorWarning_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
         <md-option value=""></md-option>
         <md-option value="String">String</md-option>
         <md-option value="Decimal">Decimal</md-option>
@@ -28,12 +28,12 @@
 </div>
 
 <div>
-    <md-checkbox name="tos" ng-model="Parameter[0].templateOptions.required">
+    <md-checkbox name="tos" ng-model="Parameter[0].templateOptions.required" ng-disabled="viewOnly">
         Is the field Required for the calculation?
     </md-checkbox>
 </div>
 <div>
-    <md-checkbox name="tos" ng-model="Parameter[0].templateOptions.list">
+    <md-checkbox name="tos" ng-model="Parameter[0].templateOptions.list" ng-disabled="viewOnly">
         Should the input be a dropdown list?
     </md-checkbox>
 </div>

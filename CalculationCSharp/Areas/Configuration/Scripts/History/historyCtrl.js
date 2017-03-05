@@ -31,11 +31,11 @@ sulhome.kanbanBoardApp.controller('historyCtrl', function ($scope, $uibModalInst
     $scope.View = function (boardID) {
         if ($scope.Function == true)
         {
-            $window.open('/Configuration/Function/Function/' + boardID + '#?ViewOnly=true&History=true')
+            $window.open('/Configuration/Function/Function/' + boardID + '#!/?ViewOnly=true&History=true');
         }
         else
         {
-            $window.open('/Configuration/Config/Config/' + boardID + '#?ViewOnly=true&History=true')
+            $window.open('/Configuration/Config/Config/' + boardID + '#!/?ViewOnly=true&History=true');
         }
         
     };

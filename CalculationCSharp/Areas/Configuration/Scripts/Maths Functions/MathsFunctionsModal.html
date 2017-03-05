@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Type</label>
-        <md-select required ng:model="Parameter[0].Type" name="MathsFunctions_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}">
+        <md-select required ng:model="Parameter[0].Type" name="MathsFunctions_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Abs">Abs</md-option>
             <md-option value="Add">Add</md-option>
@@ -39,7 +39,7 @@
 <div ng-if="Parameter[0].Type == 'AddPeriod'|| Parameter[0].Type == 'SubtractPeriod'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Period Type</label>
-        <md-select required ng:model="Parameter[0].PeriodType" name="DateAdjustment_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}">
+        <md-select required ng:model="Parameter[0].PeriodType" name="DateAdjustment_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="YearsDays">Years Days</md-option>
             <md-option value="YearsMonths">Years Months</md-option>
@@ -49,7 +49,7 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Rounding</label>
-        <md-select ng:model="Parameter[0].Rounding">
+        <md-select ng:model="Parameter[0].Rounding" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="0">0</md-option>
             <md-option value="1">1</md-option>
@@ -64,7 +64,7 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Rounding Type</label>
-        <md-select ng:model="Parameter[0].RoundingType">
+        <md-select ng:model="Parameter[0].RoundingType" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="up">Up</md-option>
             <md-option value="down">Down</md-option>

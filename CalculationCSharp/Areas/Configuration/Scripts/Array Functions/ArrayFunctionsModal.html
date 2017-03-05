@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Incoming Array Type</label>
-        <md-select required ng:model="Parameter[0].LookupType">
+        <md-select required ng:model="Parameter[0].LookupType" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
@@ -34,7 +34,7 @@
 <div ng-if="Parameter[0].LookupType == 'Date'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Function</label>
-        <md-select required ng:model="Parameter[0].Function">
+        <md-select required ng:model="Parameter[0].Function" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="FirstDate">First Date</md-option>
             <md-option value="LastDate">Last Date</md-option>
@@ -45,7 +45,7 @@
         </div>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].LookupType == 'Decimal'">
+<div ng-if="Parameter[0].LookupType == 'Decimal'" ng-disabled="viewOnly">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Function</label>
         <md-select required ng:model="Parameter[0].Function">
@@ -65,7 +65,7 @@
 <div ng-if="Parameter[0].Function == 'TotalPeriod' && Parameter[0].LookupType == 'Decimal'" >
     <md-input-container class="md-block" flex-gt-sm>
         <label>Period Type</label>
-        <md-select required ng:model="Parameter[0].PeriodType">
+        <md-select required ng:model="Parameter[0].PeriodType" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="YearsDays">Years Days</md-option>
             <md-option value="YearsMonths">Years Months</md-option>

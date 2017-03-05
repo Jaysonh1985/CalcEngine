@@ -1,6 +1,6 @@
 ﻿<div id="wrapper" class="active" ng-controller="configCtrl" layout="column" ng-cloak> 
     <form name="form" role="form" ng-submit="CalcButtonClick(form)" novalidate onbeforeunload>
-        <fieldset ng-disabled="viewOnly">
+        <fieldset>
             <section layout="column" flex="">
                 @Html.Partial("_SideBar")
                     <h3 class="pull-left"><a>@ViewData["SchemeName"] - @ViewData["CalcName"]</a></h3>

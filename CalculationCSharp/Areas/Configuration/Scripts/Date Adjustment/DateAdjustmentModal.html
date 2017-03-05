@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Adjustment Type</label>
-        <md-select required ng:model="Parameter[0].Type" name="DateAdjustment_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}">
+        <md-select required ng:model="Parameter[0].Type" name="DateAdjustment_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Add">Add</md-option>
             <md-option value="Adjust">Adjust</md-option>
@@ -33,7 +33,7 @@
     <div>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Data Type</label>
-            <md-select required ng:model="Parameter[0].PeriodType" name="DateAdjustment_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}">
+            <md-select required ng:model="Parameter[0].PeriodType" name="DateAdjustment_{{colIndex}}_{{rowIndex}}" id="DateAdjustment_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
                 <md-option value=""></md-option>
                 <md-option value="YearsDays">Years Days</md-option>
                 <md-option value="YearsMonths">Years Months</md-option>
@@ -59,13 +59,13 @@
 
         <label for="inclusive" class="control-label col-md-2">Adjustment</label>
         <div class="col-sm-9">
-            <select id="Adjustment" name="singleSelect" ng:model="period.Adjustment" class="form-control" required>
-                <option value="Less">Before</option>
-                <option value="LessEqual">On or Before</option>
-                <option value="Greater">After</option>
-                <option value="GreaterEqual">On or After</option>
-                <option value="Equal">Same Year</option>
-            </select>
+            <md-select id="Adjustment" name="singleSelect" ng:model="period.Adjustment" class="form-control" ng-disabled="viewOnly" required>
+                <md-option value="Less">Before</md-option>
+                <md-option value="LessEqual">On or Before</md-option>
+                <md-option value="Greater">After</md-option>
+                <md-option value="GreaterEqual">On or After</md-option>
+                <md-option value="Equal">Same Year</md-option>
+            </md-select>
         </div>
     </div>
     <div>

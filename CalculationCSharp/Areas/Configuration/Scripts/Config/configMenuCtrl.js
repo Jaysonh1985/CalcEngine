@@ -56,11 +56,11 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
         $scope.ID = Board.ID;
         var earl = '/Config/' + $scope.ID;
 	    if ($scope.Function == true) {
-	        $window.open('/Configuration/Function/Function/' + $scope.ID + '#?ViewOnly=true');
+	        $window.open('/Configuration/Function/Function/' + $scope.ID + '#!/?ViewOnly=true');
 	    }
 	    else
 	    {
-	        $window.open('/Configuration/Config/Config/' + $scope.ID + '#?ViewOnly=true');
+	        $window.open('/Configuration/Config/Config/' + $scope.ID + '#!/?ViewOnly=true');
 	    }   
     };
 

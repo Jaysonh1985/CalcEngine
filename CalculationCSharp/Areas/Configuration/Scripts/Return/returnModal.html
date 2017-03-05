@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Data Type</label>
-        <md-select required ng:model="Parameter[0].Datatype" name="Return_{{colIndex}}_{{rowIndex}}" id="Return_{{colIndex}}_{{rowIndex}}">
+        <md-select required ng:model="Parameter[0].Datatype" name="Return_{{colIndex}}_{{rowIndex}}" id="Return_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="String">String</md-option>
             <md-option value="Date">Date</md-option>
