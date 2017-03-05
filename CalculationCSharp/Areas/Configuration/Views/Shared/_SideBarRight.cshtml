@@ -60,17 +60,17 @@
 
             <md-content class="md-no-momentum" layout-margin="">
                 <fieldset ng-disabled="viewOnly">
-                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='ErrorsWarnings'" ng-include="'/Areas/Configuration/Scripts/Errors Warnings/ErrorsWarningsModal.html'"></div>
-                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='StringFunctions'" ng-include="'/Areas/Configuration/Scripts/String Functions/StringFunctionsModal.html'"></div>
+                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='ErrorsWarnings'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ErrorsWarningsModal.html'"></div>
+                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='StringFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/StringFunctionsModal.html'"></div>
                     <div ng-if="config[colIndex].Functions[rowIndex].Function=='Input'" ng-include="'/Areas/Configuration/Scripts/Input/InputModal.html'"></div>
                     <div ng-if="config[colIndex].Functions[rowIndex].Function=='Return'" ng-include="'/Areas/Configuration/Scripts/Return/ReturnModal.html'"></div>
-                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='Period'" ng-include="'/Areas/Configuration/Scripts/Period/PeriodModal.html'"></div>
-                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='DatePart'" ng-include="'/Areas/Configuration/Scripts/Date Part/DatePartModal.html'"></div>
-                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='DateAdjustment'" ng-include="'/Areas/Configuration/Scripts/Date Adjustment/DateAdjustmentModal.html'"></div>
-                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='Comments'" ng-include="'/Areas/Configuration/Scripts/Comments/CommentsModal.html'"></div>
-                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='MathsFunctions'" ng-include="'/Areas/Configuration/Scripts/Maths Functions/MathsFunctionsModal.html'"></div>
-                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='Factors'" ng-include="'/Areas/Configuration/Scripts/Factors/FactorsModal.html'"></div>
-                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='ArrayFunctions'" ng-include="'/Areas/Configuration/Scripts/Array Functions/ArrayFunctionsModal.html'"></div>
+                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='Period'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/PeriodModal.html'"></div>
+                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='DatePart'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/DatePartModal.html'"></div>
+                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='DateAdjustment'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/DateAdjustmentModal.html'"></div>
+                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='Comments'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/CommentsModal.html'"></div>
+                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='MathsFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/MathsFunctionsModal.html'"></div>
+                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='Factors'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/FactorsModal.html'"></div>
+                    <div ng-if="config[colIndex].Functions[rowIndex].Function=='ArrayFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ArrayFunctionsModal.html'"></div>
                     <div ng-if="config[colIndex].Functions[rowIndex].Function=='Maths' || config[colIndex].Functions[rowIndex].Function=='Function'">
                         <md-content class="md-no-momentum" layout-margin="">
                             <md-button ng-click="FunctionButtonClick('lg', colIndex, rowIndex, userForm)" class="md-accent">
