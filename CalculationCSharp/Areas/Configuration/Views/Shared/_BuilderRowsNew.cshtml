@@ -1,19 +1,22 @@
-﻿<md-list flex="" ng-model="Category.Functions">
+﻿<md-list flex="" ng-model="Category.Functions" ui-tree-nodes="" >
     <md-list-item class="md-dense" ng-repeat="rows in Category.Functions" ng-click="selectRow($event, $index, $parent.$index)" 
                   ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}"
-                  style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px">
+                  style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px" ui-tree-node>
         <div id="functionrowWrapper">
-            <div class="slide-container text-center" style="width:13%">
-                <a class="pull-left btn " data-nodrag ng-click="AddFunctionRows($parent.$index, $index)">
+            <div class="slide-container text-center" style="width:16%">
+                <a class="pull-left btn" ng-if="Category.Name != 'Input'">
+                    <span  class="glyphicon glyphicon" ui-tree-handle><img ng-hide="viewOnly" src="~/Images/checklist.png"></span>
+                </a>
+                <a class="pull-left btn" data-nodrag ng-click="AddFunctionRows($parent.$index, $index)">
                     <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></span>
                 </a>
-                <a ng-show="isRowSelected($index, $parent.$index) && $index > 0" class="pull-left btn " data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
+                <a ng-show="isRowSelected($index, $parent.$index) && $index > 0" class="pull-left btn" data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
                     <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/multiply2.png"></span>
                 </a>
-                <a ng-show="isRowSelected($index, $parent.$index)" class="pull-left btn " data-nodrag ng-click="CopyFunction($parent.$index, $index)">
+                <a ng-show="isRowSelected($index, $parent.$index)" class="pull-left btn" data-nodrag ng-click="CopyFunction($parent.$index, $index)">
                     <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/copy.png"></span>
                 </a>
-                <a ng-show="isRowSelected($index, $parent.$index)" class="pull-left btn " data-nodrag ng-click="PasteFunction($parent.$index, $index)">
+                <a ng-show="isRowSelected($index, $parent.$index)" class="pull-left btn" data-nodrag ng-click="PasteFunction($parent.$index, $index)">
                     <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/paste-clipboard.png"></span>
                 </a>
             </div>
@@ -34,7 +37,7 @@
             <img ng-if="rows.Pass == 'false'" src="~/Images/multiply.png">
 
             <div class="v-separator"><h1></h1></div>
-            <div class="slide-container" style="width:52%">
+            <div class="slide-container" style="width:49%">
                 <h6>Output: &nbsp;</h6>
                 <h4>{{ rows.Output }}</h4>
             </div>
