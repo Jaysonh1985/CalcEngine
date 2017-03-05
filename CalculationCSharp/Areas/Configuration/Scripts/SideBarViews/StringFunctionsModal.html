@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Type</label>
-        <md-select required ng:model="Parameter[0].Type" name="ErrorWarning_{{colIndex}}_{{rowIndex}}" id="ErrorWarning_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
+        <md-select ng:model="Parameter[0].Type" name="ErrorWarning_{{colIndex}}_{{rowIndex}}" id="ErrorWarning_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly" required>
             <md-option value=""></md-option>
             <md-option value="Left">Left</md-option>
             <md-option value="Right">Right</md-option>
@@ -15,26 +15,25 @@
     </md-input-container>
 </div>
 <div ng-if="Parameter[0].Type != 'Set'">  
-    <md-input-container class="md-block" flex-gt-sm>
+    <md-input-container class="md-block" flex-gt-sm required>
             <label>String 1</label>
             <input ng-model="Parameter[0].String1" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" > 
     </md-input-container>
 </div>
 <div ng-if="Parameter[0].Type == 'Left' || Parameter[0].Type == 'Right'">
-    <md-input-container class="md-block" flex-gt-sm>
+    <md-input-container class="md-block" flex-gt-sm required>
         <label>Number</label>
         <input ng-model="Parameter[0].Number1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" >
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].Type == 'Find'">
-   
-    <md-input-container class="md-block" flex-gt-sm>
+<div ng-if="Parameter[0].Type == 'Find'"> 
+    <md-input-container class="md-block" flex-gt-sm required>
         <label>String 2</label>
         <input ng-model="Parameter[0].String2" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" >
     </md-input-container>
 </div>
-<div class="form-group" ng-if="Parameter[0].Type == 'Set'">
-    <md-input-container class="md-block" flex-gt-sm>
+<div class="form-group" ng-if="Parameter[0].Type == 'Set'" >
+    <md-input-container class="md-block" flex-gt-sm required>
         <label>String</label>
         <input ng-model="Parameter[0].String3">
     </md-input-container>

@@ -20,7 +20,6 @@ sulhome.kanbanBoardApp.factory('configValidationFactory', function ($filter, con
                 {
                     configFunctionFactory.setFormValidation(value, AttName, form, VariableNames, type);
                 }
-                
             },        
     }
 });

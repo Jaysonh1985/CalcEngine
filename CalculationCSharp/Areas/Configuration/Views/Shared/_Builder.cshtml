@@ -15,13 +15,14 @@
                                      <div class="slide-container pull-right">
                                         <table class="table-borderless" ng-hide="viewOnly">
                                             <tr>
-                                                <td ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory($index, $event)" style="width:14%; padding-right:10px"><i ng-hide="viewOnly" class="pull-right glyphicon glyphicon-arrow-down"></i></td>
-                                                <td><a ng-click="AddCategoryRows($index, $event)" style="width:14%; padding-right:10px"><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></i></a></td>                                              
-                                                <td ng-if="Category.Name != 'Input'" ng-click="CategoryLogicButtonClick('lg', $index)" style="width:14%; padding-right:10px"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/settings.png"></i></a> </td>
-                                                <td ng-if="Category.Name != 'Input'" ng-click="DeleteCategory($index)" style="width:14%; padding-right:10px"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/multiply2.png"></i></a> </td>
-                                                <td ng-if="Category.Name != 'Input'" style="width:14%; padding-right:10px" ng-click="CopyCategory($index, $event)"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/copy.png"></i></a></td>
-                                                <td ng-if="Category.Name != 'Input'" style="width:14%; padding-right:10px" ng-click="GroupButtonClick('lg', $index)"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/more.png"></i></a></td>
-                                                <td style="width:14%; padding-right:10px"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i></td>
+                                                <td ng-click="AddFunctionRows($index, 0)" style="width:12.5%; padding-right:10px"><i ng-hide="viewOnly" class="pull-right glyphicon glyphicon-plus"></i></td>
+                                                <td ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory($index, $event)" style="width:12.5%; padding-right:10px"><i ng-hide="viewOnly" class="pull-right glyphicon glyphicon-arrow-down"></i></td>
+                                                <td><a ng-click="AddCategoryRows($index, $event)" style="width:12.5%; padding-right:10px"><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></i></a></td>                                              
+                                                <td ng-if="Category.Name != 'Input'" ng-click="CategoryLogicButtonClick('lg', $index)" style="width:12.5%; padding-right:10px"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/settings.png"></i></a> </td>
+                                                <td ng-if="Category.Name != 'Input'" ng-click="DeleteCategory($index)" style="width:12.5%; padding-right:10px"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/multiply2.png"></i></a> </td>
+                                                <td ng-if="Category.Name != 'Input'" style="width:12.5%; padding-right:10px" ng-click="CopyCategory($index, $event)"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/copy.png"></i></a></td>
+                                                <td ng-if="Category.Name != 'Input'" style="width:12.5%; padding-right:10px" ng-click="GroupButtonClick('lg', $index)"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/more.png"></i></a></td>
+                                                <td style="width:12.5%; padding-right:10px"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i></td>
                                             </tr>
                                         </table>
                                     </div>

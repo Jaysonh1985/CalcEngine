@@ -197,6 +197,10 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     //Categories
     $scope.AddCategoryRows = function (colIndex) {
         var item = null;
+        if (colIndex = 0)
+        {
+            colIndex = 1;
+        }
         var FunctionsValue = [buildFunction(colIndex, $scope.config)];
         item = {
             ID: colIndex + 1,
