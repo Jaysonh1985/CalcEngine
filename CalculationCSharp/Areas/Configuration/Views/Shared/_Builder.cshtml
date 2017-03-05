@@ -3,52 +3,35 @@
         <fieldset ng-disabled="viewOnly">
             <section layout="column" flex="">
                 @Html.Partial("_SideBar")
-                    <h2 class="center-block text-center"><a>@ViewData["SchemeName"] - @ViewData["CalcName"]</a></h2>
+                    <h3 class="pull-left"><a>@ViewData["SchemeName"] - @ViewData["CalcName"]</a></h3>
                     <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
-                          <md-expansion-panel-group md-component-id="panelGroup" multiple>
-                            <md-expansion-panel ng-repeat="Category in config"  md-component-id="panel_{{$index}}">
-                                <md-expansion-panel-collapsed>
-                                    <md-expansion-panel-icon></md-expansion-panel-icon>
-                                    <div class="md-title">{{ Category.Name }}</div>
-                                    <div class="md-summary">{{ Category.Description }}</div>
-                                </md-expansion-panel-collapsed>
-                                <md-expansion-panel-expanded>
-                                    <md-expansion-panel-header>
-                                        <md-expansion-panel-icon></md-expansion-panel-icon>
-                                        <div class="md-title">{{ Category.Name }}</div>
-                                        <div class="md-summary">{{ Category.Description }}</div>
-                                    </md-expansion-panel-header>
-                                    <md-expansion-panel-content>
-                                        @Html.Partial("_BuilderRowsNew")
-                                    </md-expansion-panel-content>
-                                    <md-expansion-panel-footer >
-                                        <div class="md-title pull-left">{{ Category.Name }} - </div>
-                                        <div class="slide-container " style="width:20%">
-                                            <a class="pull-left btn" data-nodrag ng-click="AddCategoryRows($index, $event)">
-                                                <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></span>
-                                            </a>
-                                            <a ng-if="Category.Name != 'Input'" class="pull-left btn " data-nodrag ng-click="DeleteCategory($index)">
-                                                <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/multiply2.png"></span>
-                                            </a>
-                                            <a ng-if="Category.Name != 'Input'" class="pull-left btn " data-nodrag ng-click="CopyCategory($index, $event)">
-                                                <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/copy.png"></span>
-                                            </a>
-                                            <a ng-if="Category.Name != 'Input'" class="pull-left btn " data-nodrag ng-click="CategoryLogicButtonClick('lg',$index)">
-                                                <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/settings.png"></span>
-                                            </a>
-                                            <a ng-if="Category.Name != 'Input'" class="pull-left btn " data-nodrag ng-click="GroupButtonClick('lg',$index)">
-                                                <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/more.png"></span>
-                                            </a>
-                                        </div>
-                                        <div flex></div>
-                                        <md-button class="md-warn" ng-click="AddFunctionRows($index, 0)">Add Function</md-button>
-                                        <md-button class="md-warn" ng-click="$panel.collapse()">Collapse</md-button>
-                                    </md-expansion-panel-footer>
-                                </md-expansion-panel-expanded>
-                            </md-expansion-panel>
-                        </md-expansion-panel-group>
-                @Html.Partial("_SideBarRight")
-            </section> 
+                    <div ng-hide="isLoading" ui-tree data-clone-enabled="true">
+                        <uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
+                            <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
+                                <uib-accordion-heading>
+                                    <div class="slide-container">
+                                        {{Category.Name}}
+                                     </div>
+                                     <div class="slide-container pull-right">
+                                        <table class="table-borderless" ng-hide="viewOnly">
+                                            <tr>
+                                                <td ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory($index, $event)" style="width:14%; padding-right:10px"><i ng-hide="viewOnly" class="pull-right glyphicon glyphicon-arrow-down"></i></td>
+                                                <td><a ng-click="AddCategoryRows($index, $event)" style="width:14%; padding-right:10px"><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></i></a></td>                                              
+                                                <td ng-if="Category.Name != 'Input'" ng-click="CategoryLogicButtonClick('lg', $index)" style="width:14%; padding-right:10px"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/settings.png"></i></a> </td>
+                                                <td ng-if="Category.Name != 'Input'" ng-click="DeleteCategory($index)" style="width:14%; padding-right:10px"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/multiply2.png"></i></a> </td>
+                                                <td ng-if="Category.Name != 'Input'" style="width:14%; padding-right:10px" ng-click="CopyCategory($index, $event)"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/copy.png"></i></a></td>
+                                                <td ng-if="Category.Name != 'Input'" style="width:14%; padding-right:10px" ng-click="GroupButtonClick('lg', $index)"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/more.png"></i></a></td>
+                                                <td style="width:14%; padding-right:10px"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </uib-accordion-heading>
+                                @Html.Partial("_BuilderRowsNew")
+                            </div>
+                        </uib-accordion>
+                    </div>
+                    @Html.Partial("_SideBarRight")
+                </section> 
           </fieldset>
     </form>
 </div>

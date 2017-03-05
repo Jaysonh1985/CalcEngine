@@ -3,7 +3,7 @@
                   ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}"
                   style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px">
         <div id="functionrowWrapper">
-            <div class="slide-container" style="width:20%">
+            <div class="slide-container text-center" style="width:20%">
                 <a class="pull-left btn " data-nodrag ng-click="AddFunctionRows($parent.$index, $index)">
                     <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></span>
                 </a>
@@ -19,24 +19,26 @@
             </div>
             <div class="v-separator"></div>
             <div class="slide-container" style="width:15%">
-                <h6>Function:</h6>
-                <h5>{{ rows.Function }}</h5>
+                Function:
+                <h4>{{ rows.Function }}</h4>
             </div>
-            <div class="v-separator"></div>
-            <div class="slide-container" style="width:15%">
-                <h6>Name:</h6>
-                <h5>{{ rows.Name }}</h5>
-            </div>
-            <div class="v-separator"></div>
-            <div class="slide-container" style="width:50%">
-                <h6>Output:</h6>
-                <h5>{{ rows.Output }}</h5>
-            </div>
-            <img ng-if="rows.Pass == 'true'" src="~/Images/checked.png">
-            <img ng-if="rows.Pass == 'false'" src="~/Images/multiply.png">
             <a ng-show="isRowSelected($index, $parent.$index) && rows.SubOutput != null " data-nodrag ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
                 <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
             </a>
+            <div class="v-separator"></div>
+                <div class="slide-container" style="width:15%">
+                    <h6>Name: </h6>
+                    <h4>{{ rows.Name }}</h4>
+                </div>
+            <img ng-if="rows.Pass == 'true'" src="~/Images/checked.png">
+            <img ng-if="rows.Pass == 'false'" src="~/Images/multiply.png">
+
+            <div class="v-separator"></div>
+            <div class="slide-container" style="word-wrap: break-word;min-width: 175px; max-width: 175px; width:50%">
+                <h6>Output: </h6>
+                <h4>{{ rows.Output }}</h4>
+            </div>
+
         </div>
     </md-list-item>
 </md-list>

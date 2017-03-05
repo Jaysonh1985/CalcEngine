@@ -174,11 +174,13 @@ element.style {
 .panel-title {
     margin-top: 0px;
     margin-bottom: 0px;
-    padding: 2%;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-left: 10px;
     font-size: 20px;
     color: inherit;
     text-overflow: ellipsis;
-    text-align: center;
+    text-align: left;
 }
 
 .panel-group .panel {
@@ -928,9 +930,9 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 
 .slide-container
 {
-    text-align: center;
-    display: inline-block;
-    margin: 0px -4px;
+    text-align: left;
+    display: inline-flex;
+    margin: 0px 4px;
 }
 
 .v-separator
