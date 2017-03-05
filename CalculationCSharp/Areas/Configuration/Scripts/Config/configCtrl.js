@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, $mdSidenav, $mdExpansionPanel, configService, configFunctionFactory, configModalFactory, configTypeaheadFactory, configValidationFactory, $filter, $timeout) {
+sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, $mdSidenav, configService, configFunctionFactory, configModalFactory, configTypeaheadFactory, configValidationFactory, $filter, $timeout) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
@@ -34,15 +34,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         return function () {
             $mdSidenav(componentId).toggle();
         };
-    }
-
-    $mdExpansionPanel().waitFor('expansionPanelOne').then(function (instance) {
-        instance.expand();
-    });
-
-
-    $scope.collapseOne = function () {
-        $mdExpansionPanel('expansionPanelOne').collapse();
     };
 
     function init() {

@@ -938,7 +938,7 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 .v-separator
 {
     content: "";
-    display: inline-block;
+    display: inline-flex;
     width: 0px;
     height: 100%;
     border-right: 1px solid #fafafa;
