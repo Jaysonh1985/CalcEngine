@@ -5,7 +5,7 @@
                 <md-toolbar class="md-theme-black">
                     <div ng-if="config[colIndex].Name != 'Input' && config[colIndex].Functions[rowIndex].Function == null">
                         <md-input-container class="md-block" flex-gt-sm>
-                            <md-select ng-model="config[colIndex].Functions[rowIndex].Function">
+                            <md-select ng-model="config[colIndex].Functions[rowIndex].Function" required>
                                 <md-option value="ArrayFunctions">Array Functions</md-option>
                                 <md-option value="Comments">Comment</md-option>
                                 <md-option value="DateAdjustment">Date Adjustment</md-option>
@@ -39,7 +39,7 @@
                     <div>
                         <md-input-container class="md-block" style="font-size:larger;" flex-gt-sm>
                             <label>Variable Name</label>
-                            <input ng-model="config[colIndex].Functions[rowIndex].Name">
+                            <input ng-model="config[colIndex].Functions[rowIndex].Name" required> 
                         </md-input-container>
                     </div>
                     <div>

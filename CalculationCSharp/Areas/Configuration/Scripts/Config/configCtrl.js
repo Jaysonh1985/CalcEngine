@@ -154,6 +154,10 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }
         return item;
     };
+    $scope.focusButtonClick = function (elementName) {
+        document.getElementById(elementName).focus();
+    };
+
 
     $scope.AddFunctionRows = function (colIndex, index) {
         var item;

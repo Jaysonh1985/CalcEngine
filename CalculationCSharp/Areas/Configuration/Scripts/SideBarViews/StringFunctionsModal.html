@@ -1,35 +1,43 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Type</label>
-        <md-select ng:model="Parameter[0].Type" name="ErrorWarning_{{colIndex}}_{{rowIndex}}" id="ErrorWarning_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly" required>
-            <md-option value=""></md-option>
+        <md-select ng:model="Parameter[0].Type" name="StringFunctionsType_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly" required>
             <md-option value="Left">Left</md-option>
             <md-option value="Right">Right</md-option>
             <md-option value="Len">Length</md-option>
             <md-option value="Find">Find</md-option>
             <md-option value="Set">Set String</md-option>
         </md-select>
-        <div ng-messages="form['StringFunctions_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+        <div ng-messages="form['StringFunctionsType_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
             <div ng-message="required">Type is required.</div>
         </div>
     </md-input-container>
 </div>
 <div ng-if="Parameter[0].Type != 'Set'">  
     <md-input-container class="md-block" flex-gt-sm required>
-            <label>String 1</label>
-            <input ng-model="Parameter[0].String1" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" > 
+        <label>String 1</label>
+        <input name="StringFunctionsString1_{{colIndex}}_{{rowIndex}}" id="StringFunctionsString1_{{colIndex}}_{{rowIndex}}"   ng-model="Parameter[0].String1" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required> 
+        <div ng-messages="form['StringFunctionsString1_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+            <div ng-message="required">Field is required.</div>
+        </div>
     </md-input-container>
 </div>
 <div ng-if="Parameter[0].Type == 'Left' || Parameter[0].Type == 'Right'">
     <md-input-container class="md-block" flex-gt-sm required>
         <label>Number</label>
-        <input ng-model="Parameter[0].Number1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" >
+        <input name="StringFunctionsNumber_{{colIndex}}_{{rowIndex}}" ng-model="Parameter[0].Number1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+        <div ng-messages="form['StringFunctionsNumber_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+            <div ng-message="required">Field is required.</div>
+        </div>
     </md-input-container>
 </div>
 <div ng-if="Parameter[0].Type == 'Find'"> 
     <md-input-container class="md-block" flex-gt-sm required>
         <label>String 2</label>
-        <input ng-model="Parameter[0].String2" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" >
+        <input name="StringFunctionsString2_{{colIndex}}_{{rowIndex}}" ng-model="Parameter[0].String2" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
+        <div ng-messages="form['StringFunctionsString2_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+            <div ng-message="required">Field is required.</div>
+        </div>
     </md-input-container>
 </div>
 <div class="form-group" ng-if="Parameter[0].Type == 'Set'" >
