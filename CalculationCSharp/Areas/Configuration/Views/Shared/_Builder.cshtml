@@ -1,46 +1,44 @@
-﻿<div id="wrapper" class="active" ng-controller="configCtrl" layout="column" ng-cloak> 
-    <form name="form" role="form" ng-submit="CalcButtonClick(form)" novalidate onbeforeunload>
-        <fieldset>
-            <section layout="column" flex="">
-                @Html.Partial("_SideBar")
-                    <h3 class="pull-left"><a>@ViewData["SchemeName"] - @ViewData["CalcName"]</a></h3>
+﻿<md-content  ng-controller="configCtrl" layout-gt-sm="row" layout="row" 
+       ng-cloak> 
+    <ng-form name="form" role="form" ng-submit="calcbuttonclick(form)" layout="row" style="width:100%">
+        @*@Html.Partial("_sidebar")*@                  
+        <md-content flex="80" layout-padding="" layout="column">
+            <h3 class="pull-left"><a>@ViewData["SchemeName"] - @ViewData["CalcName"]</a></h3>
+            <ul>
+                <li ng-repeat="(key, errors) in form.$error track by $index">
+                    <strong>{{ key }}</strong> errors
                     <ul>
-                        <li ng-repeat="(key, errors) in form.$error track by $index">
-                            <strong>{{ key }}</strong> errors
-                            <ul>
-                                <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>. <a ng-click="focusButtonClick(e.$name)">Focus</a></li>
-                            </ul>
-                        </li>
+                        <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>. <a ng-click="focusButtonClick(e.$name)">Focus</a></li>
                     </ul>
-                    <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
-                    <div ng-hide="isLoading" ui-tree data-clone-enabled="true">
-                        <uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
-                            <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" ui-tree-node>
-                                <uib-accordion-heading>
-                                    <div class="slide-container">
-                                        {{Category.Name}}
-                                     </div>
-                                     <div class="slide-container pull-right">
-                                        <table class="table-borderless" ng-hide="viewOnly">
-                                            <tr>
-                                                <td ng-click="AddFunctionRows($index, 0)" style="width:12.5%; padding-right:10px"><i ng-hide="viewOnly" class="pull-right glyphicon glyphicon-plus"></i></td>
-                                                <td ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory($index, $event)" style="width:12.5%; padding-right:10px"><i ng-hide="viewOnly" class="pull-right glyphicon glyphicon-arrow-down"></i></td>
-                                                <td><a ng-click="AddCategoryRows($index, $event)" style="width:12.5%; padding-right:10px"><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></i></a></td>                                              
-                                                <td ng-if="Category.Name != 'Input'" ng-click="CategoryLogicButtonClick('lg', $index)" style="width:12.5%; padding-right:10px"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/settings.png"></i></a> </td>
-                                                <td ng-if="Category.Name != 'Input'" ng-click="DeleteCategory($index)" style="width:12.5%; padding-right:10px"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/multiply2.png"></i></a> </td>
-                                                <td ng-if="Category.Name != 'Input'" style="width:12.5%; padding-right:10px" ng-click="CopyCategory($index, $event)"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/copy.png"></i></a></td>
-                                                <td ng-if="Category.Name != 'Input'" style="width:12.5%; padding-right:10px" ng-click="GroupButtonClick('lg', $index)"><a ><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/more.png"></i></a></td>
-                                                <td style="width:12.5%; padding-right:10px"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </uib-accordion-heading>
-                                @Html.Partial("_BuilderRowsNew")
+                </li>
+            </ul>
+            <div ui-tree >
+                <uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
+                    <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" layout="column" ui-tree-node>
+                        <uib-accordion-heading>
+                            <div class="slide-container">
+                                {{Category.Name}}
                             </div>
-                        </uib-accordion>
+                            <div class="slide-container pull-right">
+                                <table class="table-borderless" ng-hide="viewOnly">
+                                    <tr>
+                                        <td ng-click="AddFunctionRows($index, 0)" style="width:12.5%; padding-right:10px"><i ng-hide="viewOnly" class="pull-right glyphicon glyphicon-plus"></i></td>
+                                        <td ng-if="Category.Name != 'Input'" ng-click="MoveDownCategory($index, $event)" style="width:12.5%; padding-right:10px"><i ng-hide="viewOnly" class="pull-right glyphicon glyphicon-arrow-down"></i></td>
+                                        <td><a ng-click="AddCategoryRows($index, $event)" style="width:12.5%; padding-right:10px"><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></i></a></td>
+                                        <td ng-if="Category.Name != 'Input'" ng-click="CategoryLogicButtonClick('lg', $index)" style="width:12.5%; padding-right:10px"><a><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/settings.png"></i></a> </td>
+                                        <td ng-if="Category.Name != 'Input'" ng-click="DeleteCategory($index)" style="width:12.5%; padding-right:10px"><a><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/multiply2.png"></i></a> </td>
+                                        <td ng-if="Category.Name != 'Input'" style="width:12.5%; padding-right:10px" ng-click="CopyCategory($index, $event)"><a><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/copy.png"></i></a></td>
+                                        <td ng-if="Category.Name != 'Input'" style="width:12.5%; padding-right:10px" ng-click="GroupButtonClick('lg', $index)"><a><i class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/more.png"></i></a></td>
+                                        <td style="width:12.5%; padding-right:10px"><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </uib-accordion-heading>
+                        @Html.Partial("_BuilderRowsNew")
                     </div>
-                    @Html.Partial("_SideBarRight")
-                </section> 
-          </fieldset>
-    </form>
-</div>
+                </uib-accordion>
+            </div>
+        </md-content>    
+        @Html.Partial("_SideBarRight")
+    </ng-form>
+</md-content>

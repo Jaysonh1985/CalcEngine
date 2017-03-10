@@ -758,8 +758,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     $scope.selectRow = function (event, rowIndex, colIndex) {
         $scope.getVariableTypes(colIndex, rowIndex);
-        $mdSidenav('right').close();
-        $mdSidenav('right').open();
         $scope.Parameter = this.config[colIndex].Functions[rowIndex].Parameter;
         $scope.Function = this.config[colIndex].Functions[rowIndex].Function;
         $scope.rowIndex = rowIndex;
