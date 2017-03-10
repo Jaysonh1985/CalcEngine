@@ -1,88 +1,84 @@
 ﻿<div flex="20">
-    <md-toolbar layout="row" class="md-theme-black">
-        <div ng-if="config[colIndex].Name != 'Input' && config[colIndex].Functions[rowIndex].Function == null">
-            <md-input-container class="md-block" flex-gt-sm>
-                <md-select ng-model="config[colIndex].Functions[rowIndex].Function" required>
-                    <md-option value="ArrayFunctions">Array Functions</md-option>
-                    <md-option value="Comments">Comment</md-option>
-                    <md-option value="DateAdjustment">Date Adjustment</md-option>
-                    <md-option value="DatePart">Date Part</md-option>
-                    <md-option value="ErrorsWarnings">Errors & Warnings</md-option>
-                    <md-option value="Factors">Factors</md-option>
-                    <md-option ng-if="Function == false" value="Function">Function</md-option>
-                    <md-option value="Maths">Maths</md-option>
-                    <md-option value="MathsFunctions">Maths Functions</md-option>
-                    <md-option value="Period">Period</md-option>
-                    <md-option ng-if="Function == true" value="Return">Return</md-option>
-                    <md-option value="StringFunctions">String Functions</md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-        <div ng-if="config[colIndex].Name == 'Input' && config[colIndex].Functions[rowIndex].Function == null">
-            <md-input-container class="md-block" flex-gt-sm>
-                <md-select ng-model="config[colIndex].Functions[rowIndex].Function">
-                    <md-option value="Input">Input</md-option>
-                </md-select>
-            </md-input-container>
-        </div>
-        <div ng-if="config[colIndex].Functions[rowIndex].Function != null && config[colIndex].Functions[rowIndex].Function != ''">
-            <md-input-container class="md-block" flex-gt-sm>
-                {{config[colIndex].Functions[rowIndex].Function}}
-            </md-input-container>
-        </div>
+    <div ng-repeat="Category in config">
+        <div ng-repeat="rows in Category.Functions">
+            <md-toolbar layout="row" class="md-theme-black">
+                <div ng-if="Category.Name != 'Input' && rows.Function == null">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-select ng-model="rows.Function" required>
+                            <md-option value="ArrayFunctions">Array Functions</md-option>
+                            <md-option value="Comments">Comment</md-option>
+                            <md-option value="DateAdjustment">Date Adjustment</md-option>
+                            <md-option value="DatePart">Date Part</md-option>
+                            <md-option value="ErrorsWarnings">Errors & Warnings</md-option>
+                            <md-option value="Factors">Factors</md-option>
+                            <md-option ng-if="Function == false" value="Function">Function</md-option>
+                            <md-option value="Maths">Maths</md-option>
+                            <md-option value="MathsFunctions">Maths Functions</md-option>
+                            <md-option value="Period">Period</md-option>
+                            <md-option ng-if="Function == true" value="Return">Return</md-option>
+                            <md-option value="StringFunctions">String Functions</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div ng-if="Category.Name == 'Input' && rows.Function == null">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-select ng-model="rows.Function">
+                            <md-option value="Input">Input</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div ng-if="rows.Function != null && rows.Function != ''">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        {{rows.Function}}
+                    </md-input-container>
+                </div>
 
-    </md-toolbar>
-    <md-content class="md-no-momentum" layout-margin="">
-        <div>
-            <md-input-container class="md-block" style="font-size:larger;" flex-gt-sm>
-                <label>Variable Name</label>
-                <input ng-model="config[colIndex].Functions[rowIndex].Name" required>
-            </md-input-container>
-        </div>
-        <div>
-            <md-input-container class="md-block" flex-gt-sm>
-                <label>Expected Result</label>
-                <input ng-model="config[colIndex].Functions[rowIndex].ExpectedResult">
-            </md-input-container>
-        </div>
-        <div>
-            <md-content ng-if="config[colIndex].Name != 'Input'" class="md-no-momentum" layout-margin="">
-                <md-button ng-click="LogicButtonClick('lg', colIndex, rowIndex)" class="md-accent">
-                    Click to update Logic
-                </md-button>
-            </md-content>
-        </div>
-    </md-content>
-
-    <md-content class="md-no-momentum" layout-margin="">
-        <fieldset ng-disabled="viewOnly">
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='ErrorsWarnings'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ErrorsWarningsModal.html'"></div>
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='StringFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/StringFunctionsModal.html'"></div>
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='Input'" ng-include="'/Areas/Configuration/Scripts/Input/InputModal.html'"></div>
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='Return'" ng-include="'/Areas/Configuration/Scripts/Return/ReturnModal.html'"></div>
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='Period'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/PeriodModal.html'"></div>
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='DatePart'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/DatePartModal.html'"></div>
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='DateAdjustment'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/DateAdjustmentModal.html'"></div>
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='Comments'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/CommentsModal.html'"></div>
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='MathsFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/MathsFunctionsModal.html'"></div>
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='Factors'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/FactorsModal.html'"></div>
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='ArrayFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ArrayFunctionsModal.html'"></div>
-            <div ng-if="config[colIndex].Functions[rowIndex].Function=='Maths' || config[colIndex].Functions[rowIndex].Function=='Function'">
-                <md-content class="md-no-momentum" layout-margin="">
-                    <md-button ng-click="FunctionButtonClick('lg', colIndex, rowIndex, userForm)" class="md-accent">
-                        Click to Update Function
-                    </md-button>
-                </md-content>
-            </div>
-        </fieldset>
-        <div>
+            </md-toolbar>
             <md-content class="md-no-momentum" layout-margin="">
-                <md-button ng-click="toggleRight()" class="md-accent">
-                    Click to Close Sidenav
-                </md-button>
+                <div>
+                    <md-input-container class="md-block" style="font-size:larger;" flex-gt-sm>
+                        <label>Variable Name</label>
+                        <input ng-model="rows.Name" required>
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Expected Result</label>
+                        <input ng-model="rows.ExpectedResult">
+                    </md-input-container>
+                </div>
+                <div>
+                    <md-content ng-if="Category.Name != 'Input'" class="md-no-momentum" layout-margin="">
+                        <md-button ng-click="LogicButtonClick('lg', $parent.$index, $index)" class="md-accent">
+                            Click to update Logic
+                        </md-button>
+                    </md-content>
+                </div>
             </md-content>
-        </div>
 
-    </md-content>
-
+            <md-content class="md-no-momentum" layout-margin="">
+            <fieldset ng-disabled="viewOnly">
+                <div ng-if="rows.Function=='ErrorsWarnings'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ErrorsWarningsModal.html'"></div>
+                <div ng-if="rows.Function=='StringFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/StringFunctionsModal.html'"></div>
+                <div ng-if="rows.Function=='Input'" ng-include="'/Areas/Configuration/Scripts/Input/InputModal.html'"></div>
+                <div ng-if="rows.Function=='Return'" ng-include="'/Areas/Configuration/Scripts/Return/ReturnModal.html'"></div>
+                <div ng-if="rows.Function=='Period'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/PeriodModal.html'"></div>
+                <div ng-if="rows.Function=='DatePart'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/DatePartModal.html'"></div>
+                <div ng-if="rows.Function=='DateAdjustment'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/DateAdjustmentModal.html'"></div>
+                <div ng-if="rows.Function=='Comments'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/CommentsModal.html'"></div>
+                <div ng-if="rows.Function=='MathsFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/MathsFunctionsModal.html'"></div>
+                <div ng-if="rows.Function=='Factors'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/FactorsModal.html'"></div>
+                <div ng-if="rows.Function=='ArrayFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ArrayFunctionsModal.html'"></div>
+                <div ng-if="rows.Function=='Maths' ||rows.Function=='Function'">
+                    <md-content class="md-no-momentum" layout-margin="">
+                        <md-button ng-click="FunctionButtonClick('lg', colIndex, rowIndex, userForm)" class="md-accent">
+                            Click to Update Function
+                        </md-button>
+                    </md-content>
+                </div>
+            </fieldset>
+        </md-content>
+        </div>       
+    </div>
 </div>
+    

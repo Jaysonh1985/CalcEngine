@@ -1,14 +1,14 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Type</label>
-        <md-select ng:model="Parameter[0].Type" name="StringFunctionsType_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly" required>
+        <md-select ng:model="Parameter[0].Type" name="StringFunctionsType_{{$parent.$index}}_{{$index}}"  id="StringFunctionsType_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly" required>
             <md-option value="Left">Left</md-option>
             <md-option value="Right">Right</md-option>
             <md-option value="Len">Length</md-option>
             <md-option value="Find">Find</md-option>
             <md-option value="Set">Set String</md-option>
         </md-select>
-        <div ng-messages="form['StringFunctionsType_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+        <div ng-messages="form['StringFunctionsType_'+ {{$parent.$index}} + '_' + {{$index}}].$error" ng-if="!showHints">
             <div ng-message="required">Type is required.</div>
         </div>
     </md-input-container>
