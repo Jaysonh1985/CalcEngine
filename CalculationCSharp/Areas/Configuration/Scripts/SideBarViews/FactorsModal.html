@@ -1,115 +1,103 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Table Name</label>
-        <input ng-model="Parameter[0].TableName" required>
+        <input ng-model="rows.Parameter[0].TableName" name="FactorsTableName_{{$parent.$index}}_{{$index}}" id="FactorsTableName_{{$parent.$index}}_{{$index}}" required>
     </md-input-container>
 </div>
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Lookup Type</label>
-        <md-select required ng:model="Parameter[0].LookupType" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].LookupType" name="FactorsLookupType_{{$parent.$index}}_{{$index}}" id="FactorsLookupType_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
             <md-option value="String">String</md-option>
         </md-select>
-        <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
-            <div ng-message="required">Type is required.</div>
-        </div>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].LookupType == 'Date'">
+<div ng-if="rows.Parameter[0].LookupType == 'Date'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Lookup Value</label>
-        <input ng-model="Parameter[0].LookupValue"  uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].LookupValue" name="FactorsLookupValue_{{$parent.$index}}_{{$index}}" id="FactorsLookupValue_{{$parent.$index}}_{{$index}}" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].LookupType == 'Decimal'">
+<div ng-if="rows.Parameter[0].LookupType == 'Decimal'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Lookup Value</label>
-        <input ng-model="Parameter[0].LookupValue" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].LookupValue" name="FactorsLookupValue_{{$parent.$index}}_{{$index}}" id="FactorsLookupValue_{{$parent.$index}}_{{$index}}" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].LookupType == 'String'">
+<div ng-if="rows.Parameter[0].LookupType == 'String'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Lookup Value</label>
-        <input ng-model="Parameter[0].LookupValue" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].LookupValue" name="FactorsLookupValue_{{$parent.$index}}_{{$index}}" id="FactorsLookupValue_{{$parent.$index}}_{{$index}}"  uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Output Type</label>
-        <md-select required ng:model="Parameter[0].OutputType" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].OutputType" name="FactorsOutputType_{{$parent.$index}}_{{$index}}" id="FactorsOutputType_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
             <md-option value="String">String</md-option>
         </md-select>
-        <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
-            <div ng-message="required">Type is required.</div>
-        </div>
     </md-input-container>
 </div>
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Required?</label>
-        <md-select required ng:model="Parameter[0].RowMatch" ng-disabled="viewOnly">
+        <md-select  ng:model="rows.Parameter[0].RowMatch" name="FactorsRowMatch_{{$parent.$index}}_{{$index}}" id="FactorsRowMatch_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly" required>
             <md-option value=""></md-option>
             <md-option value="True">True</md-option>
             <md-option value="False">False</md-option>
         </md-select>
-        <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
-            <div ng-message="required">Type is required.</div>
-        </div>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].RowMatch == 'True'">
+<div ng-if="rows.Parameter[0].RowMatch == 'True'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Row Number</label>
-        <input ng-model="Parameter[0].RowMatchRowNo" required>
+        <input ng-model="rows.Parameter[0].RowMatchRowNo" name="FactorsRowMatchRowNo_{{$parent.$index}}_{{$index}}" id="FactorsRowMatchRowNo_{{$parent.$index}}_{{$index}}" required>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].RowMatch == 'True'">
+<div ng-if="rows.Parameter[0].RowMatch == 'True'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Lookup Type</label>
-        <md-select required ng:model="Parameter[0].RowMatchLookupType" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].RowMatchLookupType" name="FactorsRowMatchRowLookupType_{{$parent.$index}}_{{$index}}" id="FactorsRowMatchRowLookupType_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
             <md-option value="String">String</md-option>
         </md-select>
-        <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
-            <div ng-message="required">Type is required.</div>
-        </div>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].RowMatch == 'True' && Parameter[0].RowMatchLookupType == 'Date'">
+<div ng-if="rows.Parameter[0].RowMatch == 'True' && rows.Parameter[0].RowMatchLookupType == 'Date'">
         <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Value</label>
-        <input ng-model="Parameter[0].RowMatchValue" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].RowMatchValue" name="FactorsRowMatchValue_{{$parent.$index}}_{{$index}}" id="FactorsRowMatchValue_{{$parent.$index}}_{{$index}}" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].RowMatch == 'True' && Parameter[0].RowMatchLookupType == 'Decimal'">
+<div ng-if="rows.Parameter[0].RowMatch == 'True' && rows.Parameter[0].RowMatchLookupType == 'Decimal'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Value</label>
-        <input ng-model="Parameter[0].RowMatchValue" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].RowMatchValue" name="FactorsRowMatchValue_{{$parent.$index}}_{{$index}}" id="FactorsRowMatchValue_{{$parent.$index}}_{{$index}}" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].RowMatch == 'True' && Parameter[0].RowMatchLookupType == 'String'">
+<div ng-if="rows.Parameter[0].RowMatch == 'True' && rows.Parameter[0].RowMatchLookupType == 'String'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Value</label>
-        <input ng-model="Parameter[0].RowMatchValue" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].RowMatchValue" name="FactorsRowMatchValue_{{$parent.$index}}_{{$index}}" id="FactorsRowMatchValue_{{$parent.$index}}_{{$index}}" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].RowMatch == 'False'" class="form-group">
+<div ng-if="rows.Parameter[0].RowMatch == 'False'" class="form-group">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Column Number</label>
-        <input ng-model="Parameter[0].ColumnNo"required>
+        <input ng-model="rows.Parameter[0].ColumnNo" name="FactorsColumnNo_{{$parent.$index}}_{{$index}}" id="FactorsColumnNo_{{$parent.$index}}_{{$index}}" required>
     </md-input-container>
 </div>
-<div ng-if ="Parameter[0].LookupType == 'Decimal'" class="form-group">
+<div ng-if ="rows.Parameter[0].LookupType == 'Decimal'" class="form-group">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Interpolate Years and Months</label>
-        <input ng-model="Parameter[0].Interpolate" required>
+        <input ng-model="rows.Parameter[0].Interpolate" name="FactorsInterpolate_{{$parent.$index}}_{{$index}}" id="FactorsInterpolate_{{$parent.$index}}_{{$index}}" required>
     </md-input-container>
 </div>

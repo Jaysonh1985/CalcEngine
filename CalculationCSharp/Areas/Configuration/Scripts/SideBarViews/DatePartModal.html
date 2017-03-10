@@ -1,20 +1,17 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Date Part</label>
-        <md-select required ng:model="Parameter[0].Part" name="DatePart_{{colIndex}}_{{rowIndex}}" id="DatePart_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].Part" name="DatePartPart_{{colIndex}}_{{rowIndex}}" id="DatePartPart_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Year">Year</md-option>
             <md-option value="Month">Month</md-option>
             <md-option value="Day">Day</md-option>
         </md-select>
-        <div ng-messages="form['DatePart_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
-            <div ng-message="required">Type is required.</div>
-        </div>
     </md-input-container>
 </div>
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Date</label>
-        <input ng-model="Parameter[0].Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].Date1" name="DatePartDate1_{{colIndex}}_{{rowIndex}}" id="DatePartDate1_{{colIndex}}_{{rowIndex}}"  uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>

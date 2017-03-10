@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Data Type</label>
-        <md-select required ng:model="Parameter[0].Datatype" name="Return_{{colIndex}}_{{rowIndex}}" id="Return_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].Datatype" name="ReturnType_{{$parent.$index}}_{{$index}}"  id="ReturnType_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="String">String</md-option>
             <md-option value="Date">Date</md-option>
@@ -15,18 +15,18 @@
 <div ng-if="Parameter[0].Datatype == 'Date'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Variable to Return</label>
-        <input ng-model="Parameter[0].Variable" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8">
+        <input ng-model="rows.Parameter[0].Variable" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$index}}_{{$index}}"  id="ReturnVariable_{{$parent.$index}}_{{$index}}">
     </md-input-container>
 </div>
 <div ng-if="Parameter[0].Datatype == 'Decimal'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Variable to Return</label>
-        <input ng-model="Parameter[0].Variable" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8">
+        <input ng-model="rows.Parameter[0].Variable" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$index}}_{{$index}}"  id="ReturnVariable_{{$parent.$index}}_{{$index}}">
     </md-input-container>
 </div>
 <div ng-if="Parameter[0].Datatype == 'String'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Variable to Return</label>
-        <input ng-model="Parameter[0].Variable" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8">
+        <input ng-model="rows.Parameter[0].Variable" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$index}}_{{$index}}"  id="ReturnVariable_{{$parent.$index}}_{{$index}}">
     </md-input-container>
 </div>

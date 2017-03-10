@@ -1,54 +1,48 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Incoming Array Type</label>
-        <md-select required ng:model="Parameter[0].LookupType" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].LookupType"  name="ArrayFunctionLookupType_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionLookupType_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
             <!--<md-option value="String">String</md-option>-->
         </md-select>
-        <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
-            <div ng-message="required">Type is required.</div>
-        </div>
     </md-input-container>
 </div>
 
-<div ng-if="Parameter[0].LookupType == 'Date'">
+<div ng-if="rows.Parameter[0].LookupType == 'Date'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Value</label>
-        <input ng-model="Parameter[0].LookupValue" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].LookupValue" name="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].LookupType == 'Decimal'">
+<div ng-if="rows.Parameter[0].LookupType == 'Decimal'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Value</label>
-        <input ng-model="Parameter[0].LookupValue" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].LookupValue" name="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}"  uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].LookupType == 'String'">
+<div ng-if="rows.Parameter[0].LookupType == 'String'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Value</label>
-        <input ng-model="Parameter[0].LookupValue" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].LookupValue" name="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}"  uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].LookupType == 'Date'">
+<div ng-if="rows.Parameter[0].LookupType == 'Date'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Function</label>
-        <md-select required ng:model="Parameter[0].Function" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionFunction_{{colIndex}}_{{rowIndex}}"  ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="FirstDate">First Date</md-option>
             <md-option value="LastDate">Last Date</md-option>
             <md-option value="Count">Count Array Size</md-option>
         </md-select>
-        <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
-            <div ng-message="required">Type is required.</div>
-        </div>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].LookupType == 'Decimal'" ng-disabled="viewOnly">
+<div ng-if="rows.Parameter[0].LookupType == 'Decimal'" ng-disabled="viewOnly">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Function</label>
-        <md-select required ng:model="Parameter[0].Function">
+        <md-select required ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionFunction_{{colIndex}}_{{rowIndex}}" >
             <md-option value=""></md-option>
             <md-option value="Sum">Sum</md-option>
             <md-option value="Product">Product</md-option>
@@ -57,27 +51,20 @@
             <md-option value="TotalPeriod">Total Period</md-option>
             <md-option value="Count">Count Array Size</md-option>
         </md-select>
-        <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
-            <div ng-message="required">Type is required.</div>
-        </div>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].Function == 'TotalPeriod' && Parameter[0].LookupType == 'Decimal'" >
+<div ng-if="rows.Parameter[0].Function == 'TotalPeriod' && rows.Parameter[0].LookupType == 'Decimal'" >
     <md-input-container class="md-block" flex-gt-sm>
         <label>Period Type</label>
-        <md-select required ng:model="Parameter[0].PeriodType" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].PeriodType" name="ArrayFunctionPeriodType_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionPeriodType_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="YearsDays">Years Days</md-option>
             <md-option value="YearsMonths">Years Months</md-option>
         </md-select>
-        <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
-            <div ng-message="required">Type is required.</div>
-        </div>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].LookupType == 'String'">
+<div ng-if="rows.Parameter[0].LookupType == 'String'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Value</label>
-
     </md-input-container>
 </div>

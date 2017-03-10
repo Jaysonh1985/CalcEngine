@@ -1,10 +1,10 @@
 ﻿<div flex="20">
-    <div ng-repeat="Category in config">
+    <div ng-repeat="Category in config track by $index"">
         <div ng-repeat="rows in Category.Functions">
             <md-toolbar layout="row" class="md-theme-black">
                 <div ng-if="Category.Name != 'Input' && rows.Function == null">
                     <md-input-container class="md-block" flex-gt-sm>
-                        <md-select ng-model="rows.Function" required>
+                        <md-select ng-model="rows.Function" name="Function_{{Category.ID}}_{{rows.ID}}"  id="Function_{{Category.ID}}_{{rows.ID}}" required>
                             <md-option value="ArrayFunctions">Array Functions</md-option>
                             <md-option value="Comments">Comment</md-option>
                             <md-option value="DateAdjustment">Date Adjustment</md-option>
@@ -22,7 +22,7 @@
                 </div>
                 <div ng-if="Category.Name == 'Input' && rows.Function == null">
                     <md-input-container class="md-block" flex-gt-sm>
-                        <md-select ng-model="rows.Function">
+                        <md-select ng-model="rows.Function" name="Function_{{$parent.$index}}_{{$index}}"  id="Function_{{$parent.$index}}_{{$index}}">
                             <md-option value="Input">Input</md-option>
                         </md-select>
                     </md-input-container>
@@ -32,19 +32,18 @@
                         {{rows.Function}}
                     </md-input-container>
                 </div>
-
             </md-toolbar>
             <md-content class="md-no-momentum" layout-margin="">
                 <div>
                     <md-input-container class="md-block" style="font-size:larger;" flex-gt-sm>
                         <label>Variable Name</label>
-                        <input ng-model="rows.Name" required>
+                        <input ng-model="rows.Name" name="Name_{{$parent.$index}}_{{$index}}"  id="Name_{{$parent.$index}}_{{$index}}" required>
                     </md-input-container>
                 </div>
                 <div>
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Expected Result</label>
-                        <input ng-model="rows.ExpectedResult">
+                        <input ng-model="rows.ExpectedResult" name="ExpectedResult_{{$parent.$index}}_{{$index}}"  id="ExpectedResult_{{$parent.$index}}_{{$index}}">
                     </md-input-container>
                 </div>
                 <div>
@@ -55,13 +54,11 @@
                     </md-content>
                 </div>
             </md-content>
-
             <md-content class="md-no-momentum" layout-margin="">
-            <fieldset ng-disabled="viewOnly">
                 <div ng-if="rows.Function=='ErrorsWarnings'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ErrorsWarningsModal.html'"></div>
                 <div ng-if="rows.Function=='StringFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/StringFunctionsModal.html'"></div>
                 <div ng-if="rows.Function=='Input'" ng-include="'/Areas/Configuration/Scripts/Input/InputModal.html'"></div>
-                <div ng-if="rows.Function=='Return'" ng-include="'/Areas/Configuration/Scripts/Return/ReturnModal.html'"></div>
+                <div ng-if="rows.Function=='Return'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ReturnModal.html'"></div>
                 <div ng-if="rows.Function=='Period'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/PeriodModal.html'"></div>
                 <div ng-if="rows.Function=='DatePart'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/DatePartModal.html'"></div>
                 <div ng-if="rows.Function=='DateAdjustment'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/DateAdjustmentModal.html'"></div>
@@ -76,7 +73,6 @@
                         </md-button>
                     </md-content>
                 </div>
-            </fieldset>
         </md-content>
         </div>       
     </div>

@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Variable</label>
-        <input ng-model="Parameter[0].key" ng-pattern="noSpacesPattern" required>
+        <input ng-model="Parameter[0].key" ng-pattern="noSpacesPattern" name="InputVariable_{{$parent.$index}}_{{$index}}"  id="InputVariable_{{$parent.$index}}_{{$index}}" required>
     </md-input-container>
 
     <!--<label for="model" class="control-label col-md-2">Variable</label>
@@ -13,13 +13,13 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Form Label</label>
-        <input ng-model="Parameter[0].templateOptions.label" required>
+        <input ng-model="Parameter[0].templateOptions.label" name="InputLabel_{{$parent.$index}}_{{$index}}"  id="InputLabel_{{$parent.$index}}_{{$index}}" required>
     </md-input-container>
 
 </div>
 <div>
     <label>Type</label>
-    <md-select required ng:model="Parameter[0].templateOptions.type" name="ErrorWarning_{{colIndex}}_{{rowIndex}}" id="ErrorWarning_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
+    <md-select ng:model="Parameter[0].templateOptions.type" name="InputType_{{$parent.$index}}_{{$index}}"  id="InputType_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly" required>
         <md-option value=""></md-option>
         <md-option value="String">String</md-option>
         <md-option value="Decimal">Decimal</md-option>
