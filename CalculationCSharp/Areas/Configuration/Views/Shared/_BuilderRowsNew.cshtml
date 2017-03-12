@@ -1,27 +1,15 @@
 ﻿<md-list flex="" ng-model="Category.Functions" ui-tree-nodes="" >
-    <md-list-item class="md-dense" ng-repeat="rows in Category.Functions" ng-click="selectRow($event, $index, $parent.$index)" 
+    <md-list-item class="md-dense" ng-repeat="rows in Category.Functions" ng-click="selectRow($event, $index, $parent.$index)"  ng-right-click="selectRow($event, $index, $parent.$index)"  
                   ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments', 'standardRow' : rows.Function != 'Comments'}"
-                  style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px;" ui-tree-node>
+                  style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px;" context-menu="rowMenuOptions" ui-tree-node>
         <div id="functionrowWrapper">
-            <div class="slide-container text-center" style="width:16%">
-                <a class="pull-left btn" ng-if="Category.Name != 'Input'">
-                    <span  class="glyphicon glyphicon" ui-tree-handle><img ng-hide="viewOnly" src="~/Images/checklist.png"></span>
-                </a>
-                <a class="pull-left btn" data-nodrag ng-click="AddFunctionRows($parent.$index, $index)">
-                    <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/plus.png"></span>
-                </a>
-                <a ng-show="isRowSelected($index, $parent.$index) && $index > 0" class="pull-left btn" data-nodrag ng-click="DeleteFunction($parent.$index, $index)">
-                    <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/multiply2.png"></span>
-                </a>
-                <a ng-show="isRowSelected($index, $parent.$index)" class="pull-left btn" data-nodrag ng-click="CopyFunction($parent.$index, $index)">
-                    <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/copy.png"></span>
-                </a>
-                <a ng-show="isRowSelected($index, $parent.$index)" class="pull-left btn" data-nodrag ng-click="PasteFunction($parent.$index, $index)">
-                    <span class="glyphicon glyphicon"><img ng-hide="viewOnly" src="~/Images/paste-clipboard.png"></span>
+            <div class="slide-container text-center" style="width:3%">
+                <a class="pull-left" ng-if="Category.Name != 'Input'">
+                    <span ui-tree-handle><img ng-hide="viewOnly" src="~/Images/checklist.png"></span>
                 </a>
             </div>
             <div class="v-separator"><h1></h1></div>
-            <div class="slide-container" style="width:11%">
+            <div class="slide-container" style="width:18%">
                 <h6> Function: &nbsp;</h6>
                 <h4>{{ rows.Function }}</h4>
             </div>
@@ -29,7 +17,7 @@
                 <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
             </a>
             <div class="v-separator"><h1></h1></div>
-                <div class="slide-container" style="width:20%">
+                <div class="slide-container" style="width:25%">
                     <h6>Name: &nbsp;</h6>
                     <h4>{{ rows.Name }}</h4>
                 </div>
@@ -37,7 +25,7 @@
             <img ng-if="rows.Pass == 'false'" src="~/Images/multiply.png">
 
             <div class="v-separator"><h1></h1></div>
-            <div class="slide-container" style="width:49%">
+            <div class="slide-container" style="width:50%">
                 <h6>Output: &nbsp;</h6>
                 <h4>{{ rows.Output }}</h4>
             </div>

@@ -2,7 +2,7 @@
 
 // application global namespace
 var sulhome = sulhome || {};
-sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRoute', 'ui.sortable', 'gridster', 'dndLists', 'ngAnimate', 'ui.tree', 'dynamic-form', 'ds.objectDiff', 'ngCsv', 'ngSanitize', 'ngCsvImport', 'ngIdle', 'angular.filter', 'ngMaterial', 'ngMessages'])
+sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRoute', 'ui.sortable', 'gridster', 'dndLists', 'ngAnimate', 'ui.tree', 'dynamic-form', 'ds.objectDiff', 'ngCsv', 'ngSanitize', 'ngCsvImport', 'ngIdle', 'angular.filter', 'ngMaterial', 'ngMessages','ui.bootstrap.contextMenu'])
     .config( function ($routeProvider) {
         $routeProvider.when('/', {
             controller: 'configCtrl',
@@ -100,6 +100,18 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
     init();
 
 })
+sulhome.kanbanBoardApp.directive('ngRightClick', function($parse) {
+    return function(scope, element, attrs) {
+        var fn = $parse(attrs.ngRightClick);
+        element.bind('contextmenu', function(event) {
+            scope.$apply(function() {
+                event.preventDefault();
+                fn(scope, {$event:event});
+            });
+        });
+    };
+});
+
 //Timeout config
 sulhome.kanbanBoardApp.config(function(IdleProvider, KeepaliveProvider) {
      IdleProvider.idle(20*60-10);

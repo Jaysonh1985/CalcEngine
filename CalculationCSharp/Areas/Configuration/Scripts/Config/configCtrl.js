@@ -164,18 +164,33 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         document.getElementById(elementName).focus();
     };
 
+    $scope.rowMenuOptions = [
+        ['Add Row', function ($itemScope) {
+            $scope.AddFunctionRows($itemScope.$parentNodeScope.$index, $itemScope.$index);
+        }],
+        ['Delete Row', function ($itemScope) {
+            $scope.DeleteFunction($itemScope.$parentNodeScope.$index, $itemScope.$index);
+        }],
+        ['Copy Rows', function ($itemScope) {
+            $scope.CopyFunction($itemScope.$parentNodeScope.$index, $itemScope.$index);
+        }],
+        ['Paste Rows', function ($itemScope) {
+            $scope.PasteFunction($itemScope.$parentNodeScope.$index, $itemScope.$index);
+        }],
+    ];
 
     $scope.AddFunctionRows = function (colIndex, index) {
         $scope.Function = configFunctionFactory.isFunction($location.absUrl());
         var item;
         item = buildFunction(colIndex, $scope.config);
         $scope.config[colIndex].Functions.splice(index + 1, 0, item);
+        toastr.success("Rows Added", "Success");
     };
 
     $scope.CopyFunction = function (colIndex, index) {
         var selectedRows = getSelectedRows(colIndex);
         $window.localStorage["Copy"] = JSON.stringify(selectedRows);
-        toastr.success("Rows copied", "Success");
+        toastr.success("Rows Copied", "Success");
     };
 
     $scope.PasteFunction = function (colIndex, index) {
@@ -187,7 +202,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $scope.config[colIndex].Functions.splice(index + 1, 0, item);
             index = index + 1;
         });
-        toastr.success("Rows pasted", "Success");
+        toastr.success("Rows Pasted", "Success");
         $scope.form.$setDirty();
     };
 
@@ -202,16 +217,36 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 $scope.config[colIndex].Functions.splice(value, 1);
             });
             resetSelection();
+            toastr.success("Rows Deleted", "Success");
         }
         $scope.form.$setDirty();
     };
+    $scope.columnMenuOptions = [
+        ['Add Category', function ($itemScope) {
+            $scope.AddCategoryRows($itemScope.$index);
+        }],
+        ['Add Rows', function ($itemScope) {
+            $scope.AddFunctionRows($itemScope.$index);
+        }],
+        ['Delete Category', function ($itemScope) {
+            $scope.DeleteCategory($itemScope.$index);
+        }],
+        ['Copy Category', function ($itemScope) {
+            $scope.CopyCategory($itemScope.$index);
+        }],
+        ['Update Details', function ($itemScope) {
+            $scope.GroupButtonClick('lg', $itemScope.$index);
+        }],
+        ['Add Category Logic', function ($itemScope) {
+            $scope.CategoryLogicButtonClick('lg', $itemScope.$index);
+        }],
+        ['Move Category Down', function ($itemScope) {
+            $scope.MoveDownCategory($itemScope.$index);
+        }],
+    ];
     //Categories
     $scope.AddCategoryRows = function (colIndex) {
         var item = null;
-        if (colIndex = 0)
-        {
-            colIndex = 1;
-        }
         var FunctionsValue = [buildFunction(colIndex, $scope.config)];
         item = {
             ID: colIndex + 1,
@@ -233,11 +268,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.form.$setDirty();
     };
 
-    $scope.MoveDownCategory = function (Index, e) {
-        if (e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
+    $scope.MoveDownCategory = function (Index) {
         var Category = $scope.config[Index];
         var item = null;
         item = angular.copy(Category);
