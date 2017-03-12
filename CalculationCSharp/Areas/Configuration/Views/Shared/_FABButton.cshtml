@@ -1,0 +1,86 @@
+﻿<md-fab-speed-dial ng-hide="false" md-direction="up" md-open="FabOpen"
+                   class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': true}"
+                   ng-mouseenter="FabOpen=true" ng-mouseleave="FabOpen=false">
+    <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-warn">
+            <md-icon md-svg-src="/Images/menu.svg"> </md-icon>
+        </md-button>
+    </md-fab-trigger>
+
+    <md-fab-actions>
+        <md-button ng-disabled="form.$invalid || viewOnly" aria-label="Calculate" class="md-fab md-raised md-mini"
+                   ng-click="CalcButtonClick(form)">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Calculate
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/calculator.svg"> </md-icon>
+        </md-button>
+        <md-button ng-disabled="!form.$dirty || form.$invalid || viewOnly" aria-label="Save" class="md-fab md-raised md-mini"
+                   ng-click="SaveButtonClick()">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Save
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/save.svg"> </md-icon>
+        </md-button>
+        <md-button ng-disabled="viewOnly" aria-label="Exit" class="md-fab md-raised md-mini"
+                   ng-click="ExitButton()">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Exit
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/exit.svg"> </md-icon>
+        </md-button>
+        <md-button ng-disabled="form.$dirty || form.$invalid || viewOnly" aria-label="Regression" class="md-fab md-raised md-mini"
+                   ng-click="RegressionButtonClick('lg', form)">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Regression
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/check-symbol.svg"> </md-icon>
+        </md-button>
+        <md-button ng-disabled="form.$dirty || form.$invalid || viewOnly" aria-label="Specification" class="md-fab md-raised md-mini"
+                   ng-click="SpecButtonClick(form)" csv-header="getHeader" filename="Specification.csv">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Specification
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/file.svg"> </md-icon>
+        </md-button>
+        <md-button ng-disabled="viewOnly" aria-label="History" class="md-fab md-raised md-mini"
+                   ng-click="HistoryButtonClick('lg')">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                History
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/history.svg"> </md-icon>
+        </md-button>
+        <md-button aria-label="CloseAll" class="md-fab md-raised md-mini"
+                   ng-click="CloseAllButton()">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Close All
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/directional-arrow.svg"> </md-icon>
+        </md-button>
+        <md-button aria-label="OpenAll" class="md-fab md-raised md-mini"
+                   ng-click="OpenAllButton()">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Open All
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/down-arrow.svg"> </md-icon>
+        </md-button>
+        <md-button ng-if="Function == true" aria-label="Impact" class="md-fab md-raised md-mini"
+                   ng-click="ImpactAssessmentButtonClick()">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Impact Assessment
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/list.svg"> </md-icon>
+        </md-button>
+
+
+    </md-fab-actions>
+</md-fab-speed-dial>

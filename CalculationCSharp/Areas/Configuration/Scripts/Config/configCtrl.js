@@ -3,6 +3,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
+    $scope.FabOpen = false;
     $scope.isLoading = true;
     $scope.oneAtATime = false;
     $scope.Function = false;

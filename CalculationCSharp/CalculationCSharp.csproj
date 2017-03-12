@@ -353,6 +353,7 @@
     <Content Include="Areas\Configuration\Scripts\Config\configCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Logic\LogicModal.html" />
     <Content Include="Areas\Configuration\Scripts\Config\configMenuCtrl.js" />
+    <None Include="Areas\Configuration\Views\Shared\_FABButton.cshtml" />
     <Content Include="Areas\Project\Scripts\Factories\fileUploadService.js" />
     <Content Include="Areas\Project\Scripts\projectMenuAddCalcCtrl.js" />
     <Content Include="Areas\Project\Scripts\ProjectMenuAddCalcModal.html" />
@@ -649,6 +650,7 @@
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="Content\v-accordion.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\calculator.svg" />
     <Content Include="Images\checked.png" />
     <Content Include="Images\checklist.png" />
     <Content Include="Images\copy.png" />
@@ -744,7 +746,6 @@
     <Content Include="Areas\Configuration\Views\Shared\_Menu.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_Builder.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_InputForm.cshtml" />
-    <Content Include="Areas\Configuration\Views\Shared\_SideBar.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_SideBarRight.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_BuilderRows.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_BuilderRowsNew.cshtml" />

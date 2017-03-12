@@ -1,8 +1,7 @@
 ﻿<md-content  ng-controller="configCtrl" layout-gt-sm="row" layout="row" 
        ng-cloak> 
     <ng-form name="form" role="form" ng-submit="calcbuttonclick(form)" layout="row" style="width:100%">
-        @*@Html.Partial("_sidebar")*@                  
-        <md-content flex="80" layout-padding="" layout="column">
+        <md-content flex="80" layout-padding="" layout="column" style="padding:0px">
             <h3 class="pull-left"><a>@ViewData["SchemeName"] - @ViewData["CalcName"]</a></h3>
             <ul>
                 <li ng-repeat="(key, errors) in form.$error track by $index">
@@ -15,9 +14,10 @@
             <div ui-tree >
                 <uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
                     <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" layout="column" ui-tree-node>
-                        <uib-accordion-heading>
+                        <uib-accordion-heading>                         
                             <div class="slide-container">
                                 {{Category.Name}}
+                               
                             </div>
                             <div class="slide-container pull-right">
                                 <table class="table-borderless" ng-hide="viewOnly">
@@ -38,7 +38,8 @@
                     </div>
                 </uib-accordion>
             </div>
+            @Html.Partial("_FABButton")
         </md-content>    
-        @Html.Partial("_SideBarRight")
+        @Html.Partial("_SideBarRight")   
     </ng-form>
 </md-content>
