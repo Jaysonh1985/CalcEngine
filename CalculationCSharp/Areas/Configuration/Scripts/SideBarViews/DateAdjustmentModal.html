@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Adjustment Type</label>
-        <md-select required ng:model="rows.Parameter[0].Type" name="DateAdjustmentType_{{colIndex}}_{{rowIndex}}" id="DateAdjustmentType_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].Type" name="DateAdjustmentType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="DateAdjustmentType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Add">Add</md-option>
             <md-option value="Adjust">Adjust</md-option>
@@ -13,16 +13,17 @@
         </md-select>
     </md-input-container>
 </div>
-<div ng-if="rows.Parameter[0].Type != 'Today' ">
-    <md-input-container class="md-block" flex-gt-sm>
+<div ng-if="rows.Parameter[0].Type != 'Today'">
+    <md-input-container  class="md-block" flex-gt-sm>
         <label>Start Date</label>
-        <input ng-model="rows.Parameter[0].Date1" name="DateAdjustmentDate1_{{colIndex}}_{{rowIndex}}" id="DateAdjustmentDate1_{{colIndex}}_{{rowIndex}}" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].Date1" name="DateAdjustmentDate1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="DateAdjustmentDate1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
+    
 </div>
 <div ng-if="rows.Parameter[0].Type == 'Earlier' || rows.Parameter[0].Type == 'Later' || rows.Parameter[0].Type == 'DatesBetween'" class="form-group">
     <md-input-container class="md-block" flex-gt-sm>
         <label>End Date</label>
-        <input ng-model="rows.Parameter[0].Date2"  name="DateAdjustmentDate2_{{colIndex}}_{{rowIndex}}" id="DateAdjustmentDate2_{{colIndex}}_{{rowIndex}}"  uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].Date2"  name="DateAdjustmentDate2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="DateAdjustmentDate2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
 <fieldset ng-if="rows.Parameter[0].Type == 'Add'|| rows.Parameter[0].Type =='Subtract' ">
@@ -30,7 +31,7 @@
     <div>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Data Type</label>
-            <md-select required ng:model="rows.Parameter[0].PeriodType" name="DateAdjustmentPeriodType_{{colIndex}}_{{rowIndex}}" id="DateAdjustmentPeriodType_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
+            <md-select required ng:model="rows.Parameter[0].PeriodType" name="DateAdjustmentPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="DateAdjustmentPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
                 <md-option value=""></md-option>
                 <md-option value="YearsDays">Years Days</md-option>
                 <md-option value="YearsMonths">Years Months</md-option>
@@ -43,7 +44,7 @@
     <div class="form-group">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Period</label>
-            <input ng-model="rows.Parameter[0].Period" name="DateAdjustmentPeriod_{{colIndex}}_{{rowIndex}}" id="DateAdjustmentPeriod_{{colIndex}}_{{rowIndex}}" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+            <input ng-model="rows.Parameter[0].Period" name="DateAdjustmentPeriod_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="DateAdjustmentPeriod_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
         </md-input-container>
     </div>
 </fieldset>
@@ -52,7 +53,7 @@
     <div ng-if="rows.Parameter[0].Type == 'Adjust'" class="form-group">
         <label for="inclusive" class="control-label col-md-2">Adjustment</label>
         <div class="col-sm-9">
-            <md-select ng:model="rows.period.Adjustment" name="DateAdjustmentPeriodAdjustment_{{colIndex}}_{{rowIndex}}" id="DateAdjustmentPeriodAdjustment_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly" required>
+            <md-select ng:model="rows.period.Adjustment" name="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-disabled="viewOnly" required>
                 <md-option value="Less">Before</md-option>
                 <md-option value="LessEqual">On or Before</md-option>
                 <md-option value="Greater">After</md-option>
@@ -64,13 +65,13 @@
     <div>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Select Day</label>
-            <input ng-model="rows.Parameter[0].Day" name="DateAdjustmentDay_{{colIndex}}_{{rowIndex}}" id="DateAdjustmentDay_{{colIndex}}_{{rowIndex}}" required>
+            <input ng-model="rows.Parameter[0].Day" name="DateAdjustmentDay_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="DateAdjustmentDay_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
         </md-input-container>
     </div>
     <div>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Select Month</label>
-            <input ng-model="rows.Parameter[0].Month" name="DateAdjustmentMonth_{{colIndex}}_{{rowIndex}}" id="DateAdjustmentMonth_{{colIndex}}_{{rowIndex}}" required>
+            <input ng-model="rows.Parameter[0].Month" name="DateAdjustmentMonth_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="DateAdjustmentMonth_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
         </md-input-container>
     </div>
 </fieldset>

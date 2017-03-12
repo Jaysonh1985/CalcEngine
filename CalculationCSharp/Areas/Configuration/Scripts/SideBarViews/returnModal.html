@@ -1,32 +1,32 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Data Type</label>
-        <md-select required ng:model="rows.Parameter[0].Datatype" name="ReturnType_{{$parent.$index}}_{{$index}}"  id="ReturnType_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly">
+        <md-select  ng:model="rows.Parameter[0].Datatype" name="ReturnType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="ReturnType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" required>
             <md-option value=""></md-option>
             <md-option value="String">String</md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
         </md-select>
-        <div ng-messages="form['Return_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+        <!--<div ng-messages="form['Return_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
             <div ng-message="required">Type is required.</div>
-        </div>
+        </div>-->
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].Datatype == 'Date'">
+<div ng-if="rows.Parameter[0].Datatype == 'Date'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Variable to Return</label>
-        <input ng-model="rows.Parameter[0].Variable" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$index}}_{{$index}}"  id="ReturnVariable_{{$parent.$index}}_{{$index}}">
+        <input ng-model="rows.Parameter[0].Variable" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="ReturnVariable_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].Datatype == 'Decimal'">
+<div ng-if="rows.Parameter[0].Datatype == 'Decimal'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Variable to Return</label>
-        <input ng-model="rows.Parameter[0].Variable" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$index}}_{{$index}}"  id="ReturnVariable_{{$parent.$index}}_{{$index}}">
+        <input ng-model="rows.Parameter[0].Variable" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="ReturnVariable_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
     </md-input-container>
 </div>
-<div ng-if="Parameter[0].Datatype == 'String'">
+<div ng-if="rows.Parameter[0].Datatype == 'String'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Variable to Return</label>
-        <input ng-model="rows.Parameter[0].Variable" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$index}}_{{$index}}"  id="ReturnVariable_{{$parent.$index}}_{{$index}}">
+        <input ng-model="rows.Parameter[0].Variable" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="ReturnVariable_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
     </md-input-container>
 </div>

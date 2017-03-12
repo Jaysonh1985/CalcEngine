@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Data Type</label>
-        <md-select required ng:model="rows.Parameter[0].DateAdjustmentType" name="PeriodType_{{$parent.$index}}_{{$index}}"  id="PeriodType_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].DateAdjustmentType" name="PeriodType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="PeriodType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="YearsDays">Years Days</md-option>
             <md-option value="YearsMonths">Years Months</md-option>
@@ -9,48 +9,48 @@
             <md-option value="Months">Months</md-option>
             <md-option value="Days">Days</md-option>
         </md-select>
-        <div ng-messages="form['Period_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+        <!--<div ng-messages="form['Period_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
             <div ng-message="required">Type is required.</div>
-        </div>
+        </div>-->
     </md-input-container>
 </div>
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Start Date</label>
-        <input ng-model="rows.Parameter[0].Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" name="PeriodDate1_{{$parent.$index}}_{{$index}}"  id="PeriodDate1_{{$parent.$index}}_{{$index}}" required>
+        <input ng-model="rows.Parameter[0].Date1" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" name="PeriodDate1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="PeriodDate1_{{$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
     </md-input-container>
 </div>
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>End Date</label>
-        <input ng-model="rows.Parameter[0].Date2" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" name="PeriodDate2_{{$parent.$index}}_{{$index}}"  id="PeriodDate2_{{$parent.$index}}_{{$index}}" required>
+        <input ng-model="rows.Parameter[0].Date2" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" name="PeriodDate2_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="PeriodDate2_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
     </md-input-container>
 </div>
 <legend>Rounding and Adjustment</legend>
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Inclusive</label>
-        <md-select required ng:model="rows.Parameter[0].Inclusive" name="PeriodInclusive_{{$parent.$index}}_{{$index}}"  id="PeriodInclusive_{{$parent.$index}}_{{$index}}"  ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].Inclusive" name="PeriodInclusive_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="PeriodInclusive_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="True">True</md-option>
             <md-option value="False">False</md-option>
         </md-select>
-        <div ng-messages="form['Period_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+        <!--<div ng-messages="form['Period_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
             <div ng-message="required">Type is required.</div>
-        </div>
+        </div>-->
     </md-input-container>
 </div>
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Days in Year</label>
-        <md-select required ng:model="rows.Parameter[0].DaysinYear" name="PeriodDaysinYear_{{$parent.$index}}_{{$index}}"  id="PeriodDaysinYear_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly" >
+        <md-select required ng:model="rows.Parameter[0].DaysinYear" name="PeriodDaysinYear_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="PeriodDaysinYear_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" >
             <md-option value=""></md-option>
             <md-option value="365">365</md-option>
             <md-option value="365.25">365.25</md-option>
             <md-option value="366">366</md-option>
         </md-select>
-        <div ng-messages="form['Period_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+        <!--<div ng-messages="form['Period_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
             <div ng-message="required">Type is required.</div>
-        </div>
+        </div>-->
     </md-input-container>
 </div>

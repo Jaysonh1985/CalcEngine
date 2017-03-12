@@ -5,7 +5,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.DecimalNames = [];
     $scope.isLoading = true;
     $scope.oneAtATime = false;
-    $scope.Function = configFunctionFactory.isFunction($location.absUrl());
+    $scope.Function = false;
     $scope.status = {
         isFirstOpen: true,
         isFirstDisabled: false
@@ -36,9 +36,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         };
     };
 
+    $scope.testButtonClick = function (parent, child) {
+        var test = 1;
+    };
+
     function init() {
         var id = $location.absUrl();
         var Function = configFunctionFactory.isFunction($location.absUrl());
+        $scope.Function = configFunctionFactory.isFunction($location.absUrl());
         var ViewOnly = $location.search().ViewOnly;
         if (ViewOnly == 'true')
         {
@@ -160,6 +165,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
 
     $scope.AddFunctionRows = function (colIndex, index) {
+        $scope.Function = configFunctionFactory.isFunction($location.absUrl());
         var item;
         item = buildFunction(colIndex, $scope.config);
         $scope.config[colIndex].Functions.splice(index + 1, 0, item);

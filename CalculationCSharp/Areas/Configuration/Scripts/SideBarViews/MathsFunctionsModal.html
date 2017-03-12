@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Type</label>
-        <md-select required ng:model="rows.Parameter[0].Type" name="MathsFunctionsType_{{$parent.$index}}_{{$index}}" id="MathsFunctionsType_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].Type" name="MathsFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="MathsFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Abs">Abs</md-option>
             <md-option value="Add">Add</md-option>
@@ -19,27 +19,27 @@
             <!--<md-option value="SubtractPeriod">Subtract Period</option>-->
             <md-option value="Truncate">Truncate</md-option>
         </md-select>
-        <div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
+        <!--<div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
             <div ng-message="required">Type is required.</div>
-        </div>
+        </div>-->
     </md-input-container>
 </div>
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Number 1</label>
-        <input ng-model="rows.Parameter[0].Number1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="MathsFunctionsNumber1_{{$parent.$index}}_{{$index}}" id="MathsFunctionsNumber1_{{$parent.$index}}_{{$index}}" required>
+        <input ng-model="rows.Parameter[0].Number1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="MathsFunctionsNumber1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="MathsFunctionsNumber1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
     </md-input-container>
 </div>
 <div ng-if="rows.Parameter[0].Type == 'Add'|| rows.Parameter[0].Type == 'AddPeriod'|| rows.Parameter[0].Type == 'Divide'|| rows.Parameter[0].Type == 'Max' || rows.Parameter[0].Type == 'Min' || rows.Parameter[0].Type == 'Multiply'|| rows.Parameter[0].Type == 'Power'|| rows.Parameter[0].Type == 'Subtract' || rows.Parameter[0].Type == 'SubtractPeriod'">     
     <md-input-container class="md-block" flex-gt-sm>
         <label>Number 2</label>
-        <input ng-model="rows.Parameter[0].Number2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="MathsFunctionsNumber2_{{$parent.$index}}_{{$index}}" id="MathsFunctionsNumber2_{{$parent.$index}}_{{$index}}" required>
+        <input ng-model="rows.Parameter[0].Number2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="MathsFunctionsNumber2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="MathsFunctionsNumber2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
     </md-input-container>
 </div>
 <div ng-if="rows.Parameter[0].Type == 'AddPeriod'|| rows.Parameter[0].Type == 'SubtractPeriod'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Period Type</label>
-        <md-select required ng:model="rows.Parameter[0].PeriodType" name="MathsFunctionsPeriodType_{{$parent.$index}}_{{$index}}" id="MathsFunctionsPeriodType_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].PeriodType" name="MathsFunctionsPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="MathsFunctionsPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="YearsDays">Years Days</md-option>
             <md-option value="YearsMonths">Years Months</md-option>
@@ -49,7 +49,7 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Rounding</label>
-        <md-select ng:model="rows.Parameter[0].Rounding" name="MathsFunctionsRounding_{{$parent.$index}}_{{$index}}" id="MathsFunctionsRounding_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly">
+        <md-select ng:model="rows.Parameter[0].Rounding" name="MathsFunctionsRounding_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="MathsFunctionsRounding_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="0">0</md-option>
             <md-option value="1">1</md-option>
@@ -64,7 +64,7 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Rounding Type</label>
-        <md-select ng:model="rows.Parameter[0].RoundingType" name="MathsFunctionsRoundingType_{{$parent.$index}}_{{$index}}" id="MathsFunctionsRoundingType_{{$parent.$index}}_{{$index}}" ng-disabled="viewOnly">
+        <md-select ng:model="rows.Parameter[0].RoundingType" name="MathsFunctionsRoundingType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="MathsFunctionsRoundingType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="up">Up</md-option>
             <md-option value="down">Down</md-option>

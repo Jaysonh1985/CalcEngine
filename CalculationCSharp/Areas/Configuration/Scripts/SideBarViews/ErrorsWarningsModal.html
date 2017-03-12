@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Type</label>
-        <md-select required ng:model="rows.Parameter[0].Type" name="ErrorWarningType_{{colIndex}}_{{rowIndex}}" id="ErrorWarningType_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].Type" name="ErrorWarningType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="ErrorWarningType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
             <md-option value="Error">Error</md-option>
             <md-option value="Warning">Warning</md-option>
         </md-select>
@@ -10,6 +10,6 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Message</label>
-        <input ng-model="rows.Parameter[0].String1" name="ErrorWarningString1_{{colIndex}}_{{rowIndex}}" id="ErrorWarningString1_{{colIndex}}_{{rowIndex}}">
+        <input ng-model="rows.Parameter[0].String1" name="ErrorWarningString1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="ErrorWarningString1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
     </md-input-container>
 </div>

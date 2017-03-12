@@ -1,21 +1,21 @@
 ﻿<div flex="20">
-    <div ng-repeat="Category in config track by $index"">
+    <div ng-repeat="Category in config">
         <div ng-repeat="rows in Category.Functions">
             <md-toolbar layout="row" class="md-theme-black">
                 <div ng-if="Category.Name != 'Input' && rows.Function == null">
                     <md-input-container class="md-block" flex-gt-sm>
-                        <md-select ng-model="rows.Function" name="Function_{{Category.ID}}_{{rows.ID}}"  id="Function_{{Category.ID}}_{{rows.ID}}" required>
+                        <md-select ng-model="rows.Function" name="Function_{{$parent.$index}}_{{$index}}"  id="Function_{{$parent.$index}}_{{$index}}" required>
                             <md-option value="ArrayFunctions">Array Functions</md-option>
                             <md-option value="Comments">Comment</md-option>
                             <md-option value="DateAdjustment">Date Adjustment</md-option>
                             <md-option value="DatePart">Date Part</md-option>
                             <md-option value="ErrorsWarnings">Errors & Warnings</md-option>
                             <md-option value="Factors">Factors</md-option>
-                            <md-option ng-if="Function == false" value="Function">Function</md-option>
+                            <md-option ng-if="$parent.$parent.$parent.MenuHeader == 'Config'" value="Function">Function</md-option>
                             <md-option value="Maths">Maths</md-option>
                             <md-option value="MathsFunctions">Maths Functions</md-option>
                             <md-option value="Period">Period</md-option>
-                            <md-option ng-if="Function == true" value="Return">Return</md-option>
+                            <md-option ng-if="$parent.$parent.$parent.MenuHeader == 'Function'" value="Return">Return</md-option>
                             <md-option value="StringFunctions">String Functions</md-option>
                         </md-select>
                     </md-input-container>

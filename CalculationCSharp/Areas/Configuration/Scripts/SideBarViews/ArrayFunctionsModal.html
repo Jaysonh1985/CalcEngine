@@ -1,7 +1,7 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Incoming Array Type</label>
-        <md-select required ng:model="rows.Parameter[0].LookupType"  name="ArrayFunctionLookupType_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionLookupType_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].LookupType"  name="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
@@ -13,25 +13,25 @@
 <div ng-if="rows.Parameter[0].LookupType == 'Date'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Value</label>
-        <input ng-model="rows.Parameter[0].LookupValue" name="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].LookupValue" name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
 <div ng-if="rows.Parameter[0].LookupType == 'Decimal'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Value</label>
-        <input ng-model="rows.Parameter[0].LookupValue" name="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}"  uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].LookupValue" name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
 <div ng-if="rows.Parameter[0].LookupType == 'String'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Value</label>
-        <input ng-model="rows.Parameter[0].LookupValue" name="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionLookupValue_{{colIndex}}_{{rowIndex}}"  uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
+        <input ng-model="rows.Parameter[0].LookupValue" name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
 <div ng-if="rows.Parameter[0].LookupType == 'Date'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Function</label>
-        <md-select required ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionFunction_{{colIndex}}_{{rowIndex}}"  ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="FirstDate">First Date</md-option>
             <md-option value="LastDate">Last Date</md-option>
@@ -42,7 +42,7 @@
 <div ng-if="rows.Parameter[0].LookupType == 'Decimal'" ng-disabled="viewOnly">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Function</label>
-        <md-select required ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionFunction_{{colIndex}}_{{rowIndex}}" >
+        <md-select required ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" >
             <md-option value=""></md-option>
             <md-option value="Sum">Sum</md-option>
             <md-option value="Product">Product</md-option>
@@ -56,7 +56,7 @@
 <div ng-if="rows.Parameter[0].Function == 'TotalPeriod' && rows.Parameter[0].LookupType == 'Decimal'" >
     <md-input-container class="md-block" flex-gt-sm>
         <label>Period Type</label>
-        <md-select required ng:model="rows.Parameter[0].PeriodType" name="ArrayFunctionPeriodType_{{colIndex}}_{{rowIndex}}" id="ArrayFunctionPeriodType_{{colIndex}}_{{rowIndex}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].PeriodType" name="ArrayFunctionPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="ArrayFunctionPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-disabled="viewOnly">
             <md-option value=""></md-option>
             <md-option value="YearsDays">Years Days</md-option>
             <md-option value="YearsMonths">Years Months</md-option>
