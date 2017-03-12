@@ -7,7 +7,7 @@
                 <li ng-repeat="(key, errors) in form.$error track by $index">
                     <strong>{{ key }}</strong> errors
                     <ul>
-                        <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>. <a ng-click="focusButtonClick(e.$name)">Focus</a></li>
+                        <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>. <a ng-click="focusButtonClick($event, e.$name)">Focus</a></li>
                     </ul>
                 </li>
             </ul>

@@ -662,6 +662,7 @@
     <Content Include="Images\paste-clipboard.png" />
     <Content Include="Images\plus.png" />
     <Content Include="Images\settings.png" />
+    <Content Include="Images\warning-sign.svg" />
     <Content Include="Scripts\anguladynamicform.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />

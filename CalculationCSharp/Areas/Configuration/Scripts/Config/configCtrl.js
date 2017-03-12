@@ -160,8 +160,17 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }
         return item;
     };
-    $scope.focusButtonClick = function (elementName) {
-        document.getElementById(elementName).focus();
+    $scope.focusButtonClick = function (e, elementName) {
+        //document.getElementById(elementName).focus();
+
+        var str =  elementName;
+        var last = str.lastIndexOf("_");
+        var first = str.indexOf("_") + 1;
+        var length = str.length;
+        var colIndex = str.substring(first, last);
+        var rowIndex = str.substring(last + 1, length);
+
+        $scope.selectRow(e, rowIndex, colIndex);
     };
 
     $scope.rowMenuOptions = [
@@ -820,6 +829,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         } else {
 
             if (selectedRowsIndexes[colIndex] != null) {
+                resetSelection();
                 selectedRowsIndexes[colIndex] = [rowIndex];
             }
             else
