@@ -89,6 +89,9 @@ label {
     background-color: #c47d7d;
     color:white;  
 }
+.standardRow {
+    background-color: white;
+}
 .redCard{
     background-color:#AE0000;
     color:white;  
@@ -190,7 +193,6 @@ element.style {
 .panel-body {
     text-overflow: ellipsis;
     overflow: hidden;
-    background-color: white;
     border: none;
     box-shadow: none;
     padding:4px;
@@ -404,7 +406,7 @@ textarea {
     border-bottom: 1px solid #D8CCB8;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    background-color: white;
+
 }
 
 .panel {
@@ -948,10 +950,15 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 
 md-content.md-default-theme, md-content {
     color: rgba(0,0,0,0.87);
-    background-color: rgb(255,255,255);
+    /*background-color: rgb(255,255,255);*/
 }
 
 body.md-default-theme, body, html.md-default-theme, html {
     color: rgba(0,0,0,0.87);
-    background-color: rgb(255,255,255);
+    /*background-color: rgb(255,255,255);*/
+}
+.layout-row > .flex-20 {
+    position: fixed;
+    right: 0px;
+    width: 100%;
 }

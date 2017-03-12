@@ -1,7 +1,7 @@
 ﻿<md-list flex="" ng-model="Category.Functions" ui-tree-nodes="" >
     <md-list-item class="md-dense" ng-repeat="rows in Category.Functions" ng-click="selectRow($event, $index, $parent.$index)" 
-                  ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments'}"
-                  style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px" ui-tree-node>
+                  ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments', 'standardRow' : rows.Function != 'Comments'}"
+                  style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px;" ui-tree-node>
         <div id="functionrowWrapper">
             <div class="slide-container text-center" style="width:16%">
                 <a class="pull-left btn" ng-if="Category.Name != 'Input'">
