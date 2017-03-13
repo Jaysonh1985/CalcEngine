@@ -40,14 +40,15 @@
                     <div>
                         <md-input-container class="md-block" style="font-size:larger;" flex-gt-sm>
                             <label>Variable Name</label>
-                            <input ng-model="rows.Name" name="Name_{{$parent.$index}}_{{$index}}" id="Name_{{$parent.$index}}_{{$index}}" required>
+                            <input ng-model="rows.Name" ng-pattern="noSpacesPattern" name="Name_{{$parent.$index}}_{{$index}}" id="Name_{{$parent.$index}}_{{$index}}" required>
                             <div ng-messages="form['Name_'+ $parent.$index + '_' + $index].$error">
                                 <div ng-message="required">Name is required.</div>
+                                <div ng-message="pattern">Pattern Incorrect</div>
                             </div>
                         </md-input-container>
                     </div>
                     <div>
-                        <md-input-container class="md-block" flex-gt-sm>
+                        <md-input-container ng-if="Category.Name != 'Input'" class="md-block" flex-gt-sm>
                             <label>Expected Result</label>
                             <input ng-model="rows.ExpectedResult" name="ExpectedResult_{{$parent.$index}}_{{$index}}" id="ExpectedResult_{{$parent.$index}}_{{$index}}">
                         </md-input-container>
@@ -63,7 +64,7 @@
                 <md-content class="md-no-momentum" layout-margin="">
                     <div ng-if="rows.Function=='ErrorsWarnings'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ErrorsWarningsModal.html'"></div>
                     <div ng-if="rows.Function=='StringFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/StringFunctionsModal.html'"></div>
-                    <div ng-if="rows.Function=='Input'" ng-include="'/Areas/Configuration/Scripts/Input/InputModal.html'"></div>
+                    <div ng-if="rows.Function=='Input'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/InputModal.html'"></div>
                     <div ng-if="rows.Function=='Return'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ReturnModal.html'"></div>
                     <div ng-if="rows.Function=='Period'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/PeriodModal.html'"></div>
                     <div ng-if="rows.Function=='DatePart'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/DatePartModal.html'"></div>

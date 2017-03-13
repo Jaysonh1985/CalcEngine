@@ -8,7 +8,7 @@ sulhome.kanbanBoardApp.directive('uibModalWindow', function () {
     }  
 });
 //Input previously set on the builder
-sulhome.kanbanBoardApp.directive('variablecheck', function (configTypeaheadFactory, configValidationFactory) {
+sulhome.kanbanBoardApp.directive('inputset', function (configTypeaheadFactory, configValidationFactory) {
     return {
         replace: true,
         restrict: 'A',

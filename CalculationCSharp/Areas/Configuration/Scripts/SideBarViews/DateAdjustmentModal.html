@@ -1,7 +1,8 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Adjustment Type</label>
-        <md-select required ng:model="rows.Parameter[0].Type" name="DateAdjustmentType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="DateAdjustmentType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].Type" name="DateAdjustmentType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                   id="DateAdjustmentType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
             <md-option value="Add">Add</md-option>
             <md-option value="Adjust">Adjust</md-option>
             <md-option value="Earlier">Earlier</md-option>
@@ -76,10 +77,10 @@
 <fieldset ng-if="rows.Parameter[0].Type == 'Adjust' || rows.Parameter[0].Type == 'DatesBetween'">
     <legend>Adjustment to be Made</legend>
     <div ng-if="rows.Parameter[0].Type == 'Adjust'" class="form-group">
-        <label for="inclusive" class="control-label col-md-2">Adjustment</label>
-        <div class="col-sm-9">
-            <md-select ng:model="rows.period.Adjustment" name="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-                       id="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Adjustment</label>
+            <md-select ng:model="rows.period.Adjustment" name="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
+                       id="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
                        ng-disabled="viewOnly" required>
                 <md-option value="Less">Before</md-option>
                 <md-option value="LessEqual">On or Before</md-option>
@@ -87,10 +88,10 @@
                 <md-option value="GreaterEqual">On or After</md-option>
                 <md-option value="Equal">Same Year</md-option>
             </md-select>
-            <div ng-messages="form['DateAdjustmentPeriodAdjustment_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-messages="form['DateAdjustmentPeriodAdjustment_'+ $parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index].$error">
                 <div ng-message="required">Period Adjustment Type is required</div>
             </div>
-        </div>
+        </md-input-container>
     </div>
     <div>
         <md-input-container class="md-block" flex-gt-sm>

@@ -340,9 +340,8 @@
     <Content Include="Areas\Configuration\Scripts\Regression\RegressionModal.html" />
     <Content Include="Areas\Configuration\Scripts\Regression\regressionCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\History\historyCtrl.js" />
-    <Content Include="Areas\Configuration\Scripts\Input\inputCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\History\HistoryModal.html" />
-    <Content Include="Areas\Configuration\Scripts\Input\InputModal.html" />
+    <Content Include="Areas\Configuration\Scripts\SideBarViews\InputModal.html" />
     <Content Include="Areas\Configuration\Scripts\Logic\logicCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Group\GroupModal.html" />
     <Content Include="Areas\Configuration\Scripts\SideBarViews\DateAdjustmentModal.html" />
