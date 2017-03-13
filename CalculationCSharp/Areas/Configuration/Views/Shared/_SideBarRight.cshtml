@@ -4,7 +4,7 @@
                 <md-toolbar layout="row" class="md-theme-black">
                     <div ng-if="Category.Name != 'Input' && rows.Function == null">
                         <md-input-container class="md-block" flex-gt-sm>
-                            <md-select ng-model="rows.Function" name="Function_{{$parent.$index}}_{{$index}}" id="Function_{{$parent.$index}}_{{$index}}" required>
+                            <md-select ng-model="rows.Function" name="Function_{{$parent.$index}}_{{$index}}" id="Function_{{$parent.$index}}_{{$index}}" ng-change="setFunction(rows)" required>
                                 <md-option value="ArrayFunctions">Array Functions</md-option>
                                 <md-option value="Comments">Comment</md-option>
                                 <md-option value="DateAdjustment">Date Adjustment</md-option>

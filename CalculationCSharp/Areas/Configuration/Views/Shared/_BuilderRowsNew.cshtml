@@ -9,25 +9,33 @@
                 </a>
             </div>
             <div class="v-separator"><h1></h1></div>
-            <div class="slide-container" style="width:18%">
+            <div class="slide-container" style="width:12%">
                 <h6> Function: &nbsp;</h6>
                 <h4>{{ rows.Function }}</h4>
             </div>
-            <a ng-show="isRowSelected($index, $parent.$index) && rows.SubOutput != null " data-nodrag ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
-                <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
-            </a>
             <div class="v-separator"><h1></h1></div>
-                <div class="slide-container" style="width:25%">
+            <div class="slide-container" style="width:7%">
+                <h6> Type: &nbsp;</h6>
+                <h4>{{ rows.Type }}</h4>
+            </div>
+
+            <div class="v-separator"><h1></h1></div>
+                <div class="slide-container" style="width:19%">
                     <h6>Name: &nbsp;</h6>
                     <h4>{{ rows.Name }}</h4>
                 </div>
-            <img ng-if="rows.Pass == 'true'" src="~/Images/checked.png">
-            <img ng-if="rows.Pass == 'false'" src="~/Images/multiply.png">
-
             <div class="v-separator"><h1></h1></div>
-            <div class="slide-container" style="width:50%">
+            <div class="slide-container" style="width:45%">
                 <h6>Output: &nbsp;</h6>
                 <h4>{{ rows.Output }}</h4>
+            </div>
+            <div class="v-separator"><h1></h1></div>
+            <div class="slide-container" style="width:2%">
+                <img ng-if="rows.Pass == 'true'" src="~/Images/checked.png">
+                <img ng-if="rows.Pass == 'false'" src="~/Images/multiply.png">
+                <a ng-show="rows.SubOutput != null " data-nodrag ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
+                    <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
+                </a>
             </div>
         </div>
     </md-list-item>

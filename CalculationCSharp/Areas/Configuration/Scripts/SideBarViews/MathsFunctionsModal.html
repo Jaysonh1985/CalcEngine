@@ -40,9 +40,9 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Number 2</label>
         <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].Number2" 
-               uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="MathsFunctionsNumber2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               uib-typeahead="state for state in $parent.$parent.$parent.$parent.$parent.DecimalNames | filter:$viewValue | limitTo:8" name="MathsFunctionsNumber2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                id="MathsFunctionsNumber2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
-
+<button ng-click="testButtonClick()">test</button>
         <div ng-messages="form['MathsFunctionsNumber2_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">Number is required</div>
             <div ng-message="input">Variable Mismatch</div>

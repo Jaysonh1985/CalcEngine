@@ -372,6 +372,10 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }
     };
 
+    $scope.setFunctionInput = function (rows) {  //function that sets the type of the row
+        rows.Type = rows.Parameter[0].templateOptions.type;
+   };
+
     $scope.setFunction = function (rows) {  //function that sets the type of the row
         if (rows.Function == 'Maths') {
             rows.Type = 'Decimal';
@@ -432,7 +436,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.ExitButton = function () {
-
         if (!$scope.form.$dirty) {
             var ID = configFunctionFactory.getConfigID();
             if ($scope.Function == true) {
@@ -441,7 +444,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             else {
                 $window.location.assign('/Configuration/Config/Exit/' + ID);
             }
-
         }
         else {
             var cf = confirm("Are you sure you wish to exit unsaved changes will be lost?");
