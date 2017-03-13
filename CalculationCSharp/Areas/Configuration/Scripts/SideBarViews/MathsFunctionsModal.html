@@ -1,8 +1,8 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Type</label>
-        <md-select required ng:model="rows.Parameter[0].Type" name="MathsFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="MathsFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
-            <md-option value=""></md-option>
+        <md-select required ng:model="rows.Parameter[0].Type" name="MathsFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                   id="MathsFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
             <md-option value="Abs">Abs</md-option>
             <md-option value="Add">Add</md-option>
             <md-option value="AddPeriod">Add Period</md-option>
@@ -19,21 +19,34 @@
             <!--<md-option value="SubtractPeriod">Subtract Period</option>-->
             <md-option value="Truncate">Truncate</md-option>
         </md-select>
-        <!--<div ng-messages="form['DateAdjustment_'+ colIndex + '_' + rowIndex].$error" ng-if="!showHints">
-            <div ng-message="required">Type is required.</div>
-        </div>-->
+        <div ng-messages="form['MathsFunctionsType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-message="required">Type is required</div>
+        </div>
     </md-input-container>
 </div>
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Number 1</label>
-        <input ng-model="rows.Parameter[0].Number1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="MathsFunctionsNumber1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="MathsFunctionsNumber1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
-    </md-input-container>
+        <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"  ng-model="rows.Parameter[0].Number1" 
+               uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="MathsFunctionsNumber1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+               id="MathsFunctionsNumber1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
+        <div ng-messages="form['MathsFunctionsNumber1_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-message="required">Number is required</div>
+            <div ng-message="input">Variable Mismatch</div>
+        </div>
+</md-input-container>
 </div>
 <div ng-if="rows.Parameter[0].Type == 'Add'|| rows.Parameter[0].Type == 'AddPeriod'|| rows.Parameter[0].Type == 'Divide'|| rows.Parameter[0].Type == 'Max' || rows.Parameter[0].Type == 'Min' || rows.Parameter[0].Type == 'Multiply'|| rows.Parameter[0].Type == 'Power'|| rows.Parameter[0].Type == 'Subtract' || rows.Parameter[0].Type == 'SubtractPeriod'">     
     <md-input-container class="md-block" flex-gt-sm>
         <label>Number 2</label>
-        <input ng-model="rows.Parameter[0].Number2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="MathsFunctionsNumber2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="MathsFunctionsNumber2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+        <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].Number2" 
+               uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="MathsFunctionsNumber2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="MathsFunctionsNumber2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+
+        <div ng-messages="form['MathsFunctionsNumber2_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-message="required">Number is required</div>
+            <div ng-message="input">Variable Mismatch</div>
+        </div>
     </md-input-container>
 </div>
 <div ng-if="rows.Parameter[0].Type == 'AddPeriod'|| rows.Parameter[0].Type == 'SubtractPeriod'">
@@ -50,7 +63,6 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Rounding</label>
         <md-select ng:model="rows.Parameter[0].Rounding" name="MathsFunctionsRounding_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="MathsFunctionsRounding_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
-            <md-option value=""></md-option>
             <md-option value="0">0</md-option>
             <md-option value="1">1</md-option>
             <md-option value="2">2</md-option>
@@ -65,7 +77,6 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Rounding Type</label>
         <md-select ng:model="rows.Parameter[0].RoundingType" name="MathsFunctionsRoundingType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="MathsFunctionsRoundingType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
-            <md-option value=""></md-option>
             <md-option value="up">Up</md-option>
             <md-option value="down">Down</md-option>
         </md-select>

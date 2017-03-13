@@ -7,6 +7,23 @@ sulhome.kanbanBoardApp.directive('uibModalWindow', function () {
         }
     }  
 });
+//Input previously set on the builder
+sulhome.kanbanBoardApp.directive('variablecheck', function (configTypeaheadFactory, configValidationFactory) {
+    return {
+        replace: true,
+        restrict: 'A',
+        require: '^form',
+        scope: { config: '=', colIndex: '=', rowIndex: '=', inputtype: '='},
+        link: function (scope, element, attrs, form, scopectrl) {
+            element.on('blur', function () {
+                form[attrs.name].$setValidity("input", true);
+                configValidationFactory.variablePreviouslySet(scope.config, attrs.colindex, attrs.inputtype, attrs.rowindex, attrs.$$element[0].value, form, true, attrs.name);
+                })
+            }
+        }
+    }
+);
+
 //Validate the input form
 sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeaheadFactory, $filter) {
     return {

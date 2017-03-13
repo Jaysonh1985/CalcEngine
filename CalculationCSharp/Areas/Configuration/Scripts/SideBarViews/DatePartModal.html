@@ -2,16 +2,24 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Date Part</label>
         <md-select required ng:model="rows.Parameter[0].Part" name="DatePartPart_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="DatePartPart_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
-            <md-option value=""></md-option>
             <md-option value="Year">Year</md-option>
             <md-option value="Month">Month</md-option>
             <md-option value="Day">Day</md-option>
         </md-select>
+        <div ng-messages="form['DatePartPart_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-message="required">Type is required</div>
+        </div>
     </md-input-container>
 </div>
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Date</label>
-        <input ng-model="rows.Parameter[0].Date1" name="DatePartDate1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="DatePartDate1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+        <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" 
+               ng-model="rows.Parameter[0].Date1" name="DatePartDate1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+               id="DatePartDate1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+        <div ng-messages="form['DatePartDate1_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-message="required">Date is required</div>
+            <div ng-message="input">Variable Mismatch</div>
+        </div>
     </md-input-container>
 </div>

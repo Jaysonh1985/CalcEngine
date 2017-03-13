@@ -35,7 +35,7 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
         },
 
         setFormValidation: function (value, AttName, form, VariableNames, type) {
-            if (VariableNames.length > 0) {
+            if (VariableNames.length >= 0) {
                 if (type == "Decimal") {
                     var Input1Bool = isNaN(parseFloat(value));
                 }

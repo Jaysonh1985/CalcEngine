@@ -8,27 +8,48 @@
             <md-option value="Find">Find</md-option>
             <md-option value="Set">Set String</md-option>
         </md-select>
-        <!--<div ng-messages="form['StringFunctionsType_'+ {{Category.ID}}_{{rows.ID}}].$error" ng-if="!showHints">
-            <div ng-message="required">Type is required.</div>
-        </div>-->
+        <div ng-messages="form['StringFunctionsType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-message="required">Type is required</div>
+        </div>
      </md-input-container>
 </div>
 <div ng-if="rows.Parameter[0].Type != 'Set'">  
     <md-input-container class="md-block" flex-gt-sm required>
         <label>String 1</label>
-        <input name="StringFunctionsString1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="StringFunctionsString1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"   ng-model="rows.Parameter[0].String1" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required> 
+        <input variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" 
+               name="StringFunctionsString1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="StringFunctionsString1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"   
+               ng-model="rows.Parameter[0].String1" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required> 
+        <div ng-messages="form['StringFunctionsString1_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-message="required">String is required</div>
+            <div ng-message="input">Variable Mismatch</div>
+        </div>
     </md-input-container>
 </div>
 <div ng-if="rows.Parameter[0].Type == 'Left' || rows.Parameter[0].Type == 'Right'">
     <md-input-container class="md-block" flex-gt-sm required>
         <label>Number</label>
-        <input name="StringFunctionsNumber_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="StringFunctionsNumber_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-model="rows.Parameter[0].Number1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+        <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"  
+               name="StringFunctionsNumber_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="StringFunctionsNumber_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-model="rows.Parameter[0].Number1" 
+               uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+        <div ng-messages="form['StringFunctionsNumber_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-message="required">Decimal is required</div>
+            <div ng-message="input">Variable Mismatch</div>
+        </div>
     </md-input-container>
 </div>
 <div ng-if="rows.Parameter[0].Type == 'Find'"> 
     <md-input-container class="md-block" flex-gt-sm required>
         <label>String 2</label>
-        <input name="StringFunctionsString2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="StringFunctionsString2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  ng-model="rows.Parameter[0].String2" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
+        <input ariablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" 
+               name="StringFunctionsString2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="StringFunctionsString2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  ng-model="rows.Parameter[0].String2" 
+               uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
+        <div ng-messages="form['StringFunctionsString2_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-message="required">String is required</div>
+            <div ng-message="input">Variable Mismatch</div>
+        </div>
     </md-input-container>
 </div>
 <div class="form-group" ng-if="rows.Parameter[0].Type == 'Set'" >
