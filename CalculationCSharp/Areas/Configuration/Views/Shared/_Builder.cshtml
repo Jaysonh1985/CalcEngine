@@ -1,9 +1,11 @@
 ﻿<md-content  ng-controller="configCtrl" layout-gt-sm="row" layout="row" 
        ng-cloak> 
     <ng-form name="form" role="form" ng-submit="calcbuttonclick(form)" layout="row" style="width:100%">
+        
         <md-content flex="80" layout-padding="" layout="column" style="padding:0px; border-right: thin solid; border-right-color: #e8e1d6">
             <h3 class="pull-left"><a>@ViewData["SchemeName"] - @ViewData["CalcName"]</a></h3>
-            <ul>
+            
+            <ul >
                 <li ng-repeat="(key, errors) in form.$error track by $index">
                     <strong>{{ key }}</strong> errors
                     <ul>
@@ -12,6 +14,7 @@
                 </li>
             </ul>
             <div ui-tree >
+                <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
                 <uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
                     <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" layout="column" context-menu="columnMenuOptions" ui-tree-node>
                         <uib-accordion-heading>                         

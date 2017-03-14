@@ -15,7 +15,7 @@ sulhome.kanbanBoardApp.directive('variablecheck', function (configTypeaheadFacto
         require: '^form',
         scope: { config: '=', colIndex: '=', rowIndex: '=', inputtype: '='},
         link: function (scope, element, attrs, form, scopectrl, ngModel) {
-            scope.$watch('$parent.$parent.$parent.$parent.triggerValidation', function (newValue, oldValue) {
+            scope.$watch('$parent.$parent.$parent.$parent.$parent.triggerValidation', function (newValue, oldValue) {
                 form[attrs.name].$setValidity("input", true);
                 configValidationFactory.variablePreviouslySet(scope.config[0], parseInt(attrs.colindex), attrs.inputtype, parseInt(attrs.rowindex), attrs.$$element[0].value, form, true, attrs.name);
 

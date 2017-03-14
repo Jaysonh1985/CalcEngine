@@ -334,6 +334,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             }
         });
     };
+    // Model to JSON for demo purpose
+    $scope.$watch('config', function (model) {
+        $scope.Validate();
+    }, true);
+
     $scope.Validate = function Validate() {
         if ($scope.triggerValidation == false) {
             $scope.triggerValidation = true;
