@@ -8,17 +8,22 @@ sulhome.kanbanBoardApp.directive('uibModalWindow', function () {
     }  
 });
 //Input previously set on the builder
-sulhome.kanbanBoardApp.directive('inputset', function (configTypeaheadFactory, configValidationFactory) {
+sulhome.kanbanBoardApp.directive('variablecheck', function (configTypeaheadFactory, configValidationFactory) {
     return {
         replace: true,
         restrict: 'A',
         require: '^form',
         scope: { config: '=', colIndex: '=', rowIndex: '=', inputtype: '='},
-        link: function (scope, element, attrs, form, scopectrl) {
+        link: function (scope, element, attrs, form, scopectrl, ngModel) {
+            scope.$watch('$parent.$parent.$parent.$parent.triggerValidation', function (newValue, oldValue) {
+                form[attrs.name].$setValidity("input", true);
+                configValidationFactory.variablePreviouslySet(scope.config[0], parseInt(attrs.colindex), attrs.inputtype, parseInt(attrs.rowindex), attrs.$$element[0].value, form, true, attrs.name);
+
+                });
             element.on('blur', function () {
                 form[attrs.name].$setValidity("input", true);
-                configValidationFactory.variablePreviouslySet(scope.config, attrs.colindex, attrs.inputtype, attrs.rowindex, attrs.$$element[0].value, form, true, attrs.name);
-                })
+                configValidationFactory.variablePreviouslySet(scope.config[0], parseInt(attrs.colindex), attrs.inputtype, parseInt(attrs.rowindex), attrs.$$element[0].value, form, true, attrs.name);
+            });
             }
         }
     }

@@ -26,7 +26,7 @@
 <div ng-if="rows.Parameter[0].LookupType == 'Date'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Lookup Value</label>
-        <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"
+        <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
                ng-model="rows.Parameter[0].LookupValue" name="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                id="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
@@ -39,7 +39,7 @@
 <div ng-if="rows.Parameter[0].LookupType == 'Decimal'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Lookup Value</label>
-        <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
+        <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
                name="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                id="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
@@ -52,7 +52,7 @@
 <div ng-if="rows.Parameter[0].LookupType == 'String'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Lookup Value</label>
-        <input variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
+        <input variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
                name="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                id="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
                uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
@@ -167,9 +167,6 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Interpolate Years and Months</label>
         <input ng-model="rows.Parameter[0].Interpolate" name="FactorsInterpolate_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="FactorsInterpolate_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
-        <div ng-messages="form['FactorsInterpolate_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-            <div ng-message="required">Required Field</div>
-        </div>
+               id="FactorsInterpolate_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}">
     </md-input-container>
 </div>

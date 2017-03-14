@@ -19,7 +19,7 @@
 <div ng-if="rows.Parameter[0].Type != 'Today'">
     <md-input-container  class="md-block" flex-gt-sm>
         <label>Start Date</label>
-        <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"  
+        <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"  
                ng-model="rows.Parameter[0].Date1" name="DateAdjustmentDate1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                id="DateAdjustmentDate1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
@@ -76,10 +76,10 @@
 </fieldset>
 <fieldset ng-if="rows.Parameter[0].Type == 'Adjust' || rows.Parameter[0].Type == 'DatesBetween'">
     <legend>Adjustment to be Made</legend>
-    <div ng-if="rows.Parameter[0].Type == 'Adjust'" class="form-group">
+    <div ng-if="rows.Parameter[0].Type == 'Adjust'">
         <md-input-container class="md-block" flex-gt-sm>
             <label>Adjustment</label>
-            <md-select ng:model="rows.period.Adjustment" name="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
+            <md-select ng:model="rows.Parameter[0].Adjustment" name="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
                        id="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
                        ng-disabled="viewOnly" required>
                 <md-option value="Less">Before</md-option>

@@ -8,6 +8,14 @@
     </md-fab-trigger>
 
     <md-fab-actions>
+        <md-button aria-label="Validate" class="md-fab md-raised md-mini"
+                   ng-click="ValidateButtonClick(form)">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Validate
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/check-symbol.svg"> </md-icon>
+        </md-button>
         <md-button ng-disabled="form.$invalid || viewOnly" aria-label="Calculate" class="md-fab md-raised md-mini"
                    ng-click="CalcButtonClick(form)">
             <md-tooltip md-direction="left" md-visible="tooltipVisible"

@@ -7,6 +7,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.isLoading = true;
     $scope.oneAtATime = false;
     $scope.Function = false;
+    $scope.triggerValidation = false;
     $scope.status = {
         isFirstOpen: true,
         isFirstDisabled: false
@@ -310,66 +311,75 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
     ///Form Submission
     $scope.SaveButtonClick = function SaveBoard() {
+        $scope.Validate();
         $scope.viewOnly = true;
-        var id = configFunctionFactory.getConfigID();
-        var Comment = prompt("Enter a Comment");
-        $scope.rebuildCategoryIDs();
-        var Function = configFunctionFactory.isFunction($location.absUrl())
-        if (Function == true) {
-            configService.putCalcFunction(id, $scope.config, Comment).then(function (data) {
-                $scope.viewOnly = false;
-                toastr.success("Saved successfully", "Success");
-                $scope.form.$setPristine();
-            }, onError);
-        }
-        else {
-            configService.putCalc(id, $scope.config, Comment).then(function (data) {
-                $scope.viewOnly = false;
-                toastr.success("Saved successfully", "Success");
-                $scope.form.$setPristine();
-            }, onError);
-        }
-    };
-
-    $scope.CalcButtonClick = function CalcBoard(form) {
-        $scope.viewOnly = true;
-        //$scope.validateForm();
-
-        if ($scope.validationError == false)
-        {
-            $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
-        }
-        var id = configFunctionFactory.getConfigID();
-        $scope.rebuildCategoryIDs();
-        if (form.$valid == true) {
-            $scope.validationError = false;
+        $timeout(function () {
+            var id = configFunctionFactory.getConfigID();
+            var Comment = prompt("Enter a Comment");
+            $scope.rebuildCategoryIDs();
             var Function = configFunctionFactory.isFunction($location.absUrl())
             if (Function == true) {
-                configService.postCalcFunction(id, $scope.config).then(function (data) {
+                configService.putCalcFunction(id, $scope.config, Comment).then(function (data) {
                     $scope.viewOnly = false;
-                    $scope.config = data;
-                    $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
-                    toastr.success("Calculated successfully", "Success");
-                    $scope.form.$setDirty();
+                    toastr.success("Saved successfully", "Success");
+                    $scope.form.$setPristine();
                 }, onError);
             }
             else {
-                configService.postCalc(id, $scope.config).then(function (data) {
+                configService.putCalc(id, $scope.config, Comment).then(function (data) {
                     $scope.viewOnly = false;
-                    $scope.config = data;
-                    $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
-                    toastr.success("Calculated successfully", "Success");
-                    $scope.form.$setDirty();
+                    toastr.success("Saved successfully", "Success");
+                    $scope.form.$setPristine();
                 }, onError);
             }
-
+        });
+    };
+    $scope.Validate = function Validate() {
+        if ($scope.triggerValidation == false) {
+            $scope.triggerValidation = true;
         }
-        else
-        {
-            $scope.validationError = true;
-            $scope.viewOnly = false;
-            toastr.error("Failed Validations", "Error");
-        }
+        else {
+            $scope.triggerValidation = false;
+        };
+    };
+    $scope.CalcButtonClick = function CalcBoard(form) {
+        $scope.Validate();
+        $scope.viewOnly = true;
+        $timeout(function () {
+            //$scope.validateForm();
+            if ($scope.validationError == false) {
+                $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
+            }
+            var id = configFunctionFactory.getConfigID();
+            $scope.rebuildCategoryIDs();
+            if (form.$valid == true) {
+                $scope.validationError = false;
+                var Function = configFunctionFactory.isFunction($location.absUrl())
+                if (Function == true) {
+                    configService.postCalcFunction(id, $scope.config).then(function (data) {
+                        $scope.viewOnly = false;
+                        $scope.config = data;
+                        $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
+                        toastr.success("Calculated successfully", "Success");
+                        $scope.form.$setDirty();
+                    }, onError);
+                }
+                else {
+                    configService.postCalc(id, $scope.config).then(function (data) {
+                        $scope.viewOnly = false;
+                        $scope.config = data;
+                        $scope.openIndex = angular.fromJson($scope.openIndexBackup, true);
+                        toastr.success("Calculated successfully", "Success");
+                        $scope.form.$setDirty();
+                    }, onError);
+                }
+            }
+            else {
+                $scope.validationError = true;
+                $scope.viewOnly = false;
+                toastr.error("Failed Validations", "Error");
+            }
+        });
     };
 
     $scope.setFunctionInput = function (rows) {  //function that sets the type of the row
