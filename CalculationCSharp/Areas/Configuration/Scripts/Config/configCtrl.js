@@ -411,7 +411,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             rows.Type = null;
         }
         else if (rows.Function == 'StringFunctions') {
-
+            rows.Type = 'String';
         }
         else {
             rows.Type = null;
