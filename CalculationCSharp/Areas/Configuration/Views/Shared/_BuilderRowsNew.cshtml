@@ -1,6 +1,6 @@
 ﻿<md-list flex="" ng-model="Category.Functions" ui-tree-nodes="" >
     <md-list-item class="md-dense" ng-repeat="rows in Category.Functions" ng-click="selectRow($event, $index, $parent.$index)"    
-                  ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments', 'standardRow' : rows.Function != 'Comments'}"
+                  ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments', 'standardRow' : rows.Function != 'Comments', 'stripped' : rows.Pass == 'miss' }"
                   style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px;" context-menu="rowMenuOptions" name="RowForm_{{$parent.$index}}_{{$index}}" id="RowForm_{{$parent.$index}}_{{$index}}" ui-tree-node>
             <div id="functionrowWrapper">
             <div class="slide-container text-center" style="width:3%">
