@@ -746,9 +746,8 @@
     <Content Include="Areas\Configuration\Views\Shared\_Menu.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_Builder.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_InputForm.cshtml" />
-    <Content Include="Areas\Configuration\Views\Shared\_SideBarRight.cshtml" />
-    <Content Include="Areas\Configuration\Views\Shared\_BuilderRows.cshtml" />
-    <Content Include="Areas\Configuration\Views\Shared\_BuilderRowsNew.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_FunctionBar.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_BuilderRow.cshtml" />
     <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />

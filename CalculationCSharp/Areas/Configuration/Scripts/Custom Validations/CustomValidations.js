@@ -28,6 +28,23 @@ sulhome.kanbanBoardApp.directive('variablecheck', function (configTypeaheadFacto
         }
     }
 );
+//Input previously set on the builder
+sulhome.kanbanBoardApp.directive('mathsoperatorcheck', function () {
+    return {
+        replace: true,
+        restrict: 'A',
+        require: '^form',
+        scope: { config: '=' },
+        link: function (scope, element, attrs, form, scopectrl, ngModel) {
+            element.on('blur', function () {
+                form[attrs.name].$setValidity("clauseblank", true);
+                    //if ($scope.maths[key + 1] == null) {
+                    //    form[AttName].$setValidity("clause", false);
+                    //}
+            });
+        }
+    }
+});
 
 //Validate the input form
 sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeaheadFactory, $filter) {

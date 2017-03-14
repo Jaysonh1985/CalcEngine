@@ -1,4 +1,4 @@
-﻿<md-fab-speed-dial ng-hide="false" md-direction="up" md-open="FabOpen"
+﻿<md-fab-speed-dial ng-hide="false" md-direction="left" md-open="FabOpen"
                    class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': true}"
                    ng-mouseenter="FabOpen=true" ng-mouseleave="FabOpen=false">
     <md-fab-trigger>
@@ -6,7 +6,6 @@
             <md-icon md-svg-src="/Images/menu.svg"> </md-icon>
         </md-button>
     </md-fab-trigger>
-
     <md-fab-actions>
         <md-button ng-disabled="form.$invalid || viewOnly" aria-label="Calculate" class="md-fab md-raised md-mini"
                    ng-click="CalcButtonClick(form)">
@@ -80,7 +79,5 @@
             </md-tooltip>
             <md-icon md-svg-src="/Images/list.svg"> </md-icon>
         </md-button>
-
-
     </md-fab-actions>
 </md-fab-speed-dial>
