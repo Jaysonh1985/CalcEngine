@@ -1,7 +1,8 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Date Part</label>
-        <md-select required ng:model="rows.Parameter[0].Part" name="DatePartPart_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="DatePartPart_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].Part" name="DatePartPart_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                   id="DatePartPart_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"   aria-label="Part" ng-disabled="viewOnly">
             <md-option value="Year">Year</md-option>
             <md-option value="Month">Month</md-option>
             <md-option value="Day">Day</md-option>

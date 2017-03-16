@@ -2,7 +2,7 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Type</label>
         <md-select required ng:model="rows.Parameter[0].Type" name="MathsFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                   id="MathsFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
+                   id="MathsFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly">
             <md-option value="Abs">Abs</md-option>
             <md-option value="Add">Add</md-option>
             <md-option value="AddPeriod">Add Period</md-option>
@@ -61,7 +61,8 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Rounding</label>
-        <md-select ng:model="rows.Parameter[0].Rounding" name="MathsFunctionsRounding_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="MathsFunctionsRounding_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
+        <md-select ng:model="rows.Parameter[0].Rounding" name="MathsFunctionsRounding_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                   id="MathsFunctionsRounding_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Rounding" ng-disabled="viewOnly">
             <md-option value="0">0</md-option>
             <md-option value="1">1</md-option>
             <md-option value="2">2</md-option>
@@ -75,7 +76,8 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Rounding Type</label>
-        <md-select ng:model="rows.Parameter[0].RoundingType" name="MathsFunctionsRoundingType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="MathsFunctionsRoundingType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
+        <md-select ng:model="rows.Parameter[0].RoundingType" name="MathsFunctionsRoundingType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                   id="MathsFunctionsRoundingType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="RooundingType" ng-disabled="viewOnly">
             <md-option value="up">Up</md-option>
             <md-option value="down">Down</md-option>
         </md-select>

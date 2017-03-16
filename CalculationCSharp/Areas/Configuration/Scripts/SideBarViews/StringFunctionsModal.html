@@ -1,7 +1,8 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Type</label>
-        <md-select ng:model="rows.Parameter[0].Type" name="StringFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="StringFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" required>
+        <md-select ng:model="rows.Parameter[0].Type" name="StringFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
+                   id="StringFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly" required>
             <md-option value="Left">Left</md-option>
             <md-option value="Right">Right</md-option>
             <md-option value="Len">Length</md-option>

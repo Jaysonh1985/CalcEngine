@@ -1,7 +1,8 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Data Type</label>
-        <md-select  ng:model="rows.Parameter[0].Datatype" name="ReturnType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="ReturnType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" required>
+        <md-select  ng:model="rows.Parameter[0].Datatype" name="ReturnType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  
+                   id="ReturnType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly" required>
             <md-option value="String">String</md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>

@@ -2,7 +2,7 @@
     <legend>Maths Builder</legend>
     <div layout="row" ng-repeat="val in rows.Parameter">
         <md-input-container flex="1">
-            <md-select name="BracketLeft_{{$index}}" ng:model="val.Bracket1">
+            <md-select name="BracketLeft_{{$index}}"  aria-label="BracketLeft" ng:model="val.Bracket1">
                 <md-option value=""></md-option>
                 <md-option value="(">(</md-option>
             </md-select>
@@ -12,7 +12,7 @@
             <input ng:model="val.Input1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
         </md-input-container>
         <md-input-container flex="1">
-            <md-select name="Function_{{$index}}" ng:model="val.Logic">
+            <md-select name="Function_{{$index}}"  aria-label="Logic" ng:model="val.Logic">
                 <md-option value="+">+</md-option>
                 <md-option value="-">-</md-option>
                 <md-option value="/">/</md-option>
@@ -25,13 +25,13 @@
             <input ng:model="val.Input2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
         </md-input-container>
         <md-input-container flex="1">
-            <md-select name="BracketRight_{{$index}}" ng:model="val.Bracket2">
+            <md-select name="BracketRight_{{$index}}"  aria-label="BracketRight" ng:model="val.Bracket2">
                 <md-option value=""></md-option>
                 <md-option value="web">)</md-option>
             </md-select>
         </md-input-container>
         <md-input-container flex="1">
-            <md-select mathsoperatorcheck config='[rows.Parameter]' name="Operator_{{$index}}"  id="Operator_{{$index}}" ng:model="val.Logic2">
+            <md-select mathsoperatorcheck config='[rows.Parameter]' name="Operator_{{$index}}"  aria-label="BracketRight" id="Operator_{{$index}}" ng:model="val.Logic2">
                 <md-option value=""></md-option>
                 <md-option value="+">+</md-option>
                 <md-option value="-">-</md-option>
@@ -53,7 +53,7 @@
     </md-button>
 </md-content>
 <md-input-container class="md-block" flex-gt-sm>
-    <md-select name="RoundSelect" ng:model="rows.Parameter.Rounding">
+    <md-select name="RoundSelect"  aria-label="Rounding" ng:model="rows.Parameter.Rounding">
         <md-option value="0">0</md-option>
         <md-option value="1">1</md-option>
         <md-option value="2">2</md-option>
@@ -64,7 +64,7 @@
     </md-select>
 </md-input-container>
 <md-input-container class="md-block" flex-gt-sm>
-    <md-select id="inclusive" name="singleSelect" ng:model="rows.Parameter.RoundingType">
+    <md-select id="inclusive" name="singleSelect"  aria-label="BracketRight" ng:model="rows.Parameter.RoundingType">
         <md-option value=""></md-option>
         <md-option value="up">Up</md-option>
         <md-option value="down">Down</md-option>

@@ -1,7 +1,8 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Data Type</label>
-        <md-select required ng:model="rows.Parameter[0].DateAdjustmentType" name="PeriodType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="PeriodType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].DateAdjustmentType" name="PeriodType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                    id="PeriodType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly">
             <md-option value="YearsDays">Years Days</md-option>
             <md-option value="YearsMonths">Years Months</md-option>
             <md-option value="Years">Years</md-option>
@@ -40,7 +41,8 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Inclusive</label>
-        <md-select required ng:model="rows.Parameter[0].Inclusive" name="PeriodInclusive_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="PeriodInclusive_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].Inclusive" name="PeriodInclusive_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
+                    id="PeriodInclusive_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Inclusive"  ng-disabled="viewOnly">
             <md-option value="True">True</md-option>
             <md-option value="False">False</md-option>
         </md-select>
@@ -52,7 +54,8 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Days in Year</label>
-        <md-select required ng:model="rows.Parameter[0].DaysinYear" name="PeriodDaysinYear_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  id="PeriodDaysinYear_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" >
+        <md-select required ng:model="rows.Parameter[0].DaysinYear" name="PeriodDaysinYear_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  
+                   id="PeriodDaysinYear_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Days" ng-disabled="viewOnly" >
              <md-option value="365">365</md-option>
             <md-option value="365.25">365.25</md-option>
             <md-option value="366">366</md-option>

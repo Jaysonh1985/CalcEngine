@@ -1,7 +1,8 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Incoming Array Type</label>
-        <md-select required ng:model="rows.Parameter[0].LookupType"  name="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
+        <md-select required ng:model="rows.Parameter[0].LookupType"  name="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                   id="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly">
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
             <!--<md-option value="String">String</md-option>-->
@@ -55,7 +56,7 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Function</label>
         <md-select  ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-                   id="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  ng-disabled="viewOnly" required>
+                   id="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="ArrayFunction"  ng-disabled="viewOnly" required>
             <md-option value=""></md-option>
             <md-option value="FirstDate">First Date</md-option>
             <md-option value="LastDate">Last Date</md-option>
@@ -70,7 +71,7 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Array Function</label>
         <md-select  ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-                   id="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+                   id="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  aria-label="ArrayFunction"  required>
             <md-option value=""></md-option>
             <md-option value="Sum">Sum</md-option>
             <md-option value="Product">Product</md-option>
@@ -87,7 +88,8 @@
 <div ng-if="rows.Parameter[0].Function == 'TotalPeriod' && rows.Parameter[0].LookupType == 'Decimal'" >
     <md-input-container class="md-block" flex-gt-sm>
         <label>Period Type</label>
-        <md-select ng:model="rows.Parameter[0].PeriodType" name="ArrayFunctionPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="ArrayFunctionPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-disabled="viewOnly" required>
+        <md-select ng:model="rows.Parameter[0].PeriodType" name="ArrayFunctionPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
+                    id="ArrayFunctionPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"   aria-label="ArrayFunctionPeriodType" ng-disabled="viewOnly" required>
             <md-option value=""></md-option>
             <md-option value="YearsDays">Years Days</md-option>
             <md-option value="YearsMonths">Years Months</md-option>

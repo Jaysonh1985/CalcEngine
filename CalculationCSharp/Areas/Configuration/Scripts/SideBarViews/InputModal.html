@@ -36,7 +36,7 @@
 <div>
     <label>Data Type</label>
     <md-select ng:model="rows.Parameter[0].templateOptions.type" name="InputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
-               id="InputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" ng-change="setFunctionInput(rows)" ng-required="">
+               id="InputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" ng-change="setFunctionInput(rows)" aria-label="DataType" ng-required="">
         <md-option value="String">String</md-option>
         <md-option value="Decimal">Decimal</md-option>
         <md-option value="Date">Date</md-option>

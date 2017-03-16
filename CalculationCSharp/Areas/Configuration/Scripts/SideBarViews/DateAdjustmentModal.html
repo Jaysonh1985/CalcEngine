@@ -2,7 +2,7 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Adjustment Type</label>
         <md-select required ng:model="rows.Parameter[0].Type" name="DateAdjustmentType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                   id="DateAdjustmentType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
+                   id="DateAdjustmentType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  aria-label="Type" ng-disabled="viewOnly">
             <md-option value="Add">Add</md-option>
             <md-option value="Adjust">Adjust</md-option>
             <md-option value="Earlier">Earlier</md-option>
@@ -48,7 +48,8 @@
     <div>
         <md-input-container class="md-block" flex-gt-sm>
             <label>Data Type</label>
-            <md-select required ng:model="rows.Parameter[0].PeriodType" name="DateAdjustmentPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="DateAdjustmentPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly">
+            <md-select required ng:model="rows.Parameter[0].PeriodType" name="DateAdjustmentPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+                       id="DateAdjustmentPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  aria-label="DataType" ng-disabled="viewOnly">
                 <md-option value="YearsDays">Years Days</md-option>
                 <md-option value="YearsMonths">Years Months</md-option>
                 <md-option value="Years">Years</md-option>
@@ -81,7 +82,7 @@
             <label>Adjustment</label>
             <md-select ng:model="rows.Parameter[0].Adjustment" name="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
                        id="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
-                       ng-disabled="viewOnly" required>
+                         aria-label="AdjustmentType" ng-disabled="viewOnly" required>
                 <md-option value="Less">Before</md-option>
                 <md-option value="LessEqual">On or Before</md-option>
                 <md-option value="Greater">After</md-option>

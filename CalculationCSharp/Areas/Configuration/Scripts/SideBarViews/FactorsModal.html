@@ -12,7 +12,7 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Lookup Type</label>
         <md-select ng:model="rows.Parameter[0].LookupType" name="FactorsLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                   id="FactorsLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" required>
+                   id="FactorsLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly" required>
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
@@ -65,7 +65,8 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Output Type</label>
-        <md-select ng:model="rows.Parameter[0].OutputType" name="FactorsOutputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="FactorsOutputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" required>
+        <md-select ng:model="rows.Parameter[0].OutputType" name="FactorsOutputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                   id="FactorsOutputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="OutputType" ng-disabled="viewOnly" required>
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
@@ -79,7 +80,8 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Required?</label>
-        <md-select  ng:model="rows.Parameter[0].RowMatch" name="FactorsRowMatch_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="FactorsRowMatch_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" required>
+        <md-select  ng:model="rows.Parameter[0].RowMatch" name="FactorsRowMatch_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                   id="FactorsRowMatch_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="RowMatch" ng-disabled="viewOnly" required>
             <md-option value=""></md-option>
             <md-option value="True">True</md-option>
             <md-option value="False">False</md-option>
@@ -103,7 +105,7 @@
     <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Lookup Type</label>
         <md-select ng:model="rows.Parameter[0].RowMatchLookupType" name="FactorsRowMatchRowLookupType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-                   id="FactorsRowMatchRowLookupType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-disabled="viewOnly" required>
+                   id="FactorsRowMatchRowLookupType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="RowMatchType" ng-disabled="viewOnly" required>
             <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
