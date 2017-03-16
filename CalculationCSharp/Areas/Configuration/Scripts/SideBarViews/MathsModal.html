@@ -2,10 +2,17 @@
     <legend>Maths Builder</legend>
     <div layout="row" ng-repeat="val in rows.Parameter">
         <md-input-container flex="1">
-            <md-select name="BracketLeft_{{$index}}"  aria-label="BracketLeft" ng:model="val.Bracket1">
+            <md-select name="BracketLeft_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"   
+                       id="BracketLeft_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
+                       bracketscheck config='[rows.Parameter]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" 
+                       aria-label="BracketLeft" ng:model="val.Bracket1">
                 <md-option value=""></md-option>
                 <md-option value="(">(</md-option>
             </md-select>
+            <div ng-messages="form['BracketLeft_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
+                <div ng-message="bracketnotclosed">Not Closed</div>
+                <div ng-message="bracketnotopen">Not Open</div>
+            </div>
         </md-input-container>
         <md-input-container flex="45">
             <label>Input</label>
@@ -25,13 +32,21 @@
             <input ng:model="val.Input2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
         </md-input-container>
         <md-input-container flex="1">
-            <md-select name="BracketRight_{{$index}}"  aria-label="BracketRight" ng:model="val.Bracket2">
+            <md-select name="BracketRight_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$index}}"   
+                       id="BracketRight_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
+                       bracketscheck config='[rows.Parameter]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" 
+                       aria-label="BracketRight" ng:model="val.Bracket2">
                 <md-option value=""></md-option>
-                <md-option value="web">)</md-option>
+                <md-option value=")">)</md-option>
             </md-select>
+            <div ng-messages="form['BracketRight_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
+                <div ng-message="bracketnotclosed">Not Closed</div>
+                <div ng-message="bracketnotopen">Not Open</div>
+            </div>
         </md-input-container>
         <md-input-container flex="1">
-            <md-select mathsoperatorcheck config='[rows.Parameter]' name="Operator_{{$index}}"  aria-label="BracketRight" id="Operator_{{$index}}" ng:model="val.Logic2">
+            <md-select mathsoperatorcheck config='[rows.Parameter]' rowIndex="{{$index}}"  name="Operator_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
+                       aria-label="Operator2" id="Operator_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" ng:model="val.Logic2">
                 <md-option value=""></md-option>
                 <md-option value="+">+</md-option>
                 <md-option value="-">-</md-option>
@@ -39,6 +54,10 @@
                 <md-option value="*">*</md-option>
                 <md-option value="Pow">^</md-option>
             </md-select>
+            <div ng-messages="form['Operator_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
+                <div ng-message="clause">Operator on final row</div>
+                <div ng-message="clauseblank">No operator on row</div>
+            </div>
         </md-input-container>
     </div>
 </fieldset>

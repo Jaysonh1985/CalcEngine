@@ -346,8 +346,7 @@
     <Content Include="Areas\Configuration\Scripts\Group\GroupModal.html" />
     <Content Include="Areas\Configuration\Scripts\SideBarViews\DateAdjustmentModal.html" />
     <Content Include="Areas\Configuration\Scripts\SideBarViews\PeriodModal.html" />
-    <Content Include="Areas\Configuration\Scripts\Maths\MathsModal.html" />
-    <Content Include="Areas\Configuration\Scripts\Maths\mathsCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\SideBarViews\MathsModal.html" />
     <Content Include="Areas\Configuration\Scripts\Config\configService.js" />
     <Content Include="Areas\Configuration\Scripts\Config\configCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\Logic\LogicModal.html" />
@@ -893,6 +892,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Calculation\Models\" />
     <Folder Include="Areas\Calculation\Views\Shared\" />
+    <Folder Include="Areas\Configuration\Scripts\Maths\" />
     <Folder Include="Areas\Project\UploadedFiles\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Areas\Project\Views\UploadFile\" />

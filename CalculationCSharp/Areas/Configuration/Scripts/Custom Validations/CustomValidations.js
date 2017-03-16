@@ -34,13 +34,79 @@ sulhome.kanbanBoardApp.directive('mathsoperatorcheck', function () {
         replace: true,
         restrict: 'A',
         require: '^form',
-        scope: { config: '=' },
+        scope: { config: '=', rowIndex: '=' },
         link: function (scope, element, attrs, form, scopectrl, ngModel) {
             element.on('blur', function () {
+                form[attrs.name].$setValidity("clause", true);
                 form[attrs.name].$setValidity("clauseblank", true);
-                    //if ($scope.maths[key + 1] == null) {
-                    //    form[AttName].$setValidity("clause", false);
-                    //}
+                var MathsScope = scope.config[0];
+                var currentRow = MathsScope[parseInt(attrs.rowindex)];
+                var nextRow = MathsScope[parseInt(attrs.rowindex) + 1];
+                if (currentRow.Logic2 != "" && currentRow.Logic2 != null)
+                {
+                    if (nextRow == null) {
+                        form[attrs.name].$setValidity("clause", false);
+                    }
+                }
+                else if (currentRow.Logic2 == "" || currentRow.Logic2 == null) {
+                    if (nextRow != null) {
+                        form[attrs.name].$setValidity("clauseblank", false);
+                    }
+                }
+               
+            });
+        }
+    }
+});
+
+sulhome.kanbanBoardApp.directive('bracketscheck', function () {
+    return {
+        replace: true,
+        restrict: 'A',
+        require: '^form',
+        scope: { config: '=', rowIndex: '=', colIndex: '=' },
+        link: function (scope, element, attrs, form, scopectrl, ngModel) {
+            element.on('blur', function () {
+                var LBcounter = 0;
+                var RBcounter = 0;
+                angular.forEach(scope.config[0], function (value, key, obj) {
+                    if (value.Bracket1 == "(") {
+                        var AttName = 'BracketLeft_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
+                        form[AttName].$setValidity("bracketnotclosed", true);
+                        LBcounter = LBcounter + 1;
+                    }
+                    if (value.Bracket2 == ")") {
+                        var AttName = 'BracketRight_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
+                        form[AttName].$setValidity("bracketnotopen", true);
+                        RBcounter = RBcounter + 1;
+                    }
+                })
+                if (LBcounter > RBcounter) {
+                    angular.forEach(scope.config[0], function (value, key, obj) {
+                        var AttName = 'BracketLeft_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
+                        form[AttName].$setValidity("bracketnotclosed", true);
+                        if (value.Bracket1 = "(") {
+                            form[AttName].$setValidity("bracketnotclosed", false);
+                        }
+                    })
+                }
+                else if (LBcounter < RBcounter) {
+                    angular.forEach(scope.config[0], function (value, key, obj) {
+                        var AttName = 'BracketRight_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
+                        form[AttName].$setValidity("bracketnotopen", true);
+                        if (value.Bracket2 = ")") {
+                            form[AttName].$setValidity("bracketnotopen", false);
+                        }
+                    })
+                }
+                else {
+                    angular.forEach(scope.config[0], function (value, key, obj) {
+                        var AttName = 'BracketLeft_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
+                        form[AttName].$setValidity("bracketnotclosed", true);
+                        var AttName = 'BracketRight_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
+                        form[AttName].$setValidity("bracketnotopen", true);
+                    })
+                }
             });
         }
     }
