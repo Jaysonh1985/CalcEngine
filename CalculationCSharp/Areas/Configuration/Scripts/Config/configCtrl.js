@@ -591,7 +591,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.Description = this.config[colIndex].Description;
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/Group/GroupModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/SideBarViews/GroupModal.html',
             scope: $scope,
             controller: 'groupCtrl',
             backdrop: false,
