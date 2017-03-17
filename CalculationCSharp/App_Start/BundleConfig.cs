@@ -63,7 +63,8 @@ namespace CalculationCSharp
                         "~/Areas/Configuration/Scripts/Factories/configTypeaheadFactory.js",
                         "~/Areas/Configuration/Scripts/Services/configService.js",
                         "~/Areas/Configuration/Scripts/Services/configMenuService.js",
-                        "~/Areas/Configuration/Scripts/Services/configHistoryService.js"
+                        "~/Areas/Configuration/Scripts/Services/configHistoryService.js",
+                        "~/Areas/Configuration/Scripts/Services/configRegressionService.js"
                         ));
 
             //Calculation Configuration

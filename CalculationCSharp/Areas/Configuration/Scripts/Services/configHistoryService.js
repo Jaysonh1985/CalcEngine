@@ -46,6 +46,7 @@ sulhome.kanbanBoardApp.service('configHistoryService', function ($http, $q, $roo
          });
      };
 
+
     var initialize = function () {      
         connection = jQuery.hubConnection();
         this.proxy = connection.createHubProxy('KanbanBoard');

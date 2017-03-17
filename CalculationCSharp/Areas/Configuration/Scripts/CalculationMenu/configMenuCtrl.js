@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routeParams, $uibModal, $log, $location, $window, $filter, configMenuService, calculationService, configFunctionFactory) {
+sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routeParams, $uibModal, $log, $location, $window, $filter, configMenuService, configService, calculationService, configFunctionFactory) {
     // Model
     $scope.Boards = [];
     $scope.isLoading = false;
@@ -27,7 +27,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                 }, onError);
 	    }
 	    else {
-	    configService.getConfig()
+	        configMenuService.getConfig()
                 .then(function (data) {               
                     $scope.isLoading = false;
                     $scope.Boards = data;
@@ -40,7 +40,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
         if ($scope.Function == true) {
             Section = "Function";
         }
-        configService.getUserSession(Board.ID, Section).then(function (data) {         
+        configService.getUserSession(Board.ID, Section).then(function (data) {
             if(data == "")
             {
                 RecordEnabled(Board);
@@ -68,7 +68,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     $scope.addBoard = function AddBoard() {
         //Creates TypeAhead Values
         var SchemeList = [];
-        configService.getSchemes().then(function (data) {
+        configMenuService.getSchemes().then(function (data) {
             SchemeList = data;
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -95,14 +95,14 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                 };
 
 	        if($scope.Function == true){
-		        configService.addFunction($scope.selected).then(function (data) {
+		        configMenuService.addFunction($scope.selected).then(function (data) {
                     $scope.Boards.push(data);
                     $scope.isLoading = false;
                 }, onError);
                 toastr.success("Function created successfully", "Success");
 	        }
 	        else{
-		        configService.addConfig($scope.selected).then(function (data) {
+	            configMenuService.addConfig($scope.selected).then(function (data) {
 	                $scope.Boards.push(data);
 	                $scope.isLoading = false;
 	            }, onError);
@@ -117,7 +117,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     $scope.copyBoard = function AddBoard(Board) {
         //Creates TypeAhead Values
         var SchemeList = [];
-        configService.getSchemes().then(function (data) {
+        configMenuService.getSchemes().then(function (data) {
             SchemeList = data;
 
             var modalInstance = $uibModal.open({
@@ -144,14 +144,14 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                     Configuration: selectedItem[0].Configuration
                 };
 		        if($scope.Function == true){
-		            configService.addFunction($scope.selected).then(function (data) {
+		            configMenuService.addFunction($scope.selected).then(function (data) {
                         $scope.Boards.push(data);
                         $scope.isLoading = false;
                     }, onError);
                     toastr.success("Function created successfully", "Success");
 		        }
 		        else{
-		            configService.addConfig($scope.selected).then(function (data) {
+		            configMenuService.addConfig($scope.selected).then(function (data) {
                         $scope.Boards.push(data);
                         $scope.isLoading = false;
                     }, onError);
@@ -175,7 +175,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
         var Version = this.Boards[arrayID].Version;
         //Creates TypeAhead Values
         var SchemeList = [];
-        configService.getSchemes().then(function (data) {
+        configMenuService.getSchemes().then(function (data) {
             SchemeList = data;
 
             var modalInstance = $uibModal.open({
@@ -205,19 +205,19 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                 };
 		        if($scope.Function == true)
 		        {
-		            configService.putFunction($scope.selected.ID, $scope.selected).then(function (data) {
+		            configMenuService.putFunction($scope.selected.ID, $scope.selected).then(function (data) {
                         $scope.isLoading = false;
                         $scope.Boards[arrayID] = $scope.selected;
-                        configService.sendRequest();                   
+                        configMenuService.sendRequest();
                     }, onError);
                     toastr.success("Function Updated successfully", "Success");
 		        }
 		        else
 		        {
-		            configService.putConfig($scope.selected.ID, $scope.selected).then(function (data) {
+		            configMenuService.putConfig($scope.selected.ID, $scope.selected).then(function (data) {
                         $scope.isLoading = false;
                         $scope.Boards[arrayID] = $scope.selected;
-                        configService.sendRequest();                   
+                        configMenuService.sendRequest();
                     }, onError);
                     toastr.success("Calculation Updated successfully", "Success");
 		        }
@@ -245,11 +245,11 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
 
             Board.Version = Math.ceil(Board.Version);
 
-            configService.putConfig(Board.ID, $scope.selected).then(function (data) {
+            configMenuService.putConfig(Board.ID, $scope.selected).then(function (data) {
                 $scope.isLoading = false;
             }, onError);
 
-            configService.getCalcHistory(Board.ID).then(function (data) {
+            configMenuService.getCalcHistory(Board.ID).then(function (data) {
                 $scope.isLoading = false;
 
                 $scope.historySelected = {
@@ -265,7 +265,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
                 var index = configFunctionFactory.getIndexOf(data, $scope.historySelected.Version, 'Version');
 
                 if (index == false) {
-                    configService.postCalcHistory($scope.selected.ID, $scope.historySelected).then(function (data) {
+                    configMenuService.postCalcHistory($scope.selected.ID, $scope.historySelected).then(function (data) {
                         $scope.isLoading = false;
                     }, onError);
                 }
@@ -309,14 +309,14 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
         var cf = confirm("Delete this Calculation?");
         if (cf == true) {
             if ($scope.Function == true) {
-                configService.deleteFunction(Board.ID)
+                configMenuService.deleteFunction(Board.ID)
                 .then(function (data) {
                     $scope.isLoading = false;
                     $scope.Boards.splice(arrayID, 1);
                 }, onError);
             }
             else {
-                configService.deleteConfig(Board.ID)
+                configMenuService.deleteConfig(Board.ID)
                 .then(function (data) {
                     $scope.isLoading = false;
                     $scope.Boards.splice(arrayID, 1);
@@ -332,7 +332,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
      }
 
     $scope.modify = function (Boards) {
-        configService.getSchemes().then(function (data) {
+        configMenuService.getSchemes().then(function (data) {
             $scope.SchemeList = data;
             $scope.editingData[Boards.ID] = true;
         }, onError);
