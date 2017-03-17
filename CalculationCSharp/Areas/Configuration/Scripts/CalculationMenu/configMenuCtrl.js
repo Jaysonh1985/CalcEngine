@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routeParams, $uibModal, $log, $location, $window, $filter, configService, calculationService, configFunctionFactory) {
+sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routeParams, $uibModal, $log, $location, $window, $filter, configMenuService, calculationService, configFunctionFactory) {
     // Model
     $scope.Boards = [];
     $scope.isLoading = false;
@@ -11,7 +11,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
 
     function init() {
         $scope.isLoading = true;
-        configService.initialize().then(function (data) {
+        configMenuService.initialize().then(function (data) {
             $scope.refreshBoard();
            
         }, onError);
@@ -20,7 +20,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope,  $routePar
     $scope.refreshBoard = function refreshBoard() {        
         $scope.isLoading = true;
 	    if ($scope.Function == true) {
-	    configService.getFunction()
+	        configMenuService.getFunction()
                 .then(function (data) {               
                     $scope.isLoading = false;
                     $scope.Boards = data;

@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('historyCtrl', function ($scope, $uibModalInstance, $window, $log, $http, $location, configService, ID, isFunction) {
+sulhome.kanbanBoardApp.controller('historyCtrl', function ($scope, $uibModalInstance, $window, $log, $http, $location, configHistoryService, ID, isFunction) {
     init();
     //Map back the calculation histories where available for the specified calculation
     function init() {
         $scope.isLoading = true;
         if (isFunction == true)
         {
-           configService.getFunctionHistory(ID)
+           configHistoryService.getFunctionHistory(ID)
            .then(function (data) {
                $scope.isLoading = false;
                $scope.Boards = data;
@@ -14,11 +14,11 @@ sulhome.kanbanBoardApp.controller('historyCtrl', function ($scope, $uibModalInst
         }
         else
         {
-         configService.getCalcHistory(ID)
-        .then(function (data) {
-            $scope.isLoading = false;
-            $scope.Boards = data;
-        }, onError);
+            configHistoryService.getCalcHistory(ID)
+            .then(function (data) {
+                $scope.isLoading = false;
+                $scope.Boards = data;
+            }, onError);
         }
 
     };

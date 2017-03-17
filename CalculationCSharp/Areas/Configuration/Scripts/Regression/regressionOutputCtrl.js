@@ -1,6 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('regressionOutputCtrl', function ($scope, $uibModalInstance,$uibModal, $log, $http, $location, Output, $filter, Header) {
-    
+sulhome.kanbanBoardApp.controller('regressionOutputCtrl', function ($scope, $uibModalInstance,$uibModal, $log, $http, $location, Output, $filter, Header) {  
 
     function init() {
         $scope.output = angular.fromJson(Output);

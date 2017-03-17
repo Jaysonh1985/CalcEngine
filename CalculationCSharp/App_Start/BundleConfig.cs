@@ -41,12 +41,11 @@ namespace CalculationCSharp
             bundles.Add(new ScriptBundle("~/bundles/calculationConfiguration").Include(
                         "~/Areas/Configuration/Scripts/Logic/groupCtrl.js",
                         "~/Areas/Configuration/Scripts/Logic/logicCtrl.js",
-                        "~/Areas/Configuration/Scripts/Config/configBuilderRowCtrl.js",
-                        "~/Areas/Configuration/Scripts/Config/configBuilderColumnCtrl.js",
-                        "~/Areas/Configuration/Scripts/Config/configBuilderUICtrl.js",
-                        "~/Areas/Configuration/Scripts/Config/configCtrl.js",
-                        "~/Areas/Configuration/Scripts/Config/configService.js",
-                        "~/Areas/Configuration/Scripts/Config/configMenuCtrl.js",
+                        "~/Areas/Configuration/Scripts/ConfigBuilder/configBuilderRowCtrl.js",
+                        "~/Areas/Configuration/Scripts/ConfigBuilder/configBuilderColumnCtrl.js",
+                        "~/Areas/Configuration/Scripts/ConfigBuilder/configBuilderUICtrl.js",
+                        "~/Areas/Configuration/Scripts/ConfigBuilder/configCtrl.js",
+                        "~/Areas/Configuration/Scripts/CalculationMenu/configMenuCtrl.js",
                         "~/Areas/Configuration/Scripts/Comments/commentsCtrl.js",
                         "~/Areas/Configuration/Scripts/Date Part/datePartCtrl.js",
                         "~/Areas/Configuration/Scripts/CalculationMenu/configMenuAddCalcCtrl.js",
@@ -58,10 +57,13 @@ namespace CalculationCSharp
                         "~/Areas/Configuration/Scripts/Custom Validations/CustomValidations.js",
                         "~/Areas/Configuration/Scripts/Function/functionCtrl.js",
                         "~/Areas/Configuration/Scripts/Impact Assessment/impactAssessmentCtrl.js",
-                        "~/Areas/Configuration/Scripts/Config/Factories/configFunctionFactory.js",
-                        "~/Areas/Configuration/Scripts/Config/Factories/configModalFactory.js",
-                        "~/Areas/Configuration/Scripts/Config/Factories/configValidationFactory.js",
-                        "~/Areas/Configuration/Scripts/Config/Factories/configTypeaheadFactory.js"
+                        "~/Areas/Configuration/Scripts/Factories/configFunctionFactory.js",
+                        "~/Areas/Configuration/Scripts/Factories/configModalFactory.js",
+                        "~/Areas/Configuration/Scripts/Factories/configValidationFactory.js",
+                        "~/Areas/Configuration/Scripts/Factories/configTypeaheadFactory.js",
+                        "~/Areas/Configuration/Scripts/Services/configService.js",
+                        "~/Areas/Configuration/Scripts/Services/configMenuService.js",
+                        "~/Areas/Configuration/Scripts/Services/configHistoryService.js"
                         ));
 
             //Calculation Configuration
