@@ -39,8 +39,11 @@ namespace CalculationCSharp
                    "~/Content/jquery-ui.css"));
             //Calculation Configuration
             bundles.Add(new ScriptBundle("~/bundles/calculationConfiguration").Include(
-                        "~/Areas/Configuration/Scripts/Group/groupCtrl.js",
+                        "~/Areas/Configuration/Scripts/Logic/groupCtrl.js",
                         "~/Areas/Configuration/Scripts/Logic/logicCtrl.js",
+                        "~/Areas/Configuration/Scripts/Config/configBuilderRowCtrl.js",
+                        "~/Areas/Configuration/Scripts/Config/configBuilderColumnCtrl.js",
+                        "~/Areas/Configuration/Scripts/Config/configBuilderUICtrl.js",
                         "~/Areas/Configuration/Scripts/Config/configCtrl.js",
                         "~/Areas/Configuration/Scripts/Config/configService.js",
                         "~/Areas/Configuration/Scripts/Config/configMenuCtrl.js",

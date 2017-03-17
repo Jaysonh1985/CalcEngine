@@ -25,6 +25,26 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
         }
         return false;
         },
+        //get index of an array
+        buildFunction: function (colIndex, config) {
+            var item = null;
+            if (colIndex == 0) {
+                item = {
+                    ID: config[colIndex].Functions.length,
+                    Function: 'Input',
+                    Logic: [],
+                    Parameter: []
+                };
+            }
+            else {
+                item = {
+                    ID: config[colIndex].Functions.length,
+                    Logic: [],
+                    Parameter: []
+                };
+            }
+            return item;
+        },
         //function to store the array as a new array if linked back to a previous $scope
         convertToFromJson: function (arr) {
             var array = [];

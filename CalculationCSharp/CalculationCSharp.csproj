@@ -311,6 +311,10 @@
     <Content Include="AppScript\Timeout\WarningModal.html" />
     <Content Include="Areas\Calculation\Scripts\calculationMenuCtrl.js" />
     <Content Include="Areas\Calculation\Scripts\calculationService.js" />
+    <Content Include="Areas\Configuration\Scripts\Config\configBuilderUICtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Config\configBuilderColumnCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Config\configBuilderRowCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\Logic\groupCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\SideBarViews\ArrayFunctions.html" />
     <Content Include="Areas\Configuration\Scripts\CalculationMenu\configMenuAddCalcCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\CalculationMenu\ConfigMenuAddCalcModal.html" />

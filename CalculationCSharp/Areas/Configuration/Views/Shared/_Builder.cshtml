@@ -13,9 +13,9 @@
                     </ul>
                 </li>
             </ul>
-            <div ui-tree >
+            <div ui-tree ng-controller="configBuilderColumnCtrl">
                 <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
-                <uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
+                <uib-accordion close-others=false ui-tree-nodes=""   ng-model="config" data-nodrop-enabled="true">
                     <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" layout="column" context-menu="columnMenuOptions" ui-tree-node>
                         <uib-accordion-heading>                         
                             <div class="slide-container">
