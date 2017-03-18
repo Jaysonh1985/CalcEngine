@@ -28,7 +28,7 @@ csvImport.directive('ngCsvImport', function () {
 			'<div class="label">Seperator</div>' +
 			'<span><input class="separator-input" type="text" ng-change="changeSeparator" ng-model="separator"><span>' +
 			'</div>' +
-			'<div><input style="background-color:#222; border:none; color:#222" class="btn btn-default" type="file" accept=".csv"/></div>' +
+			'<div><input style="" class="btn btn-default" type="file" accept=".csv"/></div>' +
 			'</div>',
         link: function (scope, element) {
             scope.separatorVisible = scope.separatorVisible || false;

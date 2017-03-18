@@ -1,8 +1,8 @@
 ﻿<md-content  ng-controller="configCtrl" layout-gt-sm="row" layout="row" 
        ng-cloak> 
     <ng-form name="form" role="form" ng-submit="calcbuttonclick(form)" layout="row" style="width:100%">
-        
-        <md-content flex="70" layout-padding="" layout="column" style="padding:0px; border-right: thin solid; border-right-color: #e8e1d6">
+        @Html.Partial("_FunctionBar")  
+        <md-content flex="70" layout-padding="" layout="column" style="padding:0px; border-left: thin solid; border-left-color: #e8e1d6">
             <h3 class="pull-left"><a>@ViewData["SchemeName"] - @ViewData["CalcName"]</a></h3>
             
             <ul>
@@ -31,6 +31,5 @@
             </div>
             @Html.Partial("_FABButton")
         </md-content>    
-        @Html.Partial("_FunctionBar")   
     </ng-form>
 </md-content>

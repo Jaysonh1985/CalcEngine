@@ -1,0 +1,43 @@
+﻿<md-fab-speed-dial ng-hide="false" md-direction="left"  md-open="FabOpen"
+                   class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': true}"
+                   ng-mouseenter="FabOpen=true" ng-mouseleave="FabOpen=false">
+    <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-warn">
+            <md-icon md-svg-src="/Images/menu.svg"> </md-icon>
+        </md-button>
+    </md-fab-trigger>
+    <md-fab-actions ng-controller="configBuilderUICtrl">
+        <md-button ng-disabled="form.$invalid || viewOnly" aria-label="Calculate" class="md-fab md-raised md-mini"
+                   ng-click="CalcButtonClick(form)">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Calculate
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/calculator.svg"> </md-icon>
+        </md-button>
+        <md-button aria-label="Export" class="md-fab md-raised md-mini"
+                   ng-click="SpecButtonClick(form)" ng-csv="ExportCalcButtonClick(output)" filename="@ViewData["SchemeName"] - @ViewData["CalcName"] Calculation Output.csv">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Export
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/file.svg"> </md-icon>
+        </md-button>
+        <md-button aria-label="CloseAll" class="md-fab md-raised md-mini"
+                   ng-click="CloseAllButton()">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Close All
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/directional-arrow.svg"> </md-icon>
+        </md-button>
+        <md-button aria-label="OpenAll" class="md-fab md-raised md-mini"
+                   ng-click="OpenAllButton()">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Open All
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/down-arrow.svg"> </md-icon>
+        </md-button>
+    </md-fab-actions>
+</md-fab-speed-dial>

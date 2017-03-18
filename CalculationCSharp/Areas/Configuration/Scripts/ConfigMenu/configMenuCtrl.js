@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routeParams, $uibModal, $log, $location, $window, $filter, configMenuService, configService, calculationService, configFunctionFactory) {
+sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routeParams, $uibModal, $log, $location, $window, $filter, configMenuService, configHistoryService, configService, calculationService, configFunctionFactory) {
     // Model
     $scope.Boards = [];
     $scope.isLoading = false;
@@ -234,7 +234,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
             configMenuService.putConfig(Board.ID, $scope.selected).then(function (data) {
                 $scope.isLoading = false;
             }, onError);
-            configMenuService.getCalcHistory(Board.ID).then(function (data) {
+            configHistoryService.getCalcHistory(Board.ID).then(function (data) {
                 $scope.isLoading = false;
                 $scope.historySelected = {
                     CalcID: $scope.selected.ID,
@@ -247,7 +247,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
                 };
                 var index = configFunctionFactory.getIndexOf(data, $scope.historySelected.Version, 'Version');
                 if (index == false) {
-                    configMenuService.postCalcHistory($scope.selected.ID, $scope.historySelected).then(function (data) {
+                    configHistoryService.postCalcHistory($scope.selected.ID, $scope.historySelected).then(function (data) {
                         $scope.isLoading = false;
                     }, onError);
                 };

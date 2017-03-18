@@ -357,6 +357,9 @@
     <Content Include="Areas\Configuration\Scripts\ConfigBuilder\configCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Logic\LogicModal.html" />
     <Content Include="Areas\Configuration\Scripts\ConfigMenu\configMenuCtrl.js" />
+    <Content Include="Areas\Calculation\Views\Shared\_InputBar.cshtml" />
+    <Content Include="Areas\Calculation\Views\Shared\_FABButton.cshtml" />
+    <Content Include="Areas\Calculation\Views\Shared\_CalculationBulk.cshtml" />
     <None Include="Areas\Configuration\Views\Shared\_FABButton.cshtml" />
     <Content Include="Areas\Project\Scripts\Factories\fileUploadService.js" />
     <Content Include="Areas\Project\Scripts\projectMenuAddCalcCtrl.js" />
@@ -886,7 +889,6 @@
     <Folder Include=".bin\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Calculation\Models\" />
-    <Folder Include="Areas\Calculation\Views\Shared\" />
     <Folder Include="Areas\Project\UploadedFiles\" />
     <Folder Include="Areas\Project\Views\Shared\" />
     <Folder Include="Areas\Project\Views\UploadFile\" />

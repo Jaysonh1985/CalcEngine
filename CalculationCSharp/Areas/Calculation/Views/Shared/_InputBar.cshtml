@@ -1,0 +1,34 @@
+﻿<div flex="30">
+    <md-toolbar layout="row" class="md-theme-black">
+        <div ng-if="Category.Name != 'Input' && rows.Function == null">
+            <md-input-container class="md-block" flex-gt-sm>
+                @ViewData["SchemeName"] - @ViewData["CalcName"]        
+            </md-input-container>
+        </div>
+    </md-toolbar>
+    <md-content class="md-no-momentum" layout-margin="">
+        <div class="panel-heading">
+            <h2 class="panel-title">Calculation Input</h2>
+        </div>
+        <br />
+        <form name="formregress" role="form" ng-submit="CalcButtonClick(formregress)" novalidate>
+            <table class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th width="25%">Name</th>
+                        <th width="75%">Input</th>
+                    </tr>
+                </thead>
+                <tbody ng:model="configreg.Functions">
+                    <tr unselectable="on" ng-repeat="rows in configreg.Functions | filter:searchText">
+                        @Html.Partial("~/Areas/Configuration/Views/Shared/_InputForm.cshtml")
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-default submit-button">Submit</button>
+            <a class="btn btn-default" ng-click="RemoveInputsButton()">Clear</a>
+        </form>
+    </md-content>
+</div>       
+
+    
