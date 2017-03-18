@@ -390,6 +390,103 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         toastr.error(errorMessage, "Error");
     };
 
+    //Higlight rows functions
+    var selectedRowsIndexes = [];
+
+    $scope.deselectRow = function () {
+        resetSelection();
+    };
+
+    $scope.selectRow = function (event, rowIndex, colIndex) {
+        $scope.getVariableTypes(colIndex, rowIndex);
+        $scope.Parameter = this.config[colIndex].Functions[rowIndex].Parameter;
+        $scope.Function = this.config[colIndex].Functions[rowIndex].Function;
+        $scope.rowIndex = rowIndex;
+        $scope.colIndex = colIndex;
+
+        if (event.ctrlKey) {
+            if (selectedRowsIndexes[colIndex] != null) {
+                changeSelectionStatus(rowIndex, colIndex);
+            }
+            else {
+                resetSelection();
+                selectedRowsIndexes[colIndex] = [rowIndex];
+            }
+        } else if (event.shiftKey) {
+            if (selectedRowsIndexes[colIndex] != null) {
+                selectWithShift(rowIndex, colIndex);
+            }
+            else {
+                resetSelection();
+                selectedRowsIndexes[colIndex] = [rowIndex];
+            }
+        } else {
+
+            if (selectedRowsIndexes[colIndex] != null) {
+                resetSelection();
+                selectedRowsIndexes[colIndex] = [rowIndex];
+            }
+            else {
+                resetSelection();
+                selectedRowsIndexes[colIndex] = [rowIndex];
+            }
+        }
+    };
+
+    function selectWithShift(rowIndex, colIndex) {
+        var lastSelectedRowIndexInSelectedRowsList = selectedRowsIndexes.length - 1;
+        var lastSelectedRowIndex = selectedRowsIndexes[lastSelectedRowIndexInSelectedRowsList];
+        var selectFromIndex = Math.min(rowIndex, lastSelectedRowIndex);
+        var selectToIndex = Math.max(rowIndex, lastSelectedRowIndex);
+        selectRows(selectFromIndex, selectToIndex, colIndex);
+    };
+
+    function getSelectedRows(colIndex) {
+        var selectedRows = [];
+        selectedRowsIndexesOrdered = $filter('orderBy')(selectedRowsIndexes[colIndex]);
+        angular.forEach(selectedRowsIndexesOrdered, function (value, key, prop) {
+            selectedRows.push($scope.config[colIndex].Functions[value]);
+        });
+        return selectedRows;
+    };
+
+    function selectRows(selectFromIndex, selectToIndex, colIndex) {
+        for (var rowToSelect = selectFromIndex; rowToSelect <= selectToIndex; rowToSelect++) {
+            select(rowToSelect, colIndex);
+        }
+    };
+
+    function changeSelectionStatus(rowIndex, colIndex) {
+        if ($scope.isRowSelected(rowIndex, colIndex)) {
+            unselect(rowIndex, colIndex);
+        } else {
+            select(rowIndex, colIndex);
+        }
+    };
+
+    function select(rowIndex, colIndex) {
+        if (!$scope.isRowSelected(rowIndex, colIndex)) {
+            selectedRowsIndexes[colIndex].push(rowIndex)
+        }
+    };
+
+    function unselect(rowIndex, colIndex) {
+        var rowIndexInSelectedRowsList = selectedRowsIndexes[colIndex].indexOf(rowIndex);
+        var unselectOnlyOneRow = 1;
+        selectedRowsIndexes[colIndex].splice(rowIndexInSelectedRowsList, unselectOnlyOneRow);
+    };
+
+    function resetSelection() {
+        selectedRowsIndexes = [];
+    };
+
+    $scope.isRowSelected = function (rowIndex, colIndex) {
+        if (selectedRowsIndexes[colIndex] != null) {
+            return selectedRowsIndexes[colIndex].indexOf(rowIndex) > -1;
+        }
+        return false;
+    };
+
     init();
 
     $window.onbeforeunload = function (event) {
