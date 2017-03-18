@@ -62,18 +62,18 @@
                     </div>
                 </md-content>
                 <md-content class="md-no-momentum" layout-margin="">
-                    <div ng-if="rows.Function=='ErrorsWarnings'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ErrorsWarnings.html'"></div>
-                    <div ng-if="rows.Function=='StringFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/StringFunctions.html'"></div>
-                    <div ng-if="rows.Function=='Input'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/Input.html'"></div>
-                    <div ng-if="rows.Function=='Return'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/Return.html'"></div>
-                    <div ng-if="rows.Function=='Period'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/Period.html'"></div>
-                    <div ng-if="rows.Function=='DatePart'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/DatePart.html'"></div>
-                    <div ng-if="rows.Function=='DateAdjustment'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/DateAdjustment.html'"></div>
-                    <div ng-if="rows.Function=='Comments'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/Comments.html'"></div>
-                    <div ng-if="rows.Function=='MathsFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/MathsFunctions.html'"></div>
-                    <div ng-if="rows.Function=='Factors'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/Factors.html'"></div>
-                    <div ng-if="rows.Function=='ArrayFunctions'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/ArrayFunctions.html'"></div>
-                    <div ng-if="rows.Function=='Maths'" ng-include="'/Areas/Configuration/Scripts/SideBarViews/Maths.html'"></div>
+                    <div ng-if="rows.Function=='ErrorsWarnings'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ErrorsWarnings.html'"></div>
+                    <div ng-if="rows.Function=='StringFunctions'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/StringFunctions.html'"></div>
+                    <div ng-if="rows.Function=='Input'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Input.html'"></div>
+                    <div ng-if="rows.Function=='Return'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Return.html'"></div>
+                    <div ng-if="rows.Function=='Period'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Period.html'"></div>
+                    <div ng-if="rows.Function=='DatePart'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/DatePart.html'"></div>
+                    <div ng-if="rows.Function=='DateAdjustment'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/DateAdjustment.html'"></div>
+                    <div ng-if="rows.Function=='Comments'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Comments.html'"></div>
+                    <div ng-if="rows.Function=='MathsFunctions'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/MathsFunctions.html'"></div>
+                    <div ng-if="rows.Function=='Factors'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Factors.html'"></div>
+                    <div ng-if="rows.Function=='ArrayFunctions'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ArrayFunctions.html'"></div>
+                    <div ng-if="rows.Function=='Maths'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Maths.html'"></div>
                     <div ng-if="rows.Function=='Function'">
                         <md-content class="md-no-momentum" layout-margin="">
                             <md-button ng-click="FunctionButtonClick('lg', colIndex, rowIndex, userForm)" class="md-accent">
