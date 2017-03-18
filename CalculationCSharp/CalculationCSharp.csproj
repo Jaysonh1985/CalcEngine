@@ -674,7 +674,6 @@
     <Content Include="Scripts\angular-aria\angular-aria.js" />
     <Content Include="Scripts\angular-aria\angular-aria.min.js" />
     <Content Include="Scripts\angular-csv-import.js" />
-    <Content Include="Scripts\angular-drag-and-drop-lists.js" />
     <Content Include="Areas\Project\Scripts\menuCtrl.js" />
     <Content Include="Areas\Project\Scripts\boardCtrl.js" />
     <Content Include="Areas\Project\Scripts\boardService.js" />
@@ -755,7 +754,6 @@
     <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
     <Content Include="Scripts\angular-filter.js" />
     <Content Include="Scripts\angular-idle.js" />
-    <Content Include="Scripts\angular-long-press.js" />
     <Content Include="Scripts\angular-material\angular-material-mocks.js" />
     <Content Include="Scripts\angular-material\angular-material.js" />
     <Content Include="Scripts\angular-material\angular-material.min.js" />
