@@ -2,9 +2,7 @@
        ng-cloak> 
     <ng-form name="form" role="form" ng-submit="calcbuttonclick(form)" layout="row" style="width:100%">
         @Html.Partial("_FunctionBar")  
-        <md-content flex="70" layout-padding="" layout="column" style="padding:0px; border-left: thin solid; border-left-color: #e8e1d6">
-            <h3 class="pull-left"><a>@ViewData["SchemeName"] - @ViewData["CalcName"]</a></h3>
-            
+        <md-content flex="70" layout-padding="" layout="column" style="padding:0px; border-left: thin solid; border-left-color: #e8e1d6">      
             <ul>
                 <li ng-repeat="(key, errors) in form.$error track by $index">
                     <strong>{{ key }}</strong> errors

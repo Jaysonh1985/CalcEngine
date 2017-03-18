@@ -39,7 +39,7 @@
                                 </th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="row in group.Output | filter : test" ng-class="{'redrow': row.Field.indexOf('Comment') > -1}">
+                            <tr ng-repeat="row in group.Output | filter : test" ng-class="{'redrow': row.Field.indexOf('Comment') > -1}" style="background-color:white">
                                 <td>
                                     {{row.Field}}
                                 </td>

@@ -2,7 +2,12 @@
     <md-toolbar layout="row" class="md-theme-black">
         <div ng-if="Category.Name != 'Input' && rows.Function == null">
             <md-input-container class="md-block" flex-gt-sm>
-                @ViewData["SchemeName"] - @ViewData["CalcName"]        
+                <ul class="list-inline">
+                    <li class="list-inline-item"><h5>Scheme:</h5></li>
+                    <li class="list-inline-item"><h4>@ViewData["SchemeName"]</h4></li>
+                    <li class="list-inline-item"><h5>Calculation:</h5></li>
+                    <li class="list-inline-item"><h4>@ViewData["CalcName"]</h4></li>
+                </ul>
             </md-input-container>
         </div>
     </md-toolbar>

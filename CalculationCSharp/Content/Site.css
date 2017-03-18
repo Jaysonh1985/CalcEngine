@@ -481,7 +481,7 @@ form[editable-form] > div {margin: 10px 0;}
 }
 
 .selected {
-    background-color:#f1f0ed;
+    background-color:rgba(40, 53, 147, 0.19);
     color:black;
     font-weight:bold;
 }

@@ -44,7 +44,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $scope.MenuHeader = 'Function';
         }
         else {
-            $scope.MenuHeader = 'Config';
+            $scope.MenuHeader = 'Configuration';
         };
         //Check if using local storage for saved sessions after timeout
         if ($window.localStorage["Config"] != null) {
