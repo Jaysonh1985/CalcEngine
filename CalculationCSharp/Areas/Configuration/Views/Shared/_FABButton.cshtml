@@ -7,8 +7,8 @@
         </md-button>
     </md-fab-trigger>
     <md-fab-actions ng-controller="configBuilderUICtrl">
-        <md-button ng-disabled="form.$invalid || viewOnly" aria-label="Calculate" class="md-fab md-raised md-mini"
-                   ng-click="CalcButtonClick(form)">
+        <md-button ng-disabled="viewOnly" aria-label="Calculate" class="md-fab md-raised md-mini"
+                   type="submit">
             <md-tooltip md-direction="left" md-visible="tooltipVisible"
                         md-autohide="false">
                 Calculate
@@ -16,7 +16,7 @@
             <md-icon md-svg-src="/Images/calculator.svg"> </md-icon>
         </md-button>
         <md-button ng-disabled="!form.$dirty || form.$invalid || viewOnly" aria-label="Save" class="md-fab md-raised md-mini"
-                   ng-click="SaveButtonClick()">
+                   savebutton>
             <md-tooltip md-direction="left" md-visible="tooltipVisible"
                         md-autohide="false">
                 Save

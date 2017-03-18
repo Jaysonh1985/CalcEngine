@@ -145,47 +145,38 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     ///Form Submission
-    $scope.SaveButtonClick = function SaveBoard() {
-        $scope.Validate();
-        $scope.viewOnly = true;
-        $timeout(function () {
-            var id = configFunctionFactory.getConfigID();
-            var Comment = prompt("Enter a Comment");
-            $scope.rebuildCategoryIDs();
-            var Function = configFunctionFactory.isFunction($location.absUrl())
-            if (Function == true) {
-                configService.putCalcFunction(id, $scope.config, Comment).then(function (data) {
-                    $scope.viewOnly = false;
-                    toastr.success("Saved successfully", "Success");
-                    $scope.form.$setPristine();
-                }, onError);
-            }
-            else {
-                configService.putCalc(id, $scope.config, Comment).then(function (data) {
-                    $scope.viewOnly = false;
-                    toastr.success("Saved successfully", "Success");
-                    $scope.form.$setPristine();
-                }, onError);
-            };
-        });
-    };
-
-    // Model to JSON for demo purpose
-    $scope.$watch('config', function (model) {
-        $scope.Validate();
-    }, true);
-
-    $scope.Validate = function Validate() {
-        if ($scope.triggerValidation == false) {
-            $scope.triggerValidation = true;
+    $scope.SaveButtonClick = function SaveBoard(form) {
+        if (form.$valid == true) {
+            $scope.viewOnly = true;
+            $timeout(function () {
+                var id = configFunctionFactory.getConfigID();
+                var Comment = prompt("Enter a Comment");
+                $scope.rebuildCategoryIDs();
+                var Function = configFunctionFactory.isFunction($location.absUrl())
+                if (Function == true) {
+                    configService.putCalcFunction(id, $scope.config, Comment).then(function (data) {
+                        $scope.viewOnly = false;
+                        toastr.success("Saved successfully", "Success");
+                        $scope.form.$setPristine();
+                    }, onError);
+                }
+                else {
+                    configService.putCalc(id, $scope.config, Comment).then(function (data) {
+                        $scope.viewOnly = false;
+                        toastr.success("Saved successfully", "Success");
+                        $scope.form.$setPristine();
+                    }, onError);
+                };
+            });
         }
         else {
-            $scope.triggerValidation = false;
+            $scope.validationError = true;
+            $scope.viewOnly = false;
+            toastr.error("Failed Validations", "Error");
         };
     };
 
     $scope.CalcButtonClick = function CalcBoard(form) {
-        $scope.Validate();
         $scope.viewOnly = true;
         $timeout(function () {
             //$scope.validateForm();

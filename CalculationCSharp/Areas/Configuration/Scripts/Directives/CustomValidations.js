@@ -8,6 +8,17 @@ sulhome.kanbanBoardApp.directive('uibModalWindow', function () {
     }  
 });
 //Input previously set on the builder
+sulhome.kanbanBoardApp.directive('savebutton', function (configTypeaheadFactory, configValidationFactory) {
+    return {
+        link: function (scope, element, attrs) {
+            element.click(function () {
+                scope.$parent.$broadcast('form:submit');
+                scope.$parent.SaveButtonClick(scope.$parent.form);
+            });
+        }
+    };
+});
+//Input previously set on the builder
 sulhome.kanbanBoardApp.directive('variablecheck', function (configTypeaheadFactory, configValidationFactory) {
     return {
         replace: true,
@@ -15,11 +26,7 @@ sulhome.kanbanBoardApp.directive('variablecheck', function (configTypeaheadFacto
         require: '^form',
         scope: { config: '=', colIndex: '=', rowIndex: '=', inputtype: '=' },
         link: function (scope, element, attrs, form, scopectrl, ngModel) {
-            scope.$watch('$parent.$parent.$parent.$parent.$parent.triggerValidation', function (newValue, oldValue) {
-                form[attrs.name].$setValidity("input", true);
-                configValidationFactory.variablePreviouslySet(scope.config[0], parseInt(attrs.colindex), attrs.inputtype, parseInt(attrs.rowindex), attrs.$$element[0].value, form, true, attrs.name);
-            });
-            element.on('blur', function () {
+            scope.$on('form:submit', function() {
                 form[attrs.name].$setValidity("input", true);
                 configValidationFactory.variablePreviouslySet(scope.config[0], parseInt(attrs.colindex), attrs.inputtype, parseInt(attrs.rowindex), attrs.$$element[0].value, form, true, attrs.name);
             });
@@ -34,7 +41,7 @@ sulhome.kanbanBoardApp.directive('mathsoperatorcheck', function () {
         require: '^form',
         scope: { config: '=', rowIndex: '=' },
         link: function (scope, element, attrs, form, scopectrl, ngModel) {
-            element.on('blur', function () {
+            scope.$on('form:submit', function () {
                 form[attrs.name].$setValidity("clause", true);
                 form[attrs.name].$setValidity("clauseblank", true);
                 var MathsScope = scope.config[0];
@@ -55,6 +62,18 @@ sulhome.kanbanBoardApp.directive('mathsoperatorcheck', function () {
     };
 });
 
+sulhome.kanbanBoardApp.directive('form', function() {
+    return {
+        restrict: 'E',
+        link: function(scope, elem) {
+            elem.on('submit', function() {
+                scope.$broadcast('form:submit');
+                scope.CalcButtonClick(scope.form);
+            });
+        }
+    }; 
+})
+
 sulhome.kanbanBoardApp.directive('bracketscheck', function () {
     return {
         replace: true,
@@ -62,7 +81,7 @@ sulhome.kanbanBoardApp.directive('bracketscheck', function () {
         require: '^form',
         scope: { config: '=', rowIndex: '=', colIndex: '=' },
         link: function (scope, element, attrs, form, scopectrl, ngModel) {
-            element.on('blur', function () {
+            scope.$on('form:submit', function () {
                 var LBcounter = 0;
                 var RBcounter = 0;
                 angular.forEach(scope.config[0], function (value, key, obj) {
