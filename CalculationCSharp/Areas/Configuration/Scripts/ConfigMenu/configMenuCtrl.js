@@ -68,11 +68,11 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
     $scope.addBoard = function AddBoard() {
         //Creates TypeAhead Values
         var SchemeList = [];
-        configMenuService.getSchemes().then(function (data) {
+        configService.getSchemes().then(function (data) {
             SchemeList = data;
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: '/Areas/Configuration/Scripts/CalculationMenu/ConfigMenuAddCalcModal.html',
+                templateUrl: '/Areas/Configuration/Scripts/ConfigMenu/ConfigMenuAddCalcModal.html',
                 scope: $scope,
                 controller: 'configMenuAddCalcCtrl',
                 size: 'md',
@@ -122,7 +122,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: '/Areas/Configuration/Scripts/CalculationMenu/ConfigMenuAddCalcModal.html',
+                templateUrl: '/Areas/Configuration/Scripts/ConfigMenu/ConfigMenuAddCalcModal.html',
                 scope: $scope,
                 controller: 'configMenuAddCalcCtrl',
                 size: 'md',
@@ -180,7 +180,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: '/Areas/Configuration/Scripts/CalculationMenu/ConfigMenuAddCalcModal.html',
+                templateUrl: '/Areas/Configuration/Scripts/ConfigMenu/ConfigMenuAddCalcModal.html',
                 scope: $scope,
                 controller: 'configMenuAddCalcCtrl',
                 size: 'md',
