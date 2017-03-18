@@ -10,6 +10,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
              return $q.reject(error.data.Message);
          });
      };
+
      var putCalc = function (index, data, comment) {
          return $http.put("/api/ConfigWebApi/" + index, { data: data, comment: comment })
             .then(function (response) {
@@ -18,6 +19,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
+
      var postCalc = function (index, data) {
          return $http.post("/api/ConfigWebApi/" + index, { data: data })
             .then(function (response) {
@@ -26,6 +28,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
+
      var deleteCalc = function (id) {
          return $http.delete("/api/ConfigWebApi/" + id)
             .then(function (response) {
@@ -34,6 +37,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
+
     //Function Builder JSON Services
      var getCalcFunction = function (id) {
          return $http.get("/api/FunctionWebApi/Get", { params: { id: id } }).then(function (response) {
@@ -42,6 +46,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
              return $q.reject(error.data.Message);
          });
      };
+
      var putCalcFunction = function (index, data, comment) {
          return $http.put("/api/FunctionWebApi/" + index, { data: data, comment: comment })
             .then(function (response) {
@@ -50,6 +55,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
+
      var postCalcFunction = function (index, data) {
          return $http.post("/api/FunctionWebApi/" + index, { data: data })
             .then(function (response) {
@@ -58,6 +64,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
+
      var deleteCalcFunction = function (id) {
          return $http.delete("/api/FunctionWebApi/" + id)
             .then(function (response) {
@@ -66,6 +73,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
                 return $q.reject(error.data.Message);
             });
      };
+
     //Post values to Specification builder
      var specBuilder = function (index, data) {
          return $http.post("/api/CalcSpecification/" + index, { data: data })
@@ -83,6 +91,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
              return $q.reject(error.data.Message);
          });
      };
+
      var deleteUserSession = function (id) {
          return $http.delete("/api/UserSessions", { params: { id: id, Section: Section } }).then(function (response) {
              return response.data;
@@ -90,6 +99,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
              return $q.reject(error.data.Message);
          });
      };
+
     //Configuration Builder JSON Services
      var getSchemes = function () {
          return $http.get("/api/SchemeWebApi/Get").then(function (response) {
@@ -98,6 +108,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
              return $q.reject(error.data.Message);
          });
      };
+
      var getFunctionDetails = function (Scheme, ID, Type) {
          return $http.get("/api/FunctionNameWebApi/GetName", { params: { Scheme: Scheme, ID: ID, Type: Type } }).then(function (response) {
              return response.data;

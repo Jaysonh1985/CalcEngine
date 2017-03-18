@@ -7,16 +7,14 @@ sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstan
             ID: index + 1,
         };
         $scope.Logic.splice(index + 1, 0, item);
-    },
+    };
 
     $scope.removeLogicItem = function (index) {
         $scope.Logic.splice(index, 1);
-    },
+    };
 
     $scope.OperatorClauseValidations = function OperatorClauseValidations(form) {
-
-        if ($scope.Logic.length > 1)
-        {
+        if ($scope.Logic.length > 1) {
             key = $scope.Logic.length - 1;
             var AttName = 'Operator_' + key;
             form[AttName].$setValidity("clauseblank", true);
@@ -26,8 +24,7 @@ sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstan
                 }
             }
         }
-
-    }
+    };
 
     $scope.BracketsValidations = function BracketsValidations(form) {
         var LBcounter = 0;
@@ -38,14 +35,12 @@ sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstan
                 form[AttName].$setValidity("bracketnotclosed", true);
                 LBcounter = LBcounter + 1;
             }
-
             if ($scope.Logic[key].Bracket2 == ")") {
                 var AttName = 'BracketRight_' + key;
                 form[AttName].$setValidity("bracketnotopen", true);
                 RBcounter = RBcounter + 1;
             }
         })
-
         if (LBcounter > RBcounter) {
             angular.forEach($scope.Logic, function (value, key, obj) {
                 var AttName = 'BracketLeft_' + key;
@@ -64,8 +59,7 @@ sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstan
                 }
             })
         }
-        else
-        {
+        else {
             angular.forEach($scope.Logic, function (value, key, obj) {
                 var AttName = 'BracketLeft_' + key;
                 form[AttName].$setValidity("bracketnotclosed", true);
@@ -73,7 +67,7 @@ sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstan
                 form[AttName].$setValidity("bracketnotopen", true);
             })
         }
-    }
+    };
 
     //Click OK
     $scope.ok = function (form) {
@@ -82,11 +76,9 @@ sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstan
         if (form.$valid == true) {
             $uibModalInstance.close($scope.Logic);
         };
-
     };
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-
 });

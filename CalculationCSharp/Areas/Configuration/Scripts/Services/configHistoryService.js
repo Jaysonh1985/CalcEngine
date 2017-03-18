@@ -10,6 +10,7 @@ sulhome.kanbanBoardApp.service('configHistoryService', function ($http, $q, $roo
              return $q.reject(error.data.Message);
          });
      };
+
      var getCalcHistorySingle = function (id) {
          return $http.get("/api/CalcHistories", { params: { id: id, SelectList: false } }).then(function (response) {
              return response.data;
@@ -17,6 +18,7 @@ sulhome.kanbanBoardApp.service('configHistoryService', function ($http, $q, $roo
              return $q.reject(error.data.Message);
          });
      };
+
      var postCalcHistory = function (id, data) {
          return $http.post("/api/CalcHistories/" + id, data).then(function (response) {
              return response.data;
@@ -24,6 +26,7 @@ sulhome.kanbanBoardApp.service('configHistoryService', function ($http, $q, $roo
              return $q.reject(error.data.Message);
          });
      };
+
      var getFunctionHistory = function (id) {
          return $http.get("/api/FunctionHistories", { params: { id: id, SelectList: true } }).then(function (response) {
              return response.data;
@@ -31,6 +34,7 @@ sulhome.kanbanBoardApp.service('configHistoryService', function ($http, $q, $roo
              return $q.reject(error.data.Message);
          });
      };
+
      var getFunctionHistorySingle = function (id) {
          return $http.get("/api/FunctionHistories", { params: { id: id, SelectList: false } }).then(function (response) {
              return response.data;
@@ -38,6 +42,7 @@ sulhome.kanbanBoardApp.service('configHistoryService', function ($http, $q, $roo
              return $q.reject(error.data.Message);
          });
      };
+
      var postFunctionHistory = function (id, data) {
          return $http.post("/api/FunctionHistories/" + id, data).then(function (response) {
              return response.data;
@@ -45,7 +50,6 @@ sulhome.kanbanBoardApp.service('configHistoryService', function ($http, $q, $roo
              return $q.reject(error.data.Message);
          });
      };
-
 
     var initialize = function () {      
         connection = jQuery.hubConnection();
@@ -62,6 +66,7 @@ sulhome.kanbanBoardApp.service('configHistoryService', function ($http, $q, $roo
             return error.message;
         });
     };
+
     // Call 'NotifyBoardUpdated' on SignalR server
     var sendRequest = function () {        
         this.proxy.invoke('NotifyBoardUpdated');

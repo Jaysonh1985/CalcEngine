@@ -13,21 +13,19 @@ sulhome.kanbanBoardApp.directive('variablecheck', function (configTypeaheadFacto
         replace: true,
         restrict: 'A',
         require: '^form',
-        scope: { config: '=', colIndex: '=', rowIndex: '=', inputtype: '='},
+        scope: { config: '=', colIndex: '=', rowIndex: '=', inputtype: '=' },
         link: function (scope, element, attrs, form, scopectrl, ngModel) {
             scope.$watch('$parent.$parent.$parent.$parent.$parent.triggerValidation', function (newValue, oldValue) {
                 form[attrs.name].$setValidity("input", true);
                 configValidationFactory.variablePreviouslySet(scope.config[0], parseInt(attrs.colindex), attrs.inputtype, parseInt(attrs.rowindex), attrs.$$element[0].value, form, true, attrs.name);
-
-                });
+            });
             element.on('blur', function () {
                 form[attrs.name].$setValidity("input", true);
                 configValidationFactory.variablePreviouslySet(scope.config[0], parseInt(attrs.colindex), attrs.inputtype, parseInt(attrs.rowindex), attrs.$$element[0].value, form, true, attrs.name);
             });
-            }
         }
-    }
-);
+    };
+});
 //Input previously set on the builder
 sulhome.kanbanBoardApp.directive('mathsoperatorcheck', function () {
     return {
@@ -42,21 +40,19 @@ sulhome.kanbanBoardApp.directive('mathsoperatorcheck', function () {
                 var MathsScope = scope.config[0];
                 var currentRow = MathsScope[parseInt(attrs.rowindex)];
                 var nextRow = MathsScope[parseInt(attrs.rowindex) + 1];
-                if (currentRow.Logic2 != "" && currentRow.Logic2 != null)
-                {
+                if (currentRow.Logic2 != "" && currentRow.Logic2 != null) {
                     if (nextRow == null) {
                         form[attrs.name].$setValidity("clause", false);
-                    }
+                    };
                 }
                 else if (currentRow.Logic2 == "" || currentRow.Logic2 == null) {
                     if (nextRow != null) {
                         form[attrs.name].$setValidity("clauseblank", false);
-                    }
-                }
-               
+                    };
+                };
             });
         }
-    }
+    };
 });
 
 sulhome.kanbanBoardApp.directive('bracketscheck', function () {
@@ -80,7 +76,7 @@ sulhome.kanbanBoardApp.directive('bracketscheck', function () {
                         form[AttName].$setValidity("bracketnotopen", true);
                         RBcounter = RBcounter + 1;
                     }
-                })
+                });
                 if (LBcounter > RBcounter) {
                     angular.forEach(scope.config[0], function (value, key, obj) {
                         var AttName = 'BracketLeft_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
@@ -106,10 +102,10 @@ sulhome.kanbanBoardApp.directive('bracketscheck', function () {
                         var AttName = 'BracketRight_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
                         form[AttName].$setValidity("bracketnotopen", true);
                     })
-                }
+                };
             });
         }
-    }
+    };
 });
 
 //Validate the input form
@@ -120,24 +116,20 @@ sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeah
         require: '^form',
         scope: { config: '=', rowIndex: '=' },
         link: function (scope, element, attrs, form, scopectrl) {
-
             element.on('blur', function () {
                 var dataType = scope.config[0].Functions[attrs.rowindex].Type;
-                if(dataType == 'Date')
-                {
+                if (dataType == 'Date') {
                     var AttName = 'Output_' + attrs.rowindex + '_' + attrs.rowindex;
                     form[AttName].$setValidity("inputformat", true);
-                    if (scope.config[0].Functions[attrs.rowindex].Output != null)
-                    {
+                    if (scope.config[0].Functions[attrs.rowindex].Output != null) {
                         var array = scope.config[0].Functions[attrs.rowindex].Output.split('~');
                         if (array != "") {
                             angular.forEach(array, function (valueNA, keyNA, obj) {
                                 var parts = valueNA.split("/");
-                                var year = parseInt(parts[2],10);
+                                var year = parseInt(parts[2], 10);
                                 var month = parseInt(parts[1], 10) - 1;
                                 var day = parseInt(parts[0], 10);
-                                if (month != -1 && day !=0)
-                                {
+                                if (month != -1 && day != 0) {
                                     var dt = new Date(year,
                                                       month,
                                                       day);
@@ -147,24 +139,20 @@ sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeah
                                         Input1Bool = true;
                                     }
                                 }
-                                else
-                                {
+                                else {
                                     Input1Bool = true;
-                                }
-
+                                };
                                 if (Input1Bool == true) {
                                     form[AttName].$setValidity("inputformat", false);
-                                }
-                            })
-                        }
-                    }                  
-                }
-                if(dataType == 'Decimal')
-                {
+                                };
+                            });
+                        };
+                    };
+                };
+                if (dataType == 'Decimal') {
                     var AttName = 'Output_' + attrs.rowindex + '_' + attrs.rowindex;
                     form[AttName].$setValidity("inputformat", true);
-                    if (scope.config[0].Functions[attrs.rowindex].Output != null)
-                    {
+                    if (scope.config[0].Functions[attrs.rowindex].Output != null) {
                         if (scope.config[0].Functions[attrs.rowindex].Output.split('~') != null) {
                             var array = scope.config[0].Functions[attrs.rowindex].Output.split('~');
                             if (array != "") {
@@ -173,12 +161,12 @@ sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeah
                                     if (Input1Bool == true) {
                                         form[AttName].$setValidity("inputformat", false);
                                     }
-                                })
-                            }
-                        }
-                    }
-                }
+                                });
+                            };
+                        };
+                    };
+                };
             });
         }
-    }
+    };
 });

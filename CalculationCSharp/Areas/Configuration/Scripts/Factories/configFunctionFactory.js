@@ -42,15 +42,13 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
                     Logic: [],
                     Parameter: []
                 };
-            }
+            };
             return item;
         },
         //function to store the array as a new array if linked back to a previous $scope
         convertToFromJson: function (arr) {
             var array = [];
-
             array = JSON.stringify(arr);
-
             return angular.fromJson(array);
         },
 
@@ -79,12 +77,12 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
                         Input1Bool = true;
                     }
 
-                }
+                };
                 if (Input1Bool == true) {
                     if (VariableNames.indexOf(value) == -1) {
                         form[AttName].$setValidity("input", false);
                     }
-                }
+                };
             }
         },
         getDate: function (value) {
@@ -98,11 +96,9 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
                                     day);
                 return dt;
             }
-            else
-            {
+            else {
                 return value;
-            }
-
+            };
         },
         isFunction: function (URL) {
             var Function = URL.search("Function");
@@ -112,10 +108,7 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
             }
             else {
                 return false;
-            }
-
+            };
         },
     }
-
-
 });

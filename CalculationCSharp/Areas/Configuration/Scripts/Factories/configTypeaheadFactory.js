@@ -12,7 +12,6 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
             var DecimalParameter = [];
             var Names = [];
             var newArr = [];
-
             angular.forEach(config, function (groups) {
                 if (scopeid <= colIndex) {
 
@@ -21,7 +20,7 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
                     }
                     else {
                         DecimalValue = ($filter('filter')(config[scopeid].Functions, { Type: type }));
-                    }
+                    };
                     if (scopeid == colIndex) {
 
                         var DecimalValue = ($filter('limitTo')(config[scopeid].Functions, rowIndex));
@@ -30,8 +29,8 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
                         }
                         else {
                             DecimalValue = ($filter('filter')(DecimalValue, { Type: type }));
-                        }
-                       
+                        };
+
                         var spliceid = rowIndex;
                         var DecimalValueID = 0;
                     };
@@ -41,11 +40,11 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
                         if (DecimalValue.indexOf(DecimalParameter) == -1) {
                             Names[arrayID] = DecimalParameter;
                             arrayID = arrayID + 1;
-                        }
+                        };
                         functionID = functionID + 1;
-                     });
+                    });
                     scopeid = scopeid + 1
-                }
+                };
             });
             scopeid = 0;
             return Names;

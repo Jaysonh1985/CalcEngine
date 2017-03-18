@@ -5,7 +5,6 @@ sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibM
     $scope.formset = [];
     $scope.fieldset = [];
     var vm = this;
-
     vm.model = [];
 
     function init() {
@@ -31,7 +30,7 @@ sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibM
             $scope.configreg.Functions[scopeid].Output = null;
             scopeid = scopeid + 1
         });
-    }
+    };
 
     $scope.mapFormFieldsfromBuilder = function()
     {
@@ -46,7 +45,6 @@ sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibM
     function convertDateStringsToDates(input) {
         // Ignore things that aren't objects.
         if (typeof input !== "object") return input;
-
         for (var key in input) {
             if (!input.hasOwnProperty(key)) continue;
             var value = input[key];
@@ -62,20 +60,19 @@ sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibM
                 convertDateStringsToDates(value);
             }
         }
-    }
+    };
 
     $scope.mapFormFields = function mapFormFields(Input) {
-       var InputJson = angular.fromJson(Input);
-       convertDateStringsToDates([InputJson]);
+        var InputJson = angular.fromJson(Input);
+        convertDateStringsToDates([InputJson]);
         $scope.isLoading = true;
         angular.forEach(angular.fromJson(InputJson.Functions), function (value, key, obj) {
             var index = configFunctionFactory.getIndexOf($scope.configreg.Functions, value.Name, 'Name');
             $scope.configreg.Functions[index].Output = value.Output;
         });
-    }
+    };
 
     $scope.SaveButtonClick = function SaveButtonClick(form) {  //function that sets the parameters available under the different variable types     
-
         if (form.$valid == true) {
             $uibModalInstance.close($scope.configreg);
             toastr.success("Saved successfully", "Success");
@@ -83,8 +80,7 @@ sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibM
         else {
             toastr.error("Failed Validations", "Error");
         }
-    }
+    };
 
     init();
-
 })

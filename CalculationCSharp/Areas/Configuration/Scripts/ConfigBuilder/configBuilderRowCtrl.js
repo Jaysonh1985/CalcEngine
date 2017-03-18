@@ -55,7 +55,7 @@ sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $loc
             });
             resetSelection();
             toastr.success("Rows Deleted", "Success");
-        }
+        };
         $scope.form.$setDirty();
     };
 
@@ -101,7 +101,4 @@ sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $loc
         }, function () {
         });
     };
-
-   
-    
 });

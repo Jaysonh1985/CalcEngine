@@ -63,7 +63,7 @@ sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $
         if (cf == true) {
             $scope.config.splice(colIndex, 1);
             //$scope.rebuildCategoryIDs();
-        }
+        };
         $scope.form.$setDirty();
     };
 
@@ -116,6 +116,5 @@ sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $
             $scope.validateForm();
         }, function () {
         });
-    };
-    
+    };    
 });

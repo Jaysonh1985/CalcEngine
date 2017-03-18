@@ -9,6 +9,7 @@ sulhome.kanbanBoardApp.controller('functionCtrl', function ($scope, $uibModalIns
             $scope.SchemeList = data;
         }, onError);
     };
+
     //Map Back the input values if they exist
     if (Functions.length > 0) {
         $scope.function.ID = Functions[0].ID;
@@ -24,8 +25,10 @@ sulhome.kanbanBoardApp.controller('functionCtrl', function ($scope, $uibModalIns
     else {
         $scope.function = Functions
     };
+
     //Set up new object
     $scope.selected = [];
+
     //Add new Item to the selected array
     $scope.addItem = function AddItem() {
         $scope.selected.push({
@@ -33,8 +36,9 @@ sulhome.kanbanBoardApp.controller('functionCtrl', function ($scope, $uibModalIns
             Scheme: $scope.function.Scheme,
             FunctionName: $scope.function.FunctionName,
             Input: $scope.configreg.Functions,
-        })
+        });
     };
+
     //Add new Item to the selected array
     $scope.getFunctionList = function getFunctionList() {
         $scope.FunctionList = [];
@@ -77,6 +81,7 @@ sulhome.kanbanBoardApp.controller('functionCtrl', function ($scope, $uibModalIns
             $scope.configreg.Functions[index].Output = value.Output;
         });
     };
+
     var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;;
 
     function convertDateStringsToDates(input) {
@@ -96,20 +101,21 @@ sulhome.kanbanBoardApp.controller('functionCtrl', function ($scope, $uibModalIns
             } else if (typeof value === "object") {
                 // Recurse into object
                 convertDateStringsToDates(value);
-            }
+            };
         }
     };
 
     //Click OK moves back to modal instantiation
     $scope.ok = function (form) {
-        if (form.$valid == true) {           
+        if (form.$valid == true) {
             $scope.addItem();
             $uibModalInstance.close($scope.selected);
         }
         else {
             toastr.error("Failed Validations", "Error");
-        }
+        };
     };
+
     //Cancel Modal destroy modal values
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');

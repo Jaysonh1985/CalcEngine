@@ -37,19 +37,15 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var Function = configFunctionFactory.isFunction($location.absUrl());
         $scope.Function = configFunctionFactory.isFunction($location.absUrl());
         var ViewOnly = $location.search().ViewOnly;
-        if (ViewOnly == 'true')
-        {
+        if (ViewOnly == 'true') {
             $scope.viewOnly = true;
-        }
-        if (Function == true)
-        {
+        };
+        if (Function == true) {
             $scope.MenuHeader = 'Function';
         }
-        else
-        {
+        else {
             $scope.MenuHeader = 'Config';
-        }
-
+        };
         //Check if using local storage for saved sessions after timeout
         if ($window.localStorage["Config"] != null) {
             $scope.isLoading = false;
@@ -59,75 +55,65 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }
         else {
             var History = $location.search().History;
-            if(History == 'true')
-            {
+            if (History == 'true') {
                 var id = configFunctionFactory.getConfigID();
                 configService.initialize().then(function (data) {
                     $scope.isLoading = true;
-                    if (Function == true)
-                    {
+                    if (Function == true) {
                         configService.getFunctionHistorySingle(id)
                        .then(function (data) {
                            $scope.isLoading = false;
                            $scope.config = JSON.parse(data.Configuration);
                        }, onError);
                     }
-                    else
-                    {
+                    else {
                         configService.getCalcHistorySingle(id)
                        .then(function (data) {
                            $scope.isLoading = false;
                            $scope.config = JSON.parse(data.Configuration);
                        }, onError);
-                    }
+                    };
 
                 }, onError);
                 var id = configFunctionFactory.getConfigID();
             }
-            else
-            {
+            else {
                 configService.initialize().then(function (data) {
                     $scope.isLoading = true;
                     var id = configFunctionFactory.getConfigID();
-                    if (Function == true)
-                    {
+                    if (Function == true) {
                         configService.getCalcFunction(id)
                         .then(function (data) {
                             $scope.isLoading = false;
                             $scope.config = data;
                         }, onError);
                     }
-                    else
-                    {
-                      configService.getCalc(id)
-                      .then(function (data) {
-                          $scope.isLoading = false;
-                          $scope.config = data;
-                      }, onError);
-                    }
-
+                    else {
+                        configService.getCalc(id)
+                        .then(function (data) {
+                            $scope.isLoading = false;
+                            $scope.config = data;
+                        }, onError);
+                    };
                 }, onError);
                 var id = configFunctionFactory.getConfigID();
-            }
+            };
         }
         $window.localStorage.removeItem("Copy");
     };
 
     $scope.$on('IdleTimeout', function() {
-        if($scope.config != null && $scope.config != undefined)
-            {
+        if($scope.config != null && $scope.config != undefined) {
             var id = configFunctionFactory.getConfigID();
             $window.localStorage["Config"] = JSON.stringify($scope.config);
             var Function = configFunctionFactory.isFunction($location.absUrl())
-            if (Function == true)
-            {
+            if (Function == true) {
                 $window.localStorage["WebAddress"] = '/Configuration/Function/Function/' + id;
             }
-            else
-            {
-                $window.localStorage["WebAddress"]= '/Configuration/Config/Config/' +id;
-            }           
-        }
+            else {
+                $window.localStorage["WebAddress"] = '/Configuration/Config/Config/' + id;
+            };
+        };
     });
 
     $scope.focusButtonClick = function (e, elementName) {
@@ -175,7 +161,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                     toastr.success("Saved successfully", "Success");
                     $scope.form.$setPristine();
                 }, onError);
-            }
+            };
         });
     };
 
@@ -200,7 +186,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             //$scope.validateForm();
             if ($scope.validationError == false) {
                 $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
-            }
+            };
             var id = configFunctionFactory.getConfigID();
             $scope.rebuildCategoryIDs();
             if (form.$valid == true) {
@@ -223,13 +209,13 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                         toastr.success("Calculated successfully", "Success");
                         $scope.form.$setDirty();
                     }, onError);
-                }
+                };
             }
             else {
                 $scope.validationError = true;
                 $scope.viewOnly = false;
                 toastr.error("Failed Validations", "Error");
-            }
+            };
         });
     };
 
@@ -261,7 +247,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }
         else {
             rows.Type = null;
-        }
+        };
     };
 
     $scope.getVariableTypes = function getVariableTypes(colIndex, rowIndex) {  //function that sets the parameters available under the different variable types
@@ -403,7 +389,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.Function = this.config[colIndex].Functions[rowIndex].Function;
         $scope.rowIndex = rowIndex;
         $scope.colIndex = colIndex;
-
         if (event.ctrlKey) {
             if (selectedRowsIndexes[colIndex] != null) {
                 changeSelectionStatus(rowIndex, colIndex);
@@ -411,7 +396,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             else {
                 resetSelection();
                 selectedRowsIndexes[colIndex] = [rowIndex];
-            }
+            };
         } else if (event.shiftKey) {
             if (selectedRowsIndexes[colIndex] != null) {
                 selectWithShift(rowIndex, colIndex);
@@ -419,7 +404,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             else {
                 resetSelection();
                 selectedRowsIndexes[colIndex] = [rowIndex];
-            }
+            };
         } else {
 
             if (selectedRowsIndexes[colIndex] != null) {
@@ -429,8 +414,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             else {
                 resetSelection();
                 selectedRowsIndexes[colIndex] = [rowIndex];
-            }
-        }
+            };
+        };
     };
 
     function selectWithShift(rowIndex, colIndex) {
@@ -453,7 +438,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     function selectRows(selectFromIndex, selectToIndex, colIndex) {
         for (var rowToSelect = selectFromIndex; rowToSelect <= selectToIndex; rowToSelect++) {
             select(rowToSelect, colIndex);
-        }
+        };
     };
 
     function changeSelectionStatus(rowIndex, colIndex) {
@@ -461,13 +446,13 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             unselect(rowIndex, colIndex);
         } else {
             select(rowIndex, colIndex);
-        }
+        };
     };
 
     function select(rowIndex, colIndex) {
         if (!$scope.isRowSelected(rowIndex, colIndex)) {
             selectedRowsIndexes[colIndex].push(rowIndex)
-        }
+        };
     };
 
     function unselect(rowIndex, colIndex) {
@@ -493,14 +478,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         //Check if there was any change, if no changes, then simply let the user leave
         if (!$scope.form.$dirty) {
             return;
-        }
+        };
         var message = 'If you leave this page you are going to lose all unsaved changes, are you sure you want to leave?';
         if (typeof event == 'undefined') {
             event = window.event;
-        }
+        };
         if (event) {
             event.returnValue = message;
-        }
+        };
         return message;
     };
 
@@ -510,7 +495,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var answer = confirm('If you leave this page you are going to lose all unsaved changes, are you sure you want to leave?')
         if (!answer) {
             event.preventDefault();
-        }
+        };
     });
 
     $scope.$on('$destroy', function () {

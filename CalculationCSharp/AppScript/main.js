@@ -27,9 +27,7 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
 
     function init() {
         Idle.watch();
-
         checkLocalStorage();
-
     };
 
     function closeModals() {
@@ -37,16 +35,14 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
             $scope.warning.close();
             $scope.warning = null;
         }
-
         if ($scope.timedout) {
             $scope.timedout.close();
             $scope.timedout = null;
         }
     }
-    
+
     function checkLocalStorage() {
-        if ($window.localStorage["WebAddress"] != null)
-        {
+        if ($window.localStorage["WebAddress"] != null) {
             var cf = confirm("Do you wish to use continuing using the previous unsaved version?");
             if (cf == true) {
                 var webAddress = $window.localStorage.getItem("WebAddress");
@@ -60,7 +56,7 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
         }
     }
 
-    $scope.$on('IdleStart', function() {
+    $scope.$on('IdleStart', function () {
         closeModals();
         $scope.warning = $uibModal.open({
             templateUrl: '/AppScript/Timeout/WarningModal.html',
@@ -68,21 +64,19 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
         });
     });
 
-    $scope.$on('IdleEnd', function() {
+    $scope.$on('IdleEnd', function () {
         closeModals();
     });
 
-    $scope.$on('IdleTimeout', function() {
+    $scope.$on('IdleTimeout', function () {
         closeModals();
         var id = configFunctionFactory.getConfigID();
         var Function = configFunctionFactory.isFunction($location.absUrl());
         var Section = "Calculation";
-        if(Function = true){
+        if (Function = true) {
             Section = "Function";
         }
-
-        if (id > 0)
-        {
+        if (id > 0) {
             configService.getUserSession(id, Section).then(function (data) {
                 if (data == "") {
                     configService.deleteUserSession(id, Section).then(function (data) {
@@ -92,16 +86,14 @@ sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepali
 
             $window.location.assign('/Account/Timeout');
         }
-        else
-        {
+        else {
             $window.location.assign('/Account/Timeout');
         }
-        
-    });
-    
-    init();
 
-})
+    });
+    init();
+});
+
 sulhome.kanbanBoardApp.directive('ngRightClick', function($parse) {
     return function(scope, element, attrs) {
         var fn = $parse(attrs.ngRightClick);

@@ -4,13 +4,13 @@ sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibM
     $scope.OpenAllButton = function () {
         angular.forEach($scope.config, function (value, key, obj) {
             $scope.openIndex[key] = true;
-        })
+        });
     };
 
     $scope.CloseAllButton = function () {
         angular.forEach($scope.openIndex, function (value, key, obj) {
             $scope.openIndex[key] = false;
-        })
+        });
     };
 
     $scope.RemoveExpectedResultsButton = function () {
@@ -20,8 +20,8 @@ sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibM
                 angular.forEach(value.Functions, function (valueF, keyF, objF) {
                     $scope.config[key].Functions[keyF].ExpectedResult = null;
                 })
-            })
-        }
+            });
+        };
     };
 
     $scope.RemoveInputsButton = function () {
@@ -29,8 +29,8 @@ sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibM
         if (cf == true) {
             angular.forEach($scope.config[0].Functions, function (value, key, obj) {
                 $scope.config[0].Functions[key].Output = null;
-            })
-        }
+            });
+        };
     };
 
     $scope.ExitButton = function () {
@@ -41,7 +41,7 @@ sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibM
             }
             else {
                 $window.location.assign('/Configuration/Config/Exit/' + ID);
-            }
+            };
         }
         else {
             var cf = confirm("Are you sure you wish to exit unsaved changes will be lost?");
@@ -52,9 +52,9 @@ sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibM
                 }
                 else {
                     $window.location.assign('/Configuration/Config/Exit/' + ID);
-                }
-            }
-        }
+                };
+            };
+        };
     };
 
     $scope.HistoryButtonClick = function (size) {
@@ -109,7 +109,6 @@ sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibM
             }
         });
         modalInstance.result.then(function (selectedItem) {
-
         }, function () {
         });
     };
@@ -130,5 +129,4 @@ sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibM
         $scope.viewOnly = false;
         toastr.error(errorMessage, "Error");
     };
-
 });

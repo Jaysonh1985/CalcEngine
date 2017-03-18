@@ -2,20 +2,18 @@
 sulhome.kanbanBoardApp.controller('configMenuAddCalcCtrl', function ($scope, $uibModalInstance, $log, Name, Scheme, SchemeList, Configuration, Copy) {
     // Model
     //Map Back the input values
-    if (Copy == true)
-    {
+    if (Copy == true) {
         $scope.Name = Name + " (Copy)";
     }
-    else
-    {
+    else {
         $scope.Name = Name;
-    }  
+    };
+
     $scope.Scheme = Scheme;
     $scope.Group = [];
     $scope.SchemeList = SchemeList;
     $scope.Configuration = Configuration
 
-    
     //Click OK moves back to modal instantiation
     $scope.ok = function () {       
         $scope.Group.push({
@@ -30,5 +28,4 @@ sulhome.kanbanBoardApp.controller('configMenuAddCalcCtrl', function ($scope, $ui
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-
 })

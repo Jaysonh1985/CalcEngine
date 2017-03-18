@@ -10,6 +10,7 @@ sulhome.kanbanBoardApp.service('configRegressionService', function ($http, $q, $
             return $q.reject(error.data.Message);
         });
     };
+
     var postCalcRegression = function (index, data) {
         return $http.post("/api/CalcRegressionInputs/" + index, data)
            .then(function (response) {
@@ -18,6 +19,7 @@ sulhome.kanbanBoardApp.service('configRegressionService', function ($http, $q, $
                return $q.reject(error.data.Message);
            });
     };
+
     var deleteCalcRegression = function (index) {
         return $http.delete("/api/CalcRegressionInputs/" + index)
            .then(function (response) {
@@ -26,6 +28,7 @@ sulhome.kanbanBoardApp.service('configRegressionService', function ($http, $q, $
                return $q.reject(error.data.Message);
            });
     };
+
     var putCalcRegression = function (index, data) {
         return $http.put("/api/CalcRegressionInputs/" + index, data)
            .then(function (response) {
@@ -34,6 +37,7 @@ sulhome.kanbanBoardApp.service('configRegressionService', function ($http, $q, $
                return $q.reject(error.data.Message);
            });
     };
+
     var getFunctionRegression = function (id) {
         return $http.get("/api/FunctionRegressionInputs", { params: { id: id } }).then(function (response) {
             return response.data;
@@ -41,6 +45,7 @@ sulhome.kanbanBoardApp.service('configRegressionService', function ($http, $q, $
             return $q.reject(error.data.Message);
         });
     };
+
     var postFunctionRegression = function (index, data) {
         return $http.post("/api/FunctionRegressionInputs/" + index, data)
            .then(function (response) {
@@ -49,6 +54,7 @@ sulhome.kanbanBoardApp.service('configRegressionService', function ($http, $q, $
                return $q.reject(error.data.Message);
            });
     };
+
     var deleteFunctionRegression = function (index) {
         return $http.delete("/api/FunctionRegressionInputs/" + index)
            .then(function (response) {
@@ -57,6 +63,7 @@ sulhome.kanbanBoardApp.service('configRegressionService', function ($http, $q, $
                return $q.reject(error.data.Message);
            });
     };
+
     var putFunctionRegression = function (index, data) {
         return $http.put("/api/FunctionRegressionInputs/" + index, data)
            .then(function (response) {
@@ -65,6 +72,7 @@ sulhome.kanbanBoardApp.service('configRegressionService', function ($http, $q, $
                return $q.reject(error.data.Message);
            });
     };
+
     var exportRegression = function (index, data) {
         return $http.post("/api/CalcRegressionOutput/" + index, { data: data })
            .then(function (response) {

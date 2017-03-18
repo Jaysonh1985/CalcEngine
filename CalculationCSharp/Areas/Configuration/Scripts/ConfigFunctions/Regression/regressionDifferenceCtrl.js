@@ -7,8 +7,7 @@ sulhome.kanbanBoardApp.controller('regressionDifferenceCtrl', function ($scope, 
 
     $scope.SaveButtonClick = function getFormFields() {  //function that sets the parameters available under the different variable types     
         $uibModalInstance.close();
-    }
+    };
 
     init();
-
 })

@@ -15,7 +15,7 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             }
             else if (Function == 'Return') {
                 return 'ReturnCtrl'
-            }
+            };
         },
         //get URL for modal file path
         getFunctionTempURL: function (Function) {
@@ -30,7 +30,7 @@ sulhome.kanbanBoardApp.factory('configModalFactory', function ($location) {
             }
             else if (Function == 'Return') {
                 return '/Areas/Configuration/Scripts/Return/ReturnModal.html'
-            }
-        },     
-    }
+            };
+        },
+    };
 });
