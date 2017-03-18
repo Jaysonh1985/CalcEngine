@@ -1,0 +1,73 @@
+﻿<fieldset ng-disabled="$parent.viewOnly">                   
+<div class="form-group">
+    <label for="Number2" class="control-label col-md-2">Scheme</label>
+    <div class="col-sm-9">
+        <select ng-if="rows.Parameter[0].Scheme == null" ng:model="rows.Parameter[0].Scheme" ng-options='scheme for scheme in SchemeList' class="form-control  input-sm" 
+                ng-required="true" ng-change="getFunctionList()">
+            <option selected disabled hidden style='display: none' value=''></option>
+        </select>
+        <input ng-if="rows.Parameter[0].Scheme != null" ng:model="rows.Parameter[0].Scheme" class="form-control  input-sm" readonly>
+    </div>
+</div>
+<div ng-if="rows.Parameter[0].Scheme != null" class="form-group">
+    <label for="Number2" class="control-label col-md-2">Function</label>
+    <div class="col-sm-9">
+        <select ng-if="rows.Parameter[0].ID == null" ng:model="rows.Parameter[0].ID" class="form-control  input-sm" ng-required="true" ng-change="setFunctionName()">
+            <option ng-repeat="function in FunctionList" value="{{function.ID}}">{{function.Name}}</option>
+        </select>
+        <input ng-if="rows.Parameter[0].ID != null" ng:model="rows.Parameter[0].FunctionName" class="form-control  input-sm" readonly>
+    </div>
+</div>
+<div ng-if="rows.Parameter[0].FunctionName != null" class="form-group">
+    <br /> 
+    <br />               
+    <br />                 
+    <div class="panel-heading">
+        <h2 class="panel-title">Input Form</h2>
+    </div>      
+    <br />
+    <div>
+        <table class="table table-bordered ">
+            <thead>
+                <tr>
+                    <th width="25%">Name</th>
+                    <th width="75%">Input</th>
+                </tr>
+            </thead>
+            <tbody ng:model="rows.Parameter[0].Input.Functions">
+                <tr unselectable="on" ng-repeat="rows in rows.Parameter[0].Input.Functions | filter:searchText">
+                    <td width="5%">{{rows.Parameter[0].templateOptions.label}}</td>
+                    <td ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined)  && rows.Parameter[0].templateOptions.required == true" width="25%">
+                        <span show-errors rows='Category.Functions'>
+                            <input ng-if="rows.Parameter[0].templateOptions.type == 'Date'"  uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" config='[configreg]' rowIndex="{{$index}}" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control  input-sm" ng-required="true">
+                            <input ng-if="rows.Parameter[0].templateOptions.type == 'String'" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" config='[configreg]' rowIndex="{{$index}}" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control  input-sm" ng-required="true">
+                            <input ng-if="rows.Parameter[0].templateOptions.type == 'Decimal'" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" config='[configreg]' rowIndex="{{$index}}" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control  input-sm" ng-required="true">
+                        </span>
+                        <p ng-show="formregress['Output_'+ $index + '_' + $index].$invalid" class="help-block">Value is required.</p>
+                        <p ng-show="formregress['Output_'+ $index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
+                    </td>
+                    <td ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined)  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
+                        <span>
+                            <input ng-if="rows.Parameter[0].templateOptions.type == 'Date'"  uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" rowIndex="{{$index}}" config='[configreg]' type="text" ng:model="rows.Output" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" class="form-control   input-sm">
+                            <input ng-if="rows.Parameter[0].templateOptions.type == 'String'" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" rowIndex="{{$index}}" config='[configreg]' type="text" ng:model="rows.Output" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" class="form-control   input-sm">
+                            <input ng-if="rows.Parameter[0].templateOptions.type == 'Decimal'" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" rowIndex="{{$index}}" config='[configreg]' type="text" ng:model="rows.Output" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" class="form-control   input-sm">
+                        </span>
+                        <p ng-show="formregress['Output_'+ $index + '_' + $index].$error.inputformat" class="help-block">Input format incorrect</p>
+                    </td>
+                    <td ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" width="25%">
+                        <select class="form-control  input-sm" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
+                            <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                        </select>
+                        <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Value is required.</p>
+                    </td>
+                    <td ng-if="rows.Parameter[0].templateOptions.list == true  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
+                        <select class="form-control  input-sm" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
+                            <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>                           
+    </div>
+</fieldset>

@@ -74,13 +74,7 @@
                     <div ng-if="rows.Function=='Factors'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Factors.html'"></div>
                     <div ng-if="rows.Function=='ArrayFunctions'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ArrayFunctions.html'"></div>
                     <div ng-if="rows.Function=='Maths'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Maths.html'"></div>
-                    <div ng-if="rows.Function=='Function'">
-                        <md-content class="md-no-momentum" layout-margin="">
-                            <md-button ng-click="FunctionButtonClick('lg', colIndex, rowIndex, userForm)" class="md-accent">
-                                Click to Update Function
-                            </md-button>
-                        </md-content>
-                    </div>
+                    <div ng-if="rows.Function=='Function'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/FunctionModal.html'"></div>
                     <br />
                     <br />
                     <br />

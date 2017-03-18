@@ -73,7 +73,7 @@ sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $
         $scope.Description = this.config[colIndex].Description;
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/SideBarViews/Group.html',
+            templateUrl: '/Areas/Configuration/Scripts/FunctionBarViews/Group.html',
             scope: $scope,
             controller: 'groupCtrl',
             backdrop: false,

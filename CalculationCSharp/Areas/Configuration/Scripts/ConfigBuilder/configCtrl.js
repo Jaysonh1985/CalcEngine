@@ -245,6 +245,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         else if (rows.Function == 'StringFunctions') {
             rows.Type = 'String';
         }
+        else if (rows.Function == 'Function') {
+            $scope.SchemeList = [];
+            configService.getSchemes().then(function (data) {
+                $scope.SchemeList = data;
+            }, onError);
+        }
         else {
             rows.Type = null;
         };
@@ -389,6 +395,62 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.Function = this.config[colIndex].Functions[rowIndex].Function;
         $scope.rowIndex = rowIndex;
         $scope.colIndex = colIndex;
+        if ($scope.Function == 'Function') {
+            $scope.function = [];
+            $scope.SchemeList = [];
+            configService.getSchemes().then(function (data) {
+                $scope.SchemeList = data;
+            }, onError);
+
+            //Add new Item to the selected array
+            $scope.getFunctionList = function getFunctionList() {
+                $scope.FunctionList = [];
+                configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, 0, "Scheme").then(function (data) {
+                    $scope.FunctionList = data;
+                }, onError);
+            };
+
+            //Add new Item to the selected array
+            $scope.setFunctionName = function setFunctionName() {
+                var arrayID = configFunctionFactory.getIndexOf($scope.FunctionList, parseInt(this.config[colIndex].Functions[rowIndex].Parameter[0].ID), "ID");
+                this.config[colIndex].Functions[rowIndex].Parameter[0].FunctionName = $scope.FunctionList[arrayID].Name;
+                configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, $scope.FunctionList[arrayID].ID, "Config").then(function (data) {
+                    $scope.getFormFields(angular.fromJson(data[0].Configuration));
+                }, onError);
+            };
+
+            //Single Calculation
+            //Get the fields for the input form and null the values out
+            $scope.getFormFields = function getFormFields(array) {  //function that sets the parameters available under the different variable types
+                var counter = 0;
+                var scopeid = 0;
+                var functionID = 0;
+                $scope.fields = [];
+                $scope.fieldset = [];
+                this.config[colIndex].Functions[rowIndex].Parameter[0].Input = configFunctionFactory.convertToFromJson(array[0]);
+                angular.forEach(this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, function (groups) {
+                    functionID = 0;
+                    $scope.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[scopeid].Output = null;
+                    scopeid = scopeid + 1
+                });
+                if (this.config[colIndex].Functions[rowIndex].Parameter[0].Input.length > 0) {
+                    $scope.mapFormFields(this.config[colIndex].Functions[rowIndex].Parameter[0].Input);
+                };
+            };
+
+            $scope.mapFormFields = function mapFormFields(Input) {
+                var InputJson = angular.fromJson(Input);
+                convertDateStringsToDates([InputJson]);
+                $scope.isLoading = true;
+                angular.forEach(angular.fromJson(InputJson), function (value, key, obj) {
+                    var index = configFunctionFactory.getIndexOf(this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, value.Name, 'Name');
+                    this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[index].Output = value.Output;
+                });
+                this.config[colIndex].Functions[rowIndex].Parameter[0].Input = $scope.configreg;
+            };
+
+        };
+
         if (event.ctrlKey) {
             if (selectedRowsIndexes[colIndex] != null) {
                 changeSelectionStatus(rowIndex, colIndex);

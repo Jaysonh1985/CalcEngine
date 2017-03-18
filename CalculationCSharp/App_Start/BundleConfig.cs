@@ -53,7 +53,6 @@ namespace CalculationCSharp
                         "~/Areas/Configuration/Scripts/ConfigFunctions/Regression/regressionDifferenceCtrl.js",
                         "~/Areas/Configuration/Scripts/ConfigFunctions/Regression/regressionOutputCtrl.js",
                         "~/Areas/Configuration/Scripts/Directives/Custom Validations/CustomValidations.js",
-                        "~/Areas/Configuration/Scripts/ConfigFunctions/Function/functionCtrl.js",
                         "~/Areas/Configuration/Scripts/ConfigFunctions/Impact Assessment/impactAssessmentCtrl.js",
                         "~/Areas/Configuration/Scripts/Factories/configFunctionFactory.js",
                         "~/Areas/Configuration/Scripts/Factories/configModalFactory.js",

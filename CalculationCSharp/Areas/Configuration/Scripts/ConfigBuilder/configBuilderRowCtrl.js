@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $location, $window,  configFunctionFactory,   $filter) {
+sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $location, $window, $uibModal, configFunctionFactory,   $filter) {
 
     $scope.rowMenuOptions = [
         ['Add Row', function ($itemScope) {
@@ -88,7 +88,7 @@ sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $loc
         $scope.Output = angular.toJson(SubOutput);
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionOutputModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Regression/RegressionOutputModal.html',
             scope: $scope,
             controller: 'regressionOutputCtrl',
             size: size,
