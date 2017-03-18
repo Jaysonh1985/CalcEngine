@@ -124,6 +124,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var colIndex = str.substring(first, last);
         var rowIndex = str.substring(last + 1, length);
         $scope.selectRow(e, rowIndex, colIndex);
+        //10 seconds delay
+        $timeout(function () {
+            document.getElementById(elementName).focus();
+        }, 500);
+        
     };
    
     $scope.rebuildCategoryIDs = function rebuildCategoryIDs() {
