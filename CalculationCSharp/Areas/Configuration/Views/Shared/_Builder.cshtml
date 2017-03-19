@@ -12,6 +12,10 @@
             </ul>
             <div ui-tree="treeOptions" ng-controller="configBuilderColumnCtrl">
                 <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Search</label>
+                    <input type="text" ng-model="test">
+                </md-input-container>
                 <uib-accordion close-others=false ui-tree-nodes=""   ng-model="config" data-nodrop-enabled="true">
                     <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" layout="column" context-menu="columnMenuOptions" ui-tree-node>
                         <uib-accordion-heading>                         

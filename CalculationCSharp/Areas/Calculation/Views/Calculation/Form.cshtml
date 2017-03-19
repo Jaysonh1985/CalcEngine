@@ -11,12 +11,10 @@
             <div  class="panel-heading">
                 <h2 class="panel-title">Calculation Output</h2>
             </div>
-            <div class="nav navbar-nav pull-right">
-                <div class="navbar-text">Search</div>
-                <div class="input-group">
-                    <input type="text" class="form-control form-inline input" ng-model="test" placeholder="Filter">
-                </div>
-            </div>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Search</label>
+                <input type="text" ng-model="test">
+            </md-input-container>
             <uib-accordion close-others=false ng-model="output">
                 <div uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open="openIndex[$index]">
                     <uib-accordion-heading>
