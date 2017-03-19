@@ -15,48 +15,47 @@
         </div>
     </div>
     <div class="modal-body">
-
         <uib-accordion close-others=false>
-                <div class="container-fluid">
-                    <uib-accordion close-others=false ng-model="output">
-                        <div uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open="openIndexRegression[$index]">
-                            <uib-accordion-heading>
-                                {{group.Group}} 
-                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexRegression[$index], 'glyphicon-chevron-right': !openIndexRegression[$index]}"></i>
-                            </uib-accordion-heading>
-                            <br />
-                            <table id="table" class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th width="45%">
-                                            Field
-                                        </th>
-                                        <th width="45%">
-                                            Value
-                                        </th>
-                                        <th ng-if="Header != 'Output'" width="10%">
-                                            Sub Output
-                                        </th>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="row in group.Output | filter : test" ng-class="{'redrow': row.Field.indexOf('Comment') > -1}">
-                                        <td>
-                                            {{row.Field}}
-                                        </td>
-                                        <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">
-                                            {{row.Value}}
-                                        </td>
-                                        <td ng-if="Header != 'Output'">
-                                            <a ng-if="row.SubOutput != null " ng-click="OutputButtonClick('lg', $parent.$index, $index, row.SubOutput)">
-                                                <span class="glyphicon glyphicon-search"></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </uib-accordion>
-                </div>
+            <div class="container-fluid">
+                <uib-accordion close-others=false ng-model="output">
+                    <div uib-accordion-group ng-repeat="group in output" ng-init="colIndex = $index" is-open="openIndexRegression[$index]">
+                        <uib-accordion-heading>
+                            {{group.Group}} 
+                            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndexRegression[$index], 'glyphicon-chevron-right': !openIndexRegression[$index]}"></i>
+                        </uib-accordion-heading>
+                        <br />
+                        <table id="table" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th width="45%">
+                                        Field
+                                    </th>
+                                    <th width="45%">
+                                        Value
+                                    </th>
+                                    <th ng-if="Header != 'Output'" width="10%">
+                                        Sub Output
+                                    </th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in group.Output | filter : test" ng-class="{'redrow': row.Field.indexOf('Comment') > -1}">
+                                    <td>
+                                        {{row.Field}}
+                                    </td>
+                                    <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">
+                                        {{row.Value}}
+                                    </td>
+                                    <td ng-if="Header != 'Output'">
+                                        <a ng-if="row.SubOutput != null " ng-click="OutputButtonClick('lg', $parent.$index, $index, row.SubOutput)">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </uib-accordion>
+            </div>
         </uib-accordion>
     </div>
     <div class="modal-footer">
