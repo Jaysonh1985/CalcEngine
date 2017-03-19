@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2016 Project AIM
 sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $location, $window, configService,
-                                                            configFunctionFactory, configModalFactory, configTypeaheadFactory,
+                                                            configFunctionFactory, configTypeaheadFactory,
                                                             configValidationFactory, $timeout) {
     // Model
     $scope.config = [];
@@ -263,40 +263,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.AllNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, null, rowIndex);
     };
 
-    $scope.FunctionButtonClick = function (size, colIndex, index, form) {
-        $scope.Parameter = this.config[colIndex].Functions[index].Parameter;
-        var Function = this.config[colIndex].Functions[index].Function;
-        $scope.getVariableTypes(colIndex, index);
-        var FunctionCtrl = null;
-        var FunctionTemp = null;
-        $scope.AttName = 'Row_' + colIndex + '_' + index;
-        FunctionCtrl = configModalFactory.getFunctionCtrl(Function);
-        FunctionTemp = configModalFactory.getFunctionTempURL(Function);
-            var modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: FunctionTemp,
-                backdrop: false,
-                scope: $scope,
-                controller: FunctionCtrl,
-                size: size,
-                resolve: {
-                    Functions: function () { return $scope.Parameter }
-                }
-            });
-            modalInstance.result.then(function (selectedItem) {
-                $scope.config[colIndex].Functions[index].Parameter = selectedItem;
-                $timeout(function () {
-                    var el = document.getElementById($scope.AttName);
-                    angular.element(el).triggerHandler('click');
-                    $scope.form.$setDirty();
-                    $scope.validateForm();
-                });
-
-            }, function () {
-            });
-    };
-
-    $scope.optionsBuild = function (rows) {
+   $scope.optionsBuild = function (rows) {
         $scope.options = [];
         var array = null;
         if (rows.Parameter[0].templateOptions.list == true) {

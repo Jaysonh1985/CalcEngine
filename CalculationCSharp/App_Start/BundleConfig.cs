@@ -55,7 +55,6 @@ namespace CalculationCSharp
                         "~/Areas/Configuration/Scripts/Directives/CustomValidations.js",
                         "~/Areas/Configuration/Scripts/ConfigFunctions/Impact Assessment/impactAssessmentCtrl.js",
                         "~/Areas/Configuration/Scripts/Factories/configFunctionFactory.js",
-                        "~/Areas/Configuration/Scripts/Factories/configModalFactory.js",
                         "~/Areas/Configuration/Scripts/Factories/configValidationFactory.js",
                         "~/Areas/Configuration/Scripts/Factories/configTypeaheadFactory.js",
                         "~/Areas/Configuration/Scripts/Services/configService.js",

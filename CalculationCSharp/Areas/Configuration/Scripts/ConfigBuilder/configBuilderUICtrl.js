@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, $mdSidenav, configService, configFunctionFactory, configModalFactory, configTypeaheadFactory, configValidationFactory, $filter, $timeout) {
+sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibModal, $log, $http, $location, $window, $routeParams, $mdSidenav, configService, configFunctionFactory, configTypeaheadFactory, configValidationFactory, $filter, $timeout) {
 
     $scope.OpenAllButton = function () {
         angular.forEach($scope.config, function (value, key, obj) {

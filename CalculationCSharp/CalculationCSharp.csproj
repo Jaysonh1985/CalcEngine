@@ -321,7 +321,6 @@
     <Content Include="Areas\Configuration\Scripts\FunctionBarViews\ArrayFunctions.html" />
     <Content Include="Areas\Configuration\Scripts\ConfigMenu\configMenuAddCalcCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigMenu\ConfigMenuAddCalcModal.html" />
-    <Content Include="Areas\Configuration\Scripts\Factories\configModalFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Factories\configValidationFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Factories\configTypeaheadFactory.js" />
     <Content Include="Areas\Configuration\Scripts\Factories\configFunctionFactory.js" />
