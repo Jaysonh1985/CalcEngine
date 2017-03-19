@@ -2,7 +2,11 @@
        ng-cloak> 
     <form name="form" role="form" ng-submit="calcbuttonclick(form)" layout="row" style="width:100%">
         <md-content flex="70" layout-padding="0%" layout="column" style="padding:0px; border-right: thin solid; border-right-color: #e8e1d6">      
-            <ul>
+            <md-input-container style="padding:0px" class="md-block" flex-gt-sm>
+                <label>Search</label>
+                <input type="text" ng-model="test">
+            </md-input-container>
+            <ul style="padding:0px">
                 <li ng-repeat="(key, errors) in form.$error track by $index">
                     <strong>{{ key }}</strong> errors
                     <ul>
@@ -12,10 +16,6 @@
             </ul>
             <div ui-tree="treeOptions" ng-controller="configBuilderColumnCtrl">
                 <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Search</label>
-                    <input type="text" ng-model="test">
-                </md-input-container>
                 <uib-accordion close-others=false ui-tree-nodes=""   ng-model="config" data-nodrop-enabled="true">
                     <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" layout="column" context-menu="columnMenuOptions" ui-tree-node>
                         <uib-accordion-heading>                         
