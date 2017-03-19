@@ -9,30 +9,29 @@
                    <span class="glyphicon glyphicon" ui-tree-handle><img ng-hide="viewOnly" src="~/Images/checklist.png"></span>
                 </a>
             </div>
-            <div class="v-separator"><h1></h1></div>
-            <div class="slide-container" style="width:12%">
-                <h6> Function: &nbsp;</h6>
-                <h4>{{ rows.Function }}</h4>
+            <div class="v-separator"><h4></h4></div>
+            <div class="slide-container" style="width:15%">
+                <h6 class="small">Function: &nbsp;</h6>
+                {{ rows.Function }}
             </div>
-            <div class="v-separator"><h1></h1></div>
-            <div class="slide-container" style="width:7%">
-                <h6> Type: &nbsp;</h6>
-                <h4>{{ rows.Type }}</h4>
+            <div class="v-separator"><h4></h4></div>
+            <div class="slide-container" style="width:8%">
+                <h6 class="small">Type: &nbsp;</h6>
+                {{ rows.Type }}
             </div>
 
-            <div class="v-separator"><h1></h1></div>
+            <div class="v-separator"><h4></h4></div>
                 <div class="slide-container" style="width:19%">
-                    <h6>Name: &nbsp;</h6>
-                    <h4>{{ rows.Name }}</h4>
+                    <h6 class="small">Name: &nbsp;</h6>
+                    {{ rows.Name }}
                 </div>
-            <div class="v-separator"><h1></h1></div>
-            <div class="slide-container" style="width:45%">
-                <h6>Output: &nbsp;</h6>
-                <h4>{{ rows.Output | limitTo: 60}} {{rows.Output.length > 60 ? '...' : ''}}</h4>
+            <div class="v-separator"><h4></h4></div>
+            <div class="slide-container" style="width:40%">
+                <h6 class="small">Output: &nbsp;</h6>
+                {{ rows.Output | limitTo: 50}} {{rows.Output.length > 50 ? '...' : ''}}
             </div>
             <div class="v-separator"><h1></h1></div>
             <div class="slide-container" style="width:2%; text-align:center">
-                <h6>&nbsp;</h6>
                 <md-icon ng-if="rows.Pass == 'true'" md-svg-src="/Images/checked.svg"> </md-icon>
                 <md-icon ng-if="rows.Pass == 'false'" md-svg-src="/Images/multiply.svg"> </md-icon>
                 <a ng-show="rows.SubOutput != null " data-nodrag ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">

@@ -13,7 +13,6 @@
         <label>Lookup Type</label>
         <md-select ng:model="rows.Parameter[0].LookupType" name="FactorsLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
                    id="FactorsLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly" required>
-            <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
             <md-option value="String">String</md-option>
@@ -67,7 +66,6 @@
         <label>Output Type</label>
         <md-select ng:model="rows.Parameter[0].OutputType" name="FactorsOutputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
                    id="FactorsOutputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="OutputType" ng-disabled="viewOnly" required>
-            <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
             <md-option value="String">String</md-option>
@@ -82,7 +80,6 @@
         <label>Row Match Required?</label>
         <md-select  ng:model="rows.Parameter[0].RowMatch" name="FactorsRowMatch_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
                    id="FactorsRowMatch_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="RowMatch" ng-disabled="viewOnly" required>
-            <md-option value=""></md-option>
             <md-option value="True">True</md-option>
             <md-option value="False">False</md-option>
         </md-select>
@@ -106,7 +103,6 @@
         <label>Row Match Lookup Type</label>
         <md-select ng:model="rows.Parameter[0].RowMatchLookupType" name="FactorsRowMatchRowLookupType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                    id="FactorsRowMatchRowLookupType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="RowMatchType" ng-disabled="viewOnly" required>
-            <md-option value=""></md-option>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
             <md-option value="String">String</md-option>

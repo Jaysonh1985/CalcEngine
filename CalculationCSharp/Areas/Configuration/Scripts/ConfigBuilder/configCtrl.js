@@ -149,6 +149,31 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         };
     };
 
+    $scope.LogicButtonClick = function (size, colIndex, index) {
+        $scope.Logic = this.config[colIndex].Functions[index].Logic;
+        $scope.AllNames = [];
+        $scope.configReplace = configFunctionFactory.convertToFromJson($scope.config);
+        $scope.AllNames = configTypeaheadFactory.variableArrayBuilder($scope.configReplace, colIndex, null, index);
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Logic/LogicModal.html',
+            scope: $scope,
+            controller: 'logicCtrl',
+            backdrop: false,
+            size: size,
+            resolve: {
+                Logic: function () { return $scope.Logic },
+                viewOnly: function () { return $scope.viewOnly },
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+            $scope.config[colIndex].Functions[index].Logic = selectedItem;
+            $scope.form.$setDirty();
+            $scope.validateForm();
+        }, function () {
+        });
+    };
+
     $scope.CopyFunction = function (colIndex, index) {
         var selectedRows = getSelectedRows(colIndex);
         $window.localStorage["Copy"] = JSON.stringify(selectedRows);

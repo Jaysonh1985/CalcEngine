@@ -1,39 +1,33 @@
-﻿<div> 
-   <md-input-container class="md-block" flex-gt-sm>
-        <label>Form Label</label>
-        <input ng-model="rows.Parameter[0].templateOptions.label" name="InputLabel_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  
-               id="InputLabel_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
-        <div ng-messages="form['InputLabel_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-            <div ng-message="required">Label required</div>
-        </div>
-    </md-input-container>
-</div>
+﻿<md-input-container class="md-block" flex-gt-sm>
+    <label>Form Label</label>
+    <input ng-model="rows.Parameter[0].templateOptions.label" name="InputLabel_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  
+            id="InputLabel_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
+    <div ng-messages="form['InputLabel_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-message="required">Label required</div>
+    </div>
+</md-input-container>
 <md-input-container class="md-block" flex-gt-sm>
     <label>Output</label>
     <input ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) &&
             rows.Parameter[0].templateOptions.required == true" inputformat-Validation config='rows' rowIndex="{{$index}}"
            name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng:model="rows.Output" ng-required="true">
-
     <input ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) &&
             (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)"  inputformat-Validation rowIndex="{{$index}}" 
            config='rows'ng:model="rows.Output" name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
-
     <md-select ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true"  
                name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Output">
         <md-option ng-repeat="option in options" value="{{option.Name}}">{{option.Name}}</md-option>
     </md-select>
-
     <md-select ng-if="rows.Parameter[0].templateOptions.list == true  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" 
             name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Output" ng-click="optionsBuild(rows)">
         <md-option ng-repeat="option in options" value="{{option.Name}}">{{option.Name}}</md-option>
     </md-select>
-
     <div ng-messages="form['Output_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Value is required</div>
         <div ng-message="inputformat">Input format incorrect</div>
     </div>
 </md-input-container>
-<div>
+<md-input-container class="md-block" flex-gt-sm>
     <label>Data Type</label>
     <md-select ng:model="rows.Parameter[0].templateOptions.type" name="InputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
                id="InputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" ng-change="setFunctionInput(rows)" aria-label="DataType" ng-required="">
@@ -44,24 +38,22 @@
     <div ng-messages="form['InputType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Type is required</div>
     </div>
-</div>
-<div>
+</md-input-container>
+<md-input-container class="md-block" flex-gt-sm>
     <md-checkbox name="tos" ng-model="rows.Parameter[0].templateOptions.required" ng-disabled="viewOnly">
         Is the field Required for the calculation?
     </md-checkbox>
-</div>
-<div>
+</md-input-container>
+<md-input-container class="md-block" flex-gt-sm>
     <md-checkbox name="tos" ng-model="rows.Parameter[0].templateOptions.list" ng-disabled="viewOnly">
         Should the input be a dropdown list?
     </md-checkbox>
-</div>
-<div ng-if="rows.Parameter[0].templateOptions.list == true">
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Dropdown List</label>
-        <input name="InputList_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
-               id="InputList_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-model="Parameter[0].templateOptions.options" required>
-        <div ng-messages="form['InputList_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
-            <div ng-message="required">Variable required</div>
-        </div>
-    </md-input-container>
-</div>
+</md-input-container>
+<md-input-container ng-if="rows.Parameter[0].templateOptions.list == true" class="md-block"  flex-gt-sm>
+    <label>Dropdown List</label>
+    <input name="InputList_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
+            id="InputList_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-model="Parameter[0].templateOptions.options" required>
+    <div ng-messages="form['InputList_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
+        <div ng-message="required">Variable required</div>
+    </div>
+</md-input-container>

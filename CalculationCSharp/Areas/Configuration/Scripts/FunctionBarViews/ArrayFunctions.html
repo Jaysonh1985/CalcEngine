@@ -1,106 +1,86 @@
-﻿<div>
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Incoming Array Type</label>
-        <md-select required ng:model="rows.Parameter[0].LookupType"  name="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                   id="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly">
-            <md-option value="Date">Date</md-option>
-            <md-option value="Decimal">Decimal</md-option>
-            <!--<md-option value="String">String</md-option>-->
-        </md-select>
-        <div ng-messages="form['ArrayFunctionLookupType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-            <div ng-message="required">Type is required</div>
-        </div>
-    </md-input-container>
-</div>
-
-<div ng-if="rows.Parameter[0].LookupType == 'Date'">
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Array Value</label>
-        <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"   ng-model="rows.Parameter[0].LookupValue" 
-               name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
-        <div ng-messages="form['ArrayFunctionLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-            <div ng-message="required">Date is required</div>
-            <div ng-message="input">Variable Mismatch</div>
-        </div>
-    </md-input-container>
-</div>
-<div ng-if="rows.Parameter[0].LookupType == 'Decimal'">
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Array Value</label>
-        <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
-               name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
-               uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
-        <div ng-messages="form['ArrayFunctionLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-            <div ng-message="required">Decimal is required</div>
-            <div ng-message="input">Variable Mismatch</div>
-        </div>
-    </md-input-container>
-</div>
-<div ng-if="rows.Parameter[0].LookupType == 'String'">
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Array Value</label>
-        <input variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
-               name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
-               uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
-        <div ng-messages="form['ArrayFunctionLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-            <div ng-message="required">String is required</div>
-            <div ng-message="input">Variable Mismatch</div>
-        </div>
-    </md-input-container>
-</div>
-<div ng-if="rows.Parameter[0].LookupType == 'Date'">
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Array Function</label>
-        <md-select  ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-                   id="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="ArrayFunction"  ng-disabled="viewOnly" required>
-            <md-option value=""></md-option>
-            <md-option value="FirstDate">First Date</md-option>
-            <md-option value="LastDate">Last Date</md-option>
-            <md-option value="Count">Count Array Size</md-option>
-        </md-select>
-        <div ng-messages="form['ArrayFunctionFunction_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-            <div ng-message="required">Function is required</div>
-        </div>
-    </md-input-container>
-</div>
-<div ng-if="rows.Parameter[0].LookupType == 'Decimal'" ng-disabled="viewOnly">
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Array Function</label>
-        <md-select  ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-                   id="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  aria-label="ArrayFunction"  required>
-            <md-option value=""></md-option>
-            <md-option value="Sum">Sum</md-option>
-            <md-option value="Product">Product</md-option>
-            <md-option value="FirstNumber">First Number</md-option>
-            <md-option value="LastNumber">Last Number</md-option>
-            <md-option value="TotalPeriod">Total Period</md-option>
-            <md-option value="Count">Count Array Size</md-option>
-        </md-select>
-        <div ng-messages="form['ArrayFunctionFunction_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-            <div ng-message="required">Function is required</div>
-        </div>
-    </md-input-container>
-</div>
-<div ng-if="rows.Parameter[0].Function == 'TotalPeriod' && rows.Parameter[0].LookupType == 'Decimal'" >
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Period Type</label>
-        <md-select ng:model="rows.Parameter[0].PeriodType" name="ArrayFunctionPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
-                    id="ArrayFunctionPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"   aria-label="ArrayFunctionPeriodType" ng-disabled="viewOnly" required>
-            <md-option value=""></md-option>
-            <md-option value="YearsDays">Years Days</md-option>
-            <md-option value="YearsMonths">Years Months</md-option>
-        </md-select>
-        <div ng-messages="form['ArrayFunctionPeriodType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-            <div ng-message="required">Function is required</div>
-        </div>
-    </md-input-container>
-</div>
-<div ng-if="rows.Parameter[0].LookupType == 'String'">
-    <md-input-container class="md-block" flex-gt-sm>
-        <label>Array Value</label>
-    </md-input-container>
-</div>
+﻿<md-input-container class="md-block" flex-gt-sm>
+    <label>Incoming Array Type</label>
+    <md-select required ng:model="rows.Parameter[0].LookupType"  name="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                id="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly">
+        <md-option value="Date">Date</md-option>
+        <md-option value="Decimal">Decimal</md-option>
+        <!--<md-option value="String">String</md-option>-->
+    </md-select>
+    <div ng-messages="form['ArrayFunctionLookupType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-message="required">Type is required</div>
+    </div>
+</md-input-container>
+<md-input-container ng-if="rows.Parameter[0].LookupType == 'Date'" class="md-block" flex-gt-sm>
+    <label>Array Value</label>
+    <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"   ng-model="rows.Parameter[0].LookupValue" 
+            name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+    <div ng-messages="form['ArrayFunctionLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-message="required">Date is required</div>
+        <div ng-message="input">Variable Mismatch</div>
+    </div>
+</md-input-container>
+<md-input-container ng-if="rows.Parameter[0].LookupType == 'Decimal'" class="md-block" flex-gt-sm>
+    <label>Array Value</label>
+    <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
+            name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
+            uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+    <div ng-messages="form['ArrayFunctionLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-message="required">Decimal is required</div>
+        <div ng-message="input">Variable Mismatch</div>
+    </div>
+</md-input-container>
+<md-input-container ng-if="rows.Parameter[0].LookupType == 'String'" class="md-block" flex-gt-sm>
+    <label>Array Value</label>
+    <input variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
+            name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
+            uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
+    <div ng-messages="form['ArrayFunctionLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-message="required">String is required</div>
+        <div ng-message="input">Variable Mismatch</div>
+    </div>
+</md-input-container>
+<md-input-container ng-if="rows.Parameter[0].LookupType == 'Date'" class="md-block" flex-gt-sm>
+    <label>Array Function</label>
+    <md-select  ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+                id="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="ArrayFunction"  ng-disabled="viewOnly" required>
+        <md-option value="FirstDate">First Date</md-option>
+        <md-option value="LastDate">Last Date</md-option>
+        <md-option value="Count">Count Array Size</md-option>
+    </md-select>
+    <div ng-messages="form['ArrayFunctionFunction_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-message="required">Function is required</div>
+    </div>
+</md-input-container>
+<md-input-container ng-if="rows.Parameter[0].LookupType == 'Decimal'" ng-disabled="viewOnly" class="md-block" flex-gt-sm>
+    <label>Array Function</label>
+    <md-select  ng:model="rows.Parameter[0].Function" name="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+                id="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  aria-label="ArrayFunction"  required>
+        <md-option value="Sum">Sum</md-option>
+        <md-option value="Product">Product</md-option>
+        <md-option value="FirstNumber">First Number</md-option>
+        <md-option value="LastNumber">Last Number</md-option>
+        <md-option value="TotalPeriod">Total Period</md-option>
+        <md-option value="Count">Count Array Size</md-option>
+    </md-select>
+    <div ng-messages="form['ArrayFunctionFunction_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-message="required">Function is required</div>
+    </div>
+</md-input-container>
+<md-input-container ng-if="rows.Parameter[0].Function == 'TotalPeriod' && rows.Parameter[0].LookupType == 'Decimal'"  class="md-block" flex-gt-sm>
+    <label>Period Type</label>
+    <md-select ng:model="rows.Parameter[0].PeriodType" name="ArrayFunctionPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
+                id="ArrayFunctionPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"   aria-label="ArrayFunctionPeriodType" ng-disabled="viewOnly" required>
+        <md-option value="YearsDays">Years Days</md-option>
+        <md-option value="YearsMonths">Years Months</md-option>
+    </md-select>
+    <div ng-messages="form['ArrayFunctionPeriodType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-message="required">Function is required</div>
+    </div>
+</md-input-container>
+<md-input-container ng-if="rows.Parameter[0].LookupType == 'String'" class="md-block" flex-gt-sm>
+    <label>Array Value</label>
+</md-input-container>
