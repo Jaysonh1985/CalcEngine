@@ -117,6 +117,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     });
 
     $scope.focusButtonClick = function (e, elementName) {
+        var isFunctionOutput = elementName.indexOf("FunctionOutput") !== -1;
+        if (isFunctionOutput == true)
+        {
+            var removeLast = elementName.lastIndexOf("_");
+            elementName = elementName.substring(0, removeLast);
+        }
         var str =  elementName;
         var last = str.lastIndexOf("_");
         var first = str.indexOf("_") + 1;
@@ -125,10 +131,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var rowIndex = str.substring(last + 1, length);
         $scope.selectRow(e, rowIndex, colIndex);
         //10 seconds delay
-        $timeout(function () {
-            document.getElementById(elementName).focus();
-        }, 500);
-        
+        if (isFunctionOutput == false) {
+            $timeout(function () {
+                document.getElementById(elementName).focus();
+            }, 500);
+        };
     };
    
     $scope.rebuildCategoryIDs = function rebuildCategoryIDs() {
