@@ -339,10 +339,9 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.removeMathsItem = function () {
         $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.splice($scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.length - 1, 1);
     };
-
+    $scope.FunctionList = [];
     //Add new Item to the selected array
-    $scope.getFunctionList = function getFunctionList(rowIndex, colIndex) {
-        $scope.FunctionList = [];
+    $scope.getFunctionList = function getFunctionList(rowIndex, colIndex) {      
         configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, 0, "Scheme").then(function (data) {
             $scope.FunctionList = data;
         }, onError);
@@ -413,12 +412,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 $scope.SchemeList = data;
             }, onError);
 
-
-
-
-
-
-
+            $scope.getFunctionList(rowIndex, colIndex);
+            $scope.setFunctionName(rowIndex, colIndex);
 
         };
 

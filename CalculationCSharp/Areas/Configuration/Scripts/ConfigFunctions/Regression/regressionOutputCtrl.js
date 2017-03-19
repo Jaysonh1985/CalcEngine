@@ -10,7 +10,7 @@ sulhome.kanbanBoardApp.controller('regressionOutputCtrl', function ($scope, $uib
         $scope.Output = angular.toJson(SubOutput);
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionOutputModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Regression/RegressionOutputModal.html',
             scope: $scope,
             controller: 'regressionOutputCtrl',
             size: size,

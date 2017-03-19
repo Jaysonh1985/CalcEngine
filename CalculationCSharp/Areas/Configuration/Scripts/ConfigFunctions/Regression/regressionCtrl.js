@@ -64,7 +64,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
         $scope.Input = this.Regression[colIndex].Input;
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionInputModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Regression/RegressionInputModal.html',
             scope: $scope,
             controller: 'regressionInputCtrl',
             size: size,
@@ -109,7 +109,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
         $scope.Difference = this.Regression[colIndex].Difference;
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionDifferenceModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Regression/RegressionDifferenceModal.html',
             scope: $scope,
             controller: 'regressionDifferenceCtrl',
             size: size,
@@ -134,7 +134,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
         }
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionOutputModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Regression/RegressionOutputModal.html',
             scope: $scope,
             controller: 'regressionOutputCtrl',
             size: size,

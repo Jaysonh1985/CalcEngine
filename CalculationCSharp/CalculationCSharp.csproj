@@ -315,6 +315,7 @@
     <Content Include="Areas\Configuration\Scripts\ConfigBuilder\configBuilderColumnCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigBuilder\configBuilderRowCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Logic\groupCtrl.js" />
+    <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Regression\RegressionInputModal.html" />
     <Content Include="Areas\Configuration\Scripts\Services\configMenuService.js" />
     <Content Include="Areas\Configuration\Scripts\Services\configHistoryService.js" />
     <Content Include="Areas\Configuration\Scripts\Services\configRegressionService.js" />
@@ -341,7 +342,6 @@
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Regression\RegressionOutputModal.html" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Regression\regressionInputCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Regression\RegressionDifferenceModal.html" />
-    <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Regression\RegressionInputModal.html" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Regression\RegressionModal.html" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Regression\regressionCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\History\historyCtrl.js" />

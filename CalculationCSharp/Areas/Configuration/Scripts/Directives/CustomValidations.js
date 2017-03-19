@@ -136,12 +136,11 @@ sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeah
         scope: { config: '=', rowIndex: '=' },
         link: function (scope, element, attrs, form, scopectrl) {
             element.on('blur', function () {
-                var dataType = scope.config[0].Functions[attrs.rowindex].Type;
+                var dataType = scope.config.Type;
                 if (dataType == 'Date') {
-                    var AttName = 'Output_' + attrs.rowindex + '_' + attrs.rowindex;
-                    form[AttName].$setValidity("inputformat", true);
-                    if (scope.config[0].Functions[attrs.rowindex].Output != null) {
-                        var array = scope.config[0].Functions[attrs.rowindex].Output.split('~');
+                    form[attrs.name].$setValidity("inputformat", true);
+                    if (scope.config.Output != null) {
+                        var array = scope.config.Output.split('~');
                         if (array != "") {
                             angular.forEach(array, function (valueNA, keyNA, obj) {
                                 var parts = valueNA.split("/");
@@ -162,23 +161,22 @@ sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeah
                                     Input1Bool = true;
                                 };
                                 if (Input1Bool == true) {
-                                    form[AttName].$setValidity("inputformat", false);
+                                    form[attrs.name].$setValidity("inputformat", false);
                                 };
                             });
                         };
                     };
                 };
                 if (dataType == 'Decimal') {
-                    var AttName = 'Output_' + attrs.rowindex + '_' + attrs.rowindex;
-                    form[AttName].$setValidity("inputformat", true);
-                    if (scope.config[0].Functions[attrs.rowindex].Output != null) {
-                        if (scope.config[0].Functions[attrs.rowindex].Output.split('~') != null) {
-                            var array = scope.config[0].Functions[attrs.rowindex].Output.split('~');
+                    form[attrs.name].$setValidity("inputformat", true);
+                    if (scope.config.Output != null) {
+                        if (scope.config.Output.split('~') != null) {
+                            var array = scope.config.Output.split('~');
                             if (array != "") {
                                 angular.forEach(array, function (valueNA, keyNA, obj) {
                                     var Input1Bool = isNaN(parseFloat(valueNA));
                                     if (Input1Bool == true) {
-                                        form[AttName].$setValidity("inputformat", false);
+                                        form[attrs.name].$setValidity("inputformat", false);
                                     }
                                 });
                             };

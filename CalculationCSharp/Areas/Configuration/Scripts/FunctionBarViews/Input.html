@@ -11,12 +11,12 @@
 <md-input-container class="md-block" flex-gt-sm>
     <label>Output</label>
     <input ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) &&
-            rows.Parameter[0].templateOptions.required == true" inputformat-Validation config='config' rowIndex="{{$index}}"
+            rows.Parameter[0].templateOptions.required == true" inputformat-Validation config='rows' rowIndex="{{$index}}"
            name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng:model="rows.Output" ng-required="true">
 
     <input ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined) &&
             (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)"  inputformat-Validation rowIndex="{{$index}}" 
-           config='config'ng:model="rows.Output" name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
+           config='rows'ng:model="rows.Output" name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
 
     <md-select ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true"  
                name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Output">

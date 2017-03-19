@@ -62,7 +62,7 @@ sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibM
         var Function = configFunctionFactory.isFunction($location.absUrl());
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/History/HistoryModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/History/HistoryModal.html',
             scope: $scope,
             controller: 'historyCtrl',
             size: size,
@@ -82,7 +82,7 @@ sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibM
         $scope.ID = configFunctionFactory.getConfigID();
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/Regression/RegressionModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Regression/RegressionModal.html',
             scope: $scope,
             controller: 'regressionCtrl',
             size: size,
@@ -100,7 +100,7 @@ sulhome.kanbanBoardApp.controller('configBuilderUICtrl', function ($scope, $uibM
         $scope.ID = configFunctionFactory.getConfigID();
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/Impact Assessment/ImpactAssessmentModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Impact Assessment/ImpactAssessmentModal.html',
             scope: $scope,
             controller: 'impactAssessmentCtrl',
             size: 'lg',
