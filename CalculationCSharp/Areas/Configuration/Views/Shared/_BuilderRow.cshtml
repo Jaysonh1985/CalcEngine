@@ -1,4 +1,4 @@
-﻿<md-list flex="" ng-model="Category.Functions"  ng-controller="configBuilderRowCtrl" ui-tree-nodes="" >
+﻿<md-list flex="" ng-model="Category.Functions"  ng-controller="configBuilderRowCtrl" ui-tree-nodes=""  data-nodrop-enabled="$parent.$index = 0">
     <md-list-item class="md-dense" ng-repeat="rows in Category.Functions" ng-click="selectRow($event, $index, $parent.$index)"    
                   ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments', 'standardRow' : rows.Function != 'Comments', 'stripped' : rows.Pass == 'miss' }"
                   style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px;" context-menu="rowMenuOptions" 
@@ -6,7 +6,7 @@
             <div id="functionrowWrapper">
             <div class="slide-container text-center" style="width:3%">
                 <a class="pull-left" ng-if="Category.Name != 'Input'">                   
-                   <span ui-tree-handle><img ng-hide="viewOnly" src="~/Images/checklist.png"></span>
+                   <span class="glyphicon glyphicon" ui-tree-handle><img ng-hide="viewOnly" src="~/Images/checklist.png"></span>
                 </a>
             </div>
             <div class="v-separator"><h1></h1></div>
