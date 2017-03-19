@@ -40,6 +40,13 @@ sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $
         $scope.rebuildCategoryIDs();
     };
 
+    $scope.AddFunctionRows = function (colIndex, index) {
+        var item;
+        item = configFunctionFactory.buildFunction(colIndex, $scope.config);
+        $scope.config[colIndex].Functions.splice(index + 1, 0, item);
+        toastr.success("Rows Added", "Success");
+    };
+
     $scope.CopyCategory = function (index, e) {
         var Category = $scope.config[index];
         var item = null;
@@ -101,7 +108,7 @@ sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $
         $scope.AllNames = configTypeaheadFactory.variableArrayBuilder($scope.configReplace, index, null, 0);
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/Logic/LogicModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Logic/LogicModal.html',
             scope: $scope,
             controller: 'logicCtrl',
             backdrop: false,
