@@ -14,6 +14,8 @@
             <input type="text" class="form-control form-inline input" ng-model="test" placeholder="Filter">
         </div>
     </div>
+    <br />
+    <br />
     <uib-accordion close-others=false ng-model="Boards">
         <div uib-accordion-group ng-repeat="(key, value) in Boards | groupBy: 'Client'" ng-init="colIndex = $index" is-open="openIndex[$index]">
             <uib-accordion-heading>

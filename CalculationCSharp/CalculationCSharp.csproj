@@ -661,6 +661,7 @@
     <Content Include="Images\crossinsideasquare.png" />
     <Content Include="Images\gear-option.png" />
     <Content Include="Images\more.png" />
+    <Content Include="Images\movelist.svg" />
     <Content Include="Images\multiply2.png" />
     <Content Include="Images\multiply.png" />
     <Content Include="Images\paste-clipboard.png" />

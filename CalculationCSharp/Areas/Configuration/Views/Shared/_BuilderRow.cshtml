@@ -5,8 +5,9 @@
                   name="RowForm_{{$parent.$index}}_{{$index}}" id="RowForm_{{$parent.$index}}_{{$index}}" ui-tree-node>
             <div id="functionrowWrapper">
             <div class="slide-container text-center" style="width:3%">
-                <a class="pull-left" ng-if="Category.Name != 'Input'">                   
-                   <span class="glyphicon glyphicon" ui-tree-handle><img ng-hide="viewOnly" src="~/Images/checklist.png"></span>
+                <a class="pull-left" ng-if="Category.Name != 'Input'">   
+                    <md-icon ng-hide="viewOnly"n class="glyphicon glyphicon" ui-tree-handle md-svg-src="/Images/movelist.svg"> </md-icon>                
+
                 </a>
             </div>
             <div class="v-separator"><h4></h4></div>

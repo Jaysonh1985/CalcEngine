@@ -1,14 +1,8 @@
 ﻿<div flex="30">
     <md-toolbar  layout="row" class="md-theme-black" >
-        <md-input-container class="md-block" style="margin:0px" flex-gt-sm>
-            <ul class="list-inline">
-                <li class="list-inline-item">{{MenuHeader}}</li>
-                <li class="list-inline-item"><h5>Scheme:</h5></li>
-                <li class="list-inline-item"><h4>@ViewData["SchemeName"]</h4></li>
-                <li class="list-inline-item"><h5>Calculation:</h5></li>
-                <li class="list-inline-item"><h4>@ViewData["CalcName"]</h4></li>
-            </ul>
-            </md-input-container>
+        <md-input-container class="md-block" style="margin:18px 0" flex-gt-sm>
+            {{MenuHeader}} @ViewData["SchemeName"] - @ViewData["CalcName"]
+        </md-input-container>
     </md-toolbar>
     <div ng-repeat="Category in config" >
         <div ng-repeat="rows in Category.Functions" ng-show="colIndex == $parent.$index && rowIndex == $index" >
