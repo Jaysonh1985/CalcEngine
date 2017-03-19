@@ -23,41 +23,7 @@ sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $loc
         toastr.success("Rows Added", "Success");
     };
 
-    $scope.CopyFunction = function (colIndex, index) {
-        var selectedRows = getSelectedRows(colIndex);
-        $window.localStorage["Copy"] = JSON.stringify(selectedRows);
-        toastr.success("Rows Copied", "Success");
-    };
-
-    $scope.PasteFunction = function (colIndex, index) {
-        var selectedRows = JSON.parse($window.localStorage.getItem("Copy"));
-        angular.forEach(selectedRows, function (value, key, prop) {
-            var Functions = selectedRows[key];
-            var item = null;
-            item = angular.copy(Functions);
-            $scope.config[colIndex].Functions.splice(index + 1, 0, item);
-            index = index + 1;
-        });
-        toastr.success("Rows Pasted", "Success");
-        $scope.form.$setDirty();
-    };
-
-    $scope.DeleteFunction = function (colIndex, $index) {
-        var cf = confirm("Delete these lines?");
-        if (cf == true) {
-            var selectedRows = [];
-            selectedRows = selectedRowsIndexes[colIndex];
-            selectedRows = $filter('orderBy')(selectedRows);
-            selectRowsReverse = selectedRows.reverse();
-            angular.forEach(selectRowsReverse, function (value, key, prop) {
-                $scope.config[colIndex].Functions.splice(value, 1);
-            });
-            resetSelection();
-            toastr.success("Rows Deleted", "Success");
-        };
-        $scope.form.$setDirty();
-    };
-
+    
     $scope.LogicButtonClick = function (size, colIndex, index) {
         $scope.Logic = this.config[colIndex].Functions[index].Logic;
         $scope.AllNames = [];

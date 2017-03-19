@@ -1,7 +1,7 @@
 ﻿// Copyright (c) 2016 Project AIM
 sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $location, $window, configService,
                                                             configFunctionFactory, configTypeaheadFactory,
-                                                            configValidationFactory, $timeout) {
+                                                            configValidationFactory, $timeout, $filter) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
@@ -136,6 +136,41 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 document.getElementById(elementName).focus();
             }, 500);
         };
+    };
+
+    $scope.CopyFunction = function (colIndex, index) {
+        var selectedRows = getSelectedRows(colIndex);
+        $window.localStorage["Copy"] = JSON.stringify(selectedRows);
+        toastr.success("Rows Copied", "Success");
+    };
+
+    $scope.PasteFunction = function (colIndex, index) {
+        var selectedRows = JSON.parse($window.localStorage.getItem("Copy"));
+        angular.forEach(selectedRows, function (value, key, prop) {
+            var Functions = selectedRows[key];
+            var item = null;
+            item = angular.copy(Functions);
+            $scope.config[colIndex].Functions.splice(index + 1, 0, item);
+            index = index + 1;
+        });
+        toastr.success("Rows Pasted", "Success");
+        $scope.form.$setDirty();
+    };
+
+    $scope.DeleteFunction = function (colIndex, $index) {
+        var cf = confirm("Delete these lines?");
+        if (cf == true) {
+            var selectedRows = [];
+            selectedRows = selectedRowsIndexes[colIndex];
+            selectedRows = $filter('orderBy')(selectedRows);
+            selectRowsReverse = selectedRows.reverse();
+            angular.forEach(selectRowsReverse, function (value, key, prop) {
+                $scope.config[colIndex].Functions.splice(value, 1);
+            });
+            resetSelection();
+            toastr.success("Rows Deleted", "Success");
+        };
+        $scope.form.$setDirty();
     };
    
     $scope.rebuildCategoryIDs = function rebuildCategoryIDs() {
