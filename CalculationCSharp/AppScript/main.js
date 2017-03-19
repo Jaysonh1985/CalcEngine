@@ -22,7 +22,7 @@ sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRo
                 });
     });
 //Timeout functions
-sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepalive, $uibModal, $window, configFunctionFactory, configService) {
+sulhome.kanbanBoardApp.controller('TimeoutCtrl', function ($scope, Idle, Keepalive, $location, $uibModal, $window, configFunctionFactory, configService) {
     $scope.started = false;
 
     function init() {
@@ -108,7 +108,7 @@ sulhome.kanbanBoardApp.directive('ngRightClick', function($parse) {
 
 //Timeout config
 sulhome.kanbanBoardApp.config(function(IdleProvider, KeepaliveProvider) {
-     IdleProvider.idle(20*60-10);
+     IdleProvider.idle(20*1-10);
      IdleProvider.timeout(10);
      KeepaliveProvider.interval(10);
  });
