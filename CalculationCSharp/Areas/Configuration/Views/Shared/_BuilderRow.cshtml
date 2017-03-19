@@ -28,7 +28,7 @@
             <div class="v-separator"><h1></h1></div>
             <div class="slide-container" style="width:45%">
                 <h6>Output: &nbsp;</h6>
-                <h4>{{ rows.Output }}</h4>
+                <h4>{{ rows.Output | limitTo: 60}} {{rows.Output.length > 60 ? '...' : ''}}</h4>
             </div>
             <div class="v-separator"><h1></h1></div>
             <div class="slide-container" style="width:2%; text-align:center">
