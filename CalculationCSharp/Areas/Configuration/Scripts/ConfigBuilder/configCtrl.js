@@ -1,7 +1,7 @@
 ﻿// Copyright (c) 2016 Project AIM
 sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $location, $window, configService,
                                                             configFunctionFactory, configTypeaheadFactory,
-                                                            configValidationFactory, $timeout, $filter) {
+                                                            configValidationFactory, $timeout, $filter, $q) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
@@ -115,6 +115,17 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             };
         };
     });
+
+    $scope.treeOptions = {
+        beforeDrop: function (e) {
+            var sourceValue = e.source.nodeScope.$parent.$parent.$parent.$parent.$index;
+            var destValue = e.dest.nodesScope.$parent.$parent.$parent.$index;
+            // display modal if the node is being dropped into a smaller container
+            if (destValue == 0) {
+                return $q.reject();
+            };
+        }
+    };
 
     $scope.focusButtonClick = function (e, elementName) {
         var isFunctionOutput = elementName.indexOf("FunctionOutput") !== -1;
