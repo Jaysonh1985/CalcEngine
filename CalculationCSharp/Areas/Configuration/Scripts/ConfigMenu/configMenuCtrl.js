@@ -111,7 +111,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
     $scope.copyBoard = function AddBoard(Board) {
         //Creates TypeAhead Values
         var SchemeList = [];
-        configMenuService.getSchemes().then(function (data) {
+        configService.getSchemes().then(function (data) {
             SchemeList = data;
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -166,7 +166,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
         var Version = this.Boards[arrayID].Version;
         //Creates TypeAhead Values
         var SchemeList = [];
-        configMenuService.getSchemes().then(function (data) {
+        configService.getSchemes().then(function (data) {
             SchemeList = data;
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -307,7 +307,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
     };
 
     $scope.modify = function (Boards) {
-        configMenuService.getSchemes().then(function (data) {
+        configService.getSchemes().then(function (data) {
             $scope.SchemeList = data;
             $scope.editingData[Boards.ID] = true;
         }, onError);
