@@ -27,12 +27,11 @@ sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $
     //Categories
     $scope.AddCategoryRows = function (colIndex) {
         var item = null;
-        var FunctionsValue = [configFunctionFactory.buildFunction(colIndex, $scope.config)];
         item = {
             ID: colIndex + 1,
             Name: null,
             Description: null,
-            Functions: FunctionsValue,
+            Functions: [],
             Logic: []
         };
         $scope.config.splice(colIndex + 1, 0, item);
@@ -51,6 +50,7 @@ sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $
         var Category = $scope.config[index];
         var item = null;
         item = angular.copy(Category);
+        item.Name = item.Name + " Copy " + (index +1);
         $scope.config.splice(index + 1, 0, item);
         $scope.form.$setDirty();
     };

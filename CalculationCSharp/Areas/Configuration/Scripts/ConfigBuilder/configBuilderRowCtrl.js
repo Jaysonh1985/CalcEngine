@@ -17,7 +17,6 @@ sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $loc
     ];
 
     $scope.AddFunctionRows = function (colIndex, index) {
-        $scope.Function = configFunctionFactory.isFunction($location.absUrl());
         var item;
         item = configFunctionFactory.buildFunction(colIndex, $scope.config);
         $scope.config[colIndex].Functions.splice(index + 1, 0, item);
