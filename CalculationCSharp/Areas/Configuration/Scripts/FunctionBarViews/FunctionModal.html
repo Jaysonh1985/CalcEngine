@@ -3,7 +3,7 @@
     <label for="Number2" class="control-label col-md-2">Scheme</label>
     <div class="col-sm-9">
         <select ng-if="rows.Parameter[0].Scheme == null" ng:model="rows.Parameter[0].Scheme" ng-options='scheme for scheme in SchemeList' class="form-control  input-sm" 
-                ng-required="true" ng-change="getFunctionList()">
+                ng-required="true" ng-change="getFunctionList($parent.$parent.$parent.$index, $parent.$parent.$parent.$parent.$index)">
             <option selected disabled hidden style='display: none' value=''></option>
         </select>
         <input ng-if="rows.Parameter[0].Scheme != null" ng:model="rows.Parameter[0].Scheme" class="form-control  input-sm" readonly>
@@ -12,7 +12,7 @@
 <div ng-if="rows.Parameter[0].Scheme != null" class="form-group">
     <label for="Number2" class="control-label col-md-2">Function</label>
     <div class="col-sm-9">
-        <select ng-if="rows.Parameter[0].ID == null" ng:model="rows.Parameter[0].ID" class="form-control  input-sm" ng-required="true" ng-change="setFunctionName()">
+        <select ng-if="rows.Parameter[0].ID == null" ng:model="rows.Parameter[0].ID" class="form-control  input-sm" ng-required="true" ng-change="setFunctionName($parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$parent.$parent.$index)">
             <option ng-repeat="function in FunctionList" value="{{function.ID}}">{{function.Name}}</option>
         </select>
         <input ng-if="rows.Parameter[0].ID != null" ng:model="rows.Parameter[0].FunctionName" class="form-control  input-sm" readonly>
