@@ -31,6 +31,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         encodingVisible: true,
     };
     $scope.viewOnly = false;
+    $scope.validation = false;
+    $scope.repeatEnd = false
 
     function init() {
         var id = $location.absUrl();
@@ -222,6 +224,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         });
     };
 
+    $scope.onEnd = function () {
+        $timeout(function () {
+            $scope.repeatEnd = true;
+        }, 1);
+    };
+
     ///Form Submission
     $scope.SaveButtonClick = function SaveBoard(form) {
         if (form.$valid == true) {
@@ -265,6 +273,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $scope.rebuildCategoryIDs();
             if (form.$valid == true) {
                 $scope.validationError = false;
+                $scope.validation = false;
+                $scope.repeatEnd = true;
                 var Function = configFunctionFactory.isFunction($location.absUrl())
                 if (Function == true) {
                     configService.postCalcFunction(id, $scope.config).then(function (data) {

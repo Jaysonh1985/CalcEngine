@@ -62,17 +62,39 @@ sulhome.kanbanBoardApp.directive('mathsoperatorcheck', function () {
     };
 });
 
-sulhome.kanbanBoardApp.directive('form', function() {
+sulhome.kanbanBoardApp.directive('form', function ($timeout) {
     return {
         restrict: 'E',
         link: function(scope, elem) {
-            elem.on('submit', function() {
+            elem.on('submit', function () {
                 scope.$broadcast('form:submit');
-                scope.CalcButtonClick(scope.form);
+                scope.validation = true;
+                scope.isLoading = true;
+                scope.$watch("repeatEnd", function (newVal, oldVal) {
+                    if (newVal == true)
+                    {
+                        scope.$broadcast('form:submit');
+                        scope.viewOnly = false;
+                        scope.isLoading = false;
+                        scope.CalcButtonClick(scope.form);
+                    }               
+                });
+                        
             });
         }
     }; 
 })
+
+sulhome.kanbanBoardApp.directive("repeatEnd", function () {
+    return {
+        restrict: "A",
+        link: function (scope, element, attrs) {
+            if (scope.$last) {
+                scope.$eval(attrs.repeatEnd);
+            }
+        }
+    };
+});
 
 sulhome.kanbanBoardApp.directive('bracketscheck', function () {
     return {
