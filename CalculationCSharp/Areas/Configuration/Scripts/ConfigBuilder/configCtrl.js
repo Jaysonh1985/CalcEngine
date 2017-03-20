@@ -142,10 +142,17 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var length = str.length;
         var colIndex = str.substring(first, last);
         var rowIndex = str.substring(last + 1, length);
-        $scope.selectRow(e, rowIndex, colIndex);
+        $scope.selectRow(e, parseInt(rowIndex), parseInt(colIndex));
+        angular.forEach($scope.openIndex, function (value, key, obj) {
+            $scope.openIndex[key] = false;
+        });
+        $scope.openIndex[colIndex] = true;
+        var domElement = "#RowForm_"+ colIndex + "_" + rowIndex
         //10 seconds delay
         if (isFunctionOutput == false) {
             $timeout(function () {
+                angular.element(domElement).triggerHandler('click');
+                document.getElementById("RowForm_"+ colIndex + "_" + rowIndex).focus();
                 document.getElementById(elementName).focus();
             }, 500);
         };
