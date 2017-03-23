@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $location, $window, $uibModal, configFunctionFactory,   $filter) {
+sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $location, $window, $uibModal, configFunctionFactory, ngClipboard, $filter) {
 
     $scope.rowMenuOptions = [
         ['Add Row', function ($itemScope) {
@@ -13,6 +13,9 @@ sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $loc
         }],
         ['Paste Rows', function ($itemScope) {
             $scope.PasteFunction($itemScope.$parentNodeScope.$index, $itemScope.$index);
+        }],
+        ['Copy Name', function ($itemScope) {
+            ngClipboard.toClipboard($itemScope.rows.Name);
         }],
     ];
 
