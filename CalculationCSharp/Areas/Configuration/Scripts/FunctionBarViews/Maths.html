@@ -16,9 +16,14 @@
         </md-input-container>
         <md-input-container flex="45">
             <label>Input</label>
-            <input name="MathsInput1_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
+            <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
+                   name="MathsInput1_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
                    id="MathsInput1_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"
                    ng:model="val.Input1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+            <div ng-messages="form['MathsInput1_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
+                <div ng-message="required">Number is required</div>
+                <div ng-message="input">Variable Mismatch</div>
+            </div>
         </md-input-container>
         <md-input-container flex="1">
             <md-select name="MathsLogic_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
@@ -33,9 +38,14 @@
         </md-input-container>
         <md-input-container flex="45">
             <label>Input</label>
-            <input name="MathsInput2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
+            <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
+                   name="MathsInput2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
                    id="MathsInput2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"
                    ng:model="val.Input2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+            <div ng-messages="form['MathsInput2_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
+                <div ng-message="required">Number is required</div>
+                <div ng-message="input">Variable Mismatch</div>
+            </div>
         </md-input-container>
         <md-input-container flex="1">
             <md-select name="BracketRight_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$index}}"   
