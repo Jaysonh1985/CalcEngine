@@ -654,6 +654,7 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="Images\add.svg" />
     <Content Include="Images\calculator.svg" />
     <Content Include="Images\checked.png" />
     <Content Include="Images\checklist.png" />

@@ -4,10 +4,14 @@
                   style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px;" context-menu="rowMenuOptions" 
                   name="RowForm_{{$parent.$index}}_{{$index}}" id="RowForm_{{$parent.$index}}_{{$index}}" ui-tree-node>
             <div id="functionrowWrapper">
-            <div class="slide-container text-center" style="width:3%">
-                <a class="pull-left" ng-if="Category.Name != 'Input'">   
-                    <md-icon ng-hide="viewOnly"n class="glyphicon glyphicon" ui-tree-handle md-svg-src="/Images/movelist.svg"> </md-icon>                
-
+            <div class="slide-container text-center" style="width:2%">
+                <a class="center-block" ng-if="Category.Name != 'Input'">   
+                    <md-icon ng-hide="viewOnly"class="glyphicon glyphicon" ui-tree-handle md-svg-src="/Images/movelist.svg"> </md-icon>                
+                </a>               
+            </div>
+            <div class="slide-container text-center" style="width:2%">
+                <a class="center-block" ng-if="isRowSelected($index, $parent.$index)" ng-click="AddFunctionRows($parent.$parent.$index, $parent.$index)">
+                    <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/add.svg"> </md-icon>
                 </a>
             </div>
             <div class="v-separator"><h4></h4></div>
