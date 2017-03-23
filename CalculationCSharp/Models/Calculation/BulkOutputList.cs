@@ -25,9 +25,9 @@ namespace CalculationCSharp.Models.Calculation
                     //Sets the Group in the output
                     if (isNameDone == false)
                     {
-                        propValues.Add(list.Group);
-                        propNames.Add(propValues);
-                        propValues = new List<string>();
+                        //propValues.Add(list.Group);
+                        //propNames.Add(propValues);
+                        //propValues = new List<string>();
                     }
                     //Iterate through property collection
                     foreach (var prop in list.Output)
@@ -36,6 +36,24 @@ namespace CalculationCSharp.Models.Calculation
                         LoopCounter = LoopCounter + 1;
                         if (isNameDone == false)
                         {
+                            if(prop.SubOutput != null)
+                            {   
+                                foreach(var itemSubOutput in prop.SubOutput)
+                                {
+                                    foreach(var propSubOutput in itemSubOutput.Output)
+                                    {
+                                        propValues.Add("Sub Output");
+                                        propValues.Add(itemSubOutput.Group);
+                                        propValues.Add(propSubOutput.Field);
+                                        propValues.Add(propSubOutput.Value);
+                                        propNames.Add(propValues);
+                                        propValues = new List<string>();
+                                    }
+                                }
+                            };
+
+                            propValues.Add("");
+                            propValues.Add(list.Group);
                             propValues.Add(prop.Field);
                             propValues.Add(prop.Value);
                             propNames.Add(propValues);
@@ -44,11 +62,10 @@ namespace CalculationCSharp.Models.Calculation
                         //sets the row value
                         else
                         {
-                            propValues.Add(prop.Value);
-                            propNames[LoopCounter - 1].Add(prop.Value);
-                            propValues = new List<string>();
+                            //propValues.Add(prop.Value);
+                            //propNames[LoopCounter - 1].Add(prop.Value);
+                            //propValues = new List<string>();
                         }
-
                     }
                 }
                 isNameDone = true;
