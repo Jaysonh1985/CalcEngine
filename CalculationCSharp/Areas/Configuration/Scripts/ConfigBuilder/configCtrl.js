@@ -130,8 +130,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.focusButtonClick = function (e, elementName) {
+        var originalElementName = elementName;
         var isFunctionOutput = elementName.indexOf("FunctionOutput") !== -1;
-        if (isFunctionOutput == true)
+        var isBracketLeft = elementName.indexOf("BracketLeft") !== - 1;
+        var isMathsInput1 = elementName.indexOf("MathsInput1") !== - 1;
+        var isMathsInput2 = elementName.indexOf("MathsInput2") !== - 1;
+        var isBracketRight = elementName.indexOf("BracketRight") !== - 1;
+        var isOperator2 = elementName.indexOf("Operator2") !== - 1;
+        if (isFunctionOutput == true || isBracketLeft == true || isMathsInput1 == true || isMathsInput2 == true || isBracketRight == true || isOperator2 == true)
         {
             var removeLast = elementName.lastIndexOf("_");
             elementName = elementName.substring(0, removeLast);
@@ -153,7 +159,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $timeout(function () {
                 angular.element(domElement).triggerHandler('click');
                 document.getElementById("RowForm_"+ colIndex + "_" + rowIndex).focus();
-                document.getElementById(elementName).focus();
+                document.getElementById(originalElementName).focus();
             }, 500);
         };
     };

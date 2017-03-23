@@ -16,10 +16,14 @@
         </md-input-container>
         <md-input-container flex="45">
             <label>Input</label>
-            <input ng:model="val.Input1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+            <input name="MathsInput1_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
+                   id="MathsInput1_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"
+                   ng:model="val.Input1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
         </md-input-container>
         <md-input-container flex="1">
-            <md-select name="Function_{{$index}}"  aria-label="Logic" ng:model="val.Logic">
+            <md-select name="MathsLogic_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
+                       id="MathsLogic_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
+                       aria-label="Logic" ng:model="val.Logic">
                 <md-option value="+">+</md-option>
                 <md-option value="-">-</md-option>
                 <md-option value="/">/</md-option>
@@ -29,7 +33,9 @@
         </md-input-container>
         <md-input-container flex="45">
             <label>Input</label>
-            <input ng:model="val.Input2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+            <input name="MathsInput2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
+                   id="MathsInput2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"
+                   ng:model="val.Input2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
         </md-input-container>
         <md-input-container flex="1">
             <md-select name="BracketRight_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$index}}"   
@@ -45,8 +51,8 @@
             </div>
         </md-input-container>
         <md-input-container flex="1">
-            <md-select mathsoperatorcheck config='[rows.Parameter]' rowIndex="{{$index}}"  name="Operator_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
-                       aria-label="Operator2" id="Operator_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" ng:model="val.Logic2">
+            <md-select mathsoperatorcheck config='[rows.Parameter]' rowIndex="{{$index}}"  name="Operator2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
+                       aria-label="Operator2" id="Operator2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" ng:model="val.Logic2">
                 <md-option value=""></md-option>
                 <md-option value="+">+</md-option>
                 <md-option value="-">-</md-option>
@@ -54,11 +60,30 @@
                 <md-option value="*">*</md-option>
                 <md-option value="Pow">^</md-option>
             </md-select>
-            <div ng-messages="form['Operator_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
+            <div ng-messages="form['Operator2_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
                 <div ng-message="clause">Operator on final row</div>
                 <div ng-message="clauseblank">No operator on row</div>
             </div>
         </md-input-container>
+
+        <md-input-container ng-show="$last" class="md-block" flex-gt-sm>
+            <md-select name="RoundSelect" aria-label="Rounding" ng:model="val.Rounding">
+                <md-option value="0">0</md-option>
+                <md-option value="1">1</md-option>
+                <md-option value="2">2</md-option>
+                <md-option value="3">3</md-option>
+                <md-option value="4">4</md-option>
+                <md-option value="5">5</md-option>
+                <md-option value="6">6</md-option>
+            </md-select>
+        </md-input-container>
+        <!--<md-input-container  ng-show="$last" class="md-block" flex-gt-sm>
+            <md-select id="inclusive" name="singleSelect" aria-label="BracketRight" ng:model="val.RoundingType">
+                <md-option value=""></md-option>
+                <md-option value="up">Up</md-option>
+                <md-option value="down">Down</md-option>
+            </md-select>
+        </md-input-container>-->
     </div>
 </fieldset>
 <md-content class="md-no-momentum" layout-margin="">
@@ -71,22 +96,5 @@
         Click to Remove Last Row
     </md-button>
 </md-content>
-<md-input-container class="md-block" flex-gt-sm>
-    <md-select name="RoundSelect"  aria-label="Rounding" ng:model="rows.Parameter.Rounding">
-        <md-option value="0">0</md-option>
-        <md-option value="1">1</md-option>
-        <md-option value="2">2</md-option>
-        <md-option value="3">3</md-option>
-        <md-option value="4">4</md-option>
-        <md-option value="5">5</md-option>
-        <md-option value="6">6</md-option>
-    </md-select>
-</md-input-container>
-<md-input-container class="md-block" flex-gt-sm>
-    <md-select id="inclusive" name="singleSelect"  aria-label="BracketRight" ng:model="rows.Parameter.RoundingType">
-        <md-option value=""></md-option>
-        <md-option value="up">Up</md-option>
-        <md-option value="down">Down</md-option>
-    </md-select>
-</md-input-container>
+
 
