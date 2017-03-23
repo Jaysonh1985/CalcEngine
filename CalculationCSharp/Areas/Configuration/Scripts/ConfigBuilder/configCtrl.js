@@ -363,12 +363,16 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var array = null;
         if (rows.Parameter[0].templateOptions.list == true) {
             if (angular.isArray(rows.Parameter[0].templateOptions.options) == false) {
-                array = rows.Parameter[0].templateOptions.options.split(',');
-                angular.forEach(array, function (object) {
-                    $scope.options.push({
-                        Name: object
+                var test = rows.Parameter[0].templateOptions.options;
+                if (rows.Parameter[0].templateOptions.options != undefined)
+                {
+                    array = rows.Parameter[0].templateOptions.options.split(',');
+                    angular.forEach(array, function (object) {
+                        $scope.options.push({
+                            Name: object
+                        });
                     });
-                });
+                }
             }
             else {
                 options = rows.Parameter[0].templateOptions.options;
