@@ -5,7 +5,7 @@
         </md-input-container>
     </md-toolbar>
     <div ng-repeat="Category in config" >
-        <div ng-repeat="rows in Category.Functions" repeat-end="onEnd()" ng-show="colIndex == $parent.$index && rowIndex == $index" >
+        <div ng-repeat="rows in Category.Functions" repeat-end="onEnd()" ng-show="isRowSelected($index, $parent.$index)" >
             <fieldset ng-disabled="viewOnly">
                 <md-toolbar layout="row" class="md-hue-2">
                     <div ng-if="Category.Name != 'Input' && rows.Function == null">
@@ -85,7 +85,7 @@
         </md-input-container>
     </md-toolbar>
     <div ng-repeat="Category in config">
-        <div ng-repeat="rows in Category.Functions"  repeat-end="onEnd()" ng-if="colIndex == $parent.$index && rowIndex == $index">
+        <div ng-repeat="rows in Category.Functions"  repeat-end="onEnd()" ng-if="isRowSelected($index, $parent.$index)">
             <fieldset ng-disabled="viewOnly">
                 <md-toolbar layout="row" class="md-hue-2">
                     <div ng-if="Category.Name != 'Input' && rows.Function == null">
