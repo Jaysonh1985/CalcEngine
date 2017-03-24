@@ -245,6 +245,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     ///Form Submission
     $scope.SaveButtonClick = function SaveBoard(form) {
+        $scope.functionValidateForm();
         if (form.$valid == true) {
             $scope.viewOnly = true;
             $timeout(function () {
@@ -276,6 +277,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.CalcButtonClick = function CalcBoard(form) {
+        $scope.functionValidateForm();
         $scope.viewOnly = true;
         $timeout(function () {
             //$scope.validateForm();
@@ -284,7 +286,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             };
             var id = configFunctionFactory.getConfigID();
             $scope.rebuildCategoryIDs();
-            if (form.$valid == true) {
+            if (form.$valid == true && form.$invalid == false) {
                 $scope.validationError = false;
                 $scope.validation = false;
                 $scope.repeatEnd = true;
@@ -386,52 +388,24 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         };
     };
 
-    $scope.validateForm = function () {
-        form = $scope.form;
-        returnCount = 0;
-        angular.forEach($scope.config, function (value, key, obj) {
-            angular.forEach($scope.config[key].Functions, function (valueF, keyF, obj) {
-                if ($scope.Function == true) {
-                    //Return
-                    if ($scope.config[key].Functions[keyF].Function == 'Return') {
-                        returnCount = returnCount + 1;
-                        if (returnCount > 1) {
-                            var AttName3 = 'FunctionCog_' + key + '_' + keyF;
-                            form[AttName3].$setValidity("return", false);
-                        }
-                        angular.forEach(obj, function (valueN, keyN, obj) {
-                            configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].Datatype, keyF, valueN.Variable, form, true);
-                        });
-                    };
-                };
-                if ($scope.Function == true) {
-                    //Check if no return values
-                    if (returnCount == 0) {
-
-                        if ($scope.config[0].Functions.length == parseInt(0)) {
-                            $scope.form.$invalid = true;
-                            toastr.error("Failed Validation - No Return variable set", "Error");
-                        }
-                        else {
-                            var AttName4 = 'FunctionCog_' + 0 + '_' + 0;
-                            form[AttName4].$setValidity("returnMissing", false);
-                        }
-                    };
-                    //Check if No Inputs
-                    if ($scope.config[0].Functions.length == parseInt(0)) {
-                        $scope.form.$invalid = true;
-                        toastr.error("Failed Validation - No Inputs Set", "Error");
-                    };
-                    var columnLength = $scope.config.length - 1;
-                    var functionLength = $scope.config[columnLength].Functions.length - 1;
-                    if ($scope.config[columnLength].Functions[functionLength].Function != "Return") {
-                        $scope.form.$invalid = true;
-                        toastr.error("Failed Validation - Return variable not on last row", "Error");
-                    };
-                };
-            })
-        })
-    };
+   $scope.functionValidateForm = function () {
+       if ($scope.MenuHeader == 'Function') {
+           var returnCount = 0;
+           angular.forEach($scope.config, function (value, key, obj) {
+               angular.forEach($scope.config[key].Functions, function (valueF, keyF, obj) {
+                   //Return
+                   if ($scope.config[key].Functions[keyF].Function == 'Return') {
+                       returnCount = returnCount + 1;
+                   };
+               });
+           });
+            //Check if no return values
+            if (returnCount == 0) {
+                $scope.form.$invalid = true;
+                toastr.error("Failed Validation - No Return variable set", "Error");
+            };
+       }
+   };
 
     $scope.addMathsItem = function (index) {
         var item = null;
@@ -459,6 +433,68 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         resetSelection();
     };
 
+    $scope.SchemeList = [];
+    //getFunctionsList          
+    $scope.getSchemeList = function getSchemeList(rowIndex, colIndex) {
+        $scope.SchemeList = [];
+        configService.getSchemes().then(function (data) {
+            $scope.SchemeList = data;
+        }, onError);
+    };
+
+    $scope.FunctionList =[];
+    //getFunctionsList          
+    $scope.getFunctionList = function getFunctionList(rowIndex, colIndex) {
+        configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, 0, "Scheme").then(function (data) {
+            $scope.FunctionList = data;
+        }, onError);
+    };
+
+    $scope.getFunctionListSingleCall = function getFunctionListSingleCall(rowIndex, colIndex) {
+        configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, 0, "Scheme").then(function(data) {
+            $scope.FunctionList = data;
+            $scope.setFunctionName(rowIndex, colIndex);
+        }, onError);
+    };
+
+        //Add new Item to the selected array
+    $scope.setFunctionName = function setFunctionName(rowIndex, colIndex) {
+        var arrayID = configFunctionFactory.getIndexOf($scope.FunctionList, parseInt(this.config[colIndex].Functions[rowIndex].Parameter[0].ID), "ID");
+        this.config[colIndex].Functions[rowIndex].Parameter[0].FunctionName = $scope.FunctionList[arrayID].Name;
+        configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, $scope.FunctionList[arrayID].ID, "Config").then(function(data) {
+            $scope.getFormFields(angular.fromJson(data[0].Configuration), rowIndex, colIndex);
+        }, onError);
+    };
+
+    //Get the fields for the input form and null the values out
+    $scope.getFormFields = function getFormFields(array, rowIndex, colIndex) {  //function that sets the parameters available under the different variable types
+        var counter = 0;
+        var scopeid = 0;
+        var functionID = 0;
+        $scope.fields =[];
+        $scope.fieldset =[];
+        this.config[colIndex].Functions[rowIndex].Parameter[0].Input = configFunctionFactory.convertToFromJson(array[0]);
+        angular.forEach(this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, function (groups) {
+            functionID = 0;
+            $scope.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[scopeid].Output = null;
+            scopeid = scopeid + 1
+            });
+            if (this.config[colIndex].Functions[rowIndex].Parameter[0].Input.length > 0) {
+            $scope.mapFormFields(this.config[colIndex].Functions[rowIndex].Parameter[0].Input);
+        };
+    };
+
+    $scope.mapFormFields = function mapFormFields(Input) {
+        var InputJson = angular.fromJson(Input);
+        convertDateStringsToDates([InputJson]);
+        $scope.isLoading = true;
+        angular.forEach(angular.fromJson(InputJson), function (value, key, obj) {
+            var index = configFunctionFactory.getIndexOf(this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, value.Name, 'Name');
+            this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[index].Output = value.Output;
+        });
+        this.config[colIndex].Functions[rowIndex].Parameter[0].Input = $scope.configreg;
+    };
+
     $scope.selectRow = function (event, rowIndex, colIndex) {
         $scope.getVariableTypes(colIndex, rowIndex);
         $scope.Parameter = this.config[colIndex].Functions[rowIndex].Parameter;
@@ -467,57 +503,17 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.colIndex = colIndex;
         if ($scope.Function == 'Function') {
             $scope.function = [];
-            $scope.SchemeList = [];
-            configService.getSchemes().then(function (data) {
-                $scope.SchemeList = data;
-            }, onError);
-            $scope.FunctionList = [];
-            //Add new Item to the selected array
-            $scope.getFunctionList = function getFunctionList(rowIndex, colIndex) {
-                configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, 0, "Scheme").then(function (data) {
-                    $scope.FunctionList = data;
-                }, onError);
-            };
-
-            //Add new Item to the selected array
-            $scope.setFunctionName = function setFunctionName(rowIndex, colIndex) {
-                var arrayID = configFunctionFactory.getIndexOf($scope.FunctionList, parseInt(this.config[colIndex].Functions[rowIndex].Parameter[0].ID), "ID");
-                this.config[colIndex].Functions[rowIndex].Parameter[0].FunctionName = $scope.FunctionList[arrayID].Name;
-                configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, $scope.FunctionList[arrayID].ID, "Config").then(function (data) {
-                    $scope.getFormFields(angular.fromJson(data[0].Configuration), rowIndex, colIndex);
-                }, onError);
-            };
-
-            //Single Calculation
-            //Get the fields for the input form and null the values out
-            $scope.getFormFields = function getFormFields(array, rowIndex, colIndex) {  //function that sets the parameters available under the different variable types
-                var counter = 0;
-                var scopeid = 0;
-                var functionID = 0;
-                $scope.fields = [];
-                $scope.fieldset = [];
-                this.config[colIndex].Functions[rowIndex].Parameter[0].Input = configFunctionFactory.convertToFromJson(array[0]);
-                angular.forEach(this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, function (groups) {
-                    functionID = 0;
-                    $scope.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[scopeid].Output = null;
-                    scopeid = scopeid + 1
-                });
-                if (this.config[colIndex].Functions[rowIndex].Parameter[0].Input.length > 0) {
-                    $scope.mapFormFields(this.config[colIndex].Functions[rowIndex].Parameter[0].Input);
+            if (this.config[colIndex].Functions[rowIndex].Parameter.length > 0) {
+                $scope.SchemeList =[];
+                $scope.getSchemeList();
+                $scope.FunctionList =[];
+                if (this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme != null) {
+                    $scope.getFunctionList(rowIndex, colIndex);
+                };
+                if (this.config[colIndex].Functions[rowIndex].Parameter[0].FunctionName != null) {
+                   $scope.getFunctionListSingleCall(rowIndex, colIndex);
                 };
             };
-
-            $scope.mapFormFields = function mapFormFields(Input) {
-                var InputJson = angular.fromJson(Input);
-                convertDateStringsToDates([InputJson]);
-                $scope.isLoading = true;
-                angular.forEach(angular.fromJson(InputJson), function (value, key, obj) {
-                    var index = configFunctionFactory.getIndexOf(this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, value.Name, 'Name');
-                    this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[index].Output = value.Output;
-                });
-                this.config[colIndex].Functions[rowIndex].Parameter[0].Input = $scope.configreg;
-            };
-
         };
 
         if (event.ctrlKey) {

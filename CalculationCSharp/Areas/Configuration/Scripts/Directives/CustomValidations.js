@@ -106,43 +106,34 @@ sulhome.kanbanBoardApp.directive('bracketscheck', function () {
             scope.$on('form:submit', function () {
                 var LBcounter = 0;
                 var RBcounter = 0;
+                var length = scope.config.length - 1;
                 angular.forEach(scope.config[0], function (value, key, obj) {
+
                     if (value.Bracket1 == "(") {
-                        var AttName = 'BracketLeft_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
+                        var AttName = 'BracketLeft_' + attrs.colindex + '_' + attrs.rowindex + '_' + length;
                         form[AttName].$setValidity("bracketnotclosed", true);
                         LBcounter = LBcounter + 1;
                     }
                     if (value.Bracket2 == ")") {
-                        var AttName = 'BracketRight_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
+                        var AttName = 'BracketRight_' + attrs.colindex + '_' + attrs.rowindex + '_' + length;
                         form[AttName].$setValidity("bracketnotopen", true);
                         RBcounter = RBcounter + 1;
                     }
                 });
                 if (LBcounter > RBcounter) {
-                    angular.forEach(scope.config[0], function (value, key, obj) {
-                        var AttName = 'BracketLeft_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
-                        form[AttName].$setValidity("bracketnotclosed", true);
-                        if (value.Bracket1 = "(") {
-                            form[AttName].$setValidity("bracketnotclosed", false);
-                        }
-                    })
+                    var AttName = 'BracketLeft_' + attrs.colindex + '_' + attrs.rowindex + '_' + length;
+                    form[AttName].$setValidity("bracketnotclosed", true);
+                    form[AttName].$setValidity("bracketnotclosed", false);
                 }
                 else if (LBcounter < RBcounter) {
-                    angular.forEach(scope.config[0], function (value, key, obj) {
-                        var AttName = 'BracketRight_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
-                        form[AttName].$setValidity("bracketnotopen", true);
-                        if (value.Bracket2 = ")") {
-                            form[AttName].$setValidity("bracketnotopen", false);
-                        }
-                    })
+                    var AttName = 'BracketRight_' + attrs.colindex + '_' + attrs.rowindex + '_' + length;
+                    form[AttName].$setValidity("bracketnotopen", false);
                 }
                 else {
-                    angular.forEach(scope.config[0], function (value, key, obj) {
-                        var AttName = 'BracketLeft_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
-                        form[AttName].$setValidity("bracketnotclosed", true);
-                        var AttName = 'BracketRight_' + attrs.colindex + '_' + attrs.rowindex + '_' + key;
-                        form[AttName].$setValidity("bracketnotopen", true);
-                    })
+                    var AttName = 'BracketLeft_' + attrs.colindex + '_' + attrs.rowindex + '_' + length;
+                    form[AttName].$setValidity("bracketnotclosed", true);
+                    var AttName = 'BracketRight_' + attrs.colindex + '_' + attrs.rowindex + '_' + length;
+                    form[AttName].$setValidity("bracketnotopen", true);
                 };
             });
         }

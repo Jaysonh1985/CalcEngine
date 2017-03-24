@@ -85,13 +85,13 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 {
                     DateTime LookupValue;
                     DateTime.TryParse(InputA, out LookupValue);
-                    return Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
+                    return Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue.ToShortDateString()), 1, parameters.ColumnNo));
                 }
                 else if (parameters.LookupType == "Decimal")
                 {
                     decimal LookupValue;
                     decimal.TryParse(InputA, out LookupValue);
-                    return Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 1, parameters.ColumnNo));
+                    return Convert.ToString(FactorFunctions.CSVLookup(parameters.TableName, Convert.ToString(LookupValue), 3, parameters.ColumnNo));
                 }
                 else
                 {

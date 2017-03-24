@@ -14,7 +14,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
 
     function init() {
         $scope.isLoading = true;
-        if ($scope.Function == true)
+        if ($scope.MenuHeader == "Function")
         {
             configRegressionService.getFunctionRegression(ID)
             .then(function (data) {
@@ -90,7 +90,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
                 Comment: $scope.Regression[colIndex].Comment,
                 UpdateDate: ""
             };
-            if ($scope.Function == true) {
+            if ($scope.MenuHeader == "Function") {
                 configRegressionService.putFunctionRegression($scope.Regression[colIndex].ID, $scope.selected).then(function (data) {
                 }, onError);
             }
@@ -155,7 +155,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
              CalcID: ID,
              Comment: null,
          };
-         if ($scope.Function == true) {
+         if ($scope.MenuHeader == "Function") {
              configRegressionService.postFunctionRegression(ID, $scope.selected).then(function (data) {
                  $scope.Regression.push(data);
                  $scope.isLoading = false;
@@ -173,7 +173,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
          $scope.removeRegressionItem = function (index) {
              var cf = confirm("Delete this Row?");
              if (cf == true) {
-                 if ($scope.Function == true) {
+                 if ($scope.MenuHeader == "Function") {
                      configRegressionService.deleteFunctionRegression(this.Regression[index].ID)
                      .then(function (data) {
                          $scope.isLoading = false;
@@ -254,7 +254,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
                     Pass: $scope.Regression[key].Pass,
                     UpdateDate: ""
                 };
-                if ($scope.Function == true) {
+                if ($scope.MenuHeader == "Function") {
                     configRegressionService.putFunctionRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
                         toastr.success("Regression Ran successfully", "Success");
                         $scope.isLoading = false;
@@ -296,7 +296,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
                     Pass: $scope.Regression[key].Pass,
                     UpdateDate: ""
                 };
-                if ($scope.Function == true) {
+                if ($scope.MenuHeader == "Function") {
                     configRegressionService.putCalcRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
                     }, onError);
                 }
@@ -333,7 +333,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
                     Pass: $scope.Regression[key].Pass,
                     UpdateDate: ""
                 };
-                if ($scope.Function == true) {
+                if ($scope.MenuHeader == "Function") {
                     configRegressionService.putCalcRegression($scope.Regression[key].ID, $scope.selected).then(function (data) {
 
                     }, onError);

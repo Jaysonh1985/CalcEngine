@@ -65,6 +65,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
             DateTime InputBDate;
             InputADateSucceeded = DateTime.TryParse(InputA, out InputADate);
             InputBDateSucceeded = DateTime.TryParse(InputB, out InputBDate);
+
             //Builds the string to calculate the logis
             if (InputADeciSucceeded == true && InputBDeciSucceeded == true)
             {
@@ -80,15 +81,15 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
             }
             else if (InputADateSucceeded == true && InputBDateSucceeded == true)
             {
-                return "if(" + "'" + InputADate + "'" + Logic + "'" + InputBDate + "'" + ",true,false)";
+                return "if(" + "#" + InputADate.ToShortDateString() + "#" + Logic + "#" + InputBDate.ToShortDateString() + "#" + ",true,false)";
             }
             else if (InputADateSucceeded == true && InputBDateSucceeded == false)
             {
-                return "if(" + InputADate + Logic + "'" + InputBDate + "'" + ",true,false)";
+                return "if(" + InputADate + Logic + "#" + InputBDate + "#" + ",true,false)";
             }
             else if (InputADateSucceeded == false && InputBDateSucceeded == true)
             {
-                return "if(" + "'" + InputADate + "'" + Logic + InputBDate + ",true,false)";
+                return "if(" + "#" + InputADate + "#" + Logic + InputBDate + ",true,false)";
             }
             else
             {
