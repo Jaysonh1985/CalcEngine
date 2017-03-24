@@ -168,7 +168,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     {
                                         Maths Maths = new Maths();
                                         Maths parameters = (Maths)javaScriptSerializ­er.Deserialize(jparameters, typeof(Maths));
-                                        MathString = Maths.Output(jparameters,jCategory,group.ID,item.ID,MathString,PowOpen);
+                                        MathString = Maths.Output(jparameters, jCategory, group.ID, item.ID, MathString, PowOpen);
                                         PowOpen = Maths.PowOpen(jparameters, PowOpen);
                                         if (paramCount == item.Parameter.Count)
                                         {
@@ -198,13 +198,13 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                                     logger.Error(ex);
                                                     throw new HttpException(ex.ToString());
                                                 }
-                                               
+
                                                 item.Output = Convert.ToString(Output);
                                             }
                                             else
                                             {
                                                 item.Output = "0";
-                                            }                                                      
+                                            }
                                         }
                                         paramCount = paramCount + 1;
                                     }
@@ -233,7 +233,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         {
                                             logger.Error(ex);
                                             throw new HttpException(ex.ToString());
-                                        }                                   
+                                        }
                                     }
                                     else if (item.Function == "Factors")
                                     {
@@ -248,7 +248,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             logger.Error(ex);
                                             throw new HttpException(ex.ToString());
                                         }
-                                       
+
                                         item.Type = parameters.OutputType;
                                     }
                                     else if (item.Function == "DateAdjustment")
@@ -275,7 +275,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         {
                                             logger.Error(ex);
                                             throw new HttpException(ex.ToString());
-                                        }                                       
+                                        }
                                     }
                                     else if (item.Function == "Return")
                                     {
@@ -303,7 +303,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         {
                                             logger.Error(ex);
                                             throw new HttpException(ex.ToString());
-                                        }                                       
+                                        }
                                     }
                                     else if (item.Function == "ArrayFunctions")
                                     {
@@ -318,9 +318,9 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             logger.Error(ex);
                                             throw new HttpException(ex.ToString());
                                         }
-                                        
 
-                                        if(parameters.Function == "Count")
+
+                                        if (parameters.Function == "Count")
                                         {
                                             item.Type = "Decimal";
                                         }
@@ -328,12 +328,12 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         {
                                             item.Type = parameters.LookupType;
                                         }
-                                        
+
                                     }
                                     else if (item.Function == "StringFunctions")
                                     {
                                         StringFunctions StringFunctions = new StringFunctions();
-                                        StringFunctions  parameters = (StringFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(StringFunctions));
+                                        StringFunctions parameters = (StringFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(StringFunctions));
                                         try
                                         {
                                             item.Output = StringFunctions.Output(jparameters, jCategory, group.ID, item.ID);
@@ -343,8 +343,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             logger.Error(ex);
                                             throw new HttpException(ex.ToString());
                                         }
-                                        
-                                        if(parameters.Type == "Len")
+
+                                        if (parameters.Type == "Len")
                                         {
                                             item.Type = "Decimal";
                                         }
@@ -356,53 +356,64 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                     else if (item.Function == "Function")
                                     {
                                         Function Functions = new Function();
-                                        Function parameters = (Function)javaScriptSerializ­er.Deserialize(jparameters, typeof(Function));                                       
+                                        Function parameters = (Function)javaScriptSerializ­er.Deserialize(jparameters, typeof(Function));
                                         FunctionConfiguration calcFunction = db.FunctionConfiguration.Find(Convert.ToInt32(parameters.ID));
-                                        List<CategoryViewModel> calcFunctionConfig = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(calcFunction.Configuration, typeof(List<CategoryViewModel>));
-                                        //replace inputs from main configuration to function
-                                        foreach (var row in calcFunctionConfig[0].Functions)
+                                        try
                                         {
-                                            int index = parameters.Input.FindIndex(a => a.Name == row.Name);
-                                            if(index >= 0)
+                                            List<CategoryViewModel> calcFunctionConfig = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(calcFunction.Configuration, typeof(List<CategoryViewModel>));
+                                            //replace inputs from main configuration to function
+                                            foreach (var row in calcFunctionConfig[0].Functions)
                                             {
-                                                row.Output = parameters.Input[index].Output;
-                                            }
-                                            else
-                                            {
-                                                row.Output = null;
-                                            }
-                                        }
-
-                                        foreach(var input in calcFunctionConfig[0].Functions)
-                                        {
-                                            if (input.Output != null)
-                                            {
-                                                input.Output = Convert.ToString(Functions.Output(jparameters, jCategory, group.ID, item.ID, input.Output, input.Type));
-                                            }
-                                        }
-                                        //run the function with the new inputs
-                                        Calculate Calculate = new Calculate();
-                                        calcFunctionConfig = Calculate.DebugResults(calcFunctionConfig);
-                                        item.SubOutput = Calculate.OutputResults(calcFunctionConfig);
-                                        foreach(var col in calcFunctionConfig)
-                                        {
-                                            int index = col.Functions.FindIndex(a => a.Function == "Return");
-                                            if(index >=0)
-                                            {
-                                                item.Output = col.Functions[index].Output;
-                                                foreach(var thing in col.Functions[index].Parameter)
+                                                int index = parameters.Input.FindIndex(a => a.Name == row.Name);
+                                                if (index >= 0)
                                                 {
-                                                    foreach(var test in thing)
+                                                    row.Output = parameters.Input[index].Output;
+                                                }
+                                                else
+                                                {
+                                                    row.Output = null;
+                                                }
+                                            }
+
+                                            foreach (var input in calcFunctionConfig[0].Functions)
+                                            {
+                                                if (input.Output != null)
+                                                {
+                                                    input.Output = Convert.ToString(Functions.Output(jparameters, jCategory, group.ID, item.ID, input.Output, input.Type));
+                                                }
+                                            }
+                                            //run the function with the new inputs
+                                            Calculate Calculate = new Calculate();
+                                            calcFunctionConfig = Calculate.DebugResults(calcFunctionConfig);
+                                            item.SubOutput = Calculate.OutputResults(calcFunctionConfig);
+                                            foreach (var col in calcFunctionConfig)
+                                            {
+                                                int index = col.Functions.FindIndex(a => a.Function == "Return");
+                                                if (index >= 0)
+                                                {
+                                                    item.Output = col.Functions[index].Output;
+                                                    foreach (var thing in col.Functions[index].Parameter)
                                                     {
-                                                        if(test.Key == "Datatype")
+                                                        foreach (var test in thing)
                                                         {
-                                                            item.Type = test.Value;
+                                                            if (test.Key == "Datatype")
+                                                            {
+                                                                item.Type = test.Value;
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
+
                                         }
-                                    }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);
+                                            logger.Error("Missing Function, please check this is available");
+                                            throw new HttpException("Missing Function, please check this is available");
+                                        }
+                                    } 
+                                       
                                 }
                                 //Expected results on the builder this sets the required ones
                                 if (item.ExpectedResult == null || item.ExpectedResult == "")
