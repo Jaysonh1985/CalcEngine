@@ -245,6 +245,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     ///Form Submission
     $scope.SaveButtonClick = function SaveBoard(form) {
+        $scope.functionValidateForm();
         if (form.$valid == true) {
             $scope.viewOnly = true;
             $timeout(function () {
@@ -276,6 +277,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.CalcButtonClick = function CalcBoard(form) {
+        $scope.functionValidateForm();
         $scope.viewOnly = true;
         $timeout(function () {
             //$scope.validateForm();
@@ -284,7 +286,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             };
             var id = configFunctionFactory.getConfigID();
             $scope.rebuildCategoryIDs();
-            if (form.$valid == true) {
+            if (form.$valid == true && form.$invalid == false) {
                 $scope.validationError = false;
                 $scope.validation = false;
                 $scope.repeatEnd = true;
@@ -386,52 +388,24 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         };
     };
 
-    $scope.validateForm = function () {
-        form = $scope.form;
-        returnCount = 0;
-        angular.forEach($scope.config, function (value, key, obj) {
-            angular.forEach($scope.config[key].Functions, function (valueF, keyF, obj) {
-                if ($scope.Function == true) {
-                    //Return
-                    if ($scope.config[key].Functions[keyF].Function == 'Return') {
-                        returnCount = returnCount + 1;
-                        if (returnCount > 1) {
-                            var AttName3 = 'FunctionCog_' + key + '_' + keyF;
-                            form[AttName3].$setValidity("return", false);
-                        }
-                        angular.forEach(obj, function (valueN, keyN, obj) {
-                            configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].Datatype, keyF, valueN.Variable, form, true);
-                        });
-                    };
-                };
-                if ($scope.Function == true) {
-                    //Check if no return values
-                    if (returnCount == 0) {
-
-                        if ($scope.config[0].Functions.length == parseInt(0)) {
-                            $scope.form.$invalid = true;
-                            toastr.error("Failed Validation - No Return variable set", "Error");
-                        }
-                        else {
-                            var AttName4 = 'FunctionCog_' + 0 + '_' + 0;
-                            form[AttName4].$setValidity("returnMissing", false);
-                        }
-                    };
-                    //Check if No Inputs
-                    if ($scope.config[0].Functions.length == parseInt(0)) {
-                        $scope.form.$invalid = true;
-                        toastr.error("Failed Validation - No Inputs Set", "Error");
-                    };
-                    var columnLength = $scope.config.length - 1;
-                    var functionLength = $scope.config[columnLength].Functions.length - 1;
-                    if ($scope.config[columnLength].Functions[functionLength].Function != "Return") {
-                        $scope.form.$invalid = true;
-                        toastr.error("Failed Validation - Return variable not on last row", "Error");
-                    };
-                };
-            })
-        })
-    };
+   $scope.functionValidateForm = function () {
+       if ($scope.MenuHeader == 'Function') {
+           var returnCount = 0;
+           angular.forEach($scope.config, function (value, key, obj) {
+               angular.forEach($scope.config[key].Functions, function (valueF, keyF, obj) {
+                   //Return
+                   if ($scope.config[key].Functions[keyF].Function == 'Return') {
+                       returnCount = returnCount + 1;
+                   };
+               });
+           });
+            //Check if no return values
+            if (returnCount == 0) {
+                $scope.form.$invalid = true;
+                toastr.error("Failed Validation - No Return variable set", "Error");
+            };
+       }
+   };
 
     $scope.addMathsItem = function (index) {
         var item = null;

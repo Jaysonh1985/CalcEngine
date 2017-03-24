@@ -47,7 +47,7 @@
                 </md-toolbar>
                 <md-content class="md-no-momentum" layout-margin="">
                     <div>
-                        <md-input-container class="md-block" ng-if="rows.Function != 'Comments' && rows.Function != 'ErrorsWarnings'" flex-gt-sm>
+                        <md-input-container class="md-block" ng-if="rows.Function != 'Comments' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Return'" flex-gt-sm>
                             <label>Variable Name</label>
                             <input ng-model="rows.Name" ng-pattern="noSpacesPattern" name="Name_{{$parent.$index}}_{{$index}}" id="Name_{{$parent.$index}}_{{$index}}" required>
                             <div ng-messages="form['Name_'+ $parent.$index + '_' + $index].$error">
