@@ -1,49 +1,43 @@
 ﻿<div flex="30">
     <md-toolbar layout="row" class="md-theme-black" >
-        <md-input-container class="md-block" style="margin:18px 0" flex-gt-sm>
+        <md-input-container class="md-block" style="margin:18px 0; color:white; text-align: center;" flex-gt-sm>
             {{MenuHeader}} @ViewData["SchemeName"] - @ViewData["CalcName"]
         </md-input-container>
     </md-toolbar>
     <div ng-repeat="Category in config" >
-        <div ng-repeat="rows in Category.Functions" repeat-end="onEnd()" ng-show="isRowSelected($index, $parent.$index)" >
+        <div ng-repeat="rows in Category.Functions" class="md-theme-black" repeat-end="onEnd()" ng-show="isRowSelected($index, $parent.$index)" >
             <fieldset ng-disabled="viewOnly">
-                <md-toolbar layout="row" class="md-hue-2">
-                    <div ng-if="Category.Name != 'Input' && rows.Function == null">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <md-select ng-model="rows.Function" name="Function_{{$parent.$index}}_{{$index}}" aria-label="Function" id="Function_{{$parent.$index}}_{{$index}}" ng-change="setFunction(rows)" required>
-                                <md-option value="ArrayFunctions">Array Functions</md-option>
-                                <md-option value="Comments">Comment</md-option>
-                                <md-option value="DateAdjustment">Date Adjustment</md-option>
-                                <md-option value="DatePart">Date Part</md-option>
-                                <md-option value="ErrorsWarnings">Errors & Warnings</md-option>
-                                <md-option value="Factors">Factors</md-option>
-                                <md-option ng-if="$parent.$parent.$parent.MenuHeader == 'Configuration'" value="Function">Function</md-option>
-                                <md-option value="Maths">Maths</md-option>
-                                <md-option value="MathsFunctions">Maths Functions</md-option>
-                                <md-option value="Period">Period</md-option>
-                                <md-option ng-if="$parent.$parent.$parent.MenuHeader == 'Function'" value="Return">Return</md-option>
-                                <md-option value="StringFunctions">String Functions</md-option>
-                            </md-select>
-                            <div ng-messages="form['Function_'+ $parent.$index + '_' + $index].$error">
-                                <div ng-message="required">Name is required.</div>
-                            </div>
-                        </md-input-container>
-                    </div>
-                    <div ng-if="Category.Name == 'Input' && rows.Function == null">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <md-select ng-model="rows.Function" name="Function_{{$parent.$index}}_{{$index}}" id="Function_{{$parent.$index}}_{{$index}}">
-                                <md-option value="Input">Input</md-option>
-                            </md-select>
-                        </md-input-container>
-                    </div>
-                    <div ng-if="rows.Function != null && rows.Function != ''">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            {{rows.Function}}
-                            <md-button ng-if="Category.Name != 'Input'" ng-click="LogicButtonClick('lg', $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-accent">
-                                Click to update Logic
-                            </md-button>
-                        </md-input-container>
-                    </div>
+                <md-toolbar layout="row" style="color:white; text-align: center; background-color:#3d688c" >
+                    <md-input-container ng-if="Category.Name != 'Input' && rows.Function == null" class="md-block" style="color:white; text-align: center; background-color:#3d688c"  flex-gt-sm>
+                        <md-select ng-model="rows.Function" name="Function_{{$parent.$index}}_{{$index}}" aria-label="Function" id="Function_{{$parent.$index}}_{{$index}}" ng-change="setFunction(rows)" required>
+                            <md-option value="ArrayFunctions">Array Functions</md-option>
+                            <md-option value="Comments">Comment</md-option>
+                            <md-option value="DateAdjustment">Date Adjustment</md-option>
+                            <md-option value="DatePart">Date Part</md-option>
+                            <md-option value="ErrorsWarnings">Errors & Warnings</md-option>
+                            <md-option value="Factors">Factors</md-option>
+                            <md-option ng-if="$parent.$parent.$parent.MenuHeader == 'Configuration'" value="Function">Function</md-option>
+                            <md-option value="Maths">Maths</md-option>
+                            <md-option value="MathsFunctions">Maths Functions</md-option>
+                            <md-option value="Period">Period</md-option>
+                            <md-option ng-if="$parent.$parent.$parent.MenuHeader == 'Function'" value="Return">Return</md-option>
+                            <md-option value="StringFunctions">String Functions</md-option>
+                        </md-select>
+                        <div ng-messages="form['Function_'+ $parent.$index + '_' + $index].$error">
+                            <div ng-message="required">Name is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container ng-if="Category.Name == 'Input' && rows.Function == null" class="md-block" style="color:white; text-align: center; background-color:#3d688c"  flex-gt-sm>
+                        <md-select ng-model="rows.Function" name="Function_{{$parent.$index}}_{{$index}}" id="Function_{{$parent.$index}}_{{$index}}">
+                            <md-option value="Input">Input</md-option>
+                        </md-select>
+                </md-input-container>
+                    <md-input-container ng-if="rows.Function != null && rows.Function != ''" style="color:white; text-align: center; background-color:#3d688c" class="md-block"  flex-gt-sm>
+                        {{rows.Function}}
+                        <md-button ng-if="Category.Name != 'Input'" ng-click="LogicButtonClick('lg', $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-accent">
+                            Click to update Logic
+                        </md-button>
+                    </md-input-container>
                 </md-toolbar>
                 <md-content class="md-no-momentum" layout-margin="">
                     <div>
