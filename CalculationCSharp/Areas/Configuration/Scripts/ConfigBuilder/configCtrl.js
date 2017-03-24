@@ -433,6 +433,68 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         resetSelection();
     };
 
+    $scope.SchemeList = [];
+    //getFunctionsList          
+    $scope.getSchemeList = function getSchemeList(rowIndex, colIndex) {
+        $scope.SchemeList = [];
+        configService.getSchemes().then(function (data) {
+            $scope.SchemeList = data;
+        }, onError);
+    };
+
+    $scope.FunctionList =[];
+    //getFunctionsList          
+    $scope.getFunctionList = function getFunctionList(rowIndex, colIndex) {
+        configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, 0, "Scheme").then(function (data) {
+            $scope.FunctionList = data;
+        }, onError);
+    };
+
+    $scope.getFunctionListSingleCall = function getFunctionListSingleCall(rowIndex, colIndex) {
+        configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, 0, "Scheme").then(function(data) {
+            $scope.FunctionList = data;
+            $scope.setFunctionName(rowIndex, colIndex);
+        }, onError);
+    };
+
+        //Add new Item to the selected array
+    $scope.setFunctionName = function setFunctionName(rowIndex, colIndex) {
+        var arrayID = configFunctionFactory.getIndexOf($scope.FunctionList, parseInt(this.config[colIndex].Functions[rowIndex].Parameter[0].ID), "ID");
+        this.config[colIndex].Functions[rowIndex].Parameter[0].FunctionName = $scope.FunctionList[arrayID].Name;
+        configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, $scope.FunctionList[arrayID].ID, "Config").then(function(data) {
+            $scope.getFormFields(angular.fromJson(data[0].Configuration), rowIndex, colIndex);
+        }, onError);
+    };
+
+    //Get the fields for the input form and null the values out
+    $scope.getFormFields = function getFormFields(array, rowIndex, colIndex) {  //function that sets the parameters available under the different variable types
+        var counter = 0;
+        var scopeid = 0;
+        var functionID = 0;
+        $scope.fields =[];
+        $scope.fieldset =[];
+        this.config[colIndex].Functions[rowIndex].Parameter[0].Input = configFunctionFactory.convertToFromJson(array[0]);
+        angular.forEach(this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, function (groups) {
+            functionID = 0;
+            $scope.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[scopeid].Output = null;
+            scopeid = scopeid + 1
+            });
+            if (this.config[colIndex].Functions[rowIndex].Parameter[0].Input.length > 0) {
+            $scope.mapFormFields(this.config[colIndex].Functions[rowIndex].Parameter[0].Input);
+        };
+    };
+
+    $scope.mapFormFields = function mapFormFields(Input) {
+        var InputJson = angular.fromJson(Input);
+        convertDateStringsToDates([InputJson]);
+        $scope.isLoading = true;
+        angular.forEach(angular.fromJson(InputJson), function (value, key, obj) {
+            var index = configFunctionFactory.getIndexOf(this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, value.Name, 'Name');
+            this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[index].Output = value.Output;
+        });
+        this.config[colIndex].Functions[rowIndex].Parameter[0].Input = $scope.configreg;
+    };
+
     $scope.selectRow = function (event, rowIndex, colIndex) {
         $scope.getVariableTypes(colIndex, rowIndex);
         $scope.Parameter = this.config[colIndex].Functions[rowIndex].Parameter;
@@ -441,57 +503,17 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.colIndex = colIndex;
         if ($scope.Function == 'Function') {
             $scope.function = [];
-            $scope.SchemeList = [];
-            configService.getSchemes().then(function (data) {
-                $scope.SchemeList = data;
-            }, onError);
-            $scope.FunctionList = [];
-            //Add new Item to the selected array
-            $scope.getFunctionList = function getFunctionList(rowIndex, colIndex) {
-                configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, 0, "Scheme").then(function (data) {
-                    $scope.FunctionList = data;
-                }, onError);
-            };
-
-            //Add new Item to the selected array
-            $scope.setFunctionName = function setFunctionName(rowIndex, colIndex) {
-                var arrayID = configFunctionFactory.getIndexOf($scope.FunctionList, parseInt(this.config[colIndex].Functions[rowIndex].Parameter[0].ID), "ID");
-                this.config[colIndex].Functions[rowIndex].Parameter[0].FunctionName = $scope.FunctionList[arrayID].Name;
-                configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, $scope.FunctionList[arrayID].ID, "Config").then(function (data) {
-                    $scope.getFormFields(angular.fromJson(data[0].Configuration), rowIndex, colIndex);
-                }, onError);
-            };
-
-            //Single Calculation
-            //Get the fields for the input form and null the values out
-            $scope.getFormFields = function getFormFields(array, rowIndex, colIndex) {  //function that sets the parameters available under the different variable types
-                var counter = 0;
-                var scopeid = 0;
-                var functionID = 0;
-                $scope.fields = [];
-                $scope.fieldset = [];
-                this.config[colIndex].Functions[rowIndex].Parameter[0].Input = configFunctionFactory.convertToFromJson(array[0]);
-                angular.forEach(this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, function (groups) {
-                    functionID = 0;
-                    $scope.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[scopeid].Output = null;
-                    scopeid = scopeid + 1
-                });
-                if (this.config[colIndex].Functions[rowIndex].Parameter[0].Input.length > 0) {
-                    $scope.mapFormFields(this.config[colIndex].Functions[rowIndex].Parameter[0].Input);
+            if (this.config[colIndex].Functions[rowIndex].Parameter.length > 0) {
+                $scope.SchemeList =[];
+                $scope.getSchemeList();
+                $scope.FunctionList =[];
+                if (this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme != null) {
+                    $scope.getFunctionList(rowIndex, colIndex);
+                };
+                if (this.config[colIndex].Functions[rowIndex].Parameter[0].FunctionName != null) {
+                   $scope.getFunctionListSingleCall(rowIndex, colIndex);
                 };
             };
-
-            $scope.mapFormFields = function mapFormFields(Input) {
-                var InputJson = angular.fromJson(Input);
-                convertDateStringsToDates([InputJson]);
-                $scope.isLoading = true;
-                angular.forEach(angular.fromJson(InputJson), function (value, key, obj) {
-                    var index = configFunctionFactory.getIndexOf(this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, value.Name, 'Name');
-                    this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[index].Output = value.Output;
-                });
-                this.config[colIndex].Functions[rowIndex].Parameter[0].Input = $scope.configreg;
-            };
-
         };
 
         if (event.ctrlKey) {
