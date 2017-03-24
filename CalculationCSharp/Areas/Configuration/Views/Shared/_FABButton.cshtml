@@ -55,6 +55,14 @@
             </md-tooltip>
             <md-icon md-svg-src="/Images/history.svg"> </md-icon>
         </md-button>
+        <md-button ng-if="$parent.$parent.$parent.MenuHeader == 'Function'" ng-disabled="viewOnly" aria-label="History" class="md-fab md-raised md-mini"
+                   ng-click="ImpactAssessmentButtonClick()">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible"
+                        md-autohide="false">
+                Impact Assessment
+            </md-tooltip>
+            <md-icon md-svg-src="/Images/Impactlist.svg"> </md-icon>
+        </md-button>
         <md-button aria-label="CloseAll" class="md-fab md-raised md-mini"
                    ng-click="CloseAllButton()">
             <md-tooltip md-direction="left" md-visible="tooltipVisible"

@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('impactAssessmentCtrl', function ($scope, $uibModalInstance, ID, configService, configFunctionFactory) {   
+sulhome.kanbanBoardApp.controller('impactAssessmentCtrl', function ($scope, $uibModalInstance, ID, configService,configMenuService, configFunctionFactory) {   
     
     function init() {
-        configService.getConfig()
+        configMenuService.getConfig()
             .then(function (data) {               
                 $scope.isLoading = false;
                 $scope.configuration = [];
