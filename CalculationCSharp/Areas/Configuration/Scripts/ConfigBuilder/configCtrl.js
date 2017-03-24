@@ -453,7 +453,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.getFunctionListSingleCall = function getFunctionListSingleCall(rowIndex, colIndex) {
         configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, 0, "Scheme").then(function(data) {
             $scope.FunctionList = data;
-            $scope.setFunctionName(rowIndex, colIndex);
+            var arrayID = configFunctionFactory.getIndexOf($scope.FunctionList, parseInt($scope.config[colIndex].Functions[rowIndex].Parameter[0].ID), "ID");
+            $scope.config[colIndex].Functions[rowIndex].Parameter[0].FunctionName = $scope.FunctionList[arrayID].Name;
+            var oldInput = $scope.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions;
+            $scope.getFormFields(angular.fromJson($scope.FunctionList[arrayID].Configuration), rowIndex, colIndex, false);
+            $scope.mapFormFields(oldInput, colIndex, rowIndex);
+                
         }, onError);
     };
 
@@ -462,12 +467,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var arrayID = configFunctionFactory.getIndexOf($scope.FunctionList, parseInt(this.config[colIndex].Functions[rowIndex].Parameter[0].ID), "ID");
         this.config[colIndex].Functions[rowIndex].Parameter[0].FunctionName = $scope.FunctionList[arrayID].Name;
         configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, $scope.FunctionList[arrayID].ID, "Config").then(function(data) {
-            $scope.getFormFields(angular.fromJson(data[0].Configuration), rowIndex, colIndex);
+            $scope.getFormFields(angular.fromJson(data[0].Configuration), rowIndex, colIndex, true);
         }, onError);
     };
 
     //Get the fields for the input form and null the values out
-    $scope.getFormFields = function getFormFields(array, rowIndex, colIndex) {  //function that sets the parameters available under the different variable types
+    $scope.getFormFields = function getFormFields(array, rowIndex, colIndex, mapForm) {  //function that sets the parameters available under the different variable types
         var counter = 0;
         var scopeid = 0;
         var functionID = 0;
@@ -478,22 +483,42 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             functionID = 0;
             $scope.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[scopeid].Output = null;
             scopeid = scopeid + 1
-            });
-            if (this.config[colIndex].Functions[rowIndex].Parameter[0].Input.length > 0) {
-            $scope.mapFormFields(this.config[colIndex].Functions[rowIndex].Parameter[0].Input);
+        });
+        if (this.config[colIndex].Functions[rowIndex].Parameter[0].Input.length > 0 && mapForm == true) {
+            $scope.mapFormFields(this.config[colIndex].Functions[rowIndex].Parameter[0].Input, colIndex, rowIndex);
         };
     };
 
-    $scope.mapFormFields = function mapFormFields(Input) {
+    $scope.mapFormFields = function mapFormFields(Input, colIndex, rowIndex) {
         var InputJson = angular.fromJson(Input);
         convertDateStringsToDates([InputJson]);
-        $scope.isLoading = true;
         angular.forEach(angular.fromJson(InputJson), function (value, key, obj) {
-            var index = configFunctionFactory.getIndexOf(this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, value.Name, 'Name');
-            this.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[index].Output = value.Output;
+            var index = configFunctionFactory.getIndexOf($scope.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions, value.Name, 'Name');
+            $scope.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions[index].Output = value.Output;
         });
-        this.config[colIndex].Functions[rowIndex].Parameter[0].Input = $scope.configreg;
     };
+
+    function convertDateStringsToDates(input) {
+        // Ignore things that aren't objects.
+        if (typeof input !== "object") return input;
+        for (var key in input) {
+            if (!input.hasOwnProperty(key)) continue;
+            var value = input[key];
+            var match;
+            // Check for string properties which look like dates.
+            if (typeof value === "string" && (match = value.match(regexIso8601))) {
+                var milliseconds = Date.parse(match[0])
+                if (!isNaN(milliseconds)) {
+                    input[key] = new Date(milliseconds);
+                }
+            } else if (typeof value === "object") {
+                // Recurse into object
+                convertDateStringsToDates(value);
+            }
+        }
+    };
+
+    var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;;
 
     $scope.selectRow = function (event, rowIndex, colIndex) {
         $scope.getVariableTypes(colIndex, rowIndex);
