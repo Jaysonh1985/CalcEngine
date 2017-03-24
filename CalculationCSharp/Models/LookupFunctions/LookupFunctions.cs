@@ -27,14 +27,20 @@ public class LookupFunctions
         System.Data.OleDb.OleDbConnection con = new System.Data.OleDb.OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + path + "; Extended Properties='text; HDR=No; FMT=Delimited'");
 		OleDbCommand command = con.CreateCommand();
         string Column = Convert.ToString("F" + ColumnNo);
-     	if (DataType == 1) {
-			//Date
-			command.CommandText = "SELECT top 1 " + Column + " FROM " + Tablename + ".csv " + " where F1 <= " + LookupValue + " order by F1 desc";
-		} else if (DataType == 2) {
-			//String
-			command.CommandText = "SELECT top 1 " + Column + " FROM " + Tablename + ".csv " + " where F1 = " + LookupValue;
-		}
-		con.Open();
+        if (DataType == 1) {
+            //Date
+            command.CommandText = "SELECT top 1 " + Column + " FROM " + Tablename + ".csv " + " where F1 <= @date order by F1 desc";
+            command.Parameters.AddWithValue("@date", LookupValue);
+        }
+        else if (DataType == 2)  {
+            //String
+            command.CommandText = "SELECT top 1 " + Column + " FROM " + Tablename + ".csv " + " where F1 = " + LookupValue;
+        }
+        else if (DataType == 3) {
+            //Number
+            command.CommandText = "SELECT top 1 " + Column + " FROM " + Tablename + ".csv " + " where F1 <= " + LookupValue + " order by F1 desc";
+        }
+            con.Open();
         OleDbDataReader reader = command.ExecuteReader();
         object nameObj = null;
         while (reader.Read())

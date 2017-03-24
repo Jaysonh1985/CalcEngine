@@ -164,7 +164,13 @@
 <div ng-if ="rows.Parameter[0].LookupType == 'Decimal'" class="form-group">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Interpolate Years and Months</label>
-        <input ng-model="rows.Parameter[0].Interpolate" name="FactorsInterpolate_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="FactorsInterpolate_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}">
+        <md-select ng:model="rows.Parameter[0].Interpolate" name="FactorsInterpolate_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
+                   id="FactorsInterpolate_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="RowInterpolate" ng-disabled="viewOnly" required>
+            <md-option value="true">True</md-option>
+            <md-option value="false">False</md-option>
+        </md-select>
+        <div ng-messages="form['FactorsInterpolate_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-message="required">Required Field</div>
+        </div>
     </md-input-container>
 </div>

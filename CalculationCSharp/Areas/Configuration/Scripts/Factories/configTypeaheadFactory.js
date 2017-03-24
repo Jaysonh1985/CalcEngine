@@ -37,7 +37,7 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
                     functionID = 0;
                     angular.forEach(DecimalValue, function (NamesDecimalValue) {
                         DecimalParameter = ($filter('filter')(DecimalValue[functionID].Name));
-                        if (DecimalValue.indexOf(DecimalParameter) == -1) {
+                        if (Names.indexOf(DecimalParameter) == -1) {
                             Names[arrayID] = DecimalParameter;
                             arrayID = arrayID + 1;
                         };

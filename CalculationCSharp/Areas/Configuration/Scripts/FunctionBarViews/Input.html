@@ -67,7 +67,7 @@
 <md-input-container ng-if="rows.Parameter[0].templateOptions.list == true" class="md-block"  flex-gt-sm>
     <label>Dropdown List</label>
     <input name="InputList_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
-            id="InputList_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-model="Parameter[0].templateOptions.options" required>
+            id="InputList_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-model="Parameter[0].templateOptions.options">
     <div ng-messages="form['InputList_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
         <div ng-message="required">Comma Seperated List Required</div>
     </div>
