@@ -1,5 +1,5 @@
 ﻿body {
-    font-family: sans-serif;
+    font-family: Roboto,Helvetica Neue,sans-serif;
     padding-top: 50px;
     padding-bottom: 20px;
     font-size: 15px;
@@ -7,12 +7,13 @@
 }
 
 .navbar-inverse {
-    background-color: #AE0000;
-    border-color: #080808;
+    background-color: #f6f6f6 !important;
+    border-color: #e3dacd;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
 }
 
 .navbar-inverse .navbar-nav > li > a {
-    color: #fff;
+    color: #202020 !important;
 }
 
  Set padding to keep content from hitting the edges 
