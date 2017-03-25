@@ -5,7 +5,7 @@ sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $
             $scope.AddCategoryRows($itemScope.$index);
         }],
         ['Add Rows', function ($itemScope) {
-            $scope.AddFunctionRows($itemScope.$index);
+            $scope.AddFunctionRowsCat($itemScope.$index);
         }],
         ['Delete Category', function ($itemScope) {
             $scope.DeleteCategory($itemScope.$index);
@@ -39,7 +39,7 @@ sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $
         $scope.rebuildCategoryIDs();
     };
 
-    $scope.AddFunctionRows = function (colIndex, index) {
+    $scope.AddFunctionRowsCat = function (colIndex, index) {
         var item;
         item = configFunctionFactory.buildFunction(colIndex, $scope.config);
         $scope.config[colIndex].Functions.splice(index + 1, 0, item);

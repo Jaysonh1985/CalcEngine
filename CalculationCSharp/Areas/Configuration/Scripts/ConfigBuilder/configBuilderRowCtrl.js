@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $location, $window, $uibModal, configFunctionFactory, ngClipboard, $filter) {
+sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $location, $window, $uibModal, configFunctionFactory, ngClipboard, $filter, $timeout) {
 
     $scope.rowMenuOptions = [
         ['Add Row', function ($itemScope) {
@@ -19,12 +19,7 @@ sulhome.kanbanBoardApp.controller('configBuilderRowCtrl', function ($scope, $loc
         }],
     ];
 
-    $scope.AddFunctionRows = function (colIndex, index) {
-        var item;
-        item = configFunctionFactory.buildFunction(colIndex, $scope.config);
-        $scope.config[colIndex].Functions.splice(index + 1, 0, item);
-        toastr.success("Rows Added", "Success");
-    };
+
 
     $scope.SubOutputButtonClick = function (size, colIndex, type, SubOutput) {
         $scope.Output = angular.toJson(SubOutput);

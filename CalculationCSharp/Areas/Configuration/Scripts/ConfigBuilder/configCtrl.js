@@ -154,14 +154,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         });
         $scope.openIndex[colIndex] = true;
         var domElement = "#RowForm_"+ colIndex + "_" + rowIndex
-        //10 seconds delay
-        if (isFunctionOutput == false) {
-            $timeout(function () {
-                angular.element(domElement).triggerHandler('click');
-                document.getElementById("RowForm_"+ colIndex + "_" + rowIndex).focus();
-                document.getElementById(originalElementName).focus();
-            }, 500);
-        };
+        $timeout(function () {
+            angular.element(domElement).triggerHandler('click');
+            document.getElementById("RowForm_"+ colIndex + "_" + rowIndex).focus();
+            document.getElementById(originalElementName).focus();
+        }, 500);
     };
 
     $scope.LogicButtonClick = function (size, colIndex, index) {
@@ -184,9 +181,22 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         modalInstance.result.then(function (selectedItem) {
             $scope.config[colIndex].Functions[index].Logic = selectedItem;
             $scope.form.$setDirty();
-            $scope.validateForm();
         }, function () {
         });
+    };
+
+    $scope.AddFunctionRows = function (colIndex, index, e) {
+        var item;
+        item = configFunctionFactory.buildFunction(colIndex, $scope.config);
+        index = index + 1;
+        $scope.config[colIndex].Functions.splice(index, 0, item);
+        toastr.success("Rows Added", "Success");
+        $scope.selectRow(e, parseInt(index), parseInt(colIndex));
+        var domElement = "#RowForm_" + colIndex + "_" + index;
+        $timeout(function () {
+            angular.element(domElement).triggerHandler('click');
+            document.getElementById("RowForm_" + colIndex + "_" + index).focus();
+        }, 1000);
     };
 
     $scope.CopyFunction = function (colIndex, index) {
