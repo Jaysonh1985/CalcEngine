@@ -19,6 +19,45 @@ sulhome.kanbanBoardApp.directive('savebutton', function (configTypeaheadFactory,
     };
 });
 //Input previously set on the builder
+sulhome.kanbanBoardApp.directive('differentvariabletype', function (configTypeaheadFactory, configValidationFactory, $filter) {
+    return {
+        replace: true,
+        restrict: 'A',
+        require: '^form',
+        scope: { config: '=', colIndex: '=', rowIndex: '=', inputtype: '=' },
+        link: function (scope, element, attrs, form, scopectrl, ngModel) {
+            scope.$on('form:submit', function () {
+                form[attrs.name].$setValidity("variabletype", true);
+                var scopeid = 0;
+                var columnFilter = [];
+                angular.forEach(scope.config, function (groups) {
+                    if (scopeid < parseInt(attrs.colindex)) {
+                        columnFilter = ($filter('filter')(groups.Functions));
+                        columnFilter = ($filter('filter')(columnFilter, { Name: attrs.$$element[0].value }, true));
+                        if (columnFilter.length > 0) {
+                            columnFilter = ($filter('filter')(columnFilter, { Type: scope.config[parseInt(attrs.colindex)].Functions[parseInt(attrs.rowindex)].Type }, true));
+                            if (columnFilter.length == 0) {
+                                form[attrs.name].$setValidity("variabletype", false);
+                            }
+                        };
+                    }    
+                    else if (scopeid == parseInt( attrs.colindex)) {
+                        columnFilter = ($filter('limitTo')(groups.Functions, parseInt(attrs.rowindex)));
+                        columnFilter = ($filter('filter')(columnFilter, { Name: attrs.$$element[0].value }, true));
+                        if (columnFilter.length > 0) {
+                            columnFilter = ($filter('filter')(columnFilter, { Type: scope.config[parseInt(attrs.colindex)].Functions[parseInt(attrs.rowindex)].Type }, true));
+                            if (columnFilter.length == 0) {
+                                form[attrs.name].$setValidity("variabletype", false);
+                            }
+                        };
+                    };
+                    scopeid = scopeid + 1
+                });
+            });
+        }
+    };
+});
+//Input previously set on the builder
 sulhome.kanbanBoardApp.directive('variablecheck', function (configTypeaheadFactory, configValidationFactory) {
     return {
         replace: true,

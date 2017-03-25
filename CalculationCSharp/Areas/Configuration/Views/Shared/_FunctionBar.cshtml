@@ -9,7 +9,8 @@
             <fieldset ng-disabled="viewOnly">
                 <md-toolbar layout="row" style="color:white; text-align: center; background-color:#3d688c" >
                     <md-input-container ng-if="Category.Name != 'Input' && rows.Function == null" class="md-block" style="color:white; text-align: center; background-color:#3d688c"  flex-gt-sm>
-                        <md-select ng-model="rows.Function" name="Function_{{$parent.$parent.$index}}_{{$parent.$index}}" aria-label="Function" id="Function_{{$parent.$parent.$index}}_{{$parent.$index}}" ng-change="setFunction(rows)" required>
+                        <md-select ng-model="rows.Function" name="Function_{{$parent.$parent.$index}}_{{$parent.$index}}" aria-label="Function" 
+                                   id="Function_{{$parent.$parent.$index}}_{{$parent.$index}}" ng-change="setFunction(rows)" required>
                             <md-option value="ArrayFunctions">Array Functions</md-option>
                             <md-option value="Comments">Comment</md-option>
                             <md-option value="DateAdjustment">Date Adjustment</md-option>
@@ -43,10 +44,13 @@
                     <div>
                         <md-input-container class="md-block" ng-if="rows.Function != 'Comments' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Return'" flex-gt-sm>
                             <label>Variable Name</label>
-                            <input ng-model="rows.Name" ng-pattern="noSpacesPattern" name="Name_{{$parent.$parent.$index}}_{{$parent.$index}}" id="Name_{{$parent.$parent.$index}}_{{$parent.$index}}" required>
+                            <input differentvariabletype config='config' colIndex="{{$parent.$parent.$index}}" rowIndex="{{$parent.$index}}"
+                                   ng-model="rows.Name" ng-pattern="noSpacesPattern" name="Name_{{$parent.$parent.$index}}_{{$parent.$index}}" 
+                                   id="Name_{{$parent.$parent.$index}}_{{$parent.$index}}" required>
                             <div ng-messages="form['Name_'+ $parent.$parent.$index + '_' + $parent.$index].$error">
                                 <div ng-message="required">Name is required.</div>
                                 <div ng-message="pattern">Pattern Incorrect</div>
+                                <div ng-message="variabletype">Variable exists with different data type</div>
                             </div>
                         </md-input-container>
                         <md-input-container ng-if="Category.Name != 'Input'" class="md-block" flex-gt-sm>
