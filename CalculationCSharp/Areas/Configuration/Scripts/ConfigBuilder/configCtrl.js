@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $location, $window, configService,
-                                                            configFunctionFactory, configTypeaheadFactory,
-                                                            configValidationFactory, $timeout, $filter, $q) {
+sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $location, $window, configService, configFunctionFactory,
+                                                            configTypeaheadFactory, ngClipboard, configValidationFactory, $timeout, $filter, $q) {
     // Model
     $scope.config = [];
     $scope.DecimalNames = [];
@@ -179,7 +178,32 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         ['Copy Name', function ($itemScope) {
             ngClipboard.toClipboard($itemScope.rows.Name);
         }],
-    ]; 
+    ];
+
+    $scope.ctrlDown = false;
+    $scope.ctrlKey = 17, $scope.vKey = 86, $scope.cKey = 67;
+
+    $scope.keyDownFunc = function ($event, colIndex, rowIndex, Name) {
+        if ($scope.ctrlDown && ($event.keyCode == $scope.cKey)) {
+            $scope.CopyFunction(colIndex, rowIndex);
+        } else if ($scope.ctrlDown && ($event.keyCode == $scope.vKey)) {
+            $scope.PasteFunction(colIndex, rowIndex);
+        } else if ($scope.ctrlDown && ($event.keyCode == 88)) {
+            ngClipboard.toClipboard(Name);
+        }
+    };
+
+    angular.element($window).bind("keyup", function ($event) {
+        if ($event.keyCode == $scope.ctrlKey)
+            $scope.ctrlDown = false;
+        $scope.$apply();
+    });
+
+    angular.element($window).bind("keydown", function ($event) {
+        if ($event.keyCode == $scope.ctrlKey)
+            $scope.ctrlDown = true;
+        $scope.$apply();
+    });
 
     $scope.SubOutputButtonClick = function (size, colIndex, type, SubOutput) {
         $scope.Output = angular.toJson(SubOutput);
