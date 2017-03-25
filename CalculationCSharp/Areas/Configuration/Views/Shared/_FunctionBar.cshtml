@@ -66,6 +66,10 @@
                         <div ng-if="rows.Function=='ArrayFunctions'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ArrayFunctions.html'"></div>
                         <div ng-if="rows.Function=='Maths'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Maths.html'"></div>
                         <div ng-if="rows.Function=='Function'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/FunctionModal.html'"></div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Output</label>
+                            <textarea ng-model="rows.Output" md-maxlength="150" rows="3" md-select-on-focus readonly></textarea>
+                        </md-input-container>
                     </div>
                 </md-content>
 
