@@ -69,7 +69,6 @@ sulhome.kanbanBoardApp.controller('logicCtrl', function ($scope, $uibModalInstan
         }
     };
 
-    //Click OK
     $scope.ok = function (form) {
         $scope.OperatorClauseValidations(form);
         $scope.BracketsValidations(form);

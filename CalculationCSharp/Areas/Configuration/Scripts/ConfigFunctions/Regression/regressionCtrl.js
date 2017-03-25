@@ -14,8 +14,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
 
     function init() {
         $scope.isLoading = true;
-        if ($scope.MenuHeader == "Function")
-        {
+        if ($scope.MenuHeader == "Function") {
             configRegressionService.getFunctionRegression(ID)
             .then(function (data) {
                 $scope.isLoading = false;
@@ -23,15 +22,14 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
                 $scope.DifferencesCheck();
             }, onError);
         }
-        else
-        {
+        else {
             configRegressionService.getCalcRegression(ID)
            .then(function (data) {
                $scope.isLoading = false;
                $scope.Regression = data;
                $scope.DifferencesCheck();
            }, onError);
-        }
+        };
     };
 
     function setInputTypes() {
@@ -94,14 +92,11 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
                 configRegressionService.putFunctionRegression($scope.Regression[colIndex].ID, $scope.selected).then(function (data) {
                 }, onError);
             }
-            else
-            {
+            else {
                 configRegressionService.putCalcRegression($scope.Regression[colIndex].ID, $scope.selected).then(function (data) {
                 }, onError);
-            }
-
+            };
          }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
         });
     };
 
@@ -124,14 +119,12 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
     };
 
      $scope.OutputButtonClick = function (size, colIndex, type) {
-        if(type == "O")
-        {
-            $scope.Output = this.Regression[colIndex].OutputOld;
-        }
-        else
-        {
-            $scope.Output = this.Regression[colIndex].OutputNew;
-        }
+         if (type == "O") {
+             $scope.Output = this.Regression[colIndex].OutputOld;
+         }
+         else {
+             $scope.Output = this.Regression[colIndex].OutputNew;
+         };
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Regression/RegressionOutputModal.html',
@@ -166,7 +159,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
                  $scope.Regression.push(data);
                  $scope.isLoading = false;
              }, onError);
-         }
+         };
      };
 
      $scope.removeRegressionItem = function (index) {
@@ -187,7 +180,7 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
                          $scope.Regression.splice(index, 1);
                      }, onError);
                  }
-             }
+             };
          };
      };
 
@@ -349,9 +342,9 @@ sulhome.kanbanBoardApp.controller('regressionCtrl', function ($scope, $uibModal,
 
     $scope.setclickedrow = function (rowIndex) {
         $scope.selectedRow = rowIndex;  // initialize our variable to null
-    }
+    };
 
-    var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;;
+    var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
 
     $scope.pushInputsToBuilder = function (Input) {
         var InputJson = angular.fromJson(Input);

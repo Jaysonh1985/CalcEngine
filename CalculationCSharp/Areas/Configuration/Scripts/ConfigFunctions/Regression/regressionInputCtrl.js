@@ -12,10 +12,9 @@ sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibM
         $scope.config = Functions;
         $scope.fieldset = [];
         $scope.getFormFields();
-        if (Input != null)
-        {
+        if (Input != null) {
             $scope.mapFormFields(Input);
-        }
+        };
     };
     
     $scope.getFormFields = function getFormFields() {  //function that sets the parameters available under the different variable types
@@ -32,34 +31,33 @@ sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibM
         });
     };
 
-    $scope.mapFormFieldsfromBuilder = function()
-    {
+    $scope.mapFormFieldsfromBuilder = function(){
         angular.forEach($scope.config[0].Functions, function (value, key, obj) {
             var index = configFunctionFactory.getIndexOf($scope.configreg.Functions, value.Name, 'Name');
             $scope.configreg.Functions[index].Output = value.Output;
         });
     };
         
-    var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;;
+    var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
 
     function convertDateStringsToDates(input) {
-        // Ignore things that aren't objects.
-        if (typeof input !== "object") return input;
-        for (var key in input) {
-            if (!input.hasOwnProperty(key)) continue;
-            var value = input[key];
-            var match;
-            // Check for string properties which look like dates.
-            if (typeof value === "string" && (match = value.match(regexIso8601))) {
-                var milliseconds = Date.parse(match[0])
-                if (!isNaN(milliseconds)) {
-                    input[key] = new Date(milliseconds);
-                }
-            } else if (typeof value === "object") {
-                // Recurse into object
-                convertDateStringsToDates(value);
-            }
-        }
+       // Ignore things that aren't objects.
+       if (typeof input !== "object") return input;
+       for (var key in input) {
+           if (!input.hasOwnProperty(key)) continue;
+           var value = input[key];
+           var match;
+           // Check for string properties which look like dates.
+           if (typeof value === "string" && (match = value.match(regexIso8601))) {
+               var milliseconds = Date.parse(match[0])
+               if (!isNaN(milliseconds)) {
+                   input[key] = new Date(milliseconds);
+               }
+           } else if (typeof value === "object") {
+               // Recurse into object
+               convertDateStringsToDates(value);
+           }
+       };
     };
 
     $scope.mapFormFields = function mapFormFields(Input) {

@@ -41,7 +41,6 @@ namespace CalculationCSharp
             bundles.Add(new ScriptBundle("~/bundles/calculationConfiguration").Include(
                         "~/Areas/Configuration/Scripts/ConfigFunctions/Logic/groupCtrl.js",
                         "~/Areas/Configuration/Scripts/ConfigFunctions/Logic/logicCtrl.js",
-                        "~/Areas/Configuration/Scripts/ConfigBuilder/configBuilderRowCtrl.js",
                         "~/Areas/Configuration/Scripts/ConfigBuilder/configBuilderColumnCtrl.js",
                         "~/Areas/Configuration/Scripts/ConfigBuilder/configBuilderUICtrl.js",
                         "~/Areas/Configuration/Scripts/ConfigBuilder/configCtrl.js",

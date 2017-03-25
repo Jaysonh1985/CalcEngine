@@ -31,7 +31,7 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
                     $scope.isLoading = false;
                     $scope.Boards = data;
                 }, onError);
-        }
+        };
      };
 
     $scope.openBoard = function (Board) {
@@ -61,7 +61,6 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
     };
 
     $scope.addBoard = function AddBoard() {
-        //Creates TypeAhead Values
         var SchemeList = [];
         configService.getSchemes().then(function (data) {
             SchemeList = data;
@@ -88,7 +87,6 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
                     Group: null,
                     Configuration: null
                 };
-
                 if ($scope.Function == true) {
                     configMenuService.addFunction($scope.selected).then(function (data) {
                         $scope.Boards.push(data);
@@ -109,7 +107,6 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
     };
 
     $scope.copyBoard = function AddBoard(Board) {
-        //Creates TypeAhead Values
         var SchemeList = [];
         configService.getSchemes().then(function (data) {
             SchemeList = data;

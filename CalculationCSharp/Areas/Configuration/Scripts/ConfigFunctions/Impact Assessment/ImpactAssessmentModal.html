@@ -1,43 +1,42 @@
 ﻿<body ng-controller="impactAssessmentCtrl">
-        <div>
-                <div class="modal-header">
-                    <h4>Impact Assessment</h4>
+    <div>
+        <div class="modal-header">
+            <h4>Impact Assessment</h4>
+        </div>
+        <div class="modal-body">
+            <form name="form" role="form" ng-submit="ok(form)">
+                <fieldset ng-disabled="$parent.viewOnly">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Scheme</th>
+                                <th>Calculation Name</th>
+                                <th>Version</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="rows in configuration">
+                                <td width="10%">
+                                    {{rows.ID}}
+                                </td>
+                                <td width="40%">
+                                    {{rows.Scheme}}
+                                </td>
+                                <td width="40%">
+                                    {{rows.CalculationName}}
+                                </td>
+                                <td width="10%">
+                                    {{rows.Version}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">OK</button>
                 </div>
-                <div class="modal-body">
-                    <form name="form" role="form" ng-submit="ok(form)">
-                        <fieldset ng-disabled="$parent.viewOnly">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Scheme</th>
-                                    <th>Calculation Name</th>
-                                    <th>Version</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="rows in configuration">
-                                    <td width="10%">
-                                        {{rows.ID}}
-                                    </td>
-                                    <td width="40%">
-                                        {{rows.Scheme}}
-                                    </td>
-                                    <td width="40%">
-                                        {{rows.CalculationName}}
-                                    </td>
-                                    <td width="10%">
-                                        {{rows.Version}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        </fieldset>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" type="submit">OK</button>
-                            <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
-                        </div>
-                    </form>
-                </div>
-</div>
+            </form>
+        </div>
+    </div>
 </body>

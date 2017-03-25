@@ -8,7 +8,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.FabOpen = false;
     $scope.isLoading = true;
     $scope.oneAtATime = false;
-    $scope.Function = false;
     $scope.triggerValidation = false;
     $scope.status = {
         isFirstOpen: true,
@@ -19,7 +18,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.validationError = false;
     $scope.openIndexBackup = null;
     $scope.noSpacesPattern = /^[a-zA-Z0-9-_]+$/;
-    $scope.getHeader = ["Function ID", "Name", "Function", "Type", "Logic", "Parameter"];
     $scope.csv = {
         content: null,
         header: true,
@@ -31,13 +29,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         encodingVisible: true,
     };
     $scope.viewOnly = false;
-    $scope.validation = false;
-    $scope.repeatEnd = false
+    $scope.repeatEnd = false;
 
     function init() {
         var id = $location.absUrl();
         var Function = configFunctionFactory.isFunction($location.absUrl());
-        $scope.Function = configFunctionFactory.isFunction($location.absUrl());
         var ViewOnly = $location.search().ViewOnly;
         if (ViewOnly == 'true') {
             $scope.viewOnly = true;
@@ -104,20 +100,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $window.localStorage.removeItem("Copy");
     };
 
-    $scope.$on('IdleTimeout', function() {
-        if($scope.config != null && $scope.config != undefined) {
-            var id = configFunctionFactory.getConfigID();
-            $window.localStorage["Config"] = JSON.stringify($scope.config);
-            var Function = configFunctionFactory.isFunction($location.absUrl())
-            if (Function == true) {
-                $window.localStorage["WebAddress"] = '/Configuration/Function/Function/' + id;
-            }
-            else {
-                $window.localStorage["WebAddress"] = '/Configuration/Config/Config/' + id;
-            };
-        };
-    });
-
     $scope.treeOptions = {
         beforeDrop: function (e) {
             var sourceValue = e.source.nodeScope.$parent.$parent.$parent.$parent.$index;
@@ -137,11 +119,10 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var isMathsInput2 = elementName.indexOf("MathsInput2") !== - 1;
         var isBracketRight = elementName.indexOf("BracketRight") !== - 1;
         var isOperator2 = elementName.indexOf("Operator2") !== - 1;
-        if (isFunctionOutput == true || isBracketLeft == true || isMathsInput1 == true || isMathsInput2 == true || isBracketRight == true || isOperator2 == true)
-        {
+        if (isFunctionOutput == true || isBracketLeft == true || isMathsInput1 == true || isMathsInput2 == true || isBracketRight == true || isOperator2 == true) {
             var removeLast = elementName.lastIndexOf("_");
             elementName = elementName.substring(0, removeLast);
-        }
+        };
         var str =  elementName;
         var last = str.lastIndexOf("_");
         var first = str.indexOf("_") + 1;
@@ -292,7 +273,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     ///Form Submission
     $scope.SaveButtonClick = function SaveBoard(form) {
         $scope.functionValidateForm();
-        if (form.$valid == true) {
+        if (form.$valid == true && form.$invalid == false) {
             $scope.viewOnly = true;
             $timeout(function () {
                 var id = configFunctionFactory.getConfigID();
@@ -334,7 +315,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $scope.rebuildCategoryIDs();
             if (form.$valid == true && form.$invalid == false) {
                 $scope.validationError = false;
-                $scope.validation = false;
                 $scope.repeatEnd = true;
                 var Function = configFunctionFactory.isFunction($location.absUrl())
                 if (Function == true) {
@@ -418,15 +398,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         if (rows.Parameter[0].templateOptions.list == true) {
             if (angular.isArray(rows.Parameter[0].templateOptions.options) == false) {
                 var test = rows.Parameter[0].templateOptions.options;
-                if (rows.Parameter[0].templateOptions.options != undefined)
-                {
+                if (rows.Parameter[0].templateOptions.options != undefined) {
                     array = rows.Parameter[0].templateOptions.options.split(',');
                     angular.forEach(array, function (object) {
                         $scope.options.push({
                             Name: object
                         });
                     });
-                }
+                };
             }
             else {
                 options = rows.Parameter[0].templateOptions.options;
@@ -463,14 +442,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     $scope.removeMathsItem = function () {
         $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.splice($scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.length - 1, 1);
-    };
-    
+    };   
 
     var onError = function (errorMessage) {
         $scope.viewOnly = false;
         toastr.error(errorMessage, "Error");
     };
-
 
     //Higlight rows functions
     var selectedRowsIndexes = [];
@@ -480,7 +457,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.SchemeList = [];
-    //getFunctionsList          
+
     $scope.getSchemeList = function getSchemeList(rowIndex, colIndex) {
         $scope.SchemeList = [];
         configService.getSchemes().then(function (data) {
@@ -489,7 +466,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.FunctionList =[];
-    //getFunctionsList          
+
     $scope.getFunctionList = function getFunctionList(rowIndex, colIndex) {
         configService.getFunctionDetails(this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme, 0, "Scheme").then(function (data) {
             $scope.FunctionList = data;
@@ -503,8 +480,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             $scope.config[colIndex].Functions[rowIndex].Parameter[0].FunctionName = $scope.FunctionList[arrayID].Name;
             var oldInput = $scope.config[colIndex].Functions[rowIndex].Parameter[0].Input.Functions;
             $scope.getFormFields(angular.fromJson($scope.FunctionList[arrayID].Configuration), rowIndex, colIndex, false);
-            $scope.mapFormFields(oldInput, colIndex, rowIndex);
-                
+            $scope.mapFormFields(oldInput, colIndex, rowIndex);              
         }, onError);
     };
 
@@ -552,7 +528,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             var value = input[key];
             var match;
             // Check for string properties which look like dates.
-            if (typeof value === "string" && (match = value.match(regexIso8601))) {
+            if (typeof value === "string" && (match = value.match(configFunctionFactory.regexIso8601))) {
                 var milliseconds = Date.parse(match[0])
                 if (!isNaN(milliseconds)) {
                     input[key] = new Date(milliseconds);
@@ -563,8 +539,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             }
         }
     };
-
-    var regexIso8601 = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;;
 
     $scope.selectRow = function (event, rowIndex, colIndex) {
         $scope.getVariableTypes(colIndex, rowIndex);
@@ -604,7 +578,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 selectedRowsIndexes[colIndex] = [rowIndex];
             };
         } else {
-
             if (selectedRowsIndexes[colIndex] != null) {
                 resetSelection();
                 selectedRowsIndexes[colIndex] = [rowIndex];
@@ -698,6 +671,20 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
 
     $scope.$on('$destroy', function () {
         delete window.onbeforeunload;
+    });
+    
+    $scope.$on('IdleTimeout', function() {
+        if($scope.config != null && $scope.config != undefined) {
+            var id = configFunctionFactory.getConfigID();
+            $window.localStorage["Config"] = JSON.stringify($scope.config);
+            var Function = configFunctionFactory.isFunction($location.absUrl())
+            if (Function == true) {
+                $window.localStorage["WebAddress"] = '/Configuration/Function/Function/' + id;
+            }
+            else {
+                $window.localStorage["WebAddress"] = '/Configuration/Config/Config/' + id;
+            };
+        };
     });
 
 });

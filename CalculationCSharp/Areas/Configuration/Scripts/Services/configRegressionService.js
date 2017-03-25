@@ -2,7 +2,6 @@
 sulhome.kanbanBoardApp.service('configRegressionService', function ($http, $q, $rootScope) {
     var proxy = null;
 
-    //Regression Services
     var getCalcRegression = function (id) {
         return $http.get("/api/CalcRegressionInputs", { params: { id: id } }).then(function (response) {
             return response.data;

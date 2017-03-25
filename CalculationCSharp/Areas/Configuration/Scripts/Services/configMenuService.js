@@ -2,7 +2,6 @@
 sulhome.kanbanBoardApp.service('configMenuService', function ($http, $q, $rootScope) {
     var proxy = null;
 
-    //Configuration Menu Services
     var getConfig = function () {
         return $http.get("/api/CalcConfigurations").then(function (response) {
             return response.data;
@@ -38,7 +37,6 @@ sulhome.kanbanBoardApp.service('configMenuService', function ($http, $q, $rootSc
             });
      };
 
-    //Configuration Function Menu Services
      var getFunction = function () {
          return $http.get("/api/FunctionsConfiguration").then(function (response) {
              return response.data;

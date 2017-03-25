@@ -25,7 +25,6 @@ sulhome.kanbanBoardApp.controller('regressionOutputCtrl', function ($scope, $uib
         });
     };
 
-    //UI
     $scope.OpenAllButton = function () {
         angular.forEach($scope.output, function (value, key, obj) {
             $scope.openIndexRegression[key] = true;

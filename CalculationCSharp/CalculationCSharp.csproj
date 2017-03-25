@@ -313,7 +313,6 @@
     <Content Include="Areas\Calculation\Scripts\calculationService.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigBuilder\configBuilderUICtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigBuilder\configBuilderColumnCtrl.js" />
-    <Content Include="Areas\Configuration\Scripts\ConfigBuilder\configBuilderRowCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Logic\groupCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Regression\RegressionInputModal.html" />
     <Content Include="Areas\Configuration\Scripts\Services\configMenuService.js" />

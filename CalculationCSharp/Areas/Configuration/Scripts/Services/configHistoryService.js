@@ -2,8 +2,7 @@
 sulhome.kanbanBoardApp.service('configHistoryService', function ($http, $q, $rootScope) {
     var proxy = null;
 
-    //History services
-     var getCalcHistory = function (id) {
+    var getCalcHistory = function (id) {
          return $http.get("/api/CalcHistories", { params: { id: id, SelectList: true } }).then(function (response) {
              return response.data;
          }, function (error) {

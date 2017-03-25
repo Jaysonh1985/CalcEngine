@@ -2,7 +2,6 @@
 sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope) {
     var proxy = null;
 
-    //Configuration Builder JSON Services
      var getCalc = function (id) {
          return $http.get("/api/ConfigWebApi/Get", { params: { id: id } }).then(function (response) {
              return response.data;
@@ -38,7 +37,6 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
             });
      };
 
-    //Function Builder JSON Services
      var getCalcFunction = function (id) {
          return $http.get("/api/FunctionWebApi/Get", { params: { id: id } }).then(function (response) {
              return response.data;
@@ -74,7 +72,6 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
             });
      };
 
-    //Post values to Specification builder
      var specBuilder = function (index, data) {
          return $http.post("/api/CalcSpecification/" + index, { data: data })
             .then(function (response) {
@@ -100,7 +97,6 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
          });
      };
 
-    //Configuration Builder JSON Services
      var getSchemes = function () {
          return $http.get("/api/SchemeWebApi/Get").then(function (response) {
              return response.data;
