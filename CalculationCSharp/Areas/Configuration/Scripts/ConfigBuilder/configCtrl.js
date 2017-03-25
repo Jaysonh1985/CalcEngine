@@ -167,9 +167,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.rowMenuOptions = [
-        ['Add Row', function ($itemScope) {
-            $scope.AddFunctionRows($itemScope.$parentNodeScope.$index, $itemScope.$index);
-        }],
         ['Delete Row', function ($itemScope) {
             $scope.DeleteFunction($itemScope.$parentNodeScope.$index, $itemScope.$index);
         }],
