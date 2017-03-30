@@ -294,6 +294,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     ///Form Submission
     $scope.SaveButtonClick = function SaveBoard(form) {
         $scope.functionValidateForm();
+        $scope.validateForm();
         if (form.$valid == true && form.$invalid == false) {
             $scope.viewOnly = true;
             $timeout(function () {
