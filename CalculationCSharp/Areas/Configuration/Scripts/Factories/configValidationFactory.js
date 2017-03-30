@@ -32,5 +32,50 @@ sulhome.kanbanBoardApp.factory('configValidationFactory', function ($filter, con
                 configFunctionFactory.setFormValidation(value, AttName, form, VariableNames, type);
             };
         },
+        mathsoperatorcheck: function (config, form, AttName) {
+            form[AttName].$setValidity("clause", true);
+            form[AttName].$setValidity("clauseblank", true);
+
+            angular.forEach(config, function (value1, key1, obj1) {
+                var currentRow = config[parseInt(key1)];
+                var nextRow = config[parseInt(key1) + 1];
+                if (currentRow.Logic2 != "" && currentRow.Logic2 != null) {
+                    if (nextRow == null) {
+                        form[AttName].$setValidity("clause", false);
+                    };
+                }
+                else if (currentRow.Logic2 == "" || currentRow.Logic2 == null) {
+                    if (nextRow != null) {
+                        form[AttName].$setValidity("clauseblank", false);
+                    };
+                };
+            });
+        },
+        bracketscheck: function (config, form, AttName) {
+            var LBcounter = 0;
+            var RBcounter = 0;
+            var length = config.length - 1;
+            angular.forEach(config, function (value, key, obj) {
+                if (value.Bracket1 == "(") {
+                    form[AttName].$setValidity("bracketnotclosed", true);
+                    LBcounter = LBcounter + 1;
+                }
+                if (value.Bracket2 == ")") {
+                    form[AttName].$setValidity("bracketnotopen", true);
+                    RBcounter = RBcounter + 1;
+                }
+            });
+            if (LBcounter > RBcounter) {
+                form[AttName].$setValidity("bracketnotclosed", true);
+                form[AttName].$setValidity("bracketnotclosed", false);
+            }
+            else if (LBcounter < RBcounter) {
+                form[AttName].$setValidity("bracketnotopen", false);
+            }
+            else {
+                form[AttName].$setValidity("bracketnotclosed", true);
+                form[AttName].$setValidity("bracketnotopen", true);
+            };
+        },
     };
 });

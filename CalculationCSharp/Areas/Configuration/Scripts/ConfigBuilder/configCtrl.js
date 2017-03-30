@@ -426,9 +426,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                     if (key != 0) {
                         //Maths
                         if ($scope.config[key].Functions[keyF].Function == 'Maths') {
+                            configValidationFactory.mathsoperatorcheck($scope.config[key].Functions[keyF].Parameter, form, AttName);
+                            configValidationFactory.bracketscheck($scope.config[key].Functions[keyF].Parameter, form, AttName);
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Input1, form, false, AttName);
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Input2, form, false, AttName);
+                                
                             });
                         };
                         //Period
