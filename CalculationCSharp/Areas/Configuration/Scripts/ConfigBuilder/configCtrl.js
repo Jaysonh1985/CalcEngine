@@ -328,7 +328,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.functionValidateForm();
         $scope.viewOnly = true;
         $timeout(function () {
-            //$scope.validateForm();
+            $scope.validateForm();
             if ($scope.validationError == false) {
                 $scope.openIndexBackup = angular.toJson($scope.openIndex, true);
             };
@@ -411,6 +411,119 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.DateNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, 'Date', rowIndex);
         $scope.StringNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, 'String', rowIndex);
         $scope.AllNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, null, rowIndex);
+    };
+
+    $scope.validateForm = function () {
+        form = $scope.form;
+        returnCount = 0;
+        angular.forEach($scope.config, function (value, key, obj) {
+            angular.forEach($scope.config[key].Functions, function (valueF, keyF, obj) {
+                var AttName = 'Errors_' + key + '_' + keyF;
+                form[AttName].$setValidity("input", true);
+                form[AttName].$setValidity("return", true);
+                form[AttName].$setValidity("returnMissing", true);
+                angular.forEach($scope.config[key].Functions[keyF].Parameter, function (valueP, keyP, obj) {
+                    if (key != 0) {
+                        //Maths
+                        if ($scope.config[key].Functions[keyF].Function == 'Maths') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Input1, form, false, AttName);
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Input2, form, false, AttName);
+                            });
+                        };
+                        //Period
+                        if ($scope.config[key].Functions[keyF].Function == 'Period') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true);
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true);
+                            });
+                        };
+                        //Factors
+                        if ($scope.config[key].Functions[keyF].Function == 'Factors') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form, true, AttName);
+                            });
+                        };
+                        //Date Adjustment
+                        if ($scope.config[key].Functions[keyF].Function == 'DateAdjustment') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true, AttName);
+                                if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
+                                    configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true, AttName);
+                                }
+                            });
+                        };
+                        //Date Part
+                        if ($scope.config[key].Functions[keyF].Function == 'DatePart') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true, AttName);
+                            });
+                        };
+                        //Maths Functions
+                        if ($scope.config[key].Functions[keyF].Function == 'MathsFunctions') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Number1, form, true, AttName);
+                                if (valueN.Type == "Add" || valueN.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract") {
+                                    configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Number2, form, true, AttName);
+                                }
+                            });
+                        };
+                        //Array Functions
+                        if ($scope.config[key].Functions[keyF].Function == 'ArrayFunctions') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form, false, AttName);
+                            });
+                        };
+                        //Function Functions
+                        if ($scope.config[key].Functions[keyF].Function == 'Function') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                angular.forEach(obj[0].Input, function (valueNI, keyNI, objI) {
+                                    configValidationFactory.variablePreviouslySet($scope.config, key, valueNI.Type, keyF, valueNI.Output, form, true, AttName);
+                                });
+                            });
+                        };
+                        if ($scope.Function == true) {
+                            //Return
+                            if ($scope.config[key].Functions[keyF].Function == 'Return') {
+                                returnCount = returnCount + 1;
+                                if (returnCount > 1) {
+                                    var AttName3 = 'FunctionCog_' + key + '_' + keyF;
+                                    form[AttName3].$setValidity("return", false);
+                                }
+                                angular.forEach(obj, function (valueN, keyN, obj) {
+                                    configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].Datatype, keyF, valueN.Variable, form, true, AttName3);
+                                });
+                            };
+                        };
+                    }
+                })
+            })
+        })
+        if ($scope.Function == true) {
+            //Check if no return values
+            if (returnCount == 0) {
+
+                if ($scope.config[0].Functions.length == parseInt(0)) {
+                    $scope.form.$invalid = true;
+                    toastr.error("Failed Validation - No Return variable set", "Error");
+                }
+                else {
+                    var AttName4 = 'FunctionCog_' + 0 + '_' + 0;
+                    form[AttName4].$setValidity("returnMissing", false);
+                }
+            };
+            //Check if No Inputs
+            if ($scope.config[0].Functions.length == parseInt(0)) {
+                $scope.form.$invalid = true;
+                toastr.error("Failed Validation - No Inputs Set", "Error");
+            };
+            var columnLength = $scope.config.length - 1;
+            var functionLength = $scope.config[columnLength].Functions.length - 1;
+            if ($scope.config[columnLength].Functions[functionLength].Function != "Return") {
+                $scope.form.$invalid = true;
+                toastr.error("Failed Validation - Return variable not on last row", "Error");
+            };
+        };
     };
 
    $scope.optionsBuild = function (rows) {

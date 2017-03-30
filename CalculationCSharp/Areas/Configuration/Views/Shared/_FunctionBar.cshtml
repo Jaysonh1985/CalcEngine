@@ -5,10 +5,10 @@
         </md-input-container>
     </md-toolbar>
     <div ng-repeat="Category in config" >
-        <div ng-repeat="rows in Category.Functions" class="md-theme-black" repeat-end="onEnd()" ng-show="isRowSelected($index, $parent.$index)" >
+        <div ng-repeat="rows in Category.Functions" class="md-theme-black" repeat-end="onEnd()" ng-show="isRowSelected($index, $parent.$index)">
             <fieldset ng-disabled="viewOnly">
                 <md-toolbar layout="row" style="color:white; text-align: center; background-color:#3d688c" >
-                    <md-input-container ng-if="Category.Name != 'Input' && rows.Function == null" class="md-block" style="color:white; text-align: center; background-color:#3d688c"  flex-gt-sm>
+                    <md-input-container ng-if="Category.Name != 'Input' && rows.Function == null" class="md-block" style="color:white; text-align: center; background-color:#3d688c" flex-gt-sm>
                         <md-select ng-model="rows.Function" name="Function_{{$parent.$parent.$index}}_{{$parent.$index}}" aria-label="Function" 
                                    id="Function_{{$parent.$parent.$index}}_{{$parent.$index}}" ng-change="setFunction(rows)" required>
                             <md-option value="ArrayFunctions">Array Functions</md-option>
@@ -40,7 +40,7 @@
                         </md-button>
                     </md-input-container>
                 </md-toolbar>
-                <md-content class="md-no-momentum" layout-margin="">
+                <md-content class="md-no-momentum" layout-margin="" >
                     <div>
                         <md-input-container class="md-block" ng-if="rows.Function != 'Comments' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Return'" flex-gt-sm>
                             <label>Variable Name</label>
@@ -51,29 +51,42 @@
                                 <div ng-message="required">Name is required.</div>
                                 <div ng-message="pattern">Pattern Incorrect</div>
                                 <div ng-message="variabletype">Variable exists with different data type</div>
+                                <div ng-message="input">Variable Mismatch</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Errors</label>
+                            <input ng-model="rows.Errors" name="Errors_{{$parent.$index}}_{{$index}}" id="Errors_{{$parent.$parent.$index}}_{{$parent.$index}}" readonly>
+                            <div ng-messages="form['Errors_'+ $parent.$index + '_' + $index].$error">
+                                <div ng-message="required">Name is required.</div>
+                                <div ng-message="pattern">Pattern Incorrect</div>
+                                <div ng-message="variabletype">Variable exists with different data type</div>
+                                <div ng-message="input">Variable Mismatch</div>
                             </div>
                         </md-input-container>
                         <md-input-container ng-if="Category.Name != 'Input'" class="md-block" flex-gt-sm>
                             <label>Expected Result</label>
                             <input ng-model="rows.ExpectedResult" name="ExpectedResult_{{$parent.$parent.$index}}_{{$parent.$index}}" id="ExpectedResult_{{$parent.$parent.$index}}_{{$parent.$index}}">
                         </md-input-container>
-                        <div ng-if="rows.Function=='ErrorsWarnings'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ErrorsWarnings.html'"></div>
-                        <div ng-if="rows.Function=='StringFunctions'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/StringFunctions.html'"></div>
-                        <div ng-if="rows.Function=='Input'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Input.html'"></div>
-                        <div ng-if="rows.Function=='Return'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Return.html'"></div>
-                        <div ng-if="rows.Function=='Period'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Period.html'"></div>
-                        <div ng-if="rows.Function=='DatePart'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/DatePart.html'"></div>
-                        <div ng-if="rows.Function=='DateAdjustment'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/DateAdjustment.html'"></div>
-                        <div ng-if="rows.Function=='Comments'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Comments.html'"></div>
-                        <div ng-if="rows.Function=='MathsFunctions'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/MathsFunctions.html'"></div>
-                        <div ng-if="rows.Function=='Factors'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Factors.html'"></div>
-                        <div ng-if="rows.Function=='ArrayFunctions'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ArrayFunctions.html'"></div>
-                        <div ng-if="rows.Function=='Maths'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Maths.html'"></div>
-                        <div ng-if="rows.Function=='Function'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/FunctionModal.html'"></div>
+
+                        <div ng-if="rows.Function=='ErrorsWarnings' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ErrorsWarnings.html'"></div>
+                        <div ng-if="rows.Function=='StringFunctions' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/StringFunctions.html'"></div>
+                        <div ng-if="rows.Function=='Input' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Input.html'"></div>
+                        <div ng-if="rows.Function=='Return' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Return.html'"></div>
+                        <div ng-if="rows.Function=='Period' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Period.html'"></div>
+                        <div ng-if="rows.Function=='DatePart' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/DatePart.html'"></div>
+                        <div ng-if="rows.Function=='DateAdjustment' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/DateAdjustment.html'"></div>
+                        <div ng-if="rows.Function=='Comments' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Comments.html'"></div>
+                        <div ng-if="rows.Function=='MathsFunctions' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/MathsFunctions.html'"></div>
+                        <div ng-if="rows.Function=='Factors' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Factors.html'"></div>
+                        <div ng-if="rows.Function=='ArrayFunctions' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ArrayFunctions.html'"></div>
+                        <div ng-if="rows.Function=='Maths' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Maths.html'"></div>
+                        <div ng-if="rows.Function=='Function' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/FunctionModal.html'"></div>
                         <md-input-container ng-if="rows.Function!='Input' && rows.Function!='Comments' && rows.Function!='ErrorsWarnings'" class="md-block" flex-gt-sm>
                             <label>Output</label>
                             <textarea ng-model="rows.Output" rows="3" md-select-on-focus readonly></textarea>
                         </md-input-container>
+
                     </div>
                 </md-content>
             </fieldset>
