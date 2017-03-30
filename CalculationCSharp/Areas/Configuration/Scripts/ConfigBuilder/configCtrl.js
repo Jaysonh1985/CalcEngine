@@ -432,15 +432,20 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Input1, form, false, AttName);
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Input2, form, false, AttName);
-                                
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Input1);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Logic);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Input2);
                             });
                         };
                         //Period
                         if ($scope.config[key].Functions[keyF].Function == 'Period') {
-                            angular.forEach(obj, function (valueN, keyN, obj) {
-                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true);
-                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true);
-                            });
+                            configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true);
+                            configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true);
+                            configValidationFactory.requiredfieldcheck(AttName, valueN.DateAdjustmentType);
+                            configValidationFactory.requiredfieldcheck(AttName, valueN.Date1);
+                            configValidationFactory.requiredfieldcheck(AttName, valueN.Date2);
+                            configValidationFactory.requiredfieldcheck(AttName, valueN.Inclusive);
+                            configValidationFactory.requiredfieldcheck(AttName, valueN.DaysinYear);
                         };
                         //Factors
                         if ($scope.config[key].Functions[keyF].Function == 'Factors') {

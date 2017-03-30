@@ -58,7 +58,7 @@
                             <label>Errors</label>
                             <input ng-model="rows.Errors" name="Errors_{{$parent.$index}}_{{$index}}" id="Errors_{{$parent.$parent.$index}}_{{$parent.$index}}" readonly>
                             <div ng-messages="form['Errors_'+ $parent.$index + '_' + $index].$error">
-                                <div ng-message="required">Name is required.</div>
+                                <div ng-message="required">Required field is missing</div>
                                 <div ng-message="pattern">Pattern Incorrect</div>
                                 <div ng-message="variabletype">Variable exists with different data type</div>
                                 <div ng-message="input">Variable Mismatch</div>

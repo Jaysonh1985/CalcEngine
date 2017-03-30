@@ -77,5 +77,11 @@ sulhome.kanbanBoardApp.factory('configValidationFactory', function ($filter, con
                 form[AttName].$setValidity("bracketnotopen", true);
             };
         },
+        requiredfieldcheck: function (AttName, input1) {
+            form[AttName].$setValidity("required", true);
+            if (input1 == null) {
+                form[AttName].$setValidity("required", false);
+            };
+        },
     };
 });
