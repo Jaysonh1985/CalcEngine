@@ -439,13 +439,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                         };
                         //Period
                         if ($scope.config[key].Functions[keyF].Function == 'Period') {
-                            configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true);
-                            configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true);
-                            configValidationFactory.requiredfieldcheck(AttName, valueN.DateAdjustmentType);
-                            configValidationFactory.requiredfieldcheck(AttName, valueN.Date1);
-                            configValidationFactory.requiredfieldcheck(AttName, valueN.Date2);
-                            configValidationFactory.requiredfieldcheck(AttName, valueN.Inclusive);
-                            configValidationFactory.requiredfieldcheck(AttName, valueN.DaysinYear);
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true);
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true);
+                            });
+
                         };
                         //Factors
                         if ($scope.config[key].Functions[keyF].Function == 'Factors') {
