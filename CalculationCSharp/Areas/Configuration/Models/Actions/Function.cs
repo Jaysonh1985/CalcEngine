@@ -43,8 +43,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 }
                 else if(DataType == "Decimal")
                 {
-                    Int16 Int1;
-                    Int16.TryParse(InputA, out Int1);
+                    Decimal Int1;
+                    Decimal.TryParse(InputA, out Int1);
                     Output = Output + Convert.ToString(Int1) + "~";
                 }
                 else

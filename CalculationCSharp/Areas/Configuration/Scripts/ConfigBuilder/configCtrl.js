@@ -636,7 +636,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         convertDateStringsToDates([InputJson]);
         angular.forEach(angular.fromJson(InputJson), function (value, key, obj) {
             var index = configFunctionFactory.getIndexOf($scope.config[colIndex].Functions[rowIndex].Parameter[0].Input[0].Functions, value.Name, 'Name');
-            $scope.config[colIndex].Functions[rowIndex].Parameter[0].Input[0].Functions[index].Output = value.Output;
+            if (angular.isNumber(index) == false) {
+                index = -1;
+            };
+            if (index >= 0) {
+                $scope.config[colIndex].Functions[rowIndex].Parameter[0].Input[0].Functions[index].Output = value.Output;
+            };   
         });
     };
 
