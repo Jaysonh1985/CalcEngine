@@ -5,31 +5,32 @@
                 <label>Search</label>
                 <input type="text" ng-model="test">
             </md-input-container>
-            <ul style="padding:0px">
-                <li ng-repeat="(key, errors) in form.$error track by $index">
-                    <strong>{{ key }}</strong> errors
-                    <ul>
-                        <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>. <a ng-click="focusButtonClick($event, e.$name)">Focus</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div ui-tree="treeOptions" ng-controller="configBuilderColumnCtrl">
-                <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
-                <uib-accordion close-others=false ui-tree-nodes=""   ng-model="config" data-nodrop-enabled="true">
-                    <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" layout="column" context-menu="columnMenuOptions" ui-tree-node>
-                        <uib-accordion-heading>                         
-                            <div class="slide-container">
-                                {{Category.Name}}                              
-                            </div>
-                            <div class="slide-container pull-right">
-                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
-                            </div>
-                        </uib-accordion-heading>
-                        @Html.Partial("_BuilderRow")
-                    </div>
-                </uib-accordion>
-            </div>
-            @Html.Partial("_FABButton")
+            <md-list class="md-dense" ng-cloak>
+                <md-list-item ng-repeat="(key, errors) in form.$error track by $index" class="md-1-line" >
+                    <md-list class="md-dense" ng-cloak>
+                        <md-list-item ng-repeat="e in errors" class="md-1-line" ng-click="focusButtonClick($event, e.$name)">
+                            <p>{{ e.$name }} has an error</p>
+                        </md-list-item>
+                    </md-list>
+                </md-list-item>
+            </md-list>
+                   <div ui-tree="treeOptions" ng-controller="configBuilderColumnCtrl">
+                    <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
+                    <uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
+                        <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" layout="column" context-menu="columnMenuOptions" ui-tree-node>
+                            <uib-accordion-heading>
+                                <div class="slide-container">
+                                    {{Category.Name}}
+                                </div>
+                                <div class="slide-container pull-right">
+                                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
+                                </div>
+                            </uib-accordion-heading>
+                            @Html.Partial("_BuilderRow")
+                        </div>
+                    </uib-accordion>
+                </div>
+                @Html.Partial("_FABButton")
         </md-content>
         @Html.Partial("_FunctionBar")    
     </form>

@@ -1,5 +1,5 @@
 ﻿<md-list flex="" ng-model="Category.Functions"  ui-tree-nodes="">
-    <md-list-item class="md-dense" ng-repeat="rows in Category.Functions | filter : test" ng-click="selectRow($event, $index, $parent.$index)"    
+    <md-list-item class="md-dense" ng-repeat="rows in Category.Functions" ng-click="selectRow($event, $index, $parent.$index)"  ng-show="([rows.Name] | filter: test).length || ([rows.Parameters.Name] | filter: test).length"
                   ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments', 'standardRow' : rows.Function != 'Comments', 'stripped' : rows.Pass == 'miss' }"
                   style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px;" context-menu="rowMenuOptions"  
                   ng-keydown="keyDownFunc($event, $parent.$index, $index, rows.Name)"   ui-tree-node>
@@ -10,7 +10,7 @@
                 </a>               
             </div>
             <div class="slide-container text-center" style="width:2%">
-                <a class="center-block" ng-if="isRowSelected($index, $parent.$index)" ng-click="AddFunctionRows($parent.$parent.$index, $parent.$index, $event)">
+                <a class="center-block" ng-click="AddFunctionRows($parent.$index, $index, $event)">
                     <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/add.svg"> </md-icon>
                 </a>
             </div>

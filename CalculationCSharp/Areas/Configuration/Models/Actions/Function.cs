@@ -12,7 +12,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         public int ID { get; set; }
         public string Scheme { get; set; }
         public string FunctionName { get; set; }
-        public List<ConfigViewModel> Input { get; set; }
+        public List<CategoryViewModel> Input { get; set; }
 
         /// <summary>Output Factor function is used, includes the array builder.
         /// <para>jparameters = JSON congifurations relating to this function</para>
@@ -43,8 +43,8 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 }
                 else if(DataType == "Decimal")
                 {
-                    Int16 Int1;
-                    Int16.TryParse(InputA, out Int1);
+                    Decimal Int1;
+                    Decimal.TryParse(InputA, out Int1);
                     Output = Output + Convert.ToString(Int1) + "~";
                 }
                 else

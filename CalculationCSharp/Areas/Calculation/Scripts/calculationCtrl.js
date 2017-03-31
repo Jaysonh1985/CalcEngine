@@ -54,11 +54,11 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
     //Calculation Button click - this checks the form is valid then maps the inputs into the config and passes the calculation over to the server for calculation
     $scope.CalcButtonClick = function CalcButtonClick(form) {
         if (form.$valid == true) {
-            $scope.isLoading = true;
             angular.forEach($scope.configreg.Functions, function (value, key, obj) {
                 var index = configFunctionFactory.getIndexOf($scope.config[0].Functions, value.Name, 'Name');
                 $scope.config[0].Functions[index].Output = value.Output;
             });
+            toastr.success("Calculating Please Wait...", "Success");
             calculationService.postCalc(1, $scope.config).then(function (data) {
                 $scope.isLoading = false;
                 $scope.output = data;

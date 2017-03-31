@@ -6,7 +6,6 @@
 <body ng-controller="calculationCtrl" ng-cloak>
     <ng-form name="form" role="form" ng-submit="calcbuttonclick(form)" layout="row" style="width:100%">
         <md-content flex="70" layout-padding="" layout="column" style="padding:0px; border-right: thin solid; border-right-color: #e8e1d6">              
-            <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
              @Html.Partial("_CalculationBulk")          
             <div  class="panel-heading">
                 <h2 class="panel-title">Calculation Output</h2>

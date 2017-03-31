@@ -364,10 +364,10 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             //replace inputs from main configuration to function
                                             foreach (var row in calcFunctionConfig[0].Functions)
                                             {
-                                                int index = parameters.Input.FindIndex(a => a.Name == row.Name);
+                                                int index = parameters.Input[0].Functions.FindIndex(a => a.Name == row.Name);
                                                 if (index >= 0)
                                                 {
-                                                    row.Output = parameters.Input[index].Output;
+                                                    row.Output = parameters.Input[0].Functions[index].Output;
                                                 }
                                                 else
                                                 {
