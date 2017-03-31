@@ -71,7 +71,7 @@
 
                         <div ng-if="rows.Function=='ErrorsWarnings' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ErrorsWarnings.html'"></div>
                         <div ng-if="rows.Function=='StringFunctions' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/StringFunctions.html'"></div>
-                        <div ng-if="rows.Function=='Input' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Input.html'"></div>
+                        <div ng-if="rows.Function=='Input'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Input.html'"></div>
                         <div ng-if="rows.Function=='Return' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Return.html'"></div>
                         <div ng-if="rows.Function=='Period' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Period.html'"></div>
                         <div ng-if="rows.Function=='DatePart' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/DatePart.html'"></div>

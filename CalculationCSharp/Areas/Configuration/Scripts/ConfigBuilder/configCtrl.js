@@ -111,7 +111,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.focusButtonClick = function (e, elementName) {
-        $scope.test = "";
         var originalElementName = elementName;
         var isFunctionOutput = elementName.indexOf("FunctionOutput") !== -1;
         var isBracketLeft = elementName.indexOf("BracketLeft") !== - 1;
