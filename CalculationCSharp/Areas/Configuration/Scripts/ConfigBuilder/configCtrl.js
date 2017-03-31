@@ -434,8 +434,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                         //Period
                         if ($scope.config[key].Functions[keyF].Function == 'Period') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
-                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true);
-                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true);
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true, AttName);
+                                configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true, AttName);
                             });
 
                         };

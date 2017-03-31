@@ -42,6 +42,21 @@
                 </md-toolbar>
                 <md-content class="md-no-momentum" layout-margin="" >
                     <div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Errors</label>
+                            <input ng-model="rows.Errors" name="Errors_{{$parent.$index}}_{{$index}}" id="Errors_{{$parent.$index}}_{{$index}}" readonly>
+                            <div ng-messages="form['Errors_'+ $parent.$index + '_' + $index].$error">
+                                <div ng-message="required">Required field is missing</div>
+                                <div ng-message="pattern">Pattern Incorrect</div>
+                                <div ng-message="variabletype">Variable exists with different data type</div>
+                                <div ng-message="input">Variable Mismatch - A variable may not be declare before this row or the format of the input is incorrect</div>
+                                <div ng-message="clause">Operator on final row</div>
+                                <div ng-message="clauseblank">No operator on row</div>
+                                <div ng-message="bracketnotclosed">Bracket Not Closed</div>
+                                <div ng-message="bracketnotopen">Bracket Not Open</div>
+                            </div>
+                        </md-input-container>
+
                         <md-input-container class="md-block" ng-if="rows.Function != 'Comments' && rows.Function != 'ErrorsWarnings' && rows.Function != 'Return'" flex-gt-sm>
                             <label>Variable Name</label>
                             <input differentvariabletype config='config' colIndex="{{$parent.$parent.$index}}" rowIndex="{{$parent.$index}}"
@@ -52,20 +67,6 @@
                                 <div ng-message="pattern">Pattern Incorrect</div>
                                 <div ng-message="variabletype">Variable exists with different data type</div>
                                 <div ng-message="input">Variable Mismatch</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>Errors</label>
-                            <input ng-model="rows.Errors" name="Errors_{{$parent.$index}}_{{$index}}" id="Errors_{{$parent.$index}}_{{$index}}" readonly>
-                            <div ng-messages="form['Errors_'+ $parent.$index + '_' + $index].$error">
-                                <div ng-message="required">Required field is missing</div>
-                                <div ng-message="pattern">Pattern Incorrect</div>
-                                <div ng-message="variabletype">Variable exists with different data type</div>
-                                <div ng-message="input">Variable Mismatch</div>
-                                <div ng-message="clause">Operator on final row</div>
-                                <div ng-message="clauseblank">No operator on row</div>
-                                <div ng-message="bracketnotclosed">Bracket Not Closed</div>
-                                <div ng-message="bracketnotopen">Bracket Not Open</div>
                             </div>
                         </md-input-container>
                         <md-input-container ng-if="Category.Name != 'Input'" class="md-block" flex-gt-sm>
