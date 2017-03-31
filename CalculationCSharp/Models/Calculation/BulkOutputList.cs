@@ -21,22 +21,16 @@ namespace CalculationCSharp.Models.Calculation
                 LoopCounter = 0;
                 foreach (var list in item)
                 {
-                    LoopCounter = LoopCounter + 1;
                     //Sets the Group in the output
-                    if (isNameDone == false)
-                    {
-                        //propValues.Add(list.Group);
-                        //propNames.Add(propValues);
-                        //propValues = new List<string>();
-                    }
                     //Iterate through property collection
                     foreach (var prop in list.Output)
                     {
                         //Sets the row label
-                        LoopCounter = LoopCounter + 1;
+
                         if (isNameDone == false)
                         {
-                            if(prop.SubOutput != null)
+                            LoopCounter = LoopCounter + 1;
+                            if (prop.SubOutput != null)
                             {   
                                 foreach(var itemSubOutput in prop.SubOutput)
                                 {
@@ -62,9 +56,10 @@ namespace CalculationCSharp.Models.Calculation
                         //sets the row value
                         else
                         {
-                            //propValues.Add(prop.Value);
-                            //propNames[LoopCounter - 1].Add(prop.Value);
-                            //propValues = new List<string>();
+                            propValues.Add(prop.Value);
+                            propNames[LoopCounter].Add(prop.Value);
+                            propValues = new List<string>();
+                            LoopCounter = LoopCounter + 1;
                         }
                     }
                 }
