@@ -471,7 +471,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                         //Function Functions
                         if ($scope.config[key].Functions[keyF].Function == 'Function') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
-                                angular.forEach(obj[0].Input.Functions, function (valueNI, keyNI, objI) {
+                                angular.forEach(obj[0].Input[0].Functions, function (valueNI, keyNI, objI) {
                                     configValidationFactory.variablePreviouslySet($scope.config, key, valueNI.Type, keyF, valueNI.Output, form, true, AttName);
                                 });
                             });
