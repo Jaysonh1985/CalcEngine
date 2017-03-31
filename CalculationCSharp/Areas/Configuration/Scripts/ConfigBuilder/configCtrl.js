@@ -111,6 +111,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.focusButtonClick = function (e, elementName) {
+        $scope.test = "";
         var originalElementName = elementName;
         var isFunctionOutput = elementName.indexOf("FunctionOutput") !== -1;
         var isBracketLeft = elementName.indexOf("BracketLeft") !== - 1;
@@ -136,7 +137,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var domElement = "#RowForm_"+ colIndex + "_" + rowIndex
         $timeout(function () {
             angular.element(domElement).triggerHandler('click');
-            document.getElementById("RowForm_"+ colIndex + "_" + rowIndex).focus();
             document.getElementById(originalElementName).focus();
         }, 500);
     };
