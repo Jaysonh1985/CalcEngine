@@ -40,19 +40,19 @@
                     <td ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined)  && rows.Parameter[0].templateOptions.required == true" width="25%">
                         <span show-errors rows='Category.Functions'>
                             <input ng-if="rows.Parameter[0].templateOptions.type == 'Date'" variablecheck inputtype="Date" 
-                                   config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$index}}"
+                                   config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}"
                                    uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8"
                                    name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$index}}"
                                    id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$index}}" 
                                    type="text" ng:model="rows.Output" class="form-control  input-sm" ng-required="true">
                             <input ng-if="rows.Parameter[0].templateOptions.type == 'String'" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8"
-                                   variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$index}}"
+                                   variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}"
                                    name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$index}}"
                                    id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$index}}" 
                                    type="text" ng:model="rows.Output" class="form-control  input-sm" 
                                    ng-required="true">
                             <input ng-if="rows.Parameter[0].templateOptions.type == 'Decimal'" 
-                                   variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$index}}"
+                                   variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}"
                                    uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" 
                                    name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$index}}" 
                                    id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$index}}" 
@@ -65,7 +65,7 @@
                     <td ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined)  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
                         <span>
                             <input ng-if="rows.Parameter[0].templateOptions.type == 'Date'" variablecheck inputtype="Date" 
-                                   config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$index}}"
+                                   config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}"
                                    uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" 
                                    type="text" ng:model="rows.Output" 
                                    name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$index}}" 
@@ -73,11 +73,12 @@
                                    class="form-control   input-sm">
                             <input ng-if="rows.Parameter[0].templateOptions.type == 'String'" 
                                    uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" 
-                                   type="text" ng:model="rows.Output" variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$index}}"
+                                   type="text" ng:model="rows.Output" variablecheck inputtype="String" config='[config]' 
+                                   colIndex="{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}"
                                    name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$index}}" 
                                    id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$index}}" class="form-control input-sm">
                             <input ng-if="rows.Parameter[0].templateOptions.type == 'Decimal'" 
-                                   variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$index}}"
+                                   variablecheck inputtype="Decimal" config='[config]' colIndex="$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}"
                                    uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8"
                                    type="text" ng:model="rows.Output" name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$index}}" 
                                    id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$index}}" class="form-control   input-sm">
