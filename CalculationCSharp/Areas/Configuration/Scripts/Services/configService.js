@@ -112,6 +112,13 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
              return $q.reject(error.data.Message);
          });
      };
+     var getFactorTables = function (Scheme, ID, Type) {
+         return $http.get("/api/FactorTableWebApi/Get").then(function (response) {
+             return response.data;
+         }, function (error) {
+             return $q.reject(error.data.Message);
+         });
+     };
      
     var initialize = function () {      
         connection = jQuery.hubConnection();
@@ -148,6 +155,7 @@ sulhome.kanbanBoardApp.service('configService', function ($http, $q, $rootScope)
         deleteUserSession: deleteUserSession,
         specBuilder: specBuilder,
         getSchemes: getSchemes,
-        getFunctionDetails: getFunctionDetails
+        getFunctionDetails: getFunctionDetails,
+        getFactorTables: getFactorTables
     };
 });

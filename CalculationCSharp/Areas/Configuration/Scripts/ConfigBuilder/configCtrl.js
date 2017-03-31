@@ -408,6 +408,13 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         $scope.AllNames = configTypeaheadFactory.variableArrayBuilder($scope.config, colIndex, null, rowIndex);
     };
 
+
+    $scope.getFactorTablesList = function getFactorTablesList() {  //function that sets the parameters available under the different variable types
+        configService.getFactorTables().then(function (data) {
+            $scope.FactorTableList = data;
+        }, onError);
+    };
+
     $scope.validateForm = function () {
         form = $scope.form;
         returnCount = 0;
@@ -691,6 +698,9 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                    $scope.getFunctionListSingleCall(rowIndex, colIndex);
                 };
             };
+        };
+        if ($scope.Function == 'Factors') {
+            $scope.getFactorTablesList();
         };
 
         if (event.ctrlKey) {

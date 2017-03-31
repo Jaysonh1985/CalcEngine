@@ -228,6 +228,7 @@
     <Compile Include="Areas\Configuration\Controllers\Functions\FunctionHistoriesController.cs" />
     <Compile Include="Areas\Configuration\Controllers\Functions\FunctionsConfigurationController.cs" />
     <Compile Include="Areas\Configuration\Controllers\Configuration\CalcHistoriesController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\Functions\FactorTablesWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\Regression\CalcRegressionInputsController.cs" />
     <Compile Include="Areas\Configuration\Controllers\Regression\CalcRegressionOutputController.cs" />
     <Compile Include="Areas\Configuration\Controllers\UI\CalcSpecificationController.cs" />
