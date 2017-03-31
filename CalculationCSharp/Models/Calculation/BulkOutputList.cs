@@ -26,7 +26,6 @@ namespace CalculationCSharp.Models.Calculation
                     foreach (var prop in list.Output)
                     {
                         //Sets the row label
-
                         if (isNameDone == false)
                         {
                             LoopCounter = LoopCounter + 1;
@@ -45,7 +44,6 @@ namespace CalculationCSharp.Models.Calculation
                                     }
                                 }
                             };
-
                             propValues.Add("");
                             propValues.Add(list.Group);
                             propValues.Add(prop.Field);
