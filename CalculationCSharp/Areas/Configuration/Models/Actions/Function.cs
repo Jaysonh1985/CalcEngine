@@ -12,7 +12,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         public int ID { get; set; }
         public string Scheme { get; set; }
         public string FunctionName { get; set; }
-        public List<ConfigViewModel> Input { get; set; }
+        public List<CategoryViewModel> Input { get; set; }
 
         /// <summary>Output Factor function is used, includes the array builder.
         /// <para>jparameters = JSON congifurations relating to this function</para>

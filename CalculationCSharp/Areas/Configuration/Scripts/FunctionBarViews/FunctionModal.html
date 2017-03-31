@@ -34,8 +34,8 @@
                     <th width="75%">Input</th>
                 </tr>
             </thead>
-            <tbody ng:model="rows.Parameter[0].Input.Functions">
-                <tr unselectable="on" ng-repeat="rows in rows.Parameter[0].Input.Functions | filter:searchText">
+            <tbody ng:model="rows.Parameter[0].Input[0].Functions">
+                <tr unselectable="on" ng-repeat="rows in rows.Parameter[0].Input[0].Functions | filter:searchText">
                     <td width="5%">{{rows.Parameter[0].templateOptions.label}}</td>
                     <td ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined)  && rows.Parameter[0].templateOptions.required == true" width="25%">
                         <span show-errors rows='Category.Functions'>
@@ -78,17 +78,17 @@
                         <p ng-show="form['FunctionOutput_'+ $parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $index].$error.inputformat" 
                            class="help-block">Input format incorrect</p>
                     </td>
-                    <!--<td ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" width="25%">
-                        <select class="form-control  input-sm" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
-                            <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                    <td ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" width="25%">
+                        <select class="form-control  input-sm" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output" ng-click="optionsBuild(rows)" >
+                            <option ng-repeat="option in rows.Parameter[0].templateOptions.optionsList" value="{{option.Name}}">{{option.Name}}</option>
                         </select>
                         <p ng-show="form['Output_'+ $parent.$index + '_' + $index].$invalid" class="help-block">Value is required.</p>
                     </td>
                     <td ng-if="rows.Parameter[0].templateOptions.list == true  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
-                        <select class="form-control  input-sm" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output">
-                            <option ng-repeat="option in rows.Parameter[0].templateOptions.options" value="{{option.Name}}">{{option.Name}}</option>
+                        <select class="form-control input-sm" name="Output_{{$parent.$index}}_{{$index}}" id="Output_{{$parent.$index}}_{{$index}}" ng-model="rows.Output" ng-click="optionsBuild(rows)">
+                            <option ng-repeat="option in rows.Parameter[0].templateOptions.optionsList" value="{{option.Name}}">{{option.Name}}</option>
                         </select>
-                    </td>-->
+                    </td>
                 </tr>
             </tbody>
         </table>
