@@ -331,7 +331,7 @@
     <Content Include="Areas\Configuration\Scripts\FunctionBarViews\ErrorsWarnings.html" />
     <Content Include="Areas\Configuration\Scripts\FunctionBarViews\Factors.html" />
     <Content Include="Areas\Calculation\Scripts\calculationCtrl.js" />
-    <Content Include="Areas\Configuration\Scripts\FunctionBarViews\FunctionModal.html" />
+    <Content Include="Areas\Configuration\Scripts\FunctionBarViews\Function.html" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Impact Assessment\impactAssessmentCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Impact Assessment\ImpactAssessmentModal.html" />
     <Content Include="Areas\Configuration\Scripts\FunctionBarViews\Return.html" />
