@@ -45,7 +45,6 @@
 <md-input-container  ng-if="rows.Parameter[0].Type == 'AddPeriod'|| rows.Parameter[0].Type == 'SubtractPeriod'" class="md-block" flex-gt-sm>
     <label>Period Type</label>
     <md-select required ng:model="rows.Parameter[0].PeriodType" name="MathsFunctionsPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" id="MathsFunctionsPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-disabled="viewOnly">
-        <md-option value=""></md-option>
         <md-option value="YearsDays">Years Days</md-option>
         <md-option value="YearsMonths">Years Months</md-option>
     </md-select>

@@ -1,16 +1,9 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Table Name</label>
-
-        <md-select name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].TableName"  ng-click="getFactorTablesList()" >
+        <md-select name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].TableName"  ng-click="getFactorTablesList()" required>
             <md-option ng-repeat="option in FactorTableList" value="{{option.Value}}">{{option.Text}}</md-option>
         </md-select>
-
-        <!--<input ng-model="rows.Parameter[0].TableName" name="FactorsTableName_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-               id="FactorsTableName_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
-        <div ng-messages="form['FactorsTableName_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-            <div ng-message="required">Table Name is required</div>
-        </div>-->
     </md-input-container>
 </div>
 <div>

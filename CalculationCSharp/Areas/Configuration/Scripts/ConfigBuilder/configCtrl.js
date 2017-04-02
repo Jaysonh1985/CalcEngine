@@ -424,6 +424,9 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 form[AttName].$setValidity("input", true);
                 form[AttName].$setValidity("return", true);
                 form[AttName].$setValidity("returnMissing", true);
+                if ($scope.config[key].Functions[keyF].Parameter.length == 0) {
+                    configValidationFactory.requiredfieldcheck(AttName, null);
+                };
                 angular.forEach($scope.config[key].Functions[keyF].Parameter, function (valueP, keyP, obj) {
                     if (key != 0) {
                         //Maths
@@ -443,6 +446,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true, AttName);
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true, AttName);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.DateAdjustmentType);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Date1);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Date2);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Inclusive);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.DaysinYear);
                             });
 
                         };
@@ -450,36 +458,78 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                         if ($scope.config[key].Functions[keyF].Function == 'Factors') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form, true, AttName);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.TableName);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.LookupType);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.LookupValue);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.OutputType);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.RowMatch);
+                                if (valueN.RowMatch == 'True') {
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.RowMatchRowNo);
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.RowMatchLookupType);
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.RowMatchValue);
+                                }
+                                else {
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.ColumnNo);
+                                };
+                                if (valueN.LookupType == 'Decimal') {
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.Interpolate);
+                                };
                             });
                         };
                         //Date Adjustment
                         if ($scope.config[key].Functions[keyF].Function == 'DateAdjustment') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true, AttName);
-                                if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later') {
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Type);
+                                if (obj[0].Type != 'Today'){
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.Date1);
+                                };                               
+                                if (obj[0].Type == 'Earlier' || obj[0].Type == 'Later' || obj[0].Type == 'DatesBetween') {
                                     configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date2, form, true, AttName);
-                                }
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.Date2);
+                                };
+                                if (obj[0].Type == 'Add' || obj[0].Type == 'Subtract') {
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.PeriodType);
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.Period);
+                                };
+                                if (obj[0].Type == 'Adjust') {
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.Adjustment);
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.Day);
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.Month);
+                                };
                             });
                         };
                         //Date Part
                         if ($scope.config[key].Functions[keyF].Function == 'DatePart') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Date", keyF, valueN.Date1, form, true, AttName);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Date1);
                             });
                         };
                         //Maths Functions
                         if ($scope.config[key].Functions[keyF].Function == 'MathsFunctions') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Number1, form, true, AttName);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Number1);
                                 if (valueN.Type == "Add" || valueN.Type == "Divide" || valueN.Type == "Max" || valueN.Type == "Min" || valueN.Type == "Multiply" || valueN.Type == "Power" || valueN.Type == "Subtract") {
                                     configValidationFactory.variablePreviouslySet($scope.config, key, "Decimal", keyF, valueN.Number2, form, true, AttName);
-                                }
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.Number2);
+                                };
+                                if (valueN.Type == "AddPeriod" || valueN.Type == "SubtractPeriod") {
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.PeriodType);
+                                };
                             });
                         };
                         //Array Functions
                         if ($scope.config[key].Functions[keyF].Function == 'ArrayFunctions') {
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 configValidationFactory.variablePreviouslySet($scope.config, key, obj[0].LookupType, keyF, valueN.LookupValue, form, false, AttName);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.LookupType);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.LookupValue);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Function);
+                                if (valueN.Function == "TotalPeriod" || valueN.Function == "Decimal") {
+                                    configValidationFactory.requiredfieldcheck(AttName, valueN.PeriodType);
+                                };
                             });
                         };
                         //Function Functions
@@ -487,6 +537,9 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                             angular.forEach(obj, function (valueN, keyN, obj) {
                                 angular.forEach(obj[0].Input[0].Functions, function (valueNI, keyNI, objI) {
                                     configValidationFactory.variablePreviouslySet($scope.config, key, valueNI.Type, keyF, valueNI.Output, form, true, AttName);
+                                    if (valueNI.Parameter[0].templateOptions.required == true) {
+                                        configValidationFactory.requiredfieldcheck(AttName, valueNI.Output);
+                                    };
                                 });
                             });
                         };
