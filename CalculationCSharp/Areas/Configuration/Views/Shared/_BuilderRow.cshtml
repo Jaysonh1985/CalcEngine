@@ -9,40 +9,48 @@
                     <md-icon ng-hide="viewOnly"class="glyphicon glyphicon" ui-tree-handle md-svg-src="/Images/movelist.svg"> </md-icon>                
                 </a>               
             </div>
-            <div class="slide-container text-center" style="width:2%">
-                <a class="center-block" ng-click="AddFunctionRows($parent.$index, $index, $event)">
-                    <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/add.svg"> </md-icon>
-                </a>
-            </div>
-            <div class="v-separator"><h4></h4></div>
+            <div class="v-separator"><h1></h1></div>
             <div class="slide-container" style="width:15%">
                 <h6 class="small">Function: &nbsp;</h6>
                 {{ rows.Function }}
             </div>
-            <div class="v-separator"><h4></h4></div>
+            <div class="v-separator"><h1></h1></div>
             <div class="slide-container" style="width:8%">
                 <h6 class="small">Type: &nbsp;</h6>
                 {{ rows.Type }}
             </div>
-
-            <div class="v-separator"><h4></h4></div>
-                <div class="slide-container" style="width:19%">
+            <div class="v-separator"><h1></h1></div>
+                <div class="slide-container" style="width:19%" >
                     <h6 class="small">Name: &nbsp;</h6>
                     {{ rows.Name }}
                 </div>
-            <div class="v-separator"><h4></h4></div>
-            <div class="slide-container" style="width:40%">
+            <div class="v-separator"><h1></h1></div>
+            <div class="slide-container" style="width:38%">
                 <h6 class="small">Output: &nbsp;</h6>
                 {{ rows.Output | limitTo: 50}} {{rows.Output.length > 50 ? '...' : ''}}
             </div>
             <div class="v-separator"><h1></h1></div>
             <div class="slide-container" style="width:2%; text-align:center">
-                <md-icon ng-if="rows.Pass == 'true'" md-svg-src="/Images/checked.svg"> </md-icon>
-                <md-icon ng-if="rows.Pass == 'false'" md-svg-src="/Images/multiply.svg"> </md-icon>
-                <a ng-show="rows.SubOutput != null " data-nodrag ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
+                <a class="center-block" ng-click="AddFunctionRows($parent.$index, $index, $event)">
+                    <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/add.svg"> </md-icon>
+                </a>
+            </div>
+            <div class="slide-container" style="width:2%; text-align:center">
+                <a class="center-block" ng-click="DeleteFunction($parent.$index, $index)">
+                    <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/multiply.svg"> </md-icon>
+                </a>
+            </div>
+            <div class="v-separator"><h1></h1></div>
+            <div class="slide-container" style="width:2%; text-align:center">
+               <a ng-show="rows.SubOutput != null " data-nodrag ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
                     <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
                 </a>
             </div>
+            <div class="slide-container" style="width:2%; text-align:center">
+                <md-icon ng-if="rows.Pass == 'true'" md-svg-src="/Images/checked.svg"> </md-icon>
+                <md-icon ng-if="rows.Pass == 'false'" md-svg-src="/Images/exclamation.svg"> </md-icon>
+            </div>
+
         </div>
     </md-list-item>   
 </md-list>

@@ -660,6 +660,7 @@
     <Content Include="Images\checklist.png" />
     <Content Include="Images\copy.png" />
     <Content Include="Images\crossinsideasquare.png" />
+    <Content Include="Images\exclamation.svg" />
     <Content Include="Images\gear-option.png" />
     <Content Include="Images\Impactlist.svg" />
     <Content Include="Images\more.png" />
