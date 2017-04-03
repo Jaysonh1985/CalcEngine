@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2016 Project AIM
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Script.Serialization;
 
 namespace CalculationCSharp.Areas.Configuration.Models
@@ -100,6 +101,34 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 Deci1parts = InputA.Split('~');
                 return Convert.ToString(Deci1parts[Deci1parts.GetUpperBound(0)]);
             }
+            //Gets the first number in the array
+            else if (parameters.Function == "RemoveFirstNumber")
+            {
+                string[] Deci1parts = null;
+                Deci1parts = InputA.Split('~');
+                String Output = null;
+                Deci1parts = Deci1parts.Skip(1).ToArray();
+                foreach (string part in Deci1parts)
+                {
+                    Output = Output + Convert.ToString(part) + "~";
+                };
+                Output = Output.Remove(Output.Length - 1);
+                return Convert.ToString(Output);
+            }
+            //Gets the last number in the array
+            else if (parameters.Function == "RemoveLastNumber")
+            {
+                string[] Deci1parts = null;
+                Deci1parts = InputA.Split('~');
+                String Output = null;
+                Deci1parts = Deci1parts.Take(Deci1parts.Count()-1).ToArray();
+                foreach (string part in Deci1parts)
+                {
+                    Output = Output + Convert.ToString(part) + "~";
+                };
+                Output = Output.Remove(Output.Length - 1);
+                return Convert.ToString(Output);
+            }
             //Calculates Total Period in the array 
             else if (parameters.Function == "TotalPeriod")
             {
@@ -138,9 +167,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 else
                 {
                     return MathFunctions.RoundingDecimalPlaces("2", Sum);
-                }
-
-               
+                }            
 
             }
             //Counts the number or values in the array
@@ -174,6 +201,33 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 string[] Date1parts = null;
                 Date1parts = InputA.Split('~');
                 return Convert.ToString(Date1parts[Date1parts.GetUpperBound(0)]);
+            }
+            //Removes the Last Date in the array
+            if (parameters.Function == "RemoveFirstDate")
+            {
+                string[] Date1parts = null;
+                String Output = null;
+                Date1parts = InputA.Split('~');
+                Date1parts = Date1parts.Skip(1).ToArray();
+                foreach (string part in Date1parts)
+                {
+                    Output = Output + Convert.ToString(part) + "~";
+                };
+                Output = Output.Remove(Output.Length - 1);
+                return Convert.ToString(Output);
+            }
+            //Removed the Last Date in the array
+            else if (parameters.Function == "RemoveLastDate")
+            {
+                string[] Date1parts = null;
+                String Output = null;
+                Date1parts = InputA.Split('~');
+                Date1parts = Date1parts.Take(Date1parts.Count() - 1).ToArray();
+                foreach (string part in Date1parts) { 
+                    Output = Output + Convert.ToString(part) + "~";
+                };
+                Output = Output.Remove(Output.Length - 1);
+                return Convert.ToString(Output);
             }
             //Counts the number of instances
             else if (parameters.Function == "Count")
