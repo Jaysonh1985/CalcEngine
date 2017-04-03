@@ -364,7 +364,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         rows.Type = rows.Parameter[0].templateOptions.type;
     };
 
-    $scope.setFunction = function (rows) {  //function that sets the type of the row
+    $scope.setFunction = function (rows, colIndex, rowIndex) {  //function that sets the type of the row
         if (rows.Function == 'Maths') {
             rows.Type = 'Decimal';
         }
@@ -391,6 +391,15 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             configService.getSchemes().then(function (data) {
                 $scope.SchemeList = data;
             }, onError);
+        }
+        else if (rows.Function == 'Comments') {
+            rows.Name = 'Comments_' + colIndex + '_' + rowIndex;
+        }
+        else if (rows.Function == 'ErrorsWarnings') {
+            rows.Name = 'ErrorsWarnings_' + colIndex + '_' + rowIndex;
+        }
+        else if (rows.Function == 'Return') {
+            rows.Name = 'Return_' + colIndex + '_' + rowIndex;
         }
         else {
             rows.Type = null;
