@@ -374,7 +374,7 @@ public class DateFunctions
             int intMonth = Convert.ToInt32(strMonth);
             DateTime dateIncrement = Date1;
             DateTime FirstValue = new DateTime(Date1.Year, intMonth, intDay);
-            if (FirstValue > Date1)
+            if (FirstValue >= Date1)
             {
                 dateIncrement = new DateTime(Date1.Year, intMonth, intDay);
             }

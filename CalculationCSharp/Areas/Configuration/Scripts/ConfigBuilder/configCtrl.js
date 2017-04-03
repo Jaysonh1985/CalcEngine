@@ -575,13 +575,17 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
        }       
    };
 
-    $scope.addMathsItem = function (index) {
-        var item = null;
-        item = {
-            ID: index + 1,
-        };
-        $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.splice(index + 1, 0, item);
-    },
+   $scope.addMathsItem = function (index) {
+       var item = null;
+       item = {
+           ID: index + 1,
+       };
+       $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.splice(index + 1, 0, item);
+   };
+
+   $scope.setArrayType = function (rows) {
+       rows.Type = rows.Parameter[0].LookupType;
+   };
 
     $scope.removeMathsItem = function () {
         $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.splice($scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.length - 1, 1);

@@ -1,7 +1,7 @@
 ﻿<md-input-container class="md-block" flex-gt-sm>
     <label>Incoming Array Type</label>
     <md-select required ng:model="rows.Parameter[0].LookupType"  name="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                id="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly">
+                id="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-change="setArrayType(rows)" ng-disabled="viewOnly">
         <md-option value="Date">Date</md-option>
         <md-option value="Decimal">Decimal</md-option>
         <!--<md-option value="String">String</md-option>-->
