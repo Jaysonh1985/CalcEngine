@@ -25,7 +25,7 @@
                     {{ rows.Name }}
                 </div>
             <div class="v-separator"><h1></h1></div>
-            <div class="slide-container" style="width:38%">
+            <div class="slide-container" style="width:36%">
                 <h6 class="small">Output: &nbsp;</h6>
                 {{ rows.Output | limitTo: 50}} {{rows.Output.length > 50 ? '...' : ''}}
             </div>
@@ -41,12 +41,12 @@
                 </a>
             </div>
             <div class="v-separator"><h1></h1></div>
-            <div class="slide-container" style="width:2%; text-align:center">
+            <div class="slide-container" style="width:0%; text-align:center">
                <a ng-show="rows.SubOutput != null " data-nodrag ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
                     <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
                 </a>
             </div>
-            <div class="slide-container" style="width:2%; text-align:center">
+            <div class="slide-container" style="width:0%; text-align:center">
                 <md-icon ng-if="rows.Pass == 'true'" md-svg-src="/Images/checked.svg"> </md-icon>
                 <md-icon ng-if="rows.Pass == 'false'" md-svg-src="/Images/exclamation.svg"> </md-icon>
             </div>

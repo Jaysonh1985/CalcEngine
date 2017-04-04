@@ -433,8 +433,10 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                 form[AttName].$setValidity("input", true);
                 form[AttName].$setValidity("return", true);
                 form[AttName].$setValidity("returnMissing", true);
-                if ($scope.config[key].Functions[keyF].Parameter.length == 0) {
-                    configValidationFactory.requiredfieldcheck(AttName, null);
+                if ($scope.config[key].Functions[keyF].Function != 'Comments') {
+                    if ($scope.config[key].Functions[keyF].Parameter.length == 0) {
+                        configValidationFactory.requiredfieldcheck(AttName, null);
+                    };
                 };
                 angular.forEach($scope.config[key].Functions[keyF].Parameter, function (valueP, keyP, obj) {
                     if (key != 0) {
