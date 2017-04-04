@@ -10,7 +10,7 @@
                 <md-toolbar layout="row" style="color:white; text-align: center; background-color:#3d688c" >
                     <md-input-container ng-if="Category.Name != 'Input' && rows.Function == null" class="md-block" style="color:white; text-align: center; background-color:#3d688c" flex-gt-sm>
                         <md-select ng-model="rows.Function" name="Function_{{$parent.$parent.$index}}_{{$parent.$index}}" aria-label="Function" 
-                                   id="Function_{{$parent.$parent.$index}}_{{$parent.$index}}" ng-change="setFunction(rows)" required>
+                                   id="Function_{{$parent.$parent.$index}}_{{$parent.$index}}" ng-change="setFunction(rows, $parent.$parent.$index, $parent.$index)" required>
                             <md-option value="ArrayFunctions">Array Functions</md-option>
                             <md-option value="Comments">Comment</md-option>
                             <md-option value="DateAdjustment">Date Adjustment</md-option>

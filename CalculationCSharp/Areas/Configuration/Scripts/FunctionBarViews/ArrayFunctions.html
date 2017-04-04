@@ -1,7 +1,7 @@
 ﻿<md-input-container class="md-block" flex-gt-sm>
     <label>Incoming Array Type</label>
     <md-select required ng:model="rows.Parameter[0].LookupType"  name="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                id="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly">
+                id="ArrayFunctionLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-change="setArrayType(rows)" ng-disabled="viewOnly">
         <md-option value="Date">Date</md-option>
         <md-option value="Decimal">Decimal</md-option>
         <!--<md-option value="String">String</md-option>-->
@@ -49,6 +49,8 @@
                 id="ArrayFunctionFunction_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="ArrayFunction"  ng-disabled="viewOnly" required>
         <md-option value="FirstDate">First Date</md-option>
         <md-option value="LastDate">Last Date</md-option>
+        <md-option value="RemoveFirstDate">Remove First Date</md-option>
+        <md-option value="RemoveLastDate">Remove Last Date</md-option>
         <md-option value="Count">Count Array Size</md-option>
     </md-select>
     <div ng-messages="form['ArrayFunctionFunction_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
@@ -63,6 +65,8 @@
         <md-option value="Product">Product</md-option>
         <md-option value="FirstNumber">First Number</md-option>
         <md-option value="LastNumber">Last Number</md-option>
+        <md-option value="RemoveFirstNumber">Remove First Number</md-option>
+        <md-option value="RemoveLastNumber">Remove Last Number</md-option>
         <md-option value="TotalPeriod">Total Period</md-option>
         <md-option value="Count">Count Array Size</md-option>
     </md-select>
