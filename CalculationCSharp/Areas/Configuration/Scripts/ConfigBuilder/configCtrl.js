@@ -630,12 +630,12 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
        }       
    };
 
-   $scope.addMathsItem = function (index) {
+   $scope.addMathsItem = function () {
        var item = null;
        item = {
-           ID: index + 1,
+           ID: $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.length,
        };
-       $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.splice(index + 1, 0, item);
+       $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.splice($scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.length, 0, item);
    };
 
    $scope.setArrayType = function (rows) {
