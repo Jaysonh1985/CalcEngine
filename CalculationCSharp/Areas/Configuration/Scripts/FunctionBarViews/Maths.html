@@ -14,12 +14,13 @@
                 <div ng-message="bracketnotopen">Not Open</div>
             </div>
         </md-input-container>
-        <md-input-container flex="45">
+        <md-input-container ng-mouseenter="variableReplace(val.Input1, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" flex="45">
             <label>Input</label>
             <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
                    name="MathsInput1_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
                    id="MathsInput1_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"
                    ng:model="val.Input1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+            <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
             <div ng-messages="form['MathsInput1_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
                 <div ng-message="required">Number is required</div>
                 <div ng-message="input">Variable Mismatch</div>
@@ -36,12 +37,13 @@
                 <md-option value="Pow">^</md-option>
             </md-select>
         </md-input-container>
-        <md-input-container flex="45">
+        <md-input-container ng-mouseenter="variableReplace(val.Input2, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" flex="45">
             <label>Input</label>
             <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
                    name="MathsInput2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
                    id="MathsInput2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"
                    ng:model="val.Input2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+            <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
             <div ng-messages="form['MathsInput2_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
                 <div ng-message="required">Number is required</div>
                 <div ng-message="input">Variable Mismatch</div>

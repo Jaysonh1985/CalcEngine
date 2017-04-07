@@ -10,34 +10,38 @@
         <div ng-message="required">Type is required</div>
     </div>
 </md-input-container>
-<md-input-container ng-if="rows.Parameter[0].LookupType == 'Date'" class="md-block" flex-gt-sm>
+<md-input-container ng-if="rows.Parameter[0].LookupType == 'Date'" class="md-block" ng-mouseenter="variableReplace(rows.Parameter[0].LookupValue, $parent.$parent.$parent.$index, $parent.$parent.$index)" flex-gt-sm>
     <label>Array Value</label>
     <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"   ng-model="rows.Parameter[0].LookupValue" 
             name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
             id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
             uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+    <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
     <div ng-messages="form['ArrayFunctionLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Date is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
 </md-input-container>
-<md-input-container ng-if="rows.Parameter[0].LookupType == 'Decimal'" class="md-block" flex-gt-sm>
+<md-input-container ng-if="rows.Parameter[0].LookupType == 'Decimal'" class="md-block" ng-mouseenter="variableReplace(rows.Parameter[0].LookupValue, $parent.$parent.$parent.$index, $parent.$parent.$index)" flex-gt-sm>
     <label>Array Value</label>
     <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
             name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
             id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
             uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+    <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
     <div ng-messages="form['ArrayFunctionLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Decimal is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
 </md-input-container>
-<md-input-container ng-if="rows.Parameter[0].LookupType == 'String'" class="md-block" flex-gt-sm>
+<md-input-container ng-if="rows.Parameter[0].LookupType == 'String'" ng-mouseenter="variableReplace(rows.Parameter[0].LookupValue, $parent.$parent.$parent.$index, $parent.$parent.$index)" 
+                    class="md-block" flex-gt-sm>
     <label>Array Value</label>
     <input variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
             name="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
             id="ArrayFunctionLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
             uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
+    <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
     <div ng-messages="form['ArrayFunctionLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">String is required</div>
         <div ng-message="input">Variable Mismatch</div>

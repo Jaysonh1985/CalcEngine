@@ -14,23 +14,26 @@
         <div ng-message="required">Type is required</div>
     </div>
 </md-input-container>
-<md-input-container ng-if="rows.Parameter[0].Type != 'Today'" class="md-block" flex-gt-sm>
+<md-input-container ng-if="rows.Parameter[0].Type != 'Today'" ng-mouseenter="variableReplace(rows.Parameter[0].Date1, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" class="md-block" flex-gt-sm>
     <label>Start Date</label>
     <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"  
             ng-model="rows.Parameter[0].Date1" name="DateAdjustmentDate1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
             id="DateAdjustmentDate1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
             uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+    <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
     <div ng-messages="form['DateAdjustmentDate1_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Date is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
 </md-input-container>
-<md-input-container ng-if="rows.Parameter[0].Type == 'Earlier' || rows.Parameter[0].Type == 'Later' || rows.Parameter[0].Type == 'DatesBetween'" class="md-block" flex-gt-sm>
+<md-input-container ng-if="rows.Parameter[0].Type == 'Earlier' || rows.Parameter[0].Type == 'Later' || rows.Parameter[0].Type == 'DatesBetween'" 
+                    ng-mouseenter="variableReplace(rows.Parameter[0].Date2, $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-block" flex-gt-sm>
     <label>End Date</label>
     <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].Date2"  
             name="DateAdjustmentDate2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
             id="DateAdjustmentDate2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
             uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
+    <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
     <div ng-messages="form['DateAdjustmentDate2_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Date is required</div>
         <div ng-message="input">Variable Mismatch</div>
@@ -50,12 +53,14 @@
         <div ng-message="required">Type is required</div>
     </div>
 </md-input-container>
-<md-input-container ng-if="rows.Parameter[0].Type == 'Add'|| rows.Parameter[0].Type =='Subtract'" class="md-block" flex-gt-sm>
+<md-input-container ng-if="rows.Parameter[0].Type == 'Add'|| rows.Parameter[0].Type =='Subtract'"  
+                    ng-mouseenter="variableReplace(rows.Parameter[0].Period, $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-block" flex-gt-sm>
     <label>Period</label>
     <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"
             ng-model="rows.Parameter[0].Period" name="DateAdjustmentPeriod_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
             id="DateAdjustmentPeriod_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
             uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
+    <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
     <div ng-messages="form['DateAdjustmentPeriod_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Period is required</div>
         <div ng-message="input">Variable Mismatch</div>
