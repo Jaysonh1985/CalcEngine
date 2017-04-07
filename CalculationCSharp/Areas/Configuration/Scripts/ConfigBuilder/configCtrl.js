@@ -364,6 +364,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         rows.Type = rows.Parameter[0].templateOptions.type;
     };
 
+    $scope.variableReplace = function (value, colID, rowID) {
+        $scope.variableReplaced == null;
+        $scope.variableReplaced = configTypeaheadFactory.variableLastValue($scope.config, colID, rowID, value);
+        if ($scope.variableReplaced.length == 0) {
+            $scope.variableReplaced = value;
+        };
+    };
+
     $scope.setFunction = function (rows, colIndex, rowIndex) {  //function that sets the type of the row
         if (rows.Function == 'Maths') {
             rows.Type = 'Decimal';

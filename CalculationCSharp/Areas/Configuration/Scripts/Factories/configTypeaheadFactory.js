@@ -48,6 +48,38 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
             });
             scopeid = 0;
             return Names;
-        },      
+        },
+        variableLastValue: function (config, colIndex, rowIndex, name) {
+            var counter = 0;
+            var scopeid = 0;
+            var functionID = 0;
+            var arrayID = 0;
+            var Decimal = [];
+            var DecimalValue = [];
+            var DecimalParameter = [];
+            var Names = [];
+            angular.forEach(config, function (groups) {
+                if (scopeid <= colIndex) {
+                    DecimalValue = ($filter('filter')(config[scopeid].Functions, { Name: name },true));
+                    if (scopeid == colIndex) {
+                        var DecimalValue = ($filter('limitTo')(config[scopeid].Functions, rowIndex));
+                        DecimalValue = ($filter('filter')(DecimalValue, { Name: name }, true));
+                        var spliceid = rowIndex;
+                        var DecimalValueID = 0;
+                    };
+                    functionID = 0;
+                    if (DecimalValue.length > 0) {
+                        angular.forEach(DecimalValue, function (NamesDecimalValue) {
+                            DecimalParameter = ($filter('filter')(DecimalValue[functionID].Output));
+                            Names = DecimalParameter;
+                            functionID = functionID + 1;
+                        });
+                    };
+                    scopeid = scopeid + 1
+                };
+            });
+            scopeid = 0;
+            return Names;
+        },
     }
 });
