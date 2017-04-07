@@ -20,14 +20,14 @@
                 {{ rows.Type }}
             </div>
             <div class="v-separator"><h1></h1></div>
-                <div class="slide-container" style="width:19%" >
+                <div class="slide-container" style="width:25%" >
                     <h6 class="small">Name: &nbsp;</h6>
-                    {{ rows.Name }}
+                    {{ rows.Name | limitTo: 29 }} {{rows.Name.length > 29 ? '...' : ''}}
                 </div>
             <div class="v-separator"><h1></h1></div>
-            <div class="slide-container" style="width:36%">
+            <div class="slide-container" style="width:30%">
                 <h6 class="small">Output: &nbsp;</h6>
-                {{ rows.Output | limitTo: 50}} {{rows.Output.length > 50 ? '...' : ''}}
+                {{ rows.Output | limitTo: 40}} {{rows.Output.length > 40 ? '...' : ''}}
             </div>
             <div class="v-separator"><h1></h1></div>
             <div class="slide-container" style="width:2%; text-align:center">
