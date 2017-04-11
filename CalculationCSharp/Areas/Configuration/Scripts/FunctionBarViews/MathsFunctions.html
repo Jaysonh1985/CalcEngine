@@ -34,7 +34,7 @@
        
     </div>
 </md-input-container>  
-<md-input-container ng-mouseenter="variableReplace(rows.Parameter[0].Number2, $parent.$parent.$parent.$index, $parent.$parent.$index)"
+<md-input-container ng-mouseenter="variableReplace(rows.Parameter[0].Number2, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)"
                     ng-if="rows.Parameter[0].Type == 'Add'|| rows.Parameter[0].Type == 'AddPeriod'|| rows.Parameter[0].Type == 'Divide'|| rows.Parameter[0].Type == 'Max' || rows.Parameter[0].Type == 'Min' || rows.Parameter[0].Type == 'Multiply'|| rows.Parameter[0].Type == 'Power'|| rows.Parameter[0].Type == 'Subtract' || rows.Parameter[0].Type == 'SubtractPeriod'" 
                     class="md-block" flex-gt-sm>
     <label>Number 2</label>

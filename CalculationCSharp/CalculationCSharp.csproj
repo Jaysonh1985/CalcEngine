@@ -663,6 +663,7 @@
     <Content Include="Images\exclamation.svg" />
     <Content Include="Images\gear-option.png" />
     <Content Include="Images\Impactlist.svg" />
+    <Content Include="Images\magnifying-glass-searcher.svg" />
     <Content Include="Images\more.png" />
     <Content Include="Images\movelist.svg" />
     <Content Include="Images\multiply2.png" />
