@@ -140,6 +140,10 @@ public class DateFunctions
         {
             return DateAdjustmentMonthsBetween(Date1, Date2, Day);
         }
+        else if (Type == "LastDayMonth")
+        {
+            return DateAdjustmentLastDayMonth(Date1);
+        }
         else
         {
             return Convert.ToDateTime("01/01/1900").ToShortDateString();
@@ -360,6 +364,15 @@ public class DateFunctions
         {
             return Date1.ToShortDateString();
         }
+    }
+    /// <summary>Find Last Date of Month
+    /// <para>Date1 = First Date</para>
+    /// </summary>
+    public string DateAdjustmentLastDayMonth(DateTime Date1)
+    {
+        int result = DateTime.DaysInMonth(Date1.Year, Date1.Month);
+        DateTime newDate = new DateTime(Date1.Year, Date1.Month, result);
+        return newDate.ToShortDateString();
     }
     /// <summary>Find date occurances between two dates
     /// <para>Date1 = First Date</para>
