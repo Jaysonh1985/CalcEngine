@@ -136,6 +136,10 @@ public class DateFunctions
         {
             return DateAdjustmentDatesBetween(Date1, Date2, Day, Month);
         }
+        else if (Type == "MonthsBetween")
+        {
+            return DateAdjustmentMonthsBetween(Date1, Date2, Day);
+        }
         else
         {
             return Convert.ToDateTime("01/01/1900").ToShortDateString();
@@ -389,6 +393,50 @@ public class DateFunctions
                 {
                     DatesList.Add(dateIncrement.ToShortDateString());
                     dateIncrement = dateIncrement.AddYears(1);
+                }
+                while (dateIncrement <= Date2);
+                return string.Join("~", DatesList.ToArray());
+            }
+            else
+            {
+                return "";
+            }
+        }
+        else
+        {
+            return "";
+        }
+    }
+    /// <summary>Find date occurances between two dates
+    /// <para>Date1 = First Date</para>
+    /// <para>Date2 = Second Date</para>
+    /// <para>Day = Day for dates between</para>
+    /// <para>Month = Month for dates between</para>
+    /// </summary>
+    public string DateAdjustmentMonthsBetween(DateTime Date1, DateTime Date2, string Day)
+    {
+        if (Date1 <= Date2)
+        {
+            var DatesList = new List<String>();
+            string strDay = Day;
+            int intDay = Convert.ToInt32(strDay);
+            DateTime dateIncrement = Date1;
+            DateTime FirstValue = new DateTime(Date1.Year, Date1.Month, intDay);
+            if (FirstValue >= Date1)
+            {
+                dateIncrement = new DateTime(Date1.Year, Date1.Month, intDay);
+            }
+            else
+            {
+                dateIncrement = new DateTime(Date1.Year + 1, Date1.Month, intDay);
+            }
+            if (dateIncrement < Date2)
+            {
+                /* do loop execution */
+                do
+                {
+                    DatesList.Add(dateIncrement.ToShortDateString());
+                    dateIncrement = dateIncrement.AddMonths(1);
                 }
                 while (dateIncrement <= Date2);
                 return string.Join("~", DatesList.ToArray());
