@@ -539,6 +539,21 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                                 };
                             });
                         };
+                        //Logic Functions
+                        if ($scope.config[key].Functions[keyF].Function == 'LogicFunctions') {
+                            angular.forEach(obj, function (valueN, keyN, obj) {
+                                configValidationFactory.variablePreviouslySet($scope.config, key, null, keyF, valueN.Input1, form, true, AttName);
+                                configValidationFactory.variablePreviouslySet($scope.config, key, null, keyF, valueN.Input2, form, true, AttName);
+                                configValidationFactory.variablePreviouslySet($scope.config, key, null, keyF, valueN.TrueValue, form, true, AttName);
+                                configValidationFactory.variablePreviouslySet($scope.config, key, null, keyF, valueN.FalseValue, form, true, AttName);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Input1);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.Input2);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.TrueValue);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.FalseValue);
+                                configValidationFactory.requiredfieldcheck(AttName, valueN.LogicInd);
+                                configValidationFactory.requiredfieldcheck(AttName, $scope.config[key].Functions[keyF].Type);
+                            });
+                        };
                         //Array Functions
                         if ($scope.config[key].Functions[keyF].Function == 'ArrayFunctions') {
                             angular.forEach(obj, function (valueN, keyN, obj) {

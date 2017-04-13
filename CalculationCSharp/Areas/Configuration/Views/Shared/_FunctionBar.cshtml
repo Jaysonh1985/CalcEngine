@@ -18,6 +18,7 @@
                             <md-option value="ErrorsWarnings">Errors & Warnings</md-option>
                             <md-option value="Factors">Factors</md-option>
                             <md-option ng-if="$parent.$parent.$parent.MenuHeader == 'Configuration'" value="Function">Function</md-option>
+                            <md-option value="LogicFunctions">Logic Functions</md-option>
                             <md-option value="Maths">Maths</md-option>
                             <md-option value="MathsFunctions">Maths Functions</md-option>
                             <md-option value="Period">Period</md-option>
@@ -82,6 +83,7 @@
                         <div ng-if="rows.Function=='DatePart' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/DatePart.html'"></div>
                         <div ng-if="rows.Function=='DateAdjustment' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/DateAdjustment.html'"></div>
                         <div ng-if="rows.Function=='Comments' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Comments.html'"></div>
+                        <div ng-if="rows.Function=='LogicFunctions' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/LogicFunctions.html'"></div>
                         <div ng-if="rows.Function=='MathsFunctions' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/MathsFunctions.html'"></div>
                         <div ng-if="rows.Function=='Factors' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Factors.html'"></div>
                         <div ng-if="rows.Function=='ArrayFunctions' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ArrayFunctions.html'"></div>

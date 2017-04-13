@@ -28,7 +28,7 @@
     </div>
 </md-input-container>
 <md-input-container ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" class="md-block" flex-gt-sm>
-    <md-select name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Output" required>
+    <md-select name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Output" aria-label="Type" required>
         <md-option ng-repeat="option in rows.Parameter[0].templateOptions.optionsList" value="{{option.Name}}">{{option.Name}}</md-option>
     </md-select>
     <div ng-messages="form['Output_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
@@ -36,7 +36,7 @@
     </div>
 </md-input-container>   
 <md-input-container ng-if="rows.Parameter[0].templateOptions.list == true  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" class="md-block" flex-gt-sm>
-    <md-select name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Output">
+    <md-select name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-model="rows.Output">
         <md-option ng-repeat="option in rows.Parameter[0].templateOptions.optionsList" value="{{option.Name}}">{{option.Name}}</md-option>
     </md-select>
 </md-input-container>

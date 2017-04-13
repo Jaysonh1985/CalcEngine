@@ -245,6 +245,7 @@
     <Compile Include="Areas\Configuration\Models\Actions\Input.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\ArrayFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\ErrorsWarnings.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\LogicFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Return.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\StringFunctions.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\MathsFunctions.cs" />
@@ -316,6 +317,7 @@
     <Content Include="Areas\Configuration\Scripts\ConfigBuilder\configBuilderColumnCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Logic\groupCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Regression\RegressionInputModal.html" />
+    <Content Include="Areas\Configuration\Scripts\FunctionBarViews\LogicFunctions.html" />
     <Content Include="Areas\Configuration\Scripts\Services\configMenuService.js" />
     <Content Include="Areas\Configuration\Scripts\Services\configHistoryService.js" />
     <Content Include="Areas\Configuration\Scripts\Services\configRegressionService.js" />

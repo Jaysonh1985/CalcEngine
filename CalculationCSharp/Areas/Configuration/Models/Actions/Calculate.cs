@@ -353,6 +353,20 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             item.Type = "String";
                                         }
                                     }
+                                    else if (item.Function == "LogicFunctions")
+                                    {
+                                        LogicFunctions LogicFunctions = new LogicFunctions();
+                                        LogicFunctions parameters = (LogicFunctions)javaScriptSerializ­er.Deserialize(jparameters, typeof(LogicFunctions));
+                                        try
+                                        {
+                                            item.Output = LogicFunctions.Output(jCategory, parameters, group.ID, item.ID);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);
+                                            throw new HttpException(ex.ToString());
+                                        }
+                                    }
                                     else if (item.Function == "Function")
                                     {
                                         Function Functions = new Function();
