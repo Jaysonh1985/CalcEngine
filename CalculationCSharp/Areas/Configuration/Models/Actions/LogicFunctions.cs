@@ -21,19 +21,26 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
             ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
             string[] Input1parts = null;
             string[] Input2parts = null;
+            string[] TrueValueparts = null;
+            string[] FalseValueparts = null;
             //Returns array
             Input1parts = ArrayBuilder.InputArrayBuilder(bit.Input1, jCategory, GroupID, ItemID);
             Input2parts = ArrayBuilder.InputArrayBuilder(bit.Input2, jCategory, GroupID, ItemID);
+            TrueValueparts = ArrayBuilder.InputArrayBuilder(bit.TrueValue, jCategory, GroupID, ItemID);
+            FalseValueparts = ArrayBuilder.InputArrayBuilder(bit.FalseValue, jCategory, GroupID, ItemID);
             string Output = null;
             string OutputValue = null;
             //Gets Max Length of array so loops through all values        
             int MaxLength = ArrayBuilder.GetMaxLength(Input1parts, Input2parts);
+            int MaxLengthTrue = ArrayBuilder.GetMaxLength(TrueValueparts, FalseValueparts);
             int Counter = 0;
             //Loop through the array to calculate each value in array
             for (int i = 0; i < MaxLength; i++)
             {
                 dynamic InputA = null;
                 dynamic InputB = null;
+                dynamic TrueValue = null;
+                dynamic FalseValue = null;
                 //Gets the current array to use in the loop
                 InputA = ArrayBuilder.GetArrayPart(Input1parts, Counter);
                 InputB = ArrayBuilder.GetArrayPart(Input2parts, Counter);
@@ -108,11 +115,27 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
             }
             if(Convert.ToBoolean(result) == true)
             {
-                return Convert.ToString(TrueVal);
+                if(TrueVal == "")
+                {
+                    return Convert.ToString(InputA);
+                }
+                else
+                {
+                    return Convert.ToString(TrueVal);
+                }
+                
             }
             else
             {
-                return Convert.ToString(FalseVal);
+                if(FalseVal == "")
+                {
+                    return Convert.ToString(InputA);
+                }
+                else
+                {
+                    return Convert.ToString(FalseVal);
+                }
+                
             }
         }
         public bool NotEqual(dynamic InputA, dynamic InputB)

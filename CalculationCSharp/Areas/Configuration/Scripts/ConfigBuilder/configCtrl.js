@@ -548,8 +548,8 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
                                 configValidationFactory.variablePreviouslySet($scope.config, key, null, keyF, valueN.FalseValue, form, true, AttName);
                                 configValidationFactory.requiredfieldcheck(AttName, valueN.Input1);
                                 configValidationFactory.requiredfieldcheck(AttName, valueN.Input2);
-                                configValidationFactory.requiredfieldcheck(AttName, valueN.TrueValue);
-                                configValidationFactory.requiredfieldcheck(AttName, valueN.FalseValue);
+                                //configValidationFactory.requiredfieldcheck(AttName, valueN.TrueValue);
+                                //configValidationFactory.requiredfieldcheck(AttName, valueN.FalseValue);
                                 configValidationFactory.requiredfieldcheck(AttName, valueN.LogicInd);
                                 configValidationFactory.requiredfieldcheck(AttName, $scope.config[key].Functions[keyF].Type);
                             });

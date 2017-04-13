@@ -51,10 +51,9 @@
     <label>Output Value (True)</label>
     <input variablecheck inputtype="" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].TrueValue"
            uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" name="LogicFunctionsTrueVal_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
-           id="LogicFunctionsTrueVal_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
+           id="LogicFunctionsTrueVal_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
     <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
     <div ng-messages="form['LogicFunctionsTrueVal_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-        <div ng-message="required">Output Value (True) is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
 </md-input-container>
@@ -62,10 +61,9 @@
     <label>Output Value (False)</label>
     <input variablecheck inputtype="" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].FalseValue"
            uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" name="LogicFunctionsFalseVal_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
-           id="LogicFunctionsFalseVal_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
+           id="LogicFunctionsFalseVal_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
     <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
     <div ng-messages="form['LogicFunctionsFalseVal_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-        <div ng-message="required">Output Value (False) is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
 </md-input-container>
