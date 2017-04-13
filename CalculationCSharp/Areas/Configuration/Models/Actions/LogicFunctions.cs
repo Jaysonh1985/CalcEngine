@@ -32,20 +32,41 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
             string OutputValue = null;
             //Gets Max Length of array so loops through all values        
             int MaxLength = ArrayBuilder.GetMaxLength(Input1parts, Input2parts);
-            int MaxLengthTrue = ArrayBuilder.GetMaxLength(TrueValueparts, FalseValueparts);
+            int MaxLengthTrue = 0;
+            if (TrueValueparts != null)
+            {
+                MaxLengthTrue = TrueValueparts.Length - 1;
+            }
+            int MaxLengthFalse = 0;
+            if (FalseValueparts != null)
+            {
+                MaxLengthFalse = FalseValueparts.Length - 1;
+            }
             int Counter = 0;
+            int CounterTrue = 0;
+            int CounterFalse = 0;
+            dynamic TrueValue = null;
+            dynamic FalseValue = null;
             //Loop through the array to calculate each value in array
             for (int i = 0; i < MaxLength; i++)
             {
                 dynamic InputA = null;
                 dynamic InputB = null;
-                dynamic TrueValue = null;
-                dynamic FalseValue = null;
                 //Gets the current array to use in the loop
                 InputA = ArrayBuilder.GetArrayPart(Input1parts, Counter);
                 InputB = ArrayBuilder.GetArrayPart(Input2parts, Counter);
+                if(CounterTrue <= MaxLengthTrue)
+                {
+                    TrueValue = ArrayBuilder.GetArrayPart(TrueValueparts, CounterTrue);
+                    CounterTrue = CounterTrue + 1;
+                }
+                if(CounterFalse <= MaxLengthFalse)
+                {
+                    FalseValue = ArrayBuilder.GetArrayPart(FalseValueparts, CounterFalse);
+                    CounterFalse = CounterFalse + 1;
+                }
                 //Calculates the value required
-                OutputValue = Calculate(jCategory, InputA, InputB, bit, GroupID, ItemID);
+                OutputValue = Calculate(jCategory, InputA, InputB, TrueValue, FalseValue, bit, GroupID, ItemID);
                 Output = Output + OutputValue + "~";
                 Counter = Counter + 1;
             }
@@ -60,14 +81,14 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         /// <para>GroupID = current Group ID</para>
         /// <para>ItemID = current row ID</para>
         /// </summary>
-        public string Calculate(List<CategoryViewModel> jCategory, dynamic Input1, dynamic Input2, LogicFunctions bit, int GroupID, int ItemID)
+        public string Calculate(List<CategoryViewModel> jCategory, dynamic Input1, dynamic Input2, dynamic TrueValue, dynamic FalseValue, LogicFunctions bit, int GroupID, int ItemID)
         {
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();
             dynamic InputA = Config.VariableReplace(jCategory, Input1, GroupID, ItemID);
             dynamic InputB = Config.VariableReplace(jCategory, Input2, GroupID, ItemID);
-            dynamic TrueVal = Config.VariableReplace(jCategory, bit.TrueValue, GroupID, ItemID);
-            dynamic FalseVal = Config.VariableReplace(jCategory, bit.FalseValue, GroupID, ItemID);
+            dynamic TrueVal = Config.VariableReplace(jCategory, TrueValue, GroupID, ItemID);
+            dynamic FalseVal = Config.VariableReplace(jCategory, FalseValue, GroupID, ItemID);
             //Parses Decimals
             bool InputADeciSucceeded;
             bool InputBDeciSucceeded;
@@ -115,7 +136,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
             }
             if(Convert.ToBoolean(result) == true)
             {
-                if(TrueVal == "")
+                if(TrueVal == "" || TrueVal == null)
                 {
                     return Convert.ToString(InputA);
                 }
@@ -127,7 +148,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
             }
             else
             {
-                if(FalseVal == "")
+                if(FalseVal == "" || FalseVal == null)
                 {
                     return Convert.ToString(InputA);
                 }
