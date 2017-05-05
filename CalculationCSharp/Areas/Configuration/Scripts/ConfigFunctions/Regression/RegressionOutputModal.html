@@ -37,9 +37,9 @@
                                     </th>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="row in group.Output | filter : test" ng-class="{'redrow': row.Field.indexOf('Comment') > -1}">
+                                <tr ng-repeat="row in group.Output | filter : test" ng-class="{'redrow': row.Field.indexOf('Comments') > -1, 'white': row.Field.indexOf('Comments') < 0 }">
                                     <td>
-                                        {{row.Field}}
+                                        {{row.Field | underscoreless}}
                                     </td>
                                     <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">
                                         {{row.Value}}

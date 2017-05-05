@@ -332,6 +332,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             if (form.$valid == true && form.$invalid == false) {
                 $scope.validationError = false;
                 $scope.repeatEnd = true;
+                toastr.success("Calculating Please Wait...", "Success");
                 var Function = configFunctionFactory.isFunction($location.absUrl())
                 if (Function == true) {
                     configService.postCalcFunction(id, $scope.config).then(function (data) {
