@@ -51,6 +51,8 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 InputA = ArrayBuilder.GetArrayPart(Date1parts, Counter);
                 InputB = ArrayBuilder.GetArrayPart(Date2parts, Counter);
                 dynamic InputC = Config.VariableReplace(jCategory, parameters.Period, GroupID, ItemID);
+                dynamic InputD = Config.VariableReplace(jCategory, parameters.Day, GroupID, ItemID);
+                dynamic InputE = Config.VariableReplace(jCategory, parameters.Month, GroupID, ItemID);
                 DateTime Date1;
                 DateTime Date2;
                 Decimal Period;
@@ -73,7 +75,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
                     Date2 = Convert.ToDateTime("01/01/0001");
                 }
                 Decimal.TryParse(InputC, out Period);
-                string date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, parameters.Day, parameters.Month);
+                string date = DatesFunctions.DateAdjustment(parameters.Type, Convert.ToString(Date1), Convert.ToString(Date2), parameters.PeriodType, Period, parameters.Adjustment, InputD, InputE);
                 Output = Output + date + "~";
                 Counter = Counter + 1;
             }

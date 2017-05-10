@@ -71,7 +71,7 @@
 <md-input-container ng-if="rows.Parameter[0].Type == 'Adjust'" class="md-block" flex-gt-sm>
     <label>Adjustment</label>
     <md-select ng:model="rows.Parameter[0].Adjustment" name="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
-                id="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
+               id="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
                     aria-label="AdjustmentType" ng-disabled="viewOnly" required>
         <md-option value="Less">Before</md-option>
         <md-option value="LessEqual">On or Before</md-option>
@@ -85,16 +85,19 @@
 </md-input-container>
 <md-input-container ng-if="rows.Parameter[0].Type == 'Adjust' || rows.Parameter[0].Type == 'DatesBetween' || rows.Parameter[0].Type == 'MonthsBetween'" class="md-block" flex-gt-sm>
     <label>Select Day</label>
-    <input ng-model="rows.Parameter[0].Day" name="DateAdjustmentDay_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-            id="DateAdjustmentDay_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+    <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" 
+           uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" ng-model="rows.Parameter[0].Day" 
+           name="DateAdjustmentDay_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+           id="DateAdjustmentDay_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
     <div ng-messages="form['DateAdjustmentDay_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Day is required</div>
     </div>
 </md-input-container>
 <md-input-container ng-if="rows.Parameter[0].Type == 'Adjust' || rows.Parameter[0].Type == 'DatesBetween'" class="md-block" flex-gt-sm>
     <label>Select Month</label>
-    <input ng-model="rows.Parameter[0].Month" name="DateAdjustmentMonth_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-            id="DateAdjustmentMonth_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+    <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" 
+           uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" ng-model="rows.Parameter[0].Month" name="DateAdjustmentMonth_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+           id="DateAdjustmentMonth_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
     <div ng-messages="form['DateAdjustmentMonth_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Month is required</div>
     </div>
