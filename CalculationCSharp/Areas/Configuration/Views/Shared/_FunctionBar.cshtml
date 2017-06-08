@@ -62,7 +62,7 @@
                             <label>Variable Name</label>
                             <input differentvariabletype config='config' colIndex="{{$parent.$parent.$index}}" rowIndex="{{$parent.$index}}"
                                    ng-model="rows.Name" ng-pattern="noSpacesPattern" name="Name_{{$parent.$parent.$index}}_{{$parent.$index}}" 
-                                   id="Name_{{$parent.$parent.$index}}_{{$parent.$index}}" required>
+                                   id="Name_{{$parent.$parent.$index}}_{{$parent.$index}}" ng-blur="InputUnderscore(rows, rows.Name)" required>
                             <div ng-messages="form['Name_'+ $parent.$parent.$index + '_' + $parent.$index].$error">
                                 <div ng-message="required">Name is required.</div>
                                 <div ng-message="pattern">Pattern Incorrect</div>

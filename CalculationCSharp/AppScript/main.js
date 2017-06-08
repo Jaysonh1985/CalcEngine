@@ -129,6 +129,12 @@ sulhome.kanbanBoardApp.filter('stopwatchTime', function () {
 });
 sulhome.kanbanBoardApp.filter('underscoreless', function () {
     return function (input) {
-        return input.replace(/_/g, ' ');
+        if(input == null || input == ''){
+            return input;
+        }
+        else{
+            return input.replace(/_/g, ' ');
+        }
+        
     };
 });

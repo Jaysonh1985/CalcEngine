@@ -16,8 +16,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.openIndexRegression = [true];
     $scope.validationError = false;
     $scope.openIndexBackup = null;
-    $scope.noSpacesPattern = /^[a-zA-Z0-9-_]+$/;
-    $scope.csv = {
+        $scope.csv = {
         content: null,
         header: true,
         headerVisible: true,
@@ -771,6 +770,14 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }
     };
 
+    $scope.InputUnderscore = function InputUnderscore(row, value) {
+        NameUndefined = angular.isUndefined(value);
+        if (NameUndefined == false) {
+            var newString = value.replace(/\s+/g, '_');
+            row.Name = newString;
+        };
+    };
+
     $scope.selectRow = function (event, rowIndex, colIndex) {
         $scope.getVariableTypes(colIndex, rowIndex);
         $scope.Parameter = this.config[colIndex].Functions[rowIndex].Parameter;
@@ -920,5 +927,4 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
             };
         };
     });
-
 });
