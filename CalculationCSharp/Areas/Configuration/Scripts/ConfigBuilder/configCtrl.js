@@ -253,12 +253,24 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         var cf = confirm("Delete these lines?");
         if (cf == true) {
             var selectedRows = [];
-            selectedRows = selectedRowsIndexes[colIndex];
-            selectedRows = $filter('orderBy')(selectedRows);
-            selectRowsReverse = selectedRows.reverse();
-            angular.forEach(selectRowsReverse, function (value, key, prop) {
-                $scope.config[colIndex].Functions.splice(value, 1);
-            });
+            if (selectedRowsIndexes[colIndex] != null) {
+                var arrayID = selectedRowsIndexes[colIndex].indexOf($index);
+            }
+            else {
+                var arrayID = -1;
+            };
+            
+            if (arrayID == -1) {
+                $scope.config[colIndex].Functions.splice($index, 1);
+            }
+            else {
+                selectedRows = selectedRowsIndexes[colIndex];
+                selectedRows = $filter('orderBy')(selectedRows);
+                selectRowsReverse = selectedRows.reverse();
+                angular.forEach(selectRowsReverse, function (value, key, prop) {
+                    $scope.config[colIndex].Functions.splice(value, 1);
+                });
+            };
             resetSelection();
             toastr.success("Rows Deleted", "Success");
         };
