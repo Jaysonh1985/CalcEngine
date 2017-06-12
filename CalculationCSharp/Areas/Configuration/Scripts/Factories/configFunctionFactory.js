@@ -32,6 +32,7 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
                 item = {
                     ID: config[colIndex].Functions.length,
                     Function: 'Input',
+                    Name: 'New Variable',
                     Logic: [],
                     Parameter: []
                 };
@@ -40,6 +41,7 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
                 item = {
                     ID: config[colIndex].Functions.length,
                     Logic: [],
+                    Name: 'New Variable',
                     Parameter: []
                 };
             };
