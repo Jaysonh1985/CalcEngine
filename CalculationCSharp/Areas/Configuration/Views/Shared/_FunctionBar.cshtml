@@ -74,7 +74,6 @@
                             <label>Expected Result</label>
                             <input ng-model="rows.ExpectedResult" name="ExpectedResult_{{$parent.$parent.$index}}_{{$parent.$index}}" id="ExpectedResult_{{$parent.$parent.$index}}_{{$parent.$index}}">
                         </md-input-container>
-
                         <div ng-if="rows.Function=='ErrorsWarnings' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ErrorsWarnings.html'"></div>
                         <div ng-if="rows.Function=='StringFunctions' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/StringFunctions.html'"></div>
                         <div ng-if="rows.Function=='Input'" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Input.html'"></div>
@@ -92,6 +91,10 @@
                         <md-input-container ng-if="rows.Function!='Input' && rows.Function!='Comments' && rows.Function!='ErrorsWarnings'" class="md-block" flex-gt-sm>
                             <label>Output</label>
                             <textarea ng-model="rows.Output" rows="3" md-select-on-focus readonly></textarea>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Description</label>
+                            <textarea ng-model="rows.Description" name="Description_{{$parent.$parent.$index}}_{{$parent.$index}}" id="Description_{{$parent.$parent.$index}}_{{$parent.$index}}" rows="2" md-select-on-focus></textarea>
                         </md-input-container>
 
                     </div>

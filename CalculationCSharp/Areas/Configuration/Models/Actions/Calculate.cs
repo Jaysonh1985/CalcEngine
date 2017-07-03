@@ -43,7 +43,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 
                 foreach (var list in group)
                 {
-                    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value, SubOutput = list.SubOutput });
+                    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value, SubOutput = list.SubOutput, Description = list.Description });
                     //int index = SubList.FindIndex(a => a.Field == list.Field);
                     //if (index == -1)
                     //{
@@ -75,7 +75,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                     if (item.Function == "Input")
                     {
                         item.Output = InputFunctions.Output(item.Type, item.Output);
-                        OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
+                        OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, Description = item.Description });
                     }
                     else
                     {
@@ -283,7 +283,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         try
                                         {
                                             item.Output = Return.Output(jparameters, jCategory, group.ID, item.ID);
-                                            OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name });
+                                            OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, Description = item.Description });
                                             return;
                                         }
                                         catch (Exception ex)
@@ -442,7 +442,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 {
                                     item.Pass = "false";
                                 }
-                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, SubOutput = item.SubOutput });
+                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, SubOutput = item.SubOutput, Description = item.Description });
                             }
                             else
                             {
@@ -459,7 +459,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 }                           
                                 item.Pass = "miss";
 
-                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, SubOutput = item.SubOutput });
+                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, SubOutput = item.SubOutput, Description = item.Description });
                             }
                         }
                     }

@@ -16,6 +16,7 @@ namespace CalculationCSharp.Models.Calculation
         public string Value { get; set; }
         public string Group { get; set; }
         public virtual List<OutputListGroup> SubOutput { get; set; }
+        public string Description { get; set; }
 
     }
 

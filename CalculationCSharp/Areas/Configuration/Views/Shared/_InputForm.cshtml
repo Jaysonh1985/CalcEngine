@@ -1,4 +1,6 @@
-﻿<td width="5%">{{rows.Parameter[0].templateOptions.label}}</td>
+﻿<td width="5%">{{rows.Parameter[0].templateOptions.label}}
+    <md-tooltip ng-if="rows.Description != null" md-direction="left">{{rows.Description}}</md-tooltip> 
+</td>
 <td ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined)  && rows.Parameter[0].templateOptions.required == true" width="25%">
     <span show-errors rows='Category.Functions'><input inputformat-Validation config='rows' rowIndex="{{$index}}" name="Output_{{$index}}_{{$index}}" id="Output_{{$index}}_{{$index}}" type="text" ng:model="rows.Output" class="form-control  input-sm" ng-required="true"></span>
     <p ng-show="formregress['Output_'+ $index + '_' + $index].$invalid" class="help-block">Value is required.</p>
