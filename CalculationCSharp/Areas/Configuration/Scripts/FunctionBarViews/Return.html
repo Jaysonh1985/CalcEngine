@@ -1,47 +1,74 @@
-﻿<md-input-container class="md-block" flex-gt-sm>
-    <label>Data Type</label>
-    <md-select returnonlastrow config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"  
-               ng:model="rows.Parameter[0].Datatype" name="ReturnType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
-               id="ReturnType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly" required>
-        <md-option value="String">String</md-option>
-        <md-option value="Date">Date</md-option>
-        <md-option value="Decimal">Decimal</md-option>
-    </md-select>
-    <div ng-messages="form['ReturnType_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
-        <div ng-message="required">Type is required</div>
-    </div>
-</md-input-container>
-<md-input-container ng-if="rows.Parameter[0].Datatype == 'Date'" ng-mouseenter="variableReplace(rows.Parameter[0].Variable, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" class="md-block" flex-gt-sm>
-    <label>Variable to Return</label>
-    <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
-           ng-model="rows.Parameter[0].Variable" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" 
-           name="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
-           id="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
-    <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-    <div ng-messages="form['ReturnVariable_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
-        <div ng-message="required">Variable to Return required</div>
-        <div ng-message="input">Variable Mismatch</div>
-    </div>
-</md-input-container>
-<md-input-container ng-if="rows.Parameter[0].Datatype == 'Decimal'" ng-mouseenter="variableReplace(rows.Parameter[0].Variable, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" class="md-block" flex-gt-sm>
-    <label>Variable to Return</label>
-    <input  variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" ng-model="rows.Parameter[0].Variable" 
-            uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
-            id="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
-    <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-    <div ng-messages="form['ReturnVariable_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
-        <div ng-message="required">Variable to Return required</div>
-        <div ng-message="input">Variable Mismatch</div>
-    </div>
-</md-input-container>
-<md-input-container ng-if="rows.Parameter[0].Datatype == 'String'" ng-mouseenter="variableReplace(rows.Parameter[0].Variable, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" class="md-block" flex-gt-sm>
-    <label>Variable to Return</label>
-    <input  variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" ng-model="rows.Parameter[0].Variable" 
-            uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
-            id="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
-    <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-    <div ng-messages="form['ReturnVariable_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
-        <div ng-message="required">Variable to Return required</div>
-        <div ng-message="input">Variable Mismatch</div>
-    </div>
-</md-input-container>
+﻿<div layout="row" ng-repeat="val in rows.Parameter">
+    <md-input-container flex="20">
+        <label>Data Type</label>
+        <md-select returnonlastrow config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
+                   ng:model="val.Type" name="ReturnType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
+                   id="ReturnType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly" required>
+            <md-option value="String">String</md-option>
+            <md-option value="Date">Date</md-option>
+            <md-option value="Decimal">Decimal</md-option>
+        </md-select>
+        <div ng-messages="form['ReturnType_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
+            <div ng-message="required">Type is required</div>
+        </div>
+    </md-input-container>
+    <md-input-container  flex="45%">
+        <label>Variable Name</label>
+        <input differentvariabletype config='config' colIndex="{{$parent.$parent.$index}}" rowIndex="{{$parent.$index}}"
+            ng-model="val.Name" ng-pattern="noSpacesPattern" name="ReturnName_{{$parent.$parent.$index}}_{{$parent.$index}}" 
+            id="ReturnName_{{$parent.$parent.$index}}_{{$parent.$index}}" ng-blur="InputUnderscore(val, val.Name)" required>
+            <div ng-messages="form['ReturnVariable_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
+            <div ng-message="required">Variable to Return required</div>
+            <div ng-message="input">Variable Mismatch</div>
+        </div>
+    </md-input-container>
+    <md-input-container ng-if="val.Type == 'Date'" ng-mouseenter="variableReplace(val.Variable, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" flex="45%">
+        <label>Return Value</label>
+        <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
+               ng-model="val.Variable" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8"
+               name="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
+               id="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+        <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
+        <div ng-messages="form['ReturnVariable_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
+            <div ng-message="required">Variable to Return required</div>
+            <div ng-message="input">Variable Mismatch</div>
+        </div>
+    </md-input-container>
+    <md-input-container ng-if="val.Type == 'Decimal'" ng-mouseenter="variableReplace(val.Variable, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" flex="45%">
+        <label>Variable to Return</label>
+        <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" ng-model="val.Variable"
+               uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
+               id="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+        <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
+        <div ng-messages="form['ReturnVariable_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
+            <div ng-message="required">Variable to Return required</div>
+            <div ng-message="input">Variable Mismatch</div>
+        </div>
+    </md-input-container>
+    <md-input-container ng-if="val.Type == 'String'" ng-mouseenter="variableReplace(val.Variable, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" flex="45%">
+        <label>Variable to Return</label>
+        <input variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" ng-model="val.Variable"
+               uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" name="ReturnVariable_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
+               id="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+        <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
+        <div ng-messages="form['ReturnVariable_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+            <div ng-message="required">Variable to Return required</div>
+            <div ng-message="input">Variable Mismatch</div>
+        </div>
+    </md-input-container>
+    <md-input-container flex="45%">
+        <label>Result</label>
+        <input ng-model="val.Output" name="ReturnResult_{{$parent.$parent.$index}}_{{$parent.$index}}"
+               id="ReturnResult_{{$parent.$parent.$index}}_{{$parent.$index}}" readonly>
+    </md-input-container>
+</div>
+<md-content class="md-no-momentum" layout-margin="">
+    <md-button ng-click="addReturnItem($index)" class="md-accent">
+        Click to Add New Row
+    </md-button>
+</md-content>
+<md-content class="md-no-momentum" layout-margin="">
+    <md-button ng-click="removeMathsItem()" class="md-accent">
+        Click to Remove Last Row
+    </md-button>
+</md-content>

@@ -9,8 +9,10 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
 {
     public class Return
     {
-        public string Datatype { get; set; }
+        public string Type { get; set; }
         public dynamic Variable { get; set; }
+        public string Name { get; set; }
+        public dynamic Output { get; set; }
 
         /// <summary>Return where function is being built this is the value that should be passed back to the main calculation.
         /// <para>jparameters = JSON congifurations relating to this function</para>
@@ -18,7 +20,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
         /// <para>GroupID = current Group ID</para>
         /// <para>ItemID = current row ID</para>
         /// </summary>
-        public string Output(string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID)
+        public string Output1(string jparameters, List<CategoryViewModel> jCategory, int GroupID, int ItemID)
         {
             JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
             CalculationCSharp.Areas.Configuration.Models.ConfigFunctions Config = new CalculationCSharp.Areas.Configuration.Models.ConfigFunctions();

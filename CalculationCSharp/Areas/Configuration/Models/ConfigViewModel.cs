@@ -15,6 +15,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Type {get;set;}
         public string Category { get; set; }
         public string Function { get; set; }
+        public virtual List<Return> FunctionOutput { get; set; }
         public string Name { get; set; }
         public virtual List<dynamic> Parameter { get; set; }
         public string Output { get; set; }
