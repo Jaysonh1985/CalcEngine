@@ -6,46 +6,70 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
             var counter = 0;
             var scopeid = 0;
             var functionID = 0;
+            var spliceid = 0;
             var arrayID = 0;
             var Decimal = [];
             var DecimalValue = [];
             var DecimalParameter = [];
             var Names = [];
             var newArr = [];
+            var TypeaheadValue = []
             angular.forEach(config, function (groups) {
-                if (scopeid <= colIndex) {
-
-                    if (type == null) {
-                        DecimalValue = ($filter('filter')(config[scopeid].Functions));
-                    }
-                    else {
-                        DecimalValue = ($filter('filter')(config[scopeid].Functions, { Type: type }));
-                    };
-                    if (scopeid == colIndex) {
-
-                        var DecimalValue = ($filter('limitTo')(config[scopeid].Functions, rowIndex));
-                        if (type == null) {
-                            DecimalValue = ($filter('filter')(DecimalValue));
+                if (scopeid < colIndex) {
+                    angular.forEach(groups.Functions, function (functionList) {
+                        if (functionList.Function == 'Function') {
+                            angular.forEach(functionList.FunctionOutput, function (functionOutput) {
+                                if (functionOutput.Type == type) {
+                                    TypeaheadValue.push(functionOutput.Name);
+                                }
+                                else if (type == "") {
+                                    TypeaheadValue.push(functionOutput.Name);
+                                };                             
+                            });
                         }
-                        else {
-                            DecimalValue = ($filter('filter')(DecimalValue, { Type: type }));
+                        else if (type == functionList.Type) {
+                            TypeaheadValue.push(functionList.Name);
+                        }
+                        else if (type == "") {
+                            TypeaheadValue.push(functionList.Name);
                         };
-
-                        var spliceid = rowIndex;
-                        var DecimalValueID = 0;
-                    };
-                    functionID = 0;
-                    angular.forEach(DecimalValue, function (NamesDecimalValue) {
-                        DecimalParameter = ($filter('filter')(DecimalValue[functionID].Name));
-                        if (Names.indexOf(DecimalParameter) == -1) {
-                            Names[arrayID] = DecimalParameter;
-                            arrayID = arrayID + 1;
-                        };
-                        functionID = functionID + 1;
                     });
-                    scopeid = scopeid + 1
+                }
+                if (scopeid == colIndex) {
+                    spliceid = 0
+                    angular.forEach(groups.Functions, function (functionList) {
+                        if (spliceid < rowIndex) {
+                            if (functionList.Function == 'Function') {
+                                angular.forEach(functionList.FunctionOutput, function (functionOutput) {
+                                    if (functionOutput.Type == type) {
+                                        TypeaheadValue.push(functionOutput.Name);
+                                    }
+                                    else if (type == "") {
+                                        TypeaheadValue.push(functionOutput.Name);
+                                    };
+                                });
+                            }
+                            else if (type == functionList.Type) {
+                                TypeaheadValue.push(functionList.Name);
+                            }
+                            else if (type == "") {
+                                TypeaheadValue.push(functionList.Name);
+                            };
+                        };
+                    });
+                     spliceid++;
                 };
+                scopeid++;
             });
+            functionID = 0;
+            angular.forEach(TypeaheadValue, function (NamesDecimalValue) {
+                if (Names.indexOf(NamesDecimalValue) == -1) {
+                    Names[arrayID] = NamesDecimalValue;
+                    arrayID = arrayID + 1;
+                };
+                functionID = functionID + 1;
+            });
+            
             scopeid = 0;
             return Names;
         },
