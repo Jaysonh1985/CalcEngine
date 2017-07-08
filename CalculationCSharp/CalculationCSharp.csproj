@@ -900,6 +900,7 @@
     <Folder Include="Areas\Project\Views\UploadFile\" />
     <Folder Include="Areas\Workflow\Models\" />
     <Folder Include="Areas\Workflow\Views\Shared\" />
+    <Folder Include="Configuration JSON\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
