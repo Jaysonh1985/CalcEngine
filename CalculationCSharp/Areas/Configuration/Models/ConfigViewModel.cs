@@ -24,5 +24,9 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Pass { get; set; }
         public virtual List<OutputListGroup> SubOutput { get; set; }
 
+        internal object Where(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -27,24 +27,60 @@ namespace CalculationCSharp.Areas.Configuration.Models
                 //Find in columns above
                 if(item.ID < colID)
                 {
-                    element = ConfigViewModel.Where(a => a.Name == Input).LastOrDefault();
+                    foreach(var row in item.Functions){
+                        if (row.Function == "Function")
+                        {
+                            foreach (var FunctionRow in row.FunctionOutput)
+                            {
+                                if (FunctionRow.Name == Input)
+                                {
+                                    element = FunctionRow.Output;
+                                };
+
+                            };
+                        }
+                        else
+                        {
+                            if(row.Name == Input)
+                            {
+                                element = row.Output;
+                            }
+                        };
+                    };
                 }
                 //Find in current column
                 else if (item.ID == colID)
                 {
-                    element = ConfigViewModel.Where(a => a.Name == Input && a.ID < rowID).LastOrDefault();
-                }
-                else
-                {
-                    element = null;
+                    int counter = 0;
+                    foreach (var row in item.Functions)
+                    {
+                        if (counter == rowID) break;
+                        if (row.Function == "Function")
+                        {
+                            foreach (var FunctionRow in row.FunctionOutput)
+                            {
+                                if (FunctionRow.Name == Input)
+                                {
+                                    element = FunctionRow.Output;
+                                };
+
+                            };
+                        }
+                        else
+                        {
+                            if (row.Name == Input)
+                            {
+                                element = row.Output;
+                            }
+                        };
+                        counter++;
+                    };
                 }
                 //Set the value of the variable replace if available this saves it and can be overwrriten if a further one is available.
                 if(element != null)
                 {
-                    elementType = element;
-                    Output = element.Output; 
+                    Output = element; 
                 }
-
             }
             //If null then set the values to either return the default value or pass back the variable name
             if (Output == null)
