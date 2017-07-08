@@ -23,7 +23,7 @@
         </div>
     </md-input-container>
     <md-input-container ng-if="val.Type == 'Date'" ng-mouseenter="variableReplace(val.Variable, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" flex="45%">
-        <label>Return Value</label>
+        <label>Variable to Return</label>
         <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
                ng-model="val.Variable" uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8"
                name="ReturnVariable_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
