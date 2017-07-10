@@ -317,7 +317,10 @@
     <Content Include="Areas\Configuration\Scripts\ConfigBuilder\configBuilderColumnCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Logic\groupCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Regression\RegressionInputModal.html" />
+    <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Table\tableCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\FunctionBarViews\LogicFunctions.html" />
+    <Content Include="Areas\Configuration\Scripts\FunctionBarViews\TableModal.html" />
+    <Content Include="Areas\Configuration\Scripts\FunctionBarViews\Table.html" />
     <Content Include="Areas\Configuration\Scripts\Services\configMenuService.js" />
     <Content Include="Areas\Configuration\Scripts\Services\configHistoryService.js" />
     <Content Include="Areas\Configuration\Scripts\Services\configRegressionService.js" />

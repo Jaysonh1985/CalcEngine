@@ -220,6 +220,21 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }, function () {
         });
     };
+    $scope.TableButtonClick = function (size, colIndex, type, Parameters) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/Areas/Configuration/Scripts/FunctionBarViews/TableModal.html',
+            scope: $scope,
+            controller: 'tableCtrl',
+            size: size,
+            resolve: {
+                parameters: function () { return Parameters },
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+        }, function () {
+        });
+    };
 
     $scope.AddFunctionRows = function (colIndex, index, e) {
         var item;
@@ -379,7 +394,9 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     $scope.variableReplace = function (value, colID, rowID) {
         $scope.variableReplaced == null;
         $scope.variableReplaced = configTypeaheadFactory.variableLastValue($scope.config, colID, rowID, value);
-        if ($scope.variableReplaced.length == 0) {
+        if (angular.isUndefined($scope.variableReplaced) == true) {
+            $scope.variableReplaced = "No value found";
+        } else if ($scope.variableReplaced.length == 0) {
             $scope.variableReplaced = value;
         };
     };
@@ -673,13 +690,27 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
        $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.splice($scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.length, 0, item);
    };
 
+   $scope.addReturnItem = function ($index) {
+       var item = null;
+       item = {
+           Datatype: "Decimal",
+           Name: "",
+           Variable: "",
+           Result: "Result"
+       };
+       $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.splice($scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.length, 0, item);
+   };
+
    $scope.setArrayType = function (rows) {
        rows.Type = rows.Parameter[0].LookupType;
    };
 
     $scope.removeMathsItem = function () {
         $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.splice($scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.length - 1, 1);
-    };   
+    };
+    $scope.removeReturnItem = function () {
+        $scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.splice($scope.config[$scope.colIndex].Functions[$scope.rowIndex].Parameter.length - 1, 1);
+    };
 
     var onError = function (errorMessage) {
         $scope.viewOnly = false;

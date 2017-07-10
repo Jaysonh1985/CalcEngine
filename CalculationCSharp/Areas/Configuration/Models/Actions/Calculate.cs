@@ -8,6 +8,7 @@ using System.Linq;
 using log4net;
 using System.Web;
 using CalculationCSharp.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace CalculationCSharp.Areas.Configuration.Models.Actions
 {
@@ -282,8 +283,17 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         Return Return = new Return();
                                         try
                                         {
-                                            item.Output = Return.Output(jparameters, jCategory, group.ID, item.ID);
-                                            OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, Description = item.Description });
+                                            int returnCounter = 0;
+                                            foreach(var returnParam in item.Parameter.ToList())
+                                            {
+                                                string jparameters1 = Newtonsoft.Json.JsonConvert.SerializeObject(returnParam);
+                                                Return parameters = (Return)javaScriptSerializ­er.Deserialize(jparameters1, typeof(Return));
+                                                parameters.Output = Convert.ToString(Return.Output1(jparameters1, jCategory, group.ID, item.ID));
+                                                string jparameters2 = Newtonsoft.Json.JsonConvert.SerializeObject(parameters);
+                                                item.Parameter[returnCounter] = javaScriptSerializer.DeserializeObject(jparameters2);
+                                                
+                                                returnCounter ++;
+                                            }
                                             return;
                                         }
                                         catch (Exception ex)
@@ -406,19 +416,19 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                                 if (index >= 0)
                                                 {
                                                     item.Output = col.Functions[index].Output;
+                                                    List<Return> returnList = new List<Return>();
                                                     foreach (var thing in col.Functions[index].Parameter)
                                                     {
-                                                        foreach (var test in thing)
-                                                        {
-                                                            if (test.Key == "Datatype")
-                                                            {
-                                                                item.Type = test.Value;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-
+                                                        Return returnObj = new Actions.Return();
+                                                        returnObj.Type = thing["Type"];
+                                                        returnObj.Name = thing["Name"];
+                                                        returnObj.Output = thing["Output"];
+                                                        returnObj.Variable = thing["Variable"];
+                                                        returnList.Add(returnObj);                                                       
+                                                    };
+                                                    item.FunctionOutput = returnList;
+                                                };
+                                            };
                                         }
                                         catch (Exception ex)
                                         {

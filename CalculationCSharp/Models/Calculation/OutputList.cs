@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using CalculationCSharp.Models.Calculation;
 using System.ComponentModel.DataAnnotations;
 using CalculationCSharp.Areas.Configuration.Models;
+using CalculationCSharp.Areas.Configuration.Models.Actions;
 
 namespace CalculationCSharp.Models.Calculation
 {

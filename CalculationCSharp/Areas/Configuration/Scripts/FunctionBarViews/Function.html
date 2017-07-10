@@ -106,4 +106,34 @@
         </table>
         </div>                           
     </div>
+    <div class="panel-heading">
+        <h2 class="panel-title">Output Form</h2>
+    </div>      
+    <table id="table" class="table table-bordered">
+        <thead>
+            <tr>
+                <th width="50%">
+                    Type
+                </th>
+                <th width="50%">
+                    Variable
+                </th>
+                <th width="50%">
+                    Output
+                </th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in rows.FunctionOutput">
+                <td>
+                    {{row.Type}}
+                </td>
+                <td>
+                    {{row.Name}}
+                </td>
+                <td style="word-wrap: break-word;min-width: 175px; max-width: 175px;">
+                    {{row.Output}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </fieldset>

@@ -47,6 +47,11 @@
                 </a>
             </div>
             <div class="slide-container" style="width:0%; text-align:center">
+                <a ng-show="rows.Function == 'Table'" data-nodrag ng-click="TableButtonClick('lg', $parent.$index, $index, rows.Parameter)">
+                    <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
+                </a>
+            </div>
+            <div class="slide-container" style="width:0%; text-align:center">
                 <md-icon ng-if="rows.Pass == 'true'" md-svg-src="/Images/checked.svg"> </md-icon>
                 <md-icon ng-if="rows.Pass == 'false'" md-svg-src="/Images/exclamation.svg"> </md-icon>
             </div>

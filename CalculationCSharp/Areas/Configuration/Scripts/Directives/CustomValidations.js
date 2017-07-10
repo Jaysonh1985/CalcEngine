@@ -60,6 +60,29 @@ sulhome.kanbanBoardApp.directive('form', function ($timeout) {
         }
     }; 
 })
+sulhome.kanbanBoardApp.directive('myTable', function () {
+    return {
+        restrict: 'E',
+        link: function (scope, element, attrs) {
+            var html = '<table class="table table-bordered">';
+            html += '<thead><tr>';
+            angular.forEach(scope[attrs.rows], function (row, index) {
+                html += '<td>' + 'Column' + '</td>';
+            })
+            html += '<tr></thead>';
+            
+            angular.forEach(scope[attrs.rowstd], function (row1, index1) {
+                html += '<tr>';
+                angular.forEach(row1, function (subrow, index) {
+                    html += '<td>' + subrow.Name + '</td>';
+                })
+                html += '</tr>';
+            })
+            html += '</table>';
+            element.replaceWith(html)
+        }
+    }
+});
 
 //Validate the input form
 sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeaheadFactory, $filter) {

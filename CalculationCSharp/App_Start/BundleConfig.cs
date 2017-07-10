@@ -44,6 +44,7 @@ namespace CalculationCSharp
                         "~/Areas/Configuration/Scripts/ConfigBuilder/configBuilderColumnCtrl.js",
                         "~/Areas/Configuration/Scripts/ConfigBuilder/configBuilderUICtrl.js",
                         "~/Areas/Configuration/Scripts/ConfigBuilder/configCtrl.js",
+                        "~/Areas/Configuration/Scripts/ConfigBuilder/configCtrl.js",
                         "~/Areas/Configuration/Scripts/ConfigMenu/configMenuCtrl.js",
                         "~/Areas/Configuration/Scripts/ConfigMenu/configMenuAddCalcCtrl.js",
                         "~/Areas/Configuration/Scripts/ConfigFunctions/History/historyCtrl.js",
@@ -59,7 +60,8 @@ namespace CalculationCSharp
                         "~/Areas/Configuration/Scripts/Services/configService.js",
                         "~/Areas/Configuration/Scripts/Services/configMenuService.js",
                         "~/Areas/Configuration/Scripts/Services/configHistoryService.js",
-                        "~/Areas/Configuration/Scripts/Services/configRegressionService.js"
+                        "~/Areas/Configuration/Scripts/Services/configRegressionService.js",
+                        "~/Areas/Configuration/Scripts/ConfigFunctions/Table/tableCtrl.js"
                         ));
 
             //Calculation Configuration
