@@ -14,31 +14,14 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
             var Names = [];
             var newArr = [];
             var TypeaheadValue = []
+            var keepGoing = true;
             angular.forEach(config, function (groups) {
-                if (scopeid < colIndex) {
-                    angular.forEach(groups.Functions, function (functionList) {
-                        if (functionList.Function == 'Function') {
-                            angular.forEach(functionList.FunctionOutput, function (functionOutput) {
-                                if (functionOutput.Type == type) {
-                                    TypeaheadValue.push(functionOutput.Name);
-                                }
-                                else if (type == "" || type == null) {
-                                    TypeaheadValue.push(functionOutput.Name);
-                                };                             
-                            });
-                        }
-                        else if (type == functionList.Type) {
-                            TypeaheadValue.push(functionList.Name);
-                        }
-                        else if (type == "" || type == null) {
-                            TypeaheadValue.push(functionList.Name);
-                        };
-                    });
-                }
-                if (scopeid == colIndex) {
-                    spliceid = 0
-                    angular.forEach(groups.Functions, function (functionList) {
-                        if (spliceid < rowIndex) {
+                if (keepGoing) {
+                    if (scopeid > colIndex == 1) {
+                        keepGoing = false;
+                    }
+                    if (scopeid < colIndex) {
+                        angular.forEach(groups.Functions, function (functionList) {
                             if (functionList.Function == 'Function') {
                                 angular.forEach(functionList.FunctionOutput, function (functionOutput) {
                                     if (functionOutput.Type == type) {
@@ -55,11 +38,34 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
                             else if (type == "" || type == null) {
                                 TypeaheadValue.push(functionList.Name);
                             };
-                        };
-                    });
-                     spliceid++;
-                };
-                scopeid++;
+                        });
+                    }
+                    if (scopeid == colIndex) {
+                        spliceid = 0
+                        angular.forEach(groups.Functions, function (functionList) {
+                            if (spliceid < rowIndex) {
+                                if (functionList.Function == 'Function') {
+                                    angular.forEach(functionList.FunctionOutput, function (functionOutput) {
+                                        if (functionOutput.Type == type) {
+                                            TypeaheadValue.push(functionOutput.Name);
+                                        }
+                                        else if (type == "" || type == null) {
+                                            TypeaheadValue.push(functionOutput.Name);
+                                        };
+                                    });
+                                }
+                                else if (type == functionList.Type) {
+                                    TypeaheadValue.push(functionList.Name);
+                                }
+                                else if (type == "" || type == null) {
+                                    TypeaheadValue.push(functionList.Name);
+                                };
+                            };
+                        });
+                        spliceid++;
+                    };
+                    scopeid++;
+                }
             });
             functionID = 0;
             angular.forEach(TypeaheadValue, function (NamesDecimalValue) {
