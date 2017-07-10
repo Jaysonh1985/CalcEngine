@@ -47,19 +47,6 @@ sulhome.kanbanBoardApp.directive('differentvariabletype', function (configTypeah
     };
 });
 
-sulhome.kanbanBoardApp.directive('form', function ($timeout) {
-    return {
-        restrict: 'E',
-        link: function(scope, elem) {
-            elem.on('submit', function () {
-                scope.$broadcast('form:submit');
-                scope.viewOnly = false;
-                scope.isLoading = false;
-                scope.CalcButtonClick(scope.form);                       
-            });
-        }
-    }; 
-})
 sulhome.kanbanBoardApp.directive('myTable', function () {
     return {
         restrict: 'E',

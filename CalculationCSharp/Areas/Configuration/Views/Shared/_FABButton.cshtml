@@ -7,7 +7,7 @@
         </md-button>
     </md-fab-trigger>
     <md-fab-actions ng-controller="configBuilderUICtrl">
-        <md-button ng-disabled="viewOnly" aria-label="Calculate" class="md-fab md-raised md-mini"
+        <md-button ng-disabled="viewOnly" aria-label="Calculate" class="md-fab md-raised md-mini" ng-click="CalcButtonClick(form)"
                    type="submit">
             <md-tooltip md-direction="left" md-visible="tooltipVisible"
                         md-autohide="false">
