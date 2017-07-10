@@ -18,6 +18,8 @@ namespace CalculationCSharp.Models.Calculation
         public string Group { get; set; }
         public virtual List<OutputListGroup> SubOutput { get; set; }
         public string Description { get; set; }
+        public string Function { get; set; }
+        public virtual List<dynamic> Parameter { get; set; }
 
     }
 

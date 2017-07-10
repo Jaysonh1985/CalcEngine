@@ -47,8 +47,8 @@
                 </a>
             </div>
             <div class="slide-container" style="width:0%; text-align:center">
-                <a ng-show="rows.Function == 'Table'" data-nodrag ng-click="TableButtonClick('lg', $parent.$index, $index, rows.Parameter)">
-                    <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
+                <a ng-show="rows.Function == 'Table'" data-nodrag ng-click="TableButtonClick('lg', $parent.$index, $index, rows.Parameter, rows.Name)">
+                    <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/table.svg"></md-icon>
                 </a>
             </div>
             <div class="slide-container" style="width:0%; text-align:center">

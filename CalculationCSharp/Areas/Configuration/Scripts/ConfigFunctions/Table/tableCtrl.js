@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2016 Project AIM
-sulhome.kanbanBoardApp.controller('tableCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location, $filter, parameters) {
+sulhome.kanbanBoardApp.controller('tableCtrl', function ($scope, $uibModal, $uibModalInstance, $log, $http, $location, $filter, parameters, colIndex, rowIndex, TableName) {
     $scope.rows = [];
     $scope.topRow = [];
     $scope.parameters = [];
@@ -7,9 +7,10 @@ sulhome.kanbanBoardApp.controller('tableCtrl', function ($scope, $uibModal, $uib
     $scope.array = [];
     $scope.rows.Row = [];
     function init() {
+        $scope.TableName = TableName
         $scope.parameters = parameters;
         angular.forEach(parameters, function (value, key, obj) {
-            var Split = value.Column.split('~');
+            var Split = value.Result.split('~');
             angular.forEach(Split, function (valueS, keyS,objS) {
                 rows.push({
                     Name: valueS,
@@ -39,6 +40,16 @@ sulhome.kanbanBoardApp.controller('tableCtrl', function ($scope, $uibModal, $uib
             }
             $scope.parametersrows = pivoted.undefined;
         }
+    };
+
+    $scope.variableReplace = function (value, colID, rowID) {
+        $scope.variableReplaced == null;
+        $scope.variableReplaced = configTypeaheadFactory.variableLastValue($scope.config, colID, rowID, value);
+        if (angular.isUndefined($scope.variableReplaced) == true) {
+            $scope.variableReplaced = "No value found";
+        } else if ($scope.variableReplaced.length == 0) {
+            $scope.variableReplaced = value;
+        };
     };
 
     $scope.cancel = function () {

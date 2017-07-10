@@ -1,8 +1,13 @@
 ﻿<div layout="row" ng-repeat="val in rows.Parameter">
     <md-input-container>
-        <label>Column</label>
-        <input colIndex="{{$parent.$parent.$index}}" rowIndex="{{$parent.$index}}"  ng-model="val.Column" ng-pattern="noSpacesPattern" name="Column_{{$parent.$parent.$index}}_{{$parent.$index}}"
-               id="Column_{{$parent.$parent.$index}}_{{$parent.$index}}" required>
+        <label>Column Name</label>
+        <input colIndex="{{$parent.$parent.$index}}" rowIndex="{{$parent.$index}}" ng-model="val.ColumnName" ng-pattern="noSpacesPattern" name="TableColumn_{{$parent.$parent.$index}}_{{$parent.$index}}"
+               id="TableColumn_{{$parent.$parent.$index}}_{{$parent.$index}}" required>
+    </md-input-container>
+    <md-input-container>
+        <label>Variable</label>
+        <input colIndex="{{$parent.$parent.$index}}" rowIndex="{{$parent.$index}}"  ng-model="val.Variable" ng-pattern="noSpacesPattern" name="TableVariable_{{$parent.$parent.$index}}_{{$parent.$index}}"
+               id="TableVariable_{{$parent.$parent.$index}}_{{$parent.$index}}" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
 </div>
 <md-content class="md-no-momentum" layout-margin="">

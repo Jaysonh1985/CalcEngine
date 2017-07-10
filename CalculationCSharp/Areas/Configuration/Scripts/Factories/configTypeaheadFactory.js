@@ -22,7 +22,7 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
                                 if (functionOutput.Type == type) {
                                     TypeaheadValue.push(functionOutput.Name);
                                 }
-                                else if (type == "") {
+                                else if (type == "" || type == null) {
                                     TypeaheadValue.push(functionOutput.Name);
                                 };                             
                             });
@@ -30,7 +30,7 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
                         else if (type == functionList.Type) {
                             TypeaheadValue.push(functionList.Name);
                         }
-                        else if (type == "") {
+                        else if (type == "" || type == null) {
                             TypeaheadValue.push(functionList.Name);
                         };
                     });
@@ -44,7 +44,7 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
                                     if (functionOutput.Type == type) {
                                         TypeaheadValue.push(functionOutput.Name);
                                     }
-                                    else if (type == "") {
+                                    else if (type == "" || type == null) {
                                         TypeaheadValue.push(functionOutput.Name);
                                     };
                                 });
@@ -52,7 +52,7 @@ sulhome.kanbanBoardApp.factory('configTypeaheadFactory', function ($filter, conf
                             else if (type == functionList.Type) {
                                 TypeaheadValue.push(functionList.Name);
                             }
-                            else if (type == "") {
+                            else if (type == "" || type == null) {
                                 TypeaheadValue.push(functionList.Name);
                             };
                         };

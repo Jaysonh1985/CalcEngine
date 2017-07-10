@@ -220,15 +220,19 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }, function () {
         });
     };
-    $scope.TableButtonClick = function (size, colIndex, type, Parameters) {
+    $scope.TableButtonClick = function (size, colIndex, rowIndex, Parameters, TableName) {
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: '/Areas/Configuration/Scripts/FunctionBarViews/TableModal.html',
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Table/TableModal.html',
             scope: $scope,
             controller: 'tableCtrl',
             size: size,
+            windowClass: 'app-modal-window',
             resolve: {
                 parameters: function () { return Parameters },
+                colIndex: function () { return colIndex },
+                rowIndex: function () { return rowIndex },
+                TableName: function () { return TableName }
             }
         });
         modalInstance.result.then(function (selectedItem) {
@@ -437,6 +441,9 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }
         else if (rows.Function == 'Return') {
             rows.Name = 'Return_' + colIndex + '_' + rowIndex;
+        }
+        else if (rows.Function == 'Function') {
+            rows.Name = 'Function' + colIndex + '_' + rowIndex;
         }
         else {
             rows.Type = null;

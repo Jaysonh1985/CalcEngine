@@ -47,6 +47,9 @@
                                     <a ng-if="row.SubOutput != null" ng-click="OutputButtonClick('lg', $parent.$index, $index, row.SubOutput)">
                                         <span class="glyphicon glyphicon-search"></span>
                                     </a>
+                                    <a ng-show="row.Function == 'Table'" data-nodrag ng-click="TableButtonClick('lg', $parent.$index, $index, row.Parameter, row.Field)">
+                                        <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/table.svg"></md-icon>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>

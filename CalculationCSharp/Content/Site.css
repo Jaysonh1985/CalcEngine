@@ -983,3 +983,6 @@ md-list-item._md-button-wrap > div.md-button:first-child {
   -moz-background-size: 4px 4px;
   background-size: 4px 4px;
   }
+.app-modal-window .modal-dialog {
+  width: 80%;
+}

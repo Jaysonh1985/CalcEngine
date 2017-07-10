@@ -9,6 +9,7 @@ using log4net;
 using System.Web;
 using CalculationCSharp.Models;
 using System.ComponentModel.DataAnnotations;
+using CalculationCSharp.Models.ArrayFunctions;
 
 namespace CalculationCSharp.Areas.Configuration.Models.Actions
 {
@@ -44,7 +45,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                 
                 foreach (var list in group)
                 {
-                    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value, SubOutput = list.SubOutput, Description = list.Description });
+                    SubList.Add(new OutputList { ID = list.ID, Group = list.Group, Field = list.Field, Value = list.Value, SubOutput = list.SubOutput, Description = list.Description, Function = list.Function, Parameter = list.Parameter });
                     //int index = SubList.FindIndex(a => a.Field == list.Field);
                     //if (index == -1)
                     //{
@@ -76,7 +77,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                     if (item.Function == "Input")
                     {
                         item.Output = InputFunctions.Output(item.Type, item.Output);
-                        OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, Description = item.Description });
+                        OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, Description = item.Description, Function = item.Function, Parameter = item.Parameter });
                     }
                     else
                     {
@@ -377,6 +378,25 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                             throw new HttpException(ex.ToString());
                                         }
                                     }
+                                    else if (item.Function == "Table")
+                                    {
+                                        Table LogicFunctions = new Table();
+                                        Table parameters = (Table)javaScriptSerializ­er.Deserialize(jparameters, typeof(Table));
+                                        try
+                                        {
+                                            ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
+                                            string[] Numbers1parts = null;
+                                            //Returns array
+                                            Numbers1parts = ArrayBuilder.InputArrayBuilder(parameters.Variable, jCategory, group.ID, item.ID);
+                                            parameters.Result = string.Join("~", Numbers1parts);
+                                            param["Result"] = parameters.Result;
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            logger.Error(ex);
+                                            throw new HttpException(ex.ToString());
+                                        }
+                                    }
                                     else if (item.Function == "Function")
                                     {
                                         Function Functions = new Function();
@@ -452,7 +472,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 {
                                     item.Pass = "false";
                                 }
-                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, SubOutput = item.SubOutput, Description = item.Description });
+                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, SubOutput = item.SubOutput, Description = item.Description, Function = item.Function, Parameter = item.Parameter });
                             }
                             else
                             {
@@ -469,7 +489,7 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                 }                           
                                 item.Pass = "miss";
 
-                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, SubOutput = item.SubOutput, Description = item.Description });
+                                OutputList.Add(new OutputList { ID = Convert.ToString(item.ID), Field = item.Name, Value = item.Output, Group = group.Name, SubOutput = item.SubOutput, Description = item.Description, Function = item.Function, Parameter = item.Parameter });
                             }
                         }
                     }

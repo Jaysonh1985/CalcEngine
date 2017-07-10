@@ -67,7 +67,7 @@ sulhome.kanbanBoardApp.directive('myTable', function () {
             var html = '<table class="table table-bordered">';
             html += '<thead><tr>';
             angular.forEach(scope[attrs.rows], function (row, index) {
-                html += '<td>' + 'Column' + '</td>';
+                html += '<td>' + row.ColumnName + '</td>';
             })
             html += '<tr></thead>';
             

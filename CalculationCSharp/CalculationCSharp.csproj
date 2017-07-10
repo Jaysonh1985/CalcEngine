@@ -240,6 +240,7 @@
     <Compile Include="Areas\Configuration\Controllers\Configuration\ConfigWebApiController.cs" />
     <Compile Include="Areas\Configuration\Controllers\UI\UserSessionsController.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Calculate.cs" />
+    <Compile Include="Areas\Configuration\Models\Actions\Table.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Comments.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Function.cs" />
     <Compile Include="Areas\Configuration\Models\Actions\Input.cs" />
@@ -319,7 +320,7 @@
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Regression\RegressionInputModal.html" />
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Table\tableCtrl.js" />
     <Content Include="Areas\Configuration\Scripts\FunctionBarViews\LogicFunctions.html" />
-    <Content Include="Areas\Configuration\Scripts\FunctionBarViews\TableModal.html" />
+    <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Table\TableModal.html" />
     <Content Include="Areas\Configuration\Scripts\FunctionBarViews\Table.html" />
     <Content Include="Areas\Configuration\Scripts\Services\configMenuService.js" />
     <Content Include="Areas\Configuration\Scripts\Services\configHistoryService.js" />
@@ -676,6 +677,7 @@
     <Content Include="Images\paste-clipboard.png" />
     <Content Include="Images\plus.png" />
     <Content Include="Images\settings.png" />
+    <Content Include="Images\table.svg" />
     <Content Include="Images\warning-sign.svg" />
     <Content Include="Scripts\anguladynamicform.js" />
     <Content Include="Scripts\angular-animate.js" />

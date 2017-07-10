@@ -168,5 +168,26 @@ sulhome.kanbanBoardApp.controller('calculationCtrl', function ($scope, $uibModal
         });
     };
 
+    $scope.TableButtonClick = function (size, colIndex, rowIndex, Parameters, TableName) {
+        Parameters = $scope.output[colIndex].Output[rowIndex].Parameter;
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/Areas/Configuration/Scripts/ConfigFunctions/Table/TableModal.html',
+            scope: $scope,
+            controller: 'tableCtrl',
+            size: size,
+            windowClass: 'app-modal-window',
+            resolve: {
+                parameters: function () { return Parameters },
+                colIndex: function () { return colIndex },
+                rowIndex: function () { return rowIndex },
+                TableName: function () { return TableName }
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+        }, function () {
+        });
+    };
+
     init();
 });
