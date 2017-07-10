@@ -386,10 +386,22 @@ namespace CalculationCSharp.Areas.Configuration.Models.Actions
                                         {
                                             ArrayBuildingFunctions ArrayBuilder = new ArrayBuildingFunctions();
                                             string[] Numbers1parts = null;
+                                            string[] Numbers2parts = null;
+                                            parameters.Result = null;
+                                            parameters.SummaryResult = null;
                                             //Returns array
                                             Numbers1parts = ArrayBuilder.InputArrayBuilder(parameters.Variable, jCategory, group.ID, item.ID);
-                                            parameters.Result = string.Join("~", Numbers1parts);
+                                            if(Numbers1parts != null)
+                                            {
+                                                parameters.Result = string.Join("~", Numbers1parts);
+                                            };
+                                            Numbers2parts = ArrayBuilder.InputArrayBuilder(parameters.SummaryVariable, jCategory, group.ID, item.ID);
+                                            if (Numbers2parts != null)
+                                            {
+                                                parameters.SummaryResult = string.Join("~", Numbers2parts);
+                                            };
                                             param["Result"] = parameters.Result;
+                                            param["SummaryResult"] = parameters.SummaryResult;
                                         }
                                         catch (Exception ex)
                                         {

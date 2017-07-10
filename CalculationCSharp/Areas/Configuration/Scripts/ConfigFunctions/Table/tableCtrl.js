@@ -17,6 +17,12 @@ sulhome.kanbanBoardApp.controller('tableCtrl', function ($scope, $uibModal, $uib
                     RowNum: keyS
                 });
             });
+            if (value.SummaryResult != null) {
+                rows.push({
+                    Name: value.SummaryResult,
+                    RowNum: null
+                });
+            };
             $scope.topRow.push(rows);
             $scope.parameters[key].Rows = rows;
             rows = [];

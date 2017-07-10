@@ -9,6 +9,11 @@
         <input colIndex="{{$parent.$parent.$index}}" rowIndex="{{$parent.$index}}"  ng-model="val.Variable" ng-pattern="noSpacesPattern" name="TableVariable_{{$parent.$parent.$index}}_{{$parent.$index}}"
                id="TableVariable_{{$parent.$parent.$index}}_{{$parent.$index}}" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" required>
     </md-input-container>
+    <md-input-container>
+        <label>Total Variable</label>
+        <input colIndex="{{$parent.$parent.$index}}" rowIndex="{{$parent.$index}}" ng-model="val.SummaryVariable" ng-pattern="noSpacesPattern" name="TableSummaryVariable_{{$parent.$parent.$index}}_{{$parent.$index}}"
+               id="TableSummaryVariable_{{$parent.$parent.$index}}_{{$parent.$index}}" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8">
+    </md-input-container>
 </div>
 <md-content class="md-no-momentum" layout-margin="">
     <md-button ng-click="addReturnItem($index)" class="md-accent">

@@ -11,6 +11,8 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public dynamic ColumnName { get; set; }
         public dynamic Variable { get; set; }
         public dynamic Result { get; set; }
+        public dynamic SummaryVariable { get; set; }
+        public dynamic SummaryResult { get; set; }
 
     }
 }
