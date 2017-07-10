@@ -24,6 +24,7 @@
                             <md-option value="Period">Period</md-option>
                             <md-option ng-if="$parent.$parent.$parent.MenuHeader == 'Function'" value="Return">Return</md-option>
                             <md-option value="StringFunctions">String Functions</md-option>
+                            <md-option value="Table">Table</md-option>
                         </md-select>
                         <div ng-messages="form['Function_'+ $parent.$parent.$index + '_' + $parent.$index].$error">
                             <div ng-message="required">Name is required.</div>
@@ -88,6 +89,7 @@
                         <div ng-if="rows.Function=='ArrayFunctions' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/ArrayFunctions.html'"></div>
                         <div ng-if="rows.Function=='Maths' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Maths.html'"></div>
                         <div ng-if="rows.Function=='Function' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Function.html'"></div>
+                        <div ng-if="rows.Function=='Table' && isRowSelected($index, $parent.$index)" ng-include="'/Areas/Configuration/Scripts/FunctionBarViews/Table.html'"></div>
                         <md-input-container ng-if="rows.Function!='Input' && rows.Function!='Comments' && rows.Function!='ErrorsWarnings' && rows.Function!='Return' && rows.Function != 'Function'" class="md-block" flex-gt-sm>
                             <label>Output</label>
                             <textarea ng-model="rows.Output" rows="3" md-select-on-focus readonly></textarea>

@@ -220,6 +220,21 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         }, function () {
         });
     };
+    $scope.TableButtonClick = function (size, colIndex, type, Parameters) {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: '/Areas/Configuration/Scripts/FunctionBarViews/TableModal.html',
+            scope: $scope,
+            controller: 'tableCtrl',
+            size: size,
+            resolve: {
+                parameters: function () { return Parameters },
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {
+        }, function () {
+        });
+    };
 
     $scope.AddFunctionRows = function (colIndex, index, e) {
         var item;
