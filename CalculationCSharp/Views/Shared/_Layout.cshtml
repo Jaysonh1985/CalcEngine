@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Project A.I.M</title>
+    <title>CalcSteps</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/angular-ui-tree.css" rel="stylesheet" />
@@ -16,9 +16,10 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-collapse collapse">
+               
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-
+                    <li><img src="~/Images/calcstepsmenu.jpg" style="width:127px; height:50px; padding:2%" /></li>
+                    <li style="left">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                    @if (Context.User.Identity.IsAuthenticated)
                    {
                     <li>@Html.ActionLink("Configuration", "Index", new { Area = "Configuration", controller = "Config" })</li>
@@ -55,7 +56,7 @@
     <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/angular-animate.js"></script>
     <script src="~/Scripts/angular-route.min.js"></script>
-    <script src="~/Scripts/jquery.signalR-2.2.1.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
     <script src="~/Scripts/jquery.ui.touch-punch.min.js"></script>
     <script src="~/Scripts/toastr.js"></script>
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
@@ -71,8 +72,8 @@
     <script src="~/Scripts/ng-csv.js"></script>
     <script src="~/Scripts/angular-csv-import.js"></script>
     <script src="~/Scripts/angular-idle.js"></script>
-    <script src="~/Scripts/angular-aria/angular-aria.js"></script>
-    <script src="~/Scripts/angular-material/angular-material.js"></script>
+    <script src="~/Scripts/angular-aria.js"></script>
+    <script src="~/Scripts/angular-material.js"></script>
     <script src="~/Scripts/angular-messages.js"></script>
     <script src="~/Scripts/contextmenu.js"></script>
 </body>

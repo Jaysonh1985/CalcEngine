@@ -22,7 +22,7 @@ namespace CalculationCSharp.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("CalculationDBContext", throwIfV1Schema: false)
         {
         }
 

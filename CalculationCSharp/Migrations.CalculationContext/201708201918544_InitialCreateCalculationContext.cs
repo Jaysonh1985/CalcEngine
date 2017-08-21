@@ -1,46 +1,14 @@
-namespace CalculationCSharp.Migrations
+namespace CalculationCSharp.Migrations.CalculationContext
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initial : DbMigration
+    public partial class InitialCreateCalculationContext : DbMigration
     {
         public override void Up()
         {
-            DropForeignKey("dbo.ProjectUpdates", "ProjectStories_StoryId", "dbo.ProjectStories");
-            DropForeignKey("dbo.ProjectTasks", "ProjectStories_StoryId", "dbo.ProjectStories");
-            DropForeignKey("dbo.ProjectComments", "ProjectStories_StoryId", "dbo.ProjectStories");
-            DropForeignKey("dbo.ProjectStories", "ProjectColumns_ColumnId", "dbo.ProjectColumns");
-            DropForeignKey("dbo.ProjectColumns", "ProjectBoard_BoardId", "dbo.ProjectBoards");
-            DropIndex("dbo.ProjectUpdates", new[] { "ProjectStories_StoryId" });
-            DropIndex("dbo.ProjectTasks", new[] { "ProjectStories_StoryId" });
-            DropIndex("dbo.ProjectComments", new[] { "ProjectStories_StoryId" });
-            DropIndex("dbo.ProjectStories", new[] { "ProjectColumns_ColumnId" });
-            DropIndex("dbo.ProjectColumns", new[] { "ProjectBoard_BoardId" });
-            DropTable("dbo.UserSessions");
-            DropTable("dbo.Schemes");
-            DropTable("dbo.ProjectBoards");
-            DropTable("dbo.FileRepositories");
-            DropTable("dbo.CalcReleases");
-            DropTable("dbo.CalcRegressionInputs");
-            DropTable("dbo.CalcHistories");
-            DropTable("dbo.CalcConfigurations");
             CreateTable(
                 "dbo.CalcConfigurations",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Scheme = c.String(nullable: false),
-                        Name = c.String(nullable: false),
-                        User = c.String(),
-                        Configuration = c.String(storeType: "xml"),
-                        UpdateDate = c.DateTime(nullable: false),
-                        Version = c.Decimal(nullable: false, precision: 16, scale: 3),
-                    })
-                .PrimaryKey(t => t.ID);
-            
-            CreateTable(
-                "dbo.CalcFunctions",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
@@ -115,6 +83,56 @@ namespace CalculationCSharp.Migrations
                         FileSize = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.FileID);
+            
+            CreateTable(
+                "dbo.FunctionConfigurations",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Scheme = c.String(nullable: false),
+                        Name = c.String(nullable: false),
+                        User = c.String(),
+                        Configuration = c.String(storeType: "xml"),
+                        UpdateDate = c.DateTime(nullable: false),
+                        Version = c.Decimal(nullable: false, precision: 16, scale: 3),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.FunctionHistories",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        CalcID = c.Int(nullable: false),
+                        Scheme = c.String(nullable: false),
+                        Name = c.String(nullable: false),
+                        User = c.String(),
+                        Configuration = c.String(storeType: "xml"),
+                        UpdateDate = c.DateTime(nullable: false),
+                        Comment = c.String(),
+                        Version = c.Decimal(nullable: false, precision: 16, scale: 3),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.FunctionRegressionInputs",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        CalcID = c.Int(nullable: false),
+                        Scheme = c.String(),
+                        Type = c.String(),
+                        Reference = c.String(),
+                        Input = c.String(storeType: "xml"),
+                        Comment = c.String(),
+                        OriginalRunDate = c.DateTime(),
+                        LatestRunDate = c.DateTime(),
+                        OutputOld = c.String(storeType: "xml"),
+                        OutputNew = c.String(storeType: "xml"),
+                        Difference = c.String(storeType: "xml"),
+                        Pass = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.ProjectBoards",
@@ -262,11 +280,13 @@ namespace CalculationCSharp.Migrations
             DropTable("dbo.ProjectStories");
             DropTable("dbo.ProjectColumns");
             DropTable("dbo.ProjectBoards");
+            DropTable("dbo.FunctionRegressionInputs");
+            DropTable("dbo.FunctionHistories");
+            DropTable("dbo.FunctionConfigurations");
             DropTable("dbo.FileRepositories");
             DropTable("dbo.CalcReleases");
             DropTable("dbo.CalcRegressionInputs");
             DropTable("dbo.CalcHistories");
-            DropTable("dbo.CalcFunctions");
             DropTable("dbo.CalcConfigurations");
         }
     }

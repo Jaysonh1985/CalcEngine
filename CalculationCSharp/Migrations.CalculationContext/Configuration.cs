@@ -1,4 +1,4 @@
-namespace CalculationCSharp.Migrations
+namespace CalculationCSharp.Migrations.CalculationContext
 {
     using System;
     using System.Data.Entity;
@@ -10,9 +10,8 @@ namespace CalculationCSharp.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            MigrationsDirectory = @"Migrations.CalculationContext";
             ContextKey = "CalculationCSharp.Models.CalculationDBContext";
-            Database.SetInitializer(new DropCreateDatabaseAlways<CalculationCSharp.Models.CalculationDBContext>());
         }
 
         protected override void Seed(CalculationCSharp.Models.CalculationDBContext context)

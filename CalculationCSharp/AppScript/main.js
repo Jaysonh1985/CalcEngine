@@ -6,12 +6,6 @@ sulhome.kanbanBoardApp = angular.module('kanbanBoardApp', ['ui.bootstrap', 'ngRo
                                         'ds.objectDiff', 'ngCsv', 'ngSanitize', 'ngCsvImport', 'ngIdle', 'angular.filter', 
                                         'ngMaterial', 'ngMessages', 'ui.bootstrap.contextMenu'])
     .config( function ($routeProvider) {
-        $routeProvider.when('/', {
-            controller: 'configCtrl',
-            templateUrl: '/Areas/Configuration/Scripts/Builder.html'
-
-        })
-        .otherwise({ redirectTo: '/' });    
         $routeProvider.
                 when('/Configuration/Config/Config/:ID', {
                     templateUrl: '/Areas/Configuration/Views/Config/Index.cshtml',

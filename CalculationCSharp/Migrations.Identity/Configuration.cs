@@ -1,4 +1,4 @@
-namespace CalculationCSharp.Migrations
+namespace CalculationCSharp.Migrations.Identity
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -8,14 +8,13 @@ namespace CalculationCSharp.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class configurationApplication : DbMigrationsConfiguration<CalculationCSharp.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<CalculationCSharp.Models.ApplicationDbContext>
     {
-        public configurationApplication()
+        public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            MigrationsDirectory = @"Migrations.identity";
             ContextKey = "CalculationCSharp.Models.ApplicationDbContext";
-            Database.SetInitializer(new DropCreateDatabaseAlways<CalculationCSharp.Models.ApplicationDbContext>());
         }
 
         protected override void Seed(CalculationCSharp.Models.ApplicationDbContext context)

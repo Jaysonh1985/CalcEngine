@@ -299,12 +299,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201702201006143_initial.cs" />
-    <Compile Include="Migrations\201702201006143_initial.Designer.cs">
-      <DependentUpon>201702201006143_initial.cs</DependentUpon>
+    <Compile Include="Migrations.CalculationContext\201708201918544_InitialCreateCalculationContext.cs" />
+    <Compile Include="Migrations.CalculationContext\201708201918544_InitialCreateCalculationContext.Designer.cs">
+      <DependentUpon>201708201918544_InitialCreateCalculationContext.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\ConfigurationApplication.cs" />
+    <Compile Include="Migrations.CalculationContext\Configuration.cs" />
+    <Compile Include="Migrations.Identity\201708201917230_InitialCreateIdentity.cs" />
+    <Compile Include="Migrations.Identity\201708201917230_InitialCreateIdentity.Designer.cs">
+      <DependentUpon>201708201917230_InitialCreateIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations.Identity\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ArrayFunctions\ArrayBuildingFunctions.cs" />
     <Compile Include="Models\CalculationViewModels.cs" />
@@ -372,9 +376,9 @@
     <Content Include="Areas\Configuration\Scripts\ConfigFunctions\Logic\LogicModal.html" />
     <Content Include="Areas\Configuration\Scripts\ConfigMenu\configMenuCtrl.js" />
     <Content Include="Areas\Calculation\Views\Shared\_InputBar.cshtml" />
-    <Content Include="Areas\Calculation\Views\Shared\_FABButton.cshtml" />
+    <Content Include="Areas\Calculation\Views\Shared\_FABButtonCalculation.cshtml" />
     <Content Include="Areas\Calculation\Views\Shared\_CalculationBulk.cshtml" />
-    <None Include="Areas\Configuration\Views\Shared\_FABButton.cshtml" />
+    <None Include="Areas\Configuration\Views\Shared\_FABButtonConfiguration.cshtml" />
     <Content Include="Areas\Project\Scripts\Factories\fileUploadService.js" />
     <Content Include="Areas\Project\Scripts\projectMenuAddCalcCtrl.js" />
     <Content Include="Areas\Project\Scripts\ProjectMenuAddCalcModal.html" />
@@ -669,25 +673,40 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Images\add.svg" />
+    <Content Include="Images\calcstepsmenu.jpg" />
     <Content Include="Images\calculator.svg" />
+    <Content Include="Images\check-symbol.svg" />
     <Content Include="Images\checked.png" />
+    <Content Include="Images\checked.svg" />
     <Content Include="Images\checklist.png" />
     <Content Include="Images\copy.png" />
     <Content Include="Images\crossinsideasquare.png" />
+    <Content Include="Images\directional-arrow.svg" />
+    <Content Include="Images\down-arrow.svg" />
     <Content Include="Images\exclamation.svg" />
+    <Content Include="Images\calcstepslogo.jpeg" />
+    <Content Include="Images\exit.svg" />
+    <Content Include="Images\file.svg" />
     <Content Include="Images\gear-option.png" />
+    <Content Include="Images\history.svg" />
     <Content Include="Images\Impactlist.svg" />
+    <Content Include="Images\list.svg" />
     <Content Include="Images\magnifying-glass-searcher.svg" />
+    <Content Include="Images\menu.svg" />
     <Content Include="Images\more.png" />
     <Content Include="Images\movelist.svg" />
+    <Content Include="Images\multiply.svg" />
     <Content Include="Images\multiply2.png" />
     <Content Include="Images\multiply.png" />
     <Content Include="Images\paste-clipboard.png" />
     <Content Include="Images\plus.png" />
+    <Content Include="Images\save.svg" />
     <Content Include="Images\settings.png" />
     <Content Include="Images\table.svg" />
     <Content Include="Images\warning-sign.svg" />
+    <Content Include="Properties\PublishProfiles\LocalBuild.pubxml.user" />
     <Content Include="Scripts\anguladynamicform.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -766,12 +785,12 @@
     <Content Include="Areas\Configuration\Views\Shared\_InputForm.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_FunctionBar.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\_BuilderRow.cshtml" />
-    <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
-    <None Include="Properties\PublishProfiles\ProjectAim - FTP %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\ProjectAim - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy %283%29.pubxml" />
-    <None Include="Properties\PublishProfiles\ProjectAim - Web Deploy.pubxml" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\CalcSteps - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\CalcSteps - Web Deploy.pubxml" />
     <Content Include="Scripts\angular-filter.js" />
     <Content Include="Scripts\angular-idle.js" />
     <Content Include="Scripts\angular-material-mocks.js" />
@@ -790,7 +809,6 @@
     <Content Include="Scripts\angular-ui-tree.js" />
     <Content Include="Scripts\angular-ui-tree.min.js" />
     <Content Include="Scripts\angular-ui\sortable.js" />
-    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
@@ -800,6 +818,7 @@
     <Content Include="Scripts\angular-route.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />
+    <None Include="Properties\PublishProfiles\LocalBuild.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
@@ -910,14 +929,18 @@
     <Folder Include="Areas\Workflow\Models\" />
     <Folder Include="Areas\Workflow\Views\Shared\" />
     <Folder Include="Configuration JSON\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201702201006143_initial.resx">
-      <DependentUpon>201702201006143_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations.CalculationContext\201708201918544_InitialCreateCalculationContext.resx">
+      <DependentUpon>201708201918544_InitialCreateCalculationContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations.Identity\201708201917230_InitialCreateIdentity.resx">
+      <DependentUpon>201708201917230_InitialCreateIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

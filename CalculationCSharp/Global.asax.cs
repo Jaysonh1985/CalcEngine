@@ -30,10 +30,10 @@ namespace CalculationCSharp
 
             if (bool.Parse(ConfigurationManager.AppSettings["MigrateDatabaseToLatestVersion"]))
             {
-                var configuration = new CalculationCSharp.Migrations.Configuration();
+                var configuration = new CalculationCSharp.Migrations.CalculationContext.Configuration();
                 var migrator = new DbMigrator(configuration);
                 migrator.Update();
-                var configurationApplication = new CalculationCSharp.Migrations.configurationApplication();
+                var configurationApplication = new CalculationCSharp.Migrations.Identity.Configuration();
                 var migratorApplication = new DbMigrator(configurationApplication);
                 migratorApplication.Update();
             }
