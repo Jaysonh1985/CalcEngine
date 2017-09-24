@@ -378,6 +378,7 @@
     <Content Include="Areas\Calculation\Views\Shared\_InputBar.cshtml" />
     <Content Include="Areas\Calculation\Views\Shared\_FABButtonCalculation.cshtml" />
     <Content Include="Areas\Calculation\Views\Shared\_CalculationBulk.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_BuilderRow2.cshtml" />
     <None Include="Areas\Configuration\Views\Shared\_FABButtonConfiguration.cshtml" />
     <Content Include="Areas\Project\Scripts\Factories\fileUploadService.js" />
     <Content Include="Areas\Project\Scripts\projectMenuAddCalcCtrl.js" />
