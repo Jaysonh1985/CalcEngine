@@ -131,3 +131,14 @@ sulhome.kanbanBoardApp.directive('inputformatValidation', function (configTypeah
         }
     };
 });
+
+sulhome.kanbanBoardApp.directive('expand', function () {
+    function link(scope, element, attrs) {
+        scope.$on('onExpandAll', function (event, args) {
+            scope.expanded = args.expanded;
+        });
+    }
+    return {
+        link: link
+    };
+});
