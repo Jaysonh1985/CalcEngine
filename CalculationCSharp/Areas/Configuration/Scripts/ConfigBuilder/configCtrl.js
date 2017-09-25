@@ -828,6 +828,11 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         };
     };
 
+    $scope.selectResult = function (event, rowIndex, colIndex) {
+
+
+    };
+
     $scope.selectRow = function (event, rowIndex, colIndex) {
         $scope.getVariableTypes(colIndex, rowIndex);
         $scope.Parameter = this.config[colIndex].Functions[rowIndex].Parameter;
@@ -903,7 +908,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         };
     };
 
-    function changeSelectionStatus(rowIndex, colIndex) {
+    function changeSelectionStatus(rowIndex, colIndex, rowType) {
         if ($scope.isRowSelected(rowIndex, colIndex)) {
             unselect(rowIndex, colIndex);
         } else {

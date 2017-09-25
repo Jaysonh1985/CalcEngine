@@ -14,22 +14,51 @@
                     </md-list>
                 </md-list-item>
             </md-list>
-                   <div ui-tree="treeOptions" ng-controller="configBuilderColumnCtrl">
-                    <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
-                    <uib-accordion close-others=false ui-tree-nodes="" ng-model="config" data-nodrop-enabled="true">
-                        <div uib-accordion-group ng-repeat="Category in config" ng-init="colIndex = $index" is-open="openIndex[$index]" layout="column" context-menu="columnMenuOptions" ui-tree-node>
-                            <uib-accordion-heading>
-                                <div class="slide-container">
-                                    {{Category.Name}}
-                                </div>
-                                <div class="slide-container pull-right">
-                                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': openIndex[$index], 'glyphicon-chevron-right': !openIndex[$index]}"></i>
-                                </div>
-                            </uib-accordion-heading>
-                            @Html.Partial("_BuilderRow2")
-                        </div>
-                    </uib-accordion>
-                </div>
+            <div ui-tree="treeOptions" ng-controller="configBuilderColumnCtrl">
+                <div class="center-block" ng-include="'/Areas/Project/Scripts/busyModal.html'" ng-show="isLoading"></div>
+                <table  class="table table-condensed table-bordered table-sm"  ui-tree-nodes="" ng-model="config">
+                    <thead >
+                        <tr>
+                            <th style="width:2%; background-color: #3d688c; color: white;"></th>
+                            <th style="width:80%;background-color: #3d688c; color: white;">Group</th>
+                            <th style="width:2%;background-color: #3d688c; color: white;"></th>
+                            <th style="width:2%;background-color: #3d688c; color: white;"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="Category in config">
+                        <tr context-menu="columnMenuOptions"  ng-show="([rows.Name] | filter: test).length || ([rows.Parameters.Name] | filter: test).length"
+                             ng-click="selectGroup($event, 0, $index)"  ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments', 'standardRow' : rows.Function != 'Comments', 'stripped' : rows.Pass == 'miss' }"
+                             ui-tree-node>
+                            <td style="width:2%;background-color: #3d688c; color: white;">
+                                <button ng-click="Category.Expanded = !Category.Expanded" expand>
+                                    <span ng-bind="Category.Expanded ? '-' : '+'"></span>
+                                </button>
+                            </td>
+                            <td>{{ Category.Name }}</td>
+                            <td>
+                                <a class="center-block" ng-click="AddFunctionRows($parent.$index, $index, $event)">
+                                    <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/add.svg" aria-label="addGroup">
+                                    </md-icon>
+                                </a>
+                            </td>
+                            <td style="width:2%;">
+                                <a class="center-block" ng-click="DeleteFunction($parent.$index, $index)">
+                                    <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/multiply.svg" aria-label="multiplyGroup"> </md-icon>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-show="Category.Expanded">
+                            <td style="width:2%;background-color: #3d688c; color: white;"></td>
+                            <td colspan="10">
+                                @Html.Partial("_BuilderRow2")
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
             <md-fab-speed-dial ng-hide="false" md-direction="left" md-open="FabOpen"
                                class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': true}"
                                ng-mouseenter="FabOpen=true" ng-mouseleave="FabOpen=false">

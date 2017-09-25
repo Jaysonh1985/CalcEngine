@@ -11,5 +11,6 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public string Description { get; set; }
         public virtual List<ConfigViewModel> Functions { get; set; }
         public virtual List<Logic> Logic { get; set; }
+        public bool Expanded { get; set; }
     }
 }
