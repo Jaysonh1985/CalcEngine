@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2016 Project AIM
 using CalculationCSharp.Areas.Configuration.Models;
+using CalculationCSharp.Areas.Configuration.Models.Actions;
 using CalculationCSharp.Models.Calculation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -26,7 +27,7 @@ namespace CalculationCSharp.Areas.Configuration.Models
             {
                 if (Config == null)
                 {
-                    Configuration.Add(new CategoryViewModel { ID = 0, Name = "Input", Functions = new List<ConfigViewModel>() });
+                    Configuration.Add(new CategoryViewModel { ID = 0, Name = "Input", Results = new List<ResultViewModel>() });
                     HttpContext.Current.Cache["config"] = Configuration;
                 }
             }

@@ -13,6 +13,7 @@ using CalculationCSharp.Models;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using CalculationCSharp.Areas.Dashboard.Models;
 
 namespace CalculationCSharp.Areas.Configuration.Controllers
 {
@@ -24,24 +25,43 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         CalcHistoriesController CalcHistories = new CalcHistoriesController();
         CalcHistory CalcHistory = new CalcHistory();
         CalculationCSharp.Models.ApplicationDbContext context = new CalculationCSharp.Models.ApplicationDbContext();
+        List<CalcTeamConfigurationViewModel> CalcTeamConfigurationsViewModels = new List<CalcTeamConfigurationViewModel>();
         private CalculationDBContext db = new CalculationDBContext();
 
         // GET: api/CalcConfigurations
-        public IQueryable<CalcConfiguration> GetCalcConfiguration()
+        public List<CalcTeamConfigurationViewModel> GetCalcConfiguration()
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
-            string[] myInClause = null;
-            if (user.Scheme != null)
+            IQueryable<CalcConfiguration> CalcConfigurationsList = db.CalcConfiguration.Where(s => s.CalcOwner == user.Id && s.CalcTeams == null).OrderBy(s => s.Scheme);
+            if(CalcConfigurationsList != null)
             {
-                myInClause = user.Scheme.Split(',');
-                return db.CalcConfiguration.Where(s => myInClause.Contains(s.Scheme)).OrderBy(s => s.Scheme);
+                foreach (CalcConfiguration CalcConfig in CalcConfigurationsList)
+                {
+                    CalcTeamConfigurationViewModel CalcTeamConfigurationsViewModel = new CalcTeamConfigurationViewModel();
+                    CalcTeamConfigurationsViewModel.ID = CalcConfig.ID;
+                    CalcTeamConfigurationsViewModel.Scheme = CalcConfig.Scheme;
+                    CalcTeamConfigurationsViewModel.Name = CalcConfig.Name;
+                    CalcTeamConfigurationsViewModel.User = CalcConfig.User;
+                    CalcTeamConfigurationsViewModel.Configuration = CalcConfig.Configuration;
+                    CalcTeamConfigurationsViewModel.CalcOwner = CalcConfig.CalcOwner;
+                    if(CalcConfig.CalcTeams != null)
+                    {
+                        CalcTeamConfigurationsViewModel.CalcTeams = CalcConfig.CalcTeams.CalcTeamID;
+                    }
+                    CalcTeamConfigurationsViewModel.UpdateDate = CalcConfig.UpdateDate;
+                    CalcTeamConfigurationsViewModel.Version = CalcConfig.Version;
+                    CalcTeamConfigurationsViewModels.Add(CalcTeamConfigurationsViewModel);
+                }
+
+
+                return CalcTeamConfigurationsViewModels;
             }
             else
             {
                 return null;
             }
-            
+       
 
 
         }
@@ -66,23 +86,37 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
         /// </summary>
         // PUT: api/CalcConfigurations/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCalcConfiguration(int id, CalcConfiguration calcConfiguration)
+        public IHttpActionResult PutCalcConfiguration(int id, CalcTeamConfigurationViewModel calcConfigurationViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
-            if (id != calcConfiguration.ID)
+            if (id != calcConfigurationViewModel.ID)
             {
                 return BadRequest();
             }
-
-            calcConfiguration.UpdateDate = DateTime.Now;
-            calcConfiguration.User = HttpContext.Current.User.Identity.Name.ToString();
-
-            db.Entry(calcConfiguration).State = EntityState.Modified;
-
+            CalcConfiguration CalcConfiguration = new CalcConfiguration();
+            CalcConfiguration = db.CalcConfiguration.Find(calcConfigurationViewModel.ID);
+            CalcConfiguration.ID = calcConfigurationViewModel.ID;
+            CalcConfiguration.Scheme = calcConfigurationViewModel.Scheme;
+            CalcConfiguration.Name = calcConfigurationViewModel.Name;
+            CalcConfiguration.User = calcConfigurationViewModel.User;
+            CalcConfiguration.Configuration = calcConfigurationViewModel.Configuration;
+            CalcConfiguration.UpdateDate = DateTime.Now;
+            CalcConfiguration.Version = calcConfigurationViewModel.Version;
+            CalcConfiguration.CalcOwner = calcConfigurationViewModel.CalcOwner;
+            if (calcConfigurationViewModel.CalcTeams > 0)
+            {
+                CalcConfiguration.CalcTeams = db.CalcTeams.Find(calcConfigurationViewModel.CalcTeams);
+            }
+            else
+            {
+                db.Entry(CalcConfiguration).Reference(t => t.CalcTeams).CurrentValue = null;
+            }
+            
+            db.Entry(CalcConfiguration).State = EntityState.Modified;
 
             try
             {
@@ -114,6 +148,7 @@ namespace CalculationCSharp.Areas.Configuration.Controllers
             //    return BadRequest(ModelState);
             //}
             calcConfiguration.UpdateDate = DateTime.Now;
+            calcConfiguration.CalcOwner = HttpContext.Current.User.Identity.GetUserId().ToString();
             calcConfiguration.User = HttpContext.Current.User.Identity.Name.ToString();
             db.CalcConfiguration.Add(calcConfiguration);
             db.SaveChanges();

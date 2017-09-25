@@ -11,6 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 
 namespace CalculationCSharp.Models
@@ -27,6 +30,8 @@ namespace CalculationCSharp.Models
         public string Configuration { get; set; }
         public DateTime UpdateDate { get; set; }
         public decimal Version { get; set; }
+        public string CalcOwner { get; set; }
+        public virtual CalcTeams CalcTeams { get; set; }
     }
 
 
@@ -62,9 +67,23 @@ namespace CalculationCSharp.Models
         [Required]
         public decimal Version { get; set; }
     }
+    public class CalcTeams
+    {
+        [Key]
+        public int CalcTeamID { get; set; }
+        public string TeamOwner { get; set; }
+        public string TeamName { get; set; }
+        public virtual ICollection<CalcTeamMembers> CalcTeamMembers { get; set; }
+        public virtual ICollection<CalcConfiguration> CalcConfigurations { get; set; }
+    }
+    public class CalcTeamMembers
+    {
+        [Key]
+        public int CalcTeamMemberID { get; set; }
+        public string UserId { get; set; }
 
-
-
+        public virtual CalcTeams CalcTeams { get; set; }
+    }
     public class CalcRegressionInputs
     {
         [Key]
@@ -289,6 +308,8 @@ namespace CalculationCSharp.Models
         public DbSet<CalcConfiguration> CalcConfiguration { get; set; }
         public DbSet<CalcRelease> CalcRelease { get; set; }
         public DbSet<CalcHistory> CalcHistory { get; set; }
+        public DbSet<CalcTeams> CalcTeams { get; set; }
+        public DbSet<CalcTeamMembers> CalcTeamMembers { get; set; }
         public DbSet<CalcRegressionInputs> CalcRegressionInputs { get; set; }
         public DbSet<FileRepository> FileRepository { get; set; }
         public DbSet<Scheme> Schemes { get; set; }
@@ -301,7 +322,6 @@ namespace CalculationCSharp.Models
             modelBuilder.Entity<FunctionConfiguration>().Property(x => x.Version).HasPrecision(16, 3);
             modelBuilder.Entity<FunctionHistory>().Property(x => x.Version).HasPrecision(16, 3);
             Configuration.ProxyCreationEnabled = false;
-
             //one-to-many 
             modelBuilder.Entity<ProjectStories>()
             .HasOptional<ProjectColumns>(s => s.ProjectColumns)

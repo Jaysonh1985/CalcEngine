@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dashboard</h2>
+
+<div ng-cloak>
+    <md-content class="md-padding" layout-xs="column" layout="row">
+        <div flex-xs flex-gt-xs="50" layout="column" ng-controller="DashboardTeamCtrl">
+            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Teams Owned</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-content >
+                    <md-list>
+                        <md-list-item class="md-3-line" ng-repeat="item in Teams">
+                            <div class="md-list-item-text" ng-click="displayTeamMember(item)">
+                                <h2>{{item.TeamName}}</h2>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="addTeam($event)">Add Team</md-button>
+                </md-card-actions>
+            </md-card>
+            <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Team Members</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-content>
+                    <md-list>
+                        <md-list-item class="md-3-line" ng-repeat="test in TeamMembers">
+                            <div class="md-list-item-text" ng-click="displayTeamMember(item)">
+                                {{test.UserId}}
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="addTeamMember()">Add Team Member</md-button>
+                </md-card-actions>
+            </md-card>          
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Team Calculations</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    @Html.Partial("_DashboardMenu")
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="addExcludeTeamCalc(true)">Include Personal Calculation</md-button>
+                    <md-button ng-click="addExcludeTeamCalc(false)">Exclude Team Calculation</md-button>
+                </md-card-actions>     
+            </md-card>
+        </div>
+        <div flex-xs flex-gt-xs="50" layout="column" >
+            <md-card ng-controller="DashboardCalcCtrl">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Personal Calculations</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    @Html.Partial("_DashboardMenu")
+                </md-card-content>               
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="addBoard()">Add Calculation</md-button>
+                </md-card-actions>
+            </md-card>
+            <md-card ng-controller="DashboardFunctionCtrl">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Personal Functions</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content >
+                    @Html.Partial("_DashboardMenu")
+                </md-card-content>    
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="addBoard()">Add Function</md-button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </md-content>
+</div>

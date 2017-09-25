@@ -141,15 +141,15 @@ namespace CalculationCSharp.Areas.Configuration.Models
             //Subtract two value
             else if (parameters.Type == "SumDecimalAbove")
             {
-                var filterList = group.Functions.Where((l, index) => index >= (ItemID - InputADeci) && index < ItemID);
-                Output = 0;
-                foreach (var row  in filterList)
-                {
-                    if(row.Type == "Decimal" && row.Pass != "miss")
-                    {
-                        Output = Output + Convert.ToDecimal(row.Output);
-                    }                  
-                }             
+                //var filterList = group.Functions.Where((l, index) => index >= (ItemID - InputADeci) && index < ItemID);
+                //Output = 0;
+                //foreach (var row  in filterList)
+                //{
+                //    if(row.Type == "Decimal" && row.Pass != "miss")
+                //    {
+                //        Output = Output + Convert.ToDecimal(row.Output);
+                //    }                  
+                //}             
             }
             //Subtract two period value
             else if (parameters.Type == "SubtractPeriod")

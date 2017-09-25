@@ -55,7 +55,7 @@
             </md-tooltip>
             <md-icon md-svg-src="/Images/history.svg"> </md-icon>
         </md-button>
-        <md-button ng-if="$parent.$parent.$parent.MenuHeader == 'Function'" ng-disabled="viewOnly" aria-label="History" class="md-fab md-raised md-mini"
+        <md-button ng-if="Function == true" ng-disabled="viewOnly" aria-label="History" class="md-fab md-raised md-mini"
                    ng-click="ImpactAssessmentButtonClick()">
             <md-tooltip md-direction="left" md-visible="tooltipVisible"
                         md-autohide="false">
@@ -79,7 +79,7 @@
             </md-tooltip>
             <md-icon md-svg-src="/Images/down-arrow.svg"> </md-icon>
         </md-button>
-        <md-button ng-if="Function == true" aria-label="Impact" class="md-fab md-raised md-mini"
+        <md-button ng-if="MenuHeader = 'Function'" aria-label="Impact" class="md-fab md-raised md-mini"
                    ng-click="ImpactAssessmentButtonClick()">
             <md-tooltip md-direction="left" md-visible="tooltipVisible"
                         md-autohide="false">

@@ -1,0 +1,60 @@
+﻿<body ng-controller="AddTeam">
+    <div>
+        <form class="form-horizontal" role="form" ng-submit="ok($index)">
+            <div class="modal-header">
+                <h3 ng-show="Include">Include Personal Calculations</h3>
+                <h3 ng-hide="Include">Exclude Team Calculations</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>
+                                <a href="#" ng-click="orderByField='Scheme'; reverseSort = !reverseSort">
+                                    Scheme <span ng-show="orderByField == 'Scheme'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="orderByField='Name'; reverseSort = !reverseSort">
+                                    Name <span ng-show="orderByField == 'Name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="orderByField='UpdateDate'; reverseSort = !reverseSort">
+                                    Updated <span ng-show="orderByField == 'UpdateDate'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                                </a>
+                            </th>
+                            <th>
+                                Version
+                            </th>
+                            <th>
+                                Select
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody ng-cloak>
+                        <tr ng-repeat="board in Calcs | orderBy:orderByField:reverseSort">
+                            <td>{{board.Scheme}}</td>
+                            <td>{{board.Name}}</td>
+                            <td>{{board.UpdateDate | date:'d MMMM yyyy h:mm a'}}</td>
+                            <td>{{board.Version | number: 3}}</td>
+                            <td ng-show="Include">
+                                <md-button class="md-secondary" ng-click="IncludeCalc(board)">Include</md-button>
+                            </td>
+                            <td ng-hide="Include">
+                                <md-button class="md-secondary" ng-click="ExcludeCalc(board)">Exclude</md-button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" title="Close" class="btn btn-warning" ng-click="cancel()">
+                    <span aria-hidden="true">Close</span>
+                    <span class="hide">Close</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</body>

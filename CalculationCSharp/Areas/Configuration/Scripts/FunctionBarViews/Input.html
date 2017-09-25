@@ -1,8 +1,8 @@
 ﻿<md-input-container class="md-block" flex-gt-sm>
     <label>Form Label</label>
-    <input ng-model="rows.Parameter[0].templateOptions.label" name="InputLabel_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  
-            id="InputLabel_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
-    <div ng-messages="form['InputLabel_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <input ng-model="rows.Parameter[0].templateOptions.label" name="InputLabel_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  
+            id="InputLabel_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
+    <div ng-messages="form['InputLabel_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Label required</div>
     </div>
 </md-input-container>
@@ -10,9 +10,9 @@
             rows.Parameter[0].templateOptions.required == true" class="md-block" flex-gt-sm>
     <label>Output</label>
     <input inputformat-Validation config='rows' rowIndex="{{$index}}"
-           name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-           id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng:model="rows.Output" required>
-    <div ng-messages="form['Output_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+           name="Output_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+           id="Output_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng:model="rows.Output" required>
+    <div ng-messages="form['Output_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Value is required</div>
         <div ng-message="inputformat">Input format incorrect</div>
     </div>
@@ -21,35 +21,37 @@
             (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" class="md-block" flex-gt-sm>
     <label>Output</label>
     <input inputformat-Validation rowIndex="{{$index}}" config='rows' ng:model="rows.Output" 
-           name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
-    <div ng-messages="form['Output_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+           name="Output_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
+    <div ng-messages="form['Output_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Value is required</div>
         <div ng-message="inputformat">Input format incorrect</div>
     </div>
 </md-input-container>
 <md-input-container ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" class="md-block" flex-gt-sm>
-    <md-select name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Output" aria-label="Type" required>
+    <md-select name="Output_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+               id="Output_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Output" aria-label="Type" required>
         <md-option ng-repeat="option in rows.Parameter[0].templateOptions.optionsList" value="{{option.Name}}">{{option.Name}}</md-option>
     </md-select>
-    <div ng-messages="form['Output_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['Output_'+  $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Value is required</div>
     </div>
 </md-input-container>   
 <md-input-container ng-if="rows.Parameter[0].templateOptions.list == true  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" class="md-block" flex-gt-sm>
-    <md-select name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-model="rows.Output">
+    <md-select name="Output_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+               id="Output_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-model="rows.Output">
         <md-option ng-repeat="option in rows.Parameter[0].templateOptions.optionsList" value="{{option.Name}}">{{option.Name}}</md-option>
     </md-select>
 </md-input-container>
 
 <md-input-container class="md-block" flex-gt-sm>
     <label>Data Type</label>
-    <md-select ng:model="rows.Parameter[0].templateOptions.type" name="InputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
-               id="InputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" ng-change="setFunctionInput(rows)" aria-label="DataType" required>
+    <md-select ng:model="rows.Parameter[0].templateOptions.type" name="InputType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
+               id="InputType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-disabled="viewOnly" ng-change="setFunctionInput(rows)" aria-label="DataType" required>
         <md-option value="String">String</md-option>
         <md-option value="Decimal">Decimal</md-option>
         <md-option value="Date">Date</md-option>
     </md-select>
-    <div ng-messages="form['InputType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['InputType_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Type is required</div>
     </div>
 </md-input-container>
@@ -65,9 +67,9 @@
 </md-input-container>
 <md-input-container ng-if="rows.Parameter[0].templateOptions.list == true" class="md-block"  flex-gt-sm>
     <label>Dropdown List</label>
-    <input name="InputList_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
-            id="InputList_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-model="Parameter[0].templateOptions.options" ng-change="OptionsObject(rows, Parameter[0].templateOptions.options)">
-    <div ng-messages="form['InputList_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
+    <input name="InputList_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
+            id="InputList_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-model="Parameter[0].templateOptions.options" ng-change="OptionsObject(rows, Parameter[0].templateOptions.options)">
+    <div ng-messages="form['InputList_'+ $parent.$parent.$parent.$parent.$index + '_' +  $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
         <div ng-message="required">Comma Seperated List Required</div>
     </div>
 </md-input-container>

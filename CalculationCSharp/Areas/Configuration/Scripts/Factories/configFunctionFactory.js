@@ -30,7 +30,7 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
             var item = null;
             if (colIndex == 0) {
                 item = {
-                    ID: config[colIndex].Functions.length,
+                    ID: 1,
                     Function: 'Input',
                     Name: 'New_Variable',
                     Logic: [],
@@ -39,7 +39,7 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
             }
             else {
                 item = {
-                    ID: config[colIndex].Functions.length,
+                    ID: 1,
                     Logic: [],
                     Name: 'New_Variable',
                     Parameter: []
@@ -47,6 +47,17 @@ sulhome.kanbanBoardApp.factory('configFunctionFactory', function ($location) {
             };
             return item;
         },
+
+        //get index of an array
+        buildResult: function (colIndex, config) {
+        item = {
+            ID: config[colIndex].Results.length,
+            Results: 'New_Variable',
+            Functions: []
+        };
+            return item;
+        },
+
         //function to store the array as a new array if linked back to a previous $scope
         convertToFromJson: function (arr) {
             var array = [];

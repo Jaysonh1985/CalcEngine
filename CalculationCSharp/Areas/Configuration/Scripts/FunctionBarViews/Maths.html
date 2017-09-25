@@ -2,14 +2,14 @@
     <legend>Maths Builder</legend>
     <div layout="row" ng-repeat="val in rows.Parameter">
         <md-input-container flex="1">
-            <md-select name="BracketLeft_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"   
-                       id="BracketLeft_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
+            <md-select name="BracketLeft_{{$parent.$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"   
+                       id="BracketLeft_{{$parent.$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
                        bracketscheck config='[rows.Parameter]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" 
                        aria-label="BracketLeft" ng:model="val.Bracket1">
                 <md-option value=""></md-option>
                 <md-option value="(">(</md-option>
             </md-select>
-            <div ng-messages="form['BracketLeft_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
+            <div ng-messages="form['BracketLeft_'+ $parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
                 <div ng-message="bracketnotclosed">Not Closed</div>
                 <div ng-message="bracketnotopen">Not Open</div>
             </div>
@@ -17,18 +17,18 @@
         <md-input-container ng-mouseenter="variableReplace(val.Input1, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" flex="45">
             <label>Input</label>
             <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
-                   name="MathsInput1_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
-                   id="MathsInput1_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"
+                   name="MathsInput1_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
+                   id="MathsInput1_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"
                    ng:model="val.Input1" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
             <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-            <div ng-messages="form['MathsInput1_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
+            <div ng-messages="form['MathsInput1_'+ $parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
                 <div ng-message="required">Number is required</div>
                 <div ng-message="input">Variable Mismatch</div>
             </div>
         </md-input-container>
         <md-input-container flex="1">
-            <md-select name="MathsLogic_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
-                       id="MathsLogic_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
+            <md-select name="MathsLogic_{{$parent.$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
+                       id="MathsLogic_{{$parent.$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}}"  
                        aria-label="Logic" ng:model="val.Logic" required>
                 <md-option value="+">+</md-option>
                 <md-option value="-">-</md-option>
@@ -40,31 +40,31 @@
         <md-input-container ng-mouseenter="variableReplace(val.Input2, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" flex="45">
             <label>Input</label>
             <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
-                   name="MathsInput2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
-                   id="MathsInput2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"
+                   name="MathsInput2_{{$parent.$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" 
+                   id="MathsInput2_{{$parent.$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"
                    ng:model="val.Input2" uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
             <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-            <div ng-messages="form['MathsInput2_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
+            <div ng-messages="form['MathsInput2_'+ $parent.$parent.$parent.$parent.$parent.$index + '_' +  $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
                 <div ng-message="required">Number is required</div>
                 <div ng-message="input">Variable Mismatch</div>
             </div>
         </md-input-container>
         <md-input-container flex="1">
-            <md-select name="BracketRight_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$index}}"   
-                       id="BracketRight_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
+            <md-select name="BracketRight_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$index}}"   
+                       id="BracketRight_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
                        bracketscheck config='[rows.Parameter]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" 
                        aria-label="BracketRight" ng:model="val.Bracket2">
                 <md-option value=""></md-option>
                 <md-option value=")">)</md-option>
             </md-select>
-            <div ng-messages="form['BracketRight_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
+            <div ng-messages="form['BracketRight_'+ $parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
                 <div ng-message="bracketnotclosed">Not Closed</div>
                 <div ng-message="bracketnotopen">Not Open</div>
             </div>
         </md-input-container>
         <md-input-container flex="1">
-            <md-select mathsoperatorcheck config='[rows.Parameter]' rowIndex="{{$index}}"  name="Operator2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
-                       aria-label="Operator2" id="Operator2_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" ng:model="val.Logic2">
+            <md-select mathsoperatorcheck config='[rows.Parameter]' rowIndex="{{$index}}"  name="Operator2_{{$parent.$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}"  
+                       aria-label="Operator2" id="Operator2_{{$parent.$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$parent.$index }}_{{$parent.$parent.$parent.$index}}_{{$index}}" ng:model="val.Logic2">
                 <md-option value=""></md-option>
                 <md-option value="+">+</md-option>
                 <md-option value="-">-</md-option>
@@ -72,7 +72,7 @@
                 <md-option value="*">*</md-option>
                 <md-option value="Pow">^</md-option>
             </md-select>
-            <div ng-messages="form['Operator2_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
+            <div ng-messages="form['Operator2_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $index].$error">
                 <div ng-message="clause">Operator on final row</div>
                 <div ng-message="clauseblank">No operator on row</div>
             </div>
@@ -89,13 +89,6 @@
                 <md-option value="6">6</md-option>
             </md-select>
         </md-input-container>
-        <!--<md-input-container  ng-show="$last" class="md-block" flex-gt-sm>
-            <md-select id="inclusive" name="singleSelect" aria-label="BracketRight" ng:model="val.RoundingType">
-                <md-option value=""></md-option>
-                <md-option value="up">Up</md-option>
-                <md-option value="down">Down</md-option>
-            </md-select>
-        </md-input-container>-->
     </div>
 </fieldset>
 <md-content class="md-no-momentum" layout-margin="">

@@ -49,7 +49,7 @@ namespace CalculationCSharp.Areas.Config.Controllers
             foreach (var group in json.data)
             {
                 List<CategoryViewModel> jCategory = (List<CategoryViewModel>)javaScriptSerializ­er.Deserialize(Convert.ToString(group), typeof(List<CategoryViewModel>));
-                List<ConfigViewModel> jConfig = (List<ConfigViewModel>)javaScriptSerializ­er.Deserialize(Convert.ToString(group), typeof(List<ConfigViewModel>));
+                List<FunctionViewModel> jConfig = (List<FunctionViewModel>)javaScriptSerializ­er.Deserialize(Convert.ToString(group), typeof(List<FunctionViewModel>));
                 Calculate Calculate = new Calculate();
                 OutputList = Calculate.OutputResults(jCategory);
                 BulkOutputList.Add(OutputList);             

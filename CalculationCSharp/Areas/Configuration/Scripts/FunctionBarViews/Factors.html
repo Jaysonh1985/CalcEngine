@@ -1,8 +1,8 @@
 ﻿<div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Table Name</label>
-        <md-select name="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
-                    id="Output_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].TableName"  ng-click="getFactorTablesList()" required>
+        <md-select name="Output_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
+                    id="Output_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].TableName"  ng-click="getFactorTablesList()" required>
             <md-option ng-repeat="option in FactorTableList" value="{{option.Value}}">{{option.Text}}</md-option>
         </md-select>
     </md-input-container>
@@ -10,13 +10,13 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Lookup Type</label>
-        <md-select ng:model="rows.Parameter[0].LookupType" name="FactorsLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                   id="FactorsLookupType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly" required>
+        <md-select ng:model="rows.Parameter[0].LookupType" name="FactorsLookupType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                   id="FactorsLookupType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly" required>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
             <md-option value="String">String</md-option>
         </md-select>
-        <div ng-messages="form['FactorsLookupType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-messages="form['FactorsLookupType_'+ $parent.$parent.$parent.$parent.$index + '_' +$parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">Lookup Type is required</div>
         </div>
     </md-input-container>
@@ -25,11 +25,11 @@
     <md-input-container ng-mouseenter="variableReplace(rows.Parameter[0].LookupValue, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" class="md-block" flex-gt-sm>
         <label>Lookup Value</label>
         <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"
-               ng-model="rows.Parameter[0].LookupValue" name="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               ng-model="rows.Parameter[0].LookupValue" name="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
         <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-        <div ng-messages="form['FactorsLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-messages="form['FactorsLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">Date is required</div>
             <div ng-message="input">Variable Mismatch</div>
         </div>
@@ -39,11 +39,11 @@
     <md-input-container ng-mouseenter="variableReplace(rows.Parameter[0].LookupValue, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" class="md-block" flex-gt-sm>
         <label>Lookup Value</label>
         <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
-               name="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               name="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
         <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-        <div ng-messages="form['FactorsLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-messages="form['FactorsLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">Decimal is required</div>
             <div ng-message="input">Variable Mismatch</div>
         </div>
@@ -53,11 +53,11 @@
     <md-input-container ng-mouseenter="variableReplace(rows.Parameter[0].LookupValue, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" class="md-block" flex-gt-sm>
         <label>Lookup Value</label>
         <input variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" ng-model="rows.Parameter[0].LookupValue" 
-               name="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
+               name="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="FactorsLookupValue_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
                uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
         <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-        <div ng-messages="form['FactorsLookupValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-messages="form['FactorsLookupValue_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">String is required</div>
             <div ng-message="input">Variable Mismatch</div>
         </div>
@@ -66,13 +66,13 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Output Type</label>
-        <md-select ng:model="rows.Parameter[0].OutputType" name="FactorsOutputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                   id="FactorsOutputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="OutputType" ng-disabled="viewOnly" required>
+        <md-select ng:model="rows.Parameter[0].OutputType" name="FactorsOutputType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                   id="FactorsOutputType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="OutputType" ng-disabled="viewOnly" required>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
             <md-option value="String">String</md-option>
         </md-select>
-        <div ng-messages="form['FactorsOutputType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-messages="form['FactorsOutputType_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">Output Type is required</div>
         </div>
     </md-input-container>
@@ -80,12 +80,12 @@
 <div>
     <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Required?</label>
-        <md-select  ng:model="rows.Parameter[0].RowMatch" name="FactorsRowMatch_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                   id="FactorsRowMatch_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="RowMatch" ng-disabled="viewOnly" required>
+        <md-select  ng:model="rows.Parameter[0].RowMatch" name="FactorsRowMatch_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                   id="FactorsRowMatch_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="RowMatch" ng-disabled="viewOnly" required>
             <md-option value="True">True</md-option>
             <md-option value="False">False</md-option>
         </md-select>
-        <div ng-messages="form['FactorsRowMatch_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-messages="form['FactorsRowMatch_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">Required Field</div>
         </div>
     </md-input-container>
@@ -93,9 +93,9 @@
 <div ng-if="rows.Parameter[0].RowMatch == 'True'">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Row Match Row Number</label>
-        <input ng-model="rows.Parameter[0].RowMatchRowNo" name="FactorsRowMatchRowNo_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="FactorsRowMatchRowNo_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
-        <div ng-messages="form['FactorsRowMatchRowNo_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <input ng-model="rows.Parameter[0].RowMatchRowNo" name="FactorsRowMatchRowNo_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="FactorsRowMatchRowNo_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+        <div ng-messages="form['FactorsRowMatchRowNo_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">Required Field</div>
         </div>
     </md-input-container>
@@ -103,13 +103,13 @@
 <div ng-if="rows.Parameter[0].RowMatch == 'True'">
     <md-input-container  class="md-block" flex-gt-sm>
         <label>Row Match Lookup Type</label>
-        <md-select ng:model="rows.Parameter[0].RowMatchLookupType" name="FactorsRowMatchRowLookupType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-                   id="FactorsRowMatchRowLookupType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="RowMatchType" ng-disabled="viewOnly" required>
+        <md-select ng:model="rows.Parameter[0].RowMatchLookupType" name="FactorsRowMatchRowLookupType_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+                   id="FactorsRowMatchRowLookupType_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="RowMatchType" ng-disabled="viewOnly" required>
             <md-option value="Date">Date</md-option>
             <md-option value="Decimal">Decimal</md-option>
             <md-option value="String">String</md-option>
         </md-select>
-        <div ng-messages="form['FactorsRowMatchRowLookupType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-messages="form['FactorsRowMatchRowLookupType_'+ $parent.$parent.$parent.$parent.$index + '_' +  $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">Required Field</div>
         </div>
     </md-input-container>
@@ -118,11 +118,11 @@
         <md-input-container ng-mouseenter="variableReplace(rows.Parameter[0].RowMatchValue, $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-block" flex-gt-sm>
         <label>Row Match Value</label>
         <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" 
-               ng-model="rows.Parameter[0].RowMatchValue" name="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               ng-model="rows.Parameter[0].RowMatchValue" name="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
         <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-        <div ng-messages="form['FactorsRowMatchValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-messages="form['FactorsRowMatchValue_'+  $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">Date is required</div>
             <div ng-message="input">Variable Mismatch</div>
         </div>
@@ -132,11 +132,11 @@
     <md-input-container ng-mouseenter="variableReplace(rows.Parameter[0].RowMatchValue, $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-block" flex-gt-sm>
         <label>Row Match Value</label>
         <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"  ng-model="rows.Parameter[0].RowMatchValue" 
-               name="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               name="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
         <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-        <div ng-messages="form['FactorsRowMatchValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-messages="form['FactorsRowMatchValue_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">Decimal is required</div>
             <div ng-message="input">Variable Mismatch</div>
         </div>
@@ -146,11 +146,11 @@
     <md-input-container ng-mouseenter="variableReplace(rows.Parameter[0].RowMatchValue, $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-block" flex-gt-sm>
         <label>Row Match Value</label>
         <input variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].RowMatchValue" 
-               name="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               name="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="FactorsRowMatchValue_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
                uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
         <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-        <div ng-messages="form['FactorsRowMatchValue_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <div ng-messages="form['FactorsRowMatchValue_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">String is required</div>
             <div ng-message="input">Variable Mismatch</div>
         </div>
@@ -159,9 +159,9 @@
 <div ng-if="rows.Parameter[0].RowMatch == 'False'" class="form-group">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Column Number</label>
-        <input ng-model="rows.Parameter[0].ColumnNo" name="FactorsColumnNo_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-               id="FactorsColumnNo_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
-        <div ng-messages="form['FactorsColumnNo_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+        <input ng-model="rows.Parameter[0].ColumnNo" name="FactorsColumnNo_{{$parent.$parent.$parent.$parent.$parent.$index}}{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+               id="FactorsColumnNo_{{$parent.$parent.$parent.$parent.$parent.$index}}{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+        <div ng-messages="form['FactorsColumnNo_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
             <div ng-message="required">Required Field</div>
         </div>
     </md-input-container>
@@ -169,12 +169,12 @@
 <div ng-if ="rows.Parameter[0].LookupType == 'Decimal'" class="form-group">
     <md-input-container class="md-block" flex-gt-sm>
         <label>Interpolate Years and Months</label>
-        <md-select ng:model="rows.Parameter[0].Interpolate" name="FactorsInterpolate_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
-                   id="FactorsInterpolate_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="RowInterpolate" ng-disabled="viewOnly" required>
+        <md-select ng:model="rows.Parameter[0].Interpolate" name="FactorsInterpolate_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"
+                   id="FactorsInterpolate_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" aria-label="RowInterpolate" ng-disabled="viewOnly" required>
             <md-option value="true">True</md-option>
             <md-option value="false">False</md-option>
         </md-select>
-        <div ng-messages="form['FactorsInterpolate_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
+        <div ng-messages="form['FactorsInterpolate_'+ $parent.$parent.$parent.$parent.$parent.$index + '_' +  $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index].$error">
             <div ng-message="required">Required Field</div>
         </div>
     </md-input-container>

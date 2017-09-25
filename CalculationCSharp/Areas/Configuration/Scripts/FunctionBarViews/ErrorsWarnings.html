@@ -1,19 +1,19 @@
 ﻿<md-input-container class="md-block" flex-gt-sm>
     <label>Type</label>
-    <md-select required ng:model="rows.Parameter[0].Type" name="ErrorWarningType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                id="ErrorWarningType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"   aria-label="Type" ng-disabled="viewOnly">
+    <md-select required ng:model="rows.Parameter[0].Type" name="ErrorWarningType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                id="ErrorWarningType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"   aria-label="Type" ng-disabled="viewOnly">
         <md-option value="Error">Error</md-option>
         <md-option value="Warning">Warning</md-option>
     </md-select>
-    <div ng-messages="form['ErrorWarningType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['ErrorWarningType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Type is required</div>
     </div>
 </md-input-container>
 <md-input-container class="md-block" flex-gt-sm>
     <label>Message</label>
-    <input ng-model="rows.Parameter[0].String1" name="ErrorWarningString1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-            id="ErrorWarningString1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
-    <div ng-messages="form['ErrorWarningString1_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <input ng-model="rows.Parameter[0].String1" name="ErrorWarningString1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+            id="ErrorWarningString1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
+    <div ng-messages="form['ErrorWarningString1_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">String is required</div>
     </div>
 </md-input-container>

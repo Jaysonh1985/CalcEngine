@@ -12,17 +12,34 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using CalculationCSharp.Models;
+using SendGrid.Helpers.Mail;
+using System.Net;
+using System.Configuration;
+using SendGrid;
+using CalculationCSharp;
 
 namespace CalculationCSharp
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+
+            var apiKey = System.Environment.GetEnvironmentVariable("APPSETTING_SENDGRID_APIKEY");
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("jaysonherbert@hotmail.co.uk", "CalcSteps Team"),
+                Subject = message.Subject,
+                PlainTextContent = message.Body,
+                HtmlContent = "<strong>" + message.Body +"</strong>"
+            };
+            msg.AddTo(new EmailAddress(message.Destination, "CalcSteps User"));
+            var response = await client.SendEmailAsync(msg);
         }
     }
+
+    
 
     public class SmsService : IIdentityMessageService
     {
@@ -55,7 +72,7 @@ namespace CalculationCSharp
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = true,
                 RequireUppercase = true,
@@ -86,6 +103,18 @@ namespace CalculationCSharp
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+        }
+    }
+	public class ApplicationRoleManager : RoleManager<IdentityRole>
+    {
+        public ApplicationRoleManager(IRoleStore<IdentityRole,string> roleStore)
+            : base(roleStore)
+        {
+        }
+
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
+            return new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
         }
     }
 

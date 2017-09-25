@@ -1,7 +1,7 @@
 ﻿<md-input-container class="md-block" flex-gt-sm>
     <label>Adjustment Type</label>
-    <md-select required ng:model="rows.Parameter[0].Type" name="DateAdjustmentType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                id="DateAdjustmentType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  aria-label="Type" ng-disabled="viewOnly">
+    <md-select required ng:model="rows.Parameter[0].Type" name="DateAdjustmentType_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                id="DateAdjustmentType_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  aria-label="Type" ng-disabled="viewOnly">
         <md-option value="Add">Add</md-option>
         <md-option value="Adjust">Adjust</md-option>
         <md-option value="Earlier">Earlier</md-option>
@@ -12,18 +12,18 @@
         <md-option value="LastDayMonth">Last Day of the Current Month</md-option>
         <md-option value="Today">Today</md-option>
     </md-select>
-    <div ng-messages="form['DateAdjustmentType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['DateAdjustmentType_'+ $parent.$parent.$parent.$parent.$parent.$index + '_'+ $parent.$parent.$parent.$parent.$index + '_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Type is required</div>
     </div>
 </md-input-container>
 <md-input-container ng-if="rows.Parameter[0].Type != 'Today'" ng-mouseenter="variableReplace(rows.Parameter[0].Date1, $parent.$parent.$parent.$parent.$index, $parent.$parent.$parent.$index)" class="md-block" flex-gt-sm>
     <label>Start Date</label>
     <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}"  
-            ng-model="rows.Parameter[0].Date1" name="DateAdjustmentDate1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-            id="DateAdjustmentDate1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            ng-model="rows.Parameter[0].Date1" name="DateAdjustmentDate1_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            id="DateAdjustmentDate1_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
             uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
     <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-    <div ng-messages="form['DateAdjustmentDate1_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['DateAdjustmentDate1_' + $parent.$parent.$parent.$parent.$index + '_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Date is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
@@ -32,26 +32,26 @@
                     ng-mouseenter="variableReplace(rows.Parameter[0].Date2, $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-block" flex-gt-sm>
     <label>End Date</label>
     <input variablecheck inputtype="Date" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].Date2"  
-            name="DateAdjustmentDate2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-            id="DateAdjustmentDate2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
+            name="DateAdjustmentDate2_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            id="DateAdjustmentDate2_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  
             uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" required>
     <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-    <div ng-messages="form['DateAdjustmentDate2_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['DateAdjustmentDate2_'+ $parent.$parent.$parent.$parent.$index + '_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Date is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
 </md-input-container>
 <md-input-container ng-if="rows.Parameter[0].Type == 'Add'|| rows.Parameter[0].Type =='Subtract'" class="md-block" flex-gt-sm>
     <label>Data Type</label>
-    <md-select required ng:model="rows.Parameter[0].PeriodType" name="DateAdjustmentPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-                id="DateAdjustmentPeriodType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"  aria-label="DataType" ng-disabled="viewOnly">
+    <md-select required ng:model="rows.Parameter[0].PeriodType" name="DateAdjustmentPeriodType_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+                id="DateAdjustmentPeriodType_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  aria-label="DataType" ng-disabled="viewOnly">
         <md-option value="YearsDays">Years Days</md-option>
         <md-option value="YearsMonths">Years Months</md-option>
         <md-option value="Years">Years</md-option>
         <md-option value="Months">Months</md-option>
         <md-option value="Days">Days</md-option>
     </md-select>
-    <div ng-messages="form['DateAdjustmentPeriodType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['DateAdjustmentPeriodType_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Type is required</div>
     </div>
 </md-input-container>
@@ -59,19 +59,19 @@
                     ng-mouseenter="variableReplace(rows.Parameter[0].Period, $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-block" flex-gt-sm>
     <label>Period</label>
     <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"
-            ng-model="rows.Parameter[0].Period" name="DateAdjustmentPeriod_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-            id="DateAdjustmentPeriod_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            ng-model="rows.Parameter[0].Period" name="DateAdjustmentPeriod_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            id="DateAdjustmentPeriod_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
             uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
     <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-    <div ng-messages="form['DateAdjustmentPeriod_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['DateAdjustmentPeriod_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Period is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
 </md-input-container>
 <md-input-container ng-if="rows.Parameter[0].Type == 'Adjust'" class="md-block" flex-gt-sm>
     <label>Adjustment</label>
-    <md-select ng:model="rows.Parameter[0].Adjustment" name="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
-               id="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
+    <md-select ng:model="rows.Parameter[0].Adjustment" name="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
+               id="DateAdjustmentPeriodAdjustment_{{$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}" 
                     aria-label="AdjustmentType" ng-disabled="viewOnly" required>
         <md-option value="Less">Before</md-option>
         <md-option value="LessEqual">On or Before</md-option>
@@ -79,7 +79,7 @@
         <md-option value="GreaterEqual">On or After</md-option>
         <md-option value="Equal">Same Year</md-option>
     </md-select>
-    <div ng-messages="form['DateAdjustmentPeriodAdjustment_'+ $parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index].$error">
+    <div ng-messages="form['DateAdjustmentPeriodAdjustment_'+ $parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index].$error">
         <div ng-message="required">Period Adjustment Type is required</div>
     </div>
 </md-input-container>
@@ -87,18 +87,18 @@
     <label>Select Day</label>
     <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" 
            uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" ng-model="rows.Parameter[0].Day" 
-           name="DateAdjustmentDay_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-           id="DateAdjustmentDay_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
-    <div ng-messages="form['DateAdjustmentDay_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+           name="DateAdjustmentDay_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+           id="DateAdjustmentDay_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+    <div ng-messages="form['DateAdjustmentDay_'+ $parent.$parent.$parent.$parent.$index + '_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Day is required</div>
     </div>
 </md-input-container>
 <md-input-container ng-if="rows.Parameter[0].Type == 'Adjust' || rows.Parameter[0].Type == 'DatesBetween'" class="md-block" flex-gt-sm>
     <label>Select Month</label>
     <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$index}}" 
-           uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" ng-model="rows.Parameter[0].Month" name="DateAdjustmentMonth_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-           id="DateAdjustmentMonth_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
-    <div ng-messages="form['DateAdjustmentMonth_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+           uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" ng-model="rows.Parameter[0].Month" name="DateAdjustmentMonth_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+           id="DateAdjustmentMonth_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" required>
+    <div ng-messages="form['DateAdjustmentMonth_'+ $parent.$parent.$parent.$parent.$index + '_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Month is required</div>
     </div>
 </md-input-container>

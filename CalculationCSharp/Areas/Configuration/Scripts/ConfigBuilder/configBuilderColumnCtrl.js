@@ -31,7 +31,7 @@ sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $
             ID: colIndex + 1,
             Name: null,
             Description: null,
-            Functions: [],
+            Results: [],
             Logic: []
         };
         $scope.config.splice(colIndex + 1, 0, item);
@@ -41,8 +41,8 @@ sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $
 
     $scope.AddFunctionRowsCat = function (colIndex, index) {
         var item;
-        item = configFunctionFactory.buildFunction(colIndex, $scope.config);
-        $scope.config[colIndex].Functions.splice(index + 1, 0, item);
+        item = configFunctionFactory.buildResult(colIndex, $scope.config);
+        $scope.config[colIndex].Results.splice(index + 1, 0, item);
         toastr.success("Rows Added", "Success");
     };
 

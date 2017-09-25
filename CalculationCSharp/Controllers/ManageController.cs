@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CalculationCSharp.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CalculationCSharp.Controllers
 {
@@ -74,7 +75,13 @@ namespace CalculationCSharp.Controllers
             };
             return View(model);
         }
-
+        // GET: /Account/RemoveLogin
+        public ActionResult RemoveLogin()
+        {
+            var linkedAccounts = UserManager.GetLogins(User.Identity.GetUserId());
+            ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
+            return View(linkedAccounts);
+        }
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
@@ -131,6 +138,22 @@ namespace CalculationCSharp.Controllers
         }
 
         //
+        // POST: /Manage/RememberBrowser
+        [HttpPost]
+        public ActionResult RememberBrowser()
+        {
+            var rememberBrowserIdentity = AuthenticationManager.CreateTwoFactorRememberBrowserIdentity(User.Identity.GetUserId());
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, rememberBrowserIdentity);
+            return RedirectToAction("Index", "Manage");
+        }
+        //
+        // POST: /Manage/ForgetBrowser
+        [HttpPost]
+        public ActionResult ForgetBrowser()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
+            return RedirectToAction("Index", "Manage");
+        }
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -273,6 +296,41 @@ namespace CalculationCSharp.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        //
+        // GET: /Manage/UpdateDetails
+        [AllowAnonymous]
+        public ActionResult UpdateDetails()
+        {
+            return View();
+        }
+
+        // POST: /Manage/UpdateDetails
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateDetails(UpdateDetailsViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                CalculationCSharp.Models.ApplicationDbContext context = new CalculationCSharp.Models.ApplicationDbContext();
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                string userid = User.Identity.GetUserId();
+
+                ApplicationUser entity = context.Users.Where(c => c.Id == userid).AsQueryable().FirstOrDefault();
+                entity.Name = model.Name;
+                if (entity == null)
+                {
+                    return View("Error");
+                }
+                else
+                {
+                    context.Entry(entity).CurrentValues.SetValues(entity);
+                }
+                context.SaveChanges();
+            }         
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
 
         //
         // GET: /Manage/ManageLogins
@@ -341,6 +399,13 @@ namespace CalculationCSharp.Controllers
             {
                 return HttpContext.GetOwinContext().Authentication;
             }
+        }
+
+        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager));
+        
         }
 
         private void AddErrors(IdentityResult result)

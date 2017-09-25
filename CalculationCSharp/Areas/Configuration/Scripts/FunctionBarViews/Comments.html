@@ -1,7 +1,7 @@
 ﻿<md-input-container class="md-block" flex-gt-sm>
     <label>Message</label>
-    <input ng-model="rows.Output" name="CommentsString1_{{$parent.$parent.$parent.$index}}_{{$index}}" id="CommentsString1_{{$parent.$parent.$parent.$index}}_{{$index}}" required>
-    <div ng-messages="form['CommentsString1_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <input ng-model="rows.Output" name="CommentsString1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$index}}" id="CommentsString1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$index}}" required>
+    <div ng-messages="form['CommentsString1_'+ $parent.$parent.$parent.$parent.$index + '_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Message is required</div>
     </div>
 </md-input-container>

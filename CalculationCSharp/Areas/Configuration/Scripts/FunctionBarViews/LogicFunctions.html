@@ -1,7 +1,7 @@
 ﻿<md-input-container class="md-block" flex-gt-sm>
     <label>Type</label>
-    <md-select required ng:model="rows.Parameter[0].LogicInd" name="LogicFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-                id="LogicFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly">
+    <md-select required ng:model="rows.Parameter[0].LogicInd" name="LogicFunctionsType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+                id="LogicFunctionsType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly">
         <md-option value="Equal">Equal</md-option>
         <md-option value="NotEqual">Not Equal</md-option>
         <md-option value="Greater">Greater Than</md-option>
@@ -9,17 +9,17 @@
         <md-option value="Less">Less Than</md-option>
         <md-option value="LessEqual">Less Than or Equals</md-option>
     </md-select>
-    <div ng-messages="form['LogicFunctionsType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['LogicFunctionsType_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Type is required</div>
     </div>
 </md-input-container>
 <md-input-container class="md-block" ng-mouseenter="variableReplace(rows.Parameter[0].Input1, $parent.$parent.$parent.$index, $parent.$parent.$index)" flex-gt-sm>
     <label>Input 1</label>
     <input variablecheck inputtype="" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"  ng-model="rows.Parameter[0].Input1" 
-           uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" name="LogicFunctionsInput1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-           id="LogicFunctionsInput1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
+           uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" name="LogicFunctionsInput1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+           id="LogicFunctionsInput1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
     <md-tooltip md-delay="1000"  md-direction="top">{{variableReplaced}}</md-tooltip>
-    <div ng-messages="form['LogicFunctionsInput1_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['LogicFunctionsInput1_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Input is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
@@ -27,43 +27,43 @@
 <md-input-container class="md-block" ng-mouseenter="variableReplace(rows.Parameter[0].Input2, $parent.$parent.$parent.$index, $parent.$parent.$index)" flex-gt-sm>
     <label>Input 2</label>
     <input variablecheck inputtype="" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].Input2" 
-           uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" name="LogicFunctionsInput2_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
-           id="LogicFunctionsInput1_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
+           uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" name="LogicFunctionsInput2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" 
+           id="LogicFunctionsInput2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" required>
     <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-    <div ng-messages="form['LogicFunctionsInput1_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['LogicFunctionsInput1_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Input is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
 </md-input-container>
 <md-input-container class="md-block" flex-gt-sm>
     <label>Output Type</label>
-    <md-select required ng:model="rows.Type" name="LogicFunctionsOutputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
-               id="LogicFunctionsOutputType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly">
+    <md-select required ng:model="rows.Type" name="LogicFunctionsOutputType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
+               id="LogicFunctionsOutputType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly">
         <md-option value="Date">Date</md-option>
         <md-option value="Decimal">Decimal</md-option>
         <md-option value="String">String</md-option>
     </md-select>
-    <div ng-messages="form['LogicFunctionsOutputType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['LogicFunctionsOutputType_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Type is required</div>
     </div>
 </md-input-container>
 <md-input-container class="md-block" ng-mouseenter="variableReplace(rows.Parameter[0].TrueValue, $parent.$parent.$parent.$index, $parent.$parent.$index)" flex-gt-sm>
     <label>Output Value (True)</label>
     <input variablecheck inputtype="" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].TrueValue"
-           uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" name="LogicFunctionsTrueVal_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
-           id="LogicFunctionsTrueVal_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
+           uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" name="LogicFunctionsTrueVal_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
+           id="LogicFunctionsTrueVal_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
     <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-    <div ng-messages="form['LogicFunctionsTrueVal_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['LogicFunctionsTrueVal_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="input">Variable Mismatch</div>
     </div>
 </md-input-container>
 <md-input-container class="md-block" ng-mouseenter="variableReplace(rows.Parameter[0].FalseValue, $parent.$parent.$parent.$index, $parent.$parent.$index)" flex-gt-sm>
     <label>Output Value (False)</label>
     <input variablecheck inputtype="" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" ng-model="rows.Parameter[0].FalseValue"
-           uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" name="LogicFunctionsFalseVal_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
-           id="LogicFunctionsFalseVal_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
+           uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" name="LogicFunctionsFalseVal_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
+           id="LogicFunctionsFalseVal_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}">
     <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip>
-    <div ng-messages="form['LogicFunctionsFalseVal_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['LogicFunctionsFalseVal_'+ $parent.$parent.$parent.$parent.$index + '_' +  $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="input">Variable Mismatch</div>
     </div>
 </md-input-container>

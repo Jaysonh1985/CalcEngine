@@ -1,0 +1,65 @@
+﻿<body ng-controller="inputCtrl">
+    <div>
+        <div class="modal-header">
+            <h4>Form Builder</h4>
+        </div>
+        <div class="modal-body">
+
+            <form name="inputform" class="form-horizontal" role="form" ng-submit="ok($index)">
+                <fieldset  ng-disabled="$parent.viewOnly">
+                    <legend>Input Type</legend>
+                    <div class="form-group">
+                        <label for="model" class="control-label col-md-2">Variable</label>
+                        <div class="col-sm-9">
+                            <input type="Text" id="model" name="Variable" class="form-control" ng-model="form.key" ng-pattern="noSpacesPattern" required />
+                            <p ng-show="inputform.Variable.$error.pattern" class="help-block">No Spaces or Special Characters</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="caption" class="control-label col-md-2"> Label on Form</label>
+                        <div class="col-sm-9">
+                            <input type="Text" id="caption" name="caption" class="form-control" ng-model="form.templateOptions.label" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="control-label col-md-2">Type</label>
+                        <div class="col-sm-9">
+                            <select name="singleSelect" ng-model="form.templateOptions.type" class="form-control" required>
+                                <option value=""></option>
+                                <option value="String">String</option>
+                                <option value="Decimal">Decimal</option>
+                                <option value="Date">Date</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="maxLength" class="control-label col-md-2">Required</label>
+                        <div class="col-sm-9">
+                            <input type="checkbox" ng-model="form.templateOptions.required" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="maxLength" class="control-label col-md-2">List</label>
+                        <div class="col-sm-9">
+                            <input type="checkbox" ng-model="form.templateOptions.list" />
+                        </div>
+                    </div>
+                    
+                    <div ng-if="form.templateOptions.list == true" class="form-group">
+                        <label for="caption" class="control-label col-md-2"> List in Comma Seperated List</label>
+                        <div class="col-sm-9">
+                            <input type="Text" id="caption" name="caption" class="form-control" ng-model="form.templateOptions.options" required />
+                        </div>
+                    </div>
+
+
+                </fieldset>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="submit">OK</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</body>

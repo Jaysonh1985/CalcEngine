@@ -40,6 +40,9 @@ sulhome.kanbanBoardApp.controller('regressionOutputCtrl', function ($scope, $uib
     $scope.SaveButtonClick = function getFormFields() {  //function that sets the parameters available under the different variable types     
         $uibModalInstance.close();
     };
+    $scope.cancel = function () {
+        $uibModalInstance.close();
+    };
 
     init();
 })

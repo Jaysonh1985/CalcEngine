@@ -29,5 +29,16 @@ namespace CalculationCSharp.Controllers
             ViewData["P1"] = "Your contact page.";
             return View();
         }
+        public ActionResult Pricing()
+        {
+            ViewData["H1"] = "Pricing";
+            ViewData["P1"] = "Your contact page.";
+            return View();
+        }
+        public ActionResult Privacy()
+        {
+            ViewData["H1"] = "Privacy";
+            return View();
+        }
     }
 }

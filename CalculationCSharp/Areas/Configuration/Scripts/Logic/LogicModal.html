@@ -1,0 +1,87 @@
+﻿<body ng-controller="logicCtrl">
+        <div>
+                <div class="modal-header">
+                    <h4>Logic</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="form" role="form" ng-submit="ok(form)">
+                        <fieldset ng-disabled="$parent.viewOnly">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Input 1</th>
+                                    <th>Logic</th>
+                                    <th>Input 2</th>
+                                    <th></th>
+                                    <th>Operator</th>
+                                    <th></th>
+                                    <th>
+                                        <a data-nodrag ng-click="addItem($index)">
+                                            <span ng-hide="$parent.viewOnly" class="center-block glyphicon glyphicon-plus"></span>
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="rows in Logic">
+                                    <td width="10%">
+                                        <select name="BracketLeft_{{$index}}" ng:model="rows.Bracket1" class="form-control">
+                                            <option value=""></option>
+                                            <option value="(">(</option>
+                                        </select>
+                                        <p ng-show="form['BracketLeft_'+ $index].$error.bracketnotclosed" class="help-block">Not Closed</p>
+                                    </td>
+
+                                    <td width="20%"><span uib-popover="{{data || rows.Input1}}" popover-trigger="'mouseenter'" popover-popup-delay="1000"><input type="text" ng:model="rows.Input1" class="form-control" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" required></span></td>
+
+                                    <td width="10%">
+                                        <select name="singleSelect" ng:model="rows.LogicInd" class="form-control" required>
+                                            <option value=""></option>
+                                            <option value="=">=</option>
+                                            <option value="NotEqual"><></option>
+                                            <option value="Greater">></option>
+                                            <option value="GreaterEqual">>=</option>
+                                            <option value="Less"><</option>
+                                            <option value="LessEqual"><=</option>
+                                        </select>
+                                    </td>
+
+                                    <td width="20%"><span uib-popover="{{data || rows.Input2}}" popover-trigger="'mouseenter'" popover-popup-delay="1000"><input type="text" ng:model="rows.Input2" class="form-control" uib-typeahead="state for state in AllNames | filter:$viewValue | limitTo:8" required></span></td>
+                                    <td width="10%">
+                                        <select name="BracketRight_{{$index}}" ng:model="rows.Bracket2" class="form-control">
+                                            <option value=""></option>
+                                            <option value=")">)</option>
+                                        </select>
+                                        <p ng-show="form['BracketRight_'+ $index].$error.bracketnotopen" class="help-block">Not Open</p>
+                                    </td>
+                                    <td width="30%" ng-if="!$last || $first" ng-model="rows.Operator" ng-init="rows.Rounding = null"></td>
+                                    <td width="30%" ng-if="$last && !$first">
+                                        <select name="Operator_{{$index}}" ng:model="rows.Operator" class="form-control">
+                                            <option value=""></option>
+                                            <option value="AND">AND</option>
+                                            <option value="OR">OR</option>
+                                        </select>
+                                        <p ng-show="form['Operator_'+ $index].$error.clause" class="help-block">Clause and no row below</p>
+                                        <p ng-show="form['Operator_'+ $index].$error.clauseblank" class="help-block">No clause</p>
+                                    </td>
+                                    <td width="5%">
+                                        [<a ng-hide="$parent.viewOnly" ng:click="removeLogicItem($index)">X</a>]
+                                    </td>
+                                    <td>
+                                        <a data-nodrag ng-click="addItem($index)">
+                                            <i ng-hide="$parent.viewOnly" class="center-block glyphicon glyphicon-plus"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </fieldset>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">OK</button>
+                            <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
+                        </div>
+                    </form>
+                </div>
+</div>
+</body>

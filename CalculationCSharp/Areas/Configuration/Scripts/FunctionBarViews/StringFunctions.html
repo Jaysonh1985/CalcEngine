@@ -1,25 +1,25 @@
 ﻿<md-input-container class="md-block" flex-gt-sm>
     <label>Type</label>
-    <md-select ng:model="rows.Parameter[0].Type" name="StringFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
-                id="StringFunctionsType_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly" required>
+    <md-select ng:model="rows.Parameter[0].Type" name="StringFunctionsType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}"
+                id="StringFunctionsType_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}_{{$parent.$parent.$index}}" aria-label="Type" ng-disabled="viewOnly" required>
         <md-option value="Left">Left</md-option>
         <md-option value="Right">Right</md-option>
         <md-option value="Len">Length</md-option>
         <md-option value="Find">Find</md-option>
         <md-option value="Set">Set String</md-option>
     </md-select>
-    <div ng-messages="form['StringFunctionsType_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['StringFunctionsType_'+ $parent.$parent.$parent.$parent.$index + '_' +  $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Type is required</div>
     </div>
 </md-input-container>
 <md-input-container ng-if="rows.Parameter[0].Type != 'Set'" ng-mouseenter="variableReplace(rows.Parameter[0].String1, $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-block" flex-gt-sm required>
     <label>String 1</label>
     <input variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" 
-            name="StringFunctionsString1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-            id="StringFunctionsString1_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"   
+            name="StringFunctionsString1_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            id="StringFunctionsString1_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"   
             ng-model="rows.Parameter[0].String1" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
     <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip> 
-    <div ng-messages="form['StringFunctionsString1_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['StringFunctionsString1_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">String is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
@@ -27,11 +27,11 @@
 <md-input-container ng-if="rows.Parameter[0].Type == 'Left' || rows.Parameter[0].Type == 'Right'" ng-mouseenter="variableReplace(rows.Parameter[0].Number1, $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-block" flex-gt-sm required>
     <label>Number</label>
     <input variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}"  
-            name="StringFunctionsNumber_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-            id="StringFunctionsNumber_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-model="rows.Parameter[0].Number1" 
+            name="StringFunctionsNumber_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            id="StringFunctionsNumber_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" ng-model="rows.Parameter[0].Number1" 
             uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" required>
     <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip> 
-    <div ng-messages="form['StringFunctionsNumber_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['StringFunctionsNumber_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">Decimal is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>
@@ -39,11 +39,11 @@
 <md-input-container ng-if="rows.Parameter[0].Type == 'Find'" ng-mouseenter="variableReplace(rows.Parameter[0].String2, $parent.$parent.$parent.$index, $parent.$parent.$index)" class="md-block" flex-gt-sm required>
     <label>String 2</label>
     <input ariablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$index}}" 
-            name="StringFunctionsString2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
-            id="StringFunctionsString2_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  ng-model="rows.Parameter[0].String2" 
+            name="StringFunctionsString2_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}" 
+            id="StringFunctionsString2_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$index}}"  ng-model="rows.Parameter[0].String2" 
             uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" required>
     <md-tooltip md-delay="1000" md-direction="top">{{variableReplaced}}</md-tooltip> 
-    <div ng-messages="form['StringFunctionsString2_'+ $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
+    <div ng-messages="form['StringFunctionsString2_'+ $parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$index + '_' + $parent.$parent.$index].$error">
         <div ng-message="required">String is required</div>
         <div ng-message="input">Variable Mismatch</div>
     </div>

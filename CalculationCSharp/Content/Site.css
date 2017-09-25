@@ -144,7 +144,7 @@ label {
     background-color: rgba(173, 0, 0, 1);
 }
 
-.jumbotron {
+.jumbotronHomeHeader {
     
     padding-top: 30px;
     padding-bottom: 30px;
@@ -155,7 +155,20 @@ label {
     border-style:solid;
     font-weight:100;    
     color: #FFF;
-    background-color: #AE0000;
+    background-color: #242424;
+   
+}
+
+.jumbotronCarousel{
+    
+    text-align:center;
+    margin-bottom: 30px;
+    border-width:0px;
+    border-color:black;
+    border-style:solid;
+    font-weight:100;    
+    color: #FFF;
+    background-color: darkgrey;
    
 }
 
@@ -240,9 +253,9 @@ a {
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     vertical-align: middle;
-    text-align: center;
+    text-align: left;
     padding: 5px;
-    font-size:small;
+
 }
 
 a:hover, a:focus {
@@ -986,3 +999,41 @@ md-list-item._md-button-wrap > div.md-button:first-child {
 .app-modal-window .modal-dialog {
   width: 80%;
 }
+.bd-example {
+    position: relative;
+    padding: 1rem;
+    margin: 1rem -15px;
+    border: #f7f7f9;
+    border-width: .2rem 0 0;
+
+}
+
+@media (min-width: 576px) {
+    .bd-example {
+        padding: 1.5rem;
+        margin-right: 0;
+        margin-bottom: 0;
+        margin-left: 0;
+        border-width: .2rem;
+    }
+}
+.inputdemoIcons {
+  /*
+.right-icon {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  left: auto;
+  margin-top: 0;
+}
+*/ }
+  .inputdemoIcons .inputIconDemo {
+    min-height: 48px; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.email {
+    color: green; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.name {
+    color: dodgerblue; }
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+    color: red; }
+

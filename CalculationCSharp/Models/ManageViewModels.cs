@@ -21,6 +21,13 @@ namespace CalculationCSharp.Models
         public IList<AuthenticationDescription> OtherLogins { get; set; }
     }
 
+    public class UpdateDetailsViewModel
+    {
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+    }
+
     public class FactorViewModel
     {
         public string Purpose { get; set; }

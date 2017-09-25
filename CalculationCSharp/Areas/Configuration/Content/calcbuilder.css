@@ -1,0 +1,27 @@
+﻿.buildergrid {
+    width: 100%;
+    margin: 0;
+    max-width: none;
+    border-collapse: separate;
+    border-spacing: 0;
+    empty-cells: show;
+    border-width: 0;
+    outline: 0;
+}
+.headerRow {
+    border-color: #e6e6e6;
+        color: #444;
+    background-color: #fafafa;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 2px;
+}
+.k-gantt-toolbar .k-state-default, .k-grid .k-grouping-header, .k-grid-footer td, .k-grid-header, .k-grid-header-wrap, .k-group-footer td, .k-grouping-row td, .k-header, .k-pager-wrap, .k-pager-wrap .k-link, .k-pager-wrap .k-textbox {
+    border-color: #e6e6e6;
+}
+.k-grid-footer, .k-grid-footer td, .k-grid-header, .k-grid-header .k-header, .k-pager-numbers .k-state-selected, .k-pager-wrap, .k-scheduler-header, .km-pane-wrapper .k-grid-header .k-header {
+    color: #444;
+    background-color: #fafafa;
+}

@@ -79,6 +79,9 @@ sulhome.kanbanBoardApp.controller('regressionInputCtrl', function ($scope, $uibM
             toastr.error("Failed Validations", "Error");
         }
     };
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 
     init();
 })

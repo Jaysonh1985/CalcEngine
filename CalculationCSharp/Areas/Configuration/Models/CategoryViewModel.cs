@@ -9,7 +9,8 @@ namespace CalculationCSharp.Areas.Configuration.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public virtual List<ConfigViewModel> Functions { get; set; }
+        public virtual List<ResultViewModel> Results { get; set; }
         public virtual List<Logic> Logic { get; set; }
+        public bool Expanded { get; set; }
     }
 }

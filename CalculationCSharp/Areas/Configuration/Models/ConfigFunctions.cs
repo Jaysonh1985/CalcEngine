@@ -22,65 +22,70 @@ namespace CalculationCSharp.Areas.Configuration.Models
             //Loop around whole configuration
             foreach (var item in CategoryViewModel)
             {
-                List<ConfigViewModel> ConfigViewModel = new List<ConfigViewModel>();
-                ConfigViewModel = item.Functions;
-                //Find in columns above
-                if(item.ID < colID)
+                List<FunctionViewModel> ConfigViewModel = new List<FunctionViewModel>();
+                foreach(var resultItem in item.Results)
                 {
-                    foreach(var row in item.Functions){
-                        if (row.Function == "Function")
-                        {
-                            foreach (var FunctionRow in row.FunctionOutput)
-                            {
-                                if (FunctionRow.Name == Input)
-                                {
-                                    element = FunctionRow.Output;
-                                };
-
-                            };
-                        }
-                        else
-                        {
-                            if(row.Name == Input)
-                            {
-                                element = row.Output;
-                            }
-                        };
-                    };
-                }
-                //Find in current column
-                else if (item.ID == colID)
-                {
-                    int counter = 0;
-                    foreach (var row in item.Functions)
+                    ConfigViewModel = resultItem.Functions;
+                    //Find in columns above
+                    if (item.ID < colID)
                     {
-                        if (counter == rowID) break;
-                        if (row.Function == "Function")
+                        foreach (var row in resultItem.Functions)
                         {
-                            foreach (var FunctionRow in row.FunctionOutput)
+                            if (row.Function == "Function")
                             {
-                                if (FunctionRow.Name == Input)
+                                foreach (var FunctionRow in row.FunctionOutput)
                                 {
-                                    element = FunctionRow.Output;
-                                };
+                                    if (FunctionRow.Name == Input)
+                                    {
+                                        element = FunctionRow.Output;
+                                    };
 
-                            };
-                        }
-                        else
-                        {
-                            if (row.Name == Input)
-                            {
-                                element = row.Output;
+                                };
                             }
+                            else
+                            {
+                                if (row.Name == Input)
+                                {
+                                    element = row.Output;
+                                }
+                            };
                         };
-                        counter++;
-                    };
+                    }
+                    //Find in current column
+                    else if (item.ID == colID)
+                    {
+                        int counter = 0;
+                        foreach (var row in resultItem.Functions)
+                        {
+                            if (counter == rowID) break;
+                            if (row.Function == "Function")
+                            {
+                                foreach (var FunctionRow in row.FunctionOutput)
+                                {
+                                    if (FunctionRow.Name == Input)
+                                    {
+                                        element = FunctionRow.Output;
+                                    };
+
+                                };
+                            }
+                            else
+                            {
+                                if (row.Name == Input)
+                                {
+                                    element = row.Output;
+                                }
+                            };
+                            counter++;
+                        };
+                    }
+                    //Set the value of the variable replace if available this saves it and can be overwrriten if a further one is available.
+                    if (element != null)
+                    {
+                        Output = element;
+                    }
                 }
-                //Set the value of the variable replace if available this saves it and can be overwrriten if a further one is available.
-                if(element != null)
-                {
-                    Output = element; 
-                }
+          
             }
             //If null then set the values to either return the default value or pass back the variable name
             if (Output == null)

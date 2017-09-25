@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Pricing";
+}
+<div class="container body-content" style="text-align:center">
+    <h1>@ViewBag.Title</h1>
+    <h3>@ViewBag.Message</h3>
+    <h2>
+        Decide on your package
+    </h2>
+    <h5>
+        We provide various levels of service please see the below options.
+    </h5>
+    <br />  
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <md-toolbar md-scroll-shrink style="background-color:lightgray">
+                    <div class="md-toolbar-tools">Basic</div>
+                </md-toolbar>
+                <md-content style="height: 600px;" md-theme="altTheme">
+                    <section>
+                        <md-subheader class="md-primary">Simple usage of the program for one user</md-subheader>
+                        <md-list layout-padding>
+                            <md-list-item class="md-3-line">
+                                <div class="md-list-item-text">
+                                    <h2>Up to 5 calculation</h2>
+                                    <h2>One Scheme</h2>
+                                    <p>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </section>
+                </md-content>                  
+            </div>
+            <div class="col-md-4">
+                    <md-toolbar md-scroll-shrink style="background-color:darkgray">
+                        <div class="md-toolbar-tools">Business</div>
+                    </md-toolbar>
+                    <md-content style="height: 600px;" md-theme="altTheme">
+                        <section>
+                            <md-subheader class="md-primary">Unlimited calculations one user</md-subheader>
+                            <md-list layout-padding>
+                                <md-list-item class="md-3-line">
+                                    <div class="md-list-item-text">
+                                        <h2>Unlimited calculations</h2>
+                                        <h2>Multiple Schemes</h2>
+                                        <p>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</p>
+                                    </div>
+                                </md-list-item>
+                            </md-list>
+                        </section>
+                    </md-content>
+                
+            </div>
+            <div class="col-md-4">
+                <md-toolbar md-scroll-shrink style="background-color:gray">
+                    <div class="md-toolbar-tools">Enterprise</div>
+                </md-toolbar>
+                <md-content style="height: 600px;" md-theme="altTheme">
+                    <section>
+                        <md-subheader class="md-primary">Unlimited calculations multiple users</md-subheader>
+                        <md-list layout-padding>
+                            <md-list-item class="md-3-line">
+                                <div class="md-list-item-text">
+                                    <h2>Unlimited calculations</h2>
+                                    <h2>Multiple Schemes</h2>
+                                    <p>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, null)</p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </section>
+                </md-content>
+            </div>
+        </div>
+    </div>
+</div>

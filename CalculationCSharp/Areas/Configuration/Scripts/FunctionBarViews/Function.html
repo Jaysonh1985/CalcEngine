@@ -42,25 +42,25 @@
                             <input ng-if="rows.Parameter[0].templateOptions.type == 'Date'" variablecheck inputtype="Date" 
                                    config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}"
                                    uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8"
-                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
-                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
                                    type="text" ng:model="rows.Output" class="form-control  input-sm" required>
                             <input ng-if="rows.Parameter[0].templateOptions.type == 'String'" uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8"
                                    variablecheck inputtype="String" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}"
-                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
-                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
                                    type="text" ng:model="rows.Output" class="form-control  input-sm" 
                                    required>
                             <input ng-if="rows.Parameter[0].templateOptions.type == 'Decimal'" 
                                    variablecheck inputtype="Decimal" config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}"
                                    uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8" 
-                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
-                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
                                    type="text" ng:model="rows.Output" class="form-control  input-sm" 
                                    required>
                         </span>
-                        <p ng-show="form['FunctionOutput_'+ $parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $index].$error.required" class="help-block">Value is required.</p>
-                        <p ng-show="form['FunctionOutput_'+ $parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $index].$error.input" class="help-block">Input format incorrect</p>
+                        <p ng-show="form['FunctionOutput_'+ $parent.$parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $index].$error.required" class="help-block">Value is required.</p>
+                        <p ng-show="form['FunctionOutput_'+ $parent.$parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $index].$error.input" class="help-block">Input format incorrect</p>
                     </td>
                     <td ng-if="(rows.Parameter[0].templateOptions.list == false || rows.Parameter[0].templateOptions.list == undefined)  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
                         <span>
@@ -68,33 +68,33 @@
                                    config='[config]' colIndex="{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}"
                                    uib-typeahead="state for state in DateNames | filter:$viewValue | limitTo:8" 
                                    type="text" ng:model="rows.Output" 
-                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
-                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
                                    class="form-control   input-sm">
                             <input ng-if="rows.Parameter[0].templateOptions.type == 'String'" 
                                    uib-typeahead="state for state in StringNames | filter:$viewValue | limitTo:8" 
                                    type="text" ng:model="rows.Output" variablecheck inputtype="String" config='[config]' 
                                    colIndex="{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
-                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
-                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
                                    class="form-control input-sm">
                             <input ng-if="rows.Parameter[0].templateOptions.type == 'Decimal'" 
                                    variablecheck inputtype="Decimal" config='[config]'  uib-typeahead="state for state in DecimalNames | filter:$viewValue | limitTo:8"
                                    colIndex="{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}" rowIndex="{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
                                    type="text" ng:model="rows.Output" 
-                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
-                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   name="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                   id="FunctionOutput_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
                                    class="form-control   input-sm">
                         </span>
-                        <p ng-show="form['FunctionOutput_'+ $parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $index].$error.input" class="help-block">Input format incorrect</p>
+                        <p ng-show="form['FunctionOutput_'+ $parent.$parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $index].$error.input" class="help-block">Input format incorrect</p>
                     </td>
                     <td ng-if="rows.Parameter[0].templateOptions.list == true  && rows.Parameter[0].templateOptions.required == true" width="25%">
                         <select class="form-control  input-sm" ng-model="rows.Output" ng-click="optionsBuild(rows)"
-                                name="Output_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
-                                id="Output_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}" required>
+                                name="Output_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}"
+                                id="Output_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$parent.$parent.$index}}_{{$parent.$parent.$parent.$parent.$parent.$index}}_{{$index}}" required>
                             <option ng-repeat="option in rows.Parameter[0].templateOptions.optionsList" value="{{option.Name}}">{{option.Name}}</option>
                         </select>
-                        <p ng-show="form['Output_'+ $parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $index].$error.required" class="help-block">Value is required.</p>
+                        <p ng-show="form['Output_'+ $parent.$parent.$parent.$parent.$parent.$parent.$parent.$index + '_' +  $parent.$parent.$parent.$parent.$parent.$parent.$index + '_' + $parent.$parent.$parent.$parent.$index + '_' + $index].$error.required" class="help-block">Value is required.</p>
                     </td>
                     <td ng-if="rows.Parameter[0].templateOptions.list == true  && (rows.Parameter[0].templateOptions.required == false || rows.Parameter[0].templateOptions.required == undefined)" width="25%">
                         <select class="form-control input-sm" ng-model="rows.Output" ng-click="optionsBuild(rows)">

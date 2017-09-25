@@ -161,6 +161,8 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
         var Configuration = this.Boards[arrayID].Configuration;
         var User = this.Boards[arrayID].User;
         var Version = this.Boards[arrayID].Version;
+        var CalcOwner = this.Boards[arrayID].CalcOwner;
+        var CalcTeams = this.Boards[arrayID].CalcTeams;
         //Creates TypeAhead Values
         var SchemeList = [];
         configService.getSchemes().then(function (data) {
@@ -188,7 +190,10 @@ sulhome.kanbanBoardApp.controller('configMenuCtrl', function ($scope, $routePara
                     Group: null,
                     Configuration: Configuration,
                     UpdateDate: new Date(),
-                    Version: Version
+                    Version: Version,
+                    CalcOwner: CalcOwner,
+                    CalcTeams: CalcTeams
+
                 };
                 if ($scope.Function == true) {
                     configMenuService.putFunction($scope.selected.ID, $scope.selected).then(function (data) {

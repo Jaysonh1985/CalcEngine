@@ -28,7 +28,8 @@ namespace CalculationCSharp
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/toastr.css",
-                      "~/Content/angular-ui-tree.css"
+                      "~/Content/angular-ui-tree.css",
+                       "~/Areas/Configuration/Content/calcbuilder.css"
                       ));
             //Create bundel for jQueryUI  
             //js  
@@ -61,7 +62,12 @@ namespace CalculationCSharp
                         "~/Areas/Configuration/Scripts/Services/configMenuService.js",
                         "~/Areas/Configuration/Scripts/Services/configHistoryService.js",
                         "~/Areas/Configuration/Scripts/Services/configRegressionService.js",
-                        "~/Areas/Configuration/Scripts/ConfigFunctions/Table/tableCtrl.js"
+                        "~/Areas/Configuration/Scripts/ConfigFunctions/Table/tableCtrl.js",
+                        "~/Areas/Dashboard/Scripts/Controllers/DashboardCalcCtrl.js",
+                        "~/Areas/Dashboard/Scripts/Controllers/DashboardFunctionCtrl.js",
+                        "~/Areas/Dashboard/Scripts/Services/DashboardService.js",
+                        "~/Areas/Dashboard/Scripts/Controllers/DashboardTeamCtrl.js",
+                        "~/Areas/Dashboard/Scripts/Controllers/AddTeamCalcCtrl.js"
                         ));
 
             //Calculation Configuration

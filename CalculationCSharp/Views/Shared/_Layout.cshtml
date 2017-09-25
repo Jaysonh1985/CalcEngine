@@ -13,12 +13,16 @@
 </head>
 <body>
     <link href="~/Content/Site.css" rel="stylesheet" />
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-collapse collapse">
-               
+    <nav class="navbar navbar-inverse navbar-fixed-top" >
+        <a class="navbar-brand" style="padding:1px"><img src="~/Images/calcstepsmenu.jpg" style="width:127px; height:50px; padding:2%" /></a>
+        <button class="navbar-toggle collapsed pull-right" style="background:#242424" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar" style="background-color:#f6f6f6 !important"></span>
+            <span class="icon-bar" style="background-color:#f6f6f6 !important"></span>
+            <span class="icon-bar" style="background-color:#f6f6f6 !important"></span>
+        </button>
+            <div class="navbar-collapse collapse" id="navbarsExampleDefault" style="border:0px; border-color:#f6f6f6 !important; border-style:none">
                 <ul class="nav navbar-nav">
-                    <li><img src="~/Images/calcstepsmenu.jpg" style="width:127px; height:50px; padding:2%" /></li>
+                    <li></li>
                     <li style="left">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                    @if (Context.User.Identity.IsAuthenticated)
                    {
@@ -30,8 +34,7 @@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
-        </div>
-    </div>
+    </nav>
 
         @if (Context.User.Identity.IsAuthenticated)
         {
@@ -62,6 +65,7 @@
     <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <script src="~/Scripts/angular-ui/sortable.js"></script>
     <script src="~/AppScript/main.js"></script>
+    <script src="~/AppScript/AppCtrl.js"></script>
     @Scripts.Render("~/bundles/projectBoard")
     @Scripts.Render("~/bundles/calculationConfiguration")
     @Scripts.Render("~/bundles/Calculation")
@@ -76,6 +80,13 @@
     <script src="~/Scripts/angular-material.js"></script>
     <script src="~/Scripts/angular-messages.js"></script>
     <script src="~/Scripts/contextmenu.js"></script>
+    <script type="text/javascript">
+    jQuery(document).ready(function () {
+      $("#myCarousel").carousel({
+          interval: 500
+      })
+    });
+    </script>
 </body>
 
 </html>

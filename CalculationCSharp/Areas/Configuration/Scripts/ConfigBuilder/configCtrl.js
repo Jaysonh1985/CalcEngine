@@ -38,6 +38,7 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         };
         if (Function == true) {
             $scope.MenuHeader = 'Function';
+            $scope.Function = true;
         }
         else {
             $scope.MenuHeader = 'Configuration';
@@ -164,15 +165,6 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
     };
 
     $scope.rowMenuOptions = [
-        ['Delete Row', function ($itemScope) {
-            $scope.DeleteFunction($itemScope.$parentNodeScope.$index, $itemScope.$index);
-        }],
-        ['Copy Rows', function ($itemScope) {
-            $scope.CopyFunction($itemScope.$parentNodeScope.$index, $itemScope.$index);
-        }],
-        ['Paste Rows', function ($itemScope) {
-            $scope.PasteFunction($itemScope.$parentNodeScope.$index, $itemScope.$index);
-        }],
         ['Copy Name', function ($itemScope) {
             ngClipboard.toClipboard($itemScope.rows.Name);
         }],
@@ -240,54 +232,62 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         });
     };
 
-    $scope.AddFunctionRows = function (colIndex, index, e) {
+    $scope.AddResultRows = function (groupIndex, resultIndex, e) {
         var item;
-        item = configFunctionFactory.buildFunction(colIndex, $scope.config);
-        index = index + 1;
-        $scope.config[colIndex].Functions.splice(index, 0, item);
-        toastr.success("Rows Added", "Success");
-        $scope.selectRow(e, parseInt(index), parseInt(colIndex));
+        item = configFunctionFactory.buildResult(groupIndex, $scope.config);
+        resultIndex = resultIndex + 1;
+        $scope.config[groupIndex].Results.splice(resultIndex, 0, item);
+        toastr.success("Result Added", "Success");
     };
 
-    $scope.CopyFunction = function (colIndex, index) {
-        var selectedRows = getSelectedRows(colIndex);
+    $scope.AddFunctionRows = function (groupIndex, resultIndex, functionIndex, e) {
+        var item;
+        item = configFunctionFactory.buildFunction(groupIndex, $scope.config);
+        functionIndex = functionIndex + 1;
+        $scope.config[groupIndex].Results[resultIndex].Functions.splice(functionIndex, 0, item);
+        toastr.success("Rows Added", "Success");
+        $scope.selectRow(e, parseInt(groupIndex), parseInt(resultIndex), parseInt(functionIndex));
+    };
+
+    $scope.CopyFunction = function (groupIndex, resultIndex, functionIndex, e) {
+        var selectedRows = getSelectedRows(groupIndex, resultIndex, functionIndex);
         $window.localStorage["Copy"] = JSON.stringify(selectedRows);
         toastr.success("Rows Copied", "Success");
     };
 
-    $scope.PasteFunction = function (colIndex, index) {
+    $scope.PasteFunction = function (groupIndex, resultIndex, functionIndex, e) {
         var selectedRows = JSON.parse($window.localStorage.getItem("Copy"));
         angular.forEach(selectedRows, function (value, key, prop) {
             var Functions = selectedRows[key];
             var item = null;
             item = angular.copy(Functions);
-            $scope.config[colIndex].Functions.splice(index + 1, 0, item);
-            index = index + 1;
+            $scope.config[groupIndex].Results[resultIndex].Functions.splice(functionIndex + 1, 0, item);
+            functionIndex = functionIndex + 1;
         });
         toastr.success("Rows Pasted", "Success");
         $scope.form.$setDirty();
     };
 
-    $scope.DeleteFunction = function (colIndex, $index) {
+    $scope.DeleteFunction = function (groupIndex, resultIndex, functionIndex, e) {
         var cf = confirm("Delete these lines?");
         if (cf == true) {
             var selectedRows = [];
-            if (selectedRowsIndexes[colIndex] != null) {
-                var arrayID = selectedRowsIndexes[colIndex].indexOf($index);
+            if (selectedRowsIndexes[resultIndex] != null) {
+                var arrayID = selectedRowsIndexes[resultIndex].indexOf(functionIndex);
             }
             else {
                 var arrayID = -1;
             };
             
             if (arrayID == -1) {
-                $scope.config[colIndex].Functions.splice($index, 1);
+                $scope.config[resultIndex].Functions.splice(functionIndex, 1);
             }
             else {
-                selectedRows = selectedRowsIndexes[colIndex];
+                selectedRows = selectedRowsIndexes[resultIndex];
                 selectedRows = $filter('orderBy')(selectedRows);
                 selectRowsReverse = selectedRows.reverse();
                 angular.forEach(selectRowsReverse, function (value, key, prop) {
-                    $scope.config[colIndex].Functions.splice(value, 1);
+                    $scope.config[groupIndex].Results[resultIndex].Functions.splice(value, 1);
                 });
             };
             resetSelection();
@@ -828,23 +828,23 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         };
     };
 
-    $scope.selectRow = function (event, rowIndex, colIndex) {
-        $scope.getVariableTypes(colIndex, rowIndex);
-        $scope.Parameter = this.config[colIndex].Functions[rowIndex].Parameter;
-        $scope.Function = this.config[colIndex].Functions[rowIndex].Function;
-        $scope.rowIndex = rowIndex;
-        $scope.colIndex = colIndex;
+    $scope.selectRow = function (event, groupIndex, resultIndex, functionIndex) {
+        $scope.getVariableTypes(groupIndex, resultIndex);
+        //$scope.Parameter = this.config[groupIndex].Results[resultIndex].Functions[functionIndex].Parameter;
+        //$scope.Function = this.config[groupIndex].Results[resultIndex].Functions[functionIndex].Function;
+        $scope.resultIndex = resultIndex;
+        $scope.groupIndex = groupIndex;
         if ($scope.Function == 'Function') {
             $scope.function = [];
-            if (this.config[colIndex].Functions[rowIndex].Parameter.length > 0) {
+            if (this.config[groupIndex].Results[resultIndex].Functions[functionIndex].Parameter.length > 0) {
                 $scope.SchemeList =[];
                 $scope.getSchemeList();
                 $scope.FunctionList =[];
-                if (this.config[colIndex].Functions[rowIndex].Parameter[0].Scheme != null) {
-                    $scope.getFunctionList(rowIndex, colIndex);
+                if (this.config[groupIndex].Results[resultIndex].Functions[functionIndex].Parameter[0].Scheme != null) {
+                    $scope.getFunctionList(resultIndex, groupIndex);
                 };
-                if (this.config[colIndex].Functions[rowIndex].Parameter[0].FunctionName != null) {
-                   $scope.getFunctionListSingleCall(rowIndex, colIndex);
+                if (this.config[groupIndex].Results[resultIndex].Parameter[0].FunctionName != null) {
+                   $scope.getFunctionListSingleCall(resultIndex, groupIndex);
                 };
             };
         };
@@ -853,83 +853,83 @@ sulhome.kanbanBoardApp.controller('configCtrl', function ($scope, $uibModal, $lo
         };
 
         if (event.ctrlKey) {
-            if (selectedRowsIndexes[colIndex] != null) {
-                changeSelectionStatus(rowIndex, colIndex);
+            if (selectedRowsIndexes[resultIndex] != null) {
+                changeSelectionStatus(functionIndex, resultIndex);
             }
             else {
                 resetSelection();
-                selectedRowsIndexes[colIndex] = [rowIndex];
+                selectedRowsIndexes[resultIndex] = [functionIndex];
             };
         } else if (event.shiftKey) {
-            if (selectedRowsIndexes[colIndex] != null) {
-                selectWithShift(rowIndex, colIndex);
+            if (selectedRowsIndexes[resultIndex] != null) {
+                selectWithShift(functionIndex, resultIndex);
             }
             else {
                 resetSelection();
-                selectedRowsIndexes[colIndex] = [rowIndex];
+                selectedRowsIndexes[resultIndex] = [functionIndex];
             };
         } else {
-            if (selectedRowsIndexes[colIndex] != null) {
+            if (selectedRowsIndexes[resultIndex] != null) {
                 resetSelection();
-                selectedRowsIndexes[colIndex] = [rowIndex];
+                selectedRowsIndexes[resultIndex] = [functionIndex];
             }
             else {
                 resetSelection();
-                selectedRowsIndexes[colIndex] = [rowIndex];
+                selectedRowsIndexes[resultIndex] = [functionIndex];
             };
         };
     };
 
-    function selectWithShift(rowIndex, colIndex) {
+    function selectWithShift(functionIndex, resultIndex) {
         var lastSelectedRowIndexInSelectedRowsList = selectedRowsIndexes.length - 1;
         var lastSelectedRowIndex = selectedRowsIndexes[lastSelectedRowIndexInSelectedRowsList];
-        var selectFromIndex = Math.min(rowIndex, lastSelectedRowIndex);
-        var selectToIndex = Math.max(rowIndex, lastSelectedRowIndex);
-        selectRows(selectFromIndex, selectToIndex, colIndex);
+        var selectFromIndex = Math.min(functionIndex, lastSelectedRowIndex);
+        var selectToIndex = Math.max(functionIndex, lastSelectedRowIndex);
+        selectRows(selectFromIndex, selectToIndex, resultIndex);
     };
 
-    function getSelectedRows(colIndex) {
+    function getSelectedRows(groupIndex, resultIndex, functionIndex) {
         var selectedRows = [];
-        selectedRowsIndexesOrdered = $filter('orderBy')(selectedRowsIndexes[colIndex]);
+        selectedRowsIndexesOrdered = $filter('orderBy')(selectedRowsIndexes[resultIndex]);
         angular.forEach(selectedRowsIndexesOrdered, function (value, key, prop) {
-            selectedRows.push($scope.config[colIndex].Functions[value]);
+            selectedRows.push($scope.config[groupIndex].Results[resultIndex].Functions[value]);
         });
         return selectedRows;
     };
 
-    function selectRows(selectFromIndex, selectToIndex, colIndex) {
+    function selectRows(selectFromIndex, selectToIndex, resultIndex) {
         for (var rowToSelect = selectFromIndex; rowToSelect <= selectToIndex; rowToSelect++) {
-            select(rowToSelect, colIndex);
+            select(rowToSelect, resultIndex);
         };
     };
 
-    function changeSelectionStatus(rowIndex, colIndex) {
-        if ($scope.isRowSelected(rowIndex, colIndex)) {
-            unselect(rowIndex, colIndex);
+    function changeSelectionStatus(functionIndex, resultIndex) {
+        if ($scope.isRowSelected(functionIndex, resultIndex)) {
+            unselect(functionIndex, resultIndex);
         } else {
-            select(rowIndex, colIndex);
+            select(functionIndex, resultIndex);
         };
     };
 
-    function select(rowIndex, colIndex) {
-        if (!$scope.isRowSelected(rowIndex, colIndex)) {
-            selectedRowsIndexes[colIndex].push(rowIndex)
+    function select(functionIndex, resultIndex) {
+        if (!$scope.isRowSelected(functionIndex, resultIndex)) {
+            selectedRowsIndexes[resultIndex].push(functionIndex)
         };
     };
 
-    function unselect(rowIndex, colIndex) {
-        var rowIndexInSelectedRowsList = selectedRowsIndexes[colIndex].indexOf(rowIndex);
+    function unselect(functionIndex, resultIndex) {
+        var rowIndexInSelectedRowsList = selectedRowsIndexes[resultIndex].indexOf(functionIndex);
         var unselectOnlyOneRow = 1;
-        selectedRowsIndexes[colIndex].splice(rowIndexInSelectedRowsList, unselectOnlyOneRow);
+        selectedRowsIndexes[resultIndex].splice(rowIndexInSelectedRowsList, unselectOnlyOneRow);
     };
 
     function resetSelection() {
         selectedRowsIndexes = [];
     };
 
-    $scope.isRowSelected = function (rowIndex, colIndex) {
-        if (selectedRowsIndexes[colIndex] != null) {
-            return selectedRowsIndexes[colIndex].indexOf(rowIndex) > -1;
+    $scope.isRowSelected = function (functionIndex, resultIndex) {
+        if (selectedRowsIndexes[resultIndex] != null) {
+            return selectedRowsIndexes[resultIndex].indexOf(functionIndex) > -1;
         }
         return false;
     };

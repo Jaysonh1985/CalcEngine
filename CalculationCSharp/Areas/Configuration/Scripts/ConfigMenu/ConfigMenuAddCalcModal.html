@@ -3,7 +3,7 @@
         <form class="form-horizontal" role="form" ng-submit="ok($index)">
             <div class="modal-header">
                 <h3>Add New Calculation</h3>
-            </div>          
+            </div>
             <div class="modal-body">
                 <h4>Scheme Name</h4>
                 <select class="form-control" ng-model='Scheme' ng-options='scheme for scheme in SchemeList' required>
@@ -14,7 +14,10 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" type="submit">OK</button>
-                <!--<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
+                <button type="button" title="Close" class="btn btn-warning" ng-click="cancel()">
+                    <span aria-hidden="true">Close</span>
+                    <span class="hide">Close</span>
+                </button>
             </div>
         </form>
     </div>
