@@ -1,12 +1,6 @@
 ﻿// Copyright (c) 2016 Project AIM
 sulhome.kanbanBoardApp.controller('configBuilderColumnCtrl', function ($scope, $uibModal, configFunctionFactory, configTypeaheadFactory) {
      $scope.columnMenuOptions = [
-        ['Add Category', function ($itemScope) {
-            $scope.AddCategoryRows($itemScope.$index);
-        }],
-        ['Add Rows', function ($itemScope) {
-            $scope.AddFunctionRowsCat($itemScope.$index);
-        }],
         ['Delete Category', function ($itemScope) {
             $scope.DeleteCategory($itemScope.$index);
         }],

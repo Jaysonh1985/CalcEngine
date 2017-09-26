@@ -36,13 +36,13 @@
                                    </td>
                                    <td>{{ Category.Name }}</td>
                                    <td>
-                                       <a class="center-block" ng-click="AddFunctionRows($parent.$index, $index, $event)">
+                                       <a class="center-block" ng-click="AddCategoryRows($index)">
                                            <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/add.svg" aria-label="addGroup">
                                            </md-icon>
                                        </a>
                                    </td>
                                    <td style="width:2%;">
-                                       <a class="center-block" ng-click="DeleteFunction($parent.$index, $index)">
+                                       <a class="center-block" ng-click="DeleteCategory($index)">
                                            <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/multiply.svg" aria-label="multiplyGroup"> </md-icon>
                                        </a>
                                    </td>

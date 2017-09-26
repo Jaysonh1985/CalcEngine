@@ -1,0 +1,109 @@
+<div ng-model="Category.Functions" ui-tree-nodes="">
+    <table class="table table-condensed table-bordered table-sm">
+        <thead>
+            <tr>
+                <th style="width:2%;background-color: #ae0000; color: white;"></th>
+                <th style="width:80%;background-color: #ae0000; color: white;">Variable</th>
+                <th style="width:15%;background-color: #ae0000; color: white;">Expected Result</th>
+                <th style="width:2%;background-color: #ae0000; color: white;" >
+                    <a class="center-block" ng-click="AddResultRows($parent.$index, 0, $event)">
+                        <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/add.svg" aria-label="addFunction">
+                        </md-icon>
+                    </a>
+                </th>
+                <th style="width:2%;background-color: #ae0000; color: white;"></th>
+
+            </tr>
+        </thead>
+        <tbody ng-repeat="results in Category.Results">
+            <tr >
+                <td style="width:2%;background-color: #ae0000; color: white;">
+                    <button ng-click="results.Expanded = !results.Expanded" expand>
+                        <span ng-bind="results.Expanded ? '-' : '+'"></span>
+                    </button>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class="center-block" ng-click="AddResultRows($parent.$index, $index, $event)">
+                        <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/add.svg" aria-label="addFunction">
+                        </md-icon>
+                    </a>
+                </td>
+                <td style="width:2%;">
+                    <a class="center-block" ng-click="DeleteResults($parent.$index, $index, $event)">
+                        <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/multiply.svg" aria-label="multiplyFunction"> </md-icon>
+                    </a>
+                </td>
+            </tr>
+            <tr ng-show="results.Expanded">
+                <td style="width:2%;background-color: #ae0000; color: white;"></td>
+                <td colspan="10">
+                    <table class="table table-condensed table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th style="width:2%;background-color: #3d688c; color: white;"></th>
+                                <th style="width:8%;background-color: #3d688c; color: white;">Function</th>
+                                <th style="width:8%;background-color: #3d688c; color: white;">Type</th>
+                                <th style="width:25%;background-color: #3d688c; color: white;">Variable</th>
+                                <th style="width:25%;background-color: #3d688c; color: white;">Output</th>
+                                <th style="width:2%;background-color: #3d688c; color: white;">
+                                    <a class="center-block" ng-click="AddFunctionRows($parent.$index,$index, 0, $event)">
+                                        <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/add.svg" aria-label="add">
+                                        </md-icon>
+                                    </a>
+                                </th>
+                                <th style="width:2%;background-color: #3d688c; color: white;"></th>
+                                <th style="width:2%;background-color: #3d688c; color: white;"></th>
+                                <th style="width:2%;background-color: #3d688c; color: white;"></th>
+                                <th style="width:2%;background-color: #3d688c; color: white;"></th>
+
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="rows in results.Functions" ng-click="selectRow($event,$parent.$parent.$index, $parent.$index, $index)" ng-show="([rows.Name] | filter: test).length || ([rows.Parameters.Name] | filter: test).length"
+                                ng-class="{selected: isRowSelected($index, $parent.$index), 'redrow': rows.Function == 'Comments', 'standardRow' : rows.Function != 'Comments', 'stripped' : rows.Pass == 'miss' }"
+                                style="border-radius:5px; border-style:solid; border-width:thin; border-color:lightgray; margin-bottom:2px;" context-menu="rowMenuOptions"
+                                ng-keydown="keyDownFunc($event, $parent.$index, $index, rows.Name)" ng-hide="isOpenRight()" ui-tree-node>
+                                <td>
+                                    <a class="center-block" ng-if="Category.Name != 'Input'">
+                                        <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" ui-tree-handle md-svg-src="/Images/movelist.svg" aria-label="movelist"> </md-icon>
+                                    </a>
+                                </td>
+                                <td>{{ rows.Function }}</td>
+                                <td>{{ rows.Type }}</td>
+                                <td>{{ rows.Name | limitTo: 29 }} {{rows.Name.length > 29 ? '...' : ''}}</td>
+                                <td>{{ rows.Output | limitTo: 40}} {{rows.Output.length > 40 ? '...' : ''}}</td>
+                                <td>
+                                    <a class="center-block" ng-click="AddFunctionRows($parent.$parent.$index,$parent.$index, $index, $event)">
+                                        <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/add.svg" aria-label="add">
+                                        </md-icon>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="center-block" ng-click="DeleteFunction($parent.$parent.$index,$parent.$index, $index, $event)">
+                                        <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/multiply.svg" aria-label="multiply"> </md-icon>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a ng-show="rows.SubOutput != null " data-nodrag ng-click="SubOutputButtonClick('lg', $parent.$index, $index, rows.SubOutput)">
+                                        <i ng-hide="viewOnly" class="glyphicon glyphicon-search"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a ng-show="rows.Function == 'Table'" data-nodrag ng-click="TableButtonClick('lg', $parent.$index, $index, rows.Parameter, rows.Name)">
+                                        <md-icon ng-hide="viewOnly" class="glyphicon glyphicon" md-svg-src="/Images/table.svg" aria-label="table"></md-icon>
+                                    </a>
+                                </td>
+                                <td>
+                                    <md-icon ng-if="rows.Pass == 'true'" md-svg-src="/Images/checked.svg" aria-label="checked"> </md-icon>
+                                    <md-icon ng-if="rows.Pass == 'false'" md-svg-src="/Images/exclamation.svg" aria-label="exclamation"> </md-icon>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
